@@ -806,3 +806,42 @@ Stage Summary:
   格式化归 PDF-e 或独立提交；标注载荷健全性校验留 PDF-d 引擎写前。
 - 下一步：PDF-c 阅读面（pdfium 接入 + 异步光栅化 + LRU 页缓存 + 文本层
   + 1000+ 页性能基线，性能门入 gates）。
+
+---
+Task ID: pdf-c-1
+Agent: main-agent (Super Z) + 实现代理 pdf-c-1i + 独立审查代理 pdf-c-1r
+Task: 线 B PDF-c——阅读面（pdfium 引擎接入 + LRU 页缓存 + 渲染工人 + 文本层 + 性能门）
+
+Work Log:
+- 实现代理交付（crates/pdf +2476 行）：cache.rs（PageCache 字节预算 LRU，
+  HashMap+arena 双向链表 O(1)，零 unsafe 零依赖）/ render.rs（Rasterizer
+  trait + BGRA 产物）/ worker.rs（专用渲染线程 + mpsc 双通道 + 取消/
+  停机令牌 + catch_unwind panic 隔离=S4.2 落地）/ engine_pdfium.rs
+  （feature 门：=0.9.4 pin、零 image crate 走低层 PdfBitmap 调用方缓冲、
+  库定位序 env→候选→系统、OnceLock 单例失败可重试）/ document.rs
+  attach_engine（命令面零破坏，search 复用 find_matches 单一出口）。
+- 性能门实测（500 页 large.pdf）：打开 TTI 0.18ms / 首页渲染 8.2ms /
+  顺序 50 页 p95 1.1ms / 翻页命中 5µs vs 未命中 2.1ms（~400×，二次
+  取页 rasterize=0）/ 文本抽取 16k 页/s。阈值=实测×3 入 gates。
+- 独立审查（pdf-c-1r）：**通过**（0 阻断 0 重要 8 轻微），声明 9 条逐条
+  验证 ✓，亮点三项（工人排空设计/错误面工程/性能门诚实度）。
+- 审计轻微项处置：修复四项（幽灵取消令牌防御=absorb_cancel 增
+  job_watermark 双侧剪枝/attach_engine 页数一致性调用方合同入档/
+  perf_random_flip 正名 perf_sequential_flip/Engine 512 钳制与
+  put-更新超大自逐两回归锁）；在档不修两项（命中侧计时口径已注释
+  明示；绑定失败重试路径无直接锁=进程单例语义限制）。
+- 收口门禁：默认面 236/236（219+17 常开，裸环境零引擎依赖全绿）；
+  feature 面 62/62（32+17+13）+ 性能门 6/6；clippy 零新增；scan 0；
+  fmt 净；wasm32 check 过。mdcore main 408b109→7de5a34 推送验证
+  local=remote。
+- Cargo.lock +42 解析条目（默认构建零编译）——NOTICES 增量义务登记
+  PDF-e SBOM 收口。
+
+Stage Summary:
+- PDF-c 收口完成：阅读面五件套（引擎/缓存/工人/文本/性能门）全交付，
+  性能数字强正向（打开亚毫秒/翻页缓存 400×/文本 16k 页/s）——对标
+  pdfcraft 实测值（PDF-a spike 对照）与竞品水位不落下风。
+- 遗留登记：C 侧段错误进程隔离（PDF-e 强化面）；会话级限额接线与渲染
+  看门狗留 PDF-d+/视图层；S6 AcroForm 探针（spike 侧）未做——下轮补。
+- 下一步：PDF-d 标注面（lopdf 增量写 + v0 四标注往返语义锁 + Acrobat
+  互通验证的引擎层预证）。
