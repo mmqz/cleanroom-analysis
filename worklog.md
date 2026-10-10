@@ -644,3 +644,41 @@ Stage Summary:
 - 下一步（依用户裁决序）：画布线（线 A）P0——canvas-a Excalidraw
   深读 / canvas-d ComfyUI 协议 pass / office-a Univer 深读，按 11 维
   矩阵输出进本仓；PDF-b（mdc-pdf crate 骨架）待画布 P0 后依次。
+
+---
+Task ID: canvas-a-1
+Agent: main-agent (Super Z, 会话 web-52b2ba37) + 四路 Explore 勘察代理
+Task: 线 A 画布 P0 第一篇——Excalidraw 深读（11 维全量，用户裁决开工序第四项「画布依次」之首）
+
+Work Log:
+- 浅克隆 excalidraw/excalidraw @4c00f31（MIT 复核 ✓）；monorepo 结构勘察
+  （packages/{excalidraw,element,common,math,fractional-indexing} +
+  excalidraw-app 宿主）。
+- 四路并行勘察代理（元素模型与编辑内核 / 渲染与性能 / 持久化与协同 /
+  插件·AI·安全·质量·合规），~90 处证据锚点（路径:行号）。
+- 综合 11 维深读报告：canvas-line/canvas-a_Excalidraw深读报告.md
+  （含 dsh 插件面 + MCP 工具面双口径能力矩阵 + 10 条可移植结论 +
+  与 mdcore 系工作台架构对照一页）。
+- 核心发现摘要：
+  ① 元素版本三元组（version/versionNonce/updated）+ 软删除 + 纯 JSON
+    无本地状态 = 低成本 LWW 协同根基（与 mdcore document_id 哲学同源）；
+  ② 双修改通道（不可变 newElementWith + 就地 mutateElement 属性级缓存
+    失效）+ 单一提交边界 store.commit（与 apply_ops 单一变异入口同哲学）；
+  ③ 撤销 = 快照 diff inverse-delta + 三态捕获（EVENTUALLY 手势聚合）；
+  ④ 渲染 = 双 canvas + nonce 门控 + per-element 位图缓存 + 平移不动缓存，
+    全量重绘路线万级元素天花板（frame.ts:815 自标瓶颈）= 差异化机会；
+  ⑤ 协同非 OT 非 CRDF：加密快照广播 + 元素级 LWW + nonce 平局 + 20s
+    全量重同步；能力链接即全部权限（零信任取舍）；
+  ⑥ 敌意输入三层防线（restore 宁可丢元素 / embed 白名单 + 差异化
+    sandbox / AI 生成不透明源隔离）+ 缺口（无 CSP、SVG 押注 img 隔离）；
+  ⑦ AI 面 100% 无头化（applyDeltas/reconcileElements 原语天然 MCP 友好）。
+- HANDOFF.md 更新：L3 行（canvas-a 完成）+ L-MD 行（R24-a/b/c + PDF-a
+  收口状态同步）。
+
+Stage Summary:
+- canvas-a 收口完成：P0 三项之第一项交付。净室合规：MIT 确认、
+  未发现 GPL 污染（依赖面抽查 + 【推断】机器复核建议）。
+- 对工作台决策的直接输入：版本三元组/双修改通道/双 canvas 骨架列
+  P0 移植；LWW 适用边界与万级元素天花板登记为架构决策点。
+- 下一步：canvas-d ComfyUI 协议 pass（四问题：graph 模型/执行/通信/
+  敌意输入）→ office-a Univer 深读；MD 线 R24-d 壳实体待开发环境。

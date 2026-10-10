@@ -13,8 +13,8 @@
 | L0 | AGENTS.md 规范安全审计（vercel/AGENTS.md 等） | ✅ 完成（2026-10-08~09） | `agents-md-audit/`（9 篇分析 + 5 证据 + 5 工具） |
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
-| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | 📋 规划完成，**R1 待启动** | `pdf-line/05`（规划文档，P0 批次表在 §3/§7） |
-| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ 合规双门闭合 + R23 收口 + 产品仓 main 三分支就位；**R24 产品化 + PDF 载体线待开工** | `md-line/STATUS.md` + `md-line/pdf_carrier_plan_2026-10-10.md`；产品代码在私有仓 `mmqz/mdcore` |
+| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | 🔄 R1 进行中：**canvas-a Excalidraw 深读完成**（2026-10-10，11 维全量）；canvas-d ComfyUI 协议 pass / office-a Univer 深读待开 | `pdf-line/05`（规划）；`canvas-line/canvas-a_Excalidraw深读报告.md` |
+| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24-a/b/c 全收口（设置面/多窗口/打包基建）+ 质量审计轮（2 bug 修复）+ **PDF-a 完成**（ADR-P1 选型定谳 + 三探针 + 安全策略表）；R24-d 壳实体 = 开发环境轮；mdcore main=`0d6ac2f`（187/187 门禁） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
 
 > **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」
 > 即它，进度见 `md-line/STATUS.md`）。其审计底稿在私有仓
@@ -56,9 +56,12 @@ cleanroom-analysis/
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
 **线 A — L3 办公/画布线 R1**（P0 三项，详见 `pdf-line/05` §7 批次表）：
+- ~~**canvas-a**：Excalidraw 深读（MIT）~~ ✅ **完成（2026-10-10）**：11 维全量
+  + dsh/MCP 双口径能力矩阵 + 10 条可移植结论（版本三元组/双修改通道/
+  双 canvas 骨架/LWW 适用边界/敌意输入三层防线等），见
+  `canvas-line/canvas-a_Excalidraw深读报告.md`
+- **canvas-d**：ComfyUI 协议 pass（graph 模型/执行/通信/敌意输入四问题）
 - **office-a**：Univer 深读（The Office Harness for AI Agents，Apache-2.0）
-- **canvas-a**：Excalidraw 深读（MIT）
-- **canvas-d**：ComfyUI 协议 pass（Nodes 2.0 / Vue 架构）
 
 R1 内容 = 仓库克隆 + 代码勘察（结构/治理/测试/许可），按 11 维裁剪矩阵输出。动画线 P3 暂缓。同法排 R2~R5。
 
