@@ -682,3 +682,17 @@ Stage Summary:
   P0 移植；LWW 适用边界与万级元素天花板登记为架构决策点。
 - 下一步：canvas-d ComfyUI 协议 pass（四问题：graph 模型/执行/通信/
   敌意输入）→ office-a Univer 深读；MD 线 R24-d 壳实体待开发环境。
+
+---
+Task ID: docking-verify-1
+Agent: main-agent (Super Z, 会话 web-52b2ba37 续)
+Task: 新会话入坞复核——两仓同步状态澄清 + mdcore HEAD 双绿门禁复验
+
+Work Log:
+- 澄清"ahead 5"假象：cleanroom-analysis 与 mdcore 上会话末均已实际推送完成，本地 tracking ref 失真导致误报；ls-remote 实证 cleanroom main=876ef9a / mdcore main=0d6ac2f，两仓 local=remote。
+- mdcore HEAD 双绿门禁复验：scan.sh 0 命中 PASS；cargo test --workspace 187/187 全绿（与 gates.md 登记一致）。
+- 凭证纪律延续：磁盘 ghp_ 全量扫描仅命中脱敏占位符（ghp_xxx/[已脱敏]），remote URL 干净，零真实凭证残留；本会话凭证仅以单命令环境变量形式经进程内存传递。
+- 环境注意项登记：本沙箱 Bash 各次调用间 export 不持久，凭证传递沿用 HANDOFF 既有单命令模式。
+
+Stage Summary:
+- 两仓确认同步、门禁复验双绿，无代码变更；断点=canvas-d ComfyUI 协议 pass（线 A P0 第二项）→ office-a Univer 深读 → PDF-b。
