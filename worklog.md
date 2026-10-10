@@ -696,3 +696,35 @@ Work Log:
 
 Stage Summary:
 - 两仓确认同步、门禁复验双绿，无代码变更；断点=canvas-d ComfyUI 协议 pass（线 A P0 第二项）→ office-a Univer 深读 → PDF-b。
+
+---
+Task ID: canvas-d-1
+Agent: main-agent (Super Z) + 勘察代理 canvas-d-1a/1b + 复审代理 canvas-d-1r
+Task: 线 A 画布 P0 第二篇——ComfyUI 协议 pass（graph 模型/执行/通信/敌意输入四问题）
+
+Work Log:
+- 浅克隆 comfyanonymous/ComfyUI @0df64eb（GPL-3.0 实证：LICENSE 674 行标准全文，
+  规划期"待核"就此定谳→进程外协议集成为唯一路线）。
+- 两路并行勘察代理：A（图模型+执行引擎）/ B（通信协议+敌意输入+安全治理）。
+- 综合成文 canvas-line/canvas-d_ComfyUI协议pass.md（四问题 + 许可证定谳 +
+  协议最小面六端点 + 安全姿势五条 + 引擎可移植资产六条）。
+- 核心发现：①编辑图/执行图彻底分离（后端零解析 links/widgets_values，转换
+  全在前端）；②执行=全局单队列串行 + prompt 内 async 并行 + merkle 式祖先
+  签名缓存（上游变更自动失效下游）+ 增量拓扑溶解调度（非预计算拓扑序）；
+  ③通信=REST 全路由双前缀 + WS 文本/二进制双通道（4 字节大端事件号）+
+  /object_info 动态 UI 单一数据源 + 零认证（clientId 可踢旧连接）；
+  ④敌意输入=custom node exec_module 任意代码（SECURITY.md 显式信任外包）、
+  三目录路径沙箱（GHSA-779p 修复结晶）、模型无完整性校验、密钥走 prompt
+  extra_data（仅队列脱敏）。
+- 独立复审代理（canvas-d-1r，~50 锚点抽查全 7 节）：有条件通过→3 处修订
+  全部落地（execution.py 实际在仓库根非 comfy_execution/、front 取负锚点
+  移 server.py:1148-1150、workflow 透传措辞精确化为"仅提取 workflow_id"）。
+- HANDOFF.md 更新：L3 行 + §6 线 A（canvas-d 完成）/ 线 B（R24+PDF-a 完成态同步）。
+
+Stage Summary:
+- canvas-d 收口完成：P0 三项之二交付。四问题全部实证回答，零代码复制净室合规。
+- 对工作台直接输入：协议最小面（/prompt、/object_info、/history、/interrupt、
+  /view、/ws）+ 集成安全五条（网关持证、沙箱隔离、路径沙箱复刻、模型哈希门禁、
+  secrets 独立通道）+ 自研节点图内核六条可移植资产（merkle 缓存键/拓扑溶解/
+  中断语义/PENDING 三态等）。
+- 下一步：office-a Univer 深读（P0 最后一项）→ PDF-b mdc-pdf 骨架。
