@@ -535,3 +535,35 @@ Stage Summary:
 - 下一步：R24-b 多窗口核侧（SessionManager / 窗口↔document_id 映射 /
   资源上限 / 会话持久化），随后 R24-c 打包基建（前置：定名商标检索）、
   PDF-a（Acrobat 成果转化 + pdfium/lopdf 探针 + ADR-P1）。
+
+---
+Task ID: md-r24b-1
+Agent: main-agent (Super Z, 会话 web-52b2ba37)
+Task: R24-b 多窗口核侧（用户裁决开工序第二项：MD 收尾）
+
+Work Log:
+- Core 脏标记：is_dirty/mark_saved 落 lib.rs（单一变异入口挂钩——
+  View/Ai/Undo/Redo 置位、System 装载不置位、adopt_external 成功清位、
+  粘性安全向假阳性）；mem_stats 增 dirty 字段；external.rs adopt 钩子。
+- mdshell::session 新模块：SessionManager（BTreeMap 映射 + MRU 焦点序 +
+  DEFAULT_MAX_SESSIONS=16）/ 一窗一档（DocumentAlreadyOpen 携带持有窗口）/
+  超限显式 Err 不静默驱逐 / SessionRecord 持久化记录（schema v1，未来
+  版本拒绝→宿主冷启动）/ WindowRecord（path 宿主域透传）。
+- DocumentSession 增 path 字段 + new().with_path() 构造器。
+- CONTRACT.md 新增 §5 会话面（纯宿主面 Rust↔Rust；window 面零新增，
+  __contractVersion 保持 1.1——不升版裁决显式在档防两向漂移）；§1 增
+  脏标记行；contract_freeze.rs 增会话面词面锁 + 编译期常量双锚。
+- 语义锁 10 条（r24_session.rs）+ session.rs 单元 1 条；实现期修正 2 处
+  测试构造问题（Core 无 Clone/Debug → 去 derive；session_with_doc 预设
+  id 与防换牌拒绝冲突 → 改无身份核显式设同 id）。
+- 门禁终态：cargo 183/183（171+12）/ scan 0 / wasm32 clean / clippy
+  零新增。零新依赖（SBOM/NOTICES 无需再生成）。
+- 推送：mdcore main db305ab→8f08368，ls-remote 验证 local=remote。
+
+Stage Summary:
+- R24-b 收口完成：多窗口核侧全轮交付（SessionManager/映射/上限/持久化
+  + Core 脏标记权威源）。plan_reload(local_dirty) 自此有权威取值。
+- 关键决策：一窗一档 v0；会话记录=可再生缓存（冷启动降级，不设拒写）；
+  脏标记粘性；§5 不升 __contractVersion（宿主面非 window 面）。
+- 下一步：R24-c 打包基建（定名商标检索为用户决策前置阻塞项——计划以
+  参数化占位名落地基建，名称变量化不阻塞），随后 PDF-a。
