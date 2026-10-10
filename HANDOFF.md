@@ -14,7 +14,7 @@
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
 | L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ **R1 P0 三项全部完成**（canvas-a Excalidraw 深读 + canvas-d ComfyUI 协议 pass + office-a Univer 深读，2026-10-10，均经独立复审代理审定）；R2+ 待排 | `pdf-line/05`（规划）；`canvas-line/` + `office-line/`（三篇报告） |
-| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24-a/b/c 全收口（设置面/多窗口/打包基建）+ 质量审计轮（2 bug 修复）+ **PDF-a 完成**（ADR-P1 选型定谳 + 三探针 + 安全策略表）；R24-d 壳实体 = 开发环境轮；mdcore main=`0d6ac2f`（187/187 门禁） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
+| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24 全收口 + **PDF-a/b/c/d 全部完成**（a 选型定谳 / b mdc-pdf 骨架 / c 阅读面+性能门 / d 标注面+增量写互通；每轮均经独立审查代理闭环，累计修复 1 阻断+2 重要+多项轻微）；S6 AcroForm 探针定谳（formfill 在 non-V8 构建中，按 S2 同款处置）；R24-d 壳实体 = 开发环境轮；**PDF-e 收口轮待做**（SBOM/NOTICES/门禁全复跑）；mdcore main=`eb466a2`（默认面 245/245 + 双引擎面 88/88 + 性能门 6/6，scan 0 恒绿） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
 
 > **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」
 > 即它，进度见 `md-line/STATUS.md`）。其审计底稿在私有仓
@@ -80,9 +80,13 @@ cleanroom-analysis/
   （2026-10-10，含质量审计轮 md-audit-2 修复 2 实bug，187/187 双绿）**
 - ~~PDF-a 侦察收口 + spike~~ ✅ **完成**：ADR-P1 定谳 pdfium+lopdf 双引擎
   （mupdf AGPL 排除）+ 安全策略 v1，见 `md-line/pdf-a/`
-- **PDF-b mdc-pdf 骨架**（crate 骨架 + 三层模型 + Command 边界 +
-  mdcore://pdf 宿主协议草案 + CONTRACT v1.2 增章）→ PDF-c 阅读面 →
-  PDF-d 标注面 → PDF-e 收口，详见 `md-line/pdf_carrier_plan.md` §5。
+- ~~PDF-b/c/d~~ ✅ **全部完成（2026-10-10，本会话）**：骨架 32 锁 +
+  阅读面（pdfium feature + O(1) LRU + panic 隔离工人 + 性能门：打开
+  0.18ms/翻页缓存 400×）+ 标注面（lopdf 增量写四 kind + 前缀逐位保持
+  + pdfium 交叉读互通预证）；详见 gates.md PDF-b/c/d 三节。
+- **PDF-e 阶段收口**（门禁全复跑 + SBOM/NOTICES 增量（pdfium-render/
+  lopdf/传递依赖 + pdfium 二进制 licenses）+ gates PDF-e 段）= 下一会话
+  首选任务；其后按用户裁决回线 A R2 或 R24-d 开发环境轮。
 - R24-d 壳实体合入 = 开发环境轮；R24-e 收口。
 - MD 线工作纪律差异：产品仓 `mmqz/mdcore` 每轮收口双绿（`compliance/scan.sh` + `cargo test --workspace`），契约变更走 CONTRACT v1 升版纪律。
 
