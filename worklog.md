@@ -728,3 +728,37 @@ Stage Summary:
   secrets 独立通道）+ 自研节点图内核六条可移植资产（merkle 缓存键/拓扑溶解/
   中断语义/PENDING 三态等）。
 - 下一步：office-a Univer 深读（P0 最后一项）→ PDF-b mdc-pdf 骨架。
+
+---
+Task ID: office-a-1
+Agent: main-agent (Super Z) + 勘察代理 office-a-1a/1b/1c/1d + 复审代理 office-a-1r
+Task: 线 A 办公 P0——Univer 深读（11 维全量，P0 三项收官篇）
+
+Work Log:
+- 浅克隆 dream-num/univer @7166c69（v1.0.4；Apache-2.0 实证 176 行标准文本，
+  无 NOTICE 无额外条款；内嵌 numfmt MIT）。
+- 四路并行勘察：1a 架构+数据模型+编辑内核 / 1b 渲染+公式+性能 / 1c 协同+
+  持久化+格式 / 1d 插件·AI·安全·质量·合规，~110 证据锚点。
+- 综合 11 维报告 office-line/office-a_Univer深读报告.md（新建 office-line/），
+  含 dsh/MCP 双口径能力矩阵 + 10 条可移植结论 + 与 mdcore 架构对照页。
+- 核心发现：①快照即模型（Workbook 直持 JSON 原地改，undo/协同全外挂）；
+  ②三层命令 COMMAND/MUTATION/OPERATION（视图态不进 op log）+ trigger 因果链；
+  ③渲染=视口级双缓冲+条带 diff+前缀和二分虚拟滚动（与 Excalidraw
+  per-element 路线分治）；④公式引擎=AST 解释器+RTree 依赖图增量重算+
+  时间片让出+多层 LRU（504 函数）；⑤协同=docs 域 ot-json1 直嵌、sheets
+  域 rebase 在服务端（Pro）；(sid,reqId) 幂等+checkpoint+断线补拉骨架完整；
+  ⑥xlsx 导入导出全 Pro——开源办公引擎 OOXML 进出为真空=差异化蓝海；
+  ⑦"harness"编排层全在生态仓（univer-cli/dsh-univer-office/univer-mcp），
+  本仓只交付内核+Facade；⑧安全面：公式零远程/URL 白名单/权限三层 OSS
+  完备，但 SECURITY.md 滞后、静态门禁弱于声明。
+- 独立复审（office-a-1r，60+ 锚点抽查覆盖全 14 节）：0 阻断 0 重要，
+  9 处轻微（锚点偏移/计数口径）全部修订落地。
+- HANDOFF.md 更新：L3 行 P0 三项全部完成、§6 线 A 收官 + 主线索转 PDF-b。
+
+Stage Summary:
+- office-a 收口完成：线 A R1 P0 三项（canvas-a/canvas-d/office-a）全部收官，
+  均经独立复审代理审定。净室合规：Apache-2.0 确认、零代码复制。
+- 对工作台决策的直接输入：三层命令分类/公式引擎架构/协同版本骨架/
+  agent 同一 op 通道四项列 P0 移植；OOXML 开源进出登记为差异化机会；
+  op-first 与快照即模型的取舍再获实证。
+- 下一步：主线索转线 B PDF-b（mdc-pdf crate 骨架，pdf_carrier_plan §5）。

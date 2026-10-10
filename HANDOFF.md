@@ -13,7 +13,7 @@
 | L0 | AGENTS.md 规范安全审计（vercel/AGENTS.md 等） | ✅ 完成（2026-10-08~09） | `agents-md-audit/`（9 篇分析 + 5 证据 + 5 工具） |
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
-| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | 🔄 R1 进行中：**canvas-a Excalidraw 深读完成 + canvas-d ComfyUI 协议 pass 完成**（2026-10-10）；office-a Univer 深读待开 | `pdf-line/05`（规划）；`canvas-line/`（两篇报告） |
+| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ **R1 P0 三项全部完成**（canvas-a Excalidraw 深读 + canvas-d ComfyUI 协议 pass + office-a Univer 深读，2026-10-10，均经独立复审代理审定）；R2+ 待排 | `pdf-line/05`（规划）；`canvas-line/` + `office-line/`（三篇报告） |
 | L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24-a/b/c 全收口（设置面/多窗口/打包基建）+ 质量审计轮（2 bug 修复）+ **PDF-a 完成**（ADR-P1 选型定谳 + 三探针 + 安全策略表）；R24-d 壳实体 = 开发环境轮；mdcore main=`0d6ac2f`（187/187 门禁） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
 
 > **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」
@@ -66,9 +66,14 @@ cleanroom-analysis/
   拓扑溶解、零认证+custom node 任意代码面）；协议最小面六端点 + 安全
   姿势五条 + 引擎可移植资产六条；已经独立复审代理 ~50 锚点抽查，见
   `canvas-line/canvas-d_ComfyUI协议pass.md`
-- **office-a**：Univer 深读（The Office Harness for AI Agents，Apache-2.0）
+- ~~**office-a**：Univer 深读（The Office Harness for AI Agents，Apache-2.0）~~
+  ✅ **完成（2026-10-10）**：11 维全量 + dsh/MCP 双口径能力矩阵 + 10 条
+  可移植结论（三层命令分类/视口双缓冲/公式引擎 RTree 增量重算/协同版本
+  骨架/agent 同一 op 通道等）；已经独立复审代理 60+ 锚点抽查（9 处轻微
+  修订落地），见 `office-line/office-a_Univer深读报告.md`
 
-R1 内容 = 仓库克隆 + 代码勘察（结构/治理/测试/许可），按 11 维裁剪矩阵输出。动画线 P3 暂缓。同法排 R2~R5。
+**R1 P0 收官**：三项全部完成。后续 R2+ 候选（依 `pdf-line/05` §7 批次表）
+待用户裁决优先级；当前主线索转线 B PDF-b（mdc-pdf 骨架）。
 
 **线 B — MD 引擎线（mdcore）R24/PDF**（详见 `md-line/STATUS.md` §4/§5/§7）：
 - ~~R24-a 设置面核侧 / R24-b 多窗口核侧 / R24-c 打包基建~~ ✅ **均完成
