@@ -567,3 +567,39 @@ Stage Summary:
   脏标记粘性；§5 不升 __contractVersion（宿主面非 window 面）。
 - 下一步：R24-c 打包基建（定名商标检索为用户决策前置阻塞项——计划以
   参数化占位名落地基建，名称变量化不阻塞），随后 PDF-a。
+
+---
+Task ID: md-r24c-1
+Agent: main-agent (Super Z, 会话 web-52b2ba37)
+Task: R24-c 打包分发基建（用户裁决开工序第二项：MD 收尾的最后一轮核侧工作）
+
+Work Log:
+- CARGO_PKG_VERSION 单源：根 Cargo.toml [workspace.package].version（唯一
+  手写点）+ 四 crate version.workspace 继承 + mdcore::VERSION 运行时
+  唯一出口；Cargo.lock 零 diff（继承不改变解析结果）。
+- packaging/ 基建：README（定名阻塞纪律 + 变量表 + 版本单源图）/
+  checklist.md（A-F 六节核对单，A4 定名门 + B2 版本单源为硬门）/
+  四平台模板（desktop 入口含 .md mime + mdcore:// scheme 注册 +
+  SingleMainWindow 单实例语义；AppImage AppRun + 构建脚本；deb
+  control/postinst/build（手工 dpkg-deb 布局，不引入 cargo-deb）；
+  NSIS 安装器（注册表面 + WebView2 Evergreen 引导 + 卸载器）；
+  macOS Info.plist（文档类型 + URL scheme + 无网络面声明））。
+- 定名阻塞处理：正式名 = 用户决策 + TRADEMARK_RULES §4 商标检索强制门
+  未决——{{APP_NAME}} 参数化占位（基建不阻塞），可执行名/包名/scheme
+  用 mdcore 自研命名域先行；定名提交 = 占位符替换 + checklist A4 勾选
+  + README 变量表登记三处一体（锁死在 r24_packaging.rs §4）。
+- 合规门禁扩展：scan.sh PRODUCT_PATHS 纳入 packaging/（发布面=产品面）。
+- 语义锁 4 条（r24_packaging.rs）：版本单源 / 工件在位与命名域 / 构建
+  脚本注入纪律 / 定名门在档。实现期修正 2 处（const 字符串比较非稳定
+  → 运行时断言；核对单反引号子串不匹配 → 断言词修正）。
+- 门禁终态：cargo 187/187（183+4）/ scan 0（scope 扩展后）/ wasm32
+  clean / clippy 零新增。零新依赖。
+- 推送：mdcore main 8f08368→587246f，ls-remote 验证 local=remote。
+
+Stage Summary:
+- R24-c 收口完成：打包基建全轮交付（版本单源 + 四平台配置 + 合规
+  核对单）。MD 收尾三连（质量审计 + R24-b + R24-c）全部完成。
+- MD 线剩余 = R24-d 壳实体（开发环境轮，本环境不可做）+ R24-e 收口
+  （依赖 d）+ 人工项（真机 IME / 定名商标检索）。
+- 下一步：PDF-a（用户裁决序第三项）——Acrobat-audit R5/R6 成果 →
+  安全策略表 + pdfium/lopdf 三探针 spike + ADR-P1 选型定谳。
