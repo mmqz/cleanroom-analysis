@@ -845,3 +845,28 @@ Stage Summary:
   看门狗留 PDF-d+/视图层；S6 AcroForm 探针（spike 侧）未做——下轮补。
 - 下一步：PDF-d 标注面（lopdf 增量写 + v0 四标注往返语义锁 + Acrobat
   互通验证的引擎层预证）。
+
+---
+Task ID: s6-probe-1
+Agent: main-agent (Super Z)
+Task: S6 AcroForm formfill 探针（PDF-b 登记、PDF-c 轮补做的欠账闭环）
+
+Work Log:
+- spike 工程改造：src/lib.rs（fixtures 提升为公共面）+ src/bin/formfill_probe.rs
+  （新增专项探针 bin）；fixtures.rs 增 build_form_pdf（1 页 + /AcroForm +
+  /Tx 文本域 widget，lopdf 现场生成）。
+- 探测两层：能力级 PdfDocument::form() Some/None + form_type 判别；行为级
+  field_values 实枚举；对照组 = 无表单文档（small.pdf）。
+- 结论（实测）：**formfill 模块存在于 non-V8 构建**——form() = Some、
+  form_type = Acrobat（非 XFA）、/Tx 字段名值可读（"probe_text" =
+  "hello form"）；对照组无表单文档 form() = None（判别干净）。
+- SECURITY_POLICY.md S6 节定谳更新：表单字段 = 被动可读面非执行面（JS
+  引擎已由构建层排除，字段 /A 与 format/calculate 脚本无解释器可跑）；
+  处置纪律 = 按 S2 同款（打开时枚举进 SecurityReport 并告警，永不初始
+  化交互式 formfill 环境执行动作，只读 field_values）。
+- spike 双 bin 编译验证过（main 探针 + formfill_probe）。
+
+Stage Summary:
+- S6 已知缺口 #1 闭环。安全策略表 v1 全部条目要么已实证要么有明确排期。
+- 下一步：PDF-d 标注面（lopdf 增量写 + 四标注往返 + Acrobat 互通引擎层
+  预证）。

@@ -17,7 +17,7 @@ use std::time::Instant;
 use lopdf::content::{Content, Operation};
 use lopdf::{dictionary, IncrementalDocument, Document, Object, Stream, StringFormat};
 
-mod fixtures;
+use pdf_a_spike::fixtures;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let here = Path::new(env!("CARGO_MANIFEST_DIR"));

@@ -65,7 +65,7 @@
 
 | 缺口 | 定性 | 处置 |
 |---|---|---|
-| v0 无 JS → 无脚本面免疫，但**AcroForm 渲染**（字段外观）依赖 formfill 模块 | pdfium formfill 是否编入 non-V8 构建 = PDF-b 验证项（spike 未覆盖） | PDF-b 补探针 |
+| ~~AcroForm formfill 是否编入 non-V8 构建~~ **已定谳（S6 探针，2026-10-10）**：formfill 模块**存在**——`PdfDocument::form() = Some`、`form_type = Acrobat`、`field_values` 实枚举成功（/Tx 字段名值可读；对照组无表单文档 = None）。**安全含义**：表单字段是**被动可读面**而非执行面（JS 引擎已由构建层排除——args.gn `pdf_enable_v8=false`，字段 /A 动作与 format/calculate 脚本无解释器可跑）；处置纪律 = form 字段按 S2 同款对待：打开时枚举进 SecurityReport 元数据并告警，**永不初始化交互式 formfill 环境执行动作**（mdc-pdf v0 不调 InitFormFillEnvironment 的交互路径，只读 field_values）。探针证据：`spike/src/bin/formfill_probe.rs` + `fixtures/form_probe.pdf` | 已闭环（PDF-c 轮补做） |
 | pdfium 预编译二进制 = 供应链面（三平台分发链） | 中风险（plan §7） | 版本 pin + SHA256（fetch-pdfium.sh 已闭环）+ licenses/ 全量入 NOTICES（PDF-e） |
 | 嵌套调用循环 / 渲染看门狗弃置线程的累积 | 低（v0 无 JS 面） | S3-L2 看门狗 + 工人池上限登记 |
 | 敌意 PDF 的 fuzz 战役（pdf-line/03 §5 方法论） | v0 只做限额与 panic 捕获，fuzz 属强化项 | PDF-e 后登记排期 |
