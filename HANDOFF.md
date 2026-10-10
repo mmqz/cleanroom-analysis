@@ -14,6 +14,14 @@
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
 | L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | 📋 规划完成，**R1 待启动** | `pdf-line/05`（规划文档，P0 批次表在 §3/§7） |
+| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ 合规双门闭合 + R23 收口 + 产品仓 main 三分支就位；**R24 产品化 + PDF 载体线待开工** | `md-line/STATUS.md` + `md-line/pdf_carrier_plan_2026-10-10.md`；产品代码在私有仓 `mmqz/mdcore` |
+
+> **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」
+> 即它，进度见 `md-line/STATUS.md`）。其审计底稿在私有仓
+> `mmqz/typora-re-analysis`（分区铁律：底稿不出该仓）；本仓 `md-line/` 只存
+> 结论层。L2 PdfCraft 分析 = 分析别人怎么做 PDF；MD 线的 PDF 载体计划 =
+> 我们怎么做 PDF——两者互补，L2 的 17 维方法论与敌意输入边界（03 篇）是
+> PDF-a 安全策略表的直接输入。
 
 ## 3. 仓库结构
 
@@ -45,14 +53,22 @@ cleanroom-analysis/
 4. **成果单一仓库**：全部新成果提交进本仓库（用户指示），不再另建仓库。
 5. **worklog 追加式**：每完成一个 Task 追加一节（Task ID/Agent/Task/Work Log/Stage Summary），永不覆写。
 
-## 6. 下一步任务（用户已确认方向，待开工）
+## 6. 下一步任务（两条线并行，均已确认方向）
 
-L3 办公/画布线 **R1**，P0 三项（详见 `pdf-line/05` §7 批次表）：
+**线 A — L3 办公/画布线 R1**（P0 三项，详见 `pdf-line/05` §7 批次表）：
 - **office-a**：Univer 深读（The Office Harness for AI Agents，Apache-2.0）
 - **canvas-a**：Excalidraw 深读（MIT）
 - **canvas-d**：ComfyUI 协议 pass（Nodes 2.0 / Vue 架构）
 
 R1 内容 = 仓库克隆 + 代码勘察（结构/治理/测试/许可），按 11 维裁剪矩阵输出。动画线 P3 暂缓。同法排 R2~R5。
+
+**线 B — MD 引擎线（mdcore）R24/PDF**（详见 `md-line/STATUS.md` §4/§5/§7）：
+- **R24-a 设置面核侧** / **R24-b 多窗口核侧** / **R24-c 打包基建**（均不依赖壳实体，可即开工）
+- **PDF-a 侦察收口 + spike**（Acrobat 审计资产→安全策略表 + pdfium/lopdf 三探针 + ADR-P1）
+- R24-d 壳实体合入 = 开发环境轮；R24-e 收口。
+- MD 线工作纪律差异：产品仓 `mmqz/mdcore` 每轮收口双绿（`compliance/scan.sh` + `cargo test --workspace`），契约变更走 CONTRACT v1 升版纪律。
+
+**优先级裁决权在用户**：接手后先向用户确认两条线的开工顺序（可全并行）。
 
 ## 7. 环境备忘
 

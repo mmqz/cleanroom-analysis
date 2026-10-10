@@ -436,3 +436,27 @@ Work Log:
 Stage Summary:
 - 单一成果仓库终态：https://github.com/mmqz/cleanroom-analysis = L0+L1+L2+L3 规划+worklog+HANDOFF，100 文件 5.4MB，新 AI 只需看此一仓
 - 新 AI 接手话术（给用户）：让新 AI 读 cleanroom-analysis 仓库的 HANDOFF.md 即可
+
+---
+Task ID: merge-md-1
+Agent: MD 引擎研发会话（main agent）
+Task: MD 线成果同步进合并仓 + HANDOFF 两线登记（用户指示：新代理看两仓接手）
+
+Work Log:
+- 核查：本仓此前无 MD 线任何记录（R23/R24/main 首推/mdcore 全部 0 命中）；
+  MD 线成果原存于 mmqz/typora-re-analysis（主档 §31/§32 + plans/ + gates +
+  compliance_rounds/）与 mmqz/mdcore（main=66d1ea6 三提交链三分支）。
+- 新增 md-line/STATUS.md：MD 引擎线结论层同步（架构/合规双门终态/仓库地图/
+  R24 编排摘录/PDF 计划衔接/遗留定性/可开工清单）。分区铁律保持：审计底稿
+  不出 typora-re-analysis，本目录只存结论与计划。
+- 新增 md-line/pdf_carrier_plan_2026-10-10.md：PDF 载体工程计划副本（与
+  pdf-line/01~04 互补——L2 分析别人怎么做，本计划是我们怎么做；L2 敌意输入
+  边界篇为 PDF-a 安全策略输入）。
+- HANDOFF.md 增补：§2 阶段表加 L-MD 行 + 关系注（组成面「MD 引擎开发中」
+  实态 = 合规双门闭合/R23 收口/main 就位/R24+PDF 待开工）；§6 下一步改两线
+  并行（线 A L3 R1 + 线 B R24/PDF），优先级裁决权在用户。
+
+Stage Summary:
+- 合并仓现为全工作台唯一接手入口：新代理读 HANDOFF + worklog + md-line/STATUS
+  即可同时接手生态审计线（L3 R1）与 MD 引擎线（R24/PDF），产品操作落
+  mmqz/mdcore，底稿按需 fetch mmqz/typora-re-analysis（不出仓）。
