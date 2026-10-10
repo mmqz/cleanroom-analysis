@@ -1,0 +1,61 @@
+{
+ "url": [
+  "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+  "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+  "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+  "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+  "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+  "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+  "http://ocsp.digicert.com0H",
+  "http://ocsp.digicert.com0I",
+  "http://s.symcb.com/universal-root.crl0",
+  "http://s.symcd.com06",
+  "http://ts-aia.ws.symantec.com/sha256-tss-ca.cer0(",
+  "http://ts-crl.ws.symantec.com/sha256-tss-ca.crl0",
+  "http://ts-ocsp.ws.symantec.com0;",
+  "http://www.digicert.com/ssl-cps-repository.htm0",
+  "http://www.openssl.org/support/faq.html",
+  "https://d.symcb.com/cps0%",
+  "https://d.symcb.com/rpa0.",
+  "https://d.symcb.com/rpa0@",
+  "https://www.digicert.com/CPS0"
+ ],
+ "domain": [
+  "genuine.adobe.com",
+  "na1e.services.adobe.com"
+ ],
+ "autoexec": [
+  "RuntimeFailureOutOfMemory",
+  "StartupInfoW",
+  "run",
+  "runcate",
+  "runcate1",
+  "runcate2",
+  "runcatedDigestSize",
+  "running",
+  "runtime_error@std@@",
+  "startUpFailed",
+  "startup"
+ ],
+ "keyword": [
+  "AdobeGC",
+  "NGL",
+  "adobegc",
+  "genuine",
+  "machineId",
+  "serial"
+ ],
+ "autoexec_w": [
+  "Run",
+  "run",
+  "runThisThread",
+  "runThisThread:",
+  "running",
+  "running.",
+  "runtime-l1-1-1"
+ ],
+ "keyword_w": [
+  "Genuine",
+  "MACAddress"
+ ]
+}

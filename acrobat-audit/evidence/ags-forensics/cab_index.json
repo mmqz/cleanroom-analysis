@@ -1,0 +1,86 @@
+{
+ "AlfSdPack.cab": {
+  "index": {
+   "cFiles": 1,
+   "cFolders": 259,
+   "coffFiles": 44,
+   "flags": 450,
+   "indexed": 1,
+   "error": null
+  },
+  "gc_hits": [],
+  "all_names_sample": [
+   "added.txt"
+  ]
+ },
+ "Core.cab": {
+  "index": {
+   "cFiles": 1,
+   "cFolders": 259,
+   "coffFiles": 60,
+   "flags": 723,
+   "indexed": 1,
+   "error": null
+  },
+  "gc_hits": [],
+  "all_names_sample": [
+   "a3dutils.dll"
+  ]
+ },
+ "Extras.cab": {
+  "index": {
+   "cFiles": 1,
+   "cFolders": 259,
+   "coffFiles": 44,
+   "flags": 215,
+   "indexed": 1,
+   "error": null
+  },
+  "gc_hits": [],
+  "all_names_sample": [
+   "acrobatacadic.arx"
+  ]
+ },
+ "Intermediate.cab": {
+  "index": {
+   "cFiles": 1,
+   "cFolders": 259,
+   "coffFiles": 44,
+   "flags": 291,
+   "indexed": 1,
+   "error": null
+  },
+  "gc_hits": [],
+  "all_names_sample": [
+   "accessibility.aapp"
+  ]
+ },
+ "Languages.cab": {
+  "index": {
+   "cFiles": 1,
+   "cFolders": 259,
+   "coffFiles": 44,
+   "flags": 4065,
+   "indexed": 1,
+   "error": null
+  },
+  "gc_hits": [],
+  "all_names_sample": [
+   "accessibility.aapp1"
+  ]
+ },
+ "Optional.cab": {
+  "index": {
+   "cFiles": 1,
+   "cFolders": 259,
+   "coffFiles": 44,
+   "flags": 662,
+   "indexed": 1,
+   "error": null
+  },
+  "gc_hits": [],
+  "all_names_sample": [
+   "Acro2015.kfp"
+  ]
+ }
+}

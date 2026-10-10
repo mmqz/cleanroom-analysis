@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://community.adobe.com/questions-9/enable-adobe-acrobat-updates-1640087",
+    "name": "Enable Adobe Acrobat updates | Community",
+    "snippet": "AdobeARMservice is part of Acrobat/Reader's update mechanism, but simply setting the service to Automatic doesn't necessarily mean updates are ... Missing:  armsvc  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-12/adobe-reader-update-scheduled-task-is-this-normal-1506042",
+    "name": "Adobe Reader Update Scheduled Task? Is this Normal?",
+    "snippet": "Yes, Acrobat and Reader Updater self-updated itself with the latest version. There is nothing to worry about. Moving to Task Scheduler makes ... Missing:  armsvc  AdobeARMservice",
+    "host_name": "community.adobe.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://blog.gridinsoft.com/armsvc-exe",
+    "name": "armsvc.exe: Adobe Update Service or Malware Copy?",
+    "snippet": "armsvc.exe is usually Adobe Acrobat Update Service. Check its path and signature, disable it safely, fix errors, and spot a malware copy.",
+    "host_name": "blog.gridinsoft.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/how-do-i-prevent-adobe-acrobat-update-service-from-running-at-startup-1306041",
+    "name": "How do I prevent Adobe Acrobat Update Service from running",
+    "snippet": "Open Task Scheduler and [Right Click]Adobe Update->[Click]Disable. The same has to be done for Gupdate from Google. Hope this helps someone in ... Missing:  armsvc  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.flamingo.run/blog/how-to-disable-adobe-updater",
+    "name": "How to Disable Adobe Updater (Admin Guide) - Flamingo",
+    "snippet": "Adobe Acrobat Update Service ( AdobeARMservice. Task A scheduled task Triggers the update check … crobat or Reader, go to Edit > Preferences > ... Missing:  armsvc  | Show results with:",
+    "host_name": "www.flamingo.run",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.bleepingcomputer.com/startups/26600/armsvc.exe",
+    "name": "armsvc.exe - Adobe Acrobat Update Service - Bleeping Computer",
+    "snippet": "This entry has information about the Windows startup entry named Adobe Acrobat Update Service that points to the armsvc.exe file. Please visit this result ... Missing:  scheduled  | Show results with:",
+    "host_name": "www.bleepingcomputer.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.file.net/process/armsvc.exe.html",
+    "name": "armsvc.exe Windows process - What is it? - File.net",
+    "snippet": "It is the AdobeARMservice service: Adobe Acrobat Updater keeps your Adobe software up to date. The program has no visible window. It is not a Windows core file. Missing:  scheduled  | Show results with:",
+    "host_name": "www.file.net",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-12/re-enable-silent-automatic-updates-for-adobe-acrobat-reader-dc-1623764",
+    "name": "(Re-)Enable Silent Automatic Updates for Adobe Acrobat",
+    "snippet": "1. Verify Adobe ARM Installation · 2. Verify the Adobe Update Service (AdobeARMservice) · 3. Verify the Scheduled Task: Adobe Acrobat Update Task. Missing:  armsvc  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

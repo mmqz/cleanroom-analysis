@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://community.adobe.com/questions-12/how-to-remove-product-improvement-program-pop-up-1515457",
+    "name": "How to REMOVE Product Improvement Program pop up?",
+    "snippet": "Disable Adobe Product Improvement Program. On Windows, set a registry entry with help of a .reg file: [HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies ... Missing:  telemetry  enterprise",
+    "host_name": "community.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.adobe.com/devnet-docs/acrobatetk/tools/PrefRef/Windows/FeatureLockDown.html",
+    "name": "FeatureLockDown (Lockable Settings) - Adobe",
+    "snippet": "Disables both updates to the product's web-plugin components as well as all services. a \"Disable Registration\" option for disabling the Register Product UI Missing:  telemetry  | Show results with:",
+    "host_name": "www.adobe.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/SysAdminDoc/Disable-AdobeTelemetry",
+    "name": "Disable Adobe Telemetry - GitHub",
+    "snippet": "Disables known telemetry, updater, and genuine-monitoring entries. Registry policy Applies Adobe enterprise and Acrobat usage-data settings. protected registry ... Missing:  Improvement  FeatureLockdown",
+    "host_name": "github.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/sysadmin/comments/1bkeid1/turning_off_adobes_ability_to_scan_all_of_your",
+    "name": "Turning off Adobe's ability to scan all of your organization's",
+    "snippet": "I am also sharing you the registry which will allow you disable the option of Generative AI once it is available for Enterprise accounts. . ...",
+    "host_name": "www.reddit.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://cloudbuild.co.uk/disable-adobe-product-improvement-program-pop-up",
+    "name": "Disable Adobe Product Improvement Program pop up",
+    "snippet": "Add the below key to registry or push out via Group Policy. HKLM\\SOFTWARE\\Policies\\Adobe\\(product name)\\(version)\\FeatureLockdown. DWord ... Missing:  telemetry  | Show results with:",
+    "host_name": "cloudbuild.co.uk",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.flamingo.run/blog/how-to-disable-adobe-updater",
+    "name": "How to Disable Adobe Updater (Admin Guide) - Flamingo",
+    "snippet": "Turn Off Adobe Updates on One Machine In Acrobat or Reader, go to Edit > Preferences > Updater and pick Do not download or install updates ... Missing:  Improvement  telemetry",
+    "host_name": "www.flamingo.run",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-12/how-to-disable-usage-data-collection-in-adobe-reader-dc-1526924",
+    "name": "How to disable usage data collection in Adobe Reader DC?",
+    "snippet": "Choose Help > Adobe Product Improvement Program. · Select either \"Do Not Participate,\" \"Don't Allow\" or \"No,\" depending on the choice offered. Missing:  enterprise  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.winability.com/how-to-disable-adobe-acrobat-reader-generatrive-ai",
+    "name": "How to disable Adobe's ability to scan all of your organization's",
+    "snippet": "Open Registry Editor (regedit.exe) and select the following key: HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Adobe\\Adobe Acrobat\\DC\\FeatureLockDown. (If this key ...",
+    "host_name": "www.winability.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

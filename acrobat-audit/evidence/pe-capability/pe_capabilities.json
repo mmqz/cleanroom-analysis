@@ -1,0 +1,3503 @@
+[
+ {
+  "stream": "s004_348160",
+  "size": 348160,
+  "sha256": "2c9876c4cb7abed2d1098c30beeb44df27340d43acc4b4daf5a2f7457ca8e493",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.19,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s005_348160",
+  "size": 348160,
+  "sha256": "1ab814bbf415b35551636726e21e32021d7d187b8b82d7a232048bced23de6ac",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.13,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s006_409600",
+  "size": 409600,
+  "sha256": "4f48a32ab0b4c27da40cf32b8466f6215e76ac1d0e14ff347b65c3f5a716838b",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 372396,
+    "rsize": 372736,
+    "entropy": 2.28,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s007_409600",
+  "size": 409600,
+  "sha256": "4f48a32ab0b4c27da40cf32b8466f6215e76ac1d0e14ff347b65c3f5a716838b",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 372396,
+    "rsize": 372736,
+    "entropy": 2.28,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s008_409600",
+  "size": 409600,
+  "sha256": "4f48a32ab0b4c27da40cf32b8466f6215e76ac1d0e14ff347b65c3f5a716838b",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 372396,
+    "rsize": 372736,
+    "entropy": 2.28,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s009_409600",
+  "size": 409600,
+  "sha256": "2b977b200ff70ac55fdd8ed9d554d9eb77bc74c7a8428b2c1b6f833697748fe6",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 372396,
+    "rsize": 372736,
+    "entropy": 2.93,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s010_348160",
+  "size": 348160,
+  "sha256": "b5075ffa1858d2fc1292e2dcd9ef6eb25bdbc0f8344c20ff2de34641bb4ac3b5",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.08,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s011_348160",
+  "size": 348160,
+  "sha256": "7c2424c29f1be43dd2627401d4b7807d6211397bc2df91965218eec6541eed5d",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.06,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s012_348160",
+  "size": 348160,
+  "sha256": "d6fa62f5d5ab9183f03b80ebde916decf5365cccefb3c58f5527f20709a8a85b",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.05,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s013_348160",
+  "size": 348160,
+  "sha256": "3de957955db92bca688f30b5a221dbce6f08dd6dc8276b7e32488103c9699005",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.08,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s014_348160",
+  "size": 348160,
+  "sha256": "98c2f0e907b6ad0d9ff819369fe003042fca4adf459ef41874ec05f2e80f156d",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.06,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s015_348160",
+  "size": 348160,
+  "sha256": "1ab814bbf415b35551636726e21e32021d7d187b8b82d7a232048bced23de6ac",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.13,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s016_348160",
+  "size": 348160,
+  "sha256": "1d1374f4f3730a622366fb011b7a279239158be8fe182b0a47ed624ebfe09894",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 1.9,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s017_348160",
+  "size": 348160,
+  "sha256": "825c761680e0bdc5e2daa07ba7d6c77115b52411cfebe32a284c81c6e6bcefa8",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.09,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s018_348160",
+  "size": 348160,
+  "sha256": "0621453a90c21816973cb79ae0359346ba89d003338aebec0b6c1c679f6dc2ec",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.07,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s019_348160",
+  "size": 348160,
+  "sha256": "d8684b657a4aaa861db335e257b47a1697ee93088ae7e010de7fdf7e96294ec7",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 1.97,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s020_348160",
+  "size": 348160,
+  "sha256": "c7edf5315eddee34dd433b650f3b7a846ecb97ee6524e73f471fea1ef82897aa",
+  "machine": "x86",
+  "timestamp": 1335316607,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 13742,
+    "rsize": 16384,
+    "entropy": 5.95,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 1952,
+    "rsize": 4096,
+    "entropy": 3.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10716,
+    "rsize": 12288,
+    "entropy": 0.36,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 307212,
+    "rsize": 311296,
+    "entropy": 2.04,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": null,
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "InstallShield",
+   "FileVersion": "19.0.160",
+   "InternalName": "_IsIcoRes.exe",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "_IsIcoRes.exe",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ]
+  }
+ },
+ {
+  "stream": "s021_121000",
+  "size": 121000,
+  "sha256": "877aad74f9a154b6118c5595a561eb58cda8eb900b6b2152c60a8ee6e725ecca",
+  "machine": "x64",
+  "timestamp": 1612236717,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 56918,
+    "rsize": 57344,
+    "entropy": 5.98,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 37516,
+    "rsize": 37888,
+    "entropy": 4.39,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 11032,
+    "rsize": 9728,
+    "entropy": 4.56,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 4164,
+    "rsize": 4608,
+    "entropy": 4.57,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1240,
+    "rsize": 1536,
+    "entropy": 3.61,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 1192,
+    "rsize": 1536,
+    "entropy": 4.84,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "CompanyName": "Adobe",
+   "FileDescription": "Adobe Acrobat",
+   "FileVersion": "1.0.0.1",
+   "InternalName": "ANCUtili.dll",
+   "LegalCopyright": "Copyright (C) 2021",
+   "OriginalFilename": "ANCUtili.dll",
+   "ProductName": "Adobe Acrobat",
+   "ProductVersion": "1.0.0.1"
+  },
+  "exports": [
+   "checkSideloadPref",
+   "installAppx",
+   "removeAppx",
+   "removeAppxInUserContext",
+   "restoreSideloadPref"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "MSVCP140.dll",
+   "VCRUNTIME140.dll",
+   "VCRUNTIME140_1.dll",
+   "api-ms-win-core-winrt-string-l1-1-0.dll",
+   "api-ms-win-crt-convert-l1-1-0.dll",
+   "api-ms-win-crt-heap-l1-1-0.dll",
+   "api-ms-win-crt-runtime-l1-1-0.dll",
+   "api-ms-win-crt-string-l1-1-0.dll",
+   "msi.dll",
+   "ole32.dll",
+   "vccorlib140.DLL"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "com_schtasks": [
+    "CoInitialize"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s022_143016",
+  "size": 143016,
+  "sha256": "8e9fb98042491ab2f1c2a6460bd1c0ed0e43f63ebb10e140914e3c652ca32750",
+  "machine": "x64",
+  "timestamp": 1612236551,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 78720,
+    "rsize": 78848,
+    "entropy": 6.43,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 42684,
+    "rsize": 43008,
+    "entropy": 4.67,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 8040,
+    "rsize": 3584,
+    "entropy": 2.19,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 5364,
+    "rsize": 5632,
+    "entropy": 4.83,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.1,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 976,
+    "rsize": 1024,
+    "entropy": 3.28,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 1668,
+    "rsize": 2048,
+    "entropy": 4.96,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "AbcpyDll Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "AbcpyDll",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "AbcpyDll.dll",
+   "ProductName": "AbcpyDll Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "ExecuteSublaunches",
+   "GetOemSettings",
+   "IsRegKeyIncluded",
+   "SetRegKeyEntry"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "USER32.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "ShellExecuteW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "file_enum": [
+    "FindNextFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s023_606376",
+  "size": 606376,
+  "sha256": "3a6f087f4f8075622f588b52035a36c98f2cf13827d47e9565d3f50c10668b2b",
+  "machine": "x64",
+  "timestamp": 1612236594,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 348140,
+    "rsize": 348160,
+    "entropy": 6.53,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 224248,
+    "rsize": 224256,
+    "entropy": 4.49,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 11796,
+    "rsize": 5120,
+    "entropy": 2.96,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 13728,
+    "rsize": 13824,
+    "entropy": 5.63,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.1,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 2520,
+    "rsize": 2560,
+    "entropy": 3.94,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 3380,
+    "rsize": 3584,
+    "entropy": 5.36,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "Comments": "Acrobat Installer Utility",
+   "CompanyName": "Adobe Systems, Inc.",
+   "FileDescription": "ADelRCP Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "ADelRCP",
+   "LegalCopyright": "Copyright © 1998-2011 Adobe Systems Incorporated and its licensors. All rights r",
+   "OriginalFilename": "ADelRCP.dll",
+   "ProductName": " ADelRCP Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "AcrobatOverHigherpDistillerAbort",
+   "AddCacheToSourceList",
+   "BackupWebResourceReg",
+   "BroadcastMissingCompMessage",
+   "BroadcastReloadAcrobatComponents",
+   "BroadcastReloadStubMessage",
+   "BroadcastUnloadAcrobatComponents",
+   "BroadcastUnloadStubMessage",
+   "CacheInstallerFile",
+   "ChangeAcroActiveSetupKey",
+   "ChangeFeatureDisplayLevel",
+   "ChangeReaderActiveSetupKey",
+   "CheckCostingComplete",
+   "CheckMSRMSReq",
+   "CheckMSRMSReqSCA",
+   "CheckServices",
+   "CheckVCx64Runtime",
+   "CleanupPatchCache_DeleteRegKey",
+   "CleanupPatchCache_Rollback",
+   "CleanupPatchCache_SuccessReg",
+   "CleanupRunTime",
+   "CloseApplications",
+   "CollectCustomTablesData",
+   "CollectDataForARM",
+   "CollectProperties",
+   "CopySourceMsi",
+   "CopyX64V2017CRT",
+   "CreateAAM_SuccessReg",
+   "CreateAcroReaderActiveSetupKey",
+   "CreateAcrobatInstallSourceReg",
+   "CreateDDENameRegistry",
+   "CreateForceASLRRegEntries",
+   "DeleteForceASLRRegEntries",
+   "DeleteGoKartRegEntries",
+   "DeleteRdrChromeNativeMsgHost",
+   "DictionaryInstallBroadcast",
+   "ExtAlfNoFeatureSelected",
+   "FileTypesOwnerBackup",
+   "FileTypesOwnerInit",
+   "FileTypesOwnerRestore",
+   "FileTypesOwnerSet",
+   "FixCacheRegistry",
+   "FixFilePermissions",
+   "FixRegPermissions",
+   "ForceFailThisInstall",
+   "GoToWeb",
+   "HandleInterOp",
+   "HandleInterOpSCA",
+   "HandleURIOwnership",
+   "HandleUnsupportedCoEx",
+   "Install2017UCRT",
+   "InstallColorFiles",
+   "IsOptionalFeatureAvailable",
+   "IsPathRoundTripped",
+   "IsReaderFromTrackInstalled",
+   "IsSCAReaderFromTrackInstalled",
+   "IsSameTrackProductUpgrade",
+   "IsUserChoiceKeyRequired",
+   "LaunchApplicationAfterInstall",
+   "LockFilePermissions"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "GDI32.dll",
+   "KERNEL32.dll",
+   "PSAPI.DLL",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "VERSION.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW",
+    "ShellExecuteExW",
+    "ShellExecuteW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "proc_enum": [
+    "CreateToolhelp32Snapshot",
+    "EnumProcesses",
+    "OpenProcess",
+    "Process32FirstW"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteKeyW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "service_ctl": [
+    "OpenSCManagerW",
+    "StartServiceW"
+   ],
+   "privilege": [
+    "AdjustTokenPrivileges",
+    "LookupPrivilegeValueW",
+    "OpenProcessToken"
+   ],
+   "crypto": [
+    "CryptAcquireContextW",
+    "CryptHashData"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitialize",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s024_134848",
+  "size": 134848,
+  "sha256": "fe3fc208f56d1752f62b6fe4e9b3ea00a302f63af238ec0a2836dd93665f80ae",
+  "machine": "x86",
+  "timestamp": 1611640186,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 82669,
+    "rsize": 82944,
+    "entropy": 6.62,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 33342,
+    "rsize": 33792,
+    "entropy": 5.07,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 4952,
+    "rsize": 2560,
+    "entropy": 2.33,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1552,
+    "rsize": 2048,
+    "entropy": 3.37,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 5020,
+    "rsize": 5120,
+    "entropy": 6.57,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7360
+  },
+  "version_info": {
+   "Comments": "Acrobat Installer Utility",
+   "CompanyName": "Adobe Systems Incorporated",
+   "FileDescription": "ARM Installer Dynamic Link Library",
+   "FileVersion": "1.824.42.0176",
+   "InternalName": "ArmInst",
+   "LegalCopyright": "Copyright © 2013 Adobe Systems Incorporated.  All rights reserved.",
+   "OriginalFilename": "ArmInst.dll",
+   "ProductName": "ARM Installer Dynamic Link Library",
+   "ProductVersion": "1.824.42.0176"
+  },
+  "exports": [
+   "AddTask",
+   "CleanupCachedSource",
+   "RemoveTask",
+   "StartArmService"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "OLEAUT32.dll",
+   "SHELL32.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "service_ctl": [
+    "OpenSCManagerW",
+    "StartServiceW"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s025_486568",
+  "size": 486568,
+  "sha256": "32c5c1be72b365dec4b72df4620ef189f11ebdea51fa4e50601d8ccbc0fde306",
+  "machine": "x64",
+  "timestamp": 1612236626,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 364240,
+    "rsize": 364544,
+    "entropy": 6.43,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 84470,
+    "rsize": 84480,
+    "entropy": 5.08,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10280,
+    "rsize": 3584,
+    "entropy": 2.3,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 20556,
+    "rsize": 20992,
+    "entropy": 5.72,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.31,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1528,
+    "rsize": 1536,
+    "entropy": 4.14,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 2060,
+    "rsize": 2560,
+    "entropy": 4.92,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "Comments": "Installer utility file.",
+   "CompanyName": "Adobe Systems, Inc.",
+   "FileDescription": "Adobeisf",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "Adobeisf",
+   "LegalCopyright": "Copyright © 1998-2011 Adobe Systems Incorporated and its licensors. All rights r",
+   "OriginalFilename": "Adobeisf.dll",
+   "ProductName": "Adobe Acrobat Installer",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "CloseAcroTray",
+   "CloseApplications",
+   "CustomizeDevMode",
+   "DeleteDistillerPrinter",
+   "FlushHKLM",
+   "InstallPdfPortMonitor",
+   "LaunchAcrobat",
+   "RefreshShellIcons",
+   "RemoveAppInit",
+   "RemoveCurrentBlockingProduct",
+   "RestartSpoolerService",
+   "SetAllUsersDocuments",
+   "SetTabletPCProperty",
+   "SetupAdobeHome",
+   "SetupAdobePDFPrinter",
+   "SetupAppInit",
+   "SetupDeviceMode",
+   "SetupPortMonitor",
+   "UnsetIEKillBit",
+   "UpdateAdobePDFPrinterDriver",
+   "UpdateCitrixRegistry"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "VERSION.dll",
+   "WINSPOOL.DRV",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "service_ctl": [
+    "ControlService",
+    "OpenSCManagerW",
+    "StartServiceW"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s026_174248",
+  "size": 174248,
+  "sha256": "d6ba36f00332c122a07df7a1b7059d3a354b1b74706bcda9648a65bfcf7a55c1",
+  "machine": "x64",
+  "timestamp": 1612236570,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 101152,
+    "rsize": 101376,
+    "entropy": 6.43,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 51378,
+    "rsize": 51712,
+    "entropy": 4.88,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 7376,
+    "rsize": 3072,
+    "entropy": 2.13,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 5232,
+    "rsize": 5632,
+    "entropy": 4.95,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.08,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1480,
+    "rsize": 1536,
+    "entropy": 4.09,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 1664,
+    "rsize": 2048,
+    "entropy": 4.91,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "CompanyName": "Adobe Systems, Inc.",
+   "FileDescription": "Acrobat 64 bit  Installer Support",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "AcroSup64",
+   "LegalCopyright": "Copyright 1998-2021 Adobe Systems Incorporated and its licensors. All rights res",
+   "OriginalFilename": "AcroSup64.dll",
+   "ProductName": "Adobe Acrobat",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "CreatePDFMOfficeX64Registry",
+   "DeletePDFMOfficeX64Registry",
+   "RegisterPDFMOfficeX64Comp",
+   "SetPropRegisterPDFMOfficeX64Comp",
+   "SetPropUnRegisterPDFMOfficeX64Comp",
+   "UnRegisterPDFMOfficeX64Comp"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "ShellExecuteExW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_enum": [
+    "FindNextFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s027_482984",
+  "size": 482984,
+  "sha256": "b76f0ac3f98466fd40b75b3d6248c0ecffb4161eeaeb593636a2ee8d732c59b2",
+  "machine": "x64",
+  "timestamp": 1612236581,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 363360,
+    "rsize": 363520,
+    "entropy": 6.43,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 81300,
+    "rsize": 81408,
+    "entropy": 5.11,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10344,
+    "rsize": 3584,
+    "entropy": 2.31,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 21048,
+    "rsize": 21504,
+    "entropy": 5.73,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.3,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1456,
+    "rsize": 1536,
+    "entropy": 4.04,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 2064,
+    "rsize": 2560,
+    "entropy": 4.9,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "CompanyName": "Adobe Systems, Inc.",
+   "FileDescription": "AcroTgts",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "AcroTgts",
+   "LegalCopyright": "Copyright © 1998-2011 Adobe Systems Incorporated and its licensors. All rights r",
+   "OriginalFilename": "AcroTgts.dll",
+   "ProductName": "Adobe Systems AcroTgts",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "InitializeNetscapeRegistry",
+   "InitializePluginProperties",
+   "UnInitializeNetscapeRegistry",
+   "UnsetIEType"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "VERSION.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_enum": [
+    "FindNextFileW"
+   ],
+   "privilege": [
+    "AdjustTokenPrivileges",
+    "LookupPrivilegeValueW",
+    "OpenProcessToken"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s028_140968",
+  "size": 140968,
+  "sha256": "5f833f6f1c1800e437b186831804ebffdcbda6f5a7e60be2716fd0420879be55",
+  "machine": "x64",
+  "timestamp": 1612236561,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 71560,
+    "rsize": 71680,
+    "entropy": 6.44,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 47642,
+    "rsize": 48128,
+    "entropy": 4.59,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 7760,
+    "rsize": 3072,
+    "entropy": 2.2,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 4500,
+    "rsize": 4608,
+    "entropy": 4.88,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.1,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 2520,
+    "rsize": 2560,
+    "entropy": 3.94,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 1640,
+    "rsize": 2048,
+    "entropy": 4.88,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "Comments": "Acrobat Installer Utility",
+   "CompanyName": "Adobe Systems, Inc.",
+   "FileDescription": "ADelRCP Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "ADelRCP",
+   "LegalCopyright": "Copyright © 1998-2011 Adobe Systems Incorporated and its licensors. All rights r",
+   "OriginalFilename": "ADelRCP.dll",
+   "ProductName": " ADelRCP Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "CoexistAcrobat",
+   "HandleInterOp",
+   "HandleInterOpSCA"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_enum": [
+    "FindNextFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s030_34984",
+  "size": 34984,
+  "sha256": "8d4c0315daf313945cdc8a16094fc00523b2eec1b0ec33b993a270fc9e89f87b",
+  "machine": "x64",
+  "timestamp": 1612236852,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 11964,
+    "rsize": 12288,
+    "entropy": 6.08,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 11304,
+    "rsize": 11776,
+    "entropy": 4.07,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 2000,
+    "rsize": 512,
+    "entropy": 2.03,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 924,
+    "rsize": 1024,
+    "entropy": 3.76,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 480,
+    "rsize": 512,
+    "entropy": 4.7,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 92,
+    "rsize": 512,
+    "entropy": 1.18,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {},
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "MSVCP140.dll",
+   "SHELL32.dll",
+   "VCRUNTIME140.dll",
+   "VCRUNTIME140_1.dll",
+   "api-ms-win-crt-convert-l1-1-0.dll",
+   "api-ms-win-crt-heap-l1-1-0.dll",
+   "api-ms-win-crt-locale-l1-1-0.dll",
+   "api-ms-win-crt-math-l1-1-0.dll",
+   "api-ms-win-crt-runtime-l1-1-0.dll",
+   "api-ms-win-crt-stdio-l1-1-0.dll",
+   "api-ms-win-crt-string-l1-1-0.dll",
+   "api-ms-win-crt-time-l1-1-0.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "TerminateProcess"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "service_ctl": [
+    "OpenSCManagerW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s032_154280",
+  "size": 154280,
+  "sha256": "e07b62262388d60bbb48408466ac55c91d348d1f6dcfb7b84a080c440c270e45",
+  "machine": "x64",
+  "timestamp": 1612236812,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 86784,
+    "rsize": 87040,
+    "entropy": 6.46,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 46450,
+    "rsize": 46592,
+    "entropy": 4.92,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 7376,
+    "rsize": 3072,
+    "entropy": 2.14,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 4812,
+    "rsize": 5120,
+    "entropy": 4.88,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.1,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1424,
+    "rsize": 1536,
+    "entropy": 4.0,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 1664,
+    "rsize": 2048,
+    "entropy": 4.95,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "EMIOrien Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "EMIOrien",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "EMIOrien.dll",
+   "ProductName": "EMIOrien Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "Vsn",
+   "VsnSetSerial"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "file_enum": [
+    "FindNextFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s033_21672",
+  "size": 21672,
+  "sha256": "c424cd427920bb8a42201ef0cfef1c1373cb6be0368f14a99751abf20900f121",
+  "machine": "x64",
+  "timestamp": 1612236817,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 5784,
+    "rsize": 6144,
+    "entropy": 5.86,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 5018,
+    "rsize": 5120,
+    "entropy": 4.3,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 1592,
+    "rsize": 512,
+    "entropy": 0.46,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 456,
+    "rsize": 512,
+    "entropy": 3.5,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 480,
+    "rsize": 512,
+    "entropy": 4.7,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 32,
+    "rsize": 512,
+    "entropy": 0.43,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {},
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "VCRUNTIME140.dll",
+   "api-ms-win-crt-heap-l1-1-0.dll",
+   "api-ms-win-crt-locale-l1-1-0.dll",
+   "api-ms-win-crt-math-l1-1-0.dll",
+   "api-ms-win-crt-runtime-l1-1-0.dll",
+   "api-ms-win-crt-stdio-l1-1-0.dll",
+   "api-ms-win-crt-string-l1-1-0.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW",
+    "ShellExecuteW"
+   ],
+   "proc_term": [
+    "TerminateProcess"
+   ],
+   "service_ctl": [
+    "OpenSCManagerW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s034_204968",
+  "size": 204968,
+  "sha256": "d42cd44dae1458f70936b320f74828664cdd69b61030e5eebc3b1fbfc2aed27e",
+  "machine": "x64",
+  "timestamp": 1612236911,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 130224,
+    "rsize": 130560,
+    "entropy": 6.46,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 52156,
+    "rsize": 52224,
+    "entropy": 4.95,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 8112,
+    "rsize": 3072,
+    "entropy": 2.43,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 6360,
+    "rsize": 6656,
+    "entropy": 5.1,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.09,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1408,
+    "rsize": 1536,
+    "entropy": 3.97,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 1712,
+    "rsize": 2048,
+    "entropy": 5.04,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "IWActs Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "IWActs",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "IWActs.dll",
+   "ProductName": "IWActs Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "CollectMntProperties",
+   "ExportBinary",
+   "InstEnterpriseFiles",
+   "InstEnterpriseRegistry",
+   "IsElevated",
+   "MoveBinary",
+   "RestoreEnterpriseFiles",
+   "TransferPrefRegistry",
+   "UninstEnterpriseFiles",
+   "UninstEnterpriseRegistry"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "VERSION.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s035_379904",
+  "size": 379904,
+  "sha256": "475a5985bd41e0f5812cb813a0f69e1a3897d7edcc6d4d0bbea62f236a39c9ca",
+  "machine": "x86",
+  "timestamp": 1335311302,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 160805,
+    "rsize": 161280,
+    "entropy": 6.58,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 38484,
+    "rsize": 38912,
+    "entropy": 4.63,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 14592,
+    "rsize": 6656,
+    "entropy": 3.9,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 153972,
+    "rsize": 154112,
+    "entropy": 6.06,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 17530,
+    "rsize": 17920,
+    "entropy": 4.32,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 6024
+  },
+  "version_info": {
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "ISRegSvr.dll Module",
+   "FileVersion": "19.0.0.160",
+   "InternalName": "ISRegSvr.dll",
+   "OriginalFilename": "ISRegSvr.dll",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [
+   "ISSelfRegisterCosting",
+   "ISSelfRegisterFiles",
+   "ISSelfRegisterFinalize",
+   "ISUnSelfRegisterFiles"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "OLEAUT32.dll",
+   "USER32.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteKeyW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW"
+   ],
+   "com_schtasks": [
+    "CLSIDFromProgID",
+    "CoCreateInstance",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s036_304296",
+  "size": 304296,
+  "sha256": "4571fb4a3e81fb9e1a36462b6bcde063694946d10da72d062189f7fee9e07445",
+  "machine": "x64",
+  "timestamp": 1612236859,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 177564,
+    "rsize": 177664,
+    "entropy": 6.47,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 98730,
+    "rsize": 98816,
+    "entropy": 4.98,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 11016,
+    "rsize": 4608,
+    "entropy": 2.87,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 9252,
+    "rsize": 9728,
+    "entropy": 5.21,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.09,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 976,
+    "rsize": 1024,
+    "entropy": 3.28,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 3340,
+    "rsize": 3584,
+    "entropy": 5.32,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "InstOOBE Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "InstOOBE",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "InstOOBE.dll",
+   "ProductName": "InstOOBE Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "OOBELibDeactivateUI",
+   "OOBELibInstall",
+   "OOBELibRetrieveSerialNumber",
+   "OOBELibUnInstall",
+   "OOBELibUpgradeSniffingBackup"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteKeyW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s037_492712",
+  "size": 492712,
+  "sha256": "9f6b0ea66dd325bda301fe36bc52e085eecc05a355bc94f20fcce488aa11ecaf",
+  "machine": "x64",
+  "timestamp": 1612236871,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 371776,
+    "rsize": 372224,
+    "entropy": 6.43,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 82586,
+    "rsize": 82944,
+    "entropy": 5.23,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10296,
+    "rsize": 3584,
+    "entropy": 2.32,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 20940,
+    "rsize": 20992,
+    "entropy": 5.81,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.3,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1464,
+    "rsize": 1536,
+    "entropy": 4.06,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 2056,
+    "rsize": 2560,
+    "entropy": 4.9,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "Comments": "Tim Gladden",
+   "CompanyName": "Adobe Systems",
+   "FileDescription": "InstPDFM",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "InstPDFM",
+   "LegalCopyright": "Copyright 2002-2011 Adobe Systems Incorporated and its licensors. All rights res",
+   "OriginalFilename": "InstPDFM.dll",
+   "ProductName": "Adobe Acrobat",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "SetLotusIni",
+   "SetLotusInstalled",
+   "SetLotusProgramDirectory",
+   "SetPDFMakerPaths",
+   "SetupAutoCAD"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "VERSION.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessA"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExA",
+    "RegDeleteValueA",
+    "RegSetValueExA"
+   ],
+   "reg_read": [
+    "RegEnumValueA",
+    "RegOpenKeyExA",
+    "RegQueryValueExA"
+   ],
+   "file_del": [
+    "DeleteFileA"
+   ],
+   "file_enum": [
+    "FindFirstFileA",
+    "FindNextFileA",
+    "FindNextFileW"
+   ],
+   "privilege": [
+    "AdjustTokenPrivileges",
+    "LookupPrivilegeValueA",
+    "OpenProcessToken"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s038_525480",
+  "size": 525480,
+  "sha256": "7917920ba48804d682497b13e0db1f1ae5a76346e00045735b5d6e4b1d2822a4",
+  "machine": "x64",
+  "timestamp": 1612236894,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 394768,
+    "rsize": 395264,
+    "entropy": 6.41,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 90660,
+    "rsize": 91136,
+    "entropy": 5.04,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 10352,
+    "rsize": 3584,
+    "entropy": 2.33,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 22488,
+    "rsize": 22528,
+    "entropy": 5.81,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.1,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1424,
+    "rsize": 1536,
+    "entropy": 3.99,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 2068,
+    "rsize": 2560,
+    "entropy": 4.93,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "InstUtil Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "InstUtil",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "InstUtil.dll",
+   "ProductName": "InstUtil Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "DisableCancelButton",
+   "SetSecondaryInstallParams"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "VERSION.dll",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "proc_enum": [
+    "CreateToolhelp32Snapshot",
+    "OpenProcess",
+    "Process32FirstW"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "service_ctl": [
+    "OpenSCManagerW"
+   ],
+   "privilege": [
+    "AdjustTokenPrivileges",
+    "LookupPrivilegeValueW",
+    "OpenProcessToken"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s056_104616",
+  "size": 104616,
+  "sha256": "20b9094a5af298fb270d51260b1d6f334f4158ed698c3e58136696758d7ba129",
+  "machine": "x86",
+  "timestamp": 1612236972,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 58994,
+    "rsize": 59392,
+    "entropy": 6.62,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 26038,
+    "rsize": 26112,
+    "entropy": 4.66,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 12256,
+    "rsize": 4608,
+    "entropy": 3.52,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1424,
+    "rsize": 1536,
+    "entropy": 3.99,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 4268,
+    "rsize": 4608,
+    "entropy": 6.36,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "PrintInf Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "PrintInf",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "PrintInf.dll",
+   "ProductName": "PrintInf Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "CheckForAdobePDFPrinter",
+   "DeletePrinterDriverMonitor",
+   "InstallDriverAndPrinter",
+   "InstallPortMonitor",
+   "RemoveDrvFileAndContMenuReg",
+   "RestorePrinterSettings",
+   "SavePrinterSettings"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "WINSPOOL.DRV",
+   "msi.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW"
+   ],
+   "debug_anti": [
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s057_344232",
+  "size": 344232,
+  "sha256": "0d2337a98225b5e6d04f0ff99e852bfe36a70447cd78467679f997ff143ce1a2",
+  "machine": "x64",
+  "timestamp": 1612236969,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 210604,
+    "rsize": 210944,
+    "entropy": 6.47,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 99988,
+    "rsize": 100352,
+    "entropy": 5.18,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 14604,
+    "rsize": 6656,
+    "entropy": 3.4,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".pdata",
+    "vsize": 11760,
+    "rsize": 11776,
+    "entropy": 5.51,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": "_RDATA",
+    "vsize": 148,
+    "rsize": 512,
+    "entropy": 1.43,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1424,
+    "rsize": 1536,
+    "entropy": 3.99,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 3888,
+    "rsize": 4096,
+    "entropy": 5.35,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 7336
+  },
+  "version_info": {
+   "FileDescription": "PerfInst Dynamic Link Library",
+   "FileVersion": "21.1.20135.421056",
+   "InternalName": "PerfInst",
+   "LegalCopyright": "Copyright (C) 2011 Adobe Systems Incorporated and its licensors. All rights rese",
+   "OriginalFilename": "PerfInst.dll",
+   "ProductName": "PerfInst Dynamic Link Library",
+   "ProductVersion": "21.1.20135.421056"
+  },
+  "exports": [
+   "DefragmentFiles",
+   "SetOptimizationStatus"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "SHELL32.dll",
+   "USER32.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegSetValueExA"
+   ],
+   "reg_read": [
+    "RegOpenKeyExA",
+    "RegQueryValueExA"
+   ],
+   "file_enum": [
+    "FindNextFileW"
+   ],
+   "com_schtasks": [
+    "CoInitialize"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "s059_144784",
+  "size": 144784,
+  "sha256": "4c3d85e7c49928af0f43623dcbed474a157ef50af3cba40b7fd7ac3fe3df2f15",
+  "machine": "x86",
+  "timestamp": 1335311316,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 91155,
+    "rsize": 91648,
+    "entropy": 6.58,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 24037,
+    "rsize": 24064,
+    "entropy": 4.74,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 12548,
+    "rsize": 4608,
+    "entropy": 2.66,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1408,
+    "rsize": 1536,
+    "entropy": 4.37,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 15676,
+    "rsize": 15872,
+    "entropy": 2.84,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 6032
+  },
+  "version_info": {
+   "Comments": "",
+   "CompanyName": "Flexera Software LLC",
+   "FileDescription": "SetAllUsers",
+   "FileVersion": "19.0.160",
+   "InternalName": "SetAllUsers",
+   "LegalCopyright": "Copyright (c) 2012 Flexera Software LLC. All Rights Reserved.",
+   "OriginalFilename": "SetAllUsers.dll",
+   "ProductName": "InstallShield",
+   "ProductVersion": "19.0",
+   "Internal Build Number": "115289"
+  },
+  "exports": [
+   "ISAppV_SftPathFromSourceMedia",
+   "ISDetectVM",
+   "KillProcess",
+   "KillProcessByID",
+   "KillProcessByIDDeferred",
+   "KillProcessDeferred",
+   "PrintScrollableText",
+   "SetAllUsers",
+   "SetTARGETDIR",
+   "ShowMsiLog"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll",
+   "OLEAUT32.dll",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "ShellExecuteExW",
+    "ShellExecuteW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "proc_enum": [
+    "CreateToolhelp32Snapshot",
+    "OpenProcess",
+    "Process32FirstW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "com_schtasks": [
+    "CLSIDFromProgID",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ }
+]

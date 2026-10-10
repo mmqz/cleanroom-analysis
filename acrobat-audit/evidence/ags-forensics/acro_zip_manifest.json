@@ -1,0 +1,317 @@
+{
+ "total": 1696202212,
+ "entries": [
+  {
+   "name": "Adobe Acrobat/",
+   "method": 0,
+   "crc": "00000000",
+   "csize": 0,
+   "usize": 0,
+   "local_header_off": 0
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/",
+   "method": 0,
+   "crc": "00000000",
+   "csize": 0,
+   "usize": 0,
+   "local_header_off": 44
+  },
+  {
+   "name": "Adobe Acrobat/ABCPY.INI",
+   "method": 8,
+   "crc": "9fcfc1a6",
+   "csize": 202,
+   "usize": 644,
+   "local_header_off": 99
+  },
+  {
+   "name": "Adobe Acrobat/AcrobatDCx64Upd2600221931.msp",
+   "method": 8,
+   "crc": "f7d96753",
+   "csize": 946948406,
+   "usize": 953139200,
+   "local_header_off": 354
+  },
+  {
+   "name": "Adobe Acrobat/AcroPro.msi",
+   "method": 8,
+   "crc": "027a7b1c",
+   "csize": 3257734,
+   "usize": 13197312,
+   "local_header_off": 946948833
+  },
+  {
+   "name": "Adobe Acrobat/AlfSdPack.cab",
+   "method": 8,
+   "crc": "a86fb036",
+   "csize": 87202733,
+   "usize": 87472599,
+   "local_header_off": 950206622
+  },
+  {
+   "name": "Adobe Acrobat/Core.cab",
+   "method": 8,
+   "crc": "edf75e5c",
+   "csize": 188018012,
+   "usize": 188394517,
+   "local_header_off": 1037409412
+  },
+  {
+   "name": "Adobe Acrobat/Extras.cab",
+   "method": 8,
+   "crc": "8b4f6bad",
+   "csize": 95974485,
+   "usize": 96175940,
+   "local_header_off": 1225427476
+  },
+  {
+   "name": "Adobe Acrobat/Intermediate.cab",
+   "method": 8,
+   "crc": "b28c4cf6",
+   "csize": 127834238,
+   "usize": 128280352,
+   "local_header_off": 1321402015
+  },
+  {
+   "name": "Adobe Acrobat/Languages.cab",
+   "method": 8,
+   "crc": "a9677c15",
+   "csize": 115260204,
+   "usize": 115618555,
+   "local_header_off": 1449236313
+  },
+  {
+   "name": "Adobe Acrobat/Optional.cab",
+   "method": 8,
+   "crc": "86680d61",
+   "csize": 130634906,
+   "usize": 132928212,
+   "local_header_off": 1564496574
+  },
+  {
+   "name": "Adobe Acrobat/setup.exe",
+   "method": 8,
+   "crc": "7b73dddd",
+   "csize": 295215,
+   "usize": 678872,
+   "local_header_off": 1695131536
+  },
+  {
+   "name": "Adobe Acrobat/setup.ini",
+   "method": 8,
+   "crc": "386fdeb5",
+   "csize": 620,
+   "usize": 1264,
+   "local_header_off": 1695426804
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1025.mst",
+   "method": 8,
+   "crc": "d5c32f29",
+   "csize": 8935,
+   "usize": 32768,
+   "local_header_off": 1695427477
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1028.mst",
+   "method": 8,
+   "crc": "50a0392c",
+   "csize": 31317,
+   "usize": 81920,
+   "local_header_off": 1695436475
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1029.mst",
+   "method": 8,
+   "crc": "ab589e69",
+   "csize": 31469,
+   "usize": 94208,
+   "local_header_off": 1695467855
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1030.mst",
+   "method": 8,
+   "crc": "c87e3c64",
+   "csize": 32285,
+   "usize": 102400,
+   "local_header_off": 1695499387
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1031.mst",
+   "method": 8,
+   "crc": "96d0f783",
+   "csize": 33801,
+   "usize": 106496,
+   "local_header_off": 1695531735
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1033.mst",
+   "method": 8,
+   "crc": "89eb461b",
+   "csize": 8888,
+   "usize": 32768,
+   "local_header_off": 1695565599
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1034.mst",
+   "method": 8,
+   "crc": "f77d8b92",
+   "csize": 32994,
+   "usize": 106496,
+   "local_header_off": 1695574550
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1035.mst",
+   "method": 8,
+   "crc": "c2f52c19",
+   "csize": 32778,
+   "usize": 102400,
+   "local_header_off": 1695607607
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1036.mst",
+   "method": 8,
+   "crc": "253bd74c",
+   "csize": 33450,
+   "usize": 106496,
+   "local_header_off": 1695640448
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1037.mst",
+   "method": 8,
+   "crc": "0069ce5d",
+   "csize": 8935,
+   "usize": 32768,
+   "local_header_off": 1695673961
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1038.mst",
+   "method": 8,
+   "crc": "81be1aa5",
+   "csize": 31977,
+   "usize": 98304,
+   "local_header_off": 1695682959
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1040.mst",
+   "method": 8,
+   "crc": "a59a076c",
+   "csize": 32611,
+   "usize": 106496,
+   "local_header_off": 1695714999
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1041.mst",
+   "method": 8,
+   "crc": "385b0380",
+   "csize": 33198,
+   "usize": 102400,
+   "local_header_off": 1695747673
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1042.mst",
+   "method": 8,
+   "crc": "0140070f",
+   "csize": 32348,
+   "usize": 98304,
+   "local_header_off": 1695780934
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1043.mst",
+   "method": 8,
+   "crc": "5da1e4c6",
+   "csize": 32944,
+   "usize": 106496,
+   "local_header_off": 1695813345
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1044.mst",
+   "method": 8,
+   "crc": "dda7671a",
+   "csize": 31885,
+   "usize": 98304,
+   "local_header_off": 1695846352
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1045.mst",
+   "method": 8,
+   "crc": "8649021f",
+   "csize": 31667,
+   "usize": 94208,
+   "local_header_off": 1695878300
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1046.mst",
+   "method": 8,
+   "crc": "2436aac9",
+   "csize": 32613,
+   "usize": 102400,
+   "local_header_off": 1695910030
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1049.mst",
+   "method": 8,
+   "crc": "1e2b3f6e",
+   "csize": 32147,
+   "usize": 94208,
+   "local_header_off": 1695942706
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1051.mst",
+   "method": 8,
+   "crc": "19caf556",
+   "csize": 32019,
+   "usize": 98304,
+   "local_header_off": 1695974916
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1053.mst",
+   "method": 8,
+   "crc": "7b03687e",
+   "csize": 31907,
+   "usize": 98304,
+   "local_header_off": 1696006998
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1055.mst",
+   "method": 8,
+   "crc": "c9178e60",
+   "csize": 31094,
+   "usize": 94208,
+   "local_header_off": 1696038968
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1058.mst",
+   "method": 8,
+   "crc": "0a3fa80d",
+   "csize": 32665,
+   "usize": 94208,
+   "local_header_off": 1696070125
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/1060.mst",
+   "method": 8,
+   "crc": "17b19bb1",
+   "csize": 31151,
+   "usize": 94208,
+   "local_header_off": 1696102853
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/2052.mst",
+   "method": 8,
+   "crc": "3c3f5ff3",
+   "csize": 31536,
+   "usize": 86016,
+   "local_header_off": 1696134067
+  },
+  {
+   "name": "Adobe Acrobat/Transforms/6156.mst",
+   "method": 8,
+   "crc": "3d139589",
+   "csize": 33477,
+   "usize": 110592,
+   "local_header_off": 1696165666
+  }
+ ]
+}

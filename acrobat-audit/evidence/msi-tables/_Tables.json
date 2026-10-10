@@ -1,0 +1,236 @@
+[
+ {
+  "TableName": "ActionText"
+ },
+ {
+  "TableName": "AdminExecuteSequence"
+ },
+ {
+  "TableName": "Condition"
+ },
+ {
+  "TableName": "AdminUISequence"
+ },
+ {
+  "TableName": "AdvtExecuteSequence"
+ },
+ {
+  "TableName": "AdvtUISequence"
+ },
+ {
+  "TableName": "AppId"
+ },
+ {
+  "TableName": "AppSearch"
+ },
+ {
+  "TableName": "Property"
+ },
+ {
+  "TableName": "Feature"
+ },
+ {
+  "TableName": "Binary"
+ },
+ {
+  "TableName": "File"
+ },
+ {
+  "TableName": "CheckBox"
+ },
+ {
+  "TableName": "Class"
+ },
+ {
+  "TableName": "Component"
+ },
+ {
+  "TableName": "Icon"
+ },
+ {
+  "TableName": "ProgId"
+ },
+ {
+  "TableName": "ComboBox"
+ },
+ {
+  "TableName": "Directory"
+ },
+ {
+  "TableName": "Control"
+ },
+ {
+  "TableName": "Dialog"
+ },
+ {
+  "TableName": "ControlCondition"
+ },
+ {
+  "TableName": "ControlEvent"
+ },
+ {
+  "TableName": "CreateFolder"
+ },
+ {
+  "TableName": "CustomAction"
+ },
+ {
+  "TableName": "DrLocator"
+ },
+ {
+  "TableName": "DuplicateFile"
+ },
+ {
+  "TableName": "ModuleSignature"
+ },
+ {
+  "TableName": "Error"
+ },
+ {
+  "TableName": "EventMapping"
+ },
+ {
+  "TableName": "Extension"
+ },
+ {
+  "TableName": "MIME"
+ },
+ {
+  "TableName": "FeatureComponents"
+ },
+ {
+  "TableName": "Font"
+ },
+ {
+  "TableName": "InstallExecuteSequence"
+ },
+ {
+  "TableName": "InstallUISequence"
+ },
+ {
+  "TableName": "LaunchCondition"
+ },
+ {
+  "TableName": "ListBox"
+ },
+ {
+  "TableName": "ListView"
+ },
+ {
+  "TableName": "Media"
+ },
+ {
+  "TableName": "ModuleComponents"
+ },
+ {
+  "TableName": "MoveFile"
+ },
+ {
+  "TableName": "MsiDigitalCertificate"
+ },
+ {
+  "TableName": "MsiFileHash"
+ },
+ {
+  "TableName": "Patch"
+ },
+ {
+  "TableName": "PublishComponent"
+ },
+ {
+  "TableName": "RadioButton"
+ },
+ {
+  "TableName": "Registry"
+ },
+ {
+  "TableName": "RegLocator"
+ },
+ {
+  "TableName": "RemoveFile"
+ },
+ {
+  "TableName": "RemoveRegistry"
+ },
+ {
+  "TableName": "ReserveCost"
+ },
+ {
+  "TableName": "ServiceControl"
+ },
+ {
+  "TableName": "ServiceInstall"
+ },
+ {
+  "TableName": "Shortcut"
+ },
+ {
+  "TableName": "Signature"
+ },
+ {
+  "TableName": "TextStyle"
+ },
+ {
+  "TableName": "TypeLib"
+ },
+ {
+  "TableName": "UIText"
+ },
+ {
+  "TableName": "Upgrade"
+ },
+ {
+  "TableName": "Verb"
+ },
+ {
+  "TableName": "_Validation"
+ },
+ {
+  "TableName": "MsiPatchCertificate"
+ },
+ {
+  "TableName": "ISComponentExtended"
+ },
+ {
+  "TableName": "ISCustomActionReference"
+ },
+ {
+  "TableName": "LockFilePermissions"
+ },
+ {
+  "TableName": "LockRegPermissions"
+ },
+ {
+  "TableName": "AppsInUse"
+ },
+ {
+  "TableName": "AppsInUseEx"
+ },
+ {
+  "TableName": "BackupAndRestoreRegistry"
+ },
+ {
+  "TableName": "BlockingProductMatrix"
+ },
+ {
+  "TableName": "DefragFiles"
+ },
+ {
+  "TableName": "DeleteComponents"
+ },
+ {
+  "TableName": "DeleteFiles"
+ },
+ {
+  "TableName": "DeleteProducts"
+ },
+ {
+  "TableName": "DeleteRegistry"
+ },
+ {
+  "TableName": "ISDistribution"
+ },
+ {
+  "TableName": "TransferRegistry"
+ }
+]

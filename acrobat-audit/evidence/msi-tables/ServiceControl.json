@@ -1,0 +1,58 @@
+[
+ {
+  "ServiceControl": "StopArmService.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Name": "AdobeARMservice",
+  "Event": 2,
+  "Argument": null,
+  "Wait": null,
+  "Component_": "ARM_armsvc_exe.BDCA7721_F290_4124_BBED_7A15FE7694EB"
+ },
+ {
+  "ServiceControl": "UninstallArmService.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Name": "AdobeARMservice",
+  "Event": 128,
+  "Argument": null,
+  "Wait": null,
+  "Component_": "ARM_armsvc_exe.BDCA7721_F290_4124_BBED_7A15FE7694EB"
+ },
+ {
+  "ServiceControl": "ImageAcquisitionService_StopAndStart",
+  "Name": "stisvc",
+  "Event": 51,
+  "Argument": null,
+  "Wait": 0,
+  "Component_": "Plugins_Scan_WIA_Service"
+ },
+ {
+  "ServiceControl": "Spooler_StopAndStart",
+  "Name": "Spooler",
+  "Event": 51,
+  "Argument": null,
+  "Wait": null,
+  "Component_": "Distiller_Bin_AcroDistDLL"
+ },
+ {
+  "ServiceControl": "Spooler_StopAndStart_ESRCoEx",
+  "Name": "Spooler",
+  "Event": 48,
+  "Argument": null,
+  "Wait": 1,
+  "Component_": "CompForCoEx_DCOnly"
+ },
+ {
+  "ServiceControl": "Spooler_all_StopAndStart",
+  "Name": "Spooler",
+  "Event": 51,
+  "Argument": null,
+  "Wait": null,
+  "Component_": "Distiller_Shortcut"
+ },
+ {
+  "ServiceControl": "Wsearch_StopAndStart",
+  "Name": "wsearch",
+  "Event": 34,
+  "Argument": null,
+  "Wait": 0,
+  "Component_": "Reg_ServiceControl"
+ }
+]

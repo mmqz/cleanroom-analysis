@@ -1,0 +1,77 @@
+{
+ "url": [
+  "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+  "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+  "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+  "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+  "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+  "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+  "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+  "http://crl3.digicert.com/sha2-assured-ts.crl02",
+  "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+  "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+  "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+  "http://crl4.digicert.com/sha2-assured-ts.crl0",
+  "http://ocsp.digicert.com0C",
+  "http://ocsp.digicert.com0H",
+  "http://ocsp.digicert.com0I",
+  "http://ocsp.digicert.com0O",
+  "http://www.digicert.com/ssl-cps-repository.htm0",
+  "http://www.openssl.org/support/faq.html",
+  "http://www.winimage.com/zLibDll",
+  "https://genuine.adobe.com/server/services/dispatch/v1",
+  "https://www.digicert.com/CPS0"
+ ],
+ "domain": [
+  "gc-stage.licenses.adobe.com",
+  "genuine.adobe.com",
+  "genuine.adobe.com/server/services/dispatch/v1",
+  "na1e.services.adobe.com",
+  "prod.adobegenuine.com",
+  "stage.adobegenuine.com"
+ ],
+ "autoexec": [
+  "Running",
+  "Runtime",
+  "RuntimeFailure",
+  "RuntimeFailureOutOfMemory",
+  "StartupInfoW",
+  "rUnknown",
+  "run",
+  "runcate",
+  "runcate1",
+  "runcate2",
+  "runcateAdobeGenuineDataTable",
+  "runcateCCDataTable",
+  "runcateGCDataTable",
+  "runcatedDigestSize",
+  "running",
+  "runtime_error@std@@",
+  "startup"
+ ],
+ "keyword": [
+  "AdobeGC",
+  "Genuine",
+  "NGL",
+  "Serial",
+  "adobegc",
+  "genuine",
+  "machineId",
+  "serial"
+ ],
+ "autoexec_w": [
+  "Run",
+  "run",
+  "runThisThread",
+  "runThisThread:",
+  "running",
+  "running.",
+  "runtime-l1-1-2"
+ ],
+ "keyword_w": [
+  "AdobeGC",
+  "Genuine",
+  "MACAddress",
+  "genuine"
+ ]
+}

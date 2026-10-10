@@ -1,0 +1,154 @@
+{
+ "adobearm.exe": {
+  "url": [
+   "http://crl.thawte.com/ThawteTimestampingCA.crl0",
+   "http://ocsp.thawte.com0",
+   "http://s.symcb.com/pca3-g5.crl0",
+   "http://s.symcd.com0_",
+   "http://sw.symcb.com/sw.crl0",
+   "http://sw.symcd.com0'",
+   "http://sw1.symcb.com/sw.crt0",
+   "http://ts-aia.ws.symantec.com/tss-ca-g2.cer0<",
+   "http://ts-crl.ws.symantec.com/tss-ca-g2.crl0(",
+   "http://ts-ocsp.ws.symantec.com07",
+   "http://www.adobe.com/support/downloads/product.jsp?product=1&platform=Windows",
+   "http://www.adobe.com/support/downloads/product.jsp?product=10&platform=Windows",
+   "https://armmf.adobe.com/arm-manifests/win/",
+   "https://d.symcb.com/cps0%",
+   "https://d.symcb.com/rpa0)",
+   "https://d.symcb.com/rpa0+"
+  ],
+  "domain": [
+   "armmf.adobe.com/arm-manifests/win/",
+   "www.adobe.com/support/downloads/product.jsp?product=1&platform=Windows",
+   "www.adobe.com/support/downloads/product.jsp?product=10&platform=Windows"
+  ],
+  "autoexec": [
+   "Run",
+   "Runtime",
+   "StartupInfoA",
+   "StartupInfoW",
+   "run",
+   "runtime"
+  ],
+  "url_w": [
+   "http://armmf.adobe.com/arm-manifests/win/",
+   "http://www.adobe.com/go/ARMUpgradeFailedHelp",
+   "http://www.adobe.com/go/update_error_win",
+   "https://get.adobe.com/reader/"
+  ],
+  "domain_w": [
+   "armmf.adobe.com/arm-manifests/win/",
+   "get.adobe.com/reader/",
+   "www.adobe.com/go/ARMUpgradeFailedHelp",
+   "www.adobe.com/go/update_error_win"
+  ],
+  "autoexec_w": [
+   "RUNNING_DESCRIPTION",
+   "RUNNING_TITLE",
+   "RUNNING_TITLE]",
+   "Run",
+   "Run...",
+   "RunManual...",
+   "RunRestarted...",
+   "Run_SpeedLauncher:",
+   "Run_SpeedLaunchers...",
+   "run",
+   "runde",
+   "runder",
+   "runds",
+   "rung",
+   "rung...",
+   "rungen",
+   "runlar",
+   "runlara",
+   "runner",
+   "running",
+   "running.",
+   "runta",
+   "runtergeladen",
+   "runtergeladen...",
+   "runterladen"
+  ],
+  "service_w": [
+   "AdobeARMservice",
+   "armsvc"
+  ],
+  "keyword_w": [
+   "Tracking",
+   "analytics"
+  ]
+ },
+ "adobearmhelper.exe": {
+  "url": [
+   "http://crl.thawte.com/ThawteTimestampingCA.crl0",
+   "http://ocsp.thawte.com0",
+   "http://s.symcb.com/pca3-g5.crl0",
+   "http://s.symcd.com0_",
+   "http://sw.symcb.com/sw.crl0",
+   "http://sw.symcd.com0'",
+   "http://sw1.symcb.com/sw.crt0",
+   "http://ts-aia.ws.symantec.com/tss-ca-g2.cer0<",
+   "http://ts-crl.ws.symantec.com/tss-ca-g2.crl0(",
+   "http://ts-ocsp.ws.symantec.com07",
+   "http://www.adobe.com/support/downloads/product.jsp?product=1&platform=Windows",
+   "http://www.adobe.com/support/downloads/product.jsp?product=10&platform=Windows",
+   "https://armmf.adobe.com/arm-manifests/win/",
+   "https://d.symcb.com/cps0%",
+   "https://d.symcb.com/rpa0)",
+   "https://d.symcb.com/rpa0+"
+  ],
+  "domain": [
+   "armmf.adobe.com/arm-manifests/win/",
+   "www.adobe.com/support/downloads/product.jsp?product=1&platform=Windows",
+   "www.adobe.com/support/downloads/product.jsp?product=10&platform=Windows"
+  ],
+  "autoexec": [
+   "Runtime",
+   "StartupInfoA",
+   "StartupInfoW",
+   "run",
+   "runtime"
+  ],
+  "cmdline_w": [
+   "msiexec"
+  ],
+  "autoexec_w": [
+   "running"
+  ],
+  "service_w": [
+   "ArmService"
+  ]
+ },
+ "armsvc.exe": {
+  "url": [
+   "http://crl.thawte.com/ThawteTimestampingCA.crl0",
+   "http://ocsp.thawte.com0",
+   "http://s.symcb.com/pca3-g5.crl0",
+   "http://s.symcd.com0_",
+   "http://sw.symcb.com/sw.crl0",
+   "http://sw.symcd.com0'",
+   "http://sw1.symcb.com/sw.crt0",
+   "http://ts-aia.ws.symantec.com/tss-ca-g2.cer0<",
+   "http://ts-crl.ws.symantec.com/tss-ca-g2.crl0(",
+   "http://ts-ocsp.ws.symantec.com07",
+   "https://d.symcb.com/cps0%",
+   "https://d.symcb.com/rpa0)",
+   "https://d.symcb.com/rpa0+"
+  ],
+  "autoexec": [
+   "StartupInfoW",
+   "run"
+  ],
+  "service": [
+   "AdobeARMService",
+   "AdobeARMservice",
+   "armsvc"
+  ],
+  "service_w": [
+   "AdobeARMservice",
+   "AdobeArmService",
+   "armsvc"
+  ]
+ }
+}

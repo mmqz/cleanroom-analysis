@@ -1,0 +1,708 @@
+{
+ "004_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "005_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "006_PE_409600.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "007_PE_409600.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "008_PE_409600.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "009_PE_409600.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "010_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "011_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "012_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "013_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "014_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "015_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "016_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "017_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "018_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "019_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "020_PE_348160.bin": {
+  "identity": "_IsIcoRes.exe",
+  "urls": [],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "021_PE_121000.bin": {
+  "identity": "ANCUtili.dll",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Installer\nSIDELOADING_PREF\ncheckSideloadPref::Sideloading app prefere",
+   "SOFTWARE\\Adobe\\Installer\\\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersi"
+  ]
+ },
+ "022_PE_143016.bin": {
+  "identity": "AbcpyDll",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "023_PE_606376.bin": {
+  "identity": "ADelRCP",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://clients2.google.com/service/update2/crx",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [
+   "AdobeARMservice\nCustomActionInfo: ERROR Encountered: [StartArmService] : : Unable to notify ARM Service -",
+   "OpenSCManager failed:\nOpenSCManager failed\nCustomActionInfo: ERROR Encountered: [StartArmService] : :\nA",
+   "OpenSCManagerW\nCloseServiceHandle\nGetTokenInformation\nCryptReleaseContext\nCryptGetHashParam\nConvertSidT"
+  ],
+  "reg": [
+   "SOFTWARE\\Adobe\\\n.0\\InstallPath\n\\AcroRd32.exe\n\\Acrobat.exe\n      The installing/unins",
+   "SOFTWARE\\Adobe\\Acrobat Reader\nAcrobat.Document.\niSuppressToastMessage\nProgID\n\\contro",
+   "SOFTWARE\\Adobe\\Acrobat Reader\\\n\\Installer\\\nUserLangList\nLang List registry not found",
+   "SOFTWARE\\Adobe\\Acrobat\\Exe\n      Exe=\n\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Pre",
+   "SOFTWARE\\Adobe\\Acrobat\\Exe: \nReader\\AcroRd32.exe\" / u \"%1\"\nAcrobat\\Acrobat.exe\" / u",
+   "SOFTWARE\\Adobe\\Adobe ARM\\1.0\\ARM\niCheckReader\niCheck\nExisting ARM mode is not valid.",
+   "SOFTWARE\\Adobe\\Adobe ARM\\1.0\\ARM\\CollectData\nVCRTx64FileName\nVCRTx64FileVersion\nVCRT",
+   "SOFTWARE\\Adobe\\Adobe Acrobat\nSKIP_DEACTIVATION\ntForceDeactivation\nFORCE_DEACTIVATION",
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\\nHKEY_CURRENT_USER\\SOFTWARE\\Adobe\\Adobe Acrobat\\\n\\AVEnt",
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\\n\\Installer\nRebootRequired\nRegisterReboot:: Reboot Regi",
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\\n\\Installer\\RDCNotificationAppx\nRemoveAppxInUserContext",
+   "SOFTWARE\\Adobe\\Installer\n\",removeAppxInUserContext\nRemoveAppxInUserContext::Going to",
+   "SOFTWARE\\Adobe\\Installer\nNeedReboot\nKillFolder:: Deleting file:: \nDeleteFolderOrFile",
+   "SOFTWARE\\Adobe\\Installer\\\nCreateiASU_SuccessReg:: RegKey: \niASU_SUCCESS\nFound iASU_S",
+   "SOFTWARE\\Adobe\\Installer\\\n\\PDF Owner\nPDF ownership: InitCurrentPDFOwner()\nINSTALLMAJ",
+   "Software\\Adobe\\\nAcrobat Reader\\\nAdobe Acrobat\\\n\\Installer\\IOD\nLibrary\nCreateAcroRead",
+   "Software\\Adobe\\\nSetting TOOK_OWNERSHIP_AFTER_UPGRADE to 1\nResetTookOwnershipForCurre",
+   "Software\\Adobe\\Acrobat Reader\nAcroRd32.exe\nHandleURIOwnership::No capable Reader ins",
+   "Software\\Adobe\\Acrobat Reader\\\n\\Software\\Adobe\\Adobe Acrobat\\\n\\AVGeneral\niTookOwners",
+   "Software\\Adobe\\Acrobat Reader\\DC\\Installer\\\nPackageName\nSourceDir\nCacheDir\n[CacheIns",
+   "Software\\Adobe\\Acrobat\\EXE\nREG_URI_HANDLER_PREV\nREG_URI_HANDLER\n   [PDFSHELL_LOCALSE",
+   "Software\\Adobe\\Adobe Acrobat\nSecondary Install: A Reboot was Required by Primary ins",
+   "Software\\Adobe\\Adobe Acrobat\\\n[IsOptionalFeatureAvailable] : : ERROR: Couldn't read",
+   "Software\\Adobe\\Adobe Acrobat\\DC\\AdobeViewer\nHKEY_LOCAL_MACHINE\\\nProductInfoCache\nSet",
+   "Software\\Adobe\\Adobe Acrobat\\[RegistryHiveName]\\WebResource\nirandom\niUpdateId\nReboot",
+   "Software\\Adobe\\CommonFiles\n{AC76BA86-\n000000000002}\n100000000002}\nFailed to set FILE",
+   "Software\\Adobe\\PDF Owner\\PreviousOwner\n\\Restore\n   RegisterPropertyValueRestore: [%s"
+  ]
+ },
+ "024_PE_134848.bin": {
+  "identity": "ArmInst",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [
+   "AdobeARMservice\nEntered AddTask\nAdobe Acrobat Update Task\nSOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\nA",
+   "OpenSCManagerW\nCloseServiceHandle\nRegCloseKey\nADVAPI32.dll\nSHGetFolderPathW\nSHELL32.dll\nCoUninitialize"
+  ],
+  "reg": [
+   "CurrentVersion\\Run\nAdobe ARM\n\\Adobe\\ARM\\1.0\\AdobeARM.exe\"\nRegSetValueEx failed: \nRegCrea",
+   "SOFTWARE\\Adobe\\Adobe ARM\\1.0\\ARM\niLastSvcFailure\niLastSvcErrorCode\niSvcErrorCount\nEn"
+  ]
+ },
+ "025_PE_486568.bin": {
+  "identity": "Adobeisf",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [
+   "OpenSCManagerW\nOpenServiceW\nQueryServiceStatus\nStartServiceW\nRegOpenKeyW\nRegCreateKeyW\nRegEnumKeyW\nADVA"
+  ],
+  "reg": [
+   "SOFTWARE\\Adobe\\CommonFiles\nCommonFilesFolder\nAdobeHome\nADOBE_HOME\nALREADY_SET\nSoftwa",
+   "SOFTWARE\\Adobe\\Installer\\\nAC76BA86\nSoftware\\Adobe\\Adobe Acrobat\\DC\\Installer\\\nE5E6E6",
+   "SOFTWARE\\Adobe\\PostScript Printer Driver\nIncompatible Apps\nACROBAT\nCORELDRW\nPM5APP\nX",
+   "Software\\Adobe\\Acrobat Distiller\\DC\\Installer\\PrinterInfo\npComment\nPDFWriter\nAdobePS",
+   "Software\\Adobe\\Acrobat Distiller\\DC\\PrinterName\nProtocol\nSoftware\\Adobe\\Acrobat Dist",
+   "Software\\Adobe\\Acrobat Elements\\DC\\Installer\\\nSourceDir\n\\*.msi\nDefaultPDFOutput\nSoft"
+  ]
+ },
+ "026_PE_174248.bin": {
+  "identity": "AcroSup64",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Acrobat Reader\\\nSOFTWARE\\Adobe\\Adobe Acrobat\\\n\\Installer\\X64Registry"
+  ]
+ },
+ "027_PE_482984.bin": {
+  "identity": "AcroTgts",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Adobe ARM\\Products\\\nProductVersion\nWEB_RCSC_PROD_VER_REG\nWEBRCSC_PROD"
+  ]
+ },
+ "028_PE_140968.bin": {
+  "identity": "ADelRCP",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\\nHKEY_CURRENT_USER\\SOFTWARE\\Adobe\\Adobe Acrobat\\\n\\AVEnt",
+   "SOFTWARE\\Adobe\\Installer\\\n[1]: [2]\nADelRCP logging: \nInstalledProductName\nBlockingPr"
+  ]
+ },
+ "030_PE_34984.bin": {
+  "identity": "?",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [
+   "OpenSCManager failed.\n[IsMsiBusy]: QueryServiceStatusEx failed.\nTsnIorcAeBoda\n\\\\.\\pipe\\32B6B37A-4A7D-4e",
+   "OpenSCManagerW\nCloseServiceHandle\nADVAPI32.dll\nCommandLineToArgvW\nSHELL32.dll\n__CxxFrameHandler4\n__std_"
+  ],
+  "reg": []
+ },
+ "032_PE_154280.bin": {
+  "identity": "EMIOrien",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [
+   "www.adobe.com"
+  ],
+  "svc": [],
+  "reg": []
+ },
+ "033_PE_21672.bin": {
+  "identity": "?",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [
+   "OpenSCManagerW\nCloseServiceHandle\nADVAPI32.dll\nShellExecuteW\nCommandLineToArgvW\nSHELL32.dll\nStringFromG"
+  ],
+  "reg": []
+ },
+ "034_PE_204968.bin": {
+  "identity": "IWActs",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Installer\\\nProductCode\n[RegistryHiveName]\n[MSIRecordGetString] : : Go"
+  ]
+ },
+ "035_PE_379904.bin": {
+  "identity": "Kernel",
+  "urls": [
+   "http://crl.verisign.com/ThawteTimestampingCA.crl0",
+   "http://crl.verisign.com/pca3-g5.crl04",
+   "http://crl.verisign.com/tss-ca.crl0",
+   "http://csc3-2010-aia.verisign.com/CSC3-2010.cer0",
+   "http://csc3-2010-crl.verisign.com/CSC3-2010.crl0D",
+   "http://logo.verisign.com/vslogo.gif04",
+   "http://ocsp.verisign.com0",
+   "http://ocsp.verisign.com0;",
+   "http://www.flexerasoftware.com0",
+   "https://www.verisign.com/cps0*",
+   "https://www.verisign.com/rpa",
+   "https://www.verisign.com/rpa0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ },
+ "036_PE_304296.bin": {
+  "identity": "InstOOBE",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\7.0\\Registration\n   Delete: HKLM\\SOFTWARE\\Adobe\\Adobe A",
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\8.0\\Registration\n   Delete: HKLM\\SOFTWARE\\Adobe\\Adobe A",
+   "SOFTWARE\\Adobe\\Installer\\\nSet current working directory: %s\nSet current working dire",
+   "Software\\Adobe\\Adobe Acrobat\\DC\\AdobeViewer\nProductInfoCache\nBackupCachePCD()\nA9_CAC"
+  ]
+ },
+ "037_PE_492712.bin": {
+  "identity": "InstPDFM",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Installer\\\nHKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersi",
+   "Software\\Adobe\\Acrobat PDFMaker\\DC\\Notes\\Settings\nToolbarInstalled\n[SetLotusIni] : :"
+  ]
+ },
+ "038_PE_525480.bin": {
+  "identity": "InstUtil",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [
+   "OpenSCManagerW\nSetEntriesInAclW\nGetNamedSecurityInfoW\nSetNamedSecurityInfoW\nConvertSidToStringSidW\nRegC"
+  ],
+  "reg": [
+   "SOFTWARE\\Adobe\\Installer\\\n\\Restore\n   RegisterPropertyValueRestore: [%s]=%s\nSOFTWARE",
+   "Software\\Adobe\\Installer\\Backup\\Preferences\nNeedReboot\nKillFolder:: Deleting file::"
+  ]
+ },
+ "056_PE_104616.bin": {
+  "identity": "PrintInf",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Acrobat Distiller\\DC\nDefaultPDFOutput Registry key:\nDefaultPDFOutput"
+  ]
+ },
+ "057_PE_344232.bin": {
+  "identity": "PerfInst",
+  "urls": [
+   "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+   "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+   "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+   "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+   "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+   "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+   "http://crl3.digicert.com/sha2-assured-ts.crl02",
+   "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+   "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+   "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+   "http://crl4.digicert.com/sha2-assured-ts.crl0",
+   "http://ocsp.digicert.com0C",
+   "http://ocsp.digicert.com0H",
+   "http://ocsp.digicert.com0I",
+   "http://ocsp.digicert.com0O",
+   "http://www.digicert.com/CPS0",
+   "http://www.digicert.com/ssl-cps-repository.htm0",
+   "https://www.digicert.com/CPS0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": [
+   "SOFTWARE\\Adobe\\Adobe Acrobat\\DC\\InstallPath\nSOFTWARE\\Adobe\\Acrobat Reader\\DC\\Install",
+   "SOFTWARE\\Adobe\\Installer\\\nDefragResetProgress\nDefragResetProgress disabled\nDefragRes",
+   "Software\\Adobe\\Adobe Acrobat\\\nSoftware\\Adobe\\Acrobat Reader\\\nDC\\Installer\\Optimizati",
+   "Software\\Adobe\\Adobe Acrobat\\DC\\Settings\nTestOptimizationMessage\ninvalid string posi",
+   "Software\\Adobe\\Adobe Acrobat\\InstallerUI\\Optimization\nDefragStatus\nwriteCustomAction"
+  ]
+ },
+ "059_PE_144784.bin": {
+  "identity": "SetAllUsers",
+  "urls": [
+   "http://crl.verisign.com/ThawteTimestampingCA.crl0",
+   "http://crl.verisign.com/pca3-g5.crl04",
+   "http://crl.verisign.com/tss-ca.crl0",
+   "http://csc3-2010-aia.verisign.com/CSC3-2010.cer0",
+   "http://csc3-2010-crl.verisign.com/CSC3-2010.crl0D",
+   "http://logo.verisign.com/vslogo.gif04",
+   "http://ocsp.verisign.com0",
+   "http://ocsp.verisign.com0;",
+   "http://www.flexerasoftware.com0",
+   "https://www.verisign.com/cps0*",
+   "https://www.verisign.com/rpa",
+   "https://www.verisign.com/rpa0"
+  ],
+  "domains": [],
+  "svc": [],
+  "reg": []
+ }
+}

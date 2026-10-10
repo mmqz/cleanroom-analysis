@@ -1,0 +1,353 @@
+{
+ "AGSService.exe": {
+  "rec": {
+   "stream": "AGSService.exe",
+   "size": 3103824,
+   "sha256": "1d61549a6e76adb4116dd4b25d6dc45434ada77eb6af99971a805b47a7a6e72b",
+   "machine": "x86",
+   "timestamp": 1583323414,
+   "sections": [
+    {
+     "name": ".text",
+     "vsize": 2266975,
+     "rsize": 2267136,
+     "entropy": 5.44,
+     "executable": true,
+     "writable": false
+    },
+    {
+     "name": ".rdata",
+     "vsize": 520310,
+     "rsize": 520704,
+     "entropy": 5.79,
+     "executable": false,
+     "writable": false
+    },
+    {
+     "name": ".data",
+     "vsize": 168428,
+     "rsize": 143872,
+     "entropy": 1.42,
+     "executable": false,
+     "writable": true
+    },
+    {
+     "name": ".rsrc",
+     "vsize": 2248,
+     "rsize": 2560,
+     "entropy": 4.17,
+     "executable": false,
+     "writable": false
+    },
+    {
+     "name": ".reloc",
+     "vsize": 160312,
+     "rsize": 160768,
+     "entropy": 6.67,
+     "executable": false,
+     "writable": false
+    }
+   ],
+   "subsystem": 0,
+   "is_dll": false,
+   "embedded_signature": {
+    "size": 7760
+   },
+   "version_info": {
+    "CompanyName": "Adobe Systems, Incorporated",
+    "FileDescription": "Adobe Genuine Software Integrity Service",
+    "FileVersion": "6.6.0.204",
+    "InternalName": "Adobe Genuine Software Integrity Service",
+    "LegalCopyright": "Copyright 2014 Adobe Systems Incorporated. All rights reserved.",
+    "OriginalFilename": "AGSService.exe",
+    "ProductName": "Adobe Genuine Software Integrity Service",
+    "ProductVersion": "6.6.0.204 BuildVersion: 6.6; BuildDate: Wed Mar 04 2020 11:54:30",
+    "BuildDate": "Wed Mar 04 2020 11:54:30",
+    "BuildVersion": "6.6.0.204,6.6"
+   },
+   "exports": [
+    "AGDServiceClose",
+    "AGDServiceCreate",
+    "AGDServiceSetValueForKeyInSubDomain",
+    "AGDServiceValueForKeyInSubDomain",
+    "AGDTruncateAdobeGenuineDataTable",
+    "Adobe_GC_GetLatestGCApplication",
+    "Adobe_GC_InvokeApplication",
+    "Adobe_GC_InvokeApplication_NGL",
+    "Adobe_GC_ReleaseRef",
+    "Adobe_GC_SetDownloadPath",
+    "Adobe_GC_SetInstallPath",
+    "CCDGetNGLAppID",
+    "CCDServiceClose",
+    "CCDServiceCreate",
+    "CCDServiceSetAllRecords",
+    "CCDTruncateCCDataTable",
+    "IAL_CloseSession",
+    "IAL_CreateSession",
+    "IAL_DownloadAdobeGCClientFromPath",
+    "IAL_FetchRulesForLEIDs",
+    "IAL_GetAdobeGCClientAppDownloadPath",
+    "IAL_GetClientConfiguration",
+    "IAL_GetServerURLFromDispatch",
+    "IAL_GetVersion",
+    "IAL_PostRulesForLEIDs",
+    "IAL_SendEventToETSHostfileMod",
+    "IAL_SendInAppEvents",
+    "IAL_SendMachineEvents",
+    "IAL_SetLoggingMethod",
+    "IAL_SetProxyDetails",
+    "RSDConvertPCDStatusTypeEnumToString",
+    "RSDServiceClose",
+    "RSDServiceCreate",
+    "RSDServiceGetAllRecords",
+    "RSDServiceRecordStatus",
+    "RSDTruncateGCDataTable"
+   ],
+   "rich_header": {
+    "present": true
+   },
+   "import_dlls": [
+    "ADVAPI32.dll",
+    "CRYPT32.dll",
+    "IPHLPAPI.DLL",
+    "KERNEL32.dll",
+    "NETAPI32.dll",
+    "OLEAUT32.dll",
+    "RPCRT4.dll",
+    "SETUPAPI.dll",
+    "SHELL32.dll",
+    "SHLWAPI.dll",
+    "USER32.dll",
+    "USERENV.dll",
+    "VERSION.dll",
+    "WINHTTP.dll",
+    "WINTRUST.dll",
+    "WS2_32.dll",
+    "ole32.dll"
+   ]
+  },
+  "caps": {
+   "proc_exec": [
+    "CreateProcessW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess",
+    "TerminateThread"
+   ],
+   "proc_enum": [
+    "CreateToolhelp32Snapshot",
+    "OpenProcess",
+    "Process32FirstW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileA",
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "net_winhttp": [
+    "WinHttpConnect",
+    "WinHttpOpen",
+    "WinHttpOpenRequest",
+    "WinHttpReadData",
+    "WinHttpReceiveResponse",
+    "WinHttpSendRequest"
+   ],
+   "service_ctl": [
+    "ControlService",
+    "CreateServiceW",
+    "DeleteService",
+    "OpenSCManagerW"
+   ],
+   "privilege": [
+    "OpenProcessToken",
+    "SetTokenInformation"
+   ],
+   "crypto": [
+    "CryptAcquireContextW"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ "gccustomhook.exe": {
+  "rec": {
+   "stream": "gccustomhook.exe",
+   "size": 2406888,
+   "sha256": "f514f27f1608236df9b94b43686cf1636ab9a678eb825f034570eb67687f6896",
+   "machine": "x86",
+   "timestamp": 1543536035,
+   "sections": [
+    {
+     "name": ".text",
+     "vsize": 1806671,
+     "rsize": 1806848,
+     "entropy": 5.94,
+     "executable": true,
+     "writable": false
+    },
+    {
+     "name": ".rdata",
+     "vsize": 442784,
+     "rsize": 442880,
+     "entropy": 6.02,
+     "executable": false,
+     "writable": false
+    },
+    {
+     "name": ".data",
+     "vsize": 109544,
+     "rsize": 27136,
+     "entropy": 4.86,
+     "executable": false,
+     "writable": true
+    },
+    {
+     "name": ".gfids",
+     "vsize": 1780,
+     "rsize": 2048,
+     "entropy": 3.7,
+     "executable": false,
+     "writable": false
+    },
+    {
+     "name": ".tls",
+     "vsize": 9,
+     "rsize": 512,
+     "entropy": 0.02,
+     "executable": false,
+     "writable": true
+    },
+    {
+     "name": ".rsrc",
+     "vsize": 2104,
+     "rsize": 2560,
+     "entropy": 4.03,
+     "executable": false,
+     "writable": false
+    },
+    {
+     "name": ".reloc",
+     "vsize": 115860,
+     "rsize": 116224,
+     "entropy": 6.73,
+     "executable": false,
+     "writable": false
+    }
+   ],
+   "subsystem": 0,
+   "is_dll": false,
+   "embedded_signature": {
+    "size": 7656
+   },
+   "version_info": {
+    "CompanyName": "Adobe Systems, Incorporated",
+    "FileDescription": "Adobe GC Custom Hook",
+    "FileVersion": "6.0.0.168",
+    "InternalName": "customhook.exe",
+    "LegalCopyright": "Copyright 2014 Adobe Systems Incorporated. All rights reserved.",
+    "OriginalFilename": "customhook.exe",
+    "ProductName": "GC Custom Hook",
+    "ProductVersion": "6.0.0.168 BuildVersion: 6.0; BuildDate: Thu Nov 29 2018 23:44:34",
+    "BuildDate": "Thu Nov 29 2018 23:44:34",
+    "BuildVersion": "6.0.0.168,6.0"
+   },
+   "exports": [
+    "IAL_CloseSession",
+    "IAL_CreateSession",
+    "IAL_DownloadAdobeGCClientFromPath",
+    "IAL_FetchRulesForLEIDs",
+    "IAL_GetAdobeGCClientAppDownloadPath",
+    "IAL_GetClientConfiguration",
+    "IAL_GetServerURLFromDispatch",
+    "IAL_GetVersion",
+    "IAL_PostRulesForLEIDs",
+    "IAL_SendEventToETSHostfileMod",
+    "IAL_SendInAppEvents",
+    "IAL_SendMachineEvents",
+    "IAL_SetLoggingMethod",
+    "IAL_SetProxyDetails"
+   ],
+   "rich_header": {
+    "present": true
+   },
+   "import_dlls": [
+    "ADVAPI32.dll",
+    "KERNEL32.dll",
+    "OLEAUT32.dll",
+    "RPCRT4.dll",
+    "SETUPAPI.dll",
+    "SHELL32.dll",
+    "SHLWAPI.dll",
+    "USER32.dll",
+    "VERSION.dll",
+    "WINHTTP.dll",
+    "ole32.dll"
+   ]
+  },
+  "caps": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess",
+    "TerminateThread"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileA",
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "net_winhttp": [
+    "WinHttpConnect",
+    "WinHttpOpen",
+    "WinHttpOpenRequest",
+    "WinHttpReadData",
+    "WinHttpReceiveResponse",
+    "WinHttpSendRequest"
+   ],
+   "service_ctl": [
+    "ControlService",
+    "CreateServiceW",
+    "DeleteService",
+    "OpenSCManagerW",
+    "StartServiceW"
+   ],
+   "crypto": [
+    "CryptAcquireContextW"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ }
+}

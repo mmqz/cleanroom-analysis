@@ -1,0 +1,4032 @@
+[
+ {
+  "Directory": "ADOBEHUNSPELLPLUGIN",
+  "Directory_Parent": "PLUGINS2",
+  "DefaultDir": "ADOBEH~1|AdobeHunspellPlugin"
+ },
+ {
+  "Directory": "ABBREVIATIONS1",
+  "Directory_Parent": "ADOBEHUNSPELLPLUGIN",
+  "DefaultDir": "ABBREV~1|Abbreviations"
+ },
+ {
+  "Directory": "ACROBAT",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "Acrobat"
+ },
+ {
+  "Directory": "ACADRES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "acadres"
+ },
+ {
+  "Directory": "ACROAPP",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "AcroApp"
+ },
+ {
+  "Directory": "INSTALLDIR",
+  "Directory_Parent": "ACROBAT_12.0",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "COMMON_ADOBE",
+  "Directory_Parent": "CommonFiles64Folder",
+  "DefaultDir": "Adobe"
+ },
+ {
+  "Directory": "ACROBAT1",
+  "Directory_Parent": "COMMON_ADOBE",
+  "DefaultDir": "Acrobat"
+ },
+ {
+  "Directory": "X86",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "x86"
+ },
+ {
+  "Directory": "ACROBAT6",
+  "Directory_Parent": "X86",
+  "DefaultDir": "Acrobat"
+ },
+ {
+  "Directory": "ADOBE",
+  "Directory_Parent": "ProgramFiles64Folder",
+  "DefaultDir": "Adobe"
+ },
+ {
+  "Directory": "ACROBAT_12.0",
+  "Directory_Parent": "ADOBE",
+  "DefaultDir": "Acrobat DC"
+ },
+ {
+  "Directory": "ACROBAT_E",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "Acrobat:Acro_E"
+ },
+ {
+  "Directory": "EN_AE",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "en_AE"
+ },
+ {
+  "Directory": "ACROBAT_ELEMENTS",
+  "Directory_Parent": "EN_AE",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "EN_IL",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "en_IL"
+ },
+ {
+  "Directory": "ACROBAT_ELEMENTS1",
+  "Directory_Parent": "EN_IL",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "FR_MA",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "fr_MA"
+ },
+ {
+  "Directory": "ACROBAT_ELEMENTS2",
+  "Directory_Parent": "FR_MA",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "ACROBAT_HTML",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Legal"
+ },
+ {
+  "Directory": "ACROBAT_HTML_AR_AE",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ar_AE"
+ },
+ {
+  "Directory": "ACROBAT_HTML_CS_CZ",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "cs_CZ"
+ },
+ {
+  "Directory": "ACROBAT_HTML_DA_DK",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "da_DK"
+ },
+ {
+  "Directory": "ACROBAT_HTML_DE_DE",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "de_DE"
+ },
+ {
+  "Directory": "ACROBAT_HTML_EL_GR",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "el_GR"
+ },
+ {
+  "Directory": "ACROBAT_HTML_EN_GB",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "en_GB"
+ },
+ {
+  "Directory": "ACROBAT_HTML_EN_US",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "en_US"
+ },
+ {
+  "Directory": "ACROBAT_HTML_ES_ES",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "es_ES"
+ },
+ {
+  "Directory": "ACROBAT_HTML_FI_FI",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "fi_FI"
+ },
+ {
+  "Directory": "ACROBAT_HTML_FR_FR",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "fr_FR"
+ },
+ {
+  "Directory": "ACROBAT_HTML_HE_IL",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "he_IL"
+ },
+ {
+  "Directory": "ACROBAT_HTML_HU_HU",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "hu_HU"
+ },
+ {
+  "Directory": "ACROBAT_HTML_IT_IT",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "it_IT"
+ },
+ {
+  "Directory": "ACROBAT_HTML_JA_JP",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ja_JP"
+ },
+ {
+  "Directory": "ACROBAT_HTML_KO_KR",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ko_KR"
+ },
+ {
+  "Directory": "ACROBAT_HTML_NB_NO",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "nb_NO"
+ },
+ {
+  "Directory": "ACROBAT_HTML_NL_NL",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "nl_NL"
+ },
+ {
+  "Directory": "ACROBAT_HTML_PL_PL",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "pl_PL"
+ },
+ {
+  "Directory": "ACROBAT_HTML_PT_BR",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "pt_BR"
+ },
+ {
+  "Directory": "ACROBAT_HTML_RU_RU",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ru_RU"
+ },
+ {
+  "Directory": "ACROBAT_HTML_SK_SK",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "sk_SK"
+ },
+ {
+  "Directory": "ACROBAT_HTML_SL_SI",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "sl_SI"
+ },
+ {
+  "Directory": "ACROBAT_HTML_SV_SE",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "sv_SE"
+ },
+ {
+  "Directory": "ACROBAT_HTML_TR_TR",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "tr_TR"
+ },
+ {
+  "Directory": "ACROBAT_HTML_UK_UA",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "uk_UA"
+ },
+ {
+  "Directory": "ACROBAT_HTML_ZH_CN",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "zh_CN"
+ },
+ {
+  "Directory": "ACROBAT_HTML_ZH_TW",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "zh_TW"
+ },
+ {
+  "Directory": "ACROBAT_R",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "Acrobat:Acro_R"
+ },
+ {
+  "Directory": "ACROBAT_X64",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "x64"
+ },
+ {
+  "Directory": "ACROCEFEXE",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "AcroCEF"
+ },
+ {
+  "Directory": "ACROFORM",
+  "Directory_Parent": "EN_AE",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "ACROFORM1",
+  "Directory_Parent": "EN_IL",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "ACROFORM2",
+  "Directory_Parent": "FR_MA",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "PLUG_INS_ACROFORM",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "ACROFORM_NAVIGATORS",
+  "Directory_Parent": "PLUG_INS_ACROFORM",
+  "DefaultDir": "NAVIGA~1|Navigators"
+ },
+ {
+  "Directory": "ENU",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "ACROFORM_NAVIGATORS_ENU",
+  "Directory_Parent": "ACROFORM_NAVIGATORS",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "ACTIVEX",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "ActiveX"
+ },
+ {
+  "Directory": "ACTIVEX1",
+  "Directory_Parent": "ACROBAT1",
+  "DefaultDir": "ActiveX"
+ },
+ {
+  "Directory": "ADCNOTIFICATIONCLIENT",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "ADCNOT~1|ADCNotificationClient"
+ },
+ {
+  "Directory": "COLORCONVERSION",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "COLORC~1|ColorConversion"
+ },
+ {
+  "Directory": "ADJUSTDOTGAIN",
+  "Directory_Parent": "COLORCONVERSION",
+  "DefaultDir": "ADJUST~1|AdjustDotGain"
+ },
+ {
+  "Directory": "ProgramFiles64Folder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Prog64~1|Program Files 64"
+ },
+ {
+  "Directory": "PROVIDERS",
+  "Directory_Parent": "LINGUISTICS",
+  "DefaultDir": "PROVID~1|Providers"
+ },
+ {
+  "Directory": "ADOBE1",
+  "Directory_Parent": "PROVIDERS",
+  "DefaultDir": "Adobe"
+ },
+ {
+  "Directory": "PLUGINS2",
+  "Directory_Parent": "PROVIDERS",
+  "DefaultDir": "Plugins2"
+ },
+ {
+  "Directory": "XTRAS",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Xtras"
+ },
+ {
+  "Directory": "ADOBEPDF",
+  "Directory_Parent": "XTRAS",
+  "DefaultDir": "AdobePDF"
+ },
+ {
+  "Directory": "CommonFilesFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Common"
+ },
+ {
+  "Directory": "LOCALE_CS_CZ",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "cs_CZ"
+ },
+ {
+  "Directory": "ADOBE_SEND",
+  "Directory_Parent": "LOCALE_CS_CZ",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_DA_DK",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "da_DK"
+ },
+ {
+  "Directory": "ADOBE_SEND1",
+  "Directory_Parent": "LOCALE_DA_DK",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_IT_IT",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "it_IT"
+ },
+ {
+  "Directory": "ADOBE_SEND10",
+  "Directory_Parent": "LOCALE_IT_IT",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_JA_JP",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "ja_JP"
+ },
+ {
+  "Directory": "ADOBE_SEND11",
+  "Directory_Parent": "LOCALE_JA_JP",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_KO_KR",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "ko_KR"
+ },
+ {
+  "Directory": "ADOBE_SEND12",
+  "Directory_Parent": "LOCALE_KO_KR",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_NB_NO",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "nb_NO"
+ },
+ {
+  "Directory": "ADOBE_SEND13",
+  "Directory_Parent": "LOCALE_NB_NO",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_NL_NL",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "nl_NL"
+ },
+ {
+  "Directory": "ADOBE_SEND14",
+  "Directory_Parent": "LOCALE_NL_NL",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_PL_PL",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "pl_PL"
+ },
+ {
+  "Directory": "ADOBE_SEND15",
+  "Directory_Parent": "LOCALE_PL_PL",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_PT_BR",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "pt_BR"
+ },
+ {
+  "Directory": "ADOBE_SEND16",
+  "Directory_Parent": "LOCALE_PT_BR",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_RU_RU",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "ru_RU"
+ },
+ {
+  "Directory": "ADOBE_SEND17",
+  "Directory_Parent": "LOCALE_RU_RU",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_SK_SK",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "sk_SK"
+ },
+ {
+  "Directory": "ADOBE_SEND18",
+  "Directory_Parent": "LOCALE_SK_SK",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_SL_SI",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "sl_SI"
+ },
+ {
+  "Directory": "ADOBE_SEND19",
+  "Directory_Parent": "LOCALE_SL_SI",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_DE_DE",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "de_DE"
+ },
+ {
+  "Directory": "ADOBE_SEND2",
+  "Directory_Parent": "LOCALE_DE_DE",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_SV_SE",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "sv_SE"
+ },
+ {
+  "Directory": "ADOBE_SEND20",
+  "Directory_Parent": "LOCALE_SV_SE",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_TR_TR",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "tr_TR"
+ },
+ {
+  "Directory": "ADOBE_SEND21",
+  "Directory_Parent": "LOCALE_TR_TR",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_UK_UA",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "uk_UA"
+ },
+ {
+  "Directory": "ADOBE_SEND22",
+  "Directory_Parent": "LOCALE_UK_UA",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_ZH_CN",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "zh_CN"
+ },
+ {
+  "Directory": "ADOBE_SEND23",
+  "Directory_Parent": "LOCALE_ZH_CN",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_ZH_TW",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "zh_TW"
+ },
+ {
+  "Directory": "ADOBE_SEND24",
+  "Directory_Parent": "LOCALE_ZH_TW",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "ADOBE_SEND3",
+  "Directory_Parent": "EN_AE",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "ADOBE_SEND4",
+  "Directory_Parent": "EN_IL",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_ES_ES",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "es_ES"
+ },
+ {
+  "Directory": "ADOBE_SEND5",
+  "Directory_Parent": "LOCALE_ES_ES",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_FI_FI",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "fi_FI"
+ },
+ {
+  "Directory": "ADOBE_SEND6",
+  "Directory_Parent": "LOCALE_FI_FI",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_FR_FR",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "fr_FR"
+ },
+ {
+  "Directory": "ADOBE_SEND7",
+  "Directory_Parent": "LOCALE_FR_FR",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "ADOBE_SEND8",
+  "Directory_Parent": "FR_MA",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "LOCALE_HU_HU",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "hu_HU"
+ },
+ {
+  "Directory": "ADOBE_SEND9",
+  "Directory_Parent": "LOCALE_HU_HU",
+  "DefaultDir": "ADOBES~1|Adobe Send"
+ },
+ {
+  "Directory": "AIR",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Air"
+ },
+ {
+  "Directory": "TARGETDIR",
+  "Directory_Parent": null,
+  "DefaultDir": "SourceDir"
+ },
+ {
+  "Directory": "ALLUSERSPROFILE",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:ALLUSE~1|All Users"
+ },
+ {
+  "Directory": "CommonAppDataFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Common~1|CommonAppData"
+ },
+ {
+  "Directory": "ALLUSERS_APPDATA_ADOBE",
+  "Directory_Parent": "CommonAppDataFolder",
+  "DefaultDir": "Adobe"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS",
+  "Directory_Parent": "ALLUSERS_APPDATA_ADOBE",
+  "DefaultDir": "Adobe~2|Adobe PDF"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS_DISTILLER",
+  "Directory_Parent": "ALL_USERS_PDFOPTIONS",
+  "DefaultDir": "DISTIL~1|Distiller"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS_DATA",
+  "Directory_Parent": "ALL_USERS_PDFOPTIONS_DISTILLER",
+  "DefaultDir": "Data"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS_EXAMPLES",
+  "Directory_Parent": "ALL_USERS_PDFOPTIONS_DISTILLER",
+  "DefaultDir": "EXAMPL~1|Example Files"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS_EXTRAS",
+  "Directory_Parent": "ALL_USERS_PDFOPTIONS",
+  "DefaultDir": "Extras"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS_SETTINGS",
+  "Directory_Parent": "ALL_USERS_PDFOPTIONS",
+  "DefaultDir": "Settings"
+ },
+ {
+  "Directory": "ALL_USERS_PDFOPTIONS_STARTUP",
+  "Directory_Parent": "ALL_USERS_PDFOPTIONS_DISTILLER",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "PLUG_INS",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "plug_ins"
+ },
+ {
+  "Directory": "ANNOTATIONS",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "ANNOTA~1|Annotations"
+ },
+ {
+  "Directory": "DICTIONARIES1",
+  "Directory_Parent": "ADOBEHUNSPELLPLUGIN",
+  "DefaultDir": "DICTIO~1|Dictionaries"
+ },
+ {
+  "Directory": "AR_AE1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "ar_AE"
+ },
+ {
+  "Directory": "BG_BG3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "bg_BG"
+ },
+ {
+  "Directory": "BG_BG4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "bg_BG"
+ },
+ {
+  "Directory": "SUPPLEMENTALDICTIONARIES1",
+  "Directory_Parent": "ADOBEHUNSPELLPLUGIN",
+  "DefaultDir": "SUPPLE~1|SupplementalDictionaries"
+ },
+ {
+  "Directory": "BG_BG5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "bg_BG"
+ },
+ {
+  "Directory": "BROWSER",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Browser"
+ },
+ {
+  "Directory": "CACHE_SETUP_FILES",
+  "Directory_Parent": "ACROBAT1",
+  "DefaultDir": "SETUPF~1|Setup Files"
+ },
+ {
+  "Directory": "CACHE_DIR",
+  "Directory_Parent": "CACHE_SETUP_FILES",
+  "DefaultDir": "PAC76B~1|{AC76BA86-1033-FFFF-7760-BC15014EA700}"
+ },
+ {
+  "Directory": "CACHE_DIR_TRANSFORM",
+  "Directory_Parent": "CACHE_DIR",
+  "DefaultDir": "Transforms"
+ },
+ {
+  "Directory": "CA_ES3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "ca_ES"
+ },
+ {
+  "Directory": "CA_ES4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "ca_ES"
+ },
+ {
+  "Directory": "CA_ES5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "ca_ES"
+ },
+ {
+  "Directory": "CHS",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "RDRAPP",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "RdrApp"
+ },
+ {
+  "Directory": "CHS1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "CHS2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "CHT",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "CHT1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "CHT2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "RESOURCE",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "Resource"
+ },
+ {
+  "Directory": "CIDFONT",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "CIDFont"
+ },
+ {
+  "Directory": "CMAP",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "CMap"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "PREFLI~1|Preflight"
+ },
+ {
+  "Directory": "COLOR_FILES",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "Color"
+ },
+ {
+  "Directory": "COLOR_SWATCHES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "COLORS~1|Color Swatches"
+ },
+ {
+  "Directory": "DOCSETTINGS",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "DOCSET~1|DocSettings"
+ },
+ {
+  "Directory": "COMBINEFILES",
+  "Directory_Parent": "DOCSETTINGS",
+  "DefaultDir": "COMBIN~1|CombineFiles"
+ },
+ {
+  "Directory": "COMBINEFILES_CHS",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "COMBINEFILES_CHT",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "CZE",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "COMBINEFILES_CZE",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "DAN",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "COMBINEFILES_DAN",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "DEU",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "COMBINEFILES_DEU",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "COMBINEFILES_ENU",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "ESP",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "COMBINEFILES_ESP",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "FRA",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "COMBINEFILES_FRA",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "HUN",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "COMBINEFILES_HUN",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "ITA",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "COMBINEFILES_ITA",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "JPN",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "COMBINEFILES_JPN",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "KOR",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "COMBINEFILES_KOR",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "NLD",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "COMBINEFILES_NLD",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "NOR",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "COMBINEFILES_NOR",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "POL",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "COMBINEFILES_POL",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "PTB",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "COMBINEFILES_PTB",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "RUS",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "COMBINEFILES_RUS",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "SKY",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "COMBINEFILES_SKY",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "SLV",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "COMBINEFILES_SLV",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "SUO",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "COMBINEFILES_SUO",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "SVE",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "COMBINEFILES_SVE",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "TUR",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "COMBINEFILES_TUR",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "UKR",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "COMBINEFILES_UKR",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "CommonFiles64Folder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Common64"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP",
+  "Directory_Parent": "COMMON_ADOBE",
+  "DefaultDir": "HelpCfg"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_CHS",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "zh_CN"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_CHT",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "zh_TW"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_CZE",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "cs_CZ"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_DAN",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "da_DK"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_DEU",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "de_DE"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_ENU",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "en_US"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_ESP",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "es_ES"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_FRA",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "fr_FR"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_HUN",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "hu_HU"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_ITA",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "it_IT"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_JPN",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "ja_JP"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_KOR",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "ko_KR"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_NLD",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "nl_NL"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_NOR",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "nb_NO"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_POL",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "pl_PL"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_PTB",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "pt_BR"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_RUS",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "ru_RU"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_SKY",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "sk_SK"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_SLV",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "sl_SI"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_SUO",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "fi_FI"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_SVE",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "sv_SE"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_TUR",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "tr_TR"
+ },
+ {
+  "Directory": "COMMON_ADOBE_HELP_UKR",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "uk_UA"
+ },
+ {
+  "Directory": "COMMON_LINGUISTIC",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "LINGUI~1|Linguistics"
+ },
+ {
+  "Directory": "CS_CZ3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "cs_CZ"
+ },
+ {
+  "Directory": "CS_CZ4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "cs_CZ"
+ },
+ {
+  "Directory": "CS_CZ5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "cs_CZ"
+ },
+ {
+  "Directory": "CURVES1",
+  "Directory_Parent": "ADJUSTDOTGAIN",
+  "DefaultDir": "Curves"
+ },
+ {
+  "Directory": "GC",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "GC"
+ },
+ {
+  "Directory": "CUSTOMHOOK",
+  "Directory_Parent": "GC",
+  "DefaultDir": "CUSTOM~1|customhook"
+ },
+ {
+  "Directory": "REPORTS",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "Reports"
+ },
+ {
+  "Directory": "CXF",
+  "Directory_Parent": "REPORTS",
+  "DefaultDir": "CxF"
+ },
+ {
+  "Directory": "CZE1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "CZE2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "DAN1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "DAN2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "DA_DK3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "da_DK"
+ },
+ {
+  "Directory": "DA_DK4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "da_DK"
+ },
+ {
+  "Directory": "DA_DK5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "da_DK"
+ },
+ {
+  "Directory": "DEU1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "DEU2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "DE_CH3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "de_CH"
+ },
+ {
+  "Directory": "DE_CH4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "de_CH"
+ },
+ {
+  "Directory": "DE_CH5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "de_CH"
+ },
+ {
+  "Directory": "DE_DE3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "de_DE"
+ },
+ {
+  "Directory": "DE_DE4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "de_DE"
+ },
+ {
+  "Directory": "DE_DE5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "de_DE"
+ },
+ {
+  "Directory": "DISTILLR",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "Acrobat"
+ },
+ {
+  "Directory": "DISTILLER_DATA",
+  "Directory_Parent": "DISTILLR",
+  "DefaultDir": "Data"
+ },
+ {
+  "Directory": "DISTILLER_DATA_FONTS",
+  "Directory_Parent": "DISTILLER_DATA",
+  "DefaultDir": "Fonts"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK",
+  "Directory_Parent": "DISTILLER_DATA",
+  "DefaultDir": "PSDisk"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_CID",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "CID"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_DOC",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "Doc"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_ENCODINGS",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "ENCODI~1|encodings"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_FONTS",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "Fonts"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_FS",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "FS"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_LIB",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "LIB"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_PGF",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "PGF"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "Resource"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE_CIDFONT",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "DefaultDir": "CIDFont"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE_CMAP",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "DefaultDir": "CMap"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE_COMPATIBLEFONT",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "DefaultDir": "COMPAT~1|CompatibleFont"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE_FIXCIDINITPROCSET",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "DefaultDir": "FIXCID~1|FixCIDInitProcSet"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE_FIXCMAPCATEGORY",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "DefaultDir": "FIXCMA~1|FixCMapCategory"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_RESOURCE_PROCSET",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK_RESOURCE",
+  "DefaultDir": "ProcSet"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_SYS",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "SYS"
+ },
+ {
+  "Directory": "DISTILLER_DATA_PSDISK_USR",
+  "Directory_Parent": "DISTILLER_DATA_PSDISK",
+  "DefaultDir": "USR"
+ },
+ {
+  "Directory": "DISTILLER_SETTINGS",
+  "Directory_Parent": "DISTILLR",
+  "DefaultDir": "Settings"
+ },
+ {
+  "Directory": "DISTILLER_SETTINGS_J",
+  "Directory_Parent": "DISTILLR",
+  "DefaultDir": "Settings:Sett_J"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS",
+  "Directory_Parent": "DISTILLR",
+  "DefaultDir": "Xtras"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF",
+  "Directory_Parent": "DISTILLER_XTRAS",
+  "DefaultDir": "AdobePDF"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF_AMD64",
+  "Directory_Parent": "DISTILLER_XTRAS_ADOBEPDF",
+  "DefaultDir": "AMD64"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF_AMD64VISTA",
+  "Directory_Parent": "DISTILLER_XTRAS_ADOBEPDF",
+  "DefaultDir": "AMD64V~1|AMD64Vista"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF_B",
+  "Directory_Parent": "DISTILLER_XTRAS",
+  "DefaultDir": "AdobePDF:ADOBEP~1|AdobePDF_B"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF_I386",
+  "Directory_Parent": "DISTILLER_XTRAS_ADOBEPDF",
+  "DefaultDir": "I386"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF_I386_VISTA",
+  "Directory_Parent": "DISTILLER_XTRAS_ADOBEPDF",
+  "DefaultDir": "I386VI~1|I386Vista"
+ },
+ {
+  "Directory": "DISTILLER_XTRAS_ADOBEPDF_STDPPD",
+  "Directory_Parent": "ADOBEPDF",
+  "DefaultDir": "StdPPD"
+ },
+ {
+  "Directory": "DOCTEMPLATES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "DOCTEM~1|DocTemplates"
+ },
+ {
+  "Directory": "DOCTEMPLATES_CHS",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "DOCTEMPLATES_CHT",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "DOCTEMPLATES_CZE",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "DOCTEMPLATES_DAN",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "DOCTEMPLATES_DEU",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "DOCTEMPLATES_ENU",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "DOCTEMPLATES_ESP",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "DOCTEMPLATES_FRA",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "DOCTEMPLATES_HUN",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "DOCTEMPLATES_ITA",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "DOCTEMPLATES_JPN",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "DOCTEMPLATES_KOR",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "DOCTEMPLATES_NLD",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "DOCTEMPLATES_NOR",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "DOCTEMPLATES_POL",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "DOCTEMPLATES_PTB",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "DOCTEMPLATES_RUS",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "DOCTEMPLATES_SKY",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "DOCTEMPLATES_SLV",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "DOCTEMPLATES_SUO",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "DOCTEMPLATES_SVE",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "DOCTEMPLATES_TUR",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "DOCTEMPLATES_UKR",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "DesktopFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Desktop"
+ },
+ {
+  "Directory": "ELEMENTS",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "CROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "EL_GR3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "el_GR"
+ },
+ {
+  "Directory": "EL_GR4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "el_GR"
+ },
+ {
+  "Directory": "EL_GR5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "el_GR"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT_FONTRESOURCE",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "FONTRE~1|FontResource"
+ },
+ {
+  "Directory": "ENCODING",
+  "Directory_Parent": "PLUGINS_PREFLIGHT_FONTRESOURCE",
+  "DefaultDir": "Encoding"
+ },
+ {
+  "Directory": "ENU2",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "ENU3",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "LOCALE",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Locale"
+ },
+ {
+  "Directory": "EN_AE1",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "en_AE"
+ },
+ {
+  "Directory": "EN_AE3",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "en_AE"
+ },
+ {
+  "Directory": "EN_CA3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "en_CA"
+ },
+ {
+  "Directory": "EN_CA4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "en_CA"
+ },
+ {
+  "Directory": "EN_CA5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "en_CA"
+ },
+ {
+  "Directory": "EN_GB3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "en_GB"
+ },
+ {
+  "Directory": "EN_GB4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "en_GB"
+ },
+ {
+  "Directory": "EN_GB5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "en_GB"
+ },
+ {
+  "Directory": "EN_IL1",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "en_IL"
+ },
+ {
+  "Directory": "EN_IL3",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "en_IL"
+ },
+ {
+  "Directory": "EN_US3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "en_US"
+ },
+ {
+  "Directory": "EN_US4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "en_US"
+ },
+ {
+  "Directory": "EN_US5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "en_US"
+ },
+ {
+  "Directory": "EN_US8",
+  "Directory_Parent": "LOCALE",
+  "DefaultDir": "en_US"
+ },
+ {
+  "Directory": "ESL_DIR",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "Esl"
+ },
+ {
+  "Directory": "ESP1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "ESP2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "ES_ES3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "es_ES"
+ },
+ {
+  "Directory": "ES_ES4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "es_ES"
+ },
+ {
+  "Directory": "ES_ES5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "es_ES"
+ },
+ {
+  "Directory": "ET_EE3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "et_EE"
+ },
+ {
+  "Directory": "ET_EE4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "et_EE"
+ },
+ {
+  "Directory": "ET_EE5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "et_EE"
+ },
+ {
+  "Directory": "EU_ES1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "eu_ES"
+ },
+ {
+  "Directory": "FILEINFO",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "FileInfo"
+ },
+ {
+  "Directory": "FI_FI1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "fi_FI"
+ },
+ {
+  "Directory": "FONT",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "Font"
+ },
+ {
+  "Directory": "UI",
+  "Directory_Parent": "RESOURCES2",
+  "DefaultDir": "ui"
+ },
+ {
+  "Directory": "FONT1",
+  "Directory_Parent": "UI",
+  "DefaultDir": "font"
+ },
+ {
+  "Directory": "FONT_PFM",
+  "Directory_Parent": "FONT",
+  "DefaultDir": "Pfm"
+ },
+ {
+  "Directory": "FRA1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "FRA2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "FR_CA1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "fr_CA"
+ },
+ {
+  "Directory": "FR_FR3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "fr_FR"
+ },
+ {
+  "Directory": "FR_FR4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "fr_FR"
+ },
+ {
+  "Directory": "FR_FR5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "fr_FR"
+ },
+ {
+  "Directory": "FR_MA1",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "fr_MA"
+ },
+ {
+  "Directory": "FR_MA3",
+  "Directory_Parent": "COMMON_ADOBE_HELP",
+  "DefaultDir": "fr_MA"
+ },
+ {
+  "Directory": "FontsFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Fonts"
+ },
+ {
+  "Directory": "HE_IL1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "he_IL"
+ },
+ {
+  "Directory": "HR_HR3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "hr_HR"
+ },
+ {
+  "Directory": "HR_HR4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "hr_HR"
+ },
+ {
+  "Directory": "HR_HR5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "hr_HR"
+ },
+ {
+  "Directory": "HSERVICESTEMPLATES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "HOSTED~1|HostedServicesTemplates"
+ },
+ {
+  "Directory": "HSERVICESTEMPLATES_DEU",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "HSERVICESTEMPLATES_ENU",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "HSERVICESTEMPLATES_FRA",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "HSERVICESTEMPLATES_JPN",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "HUN1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "HUN2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "HU_HU3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "hu_HU"
+ },
+ {
+  "Directory": "HU_HU4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "hu_HU"
+ },
+ {
+  "Directory": "HU_HU5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "hu_HU"
+ },
+ {
+  "Directory": "IDTEMPLATES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "IDTEMP~1|IDTemplates"
+ },
+ {
+  "Directory": "IDTEMPLATES_CHS",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "IDTEMPLATES_CHT",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "IDTEMPLATES_CZE",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "IDTEMPLATES_DAN",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "IDTEMPLATES_DEU",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "IDTEMPLATES_ENU",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "IDTEMPLATES_ESP",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "IDTEMPLATES_FRA",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "IDTEMPLATES_HUN",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "IDTEMPLATES_ITA",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "IDTEMPLATES_JPN",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "IDTEMPLATES_KOR",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "IDTEMPLATES_NLD",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "IDTEMPLATES_NOR",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "IDTEMPLATES_POL",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "IDTEMPLATES_PTB",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "IDTEMPLATES_RUS",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "IDTEMPLATES_SKY",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "IDTEMPLATES_SLV",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "IDTEMPLATES_SUO",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "IDTEMPLATES_SVE",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "IDTEMPLATES_TUR",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "IDTEMPLATES_UKR",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "IE",
+  "Directory_Parent": "FONT1",
+  "DefaultDir": "ie"
+ },
+ {
+  "Directory": "INSTALLDIR_FORMSCENTRAL",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "FORMSC~1|FormsCentral"
+ },
+ {
+  "Directory": "INSTALLDIR_FORMSCENTRAL_ICONS",
+  "Directory_Parent": "INSTALLDIR_FORMSCENTRAL",
+  "DefaultDir": "icons"
+ },
+ {
+  "Directory": "ITA1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "ITA2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "IT_IT3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "it_IT"
+ },
+ {
+  "Directory": "IT_IT4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "it_IT"
+ },
+ {
+  "Directory": "IT_IT5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "it_IT"
+ },
+ {
+  "Directory": "JAVASCRIPTS",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "JAVASC~1|Javascripts"
+ },
+ {
+  "Directory": "JPN1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "JPN2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "KOR1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "KOR2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "LINGUISTICS",
+  "Directory_Parent": "_2.0",
+  "DefaultDir": "LINGUI~1|Linguistics"
+ },
+ {
+  "Directory": "LANGUAGENAMES2",
+  "Directory_Parent": "LINGUISTICS",
+  "DefaultDir": "LANGUA~1|LanguageNames2"
+ },
+ {
+  "Directory": "_2.0",
+  "Directory_Parent": "ACROBAT1",
+  "DefaultDir": "DC"
+ },
+ {
+  "Directory": "LOCALES1",
+  "Directory_Parent": "ACROCEFEXE",
+  "DefaultDir": "locales"
+ },
+ {
+  "Directory": "LOCALE_CS_CZ_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_CS_CZ",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_CS_CZ_ACROFORM",
+  "Directory_Parent": "LOCALE_CS_CZ",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_CS_CZ_PDFMAKER",
+  "Directory_Parent": "LOCALE_CS_CZ",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_DA_DK_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_DA_DK",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_DA_DK_ACROFORM",
+  "Directory_Parent": "LOCALE_DA_DK",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_DA_DK_PDFMAKER",
+  "Directory_Parent": "LOCALE_DA_DK",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_DE_DE_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_DE_DE",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_DE_DE_ACROFORM",
+  "Directory_Parent": "LOCALE_DE_DE",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_DE_DE_PDFMAKER",
+  "Directory_Parent": "LOCALE_DE_DE",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_ES_ES_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_ES_ES",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_ES_ES_ACROFORM",
+  "Directory_Parent": "LOCALE_ES_ES",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_ES_ES_PDFMAKER",
+  "Directory_Parent": "LOCALE_ES_ES",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_FI_FI_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_FI_FI",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_FI_FI_ACROFORM",
+  "Directory_Parent": "LOCALE_FI_FI",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_FI_FI_PDFMAKER",
+  "Directory_Parent": "LOCALE_FI_FI",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_FR_FR_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_FR_FR",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_FR_FR_ACROFORM",
+  "Directory_Parent": "LOCALE_FR_FR",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_FR_FR_PDFMAKER",
+  "Directory_Parent": "LOCALE_FR_FR",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_HU_HU_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_HU_HU",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_HU_HU_ACROFORM",
+  "Directory_Parent": "LOCALE_HU_HU",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_HU_HU_PDFMAKER",
+  "Directory_Parent": "LOCALE_HU_HU",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_IT_IT_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_IT_IT",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_IT_IT_ACROFORM",
+  "Directory_Parent": "LOCALE_IT_IT",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_IT_IT_PDFMAKER",
+  "Directory_Parent": "LOCALE_IT_IT",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_JA_JP_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_JA_JP",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_JA_JP_ACROFORM",
+  "Directory_Parent": "LOCALE_JA_JP",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_JA_JP_PDFMAKER",
+  "Directory_Parent": "LOCALE_JA_JP",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_KO_KR_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_KO_KR",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_KO_KR_ACROFORM",
+  "Directory_Parent": "LOCALE_KO_KR",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_KO_KR_PDFMAKER",
+  "Directory_Parent": "LOCALE_KO_KR",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_NB_NO_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_NB_NO",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_NB_NO_ACROFORM",
+  "Directory_Parent": "LOCALE_NB_NO",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_NB_NO_PDFMAKER",
+  "Directory_Parent": "LOCALE_NB_NO",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_NL_NL_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_NL_NL",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_NL_NL_ACROFORM",
+  "Directory_Parent": "LOCALE_NL_NL",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_NL_NL_PDFMAKER",
+  "Directory_Parent": "LOCALE_NL_NL",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_PL_PL_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_PL_PL",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_PL_PL_ACROFORM",
+  "Directory_Parent": "LOCALE_PL_PL",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_PL_PL_PDFMAKER",
+  "Directory_Parent": "LOCALE_PL_PL",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_PT_BR_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_PT_BR",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_PT_BR_ACROFORM",
+  "Directory_Parent": "LOCALE_PT_BR",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_PT_BR_PDFMAKER",
+  "Directory_Parent": "LOCALE_PT_BR",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_RU_RU_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_RU_RU",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_RU_RU_ACROFORM",
+  "Directory_Parent": "LOCALE_RU_RU",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_RU_RU_PDFMAKER",
+  "Directory_Parent": "LOCALE_RU_RU",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_SK_SK_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_SK_SK",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_SK_SK_ACROFORM",
+  "Directory_Parent": "LOCALE_SK_SK",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_SK_SK_PDFMAKER",
+  "Directory_Parent": "LOCALE_SK_SK",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_SL_SI_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_SL_SI",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_SL_SI_ACROFORM",
+  "Directory_Parent": "LOCALE_SL_SI",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_SL_SI_PDFMAKER",
+  "Directory_Parent": "LOCALE_SL_SI",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_SV_SE_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_SV_SE",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_SV_SE_ACROFORM",
+  "Directory_Parent": "LOCALE_SV_SE",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_SV_SE_PDFMAKER",
+  "Directory_Parent": "LOCALE_SV_SE",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_TR_TR_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_TR_TR",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_TR_TR_ACROFORM",
+  "Directory_Parent": "LOCALE_TR_TR",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_TR_TR_PDFMAKER",
+  "Directory_Parent": "LOCALE_TR_TR",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_UK_UA_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_UK_UA",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_UK_UA_ACROFORM",
+  "Directory_Parent": "LOCALE_UK_UA",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_UK_UA_PDFMAKER",
+  "Directory_Parent": "LOCALE_UK_UA",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_ZH_CN_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_ZH_CN",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_ZH_CN_ACROFORM",
+  "Directory_Parent": "LOCALE_ZH_CN",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_ZH_CN_PDFMAKER",
+  "Directory_Parent": "LOCALE_ZH_CN",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "LOCALE_ZH_TW_ACROBAT_ELEMENTS",
+  "Directory_Parent": "LOCALE_ZH_TW",
+  "DefaultDir": "ACROBA~1|Acrobat Elements"
+ },
+ {
+  "Directory": "LOCALE_ZH_TW_ACROFORM",
+  "Directory_Parent": "LOCALE_ZH_TW",
+  "DefaultDir": "AcroForm"
+ },
+ {
+  "Directory": "LOCALE_ZH_TW_PDFMAKER",
+  "Directory_Parent": "LOCALE_ZH_TW",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "PDFMAKER_MAIL_LOTUS",
+  "Directory_Parent": "PDFMAKER_MAIL",
+  "DefaultDir": "LOTUSN~1|LotusNotes"
+ },
+ {
+  "Directory": "LOTUS_NOTES_PROGRAM_DIR",
+  "Directory_Parent": "PDFMAKER_MAIL_LOTUS",
+  "DefaultDir": "Lotus"
+ },
+ {
+  "Directory": "LT_LT3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "lt_LT"
+ },
+ {
+  "Directory": "LT_LT4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "lt_LT"
+ },
+ {
+  "Directory": "LT_LT5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "lt_LT"
+ },
+ {
+  "Directory": "LV_LV3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "lv_LV"
+ },
+ {
+  "Directory": "LV_LV4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "lv_LV"
+ },
+ {
+  "Directory": "LV_LV5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "lv_LV"
+ },
+ {
+  "Directory": "MANAGECOLORS",
+  "Directory_Parent": "COLORCONVERSION",
+  "DefaultDir": "MANAGE~1|ManageColors"
+ },
+ {
+  "Directory": "SAVEASXML",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "SAVEAS~1|SaveAsXML"
+ },
+ {
+  "Directory": "MAPPINGTABLES",
+  "Directory_Parent": "SAVEASXML",
+  "DefaultDir": "MAPPIN~1|MappingTables"
+ },
+ {
+  "Directory": "REDACTION",
+  "Directory_Parent": "DOCSETTINGS",
+  "DefaultDir": "REDACT~1|Redaction"
+ },
+ {
+  "Directory": "MEA1",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "MEA2",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "MEA3",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "STAMPS",
+  "Directory_Parent": "ANNOTATIONS",
+  "DefaultDir": "Stamps"
+ },
+ {
+  "Directory": "MEA4",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "MEA5",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "MEA6",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "MEH1",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "MEH2",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "MEH3",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "MEH4",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "MEH5",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "MEH6",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "WCFIREFOXEXTN",
+  "Directory_Parent": "BROWSER",
+  "DefaultDir": "WCFIRE~1|WCFirefoxExtn"
+ },
+ {
+  "Directory": "META_INF",
+  "Directory_Parent": "WCFIREFOXEXTN",
+  "DefaultDir": "META-INF"
+ },
+ {
+  "Directory": "MOZILLA_1",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Browser"
+ },
+ {
+  "Directory": "MOZILLA_2",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Browser"
+ },
+ {
+  "Directory": "MOZILLA_3",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Browser"
+ },
+ {
+  "Directory": "MULTIMEDIA_SKINS",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "MULTIM~1|Multimedia Skins"
+ },
+ {
+  "Directory": "MULTIMEDIA_SKINS_PLAYERS",
+  "Directory_Parent": "MULTIMEDIA_SKINS",
+  "DefaultDir": "Players"
+ },
+ {
+  "Directory": "NAF1",
+  "Directory_Parent": "HSERVICESTEMPLATES",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "NAF2",
+  "Directory_Parent": "DOCTEMPLATES",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "NAF3",
+  "Directory_Parent": "IDTEMPLATES",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "NAF4",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "NAF5",
+  "Directory_Parent": "COMBINEFILES",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "NAF6",
+  "Directory_Parent": "ACROAPP",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "NB_NO2",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "nb_NO"
+ },
+ {
+  "Directory": "NB_NO3",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "nb_NO"
+ },
+ {
+  "Directory": "NB_NO6",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "nb_NO"
+ },
+ {
+  "Directory": "NETSCAPE7_CURRENT",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Browser"
+ },
+ {
+  "Directory": "NGL_RESOURCES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "NGL_RE~1|ngl_resources"
+ },
+ {
+  "Directory": "NLD1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "NLD2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "NL_NL3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "nl_NL"
+ },
+ {
+  "Directory": "NL_NL4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "nl_NL"
+ },
+ {
+  "Directory": "NL_NL5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "nl_NL"
+ },
+ {
+  "Directory": "NN_NO3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "nn_NO"
+ },
+ {
+  "Directory": "NN_NO4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "nn_NO"
+ },
+ {
+  "Directory": "NN_NO5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "nn_NO"
+ },
+ {
+  "Directory": "NOR1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "NOR2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "PDFAEXTSCHEMA",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "PDFAEX~1|PDFAExtSchema"
+ },
+ {
+  "Directory": "PDFMAKER",
+  "Directory_Parent": "INSTALLDIR",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "PDFMAKER1",
+  "Directory_Parent": "EN_AE",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "PDFMAKER2",
+  "Directory_Parent": "EN_IL",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "PDFMAKER3",
+  "Directory_Parent": "FR_MA",
+  "DefaultDir": "PDFMaker"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "AutoCAD"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2013",
+  "Directory_Parent": "PDFMAKER_AUTOCAD",
+  "DefaultDir": "2013"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2013_64",
+  "Directory_Parent": "PDFMAKER_AUTOCAD_2013",
+  "DefaultDir": "64"
+ },
+ {
+  "Directory": "_014",
+  "Directory_Parent": "PDFMAKER_AUTOCAD",
+  "DefaultDir": "2014"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2014_64",
+  "Directory_Parent": "_014",
+  "DefaultDir": "64"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2015",
+  "Directory_Parent": "PDFMAKER_AUTOCAD",
+  "DefaultDir": "2015"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2015_64",
+  "Directory_Parent": "PDFMAKER_AUTOCAD_2015",
+  "DefaultDir": "64"
+ },
+ {
+  "Directory": "_018",
+  "Directory_Parent": "PDFMAKER_AUTOCAD",
+  "DefaultDir": "2018"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2018_64",
+  "Directory_Parent": "_018",
+  "DefaultDir": "64"
+ },
+ {
+  "Directory": "_019",
+  "Directory_Parent": "PDFMAKER_AUTOCAD",
+  "DefaultDir": "2019"
+ },
+ {
+  "Directory": "PDFMAKER_AUTOCAD_2019_64",
+  "Directory_Parent": "_019",
+  "DefaultDir": "64"
+ },
+ {
+  "Directory": "PDFMAKER_COMMON",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "Common"
+ },
+ {
+  "Directory": "X64",
+  "Directory_Parent": "PDFMAKER_PDFPLUG_INS",
+  "DefaultDir": "x64"
+ },
+ {
+  "Directory": "PDFMAKER_COMMON_X64",
+  "Directory_Parent": "PDFMAKER_COMMON",
+  "DefaultDir": "X64"
+ },
+ {
+  "Directory": "PDFMAKER_MAIL",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "Mail"
+ },
+ {
+  "Directory": "PDFMAKER_MAIL_OUTLOOK",
+  "Directory_Parent": "PDFMAKER_MAIL",
+  "DefaultDir": "Outlook"
+ },
+ {
+  "Directory": "PDFMAKER_MAIL_OUTLOOK_X64",
+  "Directory_Parent": "PDFMAKER_MAIL_OUTLOOK",
+  "DefaultDir": "x64"
+ },
+ {
+  "Directory": "PDFMAKER_OFFICE",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "Office"
+ },
+ {
+  "Directory": "PDFMAKER_OFFICE_READERS",
+  "Directory_Parent": "PDFMAKER_OFFICE",
+  "DefaultDir": "Readers"
+ },
+ {
+  "Directory": "PDFMAKER_OFFICE_X64",
+  "Directory_Parent": "PDFMAKER_OFFICE",
+  "DefaultDir": "x64"
+ },
+ {
+  "Directory": "PDFMAKER_PDFPLUG_INS",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "PDFPLU~1|pdfplug_ins"
+ },
+ {
+  "Directory": "PDFMAKER_PROJECT",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "Project"
+ },
+ {
+  "Directory": "PDFOPTIMIZER",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "PDFOPT~1|PDF Optimizer"
+ },
+ {
+  "Directory": "PI_BROKERS",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "PI_BRO~1|pi_brokers"
+ },
+ {
+  "Directory": "PLUGINS_3D",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "plug_i~1|plug_ins3d"
+ },
+ {
+  "Directory": "PLUGINS_3D_PRC",
+  "Directory_Parent": "PLUGINS_3D",
+  "DefaultDir": "prc"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT_BACKGROUNDS",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "BACKGR~1|Backgrounds"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT_BACKGROUNDS_DEFAULT",
+  "Directory_Parent": "PLUGINS_PREFLIGHT_BACKGROUNDS",
+  "DefaultDir": "Default"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT_INVENTORY",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "INVENT~1|Inventory"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT_OUTPUTINTENT",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "OUTPUT~1|OutputIntent"
+ },
+ {
+  "Directory": "PLUGINS_PREFLIGHT_SETTINGS",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "Settings"
+ },
+ {
+  "Directory": "PLUG_INS_ACROFORM_PMP",
+  "Directory_Parent": "PLUG_INS_ACROFORM",
+  "DefaultDir": "PMP"
+ },
+ {
+  "Directory": "PLUG_INS_HTML2PDF",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "html2pdf"
+ },
+ {
+  "Directory": "PLUG_INS_MULTIMEDIA",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "MULTIM~1|Multimedia"
+ },
+ {
+  "Directory": "PLUG_INS_MULTIMEDIA_MPP",
+  "Directory_Parent": "PLUG_INS_MULTIMEDIA",
+  "DefaultDir": "MPP"
+ },
+ {
+  "Directory": "PLUG_INS_PAPERCAPTURE",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "PAPERC~1|PaperCapture"
+ },
+ {
+  "Directory": "PLUG_INS_PAPERCAPTURE_IDRS15",
+  "Directory_Parent": "PLUG_INS_PAPERCAPTURE",
+  "DefaultDir": "iDRS15"
+ },
+ {
+  "Directory": "PLUG_INS_PAPERCAPTURE_IDRS15_OCRRES",
+  "Directory_Parent": "PLUG_INS_PAPERCAPTURE_IDRS15",
+  "DefaultDir": "OCRRES~1|OCRResources"
+ },
+ {
+  "Directory": "PLUG_INS_TOUCHUP",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "TouchUp"
+ },
+ {
+  "Directory": "PLUG_INS_TOUCHUP_FIND",
+  "Directory_Parent": "PLUG_INS_TOUCHUP",
+  "DefaultDir": "Find"
+ },
+ {
+  "Directory": "PL_PL3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "pl_PL"
+ },
+ {
+  "Directory": "PL_PL4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "pl_PL"
+ },
+ {
+  "Directory": "PL_PL5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "pl_PL"
+ },
+ {
+  "Directory": "POL1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "POL2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "PROFILES",
+  "Directory_Parent": "COLOR_FILES",
+  "DefaultDir": "Profiles"
+ },
+ {
+  "Directory": "PTB1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "PTB2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "PT_BR3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "pt_BR"
+ },
+ {
+  "Directory": "PT_BR4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "pt_BR"
+ },
+ {
+  "Directory": "PT_BR5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "pt_BR"
+ },
+ {
+  "Directory": "PT_PT3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "pt_PT"
+ },
+ {
+  "Directory": "PT_PT4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "pt_PT"
+ },
+ {
+  "Directory": "PT_PT5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "pt_PT"
+ },
+ {
+  "Directory": "ProgramMenuFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Programs"
+ },
+ {
+  "Directory": "RDCNOTIFICATIONCLIENT",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "RDCNOT~1|RDCNotificationClient"
+ },
+ {
+  "Directory": "RECOMMENDED",
+  "Directory_Parent": "PROFILES",
+  "DefaultDir": "RECOMM~1|Recommended"
+ },
+ {
+  "Directory": "REDACTION_CAN",
+  "Directory_Parent": "REDACTION",
+  "DefaultDir": "CAN"
+ },
+ {
+  "Directory": "REDACTION_ENU",
+  "Directory_Parent": "REDACTION",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "REDACTION_FRE",
+  "Directory_Parent": "REDACTION",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "REDACTION_GER",
+  "Directory_Parent": "REDACTION",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "REDACTION_JPN",
+  "Directory_Parent": "REDACTION",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "REDACTION_UK",
+  "Directory_Parent": "REDACTION",
+  "DefaultDir": "UK"
+ },
+ {
+  "Directory": "REGULAR",
+  "Directory_Parent": "FONT1",
+  "DefaultDir": "regular"
+ },
+ {
+  "Directory": "SOLID",
+  "Directory_Parent": "SAVEASNONPDF",
+  "DefaultDir": "Solid"
+ },
+ {
+  "Directory": "RESOURCES",
+  "Directory_Parent": "SOLID",
+  "DefaultDir": "RESOUR~1|Resources"
+ },
+ {
+  "Directory": "RESOURCES2",
+  "Directory_Parent": "NGL_RESOURCES",
+  "DefaultDir": "RESOUR~1|resources"
+ },
+ {
+  "Directory": "RESOURCE_TEMPLATES",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "TEMPLA~1|templates"
+ },
+ {
+  "Directory": "RO_RO3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "ro_RO"
+ },
+ {
+  "Directory": "RO_RO4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "ro_RO"
+ },
+ {
+  "Directory": "RO_RO5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "ro_RO"
+ },
+ {
+  "Directory": "RUS1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "RUS2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "RU_RU3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "ru_RU"
+ },
+ {
+  "Directory": "RU_RU4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "ru_RU"
+ },
+ {
+  "Directory": "RU_RU5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "ru_RU"
+ },
+ {
+  "Directory": "SASIPREP",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "SaslPrep"
+ },
+ {
+  "Directory": "SAVEASNONPDF",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "SaveAsNonPDF|SaveAsNonPDF"
+ },
+ {
+  "Directory": "SCAN",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "Scan"
+ },
+ {
+  "Directory": "SEQUENCES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "SEQUEN~1|Sequences"
+ },
+ {
+  "Directory": "SEQUENCES_CHS",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "SEQUENCES_CHT",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "SEQUENCES_CZE",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "SEQUENCES_DAN",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "SEQUENCES_DEU",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "SEQUENCES_ENU",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "SEQUENCES_ESP",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "SEQUENCES_FRA",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "SEQUENCES_HUN",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "SEQUENCES_ITA",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "SEQUENCES_JPN",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "SEQUENCES_KOR",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "SEQUENCES_MEA",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "SEQUENCES_MEH",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "SEQUENCES_NAF",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "SEQUENCES_NLD",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "SEQUENCES_NOR",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "SEQUENCES_POL",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "SEQUENCES_PTB",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "SEQUENCES_RUS",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "SEQUENCES_SKY",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "SEQUENCES_SLV",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "SEQUENCES_SUO",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "SEQUENCES_SVE",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "SEQUENCES_TUR",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "SEQUENCES_UKR",
+  "Directory_Parent": "SEQUENCES",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "SETTINGS",
+  "Directory_Parent": "COLOR_FILES",
+  "DefaultDir": "Settings"
+ },
+ {
+  "Directory": "WEBEXTN",
+  "Directory_Parent": "WCFIREFOXEXTN",
+  "DefaultDir": "WebExtn"
+ },
+ {
+  "Directory": "SIGNED_EXTN",
+  "Directory_Parent": "WEBEXTN",
+  "DefaultDir": "SIGNED~1|signed_extn"
+ },
+ {
+  "Directory": "SKY1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "SKY2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "SK_SK3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "sk_SK"
+ },
+ {
+  "Directory": "SK_SK4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "sk_SK"
+ },
+ {
+  "Directory": "SK_SK5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "sk_SK"
+ },
+ {
+  "Directory": "SLV1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "SLV2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "SL_SI3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "sl_SI"
+ },
+ {
+  "Directory": "SL_SI4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "sl_SI"
+ },
+ {
+  "Directory": "SL_SI5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "sl_SI"
+ },
+ {
+  "Directory": "STAMPS_CHS",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "STAMPS_CHT",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "STAMPS_CZE",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "STAMPS_DAN",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "STAMPS_DEU",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "STAMPS_ENU",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "STAMPS_ESP",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "STAMPS_FRA",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "STAMPS_HUN",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "STAMPS_ITA",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "STAMPS_JPN",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "STAMPS_KOR",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "STAMPS_NLD",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "STAMPS_NOR",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "STAMPS_POL",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "STAMPS_PTB",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "STAMPS_RUS",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "STAMPS_SKY",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "STAMPS_SLV",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "STAMPS_SUO",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "STAMPS_SVE",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "STAMPS_TUR",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "STAMPS_UKR",
+  "Directory_Parent": "STAMPS",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "SUO1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "SUO2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "SVE1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "SVE2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "SV_SE3",
+  "Directory_Parent": "ABBREVIATIONS1",
+  "DefaultDir": "sv_SE"
+ },
+ {
+  "Directory": "SV_SE4",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "sv_SE"
+ },
+ {
+  "Directory": "SV_SE5",
+  "Directory_Parent": "SUPPLEMENTALDICTIONARIES1",
+  "DefaultDir": "sv_SE"
+ },
+ {
+  "Directory": "System64Folder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:System64"
+ },
+ {
+  "Directory": "StartupFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:StartUp"
+ },
+ {
+  "Directory": "SystemFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:System32"
+ },
+ {
+  "Directory": "TRACKER",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "Tracker"
+ },
+ {
+  "Directory": "TR_TR1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "tr_TR"
+ },
+ {
+  "Directory": "TUR1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "TUR2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "TYPESPT",
+  "Directory_Parent": "RESOURCE",
+  "DefaultDir": "TYPESU~1|TypeSupport"
+ },
+ {
+  "Directory": "TYPESPT_UNICODE",
+  "Directory_Parent": "TYPESPT",
+  "DefaultDir": "Unicode"
+ },
+ {
+  "Directory": "TYPESPT_UNICODE_ICU",
+  "Directory_Parent": "TYPESPT_UNICODE",
+  "DefaultDir": "ICU"
+ },
+ {
+  "Directory": "TYPESPT_UNICODE_MAPPINGS",
+  "Directory_Parent": "TYPESPT_UNICODE",
+  "DefaultDir": "Mappings"
+ },
+ {
+  "Directory": "TYPESPT_UNICODE_MAPPINGS_ADOBE",
+  "Directory_Parent": "TYPESPT_UNICODE_MAPPINGS",
+  "DefaultDir": "Adobe"
+ },
+ {
+  "Directory": "TYPESPT_UNICODE_MAPPINGS_MAC",
+  "Directory_Parent": "TYPESPT_UNICODE_MAPPINGS",
+  "DefaultDir": "Mac"
+ },
+ {
+  "Directory": "TYPESPT_UNICODE_MAPPINGS_WIN",
+  "Directory_Parent": "TYPESPT_UNICODE_MAPPINGS",
+  "DefaultDir": "win"
+ },
+ {
+  "Directory": "TempFolder",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Temp"
+ },
+ {
+  "Directory": "UICUSTOMIZATION",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "UICUST~1|UICustomization"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_CHS",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "CHS"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_CHT",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "CHT"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_CZE",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "CZE"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_DAN",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "DAN"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_DEU",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "DEU"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_ENU",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "ENU"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_ESP",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "ESP"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_FRA",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "FRA"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_HUN",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "HUN"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_ITA",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "ITA"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_JPN",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "JPN"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_KOR",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "KOR"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_MEA",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "MEA"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_MEH",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "MEH"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_NAF",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "NAF"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_NLD",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "NLD"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_NOR",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "NOR"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_POL",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "POL"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_PTB",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "PTB"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_RUS",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "RUS"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_SKY",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "SKY"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_SLV",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "SLV"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_SUO",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "SUO"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_SVE",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "SVE"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_TUR",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "TUR"
+ },
+ {
+  "Directory": "UICUSTOMIZATION_UKR",
+  "Directory_Parent": "UICUSTOMIZATION",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "UITHEMES",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "UIThemes"
+ },
+ {
+  "Directory": "UKR1",
+  "Directory_Parent": "RDRAPP",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "UKR2",
+  "Directory_Parent": "ACROBAT_HTML",
+  "DefaultDir": "UKR"
+ },
+ {
+  "Directory": "UK_UA1",
+  "Directory_Parent": "DICTIONARIES1",
+  "DefaultDir": "uk_UA"
+ },
+ {
+  "Directory": "UNPACKTOOL",
+  "Directory_Parent": "PLUGINS_PREFLIGHT",
+  "DefaultDir": "UNPACK~1|UnpackTool"
+ },
+ {
+  "Directory": "USERPROFILE",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:USERPR~1|UserProfile"
+ },
+ {
+  "Directory": "VIS2K2_DIR",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "VISIO2~2|Visio2002"
+ },
+ {
+  "Directory": "VIS2K2STARTUPFOLDER",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_CHS",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "2052"
+ },
+ {
+  "Directory": "VIS2K2_CHS_STARTUP",
+  "Directory_Parent": "VIS2K2_CHS",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_CHT",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1028"
+ },
+ {
+  "Directory": "VIS2K2_CHT_STARTUP",
+  "Directory_Parent": "VIS2K2_CHT",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_DAN",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1030"
+ },
+ {
+  "Directory": "VIS2K2_DAN_STARTUP",
+  "Directory_Parent": "VIS2K2_DAN",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_DEU",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1031"
+ },
+ {
+  "Directory": "VIS2K2_DEU_STARTUP",
+  "Directory_Parent": "VIS2K2_DEU",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_ENU",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1033"
+ },
+ {
+  "Directory": "VIS2K2_ENU_STARTUP",
+  "Directory_Parent": "VIS2K2_ENU",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_ESP",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "3082"
+ },
+ {
+  "Directory": "VIS2K2_ESP_STARTUP",
+  "Directory_Parent": "VIS2K2_ESP",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_FRA",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1036"
+ },
+ {
+  "Directory": "VIS2K2_FRA_STARTUP",
+  "Directory_Parent": "VIS2K2_FRA",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_ITA",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1040"
+ },
+ {
+  "Directory": "VIS2K2_ITA_STARTUP",
+  "Directory_Parent": "VIS2K2_ITA",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_JPN",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1041"
+ },
+ {
+  "Directory": "VIS2K2_JPN_STARTUP",
+  "Directory_Parent": "VIS2K2_JPN",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_KOR",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1042"
+ },
+ {
+  "Directory": "VIS2K2_KOR_STARTUP",
+  "Directory_Parent": "VIS2K2_KOR",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_NLD",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1043"
+ },
+ {
+  "Directory": "VIS2K2_NLD_STARTUP",
+  "Directory_Parent": "VIS2K2_NLD",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_NOR",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1044"
+ },
+ {
+  "Directory": "VIS2K2_NOR_STARTUP",
+  "Directory_Parent": "VIS2K2_NOR",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_PTB",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1046"
+ },
+ {
+  "Directory": "VIS2K2_PTB_STARTUP",
+  "Directory_Parent": "VIS2K2_PTB",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_SUO",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1035"
+ },
+ {
+  "Directory": "VIS2K2_SUO_STARTUP",
+  "Directory_Parent": "VIS2K2_SUO",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2K2_SVE",
+  "Directory_Parent": "VIS2K2_DIR",
+  "DefaultDir": "1053"
+ },
+ {
+  "Directory": "VIS2K2_SVE_STARTUP",
+  "Directory_Parent": "VIS2K2_SVE",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "VIS2KFOLDER",
+  "Directory_Parent": "PDFMAKER",
+  "DefaultDir": "VISIO2~1|Visio2000"
+ },
+ {
+  "Directory": "VIS2KSTARTUPFOLDER",
+  "Directory_Parent": "VIS2KFOLDER",
+  "DefaultDir": "Startup"
+ },
+ {
+  "Directory": "WCCHROMEEXTN",
+  "Directory_Parent": "BROWSER",
+  "DefaultDir": "WCCHRO~1|WCChromeExtn"
+ },
+ {
+  "Directory": "WCFIREFOXEXTN_CHROME",
+  "Directory_Parent": "WCFIREFOXEXTN",
+  "DefaultDir": "chrome"
+ },
+ {
+  "Directory": "WCFIREFOXEXTN_COMPONENTS",
+  "Directory_Parent": "WCFIREFOXEXTN",
+  "DefaultDir": "COMPON~1|components"
+ },
+ {
+  "Directory": "WCFIREFOXEXTN_DEFAULTS",
+  "Directory_Parent": "WCFIREFOXEXTN",
+  "DefaultDir": "defaults"
+ },
+ {
+  "Directory": "WCFIREFOXEXTN_DEFAULTS_PREFERENCES",
+  "Directory_Parent": "WCFIREFOXEXTN_DEFAULTS",
+  "DefaultDir": "PREFER~1|preferences"
+ },
+ {
+  "Directory": "WCIEACTIVE_X",
+  "Directory_Parent": "ACROBAT1",
+  "DefaultDir": "WCIEAC~1|WCIEActiveX"
+ },
+ {
+  "Directory": "WCIEACTIVE_X_TRACK",
+  "Directory_Parent": "WCIEACTIVE_X",
+  "DefaultDir": "DC"
+ },
+ {
+  "Directory": "WCIEACTIVE_X_X64",
+  "Directory_Parent": "WCIEACTIVE_X_TRACK",
+  "DefaultDir": "x64"
+ },
+ {
+  "Directory": "WEBPUBLISH1",
+  "Directory_Parent": "ACROBAT",
+  "DefaultDir": "WEBPUB~1|WebPublish"
+ },
+ {
+  "Directory": "X861",
+  "Directory_Parent": "PLUG_INS_HTML2PDF",
+  "DefaultDir": "x86"
+ },
+ {
+  "Directory": "X862",
+  "Directory_Parent": "PLUG_INS",
+  "DefaultDir": "x86"
+ },
+ {
+  "Directory": "ZUGFERD",
+  "Directory_Parent": "REPORTS",
+  "DefaultDir": "ZUGFeRD"
+ },
+ {
+  "Directory": "_0053",
+  "Directory_Parent": "NL_NL3",
+  "DefaultDir": "2005"
+ },
+ {
+  "Directory": "_0054",
+  "Directory_Parent": "NL_NL4",
+  "DefaultDir": "2005"
+ },
+ {
+  "Directory": "_0055",
+  "Directory_Parent": "NL_NL5",
+  "DefaultDir": "2005"
+ },
+ {
+  "Directory": "_00610",
+  "Directory_Parent": "DE_DE5",
+  "DefaultDir": "2006"
+ },
+ {
+  "Directory": "_00611",
+  "Directory_Parent": "DE_CH5",
+  "DefaultDir": "2006"
+ },
+ {
+  "Directory": "_0066",
+  "Directory_Parent": "DE_DE3",
+  "DefaultDir": "2006"
+ },
+ {
+  "Directory": "_0067",
+  "Directory_Parent": "DE_CH3",
+  "DefaultDir": "2006"
+ },
+ {
+  "Directory": "_0068",
+  "Directory_Parent": "DE_DE4",
+  "DefaultDir": "2006"
+ },
+ {
+  "Directory": "_0069",
+  "Directory_Parent": "DE_CH4",
+  "DefaultDir": "2006"
+ },
+ {
+  "Directory": "ARM.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Directory_Parent": "ADOBE_COMMON.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "DefaultDir": "ARM"
+ },
+ {
+  "Directory": "ADOBE_COMMON.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Directory_Parent": "CommonFilesFolder",
+  "DefaultDir": "Adobe"
+ },
+ {
+  "Directory": "ARM_1.0.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Directory_Parent": "ARM.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "DefaultDir": "1.0"
+ },
+ {
+  "Directory": "INSTALLDIR.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "PrimaryVolumePath",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:Primar~1|PrimaryVolumePath"
+ },
+ {
+  "Directory": "WindowsVolume",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": ".:WinRoot"
+ },
+ {
+  "Directory": "WindowsFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "Win"
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Directory_Parent": "WindowsFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Directory_Parent": "WindowsFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "WindowsFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "Win"
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Directory_Parent": "WindowsFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "WindowsFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "Win"
+ },
+ {
+  "Directory": "System64Folder_amd64_VC.05F0B5F5_44A8_3793_976B_A4F17AECF92C",
+  "Directory_Parent": "System64Folder",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.194841A2_D0F2_3B96_9F71_05BA91BEA0FA",
+  "Directory_Parent": "SystemFolder",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.CC943011_A332_3C6E_AE5A_D28E3EC152B8",
+  "Directory_Parent": "SystemFolder.CC943011_A332_3C6E_AE5A_D28E3EC152B8",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "SystemFolder.CC943011_A332_3C6E_AE5A_D28E3EC152B8",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.E281B893_10D7_34CE_BB0E_B69D88E154A5",
+  "Directory_Parent": "SystemFolder.E281B893_10D7_34CE_BB0E_B69D88E154A5",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "SystemFolder.E281B893_10D7_34CE_BB0E_B69D88E154A5",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "SystemFolder_x86_VC.71E1EC1A_562B_3AD1_94CD_84420ED4073F",
+  "Directory_Parent": "SystemFolder.71E1EC1A_562B_3AD1_94CD_84420ED4073F",
+  "DefaultDir": "."
+ },
+ {
+  "Directory": "SystemFolder.71E1EC1A_562B_3AD1_94CD_84420ED4073F",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "SystemFolder.F1670FCA_6780_3657_9C04_AF8005AC8143",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "System"
+ },
+ {
+  "Directory": "System64Folder.DFEFC2FE_EEE6_424C_841B_D4E66F0C84A3",
+  "Directory_Parent": "TARGETDIR",
+  "DefaultDir": "System64"
+ }
+]

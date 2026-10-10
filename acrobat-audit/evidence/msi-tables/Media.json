@@ -1,0 +1,50 @@
+[
+ {
+  "DiskId": 1,
+  "LastSequence": 723,
+  "DiskPrompt": "[1]",
+  "Cabinet": "Core.cab",
+  "VolumeLabel": "ACROBAT9",
+  "Source": null
+ },
+ {
+  "DiskId": 2,
+  "LastSequence": 1014,
+  "DiskPrompt": "[1]",
+  "Cabinet": "Intermediate.cab",
+  "VolumeLabel": "ACROBAT9",
+  "Source": null
+ },
+ {
+  "DiskId": 3,
+  "LastSequence": 1229,
+  "DiskPrompt": "[1]",
+  "Cabinet": "Extras.cab",
+  "VolumeLabel": "ACROBAT9",
+  "Source": null
+ },
+ {
+  "DiskId": 4,
+  "LastSequence": 1891,
+  "DiskPrompt": "[1]",
+  "Cabinet": "Optional.cab",
+  "VolumeLabel": "ACROBAT9",
+  "Source": null
+ },
+ {
+  "DiskId": 5,
+  "LastSequence": 2341,
+  "DiskPrompt": "[1]",
+  "Cabinet": "AlfSdPack.cab",
+  "VolumeLabel": "ACROBAT9",
+  "Source": null
+ },
+ {
+  "DiskId": 6,
+  "LastSequence": 6406,
+  "DiskPrompt": "[1]",
+  "Cabinet": "Languages.cab",
+  "VolumeLabel": "ACROBAT9",
+  "Source": null
+ }
+]

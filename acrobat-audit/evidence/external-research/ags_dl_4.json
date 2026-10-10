@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://helpx.adobe.com/genuine/adobe-genuine-service.html",
+    "name": "Adobe Genuine Service",
+    "snippet": "The AGS includes an automatic uninstall feature. When you uninstall all Adobe apps from your machine, whether they are genuine or not, the AGS ...",
+    "host_name": "helpx.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://helpx.adobe.com/business/enterprise/deploy-apps-updates/deploy-packages/uninstall-cc-apps.html",
+    "name": "Uninstall Creative Cloud apps with command line | Enterprise",
+    "snippet": "Download the uninstall tool Sign in to the Admin Console, then select Packages > Tools. In the Adobe uninstall tool card, select Download, then ...",
+    "host_name": "helpx.adobe.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://helpx.adobe.com/creative-cloud/apps/troubleshoot/diagnostics-repair-tools/run-creative-cloud-cleaner-tool.html",
+    "name": "Download and run the Creative Cloud Cleaner tool",
+    "snippet": "Use the Creative Cloud Cleaner tool to fix common issues, such as removing outdated Adobe software, cleaning corrupt files, and repairing host ...",
+    "host_name": "helpx.adobe.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/unable-to-fully-uninstall-adobe-genuine-service-1632725",
+    "name": "Unable to fully uninstall Adobe Genuine Service | Community",
+    "snippet": "It's apparently missing Adobe Cleanup Utility. Here's some info on this tool: https://helpx.adobe.com/genuine/faq.html Missing:  download  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-606/how-i-can-install-adobe-genuine-service-579293",
+    "name": "How i can install Adobe Genuine Service | Community",
+    "snippet": "On the help pages you will only find the instructions for the uninstallation. use the alternative download links at page bottom here, https:// ...",
+    "host_name": "community.adobe.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/Adobe/comments/1ftqu7x/adobe_genuine_services_installs_automatically",
+    "name": "Adobe Genuine Services installs automatically - Reddit",
+    "snippet": "The following articles would help you with information on what Adobe Genuine Service is and how to uninstall it https://helpx.adobe.com/ie/ ...",
+    "host_name": "www.reddit.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://helpx.adobe.com/genuine/faq.html",
+    "name": "Adobe Genuine software FAQ | View all apps",
+    "snippet": "If you need additional help to uninstall the apps, you can use the Creative Cloud Cleaner tool. The AGS includes an automatic uninstall feature.",
+    "host_name": "helpx.adobe.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://helpx.adobe.com/download-install/apps/troubleshoot/download-failure/cc-cleaner-tool-installation-problems.html",
+    "name": "Run Creative Cloud Cleaner Tool - Adobe Help Center",
+    "snippet": "Download the Adobe Creative Cloud Cleaner tool. · Right-click the downloaded file and select Run as administrator. Missing:  Genuine  | Show results with:",
+    "host_name": "helpx.adobe.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

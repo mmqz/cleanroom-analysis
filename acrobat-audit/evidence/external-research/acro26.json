@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://community.adobe.com/questions-9/acrobat-processes-hanging-in-task-manager-1560342",
+    "name": "Acrobat Processes hanging in Task Manager - Adobe Community",
+    "snippet": "Since 2 months ago we experience something weird with Adobe reader on our hosts. Users are reporting that PDF files are not opening. Missing:  localhost  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/troubleshooting-acrobat-background-processes-and-high-cpu-usage-1278521",
+    "name": "Troubleshooting Acrobat background processes and high CPU",
+    "snippet": "Unable to launch Adobe Acrobat due to app running in background process; Multiple Adobe Acrobat processes are created in the Task Manager. Missing:  26  localhost",
+    "host_name": "community.adobe.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/acrobat-failing-to-launch-correctly-multiple-adobe-processes-stuck-in-background-1630342",
+    "name": "Acrobat Failing to Launch Correctly; Multiple Adobe Processes",
+    "snippet": "Acrobat repeatedly creates multiple background processes and then fails to launch. The only temporary fix is to manually kill all the Adobe ... Missing:  network  localhost",
+    "host_name": "community.adobe.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/acrobat-doesn-t-open-and-is-creating-lots-of-subprocesses-1561925",
+    "name": "Acrobat doesn't open and is creating lots of subprocesses",
+    "snippet": "Hello everyone,We have been experiencing issues with Adobe for some time now. Our users are working on an RDS server, and after a while they ... Missing:  localhost  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/acrobat-processes-hanging-in-task-manager-1560342/index3.html",
+    "name": "Acrobat Processes hanging in Task Manager - Adobe Community",
+    "snippet": "The issue can only be resolved by ending the Adobe processes in Task Manager and then restarting the application.icon Missing:  26  network  localhost",
+    "host_name": "community.adobe.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://helpx.adobe.com/acrobat/desktop/troubleshoot/performance-issues/acrobat-run-error.html",
+    "name": "Acrobat is not responding and shows a running instance error",
+    "snippet": "Quit Acrobat. · Press Ctrl + Shift + Esc to open Task Manager. · In the Processes tab, locate Adobe Acrobat under Apps and Background Processes. Missing:  26  network  localhost",
+    "host_name": "helpx.adobe.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/i-am-also-experiencing-the-issue-many-users-are-acrobat-will-not-launch-until-all-running-acrobat-processes-are-ended-in-task-manager-1630002",
+    "name": "I am also experiencing the issue many users are: Acrobat will",
+    "snippet": "there are actually Acrobat processes launching, in the background, and they must all be closed (end task) before the app will actually launch. ... Missing:  network  localhost",
+    "host_name": "community.adobe.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/adobe-acrobat-pro-background-process-only-does-not-launch-1304913",
+    "name": "Adobe Acrobat Pro - Background process ONLY (Does not",
+    "snippet": "Users are unable to get Acrobat to launch, but multiple Acrobat background processes will open in task manager. I've been investigating for a ... Missing:  26  network  connections  localhost",
+    "host_name": "community.adobe.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

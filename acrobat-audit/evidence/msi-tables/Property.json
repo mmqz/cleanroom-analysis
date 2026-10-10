@@ -1,0 +1,1254 @@
+[
+ {
+  "Property": "Text",
+  "Value": "0"
+ },
+ {
+  "Property": "DiskPrompt",
+  "Value": "[1]"
+ },
+ {
+  "Property": "Registration",
+  "Value": "No"
+ },
+ {
+  "Property": "UpgradeCode",
+  "Value": "{AC76BA86-0000-0000-7760-7E8A45000000}"
+ },
+ {
+  "Property": "ProductCode",
+  "Value": "{AC76BA86-1033-FFFF-7760-BC15014EA700}"
+ },
+ {
+  "Property": "bIsPro",
+  "Value": "1"
+ },
+ {
+  "Property": "AppDataFolder",
+  "Value": "DC"
+ },
+ {
+  "Property": "ALLUSERS",
+  "Value": "1"
+ },
+ {
+  "Property": "DirectoryTable100_x86.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_amd64.05F0B5F5_44A8_3793_976B_A4F17AECF92C",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.194841A2_D0F2_3B96_9F71_05BA91BEA0FA",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.CC943011_A332_3C6E_AE5A_D28E3EC152B8",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.E281B893_10D7_34CE_BB0E_B69D88E154A5",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.71E1EC1A_562B_3AD1_94CD_84420ED4073F",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_x86.F1670FCA_6780_3657_9C04_AF8005AC8143",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "DirectoryTable100_amd64.DFEFC2FE_EEE6_424C_841B_D4E66F0C84A3",
+  "Value": "DirectoryTable"
+ },
+ {
+  "Property": "APP_LANG_FROM_REG",
+  "Value": "0"
+ },
+ {
+  "Property": "DELBASIDTCA",
+  "Value": "00000"
+ },
+ {
+  "Property": "ENABLE_READER_MODE",
+  "Value": "0"
+ },
+ {
+  "Property": "RESERVED_APPNAME_PDAPP",
+  "Value": "PDApp.exe"
+ },
+ {
+  "Property": "RESERVED_APPNAME_AAMSETUP",
+  "Value": "set-up.exe"
+ },
+ {
+  "Property": "APPPATHS_LOTUS_EXE",
+  "Value": "z:\\NLNOTES.EXE"
+ },
+ {
+  "Property": "ENABLE_CACHE_FILES",
+  "Value": "YES"
+ },
+ {
+  "Property": "LAUNCH_APP",
+  "Value": "1"
+ },
+ {
+  "Property": "PDF_INTEGRATION",
+  "Value": "1"
+ },
+ {
+  "Property": "PDF_INTEGRATION_ORIGINAL",
+  "Value": "1"
+ },
+ {
+  "Property": "_WebLinkChecked",
+  "Value": "1"
+ },
+ {
+  "Property": "Cancel",
+  "Value": "0"
+ },
+ {
+  "Property": "INVALID_SERIAL_ERROR",
+  "Value": "This is not a valid serial number.  Please go back and re-enter your serial number."
+ },
+ {
+  "Property": "INSTALL_MODE",
+  "Value": "Tryout"
+ },
+ {
+  "Property": "aaa",
+  "Value": "0"
+ },
+ {
+  "Property": "ApplicationUsers",
+  "Value": "AllUsers"
+ },
+ {
+  "Property": "RadioGroup",
+  "Value": "0"
+ },
+ {
+  "Property": "FileInUseProcess",
+  "Value": "0"
+ },
+ {
+  "Property": "_IsMaintenance",
+  "Value": "Change"
+ },
+ {
+  "Property": "_IsMaintenanceDist",
+  "Value": "Reinstall"
+ },
+ {
+  "Property": "RestartManagerOption",
+  "Value": "CloseRestart"
+ },
+ {
+  "Property": "IS_SQLSERVER_USERNAME",
+  "Value": "sa"
+ },
+ {
+  "Property": "IS_SQLSERVER_AUTHENTICATION",
+  "Value": "0"
+ },
+ {
+  "Property": "FilesLabel",
+  "Value": "0"
+ },
+ {
+  "Property": "SetupType",
+  "Value": "Typical"
+ },
+ {
+  "Property": "CompleteText",
+  "Value": "0"
+ },
+ {
+  "Property": "CustomText",
+  "Value": "0"
+ },
+ {
+  "Property": "_IsSetupTypeMin",
+  "Value": "Typical"
+ },
+ {
+  "Property": "DOTNET64_LINK",
+  "Value": "http://www.microsoft.com/downloads/details.aspx?FamilyID=b44a0000-acf8-4fa1-affb-40e78d788b00&displaylang=en"
+ },
+ {
+  "Property": "Display_IsBitmapDlg",
+  "Value": "1"
+ },
+ {
+  "Property": "ENABLE_OPTIMIZATION",
+  "Value": "YES"
+ },
+ {
+  "Property": "ARPREADME",
+  "Value": "[INSTALLDIR]Readme.htm"
+ },
+ {
+  "Property": "ADMIN_INSTALL",
+  "Value": "NO"
+ },
+ {
+  "Property": "BrandName",
+  "Value": "Adobe Acrobat DC"
+ },
+ {
+  "Property": "DEFAULT_JOBOPTION",
+  "Value": "Standard"
+ },
+ {
+  "Property": "INSTALLPDFPRINTER",
+  "Value": "0"
+ },
+ {
+  "Property": "INBROWSER_HANDLER",
+  "Value": "YES"
+ },
+ {
+  "Property": "REMOVE_BLOCKING",
+  "Value": "ALL"
+ },
+ {
+  "Property": "REMOVE_ACROBAT",
+  "Value": "ALL"
+ },
+ {
+  "Property": "REMOVE_PREVIOUS",
+  "Value": "YES"
+ },
+ {
+  "Property": "SINGLECLIENTAPPMODE",
+  "Value": "1"
+ },
+ {
+  "Property": "SKIP_CEF_KILL",
+  "Value": "0"
+ },
+ {
+  "Property": "UWP_APP_HKCU_REGKEY",
+  "Value": "ADCNotificationAppx"
+ },
+ {
+  "Property": "UWP_APP_INSTALLER_NAME",
+  "Value": "ADCNotificationClient.appx"
+ },
+ {
+  "Property": "UWP_APP_PACKAGE_PREFIX",
+  "Value": "AcrobatNotificationClient"
+ },
+ {
+  "Property": "UWP_APP_PRODUCT",
+  "Value": "Acrobat\\ADCNotificationClient"
+ },
+ {
+  "Property": "DISABLE_DESKTOPSHORTCUT_AAM",
+  "Value": "1"
+ },
+ {
+  "Property": "Install_Subscription",
+  "Value": "Use subscription"
+ },
+ {
+  "Property": "ProductName",
+  "Value": "Adobe Acrobat DC (64-bit)"
+ },
+ {
+  "Property": "ProductVersion",
+  "Value": "21.001.20135"
+ },
+ {
+  "Property": "REGIONAL_LIST",
+  "Value": "ENU"
+ },
+ {
+  "Property": "ADOBE_ACROBAT_DOCUMENT",
+  "Value": "Adobe Acrobat Document"
+ },
+ {
+  "Property": "ALFSDPACK_HASH",
+  "Value": "LvpZ0rSWsuXJZUEm1DGGW9uivItpGAnDXu44e/454jQ="
+ },
+ {
+  "Property": "ALLOW_LOCKDOWN_BROWSE",
+  "Value": "NO"
+ },
+ {
+  "Property": "ALLOW_LOCKDOWN_MEDIA",
+  "Value": "NO"
+ },
+ {
+  "Property": "ARMCheckFrequency",
+  "Value": "72"
+ },
+ {
+  "Property": "ARMManifestLocation",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/AcrobatDCManifest.msi"
+ },
+ {
+  "Property": "ARMManifestLocation2",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/AcrobatDCManifest2.msi"
+ },
+ {
+  "Property": "ARMManifestLocation3",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/AcrobatSCAManifest3.msi"
+ },
+ {
+  "Property": "ARMOnDemand_Redirection",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/ArmOnDemand3.msi"
+ },
+ {
+  "Property": "ARM_PROPERTIES",
+  "Value": "DISABLE_FIU_CHECK=1##IGNORE_TRACK_INTEROP=YES##MIGRATE_FEATURES=YES"
+ },
+ {
+  "Property": "ARM_Update",
+  "Value": "https://armmf.adobe.com/arm-updates/win/ARM-NEXT/ARM_update/AdobeARM.msi"
+ },
+ {
+  "Property": "ARM_Update2",
+  "Value": "https://armmf.adobe.com/arm-updates/win/ARM-NEXT/ARM_update/AdobeARM2.msi"
+ },
+ {
+  "Property": "ARM_Update3",
+  "Value": "https://armmf.adobe.com/arm-updates/win/ARM-NEXT/ARM_update/AdobeARM3.msi"
+ },
+ {
+  "Property": "ARPCOMMENTS",
+  "Value": "\n\t\t\t"
+ },
+ {
+  "Property": "ARPCONTACT",
+  "Value": "Customer Support"
+ },
+ {
+  "Property": "ARPEstimatedSize",
+  "Value": "3061841"
+ },
+ {
+  "Property": "ARPHELPLINK",
+  "Value": "http://www.adobe.com/support/main.html"
+ },
+ {
+  "Property": "ARPHELPTELEPHONE",
+  "Value": "\n\t\t\t"
+ },
+ {
+  "Property": "ARPNOREPAIR",
+  "Value": "1"
+ },
+ {
+  "Property": "ARPPRODUCTICON",
+  "Value": "_SC_Acrobat.ico"
+ },
+ {
+  "Property": "ARPURLINFOABOUT",
+  "Value": "http://www.adobe.com"
+ },
+ {
+  "Property": "ARPURLUPDATEINFO",
+  "Value": "http://helpx.adobe.com/acrobat.html"
+ },
+ {
+  "Property": "AcroLEID_Cont",
+  "Value": "V7{}AcrobatCont-12-Win-GM"
+ },
+ {
+  "Property": "AcroLEID_ESR",
+  "Value": "V7{}AcrobatESR-17-Win-GM"
+ },
+ {
+  "Property": "AcrobatProDefaultProgramDesc",
+  "Value": "is the complete PDF solution for working anywhere. Create, edit and sign PDFs from your computer or mobile device;  Edit PDFs and scanned documents; Prevent others from copying or editing sensitive information; Replace ink signatures with electronic signatures; Send, track and confirm receipt of important documents."
+ },
+ {
+  "Property": "AcrobatStdDefaultProgramDesc",
+  "Value": "simplifies your everyday tasks. Easily create and share basic PDF files that can be viewed reliably on computers, tablets and smartphones; Edit PDF files intuitively within Acrobat or convert them to Word or Excel formats; Electronically sign documents yourself or get them signed by others"
+ },
+ {
+  "Property": "AcrobatUpgradeCodes",
+  "Value": "{AC76BA86-0000-0000-7760-7E8A45000000};{AC76BA86-0000-0000-BA7E-7E8A45000000}"
+ },
+ {
+  "Property": "ActivationUninstallType",
+  "Value": "Standard"
+ },
+ {
+  "Property": "AdminProperties",
+  "Value": "ADMIN_INSTALL"
+ },
+ {
+  "Property": "AdobeAcceptEULA",
+  "Value": "No"
+ },
+ {
+  "Property": "AdobePDFPrinterProps",
+  "Value": "PRINTER_NOT_INSTALLED;AS_PRINTER_DRIVER;AS_PRINTER;AS_PRINTER;AS_PRINTER_DRIVER_64"
+ },
+ {
+  "Property": "AdobeRIBSUninstallSupport",
+  "Value": "1"
+ },
+ {
+  "Property": "AgreeToLicense",
+  "Value": "Yes"
+ },
+ {
+  "Property": "ApplicationList",
+  "Value": "0"
+ },
+ {
+  "Property": "AppsInUseUnknownAcrobatApps",
+  "Value": "Applications that are using Adobe Reader or Adobe Acrobat"
+ },
+ {
+  "Property": "BDK",
+  "Value": "0"
+ },
+ {
+  "Property": "BLOCK_APP_TIMEOUT",
+  "Value": "300"
+ },
+ {
+  "Property": "BLOCK_ENTRYPOINT_LOGGING",
+  "Value": "0"
+ },
+ {
+  "Property": "BlockingProduct",
+  "Value": "NONE"
+ },
+ {
+  "Property": "BrandNameMajorVer",
+  "Value": "Adobe Acrobat DC"
+ },
+ {
+  "Property": "Browser_Integration",
+  "Value": "1"
+ },
+ {
+  "Property": "CHROME_EXT_ID",
+  "Value": "efaidnbmnnnibpcajpcglclefindmkaj"
+ },
+ {
+  "Property": "CORE_HASH",
+  "Value": "+TVZA6B8TkF0hG5ixNJBmmH0Ikxjlsdngq94SSDA+kQ="
+ },
+ {
+  "Property": "CROSSTRACK_SERIAL_ERROR",
+  "Value": "You have entered an Acrobat DC Classic serial.  To use this serial, you need to install the Acrobat DC classic build. Go to www.adobe.com/go/getacrobatdc to download Acrobat Classic."
+ },
+ {
+  "Property": "ChannelName",
+  "Value": "Consumer"
+ },
+ {
+  "Property": "CoExProduct",
+  "Value": "None"
+ },
+ {
+  "Property": "CreateUserChoiceCondition",
+  "Value": "(Not REMOVE=\"ALL\") AND (FORCE_CREATE_OWNERSHIPKEY OR (Not Installed And DEFAULT_VERB~=\"Open\" AND OWNERSHIP_STATE<>\"0\") OR (Installed AND PATCH AND (Not TOOK_OWNERSHIP_AFTER_UPGRADE) AND  IS_MS_OWNER) OR (CURRENT_PDFOWNER_PROGID=\"\" OR Not CURRENT_PDFOWNER_PROGID))"
+ },
+ {
+  "Property": "DEACTIVATE",
+  "Value": "YES"
+ },
+ {
+  "Property": "DEFAULT_ATTACHMENT_WHITELIST",
+  "Value": "version:1|.ade:3|.adp:3|.app:3|.arc:3|.arj:3|.asp:3|.bas:3|.bat:3|.bz:3|.bz2:3|.cab:3|.chm:3|.class:3|.cmd:3|.com:3|.command:3|.cpl:3|.crt:3|.csh:3|.desktop:3|.dll:3|.exe:3|.fxp:3|.gz:3|.hex:3|.hlp:3|.hqx:3|.hta:3|.inf:3|.ini:3|.ins:3|.isp:3|.its:3|.job:3|.js:3|.jse:3|.ksh:3|.lnk:3|.lzh:3|.mad:3|.maf:3|.mag:3|.mam:3|.maq:3|.mar:3|.mas:3|.mat:3|.mau:3|.mav:3|.maw:3|.mda:3|.mdb:3|.mde:3|.mdt:3|.mdw:3|.mdz:3|.msc:3|.msi:3|.msp:3|.mst:3|.ocx:3|.ops:3|.pcd:3|.pi:3|.pif:3|.prf:3|.prg:3|.pst:3|.rar:3|.reg:3|.scf:3|.scr:3|.sct:3|.sea:3|.shb:3|.shs:3|.sit:3|.tar:3|.taz:3|.tgz:3|.tmp:3|.url:3|.vb:3|.vbe:3|.vbs:3|.vsmacros:3|.vss:3|.vst:3|.vsw:3|.webloc:3|.ws:3|.wsc:3|.wsf:3|.wsh:3|.z:3|.zip:3|.zlo:3|.zoo:3|.pdf:2|.fdf:2|.jar:3|.pkg:3|.tool:3|.term:3|.acm:3|.asa:3|.aspx:3|.ax:3|.ad:3|.application:3|.asx:3|.cer:3|.cfg:3|.chi:3|.class:3|.clb:3|.cnt:3|.cnv:3|.cpx:3|.crx:3|.der:3|.drv:3|.fon:3|.gadget:3|.grp:3|.htt:3|.ime:3|.jnlp:3|.local:3|.manifest:3|.mmc:3|.mof:3|.msh:3|.msh1:3|.msh2:3|.mshxml:3|.msh1xml:3|.msh2xml:3|.mui:3|.nls:3|.pl:3|.perl:3|.plg:3|.ps1:3|.ps2:3|.ps1xml:3|.ps2xml:3|.psc1:3|.psc2:3|.py:3|.pyc:3|.pyo:3|.pyd:3|.rb:3|.sys:3|.tlb:3|.tsp:3|.xbap:3|.xnk:3|.xpi:3|.air:3|.appref-ms:3|.desklink:3|.glk:3|.library-ms:3|.mapimail:3|.mydocs:3|.sct:3|.search-ms:3|.searchConnector-ms:3|.vxd:3|.website:3|.zfsendtotarget:3"
+ },
+ {
+  "Property": "DEFAULT_LAUNCH_URL",
+  "Value": "version:2|shell:3|hcp:3|ms-help:3|ms-its:3|ms-itss:3|its:3|mk:3|mhtml:3|help:3|disk:3|afp:3|disks:3|telnet:3|ssh:3|acrobat:2|mailto:2|file:1|rlogin:3|javascript:4|data:3|jar:3|vbscript:3"
+ },
+ {
+  "Property": "DEFAULT_UPDATE_MODE",
+  "Value": "3"
+ },
+ {
+  "Property": "DEFAULT_VERB",
+  "Value": "Open"
+ },
+ {
+  "Property": "DISABLE_BROWSER_INTEGRATION",
+  "Value": "NO"
+ },
+ {
+  "Property": "DISABLE_SUBSCRIPTION",
+  "Value": "NO"
+ },
+ {
+  "Property": "DV",
+  "Value": "Consumer"
+ },
+ {
+  "Property": "DWUSINTERVAL",
+  "Value": "30"
+ },
+ {
+  "Property": "DWUSLINK",
+  "Value": "CEEC27D809AC97A8AEAC17A84E9C978F999BC08F69BBF088CEBB97D8E9CC97B8CE1C376FD9AC"
+ },
+ {
+  "Property": "DefaultUIFont",
+  "Value": "Tahoma8"
+ },
+ {
+  "Property": "DefragResetProgress",
+  "Value": "No"
+ },
+ {
+  "Property": "DescriptionLabel",
+  "Value": "0"
+ },
+ {
+  "Property": "DialogCaption",
+  "Value": "Adobe Acrobat Next - Setup"
+ },
+ {
+  "Property": "DisallowRunFromSource",
+  "Value": "1"
+ },
+ {
+  "Property": "DisplayNameCustom",
+  "Value": "Custom"
+ },
+ {
+  "Property": "DisplayNameMinimal",
+  "Value": "Minimal"
+ },
+ {
+  "Property": "DisplayNameTypical",
+  "Value": "Typical"
+ },
+ {
+  "Property": "Dist_Unsupported_Install",
+  "Value": "Adobe PDF Creation Add-On 2015 cannot be installed on its own. Please initiate the installation through the product which shipped Adobe PDF Creation Add-On 2015"
+ },
+ {
+  "Property": "ERROR_ACROELEMENTS_INSTALLED",
+  "Value": "The installer detected that you have Acrobat Elements on your system.  You must uninstall the older version first before installing this version."
+ },
+ {
+  "Property": "ERROR_BASE_OVER_PRO",
+  "Value": "Setup has detected that you already have a more functional product installed.  Setup will now terminate."
+ },
+ {
+  "Property": "ERROR_CANNOT_OPTIMIZE_DISK",
+  "Value": "NOTE: Installation was successful. However, because your hard drive is fragmented, this application may not be able to launch as quickly as possible. \n\nTo optimize performance, please defragment your hard drive and then repair this application under Add or Remove Programs in the Control Panel.\n\nPlease see the ReadMe file installed in your Programs Folder for more information."
+ },
+ {
+  "Property": "ERROR_DEFRAG_ADTEMPLATE",
+  "Value": "Completed [1]% of process"
+ },
+ {
+  "Property": "ERROR_DEFRAG_MSG",
+  "Value": "Optimizing performance ..."
+ },
+ {
+  "Property": "ERROR_NEWER_OVER_OLDER_ABORT",
+  "Value": "The Installer has encountered the following older Adobe product on your computer:\n\n[BlockingProduct]\n"
+ },
+ {
+  "Property": "ERROR_NO_ADMIN",
+  "Value": "You do not have sufficient privileges to run this installer.  Setup will now terminate."
+ },
+ {
+  "Property": "ERROR_OLDER_OVER_NEWER",
+  "Value": "Setup has detected that you already have a more functional product installed.  Setup will now terminate."
+ },
+ {
+  "Property": "ERROR_OLDER_OVER_NEWER_2",
+  "Value": "You have [OLDER_OVER_NEWER_PRODUCT_NAME] already installed. Please uninstall that product before proceeding with this installation."
+ },
+ {
+  "Property": "ERROR_OLD_ACROBAT_INSTALLED",
+  "Value": "The installer detected that you have an older version of Acrobat on your system.  You must uninstall the older version first before installing this version."
+ },
+ {
+  "Property": "ERROR_PRINTER_SETUP",
+  "Value": "0"
+ },
+ {
+  "Property": "ERROR_PRO_OVER_BASE_ABORT",
+  "Value": "The Installer requires that you uninstall [BlockingProduct] before continuing this installation, in order to avoid application conflict.  Please follow these steps:\n\n1) Cancel this Installer\n2) Go to the \"Programs and Features\" Control Panel, located at\n      Start: Settings: Control Panel\n3) Highlight the product [BlockingProduct] \n      and click Remove\n4) Relaunch this Installer"
+ },
+ {
+  "Property": "EULA_ACCEPT",
+  "Value": "NO"
+ },
+ {
+  "Property": "EXEC_MENU_WHITELIST",
+  "Value": "Close|GeneralInfo|Quit|FirstPage|PrevPage|NextPage|LastPage|ActualSize|FitPage|FitWidth|FitHeight|SinglePage|OneColumn|TwoPages|TwoColumns|ZoomViewIn|ZoomViewOut|ShowHideBookmarks|ShowHideThumbnails|Print|GoToPage|ZoomTo|GeneralPrefs|SaveAs|FullScreenMode|OpenOrganizer|Scan|Web2PDF:OpnURL|AcroSendMail:SendMail|Spelling:Check Spelling|PageSetup|Find|FindSearch|GoBack|GoForward|FitVisible|ShowHideArticles|ShowHideFileAttachment|ShowHideAnnotManager|ShowHideFields|ShowHideOptCont|ShowHideModelTree|ShowHideSignatures|InsertPages|ExtractPages|ReplacePages|DeletePages|CropPages|RotatePages|AddFileAttachment|FindCurrentBookmark|BookmarkShowLocation|GoBackDoc|GoForwardDoc|DocHelpUserGuide|HelpReader|rolReadPage|HandMenuItem|ZoomDragMenuItem|CollectionPreview|CollectionHome|CollectionDetails|CollectionShowRoot|&Pages|Co&ntent|&Forms|Action &Wizard|Recognize &Text|P&rotection|&Sign && Certify|Doc&ument Processing|Print Pro&duction|Ja&vaScript|&Accessibility|Analy&ze|&Annotations|D&rawing Markups|Revie&w"
+ },
+ {
+  "Property": "EXTRAS_HASH",
+  "Value": "4qjX8LhK1oc/xsyb4Nj+qSdNU30jba7ZIJv6i+YFn2A="
+ },
+ {
+  "Property": "Elevated",
+  "Value": "1"
+ },
+ {
+  "Property": "EmbdUI",
+  "Value": "1"
+ },
+ {
+  "Property": "EnablePDFMakerIntergrationDisplay",
+  "Value": "1"
+ },
+ {
+  "Property": "ErrorDialog",
+  "Value": "SetupError"
+ },
+ {
+  "Property": "ErrorUnsupportedOS",
+  "Value": "This application cannot be installed on this operating system. Setup will now terminate. Please refer to the minimum system requirements at http://www.adobe.com/go/acrobat_system_reqs. "
+ },
+ {
+  "Property": "ErrorUnsupportedOS_1",
+  "Value": "This application cannot be installed on this operating system"
+ },
+ {
+  "Property": "ErrorUnsupportedOS_2",
+  "Value": "Setup will now terminate. Please refer to the minimum system requirements at http://www.adobe.com/go/acrobat_system_reqs. "
+ },
+ {
+  "Property": "Error_ALMStatus_Initialization",
+  "Value": "A required deactivation library has not been initialized."
+ },
+ {
+  "Property": "Error_ALMStatus_NoMemAlloc",
+  "Value": "Unable to allocate enough memory to complete the operation."
+ },
+ {
+  "Property": "Error_ALMStatus_OK",
+  "Value": "The operation completed successfully."
+ },
+ {
+  "Property": "EulaAgreementRequirement",
+  "Value": "0"
+ },
+ {
+  "Property": "Eula_accept_term",
+  "Value": "0"
+ },
+ {
+  "Property": "FORCE_DEACTIVATION",
+  "Value": "0"
+ },
+ {
+  "Property": "HIGH_QUALITY_PRINT",
+  "Value": "High Quality Print"
+ },
+ {
+  "Property": "HigherpDistInstalledBody",
+  "Value": "Setup has detected that you already have a higher version product-\"Adobe PDF creation Add-On [PDIST_INSTALLED_VERSION]\" installed . Setup will now terminate."
+ },
+ {
+  "Property": "HigherpDistInstalledHeader",
+  "Value": "[BrandName] - Setup"
+ },
+ {
+  "Property": "HotFix64_Link",
+  "Value": "http://www.adobe.com/go/ms_kb930627"
+ },
+ {
+  "Property": "IGNORE_INTEROP_REQS",
+  "Value": "NO"
+ },
+ {
+  "Property": "INSTALLLEVEL",
+  "Value": "100"
+ },
+ {
+  "Property": "INTERMEDIATE_HASH",
+  "Value": "LKNkO31I/UBiu9+GMLOLWSylvcsfExhSNEuRXZiOngA="
+ },
+ {
+  "Property": "INVALID_SERIAL_STR",
+  "Value": "This is not a valid serial number.  Please go back and re-enter your serial number."
+ },
+ {
+  "Property": "ISVROOT_PORT_NO",
+  "Value": "0"
+ },
+ {
+  "Property": "IS_COMPLUS_PROGRESSTEXT_COST",
+  "Value": "Costing COM+ application: [1]"
+ },
+ {
+  "Property": "IS_COMPLUS_PROGRESSTEXT_INSTALL",
+  "Value": "Installing COM+ application: [1]"
+ },
+ {
+  "Property": "IS_COMPLUS_PROGRESSTEXT_UNINSTALL",
+  "Value": "Uninstalling COM+ application: [1]"
+ },
+ {
+  "Property": "IS_PROGMSG_TEXTFILECHANGS_REPLACE",
+  "Value": "Replacing %s with %s in %s..."
+ },
+ {
+  "Property": "IS_PROGMSG_XML_COSTING",
+  "Value": "Costing XML files..."
+ },
+ {
+  "Property": "IS_PROGMSG_XML_CREATE_FILE",
+  "Value": "Creating XML file %s..."
+ },
+ {
+  "Property": "IS_PROGMSG_XML_FILES",
+  "Value": "Performing XML file changes..."
+ },
+ {
+  "Property": "IS_PROGMSG_XML_REMOVE_FILE",
+  "Value": "Removing XML file %s..."
+ },
+ {
+  "Property": "IS_PROGMSG_XML_ROLLBACK_FILES",
+  "Value": "Rolling back XML file changes..."
+ },
+ {
+  "Property": "IS_PROGMSG_XML_UPDATE_FILE",
+  "Value": "Updating XML file %s..."
+ },
+ {
+  "Property": "InstallAppsProps",
+  "Value": "APPPATHS_LOTUS_EXE;VCRT64;APPPATHS_OUTLOOK_EXE;APPPATHS_ACAD_EXE;APPPATHS_POWERPOINT_EXE;APPPATHS_WORD_EXE;APPPATHS_EXCEL_EXE;NETSCAPE7_EXE;VISIO2K2PATH;VISIO2KPATH;VISIO2K2EXE;VISIO2KEXE;VISIO2KVERSION;APPPATHS_VISIO32_EXE;APPPATHS_VISIO_EXE;AAM_SETUP_PATH_ALLUSER;AAM_SETUP_PATH_PERUSER"
+ },
+ {
+  "Property": "InstallChoice",
+  "Value": "AR"
+ },
+ {
+  "Property": "Install_Trial",
+  "Value": "Use Trial or Subscription or Named user license"
+ },
+ {
+  "Property": "InstalledFile",
+  "Value": "0"
+ },
+ {
+  "Property": "InstallerProps",
+  "Value": "UILevel;ACTION;PATCH;TRANSFORM;REMOVE_PREVIOUS;REGISTRATION_SUPPRESS;LANG_LIST;REBOOT;Privileged;MsiRunningElevated;UserLanguageID;INSTALL_MODE;ENABLE_OPTIMIZATION;SUPPRESS_APP_LAUNCH;DISABLE_BROWSER_INTEGRATION;IGNORE_INTEROP_REQS;EULA_ACCEPT;RebootYesNo;ReplacedInUseFiles;ProductVersion;ProductLanguage;AAM_DESKTOPSHORTCUT_EXISTS;PRESERIALIZATIONFILEPATH;SUITEMODE;REMOVE;ADDLOCAL;ProductLocale;DEACTIVATE;REINSTALL;REINSTALLMODE;DefragStatus;Install_Trial;MULSERIAL;LANG_LIST_SERIAL;DISABLEDESKTOPSHORTCUT;UPDATE_MODE;ProductCode"
+ },
+ {
+  "Property": "IsMinIE_Message",
+  "Value": " requires Internet Explorer 7.0 or greater.  Please visit www.microsoft.com to upgrade Internet Explorer."
+ },
+ {
+  "Property": "IsUpgrade",
+  "Value": "0"
+ },
+ {
+  "Property": "JAPAN",
+  "Value": "(Japan)"
+ },
+ {
+  "Property": "KBDOCLINK_ERROR_INVDRIVE",
+  "Value": "http://kb2.adobe.com/cps/404/kb404946.html"
+ },
+ {
+  "Property": "LANGUAGES_HASH",
+  "Value": "b6G3JMKITXpi2CNWYRnWoQQm9gLsNzv7+nDGzlf9ZEQ="
+ },
+ {
+  "Property": "LANG_LIST_Default",
+  "Value": "cs_CZ,da_DK,de_DE,en_AE,en_IL,en_US,es_ES,fi_FI,fr_FR,fr_MA,hu_HU,it_IT,ja_JP,ko_KR,nb_NO,nl_NL,pl_PL,pt_BR,ru_RU,sk_SK,sl_SI,sv_SE,tr_TR,uk_UA,zh_CN,zh_TW"
+ },
+ {
+  "Property": "LANG_LIST_EXCEPTION",
+  "Value": "0"
+ },
+ {
+  "Property": "LANG_SEL_DEFAULT",
+  "Value": "ENU"
+ },
+ {
+  "Property": "LOTUS_INSTALLED",
+  "Value": "NO"
+ },
+ {
+  "Property": "LangListMismatchError",
+  "Value": "LANG_LIST has some locales which does not match with the locale of serial number."
+ },
+ {
+  "Property": "LaunchErrorText",
+  "Value": "Acrobat could not be launched at this time. You can launch it from the desktop shortcut or the program menu."
+ },
+ {
+  "Property": "MAGAZINEADJPN",
+  "Value": "MAGAZINE Ad 2006 (Japan)"
+ },
+ {
+  "Property": "MSIFASTINSTALL",
+  "Value": "7"
+ },
+ {
+  "Property": "MSIRESTARTMANAGERCONTROL",
+  "Value": "Disable"
+ },
+ {
+  "Property": "MachinePoliciesProps",
+  "Value": "TransformsSecure;TransformsAtSource;DisablePatch;AllowLockdownPatch;DisableLUAPatching;DisableFlyWeightPatching;DisableMsi;AlwaysInstallElevated"
+ },
+ {
+  "Property": "ManifestURL",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/ArmManifest.msi"
+ },
+ {
+  "Property": "ManifestURL2",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/ArmManifest2.msi"
+ },
+ {
+  "Property": "ManifestURL3",
+  "Value": "${Root.Consumer.ARMSelfUpdateManifest3.Acrobat}"
+ },
+ {
+  "Property": "Manufacturer",
+  "Value": "Adobe"
+ },
+ {
+  "Property": "NewFilesActionText",
+  "Value": "File:      [1] \nSize:     [6] bytes \nFolder: [9]"
+ },
+ {
+  "Property": "NewRegistryActionText",
+  "Value": "Key:    [1]\nName: [2]\nValue: [3]"
+ },
+ {
+  "Property": "OLE_VERB_OPEN",
+  "Value": "&Open,0,2"
+ },
+ {
+  "Property": "OPTIONAL_HASH",
+  "Value": "mTSjvjvIL/iwlhOxk+iG9MQhTwJByGq637isy5b0HEw="
+ },
+ {
+  "Property": "OVERSIZED_PAGES",
+  "Value": "Oversized Pages"
+ },
+ {
+  "Property": "OpenWith",
+  "Value": "Open with Adobe Acrobat DC"
+ },
+ {
+  "Property": "Ownership_ChkBox",
+  "Value": "Make [BrandName] my default PDF viewer"
+ },
+ {
+  "Property": "Ownership_ChkBox_Win10",
+  "Value": "Make [BrandName] my default PDF viewer for browsing and file preview"
+ },
+ {
+  "Property": "PDFOwnershipProps",
+  "Value": "PDF_INTEGRATION;IS_CURRENT_PDFOWNER;DEFAULT_VERB;LEAVE_PDFOWNERSHIP;OWNERSHIP_STATE"
+ },
+ {
+  "Property": "PENDINGOPERATION",
+  "Value": "0"
+ },
+ {
+  "Property": "PIDTemplate",
+  "Value": "12345<###-%%%%%%%>@@@@@"
+ },
+ {
+  "Property": "PRESS_QUALITY",
+  "Value": "Press Quality"
+ },
+ {
+  "Property": "PRINTERINFO2_PCOMMENT",
+  "Value": "Creates Adobe PDF"
+ },
+ {
+  "Property": "PRINTERINFO2_PLOCATION",
+  "Value": "My Documents"
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEAPPPOOL",
+  "Value": "Creating application pool %s"
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEAPPPOOLS",
+  "Value": "Creating application Pools..."
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEVROOT",
+  "Value": "Creating IIS virtual directory %s"
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEVROOTS",
+  "Value": "Creating IIS virtual directories..."
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEWEBSERVICEEXTENSION",
+  "Value": "Creating web service extension"
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEWEBSERVICEEXTENSIONS",
+  "Value": "Creating web service extensions..."
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEWEBSITE",
+  "Value": "Creating IIS website %s"
+ },
+ {
+  "Property": "PROGMSG_IIS_CREATEWEBSITES",
+  "Value": "Creating IIS websites..."
+ },
+ {
+  "Property": "PROGMSG_IIS_EXTRACT",
+  "Value": "Extracting information for IIS virtual directories..."
+ },
+ {
+  "Property": "PROGMSG_IIS_EXTRACTDONE",
+  "Value": "Extracted information for IIS virtual directories..."
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEAPPPOOL",
+  "Value": "Removing application pool"
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEAPPPOOLS",
+  "Value": "Removing application pools..."
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVESITE",
+  "Value": "Removing web site at port %d"
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEVROOT",
+  "Value": "Removing IIS virtual directory %s"
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEVROOTS",
+  "Value": "Removing IIS virtual directories..."
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEWEBSERVICEEXTENSION",
+  "Value": "Removing web service extension"
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEWEBSERVICEEXTENSIONS",
+  "Value": "Removing web service extensions..."
+ },
+ {
+  "Property": "PROGMSG_IIS_REMOVEWEBSITES",
+  "Value": "Removing IIS websites..."
+ },
+ {
+  "Property": "PROGMSG_IIS_ROLLBACKAPPPOOLS",
+  "Value": "Rolling back application pools..."
+ },
+ {
+  "Property": "PROGMSG_IIS_ROLLBACKVROOTS",
+  "Value": "Rolling back virtual directory and web site changes..."
+ },
+ {
+  "Property": "PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS",
+  "Value": "Rolling back web service extensions..."
+ },
+ {
+  "Property": "PreviousFileTypesOwnerKey",
+  "Value": "Software\\Adobe\\PDF Owner\\PreviousOwner"
+ },
+ {
+  "Property": "ProductFamilyCode",
+  "Value": "{AC76BA86-0000-0000-0000-000000000000}"
+ },
+ {
+  "Property": "ProductID",
+  "Value": "16"
+ },
+ {
+  "Property": "ProductLanguage",
+  "Value": "1033"
+ },
+ {
+  "Property": "ProductLocale",
+  "Value": "0"
+ },
+ {
+  "Property": "ProgressType0",
+  "Value": "install"
+ },
+ {
+  "Property": "ProgressType1",
+  "Value": "Installing"
+ },
+ {
+  "Property": "ProgressType2",
+  "Value": "installed"
+ },
+ {
+  "Property": "ProgressType3",
+  "Value": "installs"
+ },
+ {
+  "Property": "REGISTRATION_SUPPRESS",
+  "Value": "NO"
+ },
+ {
+  "Property": "REG_2018_URI_HANDLER",
+  "Value": "\"[ACROBAT]Acrobat.exe\" /u \"%1\""
+ },
+ {
+  "Property": "REG_2018_URI_HANDLER_DDE",
+  "Value": "AcroViewA"
+ },
+ {
+  "Property": "REG_2018_URI_HANDLER_ICON",
+  "Value": "[ACROBAT]Acrobat.exe"
+ },
+ {
+  "Property": "REG_URI_HANDLER",
+  "Value": "\"[ACROBAT]Acrobat.exe\" /u \"%1\""
+ },
+ {
+  "Property": "REMOVE_A_CURRENT",
+  "Value": "ALL"
+ },
+ {
+  "Property": "Radio",
+  "Value": "Verify"
+ },
+ {
+  "Property": "ReadmeHtml",
+  "Value": "Readme.htm"
+ },
+ {
+  "Property": "RebootYesNo",
+  "Value": "Yes"
+ },
+ {
+  "Property": "RegistryHiveName",
+  "Value": "DC"
+ },
+ {
+  "Property": "ReinstallModeText",
+  "Value": "omus"
+ },
+ {
+  "Property": "RemoveFilesActionText",
+  "Value": "File:      [1]\n\nFolder:  [9]"
+ },
+ {
+  "Property": "RemoveOK",
+  "Value": "No"
+ },
+ {
+  "Property": "RunTimeProperties",
+  "Value": "CACHE_DIR;UPDATE_DIR;ProductName;OriginalDatabase;REMOVE;Installed;ACROBAT;INSTALLDIR;ISX_SERIALNUMBER;LOTUS_DLL_PATH;ProductCode;ProductLanguage;SUITEMODE;SourceDir;UILevel;SetupCacheExport;ALLUSERS;REINSTALLMODE;PLUG_INS;SUPPORTDIR;ProductVersion;EULA_ACCEPT;REGISTRATION_SUPPRESS;ICONS_FOLDER;DefragResetProgress;COLOR_FILES;WindowsFolder;TempFolder;CommonFilesFolder;ESIVGPU;ISX_ENCYPTEDSERIAL;A9_CACHEPCD_SAVED;DEFAULT_VERB;IS_CURRENT_PDFOWNER;ACTIVEX1;LANG_LIST_SERIAL;INSTALLMAJORVERSION;CWProvXMLFile;PRESERIALIZATIONFILEPATH;VersionNT;VersionNT64;INSTALL_MODE;SystemFolder;CURRENT_PDFOWNER_PROGID;PRODUCT_INSTALL_FLAVOR;ProductName_PRO;ProductName_STD;PDFMAKER_AUTOCAD_2013_64;PDFMAKER_AUTOCAD_2014_64;DV;RegistryHiveName;ChannelName;ARM_PROPERTIES;ARM_EXECUTION;REMOVE_PREVIOUS_ACROBAT;INSTALLED_ACROBAT;IS_SEC_INSTALL;IS_SEC_REPAIR_REQ;TerminateProcessList;MIGRATE_FEATURES;PDFMAKER_AUTOCAD_2015_64;ESIVEMULOV;REG_URI_HANDLER;REG_URI_HANDLER_PREV;TOOK_OWNERSHIP_AFTER_UPGRADE;WIN10TH2_OR_ABOVE;IS_MS_OWNER;IS_MY_USERCHOICE_KEY;PATCH;ISWINDOWS10;CHROME_JSON;ROAMIDENTITY;ROAMLICENSING;IS_COEX_REPAIR;DO_COEX_LAUNCH_REPAIR;ARPEstimatedSize;REG_2018_URI_HANDLER;REG_2018_URI_HANDLER_ICON;REG_2018_URI_HANDLER_DDE;SIDELOADING_PREF;UWP_APPX_INSTALLED;UWP_APP_INSTALLER_NAME;UWP_APP_PACKAGE_FULLNAME;UWP_APP_PRODUCT;UWP_APP_HKCU_BASEPATH;UWP_APP_INSTALLER_VERSION;PDFMAKER_AUTOCAD_2018_64;SINGLECLIENTAPPMODE;PDFMAKER_AUTOCAD_2019_64;SKIP_WEBRCS_REINSTALL;TRANSITION_INSTALL_MODE;SKIP_CEF_KILL;USER_SID;UWP_APP_HKCU_REGKEY;SCA_PACKAGE_LEVEL;CORE_HASH;INTERMEDIATE_HASH;EXTRAS_HASH;LANGUAGES_HASH;OPTIONAL_HASH;ALFSDPACK_HASH;FORCE_KILL;ENABLE_READER_MODE;DISABLE_OPTIONAL_FEATURE"
+ },
+ {
+  "Property": "SCA_PACKAGE_LEVEL",
+  "Value": "0"
+ },
+ {
+  "Property": "SKIP_DEACTIVATION",
+  "Value": "0"
+ },
+ {
+  "Property": "SMALLEST_FILE_SIZE",
+  "Value": "Smallest File Size"
+ },
+ {
+  "Property": "STANDARD",
+  "Value": "Standard"
+ },
+ {
+  "Property": "STORE_URL",
+  "Value": "http://www.adobe.com/go/Acrobat8_Standard_try_deny"
+ },
+ {
+  "Property": "SUPPORT_COEX",
+  "Value": "PDFMaker"
+ },
+ {
+  "Property": "SUPPRESS_APP_LAUNCH",
+  "Value": "No"
+ },
+ {
+  "Property": "SecureCustomProperties",
+  "Value": "AAM_DESKTOPSHORTCUT_EXISTS;AAM_PROGRAMMENUENTRY_EXISTS;AAM_SETUP_PATH_ALLUSER;ACROBAT_APP_PATH;APPPATHS_EXCEL_EXE;APPPATHS_OUTLOOK_EXE;APPPATHS_POWERPOINT_EXE;APPPATHS_WORD_EXE;ARM_COLLECT;AS_HKCR_EXE;AS_OPTIMIZE_ENABLED;AS_OPTIMIZE_STATUS;AS_PRINTER;AS_PRINTER_DRIVER;AS_PRINTER_DRIVER_64;AS_PRINTER_XP;BLOCK_APP_TIMEOUT;BLOCK_ENTRYPOINT_LOGGING;CACHE_SETUP_FILES;COMMON_LINGUISTIC;CWProvXMLFile;CreatePDFMOfficeX64Registry;DEACTIVATE;DEFAULT_CURVER_PROGID;DEFAULT_PDF_PROGID;DEFAULT_PROGID;DEFAULT_VERB;DELBASIDTCA;DISABLE_DESKTOPSHORTCUT_AAM;DISABLE_DESKTOPSHORTCUT_AAM_CACHED;DeletePDFMOfficeX64Registry;ENABLE_OPTIMIZATION;HKLMLANGUIKEY;HOT_FIX_XP64;INSTALLDIR;INSTALLMAJORVERSION;IS_CURRENT_PDFOWNER;LOTUS_INSTALLED;MIN_SYSTEM;OUTLOOK_EXE;OWNERSHIP_STATE;PDFSHELL_LOCALSERVER_COMMAND;PDF_ACROBROKER_PATH;PDF_DEFAULTICON;PDF_INPROCSERVER_VIEWERPS;PDF_PREVIEW_HANDERLER_DLL;PDF_PREVIEW_HANDERLER_HELPDIR;PDX_DEFAULT_PROGID;PRESERIALIZATIONFILEPATH;REPAIRSELECTED;RegisterPDFMOfficeX64Comp;SUPPORTDIR;UT_AP12;UT_AS12;UnRegisterPDFMOfficeX64Comp;WIA_DISPLAY_NAME;INSTALL_MODE;ISX_SERIALNUMBER;VCRT64;PDF_INTEGRATION;UPDATE_MODE;DEFAULT_UPDATE_MODE;PRODUCT_INSTALL_FLAVOR;IO_UNINSTALL_RECOMMENDED;IO_MIGRATE_FEATURE;INTEROP_EXECUTED;ABORT_FROM_INTEROP;IGNORE_TRACK_INTEROP;RegistryHiveName;ChannelName;ARM_PROPERTIES;ARM_EXECUTION;FORCE_DEACTIVATION;SKIP_DEACTIVATION;WEBRCSC_ARM_REG_CODE;WEBRCSC_PRODUCT_CODE;MIGRATE_FEATURES;IS_SEC_REPAIR_REQ;SEC_REPAIR_PRODCODE;SEC_REPAIR_SILENT;DISABLE_SECONDARY_REPAIR;REMOVE_PREVIOUS_ACROBAT;INSTALLED_ACROBAT;IS_SEC_INSTALL;REMOVE_ACROBAT;COEXSUPPORT11_VER;COEXSUPPORT10_VER;A10INSTALLED;INVALID_SERIAL_ERROR;DISABLE_FIU_CHECK;ESIVEMULOV;REG_URI_HANDLER;REG_URI_HANDLER_PREV;TOOK_OWNERSHIP_AFTER_UPGRADE;WIN10TH2_OR_ABOVE;IS_MS_OWNER;CURRENT_PDFOWNER_PROGID;FORCE_CREATE_OWNERSHIPKEY;WEB_RCSC_PROD_VER_REG;ISWINDOWS10;CHROME_JSON;ROAMIDENTITY;ROAMLICENSING;OEM_TYPE;IS_COEX_REPAIR;DO_COEX_LAUNCH_REPAIR;IGNOREAAM;REG_2018_URI_HANDLER;REG_2018_URI_HANDLER_ICON;REG_2018_URI_HANDLER_DDE;SIDELOADING_PREF;UWP_APPX_INSTALLED;INSTALLUWPAPP;DISABLE_NOTIFICATIONS;REPAIRFROMAPP;UWP_APP_INSTALLER_NAME;UWP_APP_PACKAGE_FULLNAME;UWP_APP_PRODUCT;UWP_APP_HKCU_BASEPATH;SINGLECLIENTAPPMODE;UWP_APP_INSTALLER_VERSION;ENFORCE_NGL;UT_FR;UT_A3D;UT_A;UT_A;UT_D;UR_RDR;UT_FR;UT_PRODUCT_REMOVE;UT_REMOVE_FEATURE;SUPPORT_COEX;REMOVE_BLOCKING;UNINSTALL_REQUIRED_ABORT;COEX_SCENARIO;BLOCKING_PRODUCT_ABORT;SKIP_WEBRCS_REINSTALL;TRANSITION_INSTALL_MODE;SKIP_CEF_KILL;USER_SID;READER_MIGRATION;UWP_APP_HKCU_REGKEY;SCA_PACKAGE_LEVEL;ADD_ALL_DICT;CORE_HASH;INTERMEDIATE_HASH;EXTRAS_HASH;LANGUAGES_HASH;OPTIONAL_HASH;ALFSDPACK_HASH;FORCE_KILL;CHROME_EXT_ID;READER_INSTALLED;ENABLE_READER_MODE;ENABLE_ACROBAT_MODE;DISABLE_OPTIONAL_FEATURE;APP_LANG_FROM_REG"
+ },
+ {
+  "Property": "SerialNumberErrorBasicMode",
+  "Value": "Error: An invalid serial number was provided."
+ },
+ {
+  "Property": "SetupCacheExport",
+  "Value": "\n\t\t\t"
+ },
+ {
+  "Property": "SetupCache_Installing",
+  "Value": "Installing megabyte"
+ },
+ {
+  "Property": "SetupCache_Of",
+  "Value": "of"
+ },
+ {
+  "Property": "SetupCache_Title",
+  "Value": "Copying Installer Files..."
+ },
+ {
+  "Property": "TOOLBAR_NAME",
+  "Value": "Adobe PDF"
+ },
+ {
+  "Property": "TRANSITION_INSTALL_MODE",
+  "Value": "0"
+ },
+ {
+  "Property": "TerminateProcessList",
+  "Value": "AdobeCollabSync.exe##AAM Updates Notifier.exe##AcroCEF.exe;[INSTALLDIR]Acrobat\\AcroCEF"
+ },
+ {
+  "Property": "TrackNameString",
+  "Value": "Continuous"
+ },
+ {
+  "Property": "UIMODE",
+  "Value": "YES"
+ },
+ {
+  "Property": "UITimeRemaining",
+  "Value": "Time remaining: {[1] min }[2] sec"
+ },
+ {
+  "Property": "UWP_APP_HKCU_BASEPATH",
+  "Value": "HKEY_CURRENT_USER\\SOFTWARE\\Adobe\\Adobe Acrobat\\"
+ },
+ {
+  "Property": "UWP_APP_INSTALLER_VERSION",
+  "Value": "1.0.4.0"
+ },
+ {
+  "Property": "UWP_APP_PACKAGE_ARCH",
+  "Value": "x86"
+ },
+ {
+  "Property": "UWP_APP_PACKAGE_SUFFIX",
+  "Value": "e1rzdqpraam7r"
+ },
+ {
+  "Property": "UnInstallReqProduct",
+  "Value": "NONE"
+ },
+ {
+  "Property": "UnsupportedOS_DotNet",
+  "Value": "The installation of [BrandName] on a 64-bit Windows operating system requires that you first install the following package from the location indicated below:\n\n- Package: Microsoft .NET framework 2.0 x64\n- Location: http://www.microsoft.com/downloads/details.aspx?FamilyID=\nb44a0000-acf8-4fa1-affb-40e78d788b00&&displaylang=en\n"
+ },
+ {
+  "Property": "UnsupportedOS_HotFix",
+  "Value": "Acrobat requires an update for this 64-Bit operating system.  The update can be found at http://www.adobe.com/go/ms_kb930627.  Please update your system and run setup again. Setup will now terminate."
+ },
+ {
+  "Property": "UpgradeTagFile",
+  "Value": "instmsiw.exe"
+ },
+ {
+  "Property": "VCRTFailureHeader",
+  "Value": "Visual C++ 2013 (x64) Runtime Missing"
+ },
+ {
+  "Property": "VCRTFailureMsg1",
+  "Value": "Installing Acrobat via MSI will not install Microsoft Visual C++ 2013 (x64) runtime. Without this, some application functionality will not work. "
+ },
+ {
+  "Property": "VCRTFailureMsg2",
+  "Value": "You can try installing using setup.exe if not already done. Press 'Ok' to ignore and proceed anyway or 'Cancel' to stop the installation."
+ },
+ {
+  "Property": "VCRTx64FileName",
+  "Value": "msvcr120.dll"
+ },
+ {
+  "Property": "VCRTx64FileVersion",
+  "Value": "12.0.21005.1"
+ },
+ {
+  "Property": "ValueImportAction",
+  "Value": "Import Action"
+ },
+ {
+  "Property": "WIA_Service",
+  "Value": "ServiceNotRunning"
+ },
+ {
+  "Property": "WaitForCostingComplete",
+  "Value": "150"
+ },
+ {
+  "Property": "WebLink",
+  "Value": "0"
+ },
+ {
+  "Property": "WebRcscManifestURL",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/ServicesUpdater/DC/AcroManifest.msi"
+ },
+ {
+  "Property": "WebRcscManifestURL2",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/ServicesUpdater/DC/AcroManifest2.msi"
+ },
+ {
+  "Property": "WebRcscManifestURL3",
+  "Value": "https://armmf.adobe.com/arm-manifests/win/ServicesUpdater/DC/AcroManifest3.msi"
+ },
+ {
+  "Property": "WebRscProductCodeString",
+  "Value": "{291AA914-A987-4CE9-BD63-0C0A92D435E5}"
+ },
+ {
+  "Property": "_5789b66a5ab8e",
+  "Value": "{AC76BA80-0012-7760-0000-000000000000}"
+ },
+ {
+  "Property": "edl",
+  "Value": "Asneu.dll"
+ },
+ {
+  "Property": "esif_Distiller",
+  "Value": "AcrobatDistiller.sif"
+ },
+ {
+  "Property": "esif_ETLA",
+  "Value": "AcrobatETLA.sif"
+ },
+ {
+  "Property": "esif_Perpetual",
+  "Value": "AcrobatPerpetual.sif"
+ },
+ {
+  "Property": "esif_Trial",
+  "Value": "AcrobatTrial.sif"
+ },
+ {
+  "Property": "ISReleaseFlags",
+  "Value": "MUI,PRO,CZE,DAN,DEU,ENU,ENU,ESP,FIN,FRA,FRA,HUN,ITA,JPN,KOR,NOR,NLD,POL,PTB,RUS,SVK,SVN,SWE,TUR,UKR,CHN,CHT,ALFSD,OPT"
+ },
+ {
+  "Property": "SETUPEXENAME",
+  "Value": "setup.exe"
+ },
+ {
+  "Property": "InstallShieldTempProp",
+  "Value": "0"
+ }
+]

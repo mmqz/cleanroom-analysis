@@ -1,0 +1,26 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html style=\"height: 100%;\"><head><meta name=\"viewport\" content=\"width=device-width, minimum-scale=0.1\"><title>https://www.google.com/gmp/conversion/_dc_unique_id=4716772028472461094;_dc_ptd=ChAI8KGi1gYQxbT99KzTreUBEh8Ayg5Ecujl4UqSqxlsOMSQPSzGoAvuAVmwkB7YFTgS;_dc_time=1791547867;src=9212252;dc_pre=COmx6fHzrJcDFcuwigcd4xYL1A;type=invmedia;cat=gtag_01t;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=$%7BGDPR%7D;gdpr_consent=$%7BGDPR_CONSENT_755%7D;ord=1;num=17850616644771.77</title></head><body style=\"margin: 0px; height: 100%; background-color: rgb(14, 14, 14);\"><p>A 1x1 image, likely be a tacker probe</p></body></html>",
+    "httpStatus": 200,
+    "httpStatusText": "OK",
+    "title": "https://www.google.com/gmp/conversion/_dc_unique_id=4716772028472461094;_dc_ptd=ChAI8KGi1gYQxbT99KzTreUBEh8Ayg5Ecujl4UqSqxlsOMSQPSzGoAvuAVmwkB7YFTgS;_dc_time=1791547867;src=9212252;dc_pre=COmx6fHzrJcDFcuwigcd4xYL1A;type=invmedia;cat=gtag_01t;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=$%7BGDPR%7D;gdpr_consent=$%7BGDPR_CONSENT_755%7D;ord=1;num=17850616644771.77",
+    "url": "https://helpx.adobe.com/acrobat/kb/download-64-bit-installer.html",
+    "usage": {
+      "measuredTokens": 0,
+      "outputTokens": 0,
+      "scaledTokens": 274,
+      "tokens": 274
+    }
+  },
+  "meta": {
+    "usage": {
+      "measuredTokens": 0,
+      "outputTokens": 0,
+      "scaledTokens": 274,
+      "tokens": 274
+    }
+  },
+  "status": 20000
+}

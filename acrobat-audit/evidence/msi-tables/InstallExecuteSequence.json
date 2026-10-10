@@ -1,0 +1,1262 @@
+[
+ {
+  "Action": "AppSearch",
+  "Condition": null,
+  "Sequence": 400
+ },
+ {
+  "Action": "BindImage",
+  "Condition": null,
+  "Sequence": 4300
+ },
+ {
+  "Action": "CCPSearch",
+  "Condition": "CCP_TEST",
+  "Sequence": 500
+ },
+ {
+  "Action": "CostFinalize",
+  "Condition": null,
+  "Sequence": 1310
+ },
+ {
+  "Action": "CostInitialize",
+  "Condition": null,
+  "Sequence": 800
+ },
+ {
+  "Action": "FileCost",
+  "Condition": null,
+  "Sequence": 1300
+ },
+ {
+  "Action": "InstallFiles",
+  "Condition": null,
+  "Sequence": 4000
+ },
+ {
+  "Action": "InstallValidate",
+  "Condition": null,
+  "Sequence": 1400
+ },
+ {
+  "Action": "InstallFinalize",
+  "Condition": null,
+  "Sequence": 6612
+ },
+ {
+  "Action": "InstallInitialize",
+  "Condition": null,
+  "Sequence": 1500
+ },
+ {
+  "Action": "ScheduleReboot",
+  "Condition": "((ISSCHEDULEREBOOT) Or (NeedReboot)) And (UILevel>2)",
+  "Sequence": 6460
+ },
+ {
+  "Action": "CreateShortcuts",
+  "Condition": null,
+  "Sequence": 4500
+ },
+ {
+  "Action": "PublishComponents",
+  "Condition": null,
+  "Sequence": 6290
+ },
+ {
+  "Action": "PublishFeatures",
+  "Condition": null,
+  "Sequence": 6310
+ },
+ {
+  "Action": "PublishProduct",
+  "Condition": null,
+  "Sequence": 6400
+ },
+ {
+  "Action": "RegisterClassInfo",
+  "Condition": null,
+  "Sequence": 4600
+ },
+ {
+  "Action": "RegisterExtensionInfo",
+  "Condition": null,
+  "Sequence": 4700
+ },
+ {
+  "Action": "RegisterMIMEInfo",
+  "Condition": null,
+  "Sequence": 4900
+ },
+ {
+  "Action": "RegisterProgIdInfo",
+  "Condition": null,
+  "Sequence": 4800
+ },
+ {
+  "Action": "RegisterTypeLibraries",
+  "Condition": null,
+  "Sequence": 5500
+ },
+ {
+  "Action": "MsiPublishAssemblies",
+  "Condition": null,
+  "Sequence": 6300
+ },
+ {
+  "Action": "AllocateRegistrySpace",
+  "Condition": "NOT Installed",
+  "Sequence": 1650
+ },
+ {
+  "Action": "CreateFolders",
+  "Condition": null,
+  "Sequence": 3700
+ },
+ {
+  "Action": "DeleteServices",
+  "Condition": "VersionNT",
+  "Sequence": 2000
+ },
+ {
+  "Action": "DuplicateFiles",
+  "Condition": null,
+  "Sequence": 4210
+ },
+ {
+  "Action": "FindRelatedProducts",
+  "Condition": null,
+  "Sequence": 440
+ },
+ {
+  "Action": "InstallODBC",
+  "Condition": null,
+  "Sequence": 5400
+ },
+ {
+  "Action": "InstallServices",
+  "Condition": "VersionNT",
+  "Sequence": 5800
+ },
+ {
+  "Action": "LaunchConditions",
+  "Condition": null,
+  "Sequence": 430
+ },
+ {
+  "Action": "MigrateFeatureStates",
+  "Condition": "MIGRATE_FEATURES=\"YES\"",
+  "Sequence": 1339
+ },
+ {
+  "Action": "MoveFiles",
+  "Condition": null,
+  "Sequence": 3800
+ },
+ {
+  "Action": "PatchFiles",
+  "Condition": null,
+  "Sequence": 4090
+ },
+ {
+  "Action": "ProcessComponents",
+  "Condition": null,
+  "Sequence": 1660
+ },
+ {
+  "Action": "RMCCPSearch",
+  "Condition": "Not CCP_SUCCESS And CCP_TEST",
+  "Sequence": 600
+ },
+ {
+  "Action": "RegisterComPlus",
+  "Condition": null,
+  "Sequence": 5700
+ },
+ {
+  "Action": "RegisterFonts",
+  "Condition": null,
+  "Sequence": 5300
+ },
+ {
+  "Action": "RegisterProduct",
+  "Condition": null,
+  "Sequence": 6280
+ },
+ {
+  "Action": "RegisterProperties",
+  "Condition": null,
+  "Sequence": 1507
+ },
+ {
+  "Action": "RegisterProperties_Rollback",
+  "Condition": null,
+  "Sequence": 1506
+ },
+ {
+  "Action": "RegisterUser",
+  "Condition": null,
+  "Sequence": 6270
+ },
+ {
+  "Action": "RemoveDuplicateFiles",
+  "Condition": null,
+  "Sequence": 3400
+ },
+ {
+  "Action": "RemoveEnvironmentStrings",
+  "Condition": null,
+  "Sequence": 3300
+ },
+ {
+  "Action": "RemoveExistingProducts",
+  "Condition": "(REMOVE_PREVIOUS=\"YES\") And Not(IGNORE_INTEROP_REQS=\"YES\")",
+  "Sequence": 6590
+ },
+ {
+  "Action": "RemoveFiles",
+  "Condition": null,
+  "Sequence": 3500
+ },
+ {
+  "Action": "RemoveFolders",
+  "Condition": null,
+  "Sequence": 3600
+ },
+ {
+  "Action": "RemoveIniValues",
+  "Condition": null,
+  "Sequence": 3100
+ },
+ {
+  "Action": "RemoveODBC",
+  "Condition": null,
+  "Sequence": 2400
+ },
+ {
+  "Action": "RemoveRegistryValues",
+  "Condition": null,
+  "Sequence": 2600
+ },
+ {
+  "Action": "RemoveShortcuts",
+  "Condition": null,
+  "Sequence": 3200
+ },
+ {
+  "Action": "SelfRegModules",
+  "Condition": null,
+  "Sequence": 5990
+ },
+ {
+  "Action": "SelfUnregModules",
+  "Condition": null,
+  "Sequence": 2200
+ },
+ {
+  "Action": "SetODBCFolders",
+  "Condition": null,
+  "Sequence": 1360
+ },
+ {
+  "Action": "SetupPrinterDevMode",
+  "Condition": "Privileged And (PRINTER_NOT_INSTALLED OR (PATCH And (REINSTALL=\"ALL\" Or REINSTALL><\"AdobePDFPrinter\"))) And (&AdobePDFPrinter=3 Or (!AdobePDFPrinter=3 And (Not &AdobePDFPrinter=2))) And SINGLECLIENTAPPMODE=\"1\"",
+  "Sequence": 6577
+ },
+ {
+  "Action": "StartServices",
+  "Condition": "VersionNT",
+  "Sequence": 5900
+ },
+ {
+  "Action": "StopServices",
+  "Condition": "VersionNT",
+  "Sequence": 1900
+ },
+ {
+  "Action": "UnpublishComponents",
+  "Condition": null,
+  "Sequence": 1700
+ },
+ {
+  "Action": "UnpublishFeatures",
+  "Condition": null,
+  "Sequence": 1800
+ },
+ {
+  "Action": "UnregisterClassInfo",
+  "Condition": null,
+  "Sequence": 2700
+ },
+ {
+  "Action": "UnregisterComPlus",
+  "Condition": null,
+  "Sequence": 2100
+ },
+ {
+  "Action": "UnregisterExtensionInfo",
+  "Condition": null,
+  "Sequence": 2800
+ },
+ {
+  "Action": "UnregisterFonts",
+  "Condition": null,
+  "Sequence": 2500
+ },
+ {
+  "Action": "UnregisterMIMEInfo",
+  "Condition": null,
+  "Sequence": 3000
+ },
+ {
+  "Action": "UnregisterProgIdInfo",
+  "Condition": null,
+  "Sequence": 2900
+ },
+ {
+  "Action": "UnregisterTypeLibraries",
+  "Condition": null,
+  "Sequence": 2300
+ },
+ {
+  "Action": "WriteEnvironmentStrings",
+  "Condition": null,
+  "Sequence": 5200
+ },
+ {
+  "Action": "WriteIniValues",
+  "Condition": null,
+  "Sequence": 5100
+ },
+ {
+  "Action": "WriteRegistryValues",
+  "Condition": null,
+  "Sequence": 5000
+ },
+ {
+  "Action": "CA_UIV",
+  "Condition": "(Not Installed) And ((UILevel<4) Or bIsDistiller)",
+  "Sequence": 842
+ },
+ {
+  "Action": "ChangeFeatureDisplayLevel",
+  "Condition": "UILevel<4 AND NOT Installed",
+  "Sequence": 1305
+ },
+ {
+  "Action": "AcrobatOverHigherpDistillerAbort",
+  "Condition": "(Not Installed) And (UT_D_FR) And (UILevel<4)",
+  "Sequence": 444
+ },
+ {
+  "Action": "AllowAppLaunch",
+  "Condition": "Installed And (PATCH OR REMOVE=\"ALL\") And BLOCK_APP_TIMEOUT<>\"0\"",
+  "Sequence": 6574
+ },
+ {
+  "Action": "AllowAppLaunch_Rollback",
+  "Condition": "Installed And (PATCH OR REMOVE=\"ALL\") And BLOCK_APP_TIMEOUT<>\"0\"",
+  "Sequence": 1504
+ },
+ {
+  "Action": "ApplicationsInUse",
+  "Condition": "(Not UPGRADINGPRODUCTCODE) And (Not ARM_COLLECT) And (Not DISABLE_FIU_CHECK)",
+  "Sequence": 1370
+ },
+ {
+  "Action": "BackupWebResourceReg",
+  "Condition": "Not Installed",
+  "Sequence": 1385
+ },
+ {
+  "Action": "BlockAppLaunch",
+  "Condition": "Installed And (PATCH OR REMOVE=\"ALL\") And BLOCK_APP_TIMEOUT<>\"0\"",
+  "Sequence": 1505
+ },
+ {
+  "Action": "BroadcastUnloadAcrobatComponents",
+  "Condition": "Installed",
+  "Sequence": 1502
+ },
+ {
+  "Action": "BroadcastUnloadStubMessage",
+  "Condition": "NOT (REPAIRFROMAPP=1)",
+  "Sequence": 1515
+ },
+ {
+  "Action": "CA_QV",
+  "Condition": "(Not ESIV) And (Not Installed) And (UILevel<5) And (Not bIsDistiller)",
+  "Sequence": 844
+ },
+ {
+  "Action": "CA_QVDist",
+  "Condition": "(Not ESIV) And (Not Installed) And (bIsDistiller)",
+  "Sequence": 845
+ },
+ {
+  "Action": "CA_SetTryoutSerial",
+  "Condition": "Not Installed",
+  "Sequence": 841
+ },
+ {
+  "Action": "CacheSetupFiles_SetSourceList",
+  "Condition": "(Not Installed) And (Not DISABLE_CACHE) And (ENABLE_CACHE_FILES=\"YES\") And (Not (ADMIN_INSTALL=\"YES\"))",
+  "Sequence": 6585
+ },
+ {
+  "Action": "CheckServices",
+  "Condition": null,
+  "Sequence": 755
+ },
+ {
+  "Action": "CleanupINF",
+  "Condition": "Privileged And ((PATCH And &AdobePDFPrinter=3 And (REINSTALL=\"ALL\" Or REINSTALL><\"AdobePDFPrinter\"))  Or (((Not Installed) And (&AdobePDFPrinter=3)) Or (!AdobePDFPrinter=3 And &AdobePDFPrinter=2))) And (Not AS_DISABLE_PRINTER_MAINTENANCE)",
+  "Sequence": 1950
+ },
+ {
+  "Action": "CleanupRunTime",
+  "Condition": null,
+  "Sequence": 6695
+ },
+ {
+  "Action": "ClearAppNotifications",
+  "Condition": "REMOVE=\"ALL\" AND ISWINDOWS10 AND SINGLECLIENTAPPMODE=\"1\"",
+  "Sequence": 2450
+ },
+ {
+  "Action": "ClearAppNotifications_Rdr",
+  "Condition": "REMOVE=\"ALL\" AND ISWINDOWS10 AND SINGLECLIENTAPPMODE=\"0\"",
+  "Sequence": 2425
+ },
+ {
+  "Action": "CloseAcroTray",
+  "Condition": "((Not Installed And &Distiller=3) Or (&Distiller=2) Or (REINSTALL=\"ALL\") Or (REINSTALL><\"Distiller\") Or (REINSTALL><\"PDFMaker\")) ",
+  "Sequence": 1406
+ },
+ {
+  "Action": "CloseApps",
+  "Condition": "PATCH OR (Not Installed) Or (REMOVE=\"ALL\")",
+  "Sequence": 1405
+ },
+ {
+  "Action": "CoexistAcrobat",
+  "Condition": "Not Installed",
+  "Sequence": 1308
+ },
+ {
+  "Action": "CollectCustomTablesData",
+  "Condition": null,
+  "Sequence": 1481
+ },
+ {
+  "Action": "CollectDataForARM",
+  "Condition": "ARM_COLLECT",
+  "Sequence": 1402
+ },
+ {
+  "Action": "CollectProperties",
+  "Condition": null,
+  "Sequence": 1485
+ },
+ {
+  "Action": "CollectPropertiesMNT",
+  "Condition": null,
+  "Sequence": 1479
+ },
+ {
+  "Action": "CreateAAM_SuccessReg",
+  "Condition": null,
+  "Sequence": 4150
+ },
+ {
+  "Action": "CreateDDENameRegistry",
+  "Condition": "Not REMOVE=\"ALL\"",
+  "Sequence": 6566
+ },
+ {
+  "Action": "CreateForceASLRReg",
+  "Condition": "Not REMOVE=\"ALL\"",
+  "Sequence": 6568
+ },
+ {
+  "Action": "CreateForceASLRReg_Rollback",
+  "Condition": "Not Installed",
+  "Sequence": 6567
+ },
+ {
+  "Action": "DefragmentFiles",
+  "Condition": "(ENABLE_OPTIMIZATION=\"YES\") And (ProductCode><\"AC76BA86\") And ((&ViewerProgramFiles=3) Or (REINSTALL><\"ViewerProgramFiles\") Or (REINSTALL=\"ALL\"))",
+  "Sequence": 5870
+ },
+ {
+  "Action": "DefragmentFiles_InitProgress",
+  "Condition": "(ENABLE_OPTIMIZATION=\"YES\") And (ProductCode><\"AC76BA86\") And ((&ViewerProgramFiles=3) Or (REINSTALL><\"ViewerProgramFiles\") Or (REINSTALL=\"ALL\"))",
+  "Sequence": 5865
+ },
+ {
+  "Action": "DeleteForceASLRReg",
+  "Condition": "REMOVE=\"ALL\"",
+  "Sequence": 2575
+ },
+ {
+  "Action": "DeleteForceASLRReg_Rollback",
+  "Condition": "REMOVE=\"ALL\"",
+  "Sequence": 2550
+ },
+ {
+  "Action": "DeletePDFMOfficeX64Registry",
+  "Condition": "VersionNT64 And REMOVE",
+  "Sequence": 1519
+ },
+ {
+  "Action": "DeleteRdrChromeNativeMsgHost",
+  "Condition": "SINGLECLIENTAPPMODE=\"0\" And (REMOVE=\"ALL\" Or ENABLE_CHROMEEXT=\"0\" Or ((Not ENABLE_CHROMEEXT) And CHROMEEXTREG_EXISTS=\"0\" And MISSING_ENABLE_CHROMEEXT_REG=\"1\")) And (Not UPGRADINGPRODUCTCODE)",
+  "Sequence": 6561
+ },
+ {
+  "Action": "DictionaryInstallBroadcast",
+  "Condition": "ADD_ALL_DICT",
+  "Sequence": 6696
+ },
+ {
+  "Action": "DictionaryInstallBroadcastRollBack",
+  "Condition": "ADD_ALL_DICT",
+  "Sequence": 1503
+ },
+ {
+  "Action": "DisableOptimization",
+  "Condition": "TRANSITION_INSTALL_MODE=1 Or IS_SEC_REPAIR Or INSTALLUWPAPP",
+  "Sequence": 1028
+ },
+ {
+  "Action": "DoSubLaunches",
+  "Condition": "Not Installed",
+  "Sequence": 6700
+ },
+ {
+  "Action": "EnableSideloadAppPref",
+  "Condition": "INSTALLUWPAPP AND (NOT DISABLE_NOTIFICATIONS)",
+  "Sequence": 6598
+ },
+ {
+  "Action": "ExecuteGCHook",
+  "Condition": "Not (SKIP_GC) And Not REMOVE And SINGLECLIENTAPPMODE=\"1\"",
+  "Sequence": 6130
+ },
+ {
+  "Action": "ExecuteSecondaryRepair",
+  "Condition": "(UILevel<4) And IS_SEC_REPAIR_REQ And (Not DISABLE_SECONDARY_REPAIR) And (Not IS_SEC_INSTALL)",
+  "Sequence": 6750
+ },
+ {
+  "Action": "ExportCacheBinary",
+  "Condition": "Not Installed",
+  "Sequence": 1440
+ },
+ {
+  "Action": "FileTypesOwnerBackup",
+  "Condition": null,
+  "Sequence": 1511
+ },
+ {
+  "Action": "FileTypesOwnerInit",
+  "Condition": null,
+  "Sequence": 765
+ },
+ {
+  "Action": "FileTypesOwnerRestore",
+  "Condition": "Installed AND NOT DISABLE_PDFOWNERSHIP_RESTORE",
+  "Sequence": 6565
+ },
+ {
+  "Action": "FileTypesOwnerSet",
+  "Condition": "Not REMOVE=\"ALL\"",
+  "Sequence": 1319
+ },
+ {
+  "Action": "FixFilePermissions",
+  "Condition": "(Not Installed) And (Elevated=\"1\")",
+  "Sequence": 1510
+ },
+ {
+  "Action": "FixRegPermissions",
+  "Condition": "(Not Installed) And (Elevated=\"1\")",
+  "Sequence": 1509
+ },
+ {
+  "Action": "ForceFailInstallation",
+  "Condition": "FORCE_KILL=1",
+  "Sequence": 1501
+ },
+ {
+  "Action": "HandleInterOpSCA",
+  "Condition": "Not Installed",
+  "Sequence": 441
+ },
+ {
+  "Action": "HandleURIOwnership",
+  "Condition": "REMOVE=\"ALL\"",
+  "Sequence": 6607
+ },
+ {
+  "Action": "HideCancelButton",
+  "Condition": "REMOVE",
+  "Sequence": 740
+ },
+ {
+  "Action": "ISPreventDowngrade",
+  "Condition": "ISFOUNDNEWERPRODUCTVERSION",
+  "Sequence": 450
+ },
+ {
+  "Action": "ISSetAllUsers",
+  "Condition": "Not Installed",
+  "Sequence": 11
+ },
+ {
+  "Action": "InstallAcrobatNotificationClient",
+  "Condition": "INSTALLUWPAPP AND (NOT DISABLE_NOTIFICATIONS)",
+  "Sequence": 6599
+ },
+ {
+  "Action": "InstallAdobePDFPrinter_x64",
+  "Condition": "Privileged And (PRINTER_NOT_INSTALLED OR (PATCH And (REINSTALL=\"ALL\" Or REINSTALL><\"AdobePDFPrinter\"))) And (&AdobePDFPrinter=3 Or (!AdobePDFPrinter=3 And (Not &AdobePDFPrinter=2))) And VersionNT64 And SINGLECLIENTAPPMODE=\"1\"",
+  "Sequence": 4091
+ },
+ {
+  "Action": "InstallColorFiles",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 4050
+ },
+ {
+  "Action": "InstallEnterpriseFiles",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 5906
+ },
+ {
+  "Action": "InstallEnterpriseRegistry",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 5907
+ },
+ {
+  "Action": "InstallWebResources",
+  "Condition": "SINGLECLIENTAPPMODE=\"1\" And Not (REMOVE=\"ALL\") And (Not INSTALLUWPAPP) And (Not SKIP_WEBRCS_REINSTALL) And Not (IS_SEC_INSTALL=1)",
+  "Sequence": 6592
+ },
+ {
+  "Action": "InstallWebResourcesMini",
+  "Condition": "SINGLECLIENTAPPMODE=\"0\" And Not (REMOVE=\"ALL\") And (Not INSTALLUWPAPP) And Not (IS_SEC_INSTALL=1)",
+  "Sequence": 6591
+ },
+ {
+  "Action": "IsInstallElevated",
+  "Condition": null,
+  "Sequence": 775
+ },
+ {
+  "Action": "IsPrinterRemoved",
+  "Condition": "(Not Installed) And (Not PRINTER_NOT_INSTALLED) And (REMOVE_PREVIOUS=\"YES\")",
+  "Sequence": 1478
+ },
+ {
+  "Action": "IsSameTrackUpgrade",
+  "Condition": "UPGRADINGPRODUCTCODE",
+  "Sequence": 787
+ },
+ {
+  "Action": "LangListMismatch",
+  "Condition": "LANG_LIST_MISMATCH=\"1\" AND LANG_LIST_EXCEPTION=\"0\"",
+  "Sequence": 1312
+ },
+ {
+  "Action": "LaunchAcroTrayEx",
+  "Condition": "0 And (($Distiller_Bin_AcroTray=3) Or (REINSTALL><\"PDFMaker\")) And (UserSID><\"S-1-5-21\") And (Not SUITEMODE)",
+  "Sequence": 6579
+ },
+ {
+  "Action": "LaunchAcrobatSpeedLauncher",
+  "Condition": "($Exchange_Bin_Acrobat_sl.exe=3) And (UILevel>2)",
+  "Sequence": 6465
+ },
+ {
+  "Action": "LockFilePermissions",
+  "Condition": "0 And Not (REMOVE=\"ALL\") And (Not $Registry_ACL=3)",
+  "Sequence": 5909
+ },
+ {
+  "Action": "LockRegPermissions",
+  "Condition": "0 And Not (REMOVE=\"ALL\") And (Not $Registry_ACL=3)",
+  "Sequence": 5908
+ },
+ {
+  "Action": "MoveCacheBinary",
+  "Condition": "Not Installed OR TRANSITION_INSTALL_MODE=2",
+  "Sequence": 5905
+ },
+ {
+  "Action": "MoveSetupFilesToCache",
+  "Condition": "(Not Installed Or TRANSITION_INSTALL_MODE=2 Or TRANSITION_INSTALL_MODE=4) And (Not DISABLE_CACHE)",
+  "Sequence": 3900
+ },
+ {
+  "Action": "OlderOverNewerAbort",
+  "Condition": "(Not Installed) And (UILevel<4) And UT_FR",
+  "Sequence": 445
+ },
+ {
+  "Action": "Override_ReaderMode",
+  "Condition": "ENABLE_ACROBAT_MODE=1",
+  "Sequence": 402
+ },
+ {
+  "Action": "PopulateReserveCost",
+  "Condition": "NOT Installed",
+  "Sequence": 1270
+ },
+ {
+  "Action": "ProOverBaseAbort",
+  "Condition": "(Not Installed) And (UILevel<5) And BLOCKING_PRODUCT_ABORT=\"1\" And Not(IGNORE_INTEROP_REQS=\"YES\")",
+  "Sequence": 447
+ },
+ {
+  "Action": "ProcessAbcpy",
+  "Condition": "Not Installed",
+  "Sequence": 820
+ },
+ {
+  "Action": "ProcessDeleteComponentsEx",
+  "Condition": null,
+  "Sequence": 6542
+ },
+ {
+  "Action": "ProcessDeleteFilesEx",
+  "Condition": null,
+  "Sequence": 6540
+ },
+ {
+  "Action": "ProcessDeleteProductsEx",
+  "Condition": null,
+  "Sequence": 6543
+ },
+ {
+  "Action": "ProcessDeleteRegistryEx",
+  "Condition": null,
+  "Sequence": 6541
+ },
+ {
+  "Action": "ReSet_ENABLE_OPTIMIZATION",
+  "Condition": "Installed",
+  "Sequence": 1027
+ },
+ {
+  "Action": "RefreshShellicons",
+  "Condition": "(Not UPGRADINGPRODUCTCODE) And (Not IS_SEC_INSTALL) And Not (Installed And INSTALLUWPAPP)",
+  "Sequence": 6690
+ },
+ {
+  "Action": "RegisterReboot",
+  "Condition": null,
+  "Sequence": 6630
+ },
+ {
+  "Action": "RemoveAcrobatNotificationClient",
+  "Condition": "REMOVE=\"ALL\" AND ISWINDOWS10",
+  "Sequence": 1517
+ },
+ {
+  "Action": "RemoveAcrobatNotificationClientInUserContext",
+  "Condition": "REMOVE=\"ALL\" AND ISWINDOWS10",
+  "Sequence": 2660
+ },
+ {
+  "Action": "RemoveBrowserIESettings",
+  "Condition": "(Installed) And ((REMOVE=\"ALL\") Or (&AcrobatViewer=2))",
+  "Sequence": 2620
+ },
+ {
+  "Action": "RemoveDDENameRegistry",
+  "Condition": "REMOVE=\"ALL\"",
+  "Sequence": 6570
+ },
+ {
+  "Action": "RemoveNetscapeRegistry",
+  "Condition": "(Installed) And ((REMOVE=\"ALL\") Or (&AcrobatViewer=2))",
+  "Sequence": 2610
+ },
+ {
+  "Action": "RestartInternetExplorer",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 6582
+ },
+ {
+  "Action": "RestoreAdobePDFPrinterSettings",
+  "Condition": "Privileged And (Installed) And (Not (REMOVE=\"ALL\")) And (PRINTER_NOT_INSTALLED OR (PATCH And (REINSTALL=\"ALL\" Or REINSTALL><\"AdobePDFPrinter\"))) And (&AdobePDFPrinter=3 Or (!AdobePDFPrinter=3 And (Not &AdobePDFPrinter=2))) And SINGLECLIENTAPPMODE=\"1\"",
+  "Sequence": 6513
+ },
+ {
+  "Action": "RestoreEnterpriseFiles",
+  "Condition": "Installed And Not REMOVE",
+  "Sequence": 1523
+ },
+ {
+  "Action": "RestoreSideloadAppPref",
+  "Condition": "INSTALLUWPAPP AND (NOT DISABLE_NOTIFICATIONS)",
+  "Sequence": 6600
+ },
+ {
+  "Action": "SaveAdobePDFPrinterSettings",
+  "Condition": "Privileged And (Installed) And (Not (REMOVE=\"ALL\")) And ((PATCH And !AdobePDFPrinter=3 And (REINSTALL=\"ALL\" Or REINSTALL><\"AdobePDFPrinter\"))  Or (((Not Installed) And (&AdobePDFPrinter=3)) Or (!AdobePDFPrinter=3 And &AdobePDFPrinter=2)))",
+  "Sequence": 1805
+ },
+ {
+  "Action": "Set64bitLanguageKey",
+  "Condition": "VersionNT64 And (Not REMOVE=\"ALL\")",
+  "Sequence": 1307
+ },
+ {
+  "Action": "SetALLUSERS",
+  "Condition": "Not Installed And Not PER_USER",
+  "Sequence": 205
+ },
+ {
+  "Action": "SetAPPLANG",
+  "Condition": "Installed And Not (REMOVE=\"ALL\")",
+  "Sequence": 401
+ },
+ {
+  "Action": "SetARMMode",
+  "Condition": null,
+  "Sequence": 448
+ },
+ {
+  "Action": "SetARPInstallLocation",
+  "Condition": null,
+  "Sequence": 1314
+ },
+ {
+  "Action": "SetARPReadme",
+  "Condition": null,
+  "Sequence": 1315
+ },
+ {
+  "Action": "SetARPReadmeEx",
+  "Condition": null,
+  "Sequence": 1316
+ },
+ {
+  "Action": "SetAllUsersDocuments",
+  "Condition": null,
+  "Sequence": 1240
+ },
+ {
+  "Action": "SetCachedProductInfoAndEULA",
+  "Condition": "(Not Installed) Or ENABLE_ACROBAT_MODE=1 Or REMOVE=\"ALL\"",
+  "Sequence": 6608
+ },
+ {
+  "Action": "SetCleanupINF",
+  "Condition": "Installed",
+  "Sequence": 1465
+ },
+ {
+  "Action": "SetCreateAdobePDFPrinterINF",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 1460
+ },
+ {
+  "Action": "SetCreatePortMonitorINF",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 1455
+ },
+ {
+  "Action": "SetCustomInstallerProperties",
+  "Condition": null,
+  "Sequence": 412
+ },
+ {
+  "Action": "SetDefaultJobOptions_CJK",
+  "Condition": "(ProductLanguage=1041) Or (ProductLanguage=2052) Or (ProductLanguage=1028) Or (ProductLanguage=1042)",
+  "Sequence": 1250
+ },
+ {
+  "Action": "SetDeletePDFMX64Registry",
+  "Condition": "VersionNT64 AND REMOVE",
+  "Sequence": 1313
+ },
+ {
+  "Action": "SetDisableShortcutProps",
+  "Condition": "Not Installed And DISABLEDESKTOPSHORTCUT",
+  "Sequence": 768
+ },
+ {
+  "Action": "SetInstallPDFPrinter",
+  "Condition": "(Not TRANSITION_INSTALL_MODE=2) And SINGLECLIENTAPPMODE=\"1\"",
+  "Sequence": 217
+ },
+ {
+  "Action": "SetIntraOp_BrowserHandler",
+  "Condition": "(BROWSER_HANDLER=\"NO\")",
+  "Sequence": 1025
+ },
+ {
+  "Action": "SetLotusNotesIni",
+  "Condition": null,
+  "Sequence": 6560
+ },
+ {
+  "Action": "SetLotusNotesInstalled",
+  "Condition": null,
+  "Sequence": 750
+ },
+ {
+  "Action": "SetLotusNotesProgramDirectory",
+  "Condition": null,
+  "Sequence": 1322
+ },
+ {
+  "Action": "SetMoveCacheBinary",
+  "Condition": "Not Installed OR TRANSITION_INSTALL_MODE=2",
+  "Sequence": 1450
+ },
+ {
+  "Action": "SetOwnershipState",
+  "Condition": "NOT Installed",
+  "Sequence": 766
+ },
+ {
+  "Action": "SetPrinterNotInstalled",
+  "Condition": "(Not Installed) Or ((Not AS_PRINTER) Or (((Not AS_PRINTER_DRIVER) And (Not VersionNT64)) Or ((Not AS_PRINTER_DRIVER_64) And VersionNT64)))",
+  "Sequence": 745
+ },
+ {
+  "Action": "SetREINSTALL",
+  "Condition": "REPAIRSELECTED=\"ALL\"",
+  "Sequence": 253
+ },
+ {
+  "Action": "SetREMOVE_BLOCKING",
+  "Condition": "Not(REMOVE_PREVIOUS~><\"YES\") And BlockingProduct",
+  "Sequence": 938
+ },
+ {
+  "Action": "SetRebootForContextMenu",
+  "Condition": "&AcrobatElements=2",
+  "Sequence": 3450
+ },
+ {
+  "Action": "SetRemoveAcrobatToNull",
+  "Condition": "REMOVE_PREVIOUS_ACROBAT=\"NO\"",
+  "Sequence": 260
+ },
+ {
+  "Action": "SetRemovePreviousProducts",
+  "Condition": "(Not REMOVE_PREVIOUS~><\"NO\") And UILevel=2",
+  "Sequence": 860
+ },
+ {
+  "Action": "SetRemoveReader",
+  "Condition": "(Not Installed) And REMOVE_PREVIOUS_READER=\"YES\"",
+  "Sequence": 939
+ },
+ {
+  "Action": "SetSINGLECLIENTAPPMODE",
+  "Condition": "ENABLE_READER_MODE=1 Or ENABLE_READER_MODE=\"#1\"",
+  "Sequence": 403
+ },
+ {
+  "Action": "SetSKIPCEFKILL",
+  "Condition": "UPGRADINGPRODUCTCODE OR IS_SEC_INSTALL=1",
+  "Sequence": 241
+ },
+ {
+  "Action": "SetSecondaryInstallParams",
+  "Condition": " (Not DISABLE_SECONDARY_REPAIR)",
+  "Sequence": 1480
+ },
+ {
+  "Action": "SetSourceDirCustom",
+  "Condition": "Not Installed",
+  "Sequence": 812
+ },
+ {
+  "Action": "SetSourceDirCustom_Transforms",
+  "Condition": "Not Installed",
+  "Sequence": 816
+ },
+ {
+  "Action": "SetUWPAPPHKCUREGKEY",
+  "Condition": "ENABLE_READER_MODE=1  Or ENABLE_READER_MODE=\"#1\"",
+  "Sequence": 404
+ },
+ {
+  "Action": "SetUWPAPPINSTALLERNAME",
+  "Condition": "ENABLE_READER_MODE=1 Or ENABLE_READER_MODE=\"#1\"",
+  "Sequence": 405
+ },
+ {
+  "Action": "SetUWPAPPPKGNAME",
+  "Condition": null,
+  "Sequence": 408
+ },
+ {
+  "Action": "SetUWPAPPPKGPREFIX",
+  "Condition": "ENABLE_READER_MODE=1 Or ENABLE_READER_MODE=\"#1\"",
+  "Sequence": 406
+ },
+ {
+  "Action": "SetUWPAPPPRODUCT",
+  "Condition": "ENABLE_READER_MODE=1 Or ENABLE_READER_MODE=\"#1\"",
+  "Sequence": 407
+ },
+ {
+  "Action": "Set_AS_Printer_XP",
+  "Condition": "(VersionNT=501 Or VersionNT=502) And NOT AS_PRINTER",
+  "Sequence": 411
+ },
+ {
+  "Action": "Set_DISABLE_DESKTOPSHORTCUT_AAM",
+  "Condition": "(AAM_DESKTOPSHORTCUT_EXISTS) OR (AAM_PROGRAMMENUENTRY_EXISTS)",
+  "Sequence": 410
+ },
+ {
+  "Action": "Set_IGNORE_AAM",
+  "Condition": "0 And Installed And Patch And (Not REMOVE=ALL) And (Not CANCEL_SET_IGNORE_AAM)",
+  "Sequence": 409
+ },
+ {
+  "Action": "SetupADOBE_HOME",
+  "Condition": null,
+  "Sequence": 1245
+ },
+ {
+  "Action": "SetupNetscapeRegistry",
+  "Condition": "(&AcrobatViewer=3) Or (REINSTALL><\"AcrobatViewer\")",
+  "Sequence": 3610
+ },
+ {
+  "Action": "SetupPDFMakerAutoCAD",
+  "Condition": "(Not(ProductCode><\"BA7E\")) And (Not(ProductCode><\"3478\"))",
+  "Sequence": 6581
+ },
+ {
+  "Action": "SetupPDFMakerOffice",
+  "Condition": "(Not (&PDFMaker=2)) And (Not (ProductCode><\"3478\"))",
+  "Sequence": 1260
+ },
+ {
+  "Action": "SetupPluginsProperties",
+  "Condition": null,
+  "Sequence": 772
+ },
+ {
+  "Action": "ShowAAMIntallError_Rollback",
+  "Condition": "(NOT REMOVE=\"ALL\") AND (NOT IGNOREAAM)",
+  "Sequence": 4141
+ },
+ {
+  "Action": "SuppressReboot",
+  "Condition": "UILevel<3",
+  "Sequence": 855
+ },
+ {
+  "Action": "TerminateProcesses",
+  "Condition": "NOT REPAIRFROMAPP",
+  "Sequence": 1508
+ },
+ {
+  "Action": "TransferRegistryApply",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 6595
+ },
+ {
+  "Action": "TransferRegistryCollect",
+  "Condition": "Not (REMOVE=\"ALL\")",
+  "Sequence": 1470
+ },
+ {
+  "Action": "UninstallEnterpriseFiles",
+  "Condition": "REMOVE=\"ALL\"",
+  "Sequence": 1521
+ },
+ {
+  "Action": "UninstallEnterpriseRegistry",
+  "Condition": "REMOVE=\"ALL\"",
+  "Sequence": 1522
+ },
+ {
+  "Action": "UninstallPrinterINF",
+  "Condition": "Privileged And ((PATCH And !AdobePDFPrinter=3 And (REINSTALL=\"ALL\" Or REINSTALL><\"AdobePDFPrinter\"))  Or (((Not Installed) And (&AdobePDFPrinter=3)) Or (!AdobePDFPrinter=3 And &AdobePDFPrinter=2)))",
+  "Sequence": 1811
+ },
+ {
+  "Action": "UnsupportedPrivileges",
+  "Condition": "TEST_DISABLED_B_2562627 And (Not Privileged)",
+  "Sequence": 433
+ },
+ {
+  "Action": "UpdateCitrixRegistry",
+  "Condition": null,
+  "Sequence": 6580
+ },
+ {
+  "Action": "InstallExecute",
+  "Condition": null,
+  "Sequence": 6589
+ },
+ {
+  "Action": "MsiConfigureServices",
+  "Condition": "VersionMsi >= \"5.00\"",
+  "Sequence": 5801
+ },
+ {
+  "Action": "MsiUnpublishAssemblies",
+  "Condition": null,
+  "Sequence": 1750
+ },
+ {
+  "Action": "ResolveSource",
+  "Condition": "Not Installed",
+  "Sequence": 810
+ },
+ {
+  "Action": "SetPDFMComp64ToRegister",
+  "Condition": "VersionNT64",
+  "Sequence": 6602
+ },
+ {
+  "Action": "SetPDFMComp64ToUnRegister",
+  "Condition": "VersionNT64",
+  "Sequence": 1518
+ },
+ {
+  "Action": "ValidateProductID",
+  "Condition": null,
+  "Sequence": 700
+ },
+ {
+  "Action": "StartArmService.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Condition": "(VersionNT>=600) And (Not DISABLE_ARM_SERVICE_INSTALL) And Not (REMOVE=\"ALL\")",
+  "Sequence": 6609
+ },
+ {
+  "Action": "RemoveTask.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Condition": "$ARM_AdobeARM_exe.BDCA7721_F290_4124_BBED_7A15FE7694EB=2",
+  "Sequence": 6610
+ },
+ {
+  "Action": "AddTask.BDCA7721_F290_4124_BBED_7A15FE7694EB",
+  "Condition": "Not Installed Or ($ARM_AdobeARM_exe.BDCA7721_F290_4124_BBED_7A15FE7694EB=3) Or (REINSTALL=\"ARM\") Or (REINSTALL=\"ALL\")",
+  "Sequence": 6611
+ },
+ {
+  "Action": "WindowsFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Condition": null,
+  "Sequence": 10
+ },
+ {
+  "Action": "SystemFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Condition": null,
+  "Sequence": 10
+ },
+ {
+  "Action": "CA_WindowsFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Condition": null,
+  "Sequence": 788
+ },
+ {
+  "Action": "CA_SystemFolder_x86_VC.1DEE2A86_2F57_3629_8107_A71DBB4DBED2",
+  "Condition": null,
+  "Sequence": 789
+ },
+ {
+  "Action": "SystemFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Condition": null,
+  "Sequence": 9
+ },
+ {
+  "Action": "WindowsFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Condition": null,
+  "Sequence": 9
+ },
+ {
+  "Action": "CA_WindowsFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Condition": null,
+  "Sequence": 790
+ },
+ {
+  "Action": "CA_SystemFolder_x86_VC.8F364BD8_5C29_332B_9A0E_43DF52AD4A09",
+  "Condition": null,
+  "Sequence": 791
+ },
+ {
+  "Action": "SystemFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Condition": null,
+  "Sequence": 8
+ },
+ {
+  "Action": "WindowsFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Condition": null,
+  "Sequence": 8
+ },
+ {
+  "Action": "CA_WindowsFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Condition": null,
+  "Sequence": 792
+ },
+ {
+  "Action": "CA_SystemFolder_x86_VC.D371D00B_69EC_3F8E_A622_74710A89ADC1",
+  "Condition": null,
+  "Sequence": 793
+ },
+ {
+  "Action": "System64Folder_amd64_VC.05F0B5F5_44A8_3793_976B_A4F17AECF92C",
+  "Condition": null,
+  "Sequence": 7
+ },
+ {
+  "Action": "SystemFolder_x86_VC.194841A2_D0F2_3B96_9F71_05BA91BEA0FA",
+  "Condition": null,
+  "Sequence": 6
+ },
+ {
+  "Action": "SystemFolder_x86_VC.CC943011_A332_3C6E_AE5A_D28E3EC152B8",
+  "Condition": null,
+  "Sequence": 5
+ },
+ {
+  "Action": "SystemFolder.CC943011_A332_3C6E_AE5A_D28E3EC152B8",
+  "Condition": null,
+  "Sequence": 5
+ },
+ {
+  "Action": "SystemFolder_x86_VC.E281B893_10D7_34CE_BB0E_B69D88E154A5",
+  "Condition": null,
+  "Sequence": 4
+ },
+ {
+  "Action": "SystemFolder.E281B893_10D7_34CE_BB0E_B69D88E154A5",
+  "Condition": null,
+  "Sequence": 4
+ },
+ {
+  "Action": "SystemFolder_x86_VC.71E1EC1A_562B_3AD1_94CD_84420ED4073F",
+  "Condition": null,
+  "Sequence": 3
+ },
+ {
+  "Action": "SystemFolder.71E1EC1A_562B_3AD1_94CD_84420ED4073F",
+  "Condition": null,
+  "Sequence": 3
+ },
+ {
+  "Action": "SystemFolder.F1670FCA_6780_3657_9C04_AF8005AC8143",
+  "Condition": null,
+  "Sequence": 2
+ },
+ {
+  "Action": "System64Folder.DFEFC2FE_EEE6_424C_841B_D4E66F0C84A3",
+  "Condition": null,
+  "Sequence": 1
+ }
+]

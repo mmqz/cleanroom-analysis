@@ -1,0 +1,645 @@
+[
+ {
+  "stream": "adobearm.exe",
+  "size": 1160408,
+  "sha256": "232400b5017dab5855eac8a0103000e902adf07c69414556f89f68d460cb2400",
+  "machine": "x86",
+  "timestamp": 1486106181,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 437328,
+    "rsize": 437760,
+    "entropy": 6.47,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 258894,
+    "rsize": 259072,
+    "entropy": 2.81,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 28056,
+    "rsize": 10752,
+    "entropy": 4.04,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 392916,
+    "rsize": 393216,
+    "entropy": 4.26,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 51834,
+    "rsize": 52224,
+    "entropy": 4.84,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": {
+   "size": 6360
+  },
+  "version_info": {
+   "CompanyName": "Adobe Systems Incorporated",
+   "FileDescription": "Adobe Reader and Acrobat Manager",
+   "FileVersion": "1.824.21.4663",
+   "InternalName": "AdobeARM.exe",
+   "OriginalFilename": "AdobeARM.exe",
+   "ProductName": "Adobe Reader and Acrobat Manager",
+   "ProductVersion": "1.824.21.4663"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "COMCTL32.dll",
+   "COMDLG32.dll",
+   "CRYPT32.dll",
+   "GDI32.dll",
+   "KERNEL32.dll",
+   "OLEACC.dll (delay)",
+   "OLEAUT32.dll",
+   "PSAPI.DLL",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "Secur32.dll",
+   "SensApi.dll",
+   "USER32.dll",
+   "USERENV.dll",
+   "VERSION.dll",
+   "WININET.dll",
+   "WINSPOOL.DRV",
+   "WINTRUST.dll",
+   "msi.dll",
+   "ole32.dll",
+   "urlmon.dll"
+  ],
+  "capabilities_detail": {
+   "proc_inject": [
+    "SetWindowsHookExW"
+   ],
+   "proc_exec": [
+    "CreateProcessW",
+    "ShellExecuteW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "proc_enum": [
+    "CreateToolhelp32Snapshot",
+    "OpenProcess",
+    "Process32FirstW"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteKeyW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW",
+    "SHFileOperationW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "net_wininet": [
+    "HttpOpenRequestW",
+    "HttpSendRequestW",
+    "InternetCloseHandle",
+    "InternetConnectW",
+    "InternetOpenW",
+    "InternetReadFile"
+   ],
+   "net_urldownload": [
+    "URLDownloadToFileW"
+   ],
+   "service_ctl": [
+    "ControlService",
+    "OpenSCManagerW"
+   ],
+   "privilege": [
+    "AdjustTokenPrivileges",
+    "LookupPrivilegeValueW",
+    "OpenProcessToken"
+   ],
+   "crypto": [
+    "CryptProtectData"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitialize",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ],
+   "screen": [
+    "GetDC"
+   ],
+   "hook_kb": [
+    "GetKeyState",
+    "SetWindowsHookExW"
+   ]
+  }
+ },
+ {
+  "stream": "adobearmhelper.exe",
+  "size": 421608,
+  "sha256": "ef93c3ce36b58f027ba4c8e1672986cc94aaa1165cd45931389cd2dbfe699c45",
+  "machine": "x86",
+  "timestamp": 1486106193,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 238245,
+    "rsize": 238592,
+    "entropy": 6.51,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 71912,
+    "rsize": 72192,
+    "entropy": 4.58,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 24316,
+    "rsize": 8704,
+    "entropy": 3.83,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 61424,
+    "rsize": 61440,
+    "entropy": 6.45,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 33146,
+    "rsize": 33280,
+    "entropy": 3.49,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": {
+   "size": 6376
+  },
+  "version_info": {
+   "CompanyName": "Adobe Systems Incorporated",
+   "EnglishName": "English",
+   "FileDescription": "Adobe Reader and Acrobat Manager Helper",
+   "FileVersion": "1.824.21.4663",
+   "LanguageId": "0409",
+   "LegalCopyright": "Copyright 2013 Adobe Systems Incorporated",
+   "ProductVersion": "1.824.21.4663"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "COMDLG32.dll",
+   "CRYPT32.dll",
+   "GDI32.dll",
+   "KERNEL32.dll",
+   "OLEACC.dll",
+   "OLEAUT32.dll",
+   "PSAPI.DLL",
+   "SHELL32.dll",
+   "SHLWAPI.dll",
+   "USER32.dll",
+   "USERENV.dll",
+   "WINSPOOL.DRV",
+   "WINTRUST.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_inject": [
+    "SetWindowsHookExW"
+   ],
+   "proc_exec": [
+    "CreateProcessW",
+    "ShellExecuteW"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "proc_enum": [
+    "CreateToolhelp32Snapshot",
+    "EnumProcesses",
+    "OpenProcess",
+    "Process32FirstW"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteKeyW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "privilege": [
+    "OpenProcessToken"
+   ],
+   "crypto": [
+    "CryptAcquireContextW",
+    "CryptHashData"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitialize"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ],
+   "screen": [
+    "GetDC"
+   ],
+   "hook_kb": [
+    "GetKeyState",
+    "SetWindowsHookExW"
+   ]
+  }
+ },
+ {
+  "stream": "armsvc.exe",
+  "size": 82640,
+  "sha256": "a36cc49a0c829a5c4d6cf273791071213f5ffb57dc7022d523cfb731374ff63c",
+  "machine": "x86",
+  "timestamp": 1486106155,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 48307,
+    "rsize": 48640,
+    "entropy": 6.01,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 18324,
+    "rsize": 18432,
+    "entropy": 4.24,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 3096,
+    "rsize": 1024,
+    "entropy": 2.63,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 4020,
+    "rsize": 4096,
+    "entropy": 4.83,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 3030,
+    "rsize": 3072,
+    "entropy": 6.15,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": false,
+  "embedded_signature": {
+   "size": 6352
+  },
+  "version_info": {
+   "CompanyName": "Adobe Systems Incorporated",
+   "FileDescription": "Adobe Acrobat Update Service",
+   "FileVersion": "1.824.21.4663",
+   "InternalName": "armsvc.exe",
+   "LegalCopyright": "Copyright © 2013 Adobe Systems Incorporated.  All rights reserved.",
+   "OriginalFilename": "armsvc.exe",
+   "ProductName": "Adobe Acrobat Update Service",
+   "ProductVersion": "1.824.21.4663"
+  },
+  "exports": [],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "CRYPT32.dll",
+   "KERNEL32.dll",
+   "MSVCR90.dll",
+   "OLEAUT32.dll",
+   "SHELL32.dll",
+   "USER32.dll",
+   "WINTRUST.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "ShellExecuteExW"
+   ],
+   "proc_term": [
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteKeyW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW",
+    "RegQueryValueExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "service_ctl": [
+    "ControlService",
+    "CreateServiceW",
+    "DeleteService",
+    "OpenSCManagerW"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitialize"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "armmsi_s005_ca",
+  "size": 102600,
+  "sha256": "b3df20d9b65d248a90d6b2a168fd7ec40b28850f89e70ce5fbc0f9d41cbcf4c5",
+  "machine": "x86",
+  "timestamp": 1486106134,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 64058,
+    "rsize": 64512,
+    "entropy": 6.62,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 17299,
+    "rsize": 17408,
+    "entropy": 5.17,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 12028,
+    "rsize": 5120,
+    "entropy": 3.34,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 1516,
+    "rsize": 1536,
+    "entropy": 4.19,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 6404,
+    "rsize": 6656,
+    "entropy": 4.14,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 6344
+  },
+  "version_info": {
+   "Comments": "Acrobat Installer Utility",
+   "CompanyName": "Adobe Systems Incorporated",
+   "FileDescription": "ARM Installer Dynamic Link Library",
+   "FileVersion": "1.824.21.4663",
+   "InternalName": "ArmInst",
+   "LegalCopyright": "Copyright © 2013 Adobe Systems Incorporated.  All rights reserved.",
+   "OriginalFilename": "ArmInst.dll",
+   "ProductName": "ARM Installer Dynamic Link Library",
+   "ProductVersion": "1.824.21.4663"
+  },
+  "exports": [
+   "AddTask",
+   "CleanupCachedSource",
+   "RemoveTask",
+   "StartArmService"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "ADVAPI32.dll",
+   "KERNEL32.dll",
+   "OLEAUT32.dll",
+   "SHELL32.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "reg_write": [
+    "RegCreateKeyExW",
+    "RegDeleteValueW",
+    "RegSetValueExW"
+   ],
+   "reg_read": [
+    "RegOpenKeyExW"
+   ],
+   "file_del": [
+    "DeleteFileW"
+   ],
+   "file_enum": [
+    "FindFirstFileW",
+    "FindNextFileW"
+   ],
+   "service_ctl": [
+    "OpenSCManagerW",
+    "StartServiceW"
+   ],
+   "com_schtasks": [
+    "CoCreateInstance",
+    "CoInitializeEx"
+   ],
+   "debug_anti": [
+    "GetTickCount",
+    "IsDebuggerPresent",
+    "QueryPerformanceCounter"
+   ]
+  }
+ },
+ {
+  "stream": "armmsi_s024_ca",
+  "size": 99248,
+  "sha256": "73f7e51214b775421f6679acabc51ac1d34b4271116f5f3dd3426df50d214886",
+  "machine": "x86",
+  "timestamp": 1169268998,
+  "sections": [
+   {
+    "name": ".text",
+    "vsize": 51046,
+    "rsize": 53248,
+    "entropy": 6.47,
+    "executable": true,
+    "writable": false
+   },
+   {
+    "name": ".rdata",
+    "vsize": 7347,
+    "rsize": 8192,
+    "entropy": 4.25,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".data",
+    "vsize": 21200,
+    "rsize": 16384,
+    "entropy": 2.34,
+    "executable": false,
+    "writable": true
+   },
+   {
+    "name": ".rsrc",
+    "vsize": 944,
+    "rsize": 4096,
+    "entropy": 0.98,
+    "executable": false,
+    "writable": false
+   },
+   {
+    "name": ".reloc",
+    "vsize": 5492,
+    "rsize": 8192,
+    "entropy": 3.47,
+    "executable": false,
+    "writable": false
+   }
+  ],
+  "subsystem": 0,
+  "is_dll": true,
+  "embedded_signature": {
+   "size": 5040
+  },
+  "version_info": {
+   "Comments": "",
+   "CompanyName": "Macrovision Corporation",
+   "FileDescription": "SetAllUsers",
+   "FileVersion": "12.0.58849",
+   "InternalName": "SetAllUsers",
+   "LegalCopyright": "Copyright (C) 2006 Macrovision Corporation",
+   "LegalTrademarks": "",
+   "OriginalFilename": "SetAllUsers.dll",
+   "ProductName": "InstallShield",
+   "ProductVersion": "12.0"
+  },
+  "exports": [
+   "PrintScrollableText",
+   "SetAllUsers",
+   "SetTARGETDIR"
+  ],
+  "rich_header": {
+   "present": true
+  },
+  "import_dlls": [
+   "KERNEL32.dll",
+   "OLEAUT32.dll",
+   "SHELL32.dll",
+   "USER32.dll",
+   "msi.dll",
+   "ole32.dll"
+  ],
+  "capabilities_detail": {
+   "proc_exec": [
+    "ShellExecuteExA"
+   ],
+   "proc_term": [
+    "ExitProcess",
+    "TerminateProcess"
+   ],
+   "file_del": [
+    "DeleteFileA"
+   ],
+   "com_schtasks": [
+    "CLSIDFromProgID"
+   ]
+  }
+ }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://helpx.adobe.com/ca/enterprise/kb/network-endpoints.html",
+    "name": "Network endpoints for Adobe apps & services | Enterprise",
+    "snippet": "Read on to find URLs and domains that must be accessible on port 443 for relevant Adobe applications and services to function correctly.",
+    "host_name": "helpx.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/SysAdminDoc/Disable-AdobeTelemetry",
+    "name": "Disable Adobe Telemetry - GitHub",
+    "snippet": "Firewall Blocks resolved telemetry addresses and known telemetry executables. Hosts file Adds a clearly marked sinkhole block and removes Adobe WAM reinjection ...",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/pihole/comments/73z49u/adobe_blocklist_with_detailed_info",
+    "name": "Adobe Blocklist with detailed info : r/pihole - Reddit",
+    "snippet": "I created a simple Adobe block list from Adobe's official document after the enlightening discussion here. Latest host block address. Adobe ...",
+    "host_name": "www.reddit.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.scribd.com/document/819270679/Hosts-Adobe-Bloqueo-Manual-Recomendado",
+    "name": "Adobe Hosts Block List 2025 | PDF - Scribd",
+    "snippet": "The document contains a list of domain names associated with Adobe services, these domains may be blocked or redirected.",
+    "host_name": "www.scribd.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/ethanaicode/Adobe-Block-Hosts-List",
+    "name": "ethanaicode/Adobe-Block-Hosts-List - GitHub",
+    "snippet": "This repository contains a list of host entries designed to block Adobe activation servers. By adding these entries to your system's hosts file, ... Missing:  telemetry  | Show results with:",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=p1O5mx0bMAE",
+    "name": "How to block Adobe Acrobat Internet Connection (Easiest Way",
+    "snippet": "... Firewall (1:20), editing the hosts file (4:00), and configuring ... telemetry, and potential online licensing issues. This tutorial ... Missing:  domains  list",
+    "host_name": "www.youtube.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://gitverse.ru/ignacio/a-dove-is-dumb",
+    "name": "ignacio/a-dove-is-dumb: Easily block Adobe  - GitVerse",
+    "snippet": "Quick, easy and painless way of blocking Adobe's telemetry checking servers. Updated continuously, without blocking other network-required ... Missing:  Acrobat  firewall",
+    "host_name": "gitverse.ru",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=D_hkYhL78co",
+    "name": "How to block Adobe Acrobat Internet Connection 2026 (Quick",
+    "snippet": "Follow these steps to update, block Adobe Acrobat Internet Connection. It's super simple, as long as you abide by a few rules.",
+    "host_name": "www.youtube.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

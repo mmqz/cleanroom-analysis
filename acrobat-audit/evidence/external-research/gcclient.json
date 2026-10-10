@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://community.adobe.com/questions-9/adobegcclient-exe-acrobat-cpu-bloat-how-to-fix-1247858",
+    "name": "adobegcclient.exe Acrobat cpu bloat -- how to fix? | Community",
+    "snippet": "Adobe Acrobats' protection application, adobegcclient.exe, is consistently eating up 25% of my CPU and causing my fan to continuously run high. Missing:  1.0  scheduled",
+    "host_name": "community.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.thewindowsclub.com/what-is-adobe-gc-invoker-utility-adobegcclient-exe",
+    "name": "What is Adobe GC Invoker Utility? Can I disable",
+    "snippet": "AdobeGCClient.exe shows high CPU usage and errors, including “MSVCP140.dll is missing” or “Bad image”. To stop this: Disable AGCInvokerUtility. ... Missing:  1.0  scheduled",
+    "host_name": "www.thewindowsclub.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/techsupport/comments/iequlm/what_are_these_start_up_items_long_pc_boot_up",
+    "name": "What are these start up items? Long pc boot up times - Reddit",
+    "snippet": "The GC Invoker Utility is a part of the software Adobe uses to check for tampering with any of the software in its suite (Acrobat Pro, Photoshop ... Missing:  high  | Show results with:",
+    "host_name": "www.reddit.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.partitionwizard.com/partitionmagic/gc-invoker-utility.html",
+    "name": "What Is Adobe GC Invoker Utility & How to Disable It",
+    "snippet": "lots of users reported that the agcinvokerutility.exe process eats up large CPU and memory resources in the background. That may slow down the ... Missing:  1.0  scheduled",
+    "host_name": "www.partitionwizard.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-712/adobe-gc-invoker-utility-1063333",
+    "name": "Adobe GC Invoker Utility | Community",
+    "snippet": "Adobe had created hundreds of scheduled tasks to run GC Invoker, which promptly ran and killed the computer each time. Removing those scheduled ... Missing:  high  CPU",
+    "host_name": "community.adobe.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://forums.malwarebytes.com/topic/251912-high-cpu-usage-until-the-task-manager-opens",
+    "name": "High CPU usage until the Task manager opens",
+    "snippet": "Hi, I have 10 days old HP Z2 G4 workstation with windows 10 64 bit workstation, couple of days back i noticed the fan speed is high (Noisy), ...",
+    "host_name": "forums.malwarebytes.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.bleepingcomputer.com/forums/t/799493/cpu-running-hard-high-t-screen-icons-flashing-unknown-cause",
+    "name": "CPU running hard, High T, Screen & icons flashing, unknown",
+    "snippet": "CPU running hard, High T, Screen & icons flashing, unknown cause. System32\\Tasks\\AdobeGCInvoker-1.0 =>",
+    "host_name": "www.bleepingcomputer.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.vividrepairs.co.uk/adobe-crash-processor-battery-drain",
+    "name": "Adobe Crash Processor Battery Drain? Fix It Fast 2026",
+    "snippet": "The fix is to kill the process in Task Manager, uninstall remaining Adobe products using official tools, disable auto-start entries in the ... Missing:  1.0  | Show results with:",
+    "host_name": "www.vividrepairs.co.uk",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

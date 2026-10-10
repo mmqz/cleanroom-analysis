@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://community.adobe.com/questions-712/how-can-i-prevent-adobe-and-creative-cloud-processes-from-running-when-i-am-not-using-any-adobe-apps-1157186",
+    "name": "How can I prevent Adobe and Creative Cloud processes from",
+    "snippet": "First, open the Task Manager (on Windows) or Login Items in System Settings (on macOS) and disable any Adobe-related startup entries such as ... Missing:  CoreSync  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-9/stop-background-processes-on-macos-1274938",
+    "name": "Stop background processes on macOS - Adobe Community",
+    "snippet": "You can try turning off the Coresync from the CC desktop app's preferences. Please refer to this discussion and follow the steps suggested here: Missing:  CCXProcess  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-606/how-can-i-disable-background-processes-and-services-573771",
+    "name": "How can I disable background processes and services",
+    "snippet": "I see 3 processes in task manager in startup tab that are linked with Creative Cloud software: CCX Process, CCX Process.exe and Creative Coud ... Missing:  CoreSync  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-606/how-can-i-disable-core-sync-and-updaters-581544",
+    "name": "How can I disable core sync and updaters? - Adobe Community",
+    "snippet": "If you're seeing performance issues due to Adobe background processes first ensure your operating system is up to date and that you're using the ... Missing:  AdobeIPCBroker  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-606/ipc-broker-constantly-running-in-background-577909",
+    "name": "IPC Broker constantly running in background - Adobe Community",
+    "snippet": "I have the AdobeIPCBroker constantly running in the background, and taking up 98% CPU at all times. I un-synced Creative Cloud, ... Missing:  CCXProcess  | Show results with:",
+    "host_name": "community.adobe.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/FuckAdobe/comments/1txnzsd/adobe_creative_cloud_secretly_ran_8_background",
+    "name": "Adobe Creative Cloud secretly ran 8 background processes on",
+    "snippet": "You have to shut down the entire Creative Cloud app to make it stop. • AdobeIPCBroker.exe — inter-process communication broker. Always running, ... Missing:  Acrobat  | Show results with:",
+    "host_name": "www.reddit.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.adobe.com/questions-606/how-do-i-remove-creative-cloud-syncing-services-577712",
+    "name": "How do I REMOVE creative cloud syncing services? | Community",
+    "snippet": "Is there a way to stop everything from syncing? This is a problem that's constantly making me rework my workflow and it's getting old.",
+    "host_name": "community.adobe.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=wE-7mMh3big",
+    "name": "Stop Adobe Background Processes From Automatically",
+    "snippet": "https://macmost.com/e-2766 If you have Adobe Creative Cloud installed then every time you start your Mac the Creative Cloud app and a number ... Missing:  CCXProcess  CoreSync",
+    "host_name": "www.youtube.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]

@@ -1,0 +1,669 @@
+[
+ {
+  "stream": "s004_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "2c9876c4cb7a",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s005_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "1ab814bbf415",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s006_409600",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 409600,
+  "sha256_12": "4f48a32ab0b4",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s007_409600",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 409600,
+  "sha256_12": "4f48a32ab0b4",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s008_409600",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 409600,
+  "sha256_12": "4f48a32ab0b4",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s009_409600",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 409600,
+  "sha256_12": "2b977b200ff7",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s010_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "b5075ffa1858",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s011_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "7c2424c29f1b",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s012_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "d6fa62f5d5ab",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s013_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "3de957955db9",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s014_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "98c2f0e907b6",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s015_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "1ab814bbf415",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s016_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "1d1374f4f373",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s017_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "825c761680e0",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s018_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "0621453a90c2",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s019_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "d8684b657a4a",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s020_348160",
+  "identity": "_IsIcoRes.exe",
+  "machine": "x86",
+  "is_dll": false,
+  "size": 348160,
+  "sha256_12": "c7edf5315edd",
+  "capabilities": [
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": false,
+  "import_dll_count": 1
+ },
+ {
+  "stream": "s021_121000",
+  "identity": "ANCUtili.dll",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 121000,
+  "sha256_12": "877aad74f9a1",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 13
+ },
+ {
+  "stream": "s022_143016",
+  "identity": "AbcpyDll",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 143016,
+  "sha256_12": "8e9fb9804249",
+  "capabilities": [
+   "debug_anti",
+   "file_enum",
+   "proc_exec",
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 4
+ },
+ {
+  "stream": "s023_606376",
+  "identity": "ADelRCP",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 606376,
+  "sha256_12": "3a6f087f4f80",
+  "capabilities": [
+   "com_schtasks",
+   "crypto",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "privilege",
+   "proc_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "service_ctl"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path",
+   "proc_exec+script_cmd"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 10
+ },
+ {
+  "stream": "s024_134848",
+  "identity": "ArmInst",
+  "machine": "x86",
+  "is_dll": true,
+  "size": 134848,
+  "sha256_12": "fe3fc208f56d",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "service_ctl"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 6
+ },
+ {
+  "stream": "s025_486568",
+  "identity": "Adobeisf",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 486568,
+  "sha256_12": "32c5c1be72b3",
+  "capabilities": [
+   "debug_anti",
+   "file_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "service_ctl"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 8
+ },
+ {
+  "stream": "s026_174248",
+  "identity": "AcroSup64",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 174248,
+  "sha256_12": "d6ba36f00332",
+  "capabilities": [
+   "debug_anti",
+   "file_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 4
+ },
+ {
+  "stream": "s027_482984",
+  "identity": "AcroTgts",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 482984,
+  "sha256_12": "b76f0ac3f984",
+  "capabilities": [
+   "debug_anti",
+   "file_enum",
+   "privilege",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 6
+ },
+ {
+  "stream": "s028_140968",
+  "identity": "ADelRCP",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 140968,
+  "sha256_12": "5f833f6f1c18",
+  "capabilities": [
+   "debug_anti",
+   "file_enum",
+   "proc_term",
+   "reg_read"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 3
+ },
+ {
+  "stream": "s030_34984",
+  "identity": "?",
+  "machine": "x64",
+  "is_dll": false,
+  "size": 34984,
+  "sha256_12": "8d4c0315daf3",
+  "capabilities": [
+   "debug_anti",
+   "file_del",
+   "proc_term",
+   "service_ctl"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 14
+ },
+ {
+  "stream": "s032_154280",
+  "identity": "EMIOrien",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 154280,
+  "sha256_12": "e07b62262388",
+  "capabilities": [
+   "debug_anti",
+   "file_enum",
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 2
+ },
+ {
+  "stream": "s033_21672",
+  "identity": "?",
+  "machine": "x64",
+  "is_dll": false,
+  "size": 21672,
+  "sha256_12": "c424cd427920",
+  "capabilities": [
+   "debug_anti",
+   "proc_exec",
+   "proc_term",
+   "service_ctl"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 11
+ },
+ {
+  "stream": "s034_204968",
+  "identity": "IWActs",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 204968,
+  "sha256_12": "d42cd44dae14",
+  "capabilities": [
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 6
+ },
+ {
+  "stream": "s035_379904",
+  "identity": "ISRegSvr.dll",
+  "machine": "x86",
+  "is_dll": true,
+  "size": 379904,
+  "sha256_12": "475a5985bd41",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 6
+ },
+ {
+  "stream": "s036_304296",
+  "identity": "InstOOBE",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 304296,
+  "sha256_12": "4571fb4a3e81",
+  "capabilities": [
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 4
+ },
+ {
+  "stream": "s037_492712",
+  "identity": "InstPDFM",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 492712,
+  "sha256_12": "9f6b0ea66dd3",
+  "capabilities": [
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "privilege",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 7
+ },
+ {
+  "stream": "s038_525480",
+  "identity": "InstUtil",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 525480,
+  "sha256_12": "7917920ba488",
+  "capabilities": [
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "privilege",
+   "proc_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "service_ctl"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 6
+ },
+ {
+  "stream": "s056_104616",
+  "identity": "PrintInf",
+  "machine": "x86",
+  "is_dll": true,
+  "size": 104616,
+  "sha256_12": "20b9094a5af2",
+  "capabilities": [
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 5
+ },
+ {
+  "stream": "s057_344232",
+  "identity": "PerfInst",
+  "machine": "x64",
+  "is_dll": true,
+  "size": 344232,
+  "sha256_12": "0d2337a98225",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "file_enum",
+   "proc_term",
+   "reg_read",
+   "reg_write"
+  ],
+  "suspicious": [
+   "reg_write+autoexec_path"
+  ],
+  "suspicious_level": "medium",
+  "embedded_signature": true,
+  "import_dll_count": 6
+ },
+ {
+  "stream": "s059_144784",
+  "identity": "SetAllUsers",
+  "machine": "x86",
+  "is_dll": true,
+  "size": 144784,
+  "sha256_12": "4c3d85e7c499",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "file_del",
+   "proc_enum",
+   "proc_exec",
+   "proc_term"
+  ],
+  "suspicious": [],
+  "suspicious_level": "none",
+  "embedded_signature": true,
+  "import_dll_count": 7
+ }
+]

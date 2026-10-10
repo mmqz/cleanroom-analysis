@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DispatchInfo version="1.0">
+	<DispatchTable version="1.0">
+		<Table scope="PR">
+			<CFU>https://genuine.adobe.com/server/services/update/v1</CFU>
+			<FetchRules>https://genuine.adobe.com/server/services/rules/v1</FetchRules>
+			<FetchRulesV2>https://genuine.adobe.com/server/services/rules/v2</FetchRulesV2>
+			<PostRulesData>https://genuine.adobe.com/server/services/check/v1</PostRulesData>
+			<NotifyInstall>https://genuine.adobe.com/server/services/installation/v1</NotifyInstall>
+			<InAppEvents>https://genuine.adobe.com/server/services/consequence/appevents/v1</InAppEvents>
+			<MachineEvents>https://genuine.adobe.com/server/services/machineevents/v1</MachineEvents>
+            <ClientConfiguration>https://genuine.adobe.com/server/services/clientconfiguration/v1</ClientConfiguration>
+			<ETSEndPoint>https://na1e.services.adobe.com/hsmessaging/rest</ETSEndPoint>
+		</Table>
+		<Table scope="GM">
+			<CFU>https://genuine.adobe.com/server/services/update/v1</CFU>
+			<FetchRules>https://genuine.adobe.com/server/services/rules/v1</FetchRules>
+			<FetchRulesV2>https://genuine.adobe.com/server/services/rules/v2</FetchRulesV2>
+			<PostRulesData>https://genuine.adobe.com/server/services/check/v1</PostRulesData>
+			<NotifyInstall>https://genuine.adobe.com/server/services/installation/v1</NotifyInstall>
+			<InAppEvents>https://genuine.adobe.com/server/services/consequence/appevents/v1</InAppEvents>
+			<MachineEvents>https://genuine.adobe.com/server/services/machineevents/v1</MachineEvents>
+            <ClientConfiguration>https://genuine.adobe.com/server/services/clientconfiguration/v1</ClientConfiguration>
+			<ETSEndPoint>https://na1e.services.adobe.com/hsmessaging/rest</ETSEndPoint>
+		</Table>
+	</DispatchTable>
+	<DTSignature>kRRnxxcT3lmwclj/OFE5lo/uNFM0TO9m46quvT/yvY55S6A/KS7OD5lt7G0PdIXD94uQIgbp6L5oD0WqxhbTTWUvgllfEIXgYhRqLRULfEEoNUin24BuJAfof4Etuxbew+UlmOAmeW0f1Xg0uJ9+3eFaldLoO0IduCYrw6vQMRrkraLZwVBNuQyuo2DlbJ4QNEEQJmj5lRGkzhNdNJvmtVLV+wSLODPR7O9x5k6E8wtZxIDqmGTQtzo3OByzwBMC9fpmPt07aQYJA6uXwRs8pPRjr4DIqvCsTzDGew6wa7D2APt2Y/QkQVCGhZpl7qjvHJNOlYtFVGldqYZRK0aNdw==</DTSignature>
+</DispatchInfo>

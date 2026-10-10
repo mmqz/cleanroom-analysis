@@ -1,35 +1,43 @@
-# 净室分析系列成果（Cleanroom Analysis）
+# 净室分析系列成果（Cleanroom Analysis）— 单一总仓库
 
-本仓库收录 AI 工作台引擎研究项目的净室分析（clean-room analysis）全部成果文档。研究分两条线推进：**PDF 线**（已完成并收官，四篇文档）与**办公/画布线**（规划完成，下一批开工）。
+AI 工作台引擎净室分析研究的**全部工作成果**集中仓库（用户指定单一入口）。覆盖三条已完成审计/分析线 + 一条待启动规划线。
 
-净室纪律要点：全部分析仅基于公开可获取的一手源（官方仓库、文档、标准、CVE/厂商公告、可复核的 API 与 git 元数据）；不接触任何闭源代码；关键结论均带出处与交叉验证；二手数据（商业对比文、聚合站）仅作旁证并显式标注立场。
+净室纪律：全部分析仅基于公开一手源（官方仓库、文档、标准、CVE/厂商公告、可复核的 API 与 git 元数据）；不接触闭源代码；关键结论带出处交叉验证；二手数据仅作旁证并显式标注立场。
 
-## 文档清单与阅读顺序
+## 仓库结构
 
-| # | 文档 | 定位 | 规模 |
-|---|------|------|------|
-| 01 | [PdfCraft架构深度剖析.md](01_PdfCraft架构深度剖析.md) | PDF 线·主剖析：组件架构 / crate 全景 / 治理三层宪法 / 质量门 | 359 行 |
-| 02 | [开源PDF生态缺口与差异项深度分析.md](02_开源PDF生态缺口与差异项深度分析.md) | PDF 线·生态位：六代引擎谱系 / 缺口矩阵 / 差异化机会 | 430 行 |
-| 03 | [敌意输入与执行边界剖析（净室开发分析残项补充篇）.md](03_敌意输入与执行边界剖析（净室开发分析残项补充篇）.md) | PDF 线·安全深读：vendor 35 处补丁分类学 / 限额五层纵深 / JS 沙箱边界 / fuzz 战役 | 344 行 |
-| 04 | [净室开发分析收官报告.md](04_净室开发分析收官报告.md) | PDF 线·收官：17 维评估矩阵 / 最终判定 / 后续增量跟踪口径 | 244 行 |
-| 05 | [AI工作台引擎——办公与画布线净室分析规划.md](05_AI工作台引擎——办公与画布线净室分析规划.md) | 办公/画布线·规划：16 候选总览 / 方法论裁剪 / P0 批次表 / 排除清单 | 388 行 |
+| 路径 | 内容 | 规模 |
+|------|------|------|
+| [HANDOFF.md](HANDOFF.md) | **新会话 AI 接手指南**（项目状态/纪律/下一步/环境备忘） | — |
+| [worklog.md](worklog.md) | 全程工作日志（事实登记，追加式） | 60+ KB |
+| [pdf-line/](pdf-line/) | L2·PdfCraft 净室分析四篇 + L3·办公/画布线规划 | 5 文档 1765 行 |
+| [agents-md-audit/](agents-md-audit/) | L0·AGENTS.md 架构级安全审计（9 分析 + 5 证据 + 5 工具） | 20 文件 |
+| [acrobat-audit/](acrobat-audit/) | L1·Acrobat Pro DC 安装器审计 R1~R6（4 分析 + 25 证据 + 工具链 + 哈希登记） | 70+ 文件 |
+| [tools/push_to_github.sh](tools/push_to_github.sh) | 零落盘推送脚本（token 仅内存单次传递） | — |
 
-推荐阅读路径：01 → 02 → 03 → 04 为 PDF 线完整闭环（架构 → 生态位 → 安全边界 → 收官判定）；05 为下一批（Univer / Excalidraw / ComfyUI 等办公与画布对象）的分析规划，可直接按批次表开工。
+## 三线成果速览
 
-## 方法论资产（可迁移）
+### L0 · AGENTS.md 规范审计（2026-10-08~09）
+vercel/AGENTS.md 等规范的全量架构级安全审计：供应链验证 7 仓库、提示注入面、防御性代码逐条核查（vercel 凭据黑名单、skillguard 扫描器等）、9 篇分析 + 可复现工具。详见 `agents-md-audit/README.md`。
 
-- **17 维评估矩阵**（04 收官报告定稿）：架构 / 组件 / 治理 / 质量 / 安全 / 许可 / 生态 / 社区 / 文档 / 路线 / 测试 / 基准 / 差异 / 壁垒 / 会计 / 谱系 / 残项
-- **净室合规 18 条清单**：全系列文档自检与交叉核对的纪律基线
-- **敌意输入固定章节**（03 深化）：限额五层纵深（L0 结构拒绝 / L2 钳制+看门狗 / L3 数量+时间预算 / L4 事件总量 / UI 输入面）与三种超限行为学（硬拒绝 / 钳制降级 / 弃置）
-- **事实登记表**：每篇文档末尾的"已核带源"与"待核"清单，二手数据显式声明
+### L1 · Acrobat 安装器审计（2026-10-09）
+Acrobat Pro DC 26.002.21931 安装器（TLS+MD5+Authenticode 四重验证）黑盒取证：MSI 数据库解构、36 PE 能力矩阵（零网络导入/零注入 API）、R6 AGS 取证（ARM 活体通道全链验签、gc_dispatchtable 网络面全景、SKIP_GC=1 官方阻断开关）。二进制原件在 [mmqz/acrobat-pro-audit](https://github.com/mmqz/acrobat-pro-audit)，本仓收分析与证据。详见 `acrobat-audit/README.md`。
 
-## 结论速览
+### L2 · PdfCraft 净室分析（2026-10-09~10，已收官）
+- `01` 架构深度剖析（359 行）：组件架构 / crate 全景 / 治理三层宪法 / 质量门
+- `02` 开源 PDF 生态缺口与差异项（430 行）：六代引擎谱系 / 缺口矩阵 / 差异化机会 / 许可证终审
+- `03` 敌意输入与执行边界（344 行）：vendor 35 处补丁分类学 / 限额五层纵深 / JS 沙箱 / fuzz 战役
+- `04` 收官报告（244 行）：17 维评估矩阵 / 最终判定（净室开发成立）/ 增量跟踪口径
 
-- PdfCraft（2026-09-30 发布，Apache-2.0，Rust workspace 30 crate 量级）：净室开发判定成立——会计面（252 commits、96% AI co-author）、规范密度、fuzz 战果（15 万变异文件、2026-10-05 起 0 crash）均可复核；唯 vendor 补丁带与 parity 门不在 GitHub CI 两处 caveat。
-- 开源 PDF 生态：渲染/解析层拥挤，**结构化读写管线与 AI-native 工具面**为真实缺口；六代引擎谱系与许可证终审（672 依赖零 copyleft，唯一灰区 ocrs 模型 CC-BY-SA）见 02。
-- 办公/画布线：初步判断"无 PDF 式壁垒"，两条 caveat（办公保真难度非零、红海差异化靠 AI-native）；P0 = Univer 深读 + Excalidraw 深读 + ComfyUI 协议 pass。
+### L3 · 办公与画布线规划（待启动）
+`05` 规划文档（388 行）：16 候选总览（Univer/OnlyOffice/HyperFormula/Excalidraw/tldraw/drawio-maxGraph/ComfyUI/InvokeAI…）、11 维方法论裁剪、P0 批次表（R1 = Univer 深读 + Excalidraw 深读 + ComfyUI 协议 pass）、排除清单（tldraw 水印/Penpot MPL 待核项等）。
 
-## 关联仓库
+## 新 AI / 新读者入口
 
-- [mmqz/agents-md-audit](https://github.com/mmqz/agents-md-audit) — AGENTS.md 架构级安全审计（前置研究）
-- [mmqz/acrobat-pro-audit](https://github.com/mmqz/acrobat-pro-audit) — Adobe Acrobat 安装器安全审计（PDF 生态闭源对照面）
+- **AI 接手**：读 `HANDOFF.md` → `worklog.md` 尾部 → `pdf-line/05` §3/§7
+- **人类阅读**：`pdf-line/` 01→02→03→04 为 PDF 线闭环，05 为下一批规划；两条审计线各有子目录 README
+
+## 关联仓库（原始推送存档）
+
+- [mmqz/agents-md-audit](https://github.com/mmqz/agents-md-audit) — L0 原始仓（内容已并入本仓）
+- [mmqz/acrobat-pro-audit](https://github.com/mmqz/acrobat-pro-audit) — L1 原始仓（含 Adobe 二进制原件，内容已并入本仓）

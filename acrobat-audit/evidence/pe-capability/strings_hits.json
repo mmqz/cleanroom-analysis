@@ -1,0 +1,883 @@
+{
+ "s004_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s005_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s006_409600": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s007_409600": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s008_409600": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s009_409600": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s010_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s011_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s012_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s013_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s014_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s015_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s016_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s017_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s018_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s019_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s020_348160": {
+  "identity": "_IsIcoRes.exe",
+  "hits": {
+   "autoexec": [
+    "Runtime",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ },
+ "s021_121000": {
+  "identity": "ANCUtili.dll",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "RUNTIME140.dll",
+    "RUNTIME140_1.dll",
+    "run",
+    "runtime-l1-1-0.dll"
+   ],
+   "autoexec_w": [
+    "runk"
+   ]
+  }
+ },
+ "s022_143016": {
+  "identity": "AbcpyDll",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s023_606376": {
+  "identity": "ADelRCP",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "RunTime",
+    "Runtime",
+    "StartupInfoW",
+    "run",
+    "runtime_error@std@@"
+   ],
+   "url_w": [
+    "https://clients2.google.com/service/update2/crx"
+   ],
+   "cmdline_w": [
+    "Rundll32",
+    "rundll32"
+   ],
+   "autoexec_w": [
+    "RunTimeProperties",
+    "RunTimeProperties].",
+    "Rundll32.exe\"",
+    "Running",
+    "Runtime",
+    "Runtime]",
+    "run",
+    "rundll32.exe",
+    "runk",
+    "running",
+    "running.",
+    "runtime",
+    "runtime-l1-1-2"
+   ],
+   "service_w": [
+    "AdobeARMservice"
+   ],
+   "keyword_w": [
+    "Serial"
+   ]
+  }
+ },
+ "s024_134848": {
+  "identity": "ArmInst",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "Run",
+    "runtime-l1-1-2"
+   ],
+   "service_w": [
+    "AdobeARMservice"
+   ],
+   "taskname_w": [
+    "Adobe Acrobat Update Task"
+   ]
+  }
+ },
+ "s025_486568": {
+  "identity": "Adobeisf",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "Runtime",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s026_174248": {
+  "identity": "AcroSup64",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "cmdline_w": [
+    "regsvr32"
+   ],
+   "autoexec_w": [
+    "runas",
+    "running",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s027_482984": {
+  "identity": "AcroTgts",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "Runtime",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s028_140968": {
+  "identity": "ADelRCP",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "run",
+    "runk",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s030_34984": {
+  "identity": "?",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "RUNTIME140.dll",
+    "RUNTIME140_1.dll",
+    "StartupInfoW",
+    "run",
+    "runtime-l1-1-0.dll"
+   ]
+  }
+ },
+ "s032_154280": {
+  "identity": "EMIOrien",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "domain_w": [
+    "www.adobe.com/go/getacrobatdc"
+   ],
+   "autoexec_w": [
+    "runtime-l1-1-2"
+   ],
+   "keyword_w": [
+    "Serial",
+    "serial"
+   ]
+  }
+ },
+ "s033_21672": {
+  "identity": "?",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "RUNTIME140.dll",
+    "StartupInfoW",
+    "run",
+    "runtime-l1-1-0.dll"
+   ],
+   "cmdline_w": [
+    "msiexec"
+   ]
+  }
+ },
+ "s034_204968": {
+  "identity": "IWActs",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "RunTimeProperties",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s035_379904": {
+  "identity": "ISRegSvr.dll",
+  "hits": {
+   "url": [
+    "http://crl.verisign.com/ThawteTimestampingCA.crl0",
+    "http://crl.verisign.com/pca3-g5.crl04",
+    "http://crl.verisign.com/tss-ca.crl0",
+    "http://csc3-2010-aia.verisign.com/CSC3-2010.cer0",
+    "http://csc3-2010-crl.verisign.com/CSC3-2010.crl0D",
+    "http://logo.verisign.com/vslogo.gif04",
+    "http://ocsp.verisign.com0",
+    "http://ocsp.verisign.com0;",
+    "http://www.flexerasoftware.com0",
+    "https://www.verisign.com/cps0*",
+    "https://www.verisign.com/rpa",
+    "https://www.verisign.com/rpa0"
+   ],
+   "autoexec": [
+    "RunningObjectTable",
+    "Runtime",
+    "StartupInfoA",
+    "StartupInfoW",
+    "run",
+    "runtime"
+   ],
+   "autoexec_w": [
+    "running"
+   ]
+  }
+ },
+ "s036_304296": {
+  "identity": "InstOOBE",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run",
+    "runtime_error@std@@"
+   ],
+   "autoexec_w": [
+    "runtime-l1-1-2"
+   ],
+   "keyword_w": [
+    "serial"
+   ]
+  }
+ },
+ "s037_492712": {
+  "identity": "InstPDFM",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "STARTUP",
+    "STARTUPFOLDER",
+    "STARTUPPATH",
+    "STARTUPPATHEXCEL11",
+    "STARTUPPATHEXCEL2K",
+    "STARTUPPATHEXCELXP",
+    "STARTUPPATHWORD11",
+    "STARTUPPATHWORD2K",
+    "STARTUPPATHWORDXP",
+    "Startup",
+    "StartupInfoW",
+    "run",
+    "startup"
+   ],
+   "autoexec_w": [
+    "Runtime",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s038_525480": {
+  "identity": "InstUtil",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "Running",
+    "Runtime",
+    "runk",
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s056_104616": {
+  "identity": "PrintInf",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run"
+   ],
+   "autoexec_w": [
+    "Runtime",
+    "runtime"
+   ]
+  }
+ },
+ "s057_344232": {
+  "identity": "PerfInst",
+  "hits": {
+   "url": [
+    "http://cacerts.digicert.com/DigiCertAssuredIDRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertEVCodeSigningCA-SHA2.crt0",
+    "http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt0",
+    "http://cacerts.digicert.com/DigiCertSHA2AssuredIDTimestampingCA.crt0",
+    "http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0P",
+    "http://crl3.digicert.com/DigiCertHighAssuranceEVRootCA.crl0@",
+    "http://crl3.digicert.com/EVCodeSigningSHA2-g1.crl07",
+    "http://crl3.digicert.com/sha2-assured-ts.crl02",
+    "http://crl4.digicert.com/DigiCertAssuredIDRootCA.crl0:",
+    "http://crl4.digicert.com/DigiCertHighAssuranceEVRootCA.crl0",
+    "http://crl4.digicert.com/EVCodeSigningSHA2-g1.crl0K",
+    "http://crl4.digicert.com/sha2-assured-ts.crl0",
+    "http://ocsp.digicert.com0C",
+    "http://ocsp.digicert.com0H",
+    "http://ocsp.digicert.com0I",
+    "http://ocsp.digicert.com0O",
+    "http://www.digicert.com/CPS0",
+    "http://www.digicert.com/ssl-cps-repository.htm0",
+    "https://www.digicert.com/CPS0"
+   ],
+   "autoexec": [
+    "StartupInfoW",
+    "run",
+    "runtime_error@std@@"
+   ],
+   "autoexec_w": [
+    "runtime-l1-1-2"
+   ]
+  }
+ },
+ "s059_144784": {
+  "identity": "SetAllUsers",
+  "hits": {
+   "url": [
+    "http://crl.verisign.com/ThawteTimestampingCA.crl0",
+    "http://crl.verisign.com/pca3-g5.crl04",
+    "http://crl.verisign.com/tss-ca.crl0",
+    "http://csc3-2010-aia.verisign.com/CSC3-2010.cer0",
+    "http://csc3-2010-crl.verisign.com/CSC3-2010.crl0D",
+    "http://logo.verisign.com/vslogo.gif04",
+    "http://ocsp.verisign.com0",
+    "http://ocsp.verisign.com0;",
+    "http://www.flexerasoftware.com0",
+    "https://www.verisign.com/cps0*",
+    "https://www.verisign.com/rpa",
+    "https://www.verisign.com/rpa0"
+   ],
+   "autoexec": [
+    "Runtime",
+    "RuntimeBase@@",
+    "StartupInfoA",
+    "run",
+    "runtime"
+   ]
+  }
+ }
+}

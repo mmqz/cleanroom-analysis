@@ -1,0 +1,62 @@
+{
+ "_Tables": {
+  "stream": "069_bin_156.bin",
+  "rows": 78,
+  "cols": 1,
+  "cells": 78
+ },
+ "Property": {
+  "stream": "128_bin_1252.bin",
+  "rows": 313,
+  "cols": 2,
+  "cells": 626
+ },
+ "CustomAction": {
+  "stream": "133_TABLE?_2688.bin",
+  "rows": 336,
+  "cols": 4,
+  "cells": 1344
+ },
+ "InstallExecuteSequence": {
+  "stream": "105_bin_1512.bin",
+  "rows": 252,
+  "cols": 3,
+  "cells": 756
+ },
+ "ServiceControl": {
+  "stream": "091_POOL?_84.bin",
+  "rows": 7,
+  "cols": 6,
+  "cells": 42
+ },
+ "Media": {
+  "stream": "085_POOL?_72.bin",
+  "rows": 6,
+  "cols": 6,
+  "cells": 36
+ },
+ "Directory": {
+  "stream": "098_bin_4836.bin",
+  "rows": 806,
+  "cols": 3,
+  "cells": 2418
+ },
+ "Component": {
+  "stream": "109_bin_27696.bin",
+  "rows": 2308,
+  "cols": 6,
+  "cells": 13848
+ },
+ "Registry": {
+  "stream": "088_bin_39672.bin",
+  "rows": 3306,
+  "cols": 6,
+  "cells": 19836
+ },
+ "File": {
+  "stream": "131_bin_84480.bin",
+  "rows": 5280,
+  "cols": 8,
+  "cells": 42240
+ }
+}

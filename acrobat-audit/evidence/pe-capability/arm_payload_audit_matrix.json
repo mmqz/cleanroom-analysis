@@ -1,0 +1,128 @@
+[
+ {
+  "name": "adobearm.exe",
+  "identity": "AdobeARM.exe",
+  "machine": "x86",
+  "size": 1160408,
+  "sha256_12": "232400b5017d",
+  "capabilities": [
+   "com_schtasks",
+   "crypto",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "hook_kb",
+   "net_urldownload",
+   "net_wininet",
+   "privilege",
+   "proc_enum",
+   "proc_exec",
+   "proc_inject",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "screen",
+   "service_ctl"
+  ],
+  "flags": [
+   "network_capability",
+   "proc_inject",
+   "service_ctl",
+   "reg_write+autoexec"
+  ],
+  "embedded_signature": true,
+  "timestamp": 1486106181
+ },
+ {
+  "name": "adobearmhelper.exe",
+  "identity": "adobearmhelper.exe",
+  "machine": "x86",
+  "size": 421608,
+  "sha256_12": "ef93c3ce36b5",
+  "capabilities": [
+   "com_schtasks",
+   "crypto",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "hook_kb",
+   "privilege",
+   "proc_enum",
+   "proc_exec",
+   "proc_inject",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "screen"
+  ],
+  "flags": [
+   "proc_inject",
+   "reg_write+autoexec"
+  ],
+  "embedded_signature": true,
+  "timestamp": 1486106193
+ },
+ {
+  "name": "armsvc.exe",
+  "identity": "armsvc.exe",
+  "machine": "x86",
+  "size": 82640,
+  "sha256_12": "a36cc49a0c82",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_exec",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "service_ctl"
+  ],
+  "flags": [
+   "service_ctl",
+   "reg_write+autoexec"
+  ],
+  "embedded_signature": true,
+  "timestamp": 1486106155
+ },
+ {
+  "name": "armmsi_s005_ca",
+  "identity": "ArmInst",
+  "machine": "x86",
+  "size": 102600,
+  "sha256_12": "b3df20d9b65d",
+  "capabilities": [
+   "com_schtasks",
+   "debug_anti",
+   "file_del",
+   "file_enum",
+   "proc_term",
+   "reg_read",
+   "reg_write",
+   "service_ctl"
+  ],
+  "flags": [
+   "service_ctl",
+   "reg_write+autoexec"
+  ],
+  "embedded_signature": true,
+  "timestamp": 1486106134
+ },
+ {
+  "name": "armmsi_s024_ca",
+  "identity": "SetAllUsers",
+  "machine": "x86",
+  "size": 99248,
+  "sha256_12": "73f7e51214b7",
+  "capabilities": [
+   "com_schtasks",
+   "file_del",
+   "proc_exec",
+   "proc_term"
+  ],
+  "flags": [],
+  "embedded_signature": true,
+  "timestamp": 1169268998
+ }
+]
