@@ -460,3 +460,37 @@ Stage Summary:
 - 合并仓现为全工作台唯一接手入口：新代理读 HANDOFF + worklog + md-line/STATUS
   即可同时接手生态审计线（L3 R1）与 MD 引擎线（R24/PDF），产品操作落
   mmqz/mdcore，底稿按需 fetch mmqz/typora-re-analysis（不出仓）。
+---
+Task ID: md-r24a-1
+Agent: Super Z (main agent, 双线会话)
+Task: 用户裁决顺序（MD 检查→R24→PDF→画布）；执行 MD 实现质量审计 + 整备两提交 + R24-a 设置面核侧全轮落地
+
+Work Log:
+- 审计（Task md-audit-1，本地 worklog 详录）：六门禁全绿复现——scan.sh 0 命中 /
+  cargo 148/148 / wasm32 check clean / web 构建 OK / web smoke 15/15 / 契约门
+  13/13 / IME CDP 28/28；代码审查零 unsafe、零 TODO、unwrap 全在安全路径。
+  结论：MD 实现无问题。非阻塞发现：Slint 文档漂移 + clippy ~60 风格警告。
+- 整备提交 A（44ac3f9）：活文档 ADR-H1 对齐（tao+wry+GTK3；gates.md 历史段
+  按追加纪律不动）。
+- 整备提交 B（a7630c3）：clippy 清零（~60→2，余 2 条为 rustc 1.99 对
+  wasm_bindgen 属性参数的误报，已定性登记；含 2 处带理由的显式 allow）。
+- R24-a 主提交（2de27a2）：mdshell::settings 模块（四层 schema / TOML
+  sidecar 原子写 / 默认合并 / 未知键+注释往返保留 / v0→v1 迁移 / 三层降级
+  [文件级可修复、键级回默认、未来版本拒写]）；语义锁 14 条（含跨 crate
+  常量锁 undo_coalesce_ms==COALESCE_MS）；CONTRACT v1→v1.1 minor 升版
+  三处同步（__settings/__setSetting/mdc-settings-changed；契约门 13→16）。
+- 合规：新增 toml_edit 族 8 依赖（全 MIT/Apache 白名单族，crates.io 版本级
+  API 按锁定版本取证）；NOTICES 草案 v1.1 增补于 compliance-baseline 分支
+  （8c26272；34→42 项，UNKNOWN 0）。
+- 门禁终态：cargo 164/164（148+16）/ wasm clean / scan 0 / 契约门 16/16 /
+  smoke 15/15 / IME 28/28。推送 main+compliance-baseline 双分支，ls-remote
+  验证 local=remote；token 零残留（四仓 rg 全串零命中）。
+
+Stage Summary:
+- R24-a 收口完成：设置面核侧全轮交付（主档 §31 R24-a 四条机制合同全落地），
+  产品仓 main=2de27a2（四提交链：66d1ea6→44ac3f9→a7630c3→2de27a2）。
+- 关键决策：schema_version 为 set 面保留键；未来 schema load 全默认+save
+  拒写（防降写）；值域表双侧同源（CONTRACT §4 为共同锚）。
+- 待办提醒：定名商标检索是 R24-c 前置阻塞项（TRADEMARK_RULES §4）。
+- 下一步：R24-b 多窗口核侧（SessionManager / 窗口↔document_id 映射 /
+  资源上限 / 会话持久化；CONTRACT v1.1 增 session 面）。

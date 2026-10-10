@@ -71,8 +71,12 @@
 
 ## 7. MD 线当前可开工项
 
-1. **R24-a 设置面核侧**（本环境可做，不依赖壳实体）
-2. **R24-b 多窗口核侧**（同上）
-3. **R24-c 打包基建**（同上，产物验证留 R24-d）
+1. ~~**R24-a 设置面核侧**~~ ✅ **已完成（2026-10-10，mdcore main=2de27a2）**：
+   mdshell::settings 四层 schema + TOML sidecar + CONTRACT v1.1
+   （`__settings`/`__setSetting`/`mdc-settings-changed`）；语义锁 14 条；
+   门禁 cargo 164/164 + 契约门 16/16；NOTICES v1.1 增补（toml_edit 族 8 项，
+   compliance-baseline=8c26272）。
+2. **R24-b 多窗口核侧**（本环境可做，不依赖壳实体；CONTRACT v1.1 增 session 面）
+3. **R24-c 打包基建**（同上，产物验证留 R24-d；**前置阻塞：定名商标检索**）
 4. **PDF-a 侦察收口 + spike**（与上述并行无冲突）
 5. R24-d 壳实体合入 = **开发环境轮**（需要 R22-a..f 实体所在环境执行）
