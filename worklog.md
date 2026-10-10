@@ -603,3 +603,44 @@ Stage Summary:
   （依赖 d）+ 人工项（真机 IME / 定名商标检索）。
 - 下一步：PDF-a（用户裁决序第三项）——Acrobat-audit R5/R6 成果 →
   安全策略表 + pdfium/lopdf 三探针 spike + ADR-P1 选型定谳。
+
+---
+Task ID: pdf-a-1
+Agent: main-agent (Super Z, 会话 web-52b2ba37)
+Task: PDF-a 侦察收口 + 三探针 spike + ADR-P1 选型定谳（用户裁决开工序第三项）
+
+Work Log:
+- 输入资产整合：acrobat-audit R1-R6（六轮结论）+ pdf-line/03（限额五层
+  纵深 L0/L2/L3/L4/L7 + 三行为学 + JS 沙箱四件套 + 行业 JS 决策坐标）
+  + pdf_carrier_plan §2 选型预判。
+- pdfium 取件：fetch-pdfium.sh（版本 pin chromium/8086 + SHA256 首取
+  回填复验闭环 + non-V8 构建断言）；args.gn 实证 pdf_enable_v8=false +
+  pdf_enable_xfa=false（安全策略从构建配置层坐实）；licenses/ 全套传递
+  声明已入包（NOTICES 素材，PDF-e 义务）。
+- 三探针 spike（md-line/pdf-a/spike/，独立工程不入产品 workspace）：
+  ①打开：3p/500p load 0ms + 文本抽取 19ms→0ms；②渲染：1200px 单页
+  4ms / 连渲 5 页 17ms；③标注写：lopdf IncrementalDocument 增量写
+  Highlight，原字节前缀逐位保持（1026B→1497B +471B），lopdf 重载 ✓，
+  pdfium 交叉读回 type=Highlight ✓（双引擎互通坐实——PDF-d Acrobat
+  互通验证的引擎层预证）。
+- ADR-P1 定谳：pdfium + lopdf 双引擎分工（读写分离各取所长）；排除
+  mupdf（AGPL）/ pdfium-v8（JS 引擎不接）/ 造轮子解析器；版本 pin
+  chromium/8086 + pdfium-render 0.9.4 + lopdf 0.45.0；升级纪律三件一体
+  （fetch 复验 + 三探针 + NOTICES）。
+- 安全策略表 v1（SECURITY_POLICY.md）：S1 引擎能力面 / S2 危险对象族
+  打开时检测（只读告警不执行）/ S3 限额五层（数值框架对齐 pdfcraft
+  实测值）/ S4 沙箱进程边界（渲染工人池 + panic 隔离 + 增量写/渲染
+  快照隔离）/ S5 加密签名面 / S6 诚实缺口登记（AcroForm formfill
+  在 non-V8 构建中的存在性 = PDF-b 补探针）。
+- 产品仓 gates.md 增 PDF-a 节（spike 数据入 gates = plan 门禁要求）；
+  mdcore main 587246f→0d6ac2f 推送验证 local=remote。
+- 本仓交付：md-line/pdf-a/{ADR-P1, SECURITY_POLICY, spike/}。
+
+Stage Summary:
+- PDF-a 收口完成：选型定谳 + 实测背书 + 安全规格基线全交付。三探针
+  全过且数据强正向（500 页 0ms 打开 / 3.4ms/页渲染 / 增量互通）。
+- 关键决策：双引擎分工（pdfium 读 + lopdf 写）；non-V8 构建为唯一
+  取件形态；spike 属分析域不入产品 SBOM。
+- 下一步（依用户裁决序）：画布线（线 A）P0——canvas-a Excalidraw
+  深读 / canvas-d ComfyUI 协议 pass / office-a Univer 深读，按 11 维
+  矩阵输出进本仓；PDF-b（mdc-pdf crate 骨架）待画布 P0 后依次。

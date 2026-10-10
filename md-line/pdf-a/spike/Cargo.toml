@@ -1,0 +1,8 @@
+[package]
+name = "pdf_a_spike"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lopdf = "0.45.0"
+pdfium-render = "0.9.4"
