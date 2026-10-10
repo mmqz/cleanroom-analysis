@@ -494,3 +494,44 @@ Stage Summary:
 - 待办提醒：定名商标检索是 R24-c 前置阻塞项（TRADEMARK_RULES §4）。
 - 下一步：R24-b 多窗口核侧（SessionManager / 窗口↔document_id 映射 /
   资源上限 / 会话持久化；CONTRACT v1.1 增 session 面）。
+
+---
+Task ID: md-audit-2
+Agent: main-agent (Super Z, 会话 web-52b2ba37)
+Task: 用户裁决开工序第一项——mdcore 实现质量检查（"先检查md的实现是否有问题"，Rust 性能纪律确认，至少 4 轮持续工作）
+
+Work Log:
+- 环境重建：净工作区克隆 mmqz/mdcore（main=2de27a2，三分支就位）+ 本仓；
+  Rust 1.99.0 + wasm32 target 安装；git 身份 mdcore-dev 本仓级配置。
+- 基线双绿复现：scan.sh 0 命中 + cargo test --workspace 164/164（与 R24-a
+  收口一致）+ wasm32 check 过。
+- 深度勘察（超越上轮 md-audit-1 的门禁级审计——行为探针法）：lib.rs
+  事务管线 / tree.rs arena / op.rs 求逆 / history.rs 合并窗 / settings.rs
+  R24-a 新模块 / external.rs / fingerprint.rs 确定性 / wasm 桥 / mdshell。
+- Bug#1 抓出并修复（R24-a1，P1 静默丢设置）：set() 直写
+  doc[section][key] 在节缺失时 toml_edit IndexMut 自动升格 InlineTable
+  （index.rs Item::None 分支实证），读侧 as_table() 不认 → 值落盘但下次
+  load 回默认。修复：ensure_section（写侧规范化：缺失→标准表 / inline→
+  值保留升格 / 异形→空表）+ item_of 改 as_table_like（读侧容错）。
+  探针 3 条全红复现 → 修复后全绿 → 升级为 r24_settings.rs §10 语义锁。
+- Bug#2 抓出并修复（R24-a2，undo 破坏精确恢复不变量）：invert_op 对
+  SetMark 无条件翻转 add，no-op 场景（冗余 add / 移除不存在 span）的
+  undo 会删 mark / 凭空造 mark。修复：逆方向由 state-before 的 span
+  存在性决定（no-op→同向幂等）。附带加固 SetMark 区间校验
+  （start>end / end>len → Reject）。合并窗并条对照组语义固化。
+  锁 ×4 新套件 r24_quality_fixes.rs。
+- 门禁终态：cargo 171/171（164+7）/ scan 0 / wasm32 clean / clippy
+  零新增（2 条既有 wasm-bindgen 宏告警，已登记基线）。
+- 提交推送：mdcore main 2de27a2→db305ab，ls-remote 验证 local=remote；
+  token 磁盘零残留（全仓 rg 零命中）。gates.md 增「R24 质量审计轮」节，
+  README 状态快照同步。
+
+Stage Summary:
+- 质量检查结论：mdcore 实现**总体过硬**（架构/ADR 纪律/事务语义扎实），
+  但深挖出 2 个真 bug（均为上轮门禁级审计不可见的边界缺陷）并已修复
+  +7 语义锁背书。用户"先检查"的决策被证明有效。
+- R24-a1：settings 写读形态不对称（toml_edit 自动 inline 表）——静默丢设置。
+- R24-a2：SetMark 求逆不对称——no-op 的 undo 破坏「精确恢复前态」。
+- 下一步：R24-b 多窗口核侧（SessionManager / 窗口↔document_id 映射 /
+  资源上限 / 会话持久化），随后 R24-c 打包基建（前置：定名商标检索）、
+  PDF-a（Acrobat 成果转化 + pdfium/lopdf 探针 + ADR-P1）。
