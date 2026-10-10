@@ -762,3 +762,47 @@ Stage Summary:
   agent 同一 op 通道四项列 P0 移植；OOXML 开源进出登记为差异化机会；
   op-first 与快照即模型的取舍再获实证。
 - 下一步：主线索转线 B PDF-b（mdc-pdf crate 骨架，pdf_carrier_plan §5）。
+
+---
+Task ID: pdf-b-1
+Agent: main-agent (Super Z) + 实现代理 pdf-b-1i + 独立审查代理 pdf-b-1r
+Task: 线 B PDF-b——mdc-pdf crate 骨架（第二 Document Model，pdf_carrier_plan §5 第 2 轮）
+
+Work Log:
+- 实现代理交付 crates/pdf（mdc-pdf）：页/大纲/标注三层模型（Rotation 归一化/
+  PageSpan 闭区间/OutlineTree 深度优先迭代/四 kind 标注 + Origin 溯源）+
+  六命令边界（ExtractText/Search/Outline/AnnotateAdd/Edit/List，均带 Source）+
+  typed 错误面五类 + 安全策略编码（S2 五危险族只读告警/S3 限额三行为学/
+  S5 加密态写拒且先于存在性检查——反探测面）+ mdcore://pdf 协议草案
+  （mdc-pdf-cmd/event 事件族）+ DocumentEngine object-safe 集成点（PDF-c
+  绑 pdfium non-V8）+ CONTRACT.md 升版 v1.2 增 §6（__contractVersion 保持
+  1.1——window 面零变化，仿 R24-b 先例）。
+- 关键决策（gates 在档十条）：零引擎依赖延至 PDF-c（骨架轮不耦合原生库，
+  workspace 无 pdfium 二进制可全绿；serde 系复用既有版本，Cargo.lock 仅
+  +1 条目，NOTICES 义务后移）；Source 镜像而非复用（serde 名 + mdcore
+  源面文件级读锁见证，零 path 依赖）；值时钟注入；搜索 v0 真实可执行
+  （宿主注入文本面，PDF-c 换引擎载荷形状不变）。
+- 独立审查代理（pdf-b-1r）：门禁四项亲测复跑 + 声明 10 条逐条验证 ✓；
+  发现 1 阻断 + 1 重要 + 3 轻微：①PageSpan 派生 Deserialize 绕过构造
+  校验——宿主畸形信封可致 debug panic/release 不可捕获 abort（实测复现）；
+  ②Rect 同类绕过——反序矩形可经 patch 静默落库，PDF-d 将产出非法 /Rect；
+  ③搜索两模式重叠语义不一致；④Source 镜像锁缺 rename_all 前置断言；
+  ⑤enforce_snippet_chars 循环内重复求值。
+- 主代理修复全部五项：PageSpan/Rect 字段私有 + 自定义 Deserialize（不变量
+  回类型层）+ resolve_span 改走 new()；find_matches 统一非重叠语义（并修
+  while 重写引入的 continue 标签死循环隐患）；镜像锁增严；循环不变量提出。
+  +3 审计回归锁（反转 span JSON 拒收/反序 rect JSON 全链路封死/两模式
+  计数一致）。
+- 收口门禁：cargo --workspace 219/219（187 基线 + 29 骨架锁 + 3 审计回归
+  锁）；clippy 零新增（mdcore-wasm 2 条既有基线）；scan.sh 0 命中；fmt
+  过（crate 范围）；wasm32 check 过。mdcore main 0d6ac2f→408b109 推送
+  验证 local=remote。
+
+Stage Summary:
+- PDF-b 收口完成：三层模型 + 命令边界 + 安全策略 + 协议草案 + CONTRACT
+  v1.2 全交付，双绿门禁 219/219。审计-修复-回归锁闭环（用户要求的
+  "子代理实现→新子代理审查"纪律首轮走通，阻断级缺陷被拦在合入前）。
+- 遗留登记：S6 AcroForm 探针（spike 侧，PDF-c 前完成）；全仓 rustfmt
+  格式化归 PDF-e 或独立提交；标注载荷健全性校验留 PDF-d 引擎写前。
+- 下一步：PDF-c 阅读面（pdfium 接入 + 异步光栅化 + LRU 页缓存 + 文本层
+  + 1000+ 页性能基线，性能门入 gates）。
