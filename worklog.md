@@ -415,9 +415,24 @@ Work Log:
 - 本地 git init -b main 提交 7 文件（HEAD=b691773）
 - API 创建仓库 mmqz/cleanroom-analysis 返回 201；git 推送经内存计算 Basic 头成功，main 新分支建立
 - 验证：git ls-remote 远端 HEAD=b691773 与本地完全一致；网页端确认仓库公开可见（标题含中文描述）
-- 零落盘核查：ghp_8MXm 在全部 .sh/.md/.py/.json/.txt/.log/.git/config 中零命中；token 仅在单次命令的环境变量赋值中出现，未写入任何文件
+- 零落盘核查：ghp_[脱敏] 在全部 .sh/.md/.py/.json/.txt/.log/.git/config 中零命中；token 仅在单次命令的环境变量赋值中出现，未写入任何文件
 
 Stage Summary:
 - 第三座云仓库落地：https://github.com/mmqz/cleanroom-analysis （public，5 份成果+README，与 download/ 本地副本一致）
 - 用户账号现共 3 座我方仓库：agents-md-audit / acrobat-pro-audit / cleanroom-analysis（用户所称"三个"自此成立）
 - 后续新成果（办公/画布线 R1 起）可直接提交进本仓库，推送机制 tools/push_to_github.sh 就绪（需新 token 时同法单次传递）
+---
+Task ID: merge-cleanroom-2
+Agent: Super Z (main agent)
+Task: 用户指示——全部工作成果合并进单一仓库，供新 AI 只看一个仓库接手
+
+Work Log:
+- 盘点两审计仓体量：agents-audit 20 文件 248K 全量并入；acrobat-audit 并入 analysis/evidence/tools/哈希登记与配置工件，排除 Adobe 闭源二进制原件（AcroPro.msi 13M、setup.exe 0.7M、AGS 的 EXE/MSI 载荷 8M，留原仓 mmqz/acrobat-pro-audit）
+- 重组结构：pdf-line/（01~05）、agents-md-audit/、acrobat-audit/、tools/；新增 HANDOFF.md（新 AI 接手指南：四阶段状态/必读优先级/5 条纪律/R1 批次/环境备忘含网关 Basic 机制与 API 限流旁路）；重写 README 为总索引；worklog.md 副本入库
+- 提交 100 文件（5.4MB），推送 913b2e7 成功，ls-remote 与本地一致，网页端五个结构关键词全部可见
+- 自伤修正：前一条 worklog 记录误写 token 前 7 位（ghp_[已脱敏]）且随副本公开——仅 7/36 字符不可复原，但违反零落盘纪律；已对本地与仓内两份 worklog 双重脱敏并重推；教训=核查用语不得引用 token 任何片段
+- 复核：完整 token 在全部文件零命中（本次核查模式改为正则全串匹配，避免再次引用片段）
+
+Stage Summary:
+- 单一成果仓库终态：https://github.com/mmqz/cleanroom-analysis = L0+L1+L2+L3 规划+worklog+HANDOFF，100 文件 5.4MB，新 AI 只需看此一仓
+- 新 AI 接手话术（给用户）：让新 AI 读 cleanroom-analysis 仓库的 HANDOFF.md 即可
