@@ -870,3 +870,45 @@ Stage Summary:
 - S6 已知缺口 #1 闭环。安全策略表 v1 全部条目要么已实证要么有明确排期。
 - 下一步：PDF-d 标注面（lopdf 增量写 + 四标注往返 + Acrobat 互通引擎层
   预证）。
+
+---
+Task ID: pdf-d-1
+Agent: main-agent (Super Z) + 实现代理 pdf-d-1i（两段叠加：首段超时遗留部分
+改动 + 次段收尾定稿）+ 独立审查代理 pdf-d-1r
+Task: 线 B PDF-d——标注面（lopdf 增量写 + 四标注往返 + Acrobat 互通引擎层预证）
+
+Work Log:
+- 交付（crates/pdf）：writer.rs（常开抽象：AnnotationWriter trait +
+  IncrementalSave 统计 + MockWriter + /T origin codec + /M 纯函数日期串）
+  / writer_lopdf.rs（feature engine-lopdf，=0.45.0 pin，照 spike 探针 3
+  已验证模式：四 kind 标准 Annot 映射零私有扩展、间接 /Annots 三形态
+  全覆盖、增量保存原字节前缀逐位保持）/ document.rs（attach_writer +
+  flush_annotations：S5 先于写器 + dirty 集精确跟踪 + 幂等零追加）。
+- 语义锁 24 条（pdfd_writer 15 + pdfd_session_flush 9）：四 kind 逐字段
+  往返 / 前缀逐位保持（两轮传递）/ pdfium 交叉读（互通引擎层证据：
+  subtype+/T+/Contents 全对上）/ Origin 往返含 UTF-16BE / /M 闰日与
+  2100 世纪 / 加密双防线 / 幂等 / 编辑重脏 / 包络 Rect / 百条冒烟等。
+- Acrobat 互通验证的诚实登记：引擎层证据（lopdf 写→pdfium 读）全对上；
+  GUI Acrobat 人工目视 = 开发环境轮事项（沙箱无 GUI），不冒认。
+- 独立审查（pdf-d-1r）：**有条件通过**（0 阻断 1 重要 5 轻微）——声明
+  10 条全复跑实证，**叠加一致性确认**（两段代理工作无死代码残留）。
+  修复：间接 /Annots 形态补回归锁 ⑯（审计员先仓外实证功能正确，补锁
+  后三形态全覆盖）/ 曾加密空口令形态补锁 ⑰（was_encrypted 分支，S5
+  双防线全形态闭环）/ 删零消费 pdfium_render 再导出（首段叠加遗留）/
+  修测试 helper 结构性覆盖缺口（不解引用间接 /Annots）。
+- 主代理修正过程中的自误三处（泛型 arity/Object API 形状/useless_asref）
+  均由编译器与 clippy 门禁当场拦下——门禁纪律生效证据。
+- 收口门禁四面：默认 245/245（236+9 常开）+ pdfium 71/71 + lopdf
+  58/58 + 双引擎 88/88（含审计回归两锁）；clippy 双 feature 零警告；
+  scan 0；fmt 净；wasm32 过；默认面零引擎依赖（cargo tree 实证）。
+  mdcore main 7de5a34→eb466a2 推送验证 local=remote。
+- NOTICES 增量登记：lopdf =0.45.0（MIT）入双引擎面，PDF-e SBOM 收口。
+
+Stage Summary:
+- PDF-d 收口完成：PDF 载体五轮计划的前四轮（a 侦察/b 骨架/c 阅读面/
+  d 标注面）全部落地，双引擎读写闭环（pdfium 读 + lopdf 增量写），
+  mdcore 语义锁总量 187→245（默认面）。
+- 遗留：GUI Acrobat 人工互通验证（开发环境轮）；/DA 字体挂 /DR
+  （GUI 轮）；渲染看门狗与会话级限额接线（PDF-e/视图层）。
+- 下一步：PDF-e 阶段收口（门禁全复跑 + SBOM/NOTICES 增量 + gates
+  PDF-e 段 + 双仓推送）或按用户裁决转线 A R2。
