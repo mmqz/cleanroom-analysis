@@ -1065,3 +1065,57 @@ Stage Summary:
   R2 收口综合（轮5）。
 - 下一步：轮4 线 A R2-P2 前半（canvas-c draw.io/maxGraph / canvas-e
   渲染基座对照 / canvas-f InvokeAI / penpot-a / affine-a）。
+
+---
+Task ID: t4-linea-p2a
+Agent: main-agent (Super Z) + 研究代理 J1/J1b、J2、J3/J3b、J4、J5/J5b
+  + 复审代理 R4-R1..R4-R5 + 修复代理 R4-fix（含三次失败重试：
+  J1/J3 网关超时、J5 超 200 轮上限——J1b 补救收口、J3b/J5b 收窄重试）
+Task: 轮4 线 A R2-P2 前半——canvas-c / canvas-e / canvas-f / penpot-a /
+  affine-a 五项（算法 pass / 对照 pass / UX pass / 架构 pass / 双态 pass）
+
+Work Log:
+- canvas-c（draw.io/maxGraph 算法 pass，792 行 150 锚）：布局族重写可行性
+  评级表 13×5（简单族/FR/树 ★★★ 可按规格重写；层级 ★★；ELK/libavoid
+  永远外置）；embed 25 命令协议；maxGraph JS→TS 重写与 Univer 互证。
+  J1 网关超时遗留报告，J1b 审计补全（8 处计数修正 + worklog 补登）。
+- canvas-e（渲染基座对照 pass，365 行 97 锚，14→15 张表）：Konva 色键
+  命中区三重容错（snap 3/farbling 5 + Brave farbling 探测 + 10→256 环形
+  搜索）；Fabric SVG 读侧 9 标签有损子集 + CVE-2026-44311；PixiJS 指令
+  流批渲染断批三因 + 事件默认 passive；五路线光谱裁决表。
+- canvas-f（InvokeAI Unified Canvas UX pass，550 行 ~130 锚）：**双强度
+  灰度协议**（noiseLevel 前置加噪 + denoiseLimit 去噪上限，正交 0-1 双
+  属性编码灰度 PNG）；三段协议（提交/接收/回流）+ 双重防陈旧；14 graph
+  builder 自动构图（用户零图编辑，与 ComfyUI 手编辑图相反）。J3 超时
+  后 J3b 沿 sparse-checkout 路线图重试成功。
+- penpot-a（Penpot 架构 pass，426 行 121+30 锚）：三层混合渲染（SVG DOM
+  形状层 + foreignObject 真文本 + **自研 CLJC flex/grid 2,564 行——
+  浏览器只绘制不排版**）；帧级位图 LOD；**render-wasm 第二渲染线**（Rust/
+  Skia/WebGL 512px 瓦片 + 三编译期 parity 守卫）；Rust 后端印象证伪
+  （仅渲染层）；插件面 SES Compartment + MCP 在仓内；协同零 CRDT/OT
+  （服务器行锁定序）。
+- affine-a（AFFiNE 双态 pass，collab-line/，140 行 ~40 锚）：**「一份
+  Yjs block 文档的两个视图投影」**——GfxCompatibleProps（xywh/index/
+  lockedBySelf）mixin 挂载 + surface block Boxed(Y.Map) 收纯画布图形 +
+  同 flavour 双根组件换绑 + undo 跨态保留；build-vs-buy 核验：官方博客
+  in-repo 一手证实「拼装不可行→全量自研」+ vec.ts tldraw credit；精确
+  时间线【推断：未能一手核实】诚实登记。J5 超 200 轮后 J5b 收窄（22 次
+  调用）重试成功。
+- 复审五链：R4-R1 canvas-c 通过（J1b 修正 8/8 成立；~80 锚抽验 98%
+  精确）；R4-R2 canvas-e 通过（56 锚 98.2%；三大论断逐参数实证）；
+  R4-R3 canvas-f 通过（65 锚 85% 严格/98% 内容；双强度协议端到端全链
+  成立）；R4-R4 penpot-a 通过（68 锚 90%；六指定锚 6/6）；R4-R5
+  affine-a 需修补轻量（turbo-renderer 三处定位方向修正——实为稳态位图
+  优化层 opt-in 默认关闭）。
+- R4-fix：五报告 37 处处方 + 9 项一致性联动全落地；旧串零活实例残留；
+  技术论断零改动。
+
+Stage Summary:
+- 轮4 完成：线 A R2-P2 前半五项全部落地并经独立复审+修补。渲染光谱
+  七路线成形（Excalidraw Canvas2D / tldraw DOM+SVG / Penpot 经典 DOM
+  +排版自持 / Penpot wasm GPU 瓦片 / Konva 场景图 / Fabric 对象+SVG /
+  PixiJS 指令流——AFFiNE 混合基座为第八点）。
+- 双态决策输入就绪：AFFiNE「两视图投影」模式 + InvokeAI「画布态与生成
+  管线三段协议」。
+- 下一步：轮5 线 A R2-P2 后半（office-d 写侧管线 + 读侧对照）+ R2
+  总收口综合（统一协同内核终裁 + 选型矩阵合成 + HANDOFF/STATUS 终态）。
