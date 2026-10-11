@@ -14,7 +14,7 @@
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
 | L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ **R1 P0 三项全部完成**（canvas-a Excalidraw 深读 + canvas-d ComfyUI 协议 pass + office-a Univer 深读，2026-10-10，均经独立复审代理审定）；R2+ 待排 | `pdf-line/05`（规划）；`canvas-line/` + `office-line/`（三篇报告） |
-| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24 全收口 + **PDF-a/b/c/d 全部完成**（a 选型定谳 / b mdc-pdf 骨架 / c 阅读面+性能门 / d 标注面+增量写互通；每轮均经独立审查代理闭环，累计修复 1 阻断+2 重要+多项轻微）；S6 AcroForm 探针定谳（formfill 在 non-V8 构建中，按 S2 同款处置）；R24-d 壳实体 = 开发环境轮；**PDF-e 收口轮待做**（SBOM/NOTICES/门禁全复跑）；mdcore main=`eb466a2`（默认面 245/245 + 双引擎面 88/88 + 性能门 6/6，scan 0 恒绿） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
+| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24 全收口 + **PDF 载体五轮 a-e 全部完成**（a 选型定谳 / b 骨架 / c 阅读面+性能门 / d 标注面+增量写互通 / e 收口：安全姿态对齐实装 8 族扫描+S6 form_probe+看门狗换代+L0/L4/L7，CONTRACT v1.3）；前置质量审计轮 T1（survey/review/4-fix/verify 链：F1 取消哨兵/F2 ByAnchor panic/O3/O4 修复+工具链钉住+fmt 清扫）；SBOM/NOTICES v1.2（42→105 零 UNKNOWN，ASSET_CHECK 首个分发资产）；S6 探针复原（.gitignore 根因修复）；R24-d 壳实体 = 开发环境轮；mdcore main=`03815b6`（PDF-e 已提交：四面 259/78/80+6/108+6 + perf 6/6，scan 0 恒绿）；compliance-baseline=`1adced2`（NOTICES v1.2 在档） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
 
 > **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」
 > 即它，进度见 `md-line/STATUS.md`）。其审计底稿在私有仓

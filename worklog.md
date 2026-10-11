@@ -963,3 +963,54 @@ Stage Summary:
   S6 form 字段枚举进 SecurityReport）+ SBOM/NOTICES + gates PDF-e 段
   + 门禁全复跑 + 双仓推送。
 - 下一步：PDF-e 阶段收口（即轮2）。
+
+---
+Task ID: t2-pdf-e-1
+Agent: main-agent (Super Z) + 实现代理 T2-impl（E）+ 合规代理
+  T2-notices（F）+ 审计代理 T2-review（G）+ 修复代理 T2-fix（H）
+  + 复核代理 T2-verify2（五段写/审分离链）
+Task: 轮2 PDF-e 收口——安全姿态对齐实装 + SBOM/NOTICES 增量 +
+  gates PDF-e 段 + 门禁全复跑 + 双仓双分支推送
+
+Work Log:
+- T2-impl（E，含一次网关超时中断的遗留审计收口）：security_scan.rs
+  344 行（engine-lopdf 面 8 族扫描 + S6 form_probe → OpenAssessment，
+  产品面出口三打通）；RenderWorker 看门狗换代（Timeout 回执 + 毒化 +
+  替代工人字节快照重开 + 在飞/未决令牌按提交序重放）；L0（×4 BGRA 实
+  缓冲修正）/L4/L7 接线；object_depth 作扫描护栏；xref/解析深度 +
+  seen-set 诚实登记为 lopdf 边界项；CONTRACT v1.2→v1.3；10 组短路验证
+  （SC-A..J，含空转锁发现与重构）。
+- T2-notices（F）：NOTICES v1.1→v1.2——cargo 30→90 + pdfium-bin 新类
+  目 3（A-1 linux 实取件双 SHA 重算 + A-2/A-3 分发占位纪律）+ 总计
+  42→105 零 UNKNOWN（118/118 lock 许可全解析，r-efi LGPL OR-uefi 透明
+  注记）；四面 SBOM 29/45/76/90 并集=90 程序化实证；ASSET_CHECK 首个
+  分发资产登记；R24-e 全量复跑预约兑现 + npm 面沿 R23 367（package-lock
+  零 diff 实证）。
+- T2-review（G）：通过收口（0 阻断/1 重要/3 轻微）——factory panic
+  语义（注释与代码相反 + 静默死线程/看门狗泄漏/通道悬挂）+ licenses 18→
+  17 + 畸形 /AcroForm 注释 + watchdog 零生产消费点登记。
+- T2-fix（H）：五项终修——factory 移入渲染线程闭包 + catch_unwind +
+  Retired 先置再 resume（断连不悬挂）；**实证勘误：T2-review 的现状
+  方向描述反了（探针证明修复前工厂实在构造线程执行），处方目标态正确**
+  ——诚实登记；新锁 22/23（断连判别 recv_timeout + /proc 探针 Linux
+  cfg 门控）；README/COMPLIANCE 259 口径（在档=真值）。
+- T2-verify2：通过——并发语义全写点枚举核证（Retired 无覆盖路径、锁
+  先放再 resume、Fn 非 FnOnce 跨代独立 Arc）；259 口径四面静态复算自洽
+  （259/78/80+6/108+6）；3 低 + 1 勘误均为文档级，登记 PDF-f+。
+- 主代理权威门禁（本机全复跑）：默认 259/259 + lopdf 78/78 + pdfium
+  80/80+6i + dual 108/108+6i + perf 6/6 + scan 0 + fmt 0 + clippy 零新
+  （wasm 2 条在档基线）+ wasm32 过 + 默认面零引擎依赖。
+- 分析仓权威文档对齐：SECURITY_POLICY（S1.1 无 CI 按实修正 / S2.4 实装
+  / S4.1 单工人+换代 / S4.2 三机制 / S6 form_probe 实装 / 锚点 2、4 落
+  地标记）；STATUS §5 进度 + §7 可开工项刷新；HANDOFF L-MD 行同步。
+
+Stage Summary:
+- 轮2 完成：PDF 载体五轮计划（a-e）全部收官。安全姿态「文档先于实现」
+  漂移清零（O1 四面：S1/S2/S3/S4/S6 全部实装或按实修正）。
+- mdcore main 3e450aa→03815b6；compliance-baseline 8c26272→1adced2；
+  语义锁总量 252→259（默认面）+ dual 108。
+- 遗留（PDF-f+ 宿主接线轮）：render_watchdog_ms 生产消费点、看门狗
+  收报面登记、README 双引擎面口径补全、fuzz 战役排期；L0 引擎级端到端
+  锁（冻结值下不可达，helper 面已锁）。
+- 下一步：轮3 线 A R2-P1 批次（office-b ONLYOFFICE 深读 / office-c
+  HyperFormula / canvas-b tldraw / collab-a Yjs pass）。

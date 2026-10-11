@@ -59,6 +59,11 @@
   本计划 = 我们怎么做。L2 的 17 维方法论、敌意输入边界（03 篇：限额五层纵深/
   三行为学/沙箱四件套）直接作为 PDF-a 安全策略表的输入资产。
 - **并行性**：PDF-a/b 与 R24-a/b/c 无 crate 面冲突，可并行。
+- **进度（2026-10-11）**：五轮全部完成——PDF-e 收口落地：安全姿态对齐实装
+  （8 族扫描 + S6 form_probe + 看门狗换代 + L0/L4/L7 接线，CONTRACT v1.3）；
+  SBOM/NOTICES v1.2 增量（42→105，四面 29/45/76/90 零 UNKNOWN，ASSET_CHECK
+  首个分发资产 pdfium 二进制）；门禁四面 259/78/80+6/108+6 + perf 6/6 全绿。
+  含先行质量审计轮 T1（见 worklog t1-quality-audit-1）。
 
 ## 6. 遗留四项定性（主档 §31 定谳）
 
@@ -76,7 +81,15 @@
    （`__settings`/`__setSetting`/`mdc-settings-changed`）；语义锁 14 条；
    门禁 cargo 164/164 + 契约门 16/16；NOTICES v1.1 增补（toml_edit 族 8 项，
    compliance-baseline=8c26272）。
-2. **R24-b 多窗口核侧**（本环境可做，不依赖壳实体；CONTRACT v1.1 增 session 面）
-3. **R24-c 打包基建**（同上，产物验证留 R24-d；**前置阻塞：定名商标检索**）
-4. **PDF-a 侦察收口 + spike**（与上述并行无冲突）
+2. ~~**R24-b 多窗口核侧**~~ ✅ 已完成（2026-10-10：SessionManager/窗口↔
+   document_id 映射/资源上限/会话持久化，CONTRACT v1.1 session 面；worklog
+   Task R24-b）
+3. ~~**R24-c 打包基建**~~ ✅ 已完成（2026-10-10：版本单源 + 四平台配置落
+   `packaging/` + 分发合规核对单；产物验证留 d；worklog Task R24-c。前置
+   定名商标检索仍为用户人工决策项）
+4. ~~**PDF-a 侦察收口 + spike**~~ ✅ 已完成（ADR-P1 选型定谳 + 安全策略表
+   v1 + 三探针；md-line/pdf-a/）
 5. R24-d 壳实体合入 = **开发环境轮**（需要 R22-a..f 实体所在环境执行）
+6. PDF-f+ 宿主接线遗留项（T2 系列移交）：`render_watchdog_ms` 生产消费点、
+   看门狗收报面登记（T2-verify2）、README 双引擎面口径补全；fuzz 战役
+   排期（SECURITY_POLICY S6 表）
