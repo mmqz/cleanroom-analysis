@@ -1119,3 +1119,54 @@ Stage Summary:
   管线三段协议」。
 - 下一步：轮5 线 A R2-P2 后半（office-d 写侧管线 + 读侧对照）+ R2
   总收口综合（统一协同内核终裁 + 选型矩阵合成 + HANDOFF/STATUS 终态）。
+
+---
+Task ID: t5-linea-close
+Agent: main-agent (Super Z) + 研究代理 K1r + 复审代理 R5-R1b + 修复代理
+  R5-fixb + 综合代理 S1r + 终审代理 R5-R2b + 微修代理 R5-fix2b
+  （含事故恢复：平台 08:50 重置工作区，前次轮5 全部中间产物丢失——
+  此为全新重做轮，不引用丢失产物内容，一切重新一手验证）
+Task: 轮5 线 A R2-P2 后半（office-d）+ R2 总收口综合（06 报告）
+  + 线 A 阶段终态提交
+
+Work Log:
+- 事故与恢复：工作区重置（R5-fix2 网关超时为表征）；推送面零损失
+  （三分支 ls-remote 复验：mdcore main=03815b6 / compliance-baseline=
+  1adced2 / cleanroom-analysis=2086a20）；轮5 全套重做（K1r→R5-R1b→
+  R5-fixb→S1r→R5-R2b→R5-fix2b 六段链）。
+- office-d（写侧管线 + 读侧对照 pass，272 行）：docx 9.10 全内存+模板面
+  最强（四 PatchType + estimatePageNumbers）；exceljs 唯一真流式
+  （WorkbookWriter Archiver 管道+行级释放）；PptxGenJS stream() 与 README
+  不符（整包 Buffer）；SheetJS CE Apache-2.0 壳仓化（npm 冻结 0.18.5）。
+  **核心安全结论：CSV 公式首字符消毒四库零实现**（sheetjs 反而主动
+  `'='+val.f` 输出）；**XML 控制字符三档**：损坏档（docx/pptxgenjs，
+  拒开级）/ 剥除档（exceljs——合法 XML 静默丢字符，R5-R1b 依 PR #286
+  证据链纠正）/ 保字符档（sheetjs `_xHHHH_`）；docx SimpleField 域指令
+  直通 → **dsh 管线层消毒三闸**（字符过滤/CSV 首字符/域白名单七白三黑）。
+  读侧目标线：docx-preview 级结构忠实+三处超额+数据骨架兜底。
+  复审 R5-R1b 抓出 F1 高严重度失真（exceljs 档位）并修补；25 项回源
+  65 锚 95% 命中。
+- 06 综合报告（R2 总收口，458 行八节+两附录）：①协同内核五方链→
+  三问建议（统一 CRDT 侧/Yjs 协议子集+yrs 起步+自研逃生舱/中心化
+  权威快照+客户端离线自愈双层），反对因素三条诚实登记；②渲染八路线
+  光谱+四口径选型矩阵+吞吐三招；③AFFiNE 两视图投影六条移植+风险
+  R1-R6；④AI 调用面五方水位+差异化窗口（roadmap 已列、交付未发生，
+  时效季度级【推断】）；⑤生成态 A 主（四件套直拼+消毒三闸）B 辅
+  （触发条件）；⑥安全面三闸+八层汇总；⑦许可决策表 14 对象三档
+  （ADR-C1 前提）；⑧D1/D2/D3 终裁 + yrs 评估 pass 最优先 + 七项触发
+  条件表。终审 R5-R2b：25/25 忠实零失真、已知失真点（exceljs 三档）
+  零残留、【推断】18→19/【建议】19 机械复点、「留用户裁决」12 处、
+  零上游锚点；F1-F3 低/微级经 R5-fix2b 微修（条数口径 + §0.2 推断
+  转写总则）。
+
+Stage Summary:
+- 轮5 完成：线 A 全阶段（R1 P0 三项 + R2-P1 四项 + R2-P2 六项 + 综合）
+  收官。总计 14 篇报告 + 1 篇综合（06），全部经独立复审+修补。
+- 待用户裁决（06 报告 §8.1）：
+  D1 协同内核三问（统一性/实现层排序/中心化-离线取舍）；
+  D2 双态立项（文档↔画布融合是否立项及范围）；
+  D3 生成态主线（路线 A 四件套直拼为主确认）。
+- 后续轮排队（06 §8.2/§8.3）：yrs 评估 pass（D1 裁决后第一动作）、
+  Yjs 协议子集采纳设计、MCP 工具面窗口期执行、P3 动画线等七项触发条件。
+- mdcore 两分支与产品状态不变（03815b6/1adced2）；PDF-f+ 宿主接线
+  遗留项见 md-line/STATUS.md §7。
