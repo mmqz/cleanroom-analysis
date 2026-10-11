@@ -1,4 +1,7 @@
-bin/
+# 根锚定：只忽略 spike 根的 pdfium 取件目录（fetch-pdfium.sh 落点）。
+# 曾写裸 `bin/`——该模式匹配任意深度的 bin 目录，把 src/bin/ 一并吞掉，
+# 正是 010b519 定谳提交丢失 formfill_probe.rs 的根因（F12 可复现性缺口）。
+/bin/
 target/
 Cargo.lock
 fixtures/

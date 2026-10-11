@@ -912,3 +912,54 @@ Stage Summary:
   （GUI 轮）；渲染看门狗与会话级限额接线（PDF-e/视图层）。
 - 下一步：PDF-e 阶段收口（门禁全复跑 + SBOM/NOTICES 增量 + gates
   PDF-e 段 + 双仓推送）或按用户裁决转线 A R2。
+
+---
+Task ID: t1-quality-audit-1
+Agent: main-agent (Super Z) + 勘察代理 T1-survey + 独立复审代理 T1-review
+  + 修复代理 T1-fix-a/b/c/d + 终审代理 T1-verify（六段写/审分离链）
+Task: 轮1（用户开工序第一项）——MD 实现质量检查：全仓勘察 → 交叉复审
+  → 修复 → 终审 → 双仓门禁全复跑
+
+Work Log:
+- 工具链入坞：Rust 1.99.0（wasm32/clippy/rustfmt）+ pdfium 取件
+  （fetch-pdfium.sh，chromium/8086 non-V8，SHA256 验证过）+ spike
+  fixtures 生成（small/large/small_annotated）+ 三探针复跑全过。
+- T1-survey（全新视角勘察）：0 阻断 / 5 重要 / 7 轻微——F1 RenderWorker
+  取消哨兵 off-by-one（id 0 排队取消被吞）、F2 ByAnchor 反转区间 panic
+  （expect 分支切片违 typed-reject 纪律）、F3 S2 危险对象检测未实装 +
+  族清单漂移（8 vs 5）、F4 看门狗/限额在档称启用实未接线、F5 fmt 门禁
+  随工具链漂移（459 diff）；轻微 F6-F12。
+- T1-review（交叉复审）：12 条零假阳性全确认；F5 计数修正 459/32；
+  F12 升重要；新增漏报 O1（安全姿态漂移扩至 S1/S4/S6）/ O2（门禁口径
+  失真 245 vs 实测）/ O3（attach 页数双权威）/ O4（snapshot 校验缺口）。
+- 修复四代理：fix-a（mdcore 核：F2 AnchorError::Inverted 入口拒绝 +
+  O4 SnapshotError 四变体落自定义 Deserialize + F10 失败全回滚含合并窗
+  边界 + F9 文档；+5 锁 t1_quality_fixes）；fix-b（pdf crate：F1
+  last_repaid→Option<u64> + O3 page_count trait + PageCountMismatch
+  typed 拒绝；+2 锁）；fix-c（卫生：rust-toolchain.toml 钉 1.99.0 +
+  fmt 492→0 清扫 + workspace.dependencies 统一（lock 零变化）+ r24 清单
+  +pdf + 门禁口径文档 252/252 + feature 面 bootstrap 成文）；fix-d
+  （S6 探针复原：**根因 = spike/.gitignore 裸模式 bin/ 吞掉 src/bin/**
+  ——010b519 报文称入库实未入库；根锚定 /bin/ 修复 + 探针重建 +
+  SECURITY_POLICY S6 复原注记；dual 面 89+1 → 90/0）。
+- T1-verify（终审）：11 项全确认通过收口；4 条非阻断登记（基线勘误 /
+  套件口径脚注 / 措辞精度 / trait 面增量）。
+- 主代理权威门禁（本机全复跑）：默认面 252/252 + pdfium 73 + lopdf
+  60 + dual 90（+6 ignored）+ 性能门 6/6 + scan 0 + fmt 0 diff +
+  clippy 零新（wasm 2 条在档基线）+ wasm32 过 + 默认面零引擎依赖。
+
+勘误登记（本仓 worklog 两条）：
+- 0-bootstrap 条目所记 cleanroom HEAD=798f8bf 有误，正确基线 = b9ba950
+  （798f8bf 为其第 15 代祖先；本条目按实修正）。
+- T1-survey 记录的「223+ 测试 / 16 套件」口径失实（O2）：真实基线 =
+  245 用例（修复后 252）；survey 工作记录原文保留不改，以本勘误为准。
+
+Stage Summary:
+- 轮1 完成：MD 实现质量检查闭环——2 个契约级代码缺陷（F1/F2）+ 2 个
+  输入边界缺口（O3/O4）+ 门禁可复现性破洞（F5/F12）全部修复带锁；
+  mdcore main eb466a2→3e450aa。
+- 延后 PDF-e（轮2）：安全姿态对齐（O1：S1.1 CI 措辞 / S2 八族检测
+  实装或措辞对齐 / S3 看门狗+L0/L7 接线或降级登记 / S4 单工人措辞 /
+  S6 form 字段枚举进 SecurityReport）+ SBOM/NOTICES + gates PDF-e 段
+  + 门禁全复跑 + 双仓推送。
+- 下一步：PDF-e 阶段收口（即轮2）。
