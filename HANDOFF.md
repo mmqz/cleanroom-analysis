@@ -13,7 +13,7 @@
 | L0 | AGENTS.md 规范安全审计（vercel/AGENTS.md 等） | ✅ 完成（2026-10-08~09） | `agents-md-audit/`（9 篇分析 + 5 证据 + 5 工具） |
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
-| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ **R1 P0 三项全部完成**（canvas-a Excalidraw 深读 + canvas-d ComfyUI 协议 pass + office-a Univer 深读，2026-10-10，均经独立复审代理审定）；R2+ 待排 | `pdf-line/05`（规划）；`canvas-line/` + `office-line/`（三篇报告） |
+| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ R1 P0 三项 + **R2-P1 四项全部完成**（2026-10-11，9 段写/审分离链：office-b ONLYOFFICE 11 维深读 693 行 130 锚 / office-c HyperFormula 单件深读 616 行 131 锚含 423 函数与 license 双门实测 / canvas-b tldraw 深读 565 行 181 锚含 MCP exec AI 面 / collab-a Yjs 协议 pass 664 行——AFFiNE→Yjs 确认、Excalidraw→Yjs 证伪；均经独立复审+修补收口）；R2-P2 待做（用户裁决 P2 全做） | `pdf-line/05`（规划）；`canvas-line/` + `office-line/` + `collab-line/`（八篇报告） |
 | L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24 全收口 + **PDF 载体五轮 a-e 全部完成**（a 选型定谳 / b 骨架 / c 阅读面+性能门 / d 标注面+增量写互通 / e 收口：安全姿态对齐实装 8 族扫描+S6 form_probe+看门狗换代+L0/L4/L7，CONTRACT v1.3）；前置质量审计轮 T1（survey/review/4-fix/verify 链：F1 取消哨兵/F2 ByAnchor panic/O3/O4 修复+工具链钉住+fmt 清扫）；SBOM/NOTICES v1.2（42→105 零 UNKNOWN，ASSET_CHECK 首个分发资产）；S6 探针复原（.gitignore 根因修复）；R24-d 壳实体 = 开发环境轮；mdcore main=`03815b6`（PDF-e 已提交：四面 259/78/80+6/108+6 + perf 6/6，scan 0 恒绿）；compliance-baseline=`1adced2`（NOTICES v1.2 在档） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
 
 > **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」

@@ -1014,3 +1014,54 @@ Stage Summary:
   锁（冻结值下不可达，helper 面已锁）。
 - 下一步：轮3 线 A R2-P1 批次（office-b ONLYOFFICE 深读 / office-c
   HyperFormula / canvas-b tldraw / collab-a Yjs pass）。
+
+---
+Task ID: t3-linea-p1
+Agent: main-agent (Super Z) + 研究代理 I1-I4 + 复审代理 R3-R1..R3-R4
+  + 修复代理 R3-fix（九段写/审分离链，4+4+1）
+Task: 轮3 线 A R2-P1 批次——office-b / office-c / canvas-b / collab-a
+  四项（深读×3 + 协议 pass×1）
+
+Work Log:
+- I1 office-b（ONLYOFFICE 11 维深读，六仓浅克隆）：一句话定性「内部二进制
+  格式为真相源」的三段式（x2t C++/sdkjs JS/DocService Node）；服务器全序
+  OT（change=可序列化 undo 项，undo/replay 替代 per-type transform）；
+  保真=assemblyFormatAsOrigin+确定性重放装配；三段切分专项（四层 IPC/
+  信任边界/无 OS 沙箱=结构性缺口）；693 行，130 锚实例。
+- I2 office-c（HyperFormula 单件深读）：gridless 计算内核教科书实现——
+  生产依赖仅 2（chevrotain+tiny-emitter）；**实测 423 函数**（369+53+
+  OFFSET）；稀疏整数图+迭代 Tarjan+惰性 AST；v3.5.0 勘误（计划口径
+  v3.4.0）+ org 勘误 handsontable；license 双门（Gate A #LIC!/Gate B
+  粒度）空 key/gpl-v3 双路实测；深度炸弹 RangeError 逸出公有 API（缺口
+  登记）；5 场景性能实测；AI 外置面 coming soon=窗口期判断（mdcore 抢跑
+  机会）；616 行，131 锚。
+- I3 canvas-b（tldraw 11 维深读）：shape util（record 纯 JSON+util 注册
+  表）+全响应式信号 store；渲染=React/DOM+SVG 保留模式+自研 freehand+
+  真 DOM 文本；协同=tlsync v8 git 式 push/rebase（**非 CRDT/OT**——与
+  collab-a 对照关键事实）；AI 面=MCP exec「代码即操作」+focused proxy
+  +流式执行（业界最前）；source-available 四层技术执行（ECDSA 验签/
+  生产 5s 熔断/水印/遥测）；565 行，181 锚。
+- I4 collab-a（Yjs 协议 pass，新建 collab-line/）：四问题全落（YATA
+  工程化三件套 / subdoc 分片冷热 / 离线合并内生收敛三重随机锁 / provider
+  生态三层硬边界）；**双印象核验：AFFiNE→Yjs 确认、Excalidraw 自托管
+  协同→Yjs 证伪**（官方主线 socket.io+LWW+Firestore）；y/hub=AGPL 双
+  许可例外；统一协同内核初答【推断】指向 CRDT 侧；664 行，~90 锚。
+- 复审四链：R3-R1 office-b **需修补**（2 重要：六仓许可表述——sdkjs-
+  plugins 实为 Apache-2.0；「零 MCP 引用」证伪——ROADMAP.md:22 已入
+  MCP，窗口收窄信号漏登；锚点抽验 20/20）→ R3-fix 修补；R3-R2 office-c
+  通过（实测复跑全一致：423 函数/license 双门/性能/深度炸弹；36 锚 33
+  中）；R3-R3 canvas-b 通过（20/20 锚含 7 处修正锚复验；tlsync 定性逐
+  行验证）；R3-R4 collab-a 通过（15/15 核心样本；证伪/确认证据链网络
+  一手复抓全中；8 仓许可 9/9）。
+- R3-fix：四报告 27 处处方统一修补（office-b 9 / office-c 7 / canvas-b
+  6 / collab-a 3+2+回填——office-b 协同事实回填 collab-a §6.2/§6.4
+  五处占位）；旧串 grep 零残留；新锚全部克隆核验。
+
+Stage Summary:
+- 轮3 完成：线 A R2-P1 四项全部落地并经独立复审+修补。报告总量 2538
+  行、~532 锚实例；三线对照事实链成形（Univer 自研协议 / ONLYOFFICE
+  服务器全序 OT / tldraw git 式 rebase / Yjs CRDT）。
+- 关键裁决输入就绪：统一协同内核初答指向 CRDT（Yjs 侧），最终裁决留
+  R2 收口综合（轮5）。
+- 下一步：轮4 线 A R2-P2 前半（canvas-c draw.io/maxGraph / canvas-e
+  渲染基座对照 / canvas-f InvokeAI / penpot-a / affine-a）。
