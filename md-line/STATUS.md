@@ -93,3 +93,7 @@
 6. PDF-f+ 宿主接线遗留项（T2 系列移交）：`render_watchdog_ms` 生产消费点、
    看门狗收报面登记（T2-verify2）、README 双引擎面口径补全；fuzz 战役
    排期（SECURITY_POLICY S6 表）
+7. **MD 引擎边界调查**（用户架构裁决 2026-10-11：保留复用现有 MD 引擎 /
+   文档画布领域隔离 / 暂不 shared-infra 与 Yjs/yrs / 内容引用暂不实现 /
+   只读审计）：计划草案已起草待审核——`md-line/boundary-audit/PLAN.md`
+   （P0-P7 八阶段，七项调查任务 + 三必答；执行前置 = 凭据恢复）
