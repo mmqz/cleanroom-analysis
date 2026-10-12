@@ -93,10 +93,13 @@
 6. PDF-f+ 宿主接线遗留项（T2 系列移交）：`render_watchdog_ms` 生产消费点、
    看门狗收报面登记（T2-verify2）、README 双引擎面口径补全；fuzz 战役
    排期（SECURITY_POLICY S6 表）
-7. **MD 现有模块复用审计**（用户裁决链：2026-10-11 架构五条 + v1.1 五点
-   修订通过 + **2026-10-12 v1.2 范围收缩**——主目标 = 模块复用审计而非
-   统一引擎/协同架构研究；P2-P6 收敛六题；协同仅现状与约束、零选型；
-   P7 复用方案报告三分类 × 四要素；D1/D2/D3 仅记录发现；本轮零 commit
-   零推送）：PLAN v1.2 = 执行基线，节奏 = P0-P1 先行回报；**当前阻塞：
-   凭据未随会话保留（baseline.md §0 BL-1~BL-3 在档），待用户重新单次
-   传递 PAT**——`md-line/boundary-audit/PLAN.md` + `baseline.md`
+7. ~~**MD 现有模块复用审计**~~ ✅ **已完成（2026-10-12，P0-P7 全阶段
+   连续执行）**：门禁九项全绿复现（259/78/80+6i/108+6i + perf 6/6 + scan
+   0 + wasm32 + clippy + fmt，B11 零漂移）+ B1-B14 对账（B12 证伪校准：
+   sync_resync=本地重同步）+ 12 项复用单元三分类（REPORT.md，≤300 行，
+   终审通过）——核心结论：mdc-pdf 与 mdcore 零编译依赖，PDF 质量守护面
+   全在 mdc-pdf 自有代码内，复用 MD 模块对 PDF 布局/分页/保真无波及
+   （唯三耦合点登记，Source 镜像锁单向为最重要缺口）；协同现状 = 零
+   实现 + C/K 约束清单。**待用户裁决：D1/D2/D3 + 5 组质量缺口**
+   （`md-line/boundary-audit/`：PLAN/baseline/p1-p6/REPORT 八件套，
+   锚点 500+ 经独立复审零事实性错锚；mdcore 零改动）

@@ -1300,3 +1300,91 @@ Stage Summary:
   残留验证→工具链对齐→门禁四面复现→结构盘点→B1-B14 对账落级→只读
   红线验证）→ P1 结构勘察（入口/调用链/DocumentEngine 形状/模块依赖
   方向图）→ 回报调查方向供用户确认。
+
+---
+Task ID: t7-md-boundary-exec（P0-P7 全阶段执行，2026-10-12 用户开工指令后连续完成）
+Agent: main-agent (Super Z) + 勘察代理 t7-p2p3-survey / t7-p4-survey /
+  t7-p5-survey / t7-p6-survey + 复审代理 t7-p2p3-review / t7-p4-review /
+  t7-p5-review + 终审代理 t7-p7-final-review（P6 复审合并覆盖）
+Task: MD 现有模块复用审计 P0-P7 全阶段（PLAN v1.2 执行基线；全程只读，
+  mdcore 零改动；连续执行不停工——用户 2026-10-12 指令）
+
+Work Log:
+- 环境：用户消息内提供 PAT（环境变量未实际注入，Bash 每调用为新 shell
+  ——逐命令内联传递，零落盘零残留实测）；本仓 v1.2 改动 commit bbbc6af
+  推送（远端=本地实证，48d0536 历史保留）；mdcore 浅克隆 main=03815b6
+  （extraheader 认证，.git/config 干净 + 全仓 token grep 零命中）。
+- P0（主代理）：三分支 SHA 验证一致（main=03815b6/compliance-baseline=
+  1adced2/mother=24268ca）；工具链 1.99.0 重建（rustup minimal + wasm32
+  + rustfmt/clippy）；pdfium 取件（chromium/8086 non-V8 SHA256 验证）+
+  fixtures 现场生成（spike 双探针 + formfill_probe）；门禁九项全绿复现：
+  默认 259/259 + lopdf 78/78 + pdfium 80/80+6i + dual 108/108+6i + perf
+  6/6（打开中位 0.17ms/首页渲染 8.21ms/p95 0.97ms/命中 5.41µs/文本抽取
+  26.48ms@500 页）+ scan 0 + wasm32 过 + clippy 2 基线零新 + fmt 0——
+  B11 零漂移；workspace 结构盘点（5 crate 实测，B1 口径修正）；B1-B14
+  对账：11 确认 + 1 证伪校准（B12：sync_resync=本地重同步非协同体系）+
+  3 处差异登记（B1 crate 数/B13 补 ENTROPY_SEQ/B14 表述微调）→
+  baseline.md（113 行）。
+- P1（主代理亲读 ~9K 行核心源码）：模块地图（O1-O5）/ crate+模块双层
+  依赖方向图（无环；核心五件闭包极小；mdc-pdf 零 path 依赖）/ 四条调用
+  链全锚点（编辑→事务→op→树→历史；加载→adopt→指纹→会话；设置→
+  sidecar→事件；桥→核→回推）/ DocumentEngine 四方法 object-safe 形状 /
+  核侧零渲染器确认 → p1-structure.md（162 行）。
+- P2+P3（勘察代理 + 复审全量核验）：依赖闭包表（含 fingerprint/external/
+  document 三文件 impl Core 反向依赖——P1 勘误补录）；Block ID 三路保真
+  分层（snapshot/replay 全保真；save→open 条件保真——先序 1..n 递增时
+  才一致）；增量保存三态=无（宿主面）；op 求逆矩阵全成员；typed reject
+  7 类 23 变体；五项不变量代码+测试双背书；**settings.undo_coalesce_ms
+  死设置**（存储链齐备、should_coalesce 直读常量、全仓零消费者）；**
+  coalesced 事务不 bump revision**（同号多记录→revision 非全局唯一）；
+  复用先决条件四项；测试锁缺口 6 项。复审：213 锚点 100% 核验零误报，
+  2 轻微（html.rs serde 单元格/r17_utf16 计数）已回写。
+- P4（勘察 + 复审）：六项协同能力全缺失（多端同步/OT/CRDT/广播/离线/
+  自动冲突——grep 搜索记录在档）；三边界判定成立（take_events 非广播/
+  adopt_external 非离线合并/OfferChoice 非自动冲突）；B12 独立确认证伪
+  校准；约束事实 C1-C10 + K1-K8（单写者模型/门禁语义/revision 三路径
+  持久化）；零选型机械扫描通过。复审：83 锚点核验、六判定独立复核全
+  一致，3 轻微（K4 锚点区间/五 crate 口径/broadcast 关键词注记）已回写。
+- P5（勘察 + 复审）：五能力四态矩阵（命令调用=可直接/变更订阅=需适配
+  [推送多订阅缺失]/按 ID 取块=需适配/块级监听=需适配[单块订阅缺失]/
+  序列化访问=可直接）；契约三面对照 4 项漂移（F-1 __wasmMemory/
+  __heapTrace 非恒在且门禁不可见——实质漂移；F-2 CONTRACT §3:62 版本
+  号残留 1；F-3/F-4 弱漂移）；P1 勘误（wasm 导出 19→23 实为 22 方法+
+  构造器；undo/redo 行号 :79/:85）。复审：150 锚点全量核验五格全成立，
+  2 轻微（p1:156 残留/启动面计数 9 项）已回写。
+- P6（勘察；复审由终审合并）：全局可变状态全仓恰 3 处（ENTROPY_SEQ
+  原子/PDFIUM+BIND_LOCK OnceLock，多 Core 实例无静态障碍）；性能纪律
+  合规（MD 面仅 1 条软冒烟断言 + r14 打点，B-1..B-10 待基准清单）；
+  PDF 复用风险三项：依赖面=编译级零依赖 + 3 文件级耦合点（Source 语义
+  镜像锁**单向**[mdcore 新增第六值静默漂移]/scheme 命名/版本单源）；
+  波及面=抽取 op/history/tree → pdfb_skeleton 镜像锁读 mdcore 路径会破
+  （测试面，非 lib 面）；敏感点 Q1-Q8（增量写前缀逐位/交叉读互通/四
+  kind 往返/flush 事务/perf 门 6/6/安全八族/看门狗/装配对账）守护测试
+  全部落在 mdc-pdf 自有代码内——**复用 mdcore 模块不触碰 PDF 质量守护
+  面**；PDF 面无 undo 系统（Source::Undo/Redo 零消费）→
+  p6-perf-coupling-pdf-risk.md（214 行）。
+- P7（主代理汇总 + 终审）：REPORT.md（160 行 ≤300）——三必答逐条锚点
+  背书；三分类 12 项（R1-R5 可直接复用/A1-A5 需最小适配/X1-X2 跨域
+  不可复用[域内 R3]）× 四要素（代码证据/适配成本/对 PDF 质量的影响
+  [12/12 显式作答]/验证标准）；协同附属登记；D1/D2/D3 仅发现（零终裁
+  表述）；内容引用一行登记；质量缺口 5 组 + 遗留未知 U-1..U-5。终审
+  （P6 复审 + P7 八项验收合并）：P6 通过（4 轻微计数已回写：9 锁/6 处
+  str/十二字段/set 位点）；P7 八项全过（三必答/四要素完整性/零终裁/
+  零选型/零性能宣称/引用忠实性 20+ 抽查/行数/无 P6 污染），4 轻微
+  （复审范围限定表述/节号×3/U-4 推断级别）已回写。
+- 只读红线：mdcore 全程 git status --porcelain 零改动（每阶段复核）；
+  两仓 commit/push 仅本仓（用户指令允许按既有纪律保存文档成果，推送
+  前远端核实无覆盖）。
+
+Stage Summary:
+- P0-P7 全阶段完成：8 份产物（PLAN 已在档 + baseline 113 行 + p1 162 +
+  p2 150 + p3 150 + p4 262 + p5 155 + p6 214 + REPORT 160 行）全部经
+  独立复审或终审核验，锚点抽查合计 500+ 零事实性错锚。
+- 核心结论：MD 引擎 12 项复用单元三分类就绪；mdc-pdf 与 mdcore 零编译
+  依赖，PDF 质量（布局/分页/保真）守护面全部在 mdc-pdf 自有代码内，
+  复用 MD 模块对 PDF 质量无波及（唯三耦合点已锚点登记，Source 镜像锁
+  单向为最重要缺口）；协同现状 = 零实现 + C/K 约束清单在档。
+- 待用户裁决事项（REPORT §4/§6，本轮不动手）：D1/D2/D3 三裁决的事实
+  输入就绪；5 组质量缺口（Source 镜像锁单向/undo_coalesce_ms 死设置/
+  P3 六项测试锁缺口/P5 四项契约漂移/MD 面基准空位）全部登记留裁决。
+- mdcore 两分支 SHA 不变（03815b6/1adced2，零接触零改动）。
