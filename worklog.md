@@ -1425,3 +1425,38 @@ Stage Summary:
   建基准/桥侧校验/开发环境轮，均超出本环境或本轮范围）。
 - mdcore 全程零改动零提交零推送（构建/测试产物均在 .gitignore 覆盖
   面或已清理）；REPORT.md 补验后 164 行仍 ≤300。
+
+---
+Task ID: t8-plan（复用地基实施轮：启动 + 平台回滚恢复）
+Agent: 主代理
+Task: 按用户 2026-10-12 六点指令（审计收口进入开发）提交实施任务清单，
+随后连续执行；先行恢复平台工作区回滚事故
+
+Work Log:
+- 事故与恢复：平台将 /home/z/my-project 回滚至 10-11 快照——本仓 .git
+  退回 48d0536（bbbc6af/dfd41ae/eb18074 三提交从本地消失，p1-p6/REPORT
+  磁盘丢失）；mdcore 目录清空；~/.cargo 工具链全丢（playwright 缓存与
+  node 幸存）。恢复：fetch 核验远端 eb18074 完好 → 磁盘四文件备份对比
+  （全部为提交前旧稿，远端版更完整=零内容损失）→ reset --hard
+  origin/main → 八件套/ worklog/STATUS 全部恢复；mdcore 完整重克隆
+  （默认分支为 compliance-baseline，checkout main=03815b6 核验；凭据
+  extraheader 单次传递，.git/config 实测零残留）；rustup 1.99.0 +
+  wasm32 + rustfmt/clippy 前台重装成功。
+- 事实核对（计划输入）：重读 p1/p2/p3/p5/p6/baseline 全文 + 代码落点
+  快查——settings.rs 对 mdcore 引用仅 :102 一处常量默认值（零 Core
+  依赖，抽取缝极小）；main.ts 全部 apply_ops 调用点仅 'view' 两处
+  （:846/:1027，T2c 校验化零破坏面）；镜像锁原文 pdfb_skeleton.rs:
+  1040-1079 确认为"在场检查"（无多余变体检查=单向缺口实证）；r24_
+  settings.rs 经 mdshell::settings:: 导入（re-export 可保路径稳定）、
+  :365 defaults_align_with_core_constants 可继续背书抽取后单源。
+- 计划：md-line/reuse-impl/PLAN.md（v1）——分诊表 7 项（4 先修 3 登记）
+  + 任务 T0/T2a-d/T3/T4/T5（每项模块/复用依据/风险/验收）+ 六条全程
+  不变量（PDF 质量零波及/契约面稳定/零新依赖/合规/Git 纪律/证据分级）。
+  范围裁决转录：不做通用引擎/统一 CRDT/双向投影/D1-D3/A1-A3/session
+  泛化/Office 引擎/增量保存接线/undo_coalesce_ms 接线（后两项登记留
+  用户裁决）。
+
+Stage Summary:
+- 平台回滚事故零损失恢复（远端为唯一真源，磁盘旧稿未覆盖任何新内容）。
+- 任务清单已提交（用户指令 6 前半），随即连续执行 T0→T5。
+- mdcore 起点 main=03815b6（与审计基线一致），本轮起进入开发态写面。
