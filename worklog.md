@@ -1505,3 +1505,43 @@ Stage Summary:
   改前改后全绿 = 不降质证明；零新第三方依赖（NOTICES/SBOM 零增量）。
 - 遗留登记 R-1..R-6（死设置接线/撞号修复/栈上限/F-4/基准/真机壳）
   全部留用户裁决，无阻塞项。未知项：U-2/U-4 本轮消除，U-3/U-5 维持。
+
+---
+Task ID: t9-a（继续推进轮启动：平台回滚恢复 + 基线复认证 + clippy 口径修复）
+Agent: 主代理
+Task: 用户指令"继续推进"（2026-10-12，凭据环境变量传递）——恢复再次被
+平台回滚的工作区，12 门禁基线复认证，处置复认证中发现的 t8 漏检项
+
+Work Log:
+- 平台回滚恢复（第二次，同 t8 事故模式）：本仓 .git 退回 48d0536（五提交
+  从本地消失），boundary-audit 八件套磁盘丢失；mdcore 目录被清空。
+  恢复：fetch 核验远端 dc8c6a9 完好 → 本地未提交改动核实为提交前旧稿
+  （远端版更完整）→ reset --hard origin/main → 八件套全部恢复；mdcore
+  重克隆（checkout main=15efc28 核验，.git/config 零残留复核）。
+- 环境重建（~/.cargo 全丢）：rustup 1.99.0 + wasm32 target + rustfmt/
+  clippy 前台重装；pdfium 取件（fetch-pdfium.sh chromium/8086，
+  SHA256 验证过）；fixtures 现场生成（pdf_a_spike 三探针 + formfill_probe
+  S6 探针全过，form_probe.pdf 首次缺失致 G3/G4 首跑 13+1 失败后补齐）；
+  wasm-bindgen-cli 0.2.129（与 Cargo.lock 精确一致）；web npm ci +
+  esbuild dist 构建。
+- 12 门禁基线复认证（mdcore 15efc28 零改动状态下）：G1 267/267 +
+  G2 79 + G3 81+6i + G4 109+6i + G5 perf 6/6 + G6 scan 0 + G7 wasm32
+  过 + G9 fmt 0 + 契约 18/18 + smoke 15/15 + IME 28/28 = 与 t8 收口
+  口径逐项一致；**G8 clippy 偏差**：四面 --all-targets 口径实测 3 条
+  （2 wasm 在档基线 + 1 条 26aa4af 引入的 pdfb_skeleton:1107
+  manual_pattern_char_comparison）——t8 REPORT"2 基线零新"系口径收窄
+  （--workspace 不含测试目标）所致漏检。
+- 修复（mdcore d3123ba）：.split 闭包改字符数组模式（语义零变化，红绿
+  = dual 109+6i 复验不变）+ REUSE.md §4 clippy 命令恢复 gates.md
+  PDF-e 起四面 --all-targets 口径；修复后四面实测仅 2 条 wasm 基线
+  零新增；REPORT §7 勘误段回写（诚实登记纪律）。
+- Git 纪律：门禁绿后提交；推送前 ls-remote 核实远端 15efc28 无位移；
+  PAT extraheader 单次传递，推送后 .git 零残留复核。
+
+Stage Summary:
+- 工作区与环境第二次零损失恢复；12 门禁基线全数复现。
+- t8 唯一漏检项（clippy 口径回退）已修复并在两仓登记勘误。
+- mdcore main：15efc28 → d3123ba（一卫生提交）。
+- 下一步（本会话连续执行）：t9-b office-impl PLAN v1 任务清单提交——
+  依据 = 用户六点指令第 3 条（Office 按自身需求开发）+ t8 PLAN §0
+  "Office 引擎（按需另轮）"的另轮启动 + REUSE.md 复用入口就绪。
