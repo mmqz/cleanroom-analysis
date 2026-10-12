@@ -1701,3 +1701,31 @@ Stage Summary:
 - 推荐件组合（calamine + rust_xlsxwriter + zip 9）读写往返互证
   成立——ADR-O1 证据链闭环。
 - 下一步：t9-f（T4 收口报告 + 内核轮裁决问题整理 + 双仓收尾）。
+
+---
+Task ID: t9-f（office-impl T4：收口报告 + 裁决问题整理 + 全线同步）
+Agent: 主代理
+Task: 按 office-impl PLAN v1 T4 收口——REPORT 三要素 + 内核轮裁决
+问题整理（证据先行）+ HANDOFF/STATUS 同步 + 双仓收尾
+
+Work Log:
+- REPORT.md（office-line/office-impl/）：T0-T4 完成项对账表 + 门禁
+  改前改后全表（290/79/81+6i/109+6i/perf6/scan0/wasm32/clippy四面/
+  fmt + 18/15/28 + Cargo.lock 4 行零依赖证明）+ 零阻塞声明 + §4 内核
+  轮裁决问题四项（R-O1 格式优先序 / R-O2 docx 渲染级读侧 / R-O3 IO
+  依赖落地批准 / R-O4 编辑往返，各带证据基础与建议非裁决）+ 遗留
+  登记（R-1..R-6 维持 + docx-rs 观察项 + 条目数上限待实测）+ 执行链
+  与 Git 纪律复现段。
+- HANDOFF.md 同步：L3 行增补 office-impl 开发轮全记录与 R-O1..R-O4
+  裁决入口；L-MD 行 mdcore 版本链更新（03815b6→15efc28→d3123ba→
+  2a4cb6c，含各阶段一句定性）。
+- 会话总账（t9-a..f 六轮，超"至少 5 轮"要求）：两次平台回滚恢复 +
+  t8 漏检修复 + office 开发启动轮全链（任务清单→消毒五面产品代码→
+  选型侦察→探针实证→收口）；mdcore 两提交 / 分析仓六提交全部推送
+  零残留。
+
+Stage Summary:
+- office-impl 开发启动轮完整收口：安全基座（产品代码）+ 侦察选型
+  （ADR/安全策略）+ 探针实证三线全部交付在档。
+- 下一阶段入口四项裁决（R-O1..R-O4）已整理完毕，等待用户；MD 线
+  R-1..R-6 维持留裁决。无阻塞，无悬空工作。
