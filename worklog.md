@@ -1576,3 +1576,51 @@ Stage Summary:
 - 范围红线：零内核代码、零 D1/D2/D3 预裁决、零跨格式抽象、
   选型库零进 mdcore。
 - 随即连续执行 T1 → T2 → T3 → T4。
+
+---
+Task ID: t9-c（office-impl T1：mdc-office 消毒五面落地）
+Agent: 主代理
+Task: 按 office-impl PLAN v1 T1 实施 mdc-office crate（mdcore workspace
+第七成员）+ 敌意输出面消毒五面 + 全门禁验收
+
+Work Log:
+- crate 落地：crates/office（mdc-office，纯 std 零三方依赖，对 mdcore
+  零编译依赖）；workspace members/default-members 接线 + r24_packaging
+  版本锁六→七 crate 同步 + 根清单注释增补。
+- 五面实现（office-d §5 逐面）：①csv_formula_guard——=+-@ 触发集三
+  模式（前置 '/前置空格/typed reject），xlsx 路线豁免注记（§5.1 裁决
+  2）；②xml_control——保字符档 _xHHHH_ 转义（转义集 = 0x00-0x08/
+  0x0B/0x0C/0x0E-0x1F/FFFE/FFFF，\t\n\r 与 0x7F 放行），**字面量消歧
+  含逃逸边界闭合扩展**（闭合位 ∈ {_, 转义集字符}，多字节成员
+  FFFE/FFFF 经字符级判定——设计推导中发现朴素"仅原位 _ 闭合"会漏
+  跨逃逸边界假形态，例 _x00AB+U+000B 编码后 _x00AB_ 可解码）；③
+  xml_entities——文本最小集/属性五实体 + 控制字符一体化兜底形态；
+  ④html_escape——href 注入面五实体兜底；⑤field_whitelist——默认
+  七白（DATE/PAGE/NUMPAGES/TOC/PAGEREF/MERGEFIELD/SEQ）六黑
+  （INCLUDETEXT/INCLUDEPICTURE/DDE/DDEAUTO/LINK/RD），全 token 前缀
+  扫描防嵌套注入（含引号粘连形态）。
+- 测试：18 集成 + 5 文档 = 23 项——码位边界全扫（0..0x2000 +
+  星面字符）、三档对照断言（损坏档 = 产物零转义集残留即合法 XML；
+  剥除档 = 往返零丢失）、字面量消歧回归组 11 例（设计推导链全部
+  手工用例）、4000 例 LCG 往返性质测试（敌意字母表，确定性零三方
+  依赖）、审计锚定载荷族（DDE 命令/超链接/算式改写 + href 注入 +
+  域嵌套注入）、零依赖自锁（清单级 [dependencies] 缺席 + mdcore
+  依赖键缺席双保险）。
+- 过程修正三处：&str 迭代（.chars()）；零依赖自锁的 mdcore 文本
+  匹配误伤 description（改行首依赖键判定）；web 测试运行产物
+  results/*.json 误入首提交（历史从未跟踪——amend 移除 + web/
+  .gitignore 补 tests/results/，t8"产物提取数字后清理"纪律固化）。
+- 门禁验收：G1 290/290（267+18+5，全对账）+ dual 109+6i（PDF 零
+  波及）+ clippy 四面 2 wasm 基线零新（office 面 0）+ fmt 0 + scan 0
+  + wasm32 过 + web 18/15/28；Cargo.lock 增量 = 包注册块 4 行（零
+  三方依赖的机器验证，NOTICES 零增量）。
+- Git：门禁绿后提交；推送前 ls-remote 核实 d3123ba 无位移；amend
+  发生在推送前（产物修正，无历史改写风险）；PAT extraheader 单次
+  传递零残留。
+
+Stage Summary:
+- T1 完成：Office 域第一块产品代码落地 mdcore（main d3123ba→2a4cb6c），
+  三域纪律全维持（零编译依赖 + 零三方依赖 + PDF 零波及）。
+- _xHHHH_ 字面量歧义（审计【推断】登记项）升级为已解决：消歧规则
+  + 性质测试锁死，超参照库行为差异在模块文档显式标注。
+- 下一步：t9-d（T2 Rust OOXML 生态侦察 + ADR-O1 + 安全策略 v1）。
