@@ -1663,3 +1663,41 @@ Stage Summary:
 - 安全策略 v1 草案就绪：输入防线四层 + 限额表待 T3 实测回填。
 - 下一步：t9-e（T3 spike 三探针：xlsx 读 + xlsx 写 + 敌意输入
   限额行为）。
+
+---
+Task ID: t9-e（office-impl T3：spike 三探针）
+Agent: 主代理
+Task: 按 office-impl PLAN v1 T3 在 office-line/spike（分析仓 cargo
+工作区，零进 mdcore）执行三探针：xlsx 读 + xlsx 写流式 + 敌意输入
+
+Work Log:
+- spike 基建：office-line/spike（Cargo.toml 四依赖 = office-e 推荐件
+  calamine 0.36 / rust_xlsxwriter 0.99 constant_memory / zip 9 +
+  flate2 原始流构造件；Cargo.lock 提交钉版本；.gitignore target/
+  fixtures）。
+- 探针 1 读面：rust_xlsxwriter 生成 fixtures（跨件互证设计）→
+  calamine 全量提取 + 抽点断言（字符串/数字/布尔三型）+ 全量对账
+  （156,000 格零丢失）+ 大表量级（500,000 格）。
+- 探针 2 写面：constant_memory 100 万格写（971.50ms，产物 3.33MB）
+  + calamine 重开往返（末格浮点断言 + 行数对账）——ADR-O1 O1-1+O1-2
+  推荐件组合互证成立。
+- 探针 3 敌意输入三件：3a 声明预扫（by_index 逐条 size() 求和 +
+  enclosed_name 逃逸识别，0.01ms 零数据读取）；3b 谎言头（手构 zip
+  单条目 deflate 声明 16B 实际膨胀 1MB——本地头/中央目录/EOCD 手工
+  字节装配 + 自含 CRC-32 查表）→ zip 9.x 内建拒绝（"File is larger
+  than its declared uncompressed size"）；3c 巨量 dimension（手构
+  最小 xlsx 四部件，声明 A1:ZZZ9999999 ≈1.7e12 格）→ calamine 无害
+  （Range 按实际单元格定尺寸 2×2，0.05ms）。
+- 过程修正六处编译错（write_number 实参序 / add_worksheet_with_
+  constant_memory 0.99 无 Result / get usize 元组 / open_workbook
+  turbofish 序 / matches! 借用）——API 校准记录在案。
+- 回填：SECURITY_POLICY §2.2.1（T3 降级为登记观察）+ §3 限额表
+  （谎言头实测拒绝 / dimension 实测无害 / 预扫机制实证 / 路径逃逸
+  实测识别）+ 头注状态升级；office-e 增 §8 探针实测表。
+
+Stage Summary:
+- T3 完成：三探针全过，数字在档；两条敌意输入关键实证（zip 内建
+  反谎言头 + calamine 不按声明预分配）直接校准安全策略。
+- 推荐件组合（calamine + rust_xlsxwriter + zip 9）读写往返互证
+  成立——ADR-O1 证据链闭环。
+- 下一步：t9-f（T4 收口报告 + 内核轮裁决问题整理 + 双仓收尾）。

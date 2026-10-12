@@ -1,0 +1,15 @@
+[package]
+name = "office_impl_spike"
+version = "0.1.0"
+edition = "2021"
+
+# office-impl T3 探针（分析仓写面，不进 mdcore——选型未落地前的证据采集）。
+# 依赖 = office-e 选型 pass 推荐件（版本与 office-e §0 锚定一致；Cargo.lock
+# 提交钉住精确版本）。flate2 为 3b 谎言头探针的原始 deflate 流构造件
+# （zip 9.x 内部同源，非第二实现）。
+
+[dependencies]
+calamine = "0.36"
+rust_xlsxwriter = { version = "0.99", features = ["constant_memory"] }
+zip = { version = "9", default-features = false, features = ["deflate"] }
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
