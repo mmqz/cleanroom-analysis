@@ -1545,3 +1545,34 @@ Stage Summary:
 - 下一步（本会话连续执行）：t9-b office-impl PLAN v1 任务清单提交——
   依据 = 用户六点指令第 3 条（Office 按自身需求开发）+ t8 PLAN §0
   "Office 引擎（按需另轮）"的另轮启动 + REUSE.md 复用入口就绪。
+
+---
+Task ID: t9-b（office 开发启动轮：任务清单提交）
+Agent: 主代理
+Task: 按用户六点指令第 3 条 + t8 PLAN §0 "Office 引擎（按需另轮）"登记，
+提交 Office 首开发轮任务清单（指令 6 纪律：模块/复用依据/风险/验收）
+
+Work Log:
+- 依据链整理：用户指令第 3 条（Office 按自身需求开发/优先复用/不预设计
+  跨格式抽象）→ t8 PLAN §0 明示"Office 引擎（按需另轮）"→ REUSE.md
+  T4 即"Office 后续按需复用入口"→ 本轮启动。MD 线 R-1..R-6 全部留
+  裁决、L3 后续轮 D1 门控——Office 启动轮是当前唯一无裁决依赖的
+  可推进开发面。
+- 规格输入精读：office-d §5 敌意输出面全节（五面职责表 + CSV 四库
+  逐一裁决 + XML 三档一手核验 + 域白名单建议）+ office-b §3.5（
+  x2t 敌意输入五件套限额：4GiB/zip 50MB·300MB/下载 100MB/2m/3 次/
+  路径逃逸/私网守卫）+ office-a §9（isSafeUrl/custom 验证器无 eval/
+  剪贴板剥离）。
+- 分诊（指令 5）：唯一安全正确性级缺口 = sheetjs _xHHHH_ 字面量歧义
+  （审计【推断】登记未展开）→ T1 升格处理（消歧规则 + 往返测试）。
+  其余输入一手代码级已闭环或参照齐备，无阻塞。
+- 任务清单：office-line/office-impl/PLAN.md（T0 已毕 + T1 消毒五面
+  crate + T2 Rust 生态侦察 ADR-O1/安全策略 v1 + T3 spike 三探针 +
+  T4 收口含内核轮裁决问题整理；六条全程不变量）。
+
+Stage Summary:
+- Office 开发启动轮任务清单已提交（两翼 = 安全基座直进 mdcore +
+  侦察选型循 pdf-a 先例零依赖落地）。
+- 范围红线：零内核代码、零 D1/D2/D3 预裁决、零跨格式抽象、
+  选型库零进 mdcore。
+- 随即连续执行 T1 → T2 → T3 → T4。
