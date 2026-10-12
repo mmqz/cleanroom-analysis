@@ -105,3 +105,15 @@
    锚点 500+ 经独立复审零事实性错锚；mdcore 零改动。
    执行轮补验：web 三门禁契约门 16/16 + smoke 15/15 + IME CDP 28/28
    复跑全绿，U-1 消除【测试验证】，mdcore 仍零改动零提交）
+8. ~~**MD 复用地基实施轮（开发态）**~~ ✅ **已完成（2026-10-12，
+   T0-T5 连续执行，用户六点指令：审计收口进入开发/三域独立/只抽取
+   明确共性/Office 与跨引擎统一后置）**：mdcore main 03815b6→15efc28
+   三工作流提交——①阻断缺口四项（Source 镜像锁双向化[红绿演示] +
+   P3 测试锁四条[G4b 撞号实测成立：重开 undo 物化 ID 与重解析块撞号
+   →树内重复 BlockId，修复留裁决] + wasm source typed reject +
+   契约卫生 F-1/2/3[契约门 16→18]）；②settings 独立 crate 化
+   （mdc-settings 域无关零 mdcore 依赖 + 闭包锁，三域可直接消费，
+   shell re-export 路径零破坏）；③REUSE.md 复用工具包（12 单元转录，
+   Office 后续按需复用入口）。门禁改前改后全绿（267/79/81+6i/109+6i/
+   perf6/scan0 + 18/15/28），PDF 四面+perf 恒绿 = 不降质证明。
+   零阻塞；登记 R-1..R-6 留裁决（`md-line/reuse-impl/`：PLAN/REPORT）

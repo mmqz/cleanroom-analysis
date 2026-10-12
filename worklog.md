@@ -1460,3 +1460,48 @@ Stage Summary:
 - 平台回滚事故零损失恢复（远端为唯一真源，磁盘旧稿未覆盖任何新内容）。
 - 任务清单已提交（用户指令 6 前半），随即连续执行 T0→T5。
 - mdcore 起点 main=03815b6（与审计基线一致），本轮起进入开发态写面。
+
+---
+Task ID: t8-exec（复用地基实施轮：T0-T5 连续执行收口）
+Agent: 主代理
+Task: 按 reuse-impl PLAN v1 连续完成 T0-T5（用户指令"先交清单后连续
+执行"），mdcore 进入开发态写面
+
+Work Log:
+- T0：改前 12 门禁全绿认证（九 Rust 门禁 259/78/80+6i/108+6i/perf6/
+  scan0/wasm32/clippy2基线/fmt + web 16/15/28）；pdfium 取件
+  （fetch-pdfium.sh chromium/8086）+ fixtures 现场生成（spike 双探针
+  全过）+ wasm-bindgen 0.2.129 重装。
+- T2（提交 26aa4af）：镜像锁双向化（新增 source_mirror_bidirectional_
+  exact_count：mdcore 侧恰五变体计数锁 + pdf 侧编译期穷尽锁；红绿演示
+  = 注入 Ghost 第六变体精确报警后撤销）；t3_reuse_locks.rs 四条现状锁
+  （G1 清 redo / G4a ID 重编号 [1,4,2,3]→[1,2,3,4] / G4b 撞号
+  [1,2,3,3,4] 实测成立 / G6 coalesced 共享 revision）；wasm source
+  typed reject（parse_source_str 纯函数 + 2 单测，main.ts 全调用点
+  'view' 零破坏）；契约卫生（CONTRACT §3 勘误渐进专属 + 版本残留
+  1→1.1；契约门 16→18 检含 F-1 双侧现状锁 + F-3 __view）。
+- T3（提交 f08e376）：crates/settings（mdc-settings）独立 crate——
+  settings.rs 整体迁移（rename 血缘 96%）；:102 唯一 mdcore 引用改本地
+  常量（r24_settings:365 跨 crate 锁继续背书单源）；shell pub use
+  re-export 路径零破坏（r24_settings/contract_freeze 原样过）；闭包锁
+  测试（行首匹配——首版整文件 contains 被自身描述误伤，红绿校准）；
+  r24_packaging 版本锁同步六 crate；toml_edit 随迁零新依赖。
+- T4（提交 15efc28）：REUSE.md 91 行（12 单元转录 + 快速指引 + 九门禁
+  基线 + 六条消费契约注记；零上游品牌词 scan 0）。
+- T5：终跑全绿——G1 267/267（259+7 增量）+ G2 79 + G3 81+6i + G4
+  109+6i + G5 perf 6/6 + scan 0 + wasm32 + clippy 2 基线 + fmt 0 +
+  契约 18 + smoke 15 + IME 28；mdcore 工作区归零；运行产物清理。
+- 实测新发现三条：G4b 撞号机制成立（P2-U2 推断→测试验证，撞点 p2/p3
+  与预测 p3/p4 不同机制一致，修复留裁决 R-2）；G4a 漂移具体形状（ID
+  语义转移）；P1"settings 用 Core"校准为仅常量取源（抽取缝极小的证据）。
+- Git 纪律：三提交均门禁绿后提交；推送前 fetch 核实远端（03815b6 无
+  位移）；PAT extraheader 单次传递，每次推送后 .git/ grep 零残留。
+
+Stage Summary:
+- 用户六点指令全部落地：阻断缺口先处理（4 项）+ 唯一结构抽取
+  （settings 域无关化，三域可直接消费）+ 复用工具包（Office 后续按需
+  复用的入口文档）+ 连续执行零停工 + 每阶段汇报三要素齐备。
+- mdcore main：03815b6 → 15efc28（三工作流提交）；PDF 四面 + perf
+  改前改后全绿 = 不降质证明；零新第三方依赖（NOTICES/SBOM 零增量）。
+- 遗留登记 R-1..R-6（死设置接线/撞号修复/栈上限/F-4/基准/真机壳）
+  全部留用户裁决，无阻塞项。未知项：U-2/U-4 本轮消除，U-3/U-5 维持。
