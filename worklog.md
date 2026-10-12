@@ -1388,3 +1388,40 @@ Stage Summary:
   输入就绪；5 组质量缺口（Source 镜像锁单向/undo_coalesce_ms 死设置/
   P3 六项测试锁缺口/P5 四项契约漂移/MD 面基准空位）全部登记留裁决。
 - mdcore 两分支 SHA 不变（03815b6/1adced2，零接触零改动）。
+
+---
+Task ID: t7-u1-webgate-recheck（P7 收尾补验，隶属 t7-md-boundary-exec）
+Agent: 主代理
+Task: 消除 REPORT.md U-1（web 三门禁本轮未复验）——环境具备后复跑
+契约门 / smoke / IME CDP 三门禁
+
+Work Log:
+- 前置恢复：子仓 26 文件模式位 755→644（环境侧 chmod 副作用，零内容
+  改动，git status 归零）；确认 dfd41ae 已在 origin/main，无未推送提交；
+  mdcore 工作区干净、main=03815b6 不变。
+- 环境探测：node v24.21.0 + npm 11.19.0 + Python playwright + chromium
+  缓存（1200/1248）齐备；wasm-bindgen CLI 补装 0.2.129（与 Cargo.lock
+  精确一致，cargo install --locked）。
+- 构建链（产物全在 .gitignore 覆盖面：pkg/dist/node_modules/target）：
+  cargo build wasm32 --release 20.44s + wasm-bindgen → pkg/ + esbuild →
+  dist/（main.js 531KB + wasm 704KB）。
+- 三门禁复跑（web/tests/，2026-10-12，全部 stdout 全绿在档）：
+  * contract_gate.py → 16/16 全绿（boot surface / bridge inventory /
+    inject 族 6 检 / chunk progressive / undo key / unit constitution /
+    settings 三检）；
+  * web_smoke.py → 15/15 全绿（1MB/20448 块实测：typing p95 12.6ms /
+    fallback sync 282ms / undo 重渲染 136.1ms）；
+  * ime_cdp.py → 28/28 全绿（IC1-IC6 组合流全量 + CDP 点击不强制提交
+    的路径限制登记与基线口径一致）。
+- 只读红线：tests/results/*.json 为运行产物（本克隆不入库），提取
+  汇总数字后整目录删除；mdcore git status --porcelain 归零复核。
+- 回写：REPORT.md 头注补验说明 + §6 守护段三门禁升级【测试验证】+
+  §7 U-1 行标记已消除（表名同步微调）；STATUS.md §7.7 补一行；本段
+  worklog 追加。
+
+Stage Summary:
+- U-1 消除：web 三门禁从【文档记录：本轮未复验】升级【测试验证】
+  （16/16 + 15/15 + 28/28）；U-2..U-5 维持原状（分别需新增往返测试/
+  建基准/桥侧校验/开发环境轮，均超出本环境或本轮范围）。
+- mdcore 全程零改动零提交零推送（构建/测试产物均在 .gitignore 覆盖
+  面或已清理）；REPORT.md 补验后 164 行仍 ≤300。
