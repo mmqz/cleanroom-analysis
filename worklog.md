@@ -1624,3 +1624,42 @@ Stage Summary:
 - _xHHHH_ 字面量歧义（审计【推断】登记项）升级为已解决：消歧规则
   + 性质测试锁死，超参照库行为差异在模块文档显式标注。
 - 下一步：t9-d（T2 Rust OOXML 生态侦察 + ADR-O1 + 安全策略 v1）。
+
+---
+Task ID: t9-d（office-impl T2：Rust OOXML 生态侦察 + ADR-O1 + 安全策略 v1）
+Agent: 主代理
+Task: 按 office-impl PLAN v1 T2 执行 Rust 生态一手核验选型 pass +
+ADR-O1 + 敌意输入安全策略 v1 草案
+
+Work Log:
+- 一手核验：五仓浅克隆（office-line/_upstream/ 本地不入 git，.
+  gitignore 增条目）——calamine 0.36.1 / rust_xlsxwriter 0.99.1 /
+  umya-spreadsheet 3.1.1 / docx-rs docx-core 0.4.22 / zip(zip2 线)
+  9.0.2；LICENSE 文件逐件直读（4×MIT + 1×MIT/Apache 双许可，净室
+  零义务）；HEAD 提交日期全录（全部 2026-09~10 活跃）。
+- 供应链陷阱一手发现：zip-rs/zip 仓 master 停滞 0.6.x（2024-05），
+  活跃线在 zip-rs/zip2（crates.io 名 zip 9.x）——克隆陷阱登记
+  ADR-O1 O1-5 禁令。
+- docx 读面发现：docx-rs 存在 reader（read_docx/read_docx_with_
+  options 进 writer 同一 Docx 模型，reader 78 子模块文件）——
+  05 §8.1"蓝海"读侧假设校准：模型级读写已存在，蓝海在渲染保真级
+  读侧（office-d §6.3 目标线），ADR-O1 开放项 O1-6 留裁决。
+- zip 限额面一手证据：types.rs uncompressed_size pub 暴露（预扫
+  求和可行）+ crc32.rs with_size_limit 按声明值截断（反谎言头
+  炸弹两层闭环）——安全策略 §2.1 的工程依据。
+- 过程自纠：rg -r 误用（replace 语义）导致两次输出被替换 chasing
+  幽灵符号（with_ln 实为 with_limit）——干净复查后定谳，锚点已按
+  正确 API 名写入报告。
+- 三件交付：office-e 选型 pass（对象锚定/能力面/防御面/选型矩阵/
+  锚点统计，零【推断】标注）+ ADR-O1（六面决策 + 风险缓解 + 落地
+  前置 + 两开放项留裁决）+ SECURITY_POLICY v1 草案（威胁模型六项/
+  四层防线/限额表六维建议值——三项一手参照采用 + 三项新设标注
+  待 T3 校准）。
+
+Stage Summary:
+- T2 完成：Rust OOXML 选型证据链闭环，ADR-O1 六面建议稿在档
+  （推荐 calamine/rust_xlsxwriter/docx-rs/zip2 线，umya 按需，
+  渲染级读侧留裁决）。
+- 安全策略 v1 草案就绪：输入防线四层 + 限额表待 T3 实测回填。
+- 下一步：t9-e（T3 spike 三探针：xlsx 读 + xlsx 写 + 敌意输入
+  限额行为）。
