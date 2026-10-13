@@ -13,8 +13,8 @@
 | L0 | AGENTS.md 规范安全审计（vercel/AGENTS.md 等） | ✅ 完成（2026-10-08~09） | `agents-md-audit/`（9 篇分析 + 5 证据 + 5 工具） |
 | L1 | Adobe Acrobat Pro DC 26.002.21931 安装器审计（R1~R6，含 AGS 取证） | ✅ 完成 | `acrobat-audit/`（4 分析 + 25 证据 + 工具链） |
 | L2 | PdfCraft 净室开发分析（PDF 线四篇） | ✅ 完成收官（无剩余事项结论成立） | `pdf-line/`（01~04） |
-| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ **全阶段收官**：R1 P0 三项 + R2-P1 四项 + R2-P2 六项（office-d 含）+ **R2 总收口综合**（`pdf-line/06`，458 行：协同内核五方链、渲染八路线光谱、双态六条、AI 调用面窗口、生成态 A/B、安全三闸、许可 14 对象三档、D1/D2/D3 终裁问题）——14 篇报告全部经独立复审+修补；2026-10-11 含工作区重置事故恢复（重做轮 5 全套，推送面零损失）。**待用户裁决：D1 协同内核三问 / D2 双态立项 / D3 生成态主线**（06 §8.1）；后续轮：yrs 评估 pass 最优先（D1 门控）。**office-impl 开发启动轮已完成（2026-10-12，t9-a..f）**：mdc-office crate 落地 mdcore（消毒五面 + 4000 例往返性质测试，main 2a4cb6c）+ Rust 生态选型 ADR-O1（calamine/rust_xlsxwriter/docx-rs/zip2 线）+ SECURITY_POLICY v1 + spike 三探针（谎言头/巨量 dimension 两实证）。**xlsx-r1 内核轮（Round 1 XLSX 优先，2026-10-13）阶段 A 完成**：7 维语料 17 件 + C3 保真丢失矩阵定谳（样式/关系结构性丢，组合语义=重建不宣称编辑往返）+ 读骨架 harness 17/17 零 panic + 消毒针对性安全测试设计 61 用例（URL 策略缺口发现 + 补面）+ 依赖闭包 51 crate 零 copyleft + io/url_policy 产品代码 24/24（spike lib 验证态）；**阶段 B（mdcore 落地双 crate 方案 + runbook）凭据阻塞待解锁**（`xlsx-r1/REPORT.md` §3-4）；R-O1/R-O3 已由本轮指令回放落定，R-O2/R-O4 维持裁决 | `pdf-line/05`（规划）+ `pdf-line/06`（综合）；`canvas-line/`（7）+ `office-line/`（4 研究报告 + office-e 选型 + ADR-O1 + SECURITY_POLICY + spike + office-impl PLAN/REPORT + xlsx-r1 七件[PLAN/FIDELITY/SANITIZE_TESTS/DEPS/CAPABILITIES/REPORT + 语料]）——14 篇报告 + 综合 + 开发轮五件 + 内核轮阶段 A 全套 |
-| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24 全收口 + **PDF 载体五轮 a-e 全部完成**（a 选型定谳 / b 骨架 / c 阅读面+性能门 / d 标注面+增量写互通 / e 收口：安全姿态对齐实装 8 族扫描+S6 form_probe+看门狗换代+L0/L4/L7，CONTRACT v1.3）；前置质量审计轮 T1（survey/review/4-fix/verify 链：F1 取消哨兵/F2 ByAnchor panic/O3/O4 修复+工具链钉住+fmt 清扫）；SBOM/NOTICES v1.2（42→105 零 UNKNOWN，ASSET_CHECK 首个分发资产）；S6 探针复原（.gitignore 根因修复）；R24-d 壳实体 = 开发环境轮；mdcore main=`2a4cb6c`（演进链：03815b6 PDF-e → 15efc28 复用地基轮 T0-T5[settings 独立 crate + REUSE.md] → d3123ba clippy 口径修复 → 2a4cb6c mdc-office 消毒五面；四面 290/79/81+6i/109+6i + perf 6/6，scan 0 恒绿）；compliance-baseline=`1adced2`（NOTICES v1.2 在档） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
+| L3 | 办公与画布线（Univer/Excalidraw/ComfyUI 等 16 候选） | ✅ **全阶段收官**：R1 P0 三项 + R2-P1 四项 + R2-P2 六项（office-d 含）+ **R2 总收口综合**（`pdf-line/06`，458 行：协同内核五方链、渲染八路线光谱、双态六条、AI 调用面窗口、生成态 A/B、安全三闸、许可 14 对象三档、D1/D2/D3 终裁问题）——14 篇报告全部经独立复审+修补；2026-10-11 含工作区重置事故恢复（重做轮 5 全套，推送面零损失）。**待用户裁决：D1 协同内核三问 / D2 双态立项 / D3 生成态主线**（06 §8.1）；后续轮：yrs 评估 pass 最优先（D1 门控）。**office-impl 开发启动轮已完成（2026-10-12，t9-a..f）**：mdc-office crate 落地 mdcore（消毒五面 + 4000 例往返性质测试，main 2a4cb6c）+ Rust 生态选型 ADR-O1（calamine/rust_xlsxwriter/docx-rs/zip2 线）+ SECURITY_POLICY v1 + spike 三探针（谎言头/巨量 dimension 两实证）。**xlsx-r1 内核轮（Round 1 XLSX 优先，2026-10-13）全轮完成（阶段 A + 阶段 B 同日闭环）**：阶段 A = 7 维语料 17 件 + C3 保真丢失矩阵定谳（样式/关系结构性丢，组合语义=重建不宣称编辑往返）+ 读骨架 harness 17/17 零 panic + 消毒针对性安全测试设计（URL 策略缺口发现 + 补面）+ 依赖闭包 50 crate 零 copyleft；**阶段 B（凭据同日解锁）= mdc-office-io 落地（workspace 第八成员，双 crate 方案 A：容器双门[声明四检查+谎言头策略层闭环]+calamine 四面+统一错误三分，main 2a4cb6c→880864e）+ mdc-office 消毒六面（url_policy 补面，纯 std 不破自锁）+ 靶向安全 44 用例 + 17 件语料集成 harness（G1 361/361 只增不改；PDF 四面零波及逐位复验；web 18/15/28）+ NOTICES v1.3（compliance-baseline 1adced2→ddc51c1：正文 90→101/账 28→33，zip=MIT 与 rust_xlsxwriter=双许可两修正回写）+ SECURITY_POLICY v1.0 生效**；四处设计-实现出入与两处许可修正全部钉定回写（SANITIZE_TESTS/DEPS/REPORT §7 审计链在档）；R-O1/R-O3 已由指令回放落定，R-O2/R-O4 维持裁决 | `pdf-line/05`（规划）+ `pdf-line/06`（综合）；`canvas-line/`（7）+ `office-line/`（4 研究报告 + office-e 选型 + ADR-O1 + SECURITY_POLICY v1.0 + spike + office-impl PLAN/REPORT + xlsx-r1 七件[PLAN/FIDELITY/SANITIZE_TESTS/DEPS/CAPABILITIES/REPORT + 语料]）——14 篇报告 + 综合 + 开发轮五件 + 内核轮全套 |
+| L-MD | **MD 引擎（mdcore）研发与合规**（另一会话线，2026-10-10 登记） | ✅ R24 全收口 + **PDF 载体五轮 a-e 全部完成**（a 选型定谳 / b 骨架 / c 阅读面+性能门 / d 标注面+增量写互通 / e 收口：安全姿态对齐实装 8 族扫描+S6 form_probe+看门狗换代+L0/L4/L7，CONTRACT v1.3）；前置质量审计轮 T1（survey/review/4-fix/verify 链：F1 取消哨兵/F2 ByAnchor panic/O3/O4 修复+工具链钉住+fmt 清扫）；S6 探针复原（.gitignore 根因修复）；R24-d 壳实体 = 开发环境轮；mdcore main=`880864e`（演进链：03815b6 PDF-e → 15efc28 复用地基轮 T0-T5[settings 独立 crate + REUSE.md] → d3123ba clippy 口径修复 → 2a4cb6c mdc-office 消毒五面 → 880864e xlsx-r1 阶段 B[mdc-office-io 第八成员 + 消毒六面 + 靶向安全 44 + 语料 harness，G1 361/290 只增不改，四面 361/79/81+6i/109+6i + perf 6/6，scan 0 恒绿]）；compliance-baseline=`ddc51c1`（NOTICES v1.3 在档：Office 线首批三方依赖入账，第三方 105→116 零 UNKNOWN） | `md-line/STATUS.md` + `md-line/pdf_carrier_plan.md` + `md-line/pdf-a/`；产品代码在私有仓 `mmqz/mdcore` |
 
 > **L-MD 与本仓的关系**：MD 引擎是工作台组成面之一（§1 的「MD 引擎开发中」
 > 即它，进度见 `md-line/STATUS.md`）。其审计底稿在私有仓
@@ -54,6 +54,17 @@ cleanroom-analysis/
 5. **worklog 追加式**：每完成一个 Task 追加一节（Task ID/Agent/Task/Work Log/Stage Summary），永不覆写。
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
+
+> **当前态速览（2026-10-13 xlsx-r1 收口后）**：office-impl 开发轮 +
+> xlsx-r1 内核轮（阶段 A+B）全部完成——Office 域产品代码已在 mdcore
+> （mdc-office 消毒六面 + mdc-office-io XLSX 读路径，main 880864e）。
+> **下一轮候选（按在档登记，待用户裁决优先级）**：①xlsx-r2（C2 写面
+> 产品化——rust_xlsxwriter 进 mdc-office-io 产品依赖 + 写读管线接线，
+> 证据 = style_probe 9/9 + T3 探针）②mal7e 垃圾部件严格模式裁决 ③门 2
+> 双读成本优化（受信源跳过开关）④R-O2 docx 渲染级读侧裁决 ⑤L3 分析
+> 线遗留裁决（D1 协同内核三问 / D2 双态立项 / D3 生成态主线，yrs
+> 评估 pass 最优先）。凭据若再失效：本轮全部成果已双仓推送，本地
+> 零未推送状态。
 
 **线 A — L3 办公/画布线 R1**（P0 三项，详见 `pdf-line/05` §7 批次表）：
 - ~~**canvas-a**：Excalidraw 深读（MIT）~~ ✅ **完成（2026-10-10）**：11 维全量

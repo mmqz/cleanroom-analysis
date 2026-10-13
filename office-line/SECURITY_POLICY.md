@@ -1,11 +1,13 @@
-# Office 线敌意输入安全策略（SECURITY_POLICY v1 草案）
+# Office 线敌意输入安全策略（SECURITY_POLICY v1.0）
 
-> 状态：**v1 草案（限额表已按 T3 探针实测校准，2026-10-12）**（office-impl
-> T2+T3 产出；循 pdf-a SECURITY_POLICY 先例）。日期：2026-10-12。输入：
-> office-b §3.5（x2t 五件套一手限额参照）+ office-a §9（边界参照）+
-> office-d §5（输出面）+ office-e §6/§8（Rust zip 限额一手证据 + 探针
-> 实测）+ L2/03 敌意输入方法论（五层纵深/三行为学/沙箱四件套）。
-> 生效面：mdc-office 后续 IO 模块 + 宿主接线层。
+> 状态：**v1.0 生效（2026-10-13，mdc-office-io 实装同步升版——§5 纪律
+> 兑现：草案→生效）**。前身：v1 草案（2026-10-12 T2+T3 产出，限额表
+> 已按探针实测校准；2026-10-13 lie86 谎言头项校准）——输入：office-b
+> §3.5（x2t 五件套一手限额参照）+ office-a §9（边界参照）+ office-d
+> §5（输出面）+ office-e §6/§8（Rust zip 限额一手证据 + 探针实测）+
+> L2/03 敌意输入方法论（五层纵深/三行为学/沙箱四件套）。
+> 生效面：mdc-office-io（XLSX 读路径已实装，mdcore main 880864e）+
+> mdc-office sanitize 六面 + 宿主接线层（§2.3 待接线）。
 
 ## 1. 威胁模型
 
@@ -20,10 +22,11 @@
 | T5 | 条目路径逃逸（`../` 绝对路径） | zip entry name | office-b §3.5 |
 | T6 | 外部资源拉取（INCLUDEPICTURE/外链） | 文档体 | office-d §5.3 |
 
-敌意**输出**面（LLM/用户可控文本落产物）：**消毒五面**（已落地
-mdc-office sanitize，mdcore 2a4cb6c）——CSV 公式首字符 / XML 控制
-字符保字符档 / XML 实体属性位 / HTML href / 域指令白名单。本策略
-不重复其规格（见 mdcore crates/office）。
+敌意**输出**面（LLM/用户可控文本落产物）：**消毒六面**（已落地
+mdc-office sanitize，mdcore main 880864e；第六面 url_policy 于
+xlsx-r1 阶段 B 补面）——CSV 公式首字符 / XML 控制字符保字符档 /
+XML 实体属性位 / HTML href / 域指令白名单 / URL scheme 白名单。
+本策略不重复其规格（见 mdcore crates/office）。
 
 ## 2. 输入防线（分层，L2/03 五层纵深裁剪）
 
@@ -93,17 +96,29 @@ mdc-office sanitize，mdcore 2a4cb6c）——CSV 公式首字符 / XML 控制
 
 ## 4. 输出面引用
 
-消毒五面规格与实现 = mdcore `crates/office`（mdc-office，office-impl
-T1，main 2a4cb6c）：五模块 API + 往返性质测试 + 三档对照断言在档。
-宿主/生成态管线消费契约见该 crate crate 根文档（含 xlsx 路线 CSV
-消毒豁免注记）。
+消毒六面规格与实现 = mdcore `crates/office`（mdc-office，office-impl
+T1 + xlsx-r1 阶段 B，main 880864e）：六模块 API（含 url_policy）+
+往返性质测试 + 三档对照断言 + 靶向安全测试（xlsx-r1 阶段 B 落地
+44 用例）在档。宿主/生成态管线消费契约见该 crate crate 根文档
+（含 xlsx 路线 CSV 消毒豁免注记 + 幂等/非幂等契约分立 + URL 管线
+顺序）。
+
+输入面读路径实现 = mdcore `crates/office-io`（mdc-office-io，xlsx-r1
+阶段 B，main 880864e）：双门（§2.1）+ calamine 四 API 面 + 统一错误
+三分；限额常量即 §3 表接线（LIMIT_TOTAL_DECLARED / LIMIT_SINGLE_
+ENTRY / LIMIT_ENTRY_COUNT）。
 
 ## 5. 版本与复核纪律
 
-- 本策略随 mdc-office IO 模块实装同步升 v1.0（草案→生效）；限额表
-  数字变更走版本化（v1.x 内校准，破坏性变更升 v2）。
-- 复核触发：T3 探针完成 / 首个敌意样本回归 / zip 或解析库大版本
-  升级（**已知敏感点：zip 8.6→9 迁移会改变谎言头读界行为**
-  ——§2.1 第 2 项与门 2 实现须同步重评）。
+- ~~本策略随 mdc-office IO 模块实装同步升 v1.0（草案→生效）~~
+  **已兑现（2026-10-13）**：mdc-office-io 实装（mdcore main 880864e）
+  → 本文件升 v1.0 生效。限额表数字变更走版本化（v1.x 内校准，
+  破坏性变更升 v2）。
+- 复核触发：T3 探针完成 ✅ / 首个敌意样本回归（阶段 B 已落地：17
+  件语料 harness 17/17 + 靶向安全 44 用例全绿——后续每轮回归仍触发
+  复核）/ zip 或解析库大版本升级（**已知敏感点：zip 8.6→9 迁移
+  会改变谎言头读界行为**——§2.1 第 2 项与门 2 实现须同步重评）。
 - 校准历史：v1 草案（2026-10-12 T3）→ 谎言头项校准（2026-10-13
-  xlsx-r1 lie86 探针：8.6 无内建强制，改策略层实现）。
+  xlsx-r1 lie86 探针：8.6 无内建强制，改策略层实现）→ **v1.0 生效**
+  （2026-10-13 xlsx-r1 阶段 B：mdc-office-io 实装同步，门 1+门 2
+  产品化，限额常量接线，语料回归全绿）。

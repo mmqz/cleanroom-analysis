@@ -1851,3 +1851,77 @@ Stage Summary:
   登记为后续样式面扩展的参照。
 - 零凭据推进面彻底收尾：遗留项仅剩凭据门控（阶段 B + 推送）与
   四项登记裁决（R-O2/mal7e 严格模式/双 crate 确认/门 2 成本）。
+---
+Task ID: t10-B（xlsx-r1 阶段 B：mdcore 落地——runbook §3 七步全执行）
+Agent: 主代理
+Task: 凭据解锁后按 xlsx-r1/REPORT.md §3 runbook 执行阶段 B——双 crate
+落地 + 测试全量 + NOTICES 增量 + 门禁全绿 + 双仓推送 + 分析仓收口
+
+Work Log:
+- 凭据解锁（2026-10-13 同日）：用户注入凭据；环境变量单次传递纪律
+  维持（克隆走内联 credential helper / 推送走 extraheader，token 磁盘
+  零残留——env 跨调用不持久的发现与两种单次传递形态均在案）。
+  前置核实：mdcore main = 2a4cb6c 无位移；分析仓四提交先行推送
+  （dd7fb1a..91db58a）。
+- 环境第 5 次重建：rust 1.99.0 工具链在位（rustup 目录幸存）；
+  wasm-bindgen-cli 0.2.129 补装（版本对齐 lock）；md-line pdf-a spike
+  取件 pdfium chromium/8086（SHA256 pin 验证过）+ 现场生成 fixtures
+  （small/large/form_probe，lopdf 构造）。
+- 步 2 mdc-office-io 落地（workspace 第八成员）：spike io.rs 直移
+  （门 1 prescan 四检查 + 门 2 verify_actual_sizes 谎言头闭环 +
+  calamine 四 API 面 + 统一错误三分 + 内联 9 单测）；依赖按 DEPS §1
+  （calamine 0.36 + zip 8.6 deflate；dev：rust_xlsxwriter 语料构造 +
+  flate2 谎言头流构造）；workspace members/default-members 接线 +
+  r24_packaging 版本锁七→八；crate 文档含 Capabilities 节
+  （CAPABILITIES.md 口径引用）+ 容忍度发现三件。
+- 步 3 mdc-office 第六面：url_policy.rs 直移 sanitize 家族（16 单测）
+  + mod/lib 文档接线（面表五→六 + 消费契约五条：xlsx 豁免/_xHHHH_
+  幂等契约/保守误杀/实体非幂等/URL 管线顺序）——纯 std 不破 T1
+  自锁（清单级 [dependencies] 缺席断言恒绿）。
+- 步 4 测试三层：spike 25 随直移 + sanitize_security.rs 44 用例
+  （t10-e §1-§5 逐条精确断言）+ corpus_harness.rs 17 件三分断言
+  （corpus.rs 构造函数内联·临时目录）。**四处设计-实现出入按「以
+  mdcore 实际为准」钉定**：X-03 期望串拼接笔误（实测
+  _x005F_x005F_x005F_x0000_，decode(encode(x))==x 恒成立）/ F-06
+  引号包裹 token 实测放行（Word 域语法字面量语义，花括号嵌套裸
+  token 拦截对测钉定）/ F-10 前缀超集实测拦截（startsWith 设计代价，
+  F-09 同类保守误杀）/ F-08 双门分立（Blacklist 策略隔离边界）——
+  SANITIZE_TESTS.md 四处回写。
+- 步 5 NOTICES v1.3（compliance-baseline 分支）：四面复跑（default
+  50/pdfium 64/lopdf 88/dual 101，host-target + default-members +
+  mdcore-wasm 口径经 3e450aa 校准复现 v1.2 基准 29 后定谳）；正文
+  90→101（新入 9 + rustversion/zlib-rs 账提升——atoi_simd proc-macro
+  硬边/zip→flate2 zlib-rs 后端边）+ 分类账 28→33（rust_xlsxwriter
+  dev 面 + tempfile 族 5 + windows-sys win 面）；三链核验 16/16
+  （sparse 索引 etag 包装 raw_decode 解析 + 短名三层布局探测）；
+  **两处许可修正**：zip 8.6.0 = MIT 单许可（首版记双许可系口径
+  混淆）、rust_xlsxwriter 0.99.1 = MIT OR Apache-2.0（首版记 MIT）
+  ——DEPS.md 回写；ASSET_CHECK v1.3 对账（office 线零二进制资产）；
+  自研单列补齐 5→8。
+- 步 6 门禁全绿：**G1 361/361**（290 基线只增不改 +71：office 83
+  [url_policy 16+gates 18+security 44+文档 5] + office-io 11 [io 9+
+  harness 2]）+ lopdf 79/79 + pdfium 81/81+6i + dual 109/109+6i（PDF
+  四面零波及逐位复验）+ perf 6/6 + clippy 四面 --all-targets 零新
+  （仅 wasm 2 条在档基线）+ fmt 0（spike 直移源清扫）+ wasm32 过 +
+  scan 产品面/--all 双 0 + web 18/15/28（contract/smoke/ime_cdp）。
+- 步 7 提交推送：mdcore **main 2a4cb6c→880864e**（README 架构图
+  Office 域行 + 门禁计数 259→361 同步 + COMPLIANCE 计数同步）；
+  **compliance-baseline 1adced2→ddc51c1**（NOTICES v1.3 + ASSET_CHECK）；
+  SECURITY_POLICY **v1.0 生效**（§5 纪律兑现：草案→生效随实装）；
+  CAPABILITIES crate 接线注记；REPORT §7 执行记录 + §1/§4 闭项。
+- 过程修正五件：crc.to_le_bytes() 缺引用（直移编译错）；MultiEdit
+  连续批次在长文件上的部分应用行为（逐条重发收敛）；sanitize_security
+  首版两断言期望侧笔误（X-03 往返断言写错原像、F-08 未区分双门）——
+  均首轮测试红后即改；cargo tree 计数管道（(\*) 后缀与 target 过滤）
+  校准。
+
+Stage Summary:
+- xlsx-r1 阶段 B 全步完成：Office 域首批产品代码 + 三方依赖进 mdcore
+  （mdc-office-io 读路径 + mdc-office 消毒六面 + 60 个针对性/语料
+  测试函数），双分支推送零残留；NOTICES v1.3 闭环（第三方总数
+  105→116，零 UNKNOWN，GPL/AGPL 零命中）。
+- 安全面：谎言头双门 + 靶向安全测试全绿；四处设计-实现出入与两处
+  许可修正全部钉定回写（设计文档与实现对齐的完整审计链在档）。
+- 能力宣称边界不变：C1 可宣称 / C2 写面验证态（产品面下轮）/ C3
+  不宣称。遗留裁决项维持：mal7e 严格模式 / 门 2 双读成本优化 /
+  R-O2 docx 渲染级读侧。
