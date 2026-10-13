@@ -1729,3 +1729,61 @@ Stage Summary:
   （ADR/安全策略）+ 探针实证三线全部交付在档。
 - 下一阶段入口四项裁决（R-O1..R-O4）已整理完毕，等待用户；MD 线
   R-1..R-6 维持留裁决。无阻塞，无悬空工作。
+
+---
+Task ID: t10（xlsx-r1 阶段 A：XLSX 内核 Round 1 分析仓全量）
+Agent: 主代理
+Task: 按 xlsx-r1 PLAN v1 执行 t10-a..g 阶段 A 全部任务（用户六项
+子要求，凭据无关项先行；阶段 B mdcore 落地待解锁）
+
+Work Log:
+- 环境第 4 次重建：rust 1.99.0（rustup minimal + clippy/rustfmt）；
+  filemode 噪声 45 件清理（core.fileMode false，零内容变化）。
+- t10-b 补完：corpus.rs 17 件语料生成 + manifest 校验全过；mal6c
+  手构 zip64 **双缺陷修正**（①EOCD size-of-record 是 u64 首版误写
+  u32 致整条记录错位；②CDFH extralen 回填位算错 z.len()-30 打进
+  name 末两字节且 extralen 留 0 → zip 按裸 0xFFFFFFFF seek 出界）
+  ——两处均由 t10-d harness 失败回溯定位，字节级 Python 复核定谳。
+- t10-c 补完：fidelity.rs 七处 API 校准修复后首跑（write_formula
+  String→&str / i64 as f64 / merge_range u16 / zip 9 name() Result
+  形态 / mut wb）→ 五档丢失矩阵：值 37/37、公式文本 6/6、合并 3/3、
+  表序 5/5、修改标记 5/5 保；**样式结构性丢**（calamine 无可观测面
+  + styles.xml 重写）、**关系引用结构性丢**（dim5 实测 .rels 条目
+  整体消失）→ FIDELITY.md 定谳"组合语义=重建而非修改"。
+- t10-d 新建：read_proto.rs（限额常量 + 预扫门四检查 typed reject +
+  calamine 四 API 面 + 三分统一错误 + 17 件全语料 harness）→
+  **17/17 全过零 panic**；mal7c/mal7e 实证钉定为解析器容忍度发现
+  （0x00 入值/垃圾部件静默降级空表）带锚点闭包自证。
+- t10-e 新建：SANITIZE_TESTS.md——61 用例攻击载荷表（csv 10/xml
+  字符 10/xml 实体 7/html 6/域白名单 10/url 15 + 三模式对照），
+  每用例四元组精确期望；**URL 策略缺口发现**（指令 4 五上下文 vs
+  t9-c 五面：scheme 级白名单无承载面，H-03/H-04 用例实证字符转义
+  对 scheme 攻击无效）→ 补面设计 + 管线顺序契约。
+- t10-f 新建：DEPS.md——51 外部 crate 闭包全量许可证核验
+  （Cargo.lock BFS + 本地 src 直读 + crates.io API 补 11 件），
+  零 copyleft；zip 8.6/9.0 并存登记（传递面均为 8.6，直依赖 9）
+  + 阶段 B 对齐 8.6 建议（API 面等价已核）+ 谎言头重测项；
+  encoding_rs BSD-3-Clause / unicode-ident Unicode-3.0 两 AND 条款
+  入 NOTICES 注意。
+- t10-g 新建：CAPABILITIES.md——C1/C2 按实证宣称（边界清单），
+  C3 唯一口径=不宣称（替代路径丢失矩阵引用），容忍度发现随宣称
+  发布，DOCX 独立模块边界四条声明，宣称变更纪律。
+- 产品代码预置（超 PLAN 最小集）：spike lib 形态——io.rs（预扫门
+  + calamine 包装，8 测试含敌意件内联自构造）+ url_policy.rs（消毒
+  第六面 16 测试 = t10-e §6 全表落地）→ **cargo test --lib 24/24**；
+  新发现：缺根闭合 </worksheet> 截断被容忍（与 mal7a 标签内截断
+  报错构成容忍度分界，双测钉定）。
+- 阶段 B 架构决策登记：T1 mdc-office 零三方依赖自锁测试与 IO 依赖
+  冲突 → 双 crate 方案 A（新 mdc-office-io 第八成员 + url_policy
+  落现有 sanitize 家族）；runbook 七步写入 REPORT.md §3。
+- 收口：REPORT.md（六项对账 + 数字汇总 + 遗留 5 项）+ HANDOFF L3
+  行同步 + 本 worklog；提交 1fd729c（阶段 A 五件 + 三 bin）+ 收口
+  二次提交；**推送与阶段 B 均凭据阻塞**（GITHUB_TOKEN 空/凭据文件
+  零存在/两仓匿名不可达——实测登记，解锁即机械执行）。
+
+Stage Summary:
+- 阶段 A 全量完成：语料/保真/读骨架/测试设计/依赖锁定/宣称边界
+  六线交付 + 产品代码 24/24 验证态；三轮实证发现（mal6c 构造缺陷
+  ×2、解析器容忍度 ×3、URL 策略缺口 ×1）全部钉定在档。
+- 阻塞面唯一：凭据。解锁后按 xlsx-r1/REPORT.md §3 runbook 七步
+  （双 crate 落地 → 测试 → NOTICES → 门禁 → 提交推送）。
