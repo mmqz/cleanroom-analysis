@@ -12,16 +12,23 @@
 |-------|----------|--------------------|------|----------|
 | calamine | **0.36.1** | MIT | 读 | **仅读取**（值/公式文本/合并/表名四 API 面）；无样式/关系可观测面（FIDELITY.md §4） |
 | rust_xlsxwriter | **0.99.1**（feature: constant_memory） | MIT | 写 | **仅从零新建**；不宣称已有工作簿编辑往返（FIDELITY.md 定谳） |
-| zip | **9.0.2**（spike 直依赖）/ **8.6.0**（传递） | MIT OR Apache-2.0 | 容器预扫门 | 声明求和/单条目/条目数/路径逃逸四检查（read_proto.rs 实证） |
+| zip | **8.6.0**（对齐后唯一版本，与传递面一致） | MIT OR Apache-2.0 | 容器双门 | 门 1 声明值四检查 + 门 2 尺寸诚实性（策略层，见下） |
 
-**版本并存登记**：calamine 0.36.1 与 rust_xlsxwriter 0.99.1 的传递
-依赖均为 **zip ^8.6.0**；spike 直依赖 zip 9（探针/预扫用）。两代
-并存 = Cargo 语义允许（不同 major 不冲突），但 **阶段 B 建议对齐
-zip = "8.6"**：预扫 API 面（`size() -> u64` / `enclosed_name() ->
-Option<PathBuf>`）在 8.6.0 逐一在场（本文件核验日直读 8.6.0 源码），
-对齐后闭包收敛（去 zip 9 支线），`with_size_limit` 谎言头内建拒绝
-在 8.6 同在（T3 3b 探针时为 9.x 实测，阶段 B 落地时**须以 8.6 重测**
-——重测项登记，不假设跨 major 行为一致）。
+**版本并存登记 + 对齐定谳（2026-10-13 实测）**：calamine 0.36.1 与
+rust_xlsxwriter 0.99.1 的传递依赖均为 **zip ^8.6.0**；spike 曾直依赖
+zip 9（探针/预扫用）。**已对齐 zip = "8.6" 并全量回归**（lib 25/25 +
+harness 17/17 + corpus + fidelity，API 差异仅 name() 形态[9.x
+Result<Cow>→8.6 &str]，预扫面等价）。
+
+**对齐的关键安全发现（lie86 探针定谳）**：zip **8.6 读界无声明值
+强制**——谎言头条目（声明 16B 实际 1MB，CRC 正确）read_to_end
+全量读回零错误（仅 EOF CRC 校验，攻击者可算对绕过）；T3 3b 验证的
+内建拒绝（"File is larger than its declared uncompressed size"）为
+**zip 9.x 独有**。而 calamine 0.36.1 内部依赖 8.6 → 实际读路径无
+此防线。**闭环**：策略层 `verify_actual_sizes`（io.rs）逐条目有界
+读取计数，实际 > 声明即 typed reject（门 2）——harness mal6a 升级
+为 REJECT + lib 单测双验证。SECURITY_POLICY §2.1 第 2 项同步校准
+（"库内建"→"策略层实现"）。
 
 ## 2. 供应链陷阱重申（ADR-O1 O1-5）
 
@@ -36,7 +43,7 @@ zip-rs/zip2 仓（crates.io 包名仍为 `zip`，9.x）。依赖声明与审计�
 registry 源码 Cargo.toml 直读，`api` 列 = crates.io API）：
 
 **根件（3）**：calamine 0.36.1 MIT · rust_xlsxwriter 0.99.1 MIT ·
-zip 9.0.2 MIT OR Apache-2.0
+zip 8.6.0 MIT OR Apache-2.0（对齐后 zip 9.0.2 支线移出闭包）
 
 **XML/解析（4）**：quick-xml 0.41.0 MIT（api）· serde 1.0.229
 MIT OR Apache-2.0 · serde_derive 1.0.229 MIT OR Apache-2.0（api）·
@@ -93,17 +100,19 @@ NOTICES 纪律）。
 ## 4. 适用边界（能力宣称纪律——与 CAPABILITIES.md 互引）
 
 1. **读 = calamine 面**：值矩阵/公式文本/合并范围/表名（read_proto
-   四 API 面）；样式/关系引用/元数据字节保真**不在面内**。
+   四 API 面）；样式/关系引用/元数据字节保真**不在面内**。读门 =
+   声明值四检查 + 谎言头闭环（策略层 verify_actual_sizes）。
 2. **写 = 从零新建**：rust_xlsxwriter constant_memory 流式（T3 探针
    100 万格 972ms 实测）。
 3. **已有工作簿编辑往返 = 未证明支持**：t10-c FIDELITY.md 丢失矩阵
    定谳（样式/关系结构性丢失）——**不得宣称**。
-4. **zip 预扫门 = 输入防线**：四检查 + typed reject（read_proto
-   17/17 实证）；谎言头内建拒绝重测项见 §1。
+4. **zip 预扫门 = 输入防线**：四检查 + typed reject + 门 2 尺寸
+   诚实性（read_proto 17/17 实证，zip 8.6 对齐态）。
 
 ## 5. 版本纪律
 
-- 阶段 B 依赖声明（`crates/office/Cargo.toml`）按本文件锁定版本书写；
+- 阶段 B 依赖声明（`crates/office-io/Cargo.toml`，双 crate 方案 A
+  ——REPORT.md §2）按本文件锁定版本书写；
   Cargo.lock 钉死闭包；升版触发 SECURITY_POLICY §5 复核纪律
   （zip 或解析库大版本升级 = 复核触发）。
 - 本文件与 spike Cargo.lock 同步维护（新增依赖 = 本文件增行 +

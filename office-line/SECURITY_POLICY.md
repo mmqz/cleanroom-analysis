@@ -33,12 +33,20 @@ mdc-office sanitize，mdcore 2a4cb6c）——CSV 公式首字符 / XML 控制
    求和 + 单条目上限对照 §3 限额表——超额即整档拒绝（typed reject，
    不进解压）。依据：office-e §6（zip 9.x 声明尺寸 pub 暴露）+
    office-b checkInputLimits 同构（docx/pptx 50MB、xlsx 300MB 按
-   格式族分档）。
-2. **读界**（库内建，非策略层）：zip `with_size_limit` 按声明值截
-   断——实际膨胀超声明即错（反 T1）；声明值本身由 1 把门（反 T2）。
+   格式族分档）。（实现：xlsx-r1 io.rs `prescan`，门 1）
+2. **实际尺寸诚实性验证**（**策略层实现，2026-10-13 校准**）：逐
+   条目有界读取计数，实际 > 声明即 typed reject。校准依据：T3 3b
+   曾按 zip **9.x** 实测记录为"库内建拒绝"——xlsx-r1 lie86 探针
+   定谳 zip **8.6 读界无声明值强制**（正确 CRC 谎言头条目全量读回
+   零错误），而 calamine 0.36.1 内部依赖 8.6 → 实际读路径无此
+   防线，改由策略层补（io.rs `verify_actual_sizes`，门 2；成本 =
+   合法档双读，优化留后续）。（反 T1；zip 9 的内建拒绝为 9.x 独有
+   ——升 zip 大版本时重测此行）
 3. **条目路径校验**：entry name 拒绝绝对路径/`..` 逃逸/盘符位
-   （反 T5；office-b checkPathTraversal 同构）。
+   （反 T5；office-b checkPathTraversal 同构；enclosed_name None
+   判定）。（实现：`prescan`，门 1）
 4. **条目数上限**（DoS 面）：单档条目数 > 上限拒绝（§3 表）。
+   （实现：`prescan`，门 1；mal6d 实测校准）
 
 ### 2.2 解析层（XML/模型门）
 
@@ -70,16 +78,18 @@ mdc-office sanitize，mdcore 2a4cb6c）——CSV 公式首字符 / XML 控制
 | zip 声明总量（xlsx 族） | 300 MB | office-b default.json:604-629 | 机制实证（预扫 0.01ms 零数据读取）|
 | zip 声明总量（docx/pptx 族） | 50 MB | 同上 | 同机制 |
 | 单条目声明尺寸 | = 同族总量上限 | 本策略对称设计 | 同机制 |
-| 条目数上限 | 10,000 | 【本 v1 新设】 | 待 IO 模块实测 |
-| 谎言声明头（实际膨胀 > 声明） | 拒绝 | zip 9.x 内建 | **实测拒绝**（错误串："File is larger than its declared uncompressed size"）|
+| 条目数上限 | 10,000 | 【本 v1 新设】 | **实测校准**（xlsx-r1 mal6d：10,001 件门 1 拒绝）|
+| 谎言声明头（实际膨胀 > 声明） | 拒绝 | **策略层**（io.rs 门 2；2026-10-13 校准） | **实测拒绝**（zip 8.6 无内建[lie86 探针]，策略层拦；zip 9 内建为 9.x 独有[T3 3b]）|
 | dimension 巨量声明 | 登记观察（不设前置门） | 【本 v1 新设→T3 降级】 | **实测无害**（calamine 按实际单元格定尺寸，0.05ms）|
 | 共享字符串解压上限 | 256 MB | calamine 机制位（值自设） | 机制在档（UnzipXMLSizeLimit）|
 | 路径逃逸条目 | 拒绝 | office-b 同构 | **实测识别**（zip enclosed_name None 判定）|
 
 > 值分级说明：office-b 三值为**一手参照**；两项【本 v1 新设】中
-> dimension 项经 T3 实测降级、条目数项待 IO 模块立项实测；谎言头/
-> 路径逃逸两项由 T3 探针实证为库内建行为（策略层不重复实现，引用
-> 即可）。
+> dimension 项经 T3 实测降级、条目数项经 xlsx-r1 mal6d 实测校准；
+> 谎言头项由 T3 探针实证为 zip 9.x 内建行为后，**xlsx-r1 lie86
+> 探针校准为 8.6 无内建、策略层实现**（双版本行为差异在档）；
+> 路径逃逸项由 T3 探针实证（zip enclosed_name None 判定，
+> xlsx-r1 门 1 引用）。
 
 ## 4. 输出面引用
 
@@ -93,4 +103,7 @@ T1，main 2a4cb6c）：五模块 API + 往返性质测试 + 三档对照断言�
 - 本策略随 mdc-office IO 模块实装同步升 v1.0（草案→生效）；限额表
   数字变更走版本化（v1.x 内校准，破坏性变更升 v2）。
 - 复核触发：T3 探针完成 / 首个敌意样本回归 / zip 或解析库大版本
-  升级。
+  升级（**已知敏感点：zip 8.6→9 迁移会改变谎言头读界行为**
+  ——§2.1 第 2 项与门 2 实现须同步重评）。
+- 校准历史：v1 草案（2026-10-12 T3）→ 谎言头项校准（2026-10-13
+  xlsx-r1 lie86 探针：8.6 无内建强制，改策略层实现）。

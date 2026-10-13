@@ -187,16 +187,9 @@ fn zip_entries(path: &str) -> Result<BTreeMap<String, Vec<u8>>, Box<dyn std::err
     let mut m = BTreeMap::new();
     for i in 0..za.len() {
         let mut zf = za.by_index(i)?;
-        // zip 9.x：name() 返回 Result<Cow<str>>（UTF-8 校验面）；
-        // mangled_name() 返回 Result<PathBuf>；非法名退有损替换形态——
-        // 条目名对比语义不受影响。
-        let name = match zf.name() {
-            Ok(n) => n.to_string(),
-            Err(_) => zf
-                .mangled_name()
-                .map(|n| n.to_string_lossy().into_owned())
-                .unwrap_or_default(),
-        };
+        // zip 8.6：name() 直接返回 &str（9.x 为 Result<Cow<str>>——
+        // 对齐 8.6 后简化；条目名对比语义不变）。
+        let name = zf.name().to_string();
         let mut buf = Vec::new();
         zf.read_to_end(&mut buf)?;
         m.insert(name, buf);

@@ -73,13 +73,14 @@ calamine/rust_xlsxwriter/zip 依赖**不能进 mdc-office**（自锁必红）。
 | 项 | 数字 | 来源 |
 |----|------|------|
 | 语料 | 17 件（正向 5 + 敌意 11 + 对照 1） | manifest.md |
-| 读骨架 harness | 17/17 三分归类 + 零 panic | read_proto.rs |
+| 读骨架 harness | 17/17 三分归类 + 零 panic（zip 8.6 对齐态，敌意四拒二错两容忍） | read_proto.rs |
 | 保真对比 | 值 37/37 格零差异；公式 6/6；合并 3/3；样式/关系丢 | FIDELITY.md |
-| lib 产品代码测试 | 24/24（io 8 + url_policy 16） | `cargo test --lib` |
-| 依赖闭包 | 51 外部 crate，零 copyleft | DEPS.md |
+| lib 产品代码测试 | 25/25（io 9 含门 2 谎言头 + url_policy 16） | `cargo test --lib` |
+| 依赖闭包 | 对齐后 50 外部 crate（zip 9 支线移出），零 copyleft | DEPS.md |
 | 针对性安全测试设计 | 61 用例（45 待落地 + 16 已验证） | SANITIZE_TESTS.md |
 | 敌意构造缺陷修正 | mal6c zip64 两处（EOCD u64 / CDFH extralen 位） | corpus.rs 注记 |
 | 容忍度发现 | 3 项（0x00 入值 / 垃圾静默空表 / 缺根闭合容忍[lib 测试新发现]） | read_proto + io.rs tests |
+| **安全发现（本轮最重要）** | **zip 8.6 读界无声明值强制**（谎言头全量读回零错误；zip 9 内建为 9.x 独有；calamine 内部 8.6）→ 策略层门 2 `verify_actual_sizes` 闭环，harness mal6a REJECT + lib 单测双验证 | lie86 探针 + SECURITY_POLICY §2.1 校准 |
 
 ## 6. 遗留登记（不阻塞）
 
@@ -87,6 +88,10 @@ calamine/rust_xlsxwriter/zip 依赖**不能进 mdc-office**（自锁必红）。
    落定（xlsx 先行 / 依赖按已验证候选推进）；R-O4 编辑往返由
    FIDELITY.md 定谳支撑（不宣称 + 丢失矩阵在档）。
 2. C2 样式写入正确性逐属性断言（CAPABILITIES C2 边界登记）。
-3. zip 8.6 对齐的谎言头重测（runbook §3.2 内嵌）。
+3. ~~zip 8.6 对齐的谎言头重测~~（**已闭环**：lie86 探针定谳 8.6
+   无内建 → 策略层门 2 实现 + 双层验证；runbook §3.2 对应步骤
+   改为直移含门 2 的 io.rs）。
 4. mal7e 垃圾部件静默降级的严格模式裁决（后续轮）。
 5. 阶段 B 双 crate 决策的裁决确认（§2，默认 A 执行）。
+6. 门 2 双读成本优化（受信源跳过开关）——登记待裁决（v1 已知
+   成本，总量 ≤300MB 已锁）。

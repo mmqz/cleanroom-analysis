@@ -89,13 +89,13 @@ pub fn prescan<R: std::io::Read + std::io::Seek>(
         if declared > LIMIT_SINGLE_ENTRY {
             return Err(ReadError::PrescanRejected {
                 reason: "single entry declared size over limit",
-                entry: Some(zf.name().unwrap_or_default().to_string()),
+                entry: Some(zf.name().to_string()),
             });
         }
         if zf.enclosed_name().is_none() {
             return Err(ReadError::PrescanRejected {
                 reason: "path escape entry",
-                entry: Some(zf.name().unwrap_or_default().to_string()),
+                entry: Some(zf.name().to_string()),
             });
         }
         max_single = max_single.max(declared);
@@ -112,6 +112,52 @@ pub fn prescan<R: std::io::Read + std::io::Seek>(
         total_declared: total,
         max_single_declared: max_single,
     })
+}
+
+/// 实际尺寸诚实性验证（T1 谎言头闭环，策略层实现）。
+///
+/// 依据（xlsx-r1 实测定谳 2026-10-13）：zip 8.6 读界**无**声明值强制
+/// （谎言头条目 read_to_end 全量读回零错误，仅 CRC 校验可被正确
+/// CRC 绕过）；zip 9 的内建拒绝（T3 3b）为 9.x 独有。calamine
+/// 0.36.1 内部依赖 zip 8.6 → 实际读路径无此防线，由本层补：
+/// 逐条目有界读取计数，实际 > 声明即 typed reject。
+///
+/// 成本注记：合法档全量解压一次（总量已由 prescan 锁 ≤300MB）；
+/// 随后 calamine 重读。双读为 v1 已知成本，优化路径（受信源跳过
+/// 开关）留后续裁决。
+pub fn verify_actual_sizes<R: std::io::Read + std::io::Seek>(
+    za: &mut zip::ZipArchive<R>,
+) -> Result<(), ReadError> {
+    let n = za.len();
+    for i in 0..n {
+        let mut zf = za
+            .by_index(i)
+            .map_err(|e| ReadError::ContainerCorrupt(format!("{e}")))?;
+        let name = zf.name().to_string();
+        let declared = zf.size();
+        let mut total: u64 = 0;
+        let mut buf = vec![0u8; 64 * 1024];
+        loop {
+            use std::io::Read as _;
+            match zf.read(&mut buf) {
+                Ok(0) => break,
+                Ok(k) => {
+                    total = total.saturating_add(k as u64);
+                    if total > declared {
+                        return Err(ReadError::PrescanRejected {
+                            reason: "actual size exceeds declared (lie header)",
+                            entry: Some(name),
+                        });
+                    }
+                }
+                Err(e) => {
+                    // CRC 不匹配 / 解压损坏 → 容器损坏族
+                    return Err(ReadError::ContainerCorrupt(format!("{e}")));
+                }
+            }
+        }
+    }
+    Ok(())
 }
 
 // ---------------------------------------------------------------------------
@@ -152,17 +198,18 @@ impl Book {
     }
 }
 
-/// 读入口：预扫门 → calamine 全量提取。
+/// 读入口：预扫门 → 尺寸验证 → calamine 全量提取。
 ///
-/// 门在前（敌意输入零解析层接触）；门过后错误归 ParseError（含 zip
-/// 读界：谎言头由 with_size_limit 内建拒绝——T3 3b 实测，阶段 B 以
-/// zip 8.6 对齐时重测，见 DEPS.md §1）。
+/// 门在前（敌意输入零解析层接触）：①prescan 声明值四检查；
+/// ②verify_actual_sizes 谎言头闭环（zip 8.6 读界无内建强制——
+/// 2026-10-13 实测，策略层补）。门过后错误归 ParseError。
 pub fn read_book(path: &str) -> Result<Book, ReadError> {
     let f = std::fs::File::open(path)
         .map_err(|e| ReadError::ContainerCorrupt(format!("open: {e}")))?;
     let mut za = zip::ZipArchive::new(f)
         .map_err(|e| ReadError::ContainerCorrupt(format!("{e}")))?;
-    prescan(&mut za)?; // 门：拒绝即出，不进解析层
+    prescan(&mut za)?; // 门 1：声明值四检查
+    verify_actual_sizes(&mut za)?; // 门 2：实际尺寸诚实性
     drop(za);
 
     let mut book: Xlsx<_> = calamine::open_workbook(path)
@@ -351,6 +398,75 @@ mod tests {
         let book = read_book(&p).unwrap();
         assert_eq!(book.sheets.len(), 1);
         assert_eq!(book.non_empty_cells(), 0);
+        let _ = std::fs::remove_file(&p);
+    }
+
+    #[test]
+    fn lie_header_rejected_at_gate2() {
+        // T1 谎言头闭环（2026-10-13 定谳）：zip 8.6 读界无声明值强制
+        // （lie86 探针实测：正确 CRC + 声明 16B 实际 1MB → 全量读回零
+        // 错误）→ 策略层 verify_actual_sizes 有界计数拦截。CRC 本测
+        // 用 0（计数门在 EOF 的 CRC 校验前触发）；正确 CRC 形态由
+        // harness mal6a（T3 3b 构造）覆盖。
+        let payload: Vec<u8> = vec![0x41; 1 << 20]; // 1MB
+        let mut enc = flate2::write::DeflateEncoder::new(Vec::new(), flate2::Compression::default());
+        use std::io::Write as _;
+        enc.write_all(&payload).unwrap();
+        let compressed = enc.finish().unwrap();
+        let name = b"blob.bin";
+
+        let mut z = Vec::new();
+        z.extend_from_slice(b"PK\x03\x04");
+        z.extend_from_slice(&20u16.to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes()); // flags
+        z.extend_from_slice(&8u16.to_le_bytes()); // deflate
+        z.extend_from_slice(&0u16.to_le_bytes()); // time
+        z.extend_from_slice(&0u16.to_le_bytes()); // date
+        z.extend_from_slice(&0u32.to_le_bytes()); // crc（见注）
+        z.extend_from_slice(&(compressed.len() as u32).to_le_bytes()); // csize 真实
+        z.extend_from_slice(&16u32.to_le_bytes()); // usize 谎言（真实 1MB）
+        z.extend_from_slice(&(name.len() as u16).to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes()); // extra
+        z.extend_from_slice(name);
+        z.extend_from_slice(&compressed);
+        let cd_off = z.len() as u32;
+        z.extend_from_slice(b"PK\x01\x02");
+        z.extend_from_slice(&20u16.to_le_bytes());
+        z.extend_from_slice(&20u16.to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes());
+        z.extend_from_slice(&8u16.to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes());
+        z.extend_from_slice(&0u32.to_le_bytes()); // crc
+        z.extend_from_slice(&(compressed.len() as u32).to_le_bytes());
+        z.extend_from_slice(&16u32.to_le_bytes()); // usize 谎言
+        z.extend_from_slice(&(name.len() as u16).to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes()); // extra
+        z.extend_from_slice(&0u16.to_le_bytes()); // comment
+        z.extend_from_slice(&0u16.to_le_bytes()); // disk
+        z.extend_from_slice(&0u16.to_le_bytes()); // iattr
+        z.extend_from_slice(&0u32.to_le_bytes()); // eattr
+        z.extend_from_slice(&0u32.to_le_bytes()); // LFH 偏移（0 位）
+        z.extend_from_slice(name);
+        let cd_size = z.len() as u32 - cd_off;
+        z.extend_from_slice(b"PK\x05\x06");
+        z.extend_from_slice(&0u16.to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes());
+        z.extend_from_slice(&1u16.to_le_bytes());
+        z.extend_from_slice(&1u16.to_le_bytes());
+        z.extend_from_slice(&cd_size.to_le_bytes());
+        z.extend_from_slice(&cd_off.to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes());
+
+        let p = tmp("lie");
+        std::fs::write(&p, &z).unwrap();
+        match read_book(&p) {
+            Err(ReadError::PrescanRejected { reason, entry }) => {
+                assert_eq!(reason, "actual size exceeds declared (lie header)");
+                assert_eq!(entry.as_deref(), Some("blob.bin"));
+            }
+            other => panic!("expected gate-2 reject, got {other:?}"),
+        }
         let _ = std::fs::remove_file(&p);
     }
 

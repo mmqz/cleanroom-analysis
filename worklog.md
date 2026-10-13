@@ -1787,3 +1787,44 @@ Stage Summary:
   ×2、解析器容忍度 ×3、URL 策略缺口 ×1）全部钉定在档。
 - 阻塞面唯一：凭据。解锁后按 xlsx-r1/REPORT.md §3 runbook 七步
   （双 crate 落地 → 测试 → NOTICES → 门禁 → 提交推送）。
+
+---
+Task ID: t10-sup（xlsx-r1 阶段 A 补充轮：zip 8.6 对齐 + 谎言头安全发现闭环）
+Agent: 主代理
+Task: 凭据解锁前的最后零凭据推进面——DEPS §1 对齐建议提前实测验证
+
+Work Log:
+- zip 9→8.6 对齐切换：Cargo.toml 改版本 + API 差异三处校准
+  （name() 9.x Result<Cow<str>> → 8.6 &str，io.rs/read_proto/
+  fidelity.rs）→ 全量回归 lib 24/24 + harness 17/17 + corpus +
+  fidelity 全绿，闭包收敛（zip 9 支线移出，51→50 外部 crate）。
+- lie86 探针（手构谎言头：deflate 声明 16B 实际 1MB + 正确 CRC）
+  → **定谳安全发现：zip 8.6 读界无声明值强制**——read_to_end 全量
+  读回 1MB 零错误（仅 EOF CRC 校验，正确 CRC 即绕过）；T3 3b 记录
+  的"库内建拒绝"为 zip 9.x 独有；calamine 0.36.1 内部依赖 8.6 →
+  **SECURITY_POLICY §2.1 第 2 项的读界防线在实际读路径不存在**。
+- 过程自纠两处：lie86 探针 CDFH 偏移字段笔误（写 cd_off 应写 0）+
+  sed 无 g 误伤 EOCD 同文案行（字节级 Python 复核定位）；rg -rln
+  再犯 t9-d 登记的 -r 替换语义坑（-rln = 替换为 "ln"）——两坑均
+  worklog 在案，本次即时识别。
+- 闭环实现：io.rs 新增 verify_actual_sizes（门 2）——逐条目 64KB
+  有界读取计数，实际 > 声明即 typed reject（计数在 EOF CRC 校验前
+  触发，CRC 正确性无关）；read_book 接线双门（门 1 声明四检查 +
+  门 2 尺寸诚实性）；read_proto harness 委托 lib（原型→产品收束，
+  本地 ReadError/prescan/read_book 副本删除）。
+- 双层验证：lib 单测 lie_header_rejected_at_gate2（内联手构）+ 
+  harness mal6a 升级 REJECT（正确 CRC 形态）→ lib 25/25 + 
+  17/17 零 panic；mal6d 条目数门同步 SECURITY_POLICY §3 实测校准。
+- 文档同步：DEPS.md §1（对齐定谳 + 安全发现 + 闭包 50）§4/§5
+  （双 crate 落点）；SECURITY_POLICY §2.1 第 2 项改写（库内建→
+  策略层）+ §3 两行校准 + §5 复核纪律（zip 8.6→9 迁移敏感点 +
+  校准历史）；REPORT.md §5 数字表（安全发现置顶行）+ §6 遗留
+  3 项闭环 + 新增 6 项（门 2 双读成本优化登记）。
+
+Stage Summary:
+- 本轮最重要产出：谎言头读界防线缺口发现 + 策略层闭环（门 2），
+  SECURITY_POLICY 三处校准——安全策略从"引用库行为"校准为
+  "实测版本行为 + 策略层自持防线"。
+- 零凭据推进面至此耗尽：阶段 B（mdcore 落地）与双仓推送仍凭据
+  阻塞；解锁后按 REPORT.md §3 runbook 执行（步骤 2 已简化：直移
+  含门 2 的 io.rs）。
