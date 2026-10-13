@@ -81,13 +81,16 @@ calamine/rust_xlsxwriter/zip 依赖**不能进 mdc-office**（自锁必红）。
 | 敌意构造缺陷修正 | mal6c zip64 两处（EOCD u64 / CDFH extralen 位） | corpus.rs 注记 |
 | 容忍度发现 | 3 项（0x00 入值 / 垃圾静默空表 / 缺根闭合容忍[lib 测试新发现]） | read_proto + io.rs tests |
 | **安全发现（本轮最重要）** | **zip 8.6 读界无声明值强制**（谎言头全量读回零错误；zip 9 内建为 9.x 独有；calamine 内部 8.6）→ 策略层门 2 `verify_actual_sizes` 闭环，harness mal6a REJECT + lib 单测双验证 | lie86 探针 + SECURITY_POLICY §2.1 校准 |
+| C2 样式写入验证 | style_probe XML 级 9/9（bold/字色/填充/边框/双 numFmt/cellXfs 应用链） | spike style_probe |
 
 ## 6. 遗留登记（不阻塞）
 
 1. R-O2 docx 渲染级读侧（维持裁决）；R-O1/R-O3 由本轮指令回放
    落定（xlsx 先行 / 依赖按已验证候选推进）；R-O4 编辑往返由
    FIDELITY.md 定谳支撑（不宣称 + 丢失矩阵在档）。
-2. C2 样式写入正确性逐属性断言（CAPABILITIES C2 边界登记）。
+2. ~~C2 样式写入正确性逐属性断言~~（**已闭项**：style_probe 探针
+   XML 级 9/9——CAPABILITIES C2 边界同步升级；完整样式模型仍不
+   宣称）。
 3. ~~zip 8.6 对齐的谎言头重测~~（**已闭环**：lie86 探针定谳 8.6
    无内建 → 策略层门 2 实现 + 双层验证；runbook §3.2 对应步骤
    改为直移含门 2 的 io.rs）。

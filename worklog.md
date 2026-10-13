@@ -1828,3 +1828,26 @@ Stage Summary:
 - 零凭据推进面至此耗尽：阶段 B（mdcore 落地）与双仓推送仍凭据
   阻塞；解锁后按 REPORT.md §3 runbook 执行（步骤 2 已简化：直移
   含门 2 的 io.rs）。
+
+---
+Task ID: t10-sup2（C2 样式写入 XML 级验证闭项）
+Agent: 主代理
+Task: 零凭据面收尾——REPORT §6 遗留 #2 闭项（C2 样式写入逐属性断言）
+
+Work Log:
+- style_probe.rs 探针：直查 dim2_styles.xlsx 生成档的 xl/styles.xml
+  + sheet1.xml（zip 8.6 读条目 + 字符串级断言，零新依赖）——九项
+  逐属性：font bold、字色 FFFF0000、填充 FFFFFF00、thin 边框、
+  自定义 numFmt 区（numFmtId 164+）、¥ 货币格式码、百分比格式码
+  （0.0%——首版断言误写 0.00%，与 corpus 构造对齐修正）、cellXfs
+  xf 条目 ≥2、sheet 单元格 s= 引用 → **9/9 全过**。
+- CAPABILITIES.md C2 边界升级：基础级（仅值面）→ XML 级验证
+  （探针 9/9 + 完整样式模型[条件格式/主题色/富文本]仍不宣称）；
+  REPORT.md §5 增行 + §6 遗留 #2 划线闭项。
+
+Stage Summary:
+- C2 宣称边界从"样式写入未断言"升级为"XML 级九属性断言通过"，
+  读侧无样式面（calamine 限制）通过直查产物部件绕开——验证方法
+  登记为后续样式面扩展的参照。
+- 零凭据推进面彻底收尾：遗留项仅剩凭据门控（阶段 B + 推送）与
+  四项登记裁决（R-O2/mal7e 严格模式/双 crate 确认/门 2 成本）。
