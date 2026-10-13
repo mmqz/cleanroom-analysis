@@ -1925,3 +1925,68 @@ Stage Summary:
 - 能力宣称边界不变：C1 可宣称 / C2 写面验证态（产品面下轮）/ C3
   不宣称。遗留裁决项维持：mal7e 严格模式 / 门 2 双读成本优化 /
   R-O2 docx 渲染级读侧。
+
+---
+Task ID: t10-verify（xlsx-r1 收口后：第 5 次平台重置恢复 + 12 门禁复认证）
+Agent: 主代理（Super Z）
+Task: 用户注入凭据后继续执行——盘点第 5 次平台重置损失面，恢复工作区，
+对 xlsx-r1 双仓推送态（mdcore main 880864e / compliance-baseline
+ddc51c1）做全量门禁复认证，确认远端真源可复现性
+
+Work Log:
+- 重置盘点：/tmp/my-project 工作区被第 5 次平台重置清空（前会话
+  cleanroom/mdcore 克隆丢失，worklog 会话级快照幸存）；/home/z/
+  my-project 从 Oct 12 15:33 快照恢复（HEAD=dd7fb1a t9-f 态 +
+  未跟踪旧稿：xlsx-r1/PLAN.md + spike/src/bin 前会话半成品）。
+- 关键转机（远端为真源纪律）：凭据注入后 ls-remote 实测——
+  cleanroom-analysis main = e23efa9（dd7fb1a 之后 5 提交）、mdcore
+  main = 880864e / compliance-baseline = ddc51c1。前会话中期 worklog
+  （"两提交本地在案待凭据"）为推送前快照：最终凭据同日解锁，阶段 B
+  七步全执行并双仓推送（1fd729c/4fa49ec/0fe8ce4/91db58a/e23efa9
+  五提交 = 阶段 A 收口 + 安全发现轮 + C2 样式闭项 + 阶段 B 收口）。
+  本地零未推送状态确认（HANDOFF e23efa9 注记与实测一致）。
+- 零损失恢复：未跟踪旧稿移盘备份对比（xlsx-r1/PLAN.md 逐字节一致；
+  corpus.rs 28556B/ fidelity.rs 15710B = 修复前旧版，远端 29438B/
+  15871B 为修复版）→ core.filemode false（45 文件 mode 噪声消除，
+  t7-u1 已知平台副作用）→ reset --hard origin/main → 工作区归零。
+- 环境重建（第 5 次，~/.cargo 全丢）：rustup-init.bin 复用安装
+  1.99.0 minimal + rustfmt/clippy + wasm32 target；pdfium
+  chromium/8086 取件（fetch-pdfium.sh SHA256 验证过）；fixtures
+  现场生成三件（small 1026B / large 124524B / form_probe 731B——
+  与登记字节数逐位一致）+ pdf_a_spike 三探针 + S6 formfill_probe
+  全过（数字与 gates.md 登记一致：3p load 0ms / 渲染 3ms /
+  lopdf→pdfium 交叉读互通 OK / form()=Some）；wasm-bindgen-cli
+  0.2.129 cargo install --locked（与 Cargo.lock 精确一致）+ web
+  npm ci + esbuild（dist/main.js 531.2kb 与在档 531KB 一致）。
+- mdcore 克隆：内联 credential helper（token 零落盘，.git/ grep
+  ghp_ = 0 复核）；main checkout 880864e + compliance-baseline
+  ddc51c1 双 SHA 核验。
+- **12 门禁复认证全绿零漂移**（逐项对照 t10-B 登记）：
+  G1 默认 361/361（290+71 只增不改）| G2 lopdf 79/79 | G3 pdfium
+  81+6i | G4 dual 109+6i（raw 行含 pdfc_perf "6 ignored" 逐位确认）|
+  G5 perf --ignored 6/6 | G6 scan 0（product scope, 20 terms）|
+  G7 wasm32 check 过 | G8 clippy 四面（default/lopdf/pdfium/dual
+  --all-targets）零新增——唯一 2 条 = mdcore-wasm lib.rs:188/:197
+  wasm_bindgen(static_method_of) 宏属性告警 = 在档基线精确复现 |
+  G9 fmt 0 diff | web 三门禁 contract 18/18 + smoke 15/15 + IME
+  CDP 28/28。
+- compliance-baseline 复核：NOTICES v1.3（草案头 + 增量明细 + 116
+  总数 = cargo 101 + npm 12 + pdfium 3 + 分类账 28→33 + ASSET_CHECK
+  结构）在档核验；16 新 crate 三链核验脚本重跑（xlsxr1_notices_
+  verify.py 自 /tmp 幸存）——首跑 15/16（windows-sys ③ 链 .crate
+  工件缓存缺失 = win 目标件 Linux 不下载的环境产物，①==② 关键链
+  过；原会话同口径 15/16 + API 直验）；补齐 static.crates.io 工件
+  后 16/16 全绿（超原会话口径）。
+- 运行产物清理：web/tests/results/ 删除（t7-u1 纪律）；mdcore
+  git status 归零复核（target/pkg/dist/node_modules 全在 .gitignore
+  覆盖面）。
+
+Stage Summary:
+- 第 5 次平台重置零损失恢复：xlsx-r1 全部成果（阶段 A + B）确认
+  已在双仓远端在案，本地无需重建任何工作。
+- 复认证定谳：12 门禁 + NOTICES v1.3 三链全绿零漂移——mdcore
+  main 880864e 在全新环境完整可复现，推送态稳定。
+- 决策点五项维持待裁决（HANDOFF §6）：xlsx-r2 C2 写面产品化 /
+  mal7e 严格模式 / 门 2 双读成本优化 / R-O2 docx 渲染级读侧 /
+  L3 遗留 D1-D3（yrs 评估 pass 最优先）。Office 域无阻塞可推进项，
+  下一动作 = 用户裁决。

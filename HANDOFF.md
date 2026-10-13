@@ -58,6 +58,11 @@ cleanroom-analysis/
 > **当前态速览（2026-10-13 xlsx-r1 收口后）**：office-impl 开发轮 +
 > xlsx-r1 内核轮（阶段 A+B）全部完成——Office 域产品代码已在 mdcore
 > （mdc-office 消毒六面 + mdc-office-io XLSX 读路径，main 880864e）。
+> **复认证（2026-10-13，第 5 次平台重置后，worklog t10-verify）**：
+> 环境全量重建 + 12 门禁 + NOTICES v1.3 三链全绿零漂移（G1 361 /
+> 79 / 81+6i / 109+6i / perf 6 / scan 0 / wasm32 / clippy 2 wasm
+> 基线 / fmt 0 + web 18/15/28；三链 16/16 含 windows-sys 工件链补齐）
+> ——双仓远端真源在全新环境完整可复现。
 > **下一轮候选（按在档登记，待用户裁决优先级）**：①xlsx-r2（C2 写面
 > 产品化——rust_xlsxwriter 进 mdc-office-io 产品依赖 + 写读管线接线，
 > 证据 = style_probe 9/9 + T3 探针）②mal7e 垃圾部件严格模式裁决 ③门 2
