@@ -74,7 +74,23 @@ fn main() {
         ("dim4_multisheet.xlsx", Class::Ok, |b| {
             b.sheet_names() == vec!["Data", "RefSheet", "Calc", "TailEmpty"]
         }),
-        ("dim5_relationships.xlsx", Class::Ok, |b| b.non_empty_cells() == 5),
+        ("dim5_relationships.xlsx", Class::Ok, |b| {
+            // v2：语料五链接形态（corpus.rs v2）——非空 7 + 超链接闭环
+            b.non_empty_cells() == 7
+                && b.sheets[0].hyperlinks.len() == 5
+                && b.sheets[0]
+                    .hyperlinks
+                    .iter()
+                    .any(|h| h.target.as_deref() == Some("https://example.org/path?q=1&x=2"))
+                && b.sheets[0]
+                    .hyperlinks
+                    .iter()
+                    .any(|h| h.location.as_deref() == Some("Sheet1!A1"))
+                && b.sheets[0]
+                    .hyperlinks
+                    .iter()
+                    .any(|h| h.tooltip.as_deref() == Some("悬停提示文本"))
+        }),
         // 敌意 ⑥：容器门检查逐件对位（门 1 声明值 + 门 2 实际尺寸）
         // mal6a：声明 16B 过门 1；门 2 实测计数 1MB > 16B → REJECT
         //（2026-10-13 定谳：zip 8.6 读界无内建声明值强制[lie86 探针]，

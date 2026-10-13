@@ -235,6 +235,16 @@ fn dim5_relationships(m: &mut String) -> Result<(), Box<dyn std::error::Error>> 
         ws.write_url(2, 0, "internal:Target!A1")?;
         // URL 样式字符串（非超链接单元格，纯值面）
         ws.write_string(3, 0, "https://example.net/plain")?;
+        // t10-c v2：tooltip 面 + 外部工作簿子锚形态（PLAN 规格"外部工作簿引用"）
+        ws.write_url_with_options(
+            4,
+            0,
+            "https://example.com/tip",
+            "悬停有提示的链接",
+            "悬停提示文本",
+            None,
+        )?;
+        ws.write_url(5, 0, "file:///C:/refs/Book2.xlsx#Sheet1!A1")?;
     }
     let target = wb.add_worksheet();
     target.set_name("Target")?;
@@ -248,9 +258,34 @@ fn dim5_relationships(m: &mut String) -> Result<(), Box<dyn std::error::Error>> 
         "带文本链接值"
     );
     let a1 = rg.get((0, 0)).cloned().unwrap_or(Data::Empty);
+    // v2：超链接关系面可观测（calamine 0.36.1 hyperlinks_by_sheet_name）
+    let hls = book.hyperlinks_by_sheet_name("Links")?;
+    assert_eq!(hls.len(), 5, "超链接条数：{hls:?}");
+    let file_link = hls
+        .iter()
+        .find(|h| h.range.start == (5, 0))
+        .expect("file 子锚链接在位");
+    assert!(
+        file_link.target.as_deref().unwrap_or("").starts_with("file:///"),
+        "外部工作簿 target：{file_link:?}"
+    );
+    assert_eq!(
+        file_link.location.as_deref(),
+        Some("Sheet1!A1"),
+        "子锚 location：{file_link:?}"
+    );
+    let tip_link = hls
+        .iter()
+        .find(|h| h.range.start == (4, 0))
+        .expect("tooltip 链接在位");
+    assert_eq!(
+        tip_link.tooltip.as_deref(),
+        Some("悬停提示文本"),
+        "tooltip：{tip_link:?}"
+    );
     let _ = writeln!(
         m,
-        "| dim5_relationships.xlsx | 关系引用（外链 URL×2 + 内部 Target!A1 链接 + 纯文本 URL 值；rels 部件 = sheet1.xml.rels） | 校验过：值面读回 ✓（超链接关系面 calamine 无公开 API——保真对比预期丢失维度；A1 读回 = {a1:?}） |"
+        "| dim5_relationships.xlsx | 关系引用（外链 URL×2 + 内部 Target!A1 链接 + 纯文本 URL 值 + tooltip 面 + file 子锚外部工作簿引用；rels 部件 = sheet1.xml.rels） | 校验过：值面读回 ✓ 超链接 API 读回 5 条 ✓（target/location/tooltip 三字段断言过；v1 manifest 曾误记「calamine 无公开 API」——v2 修正：0.36.1 hyperlinks_by_sheet_name 完整可观测）；A1 读回 = {a1:?} |"
     );
     Ok(())
 }
@@ -452,36 +487,41 @@ fn dim6_malicious_zip(m: &mut String) -> Result<(), Box<dyn std::error::Error>> 
         z.extend_from_slice(&declared.to_le_bytes()); // usize
         z.extend_from_slice(&declared.to_le_bytes()); // csize
         z.extend_from_slice(&0u64.to_le_bytes()); // offset
-        let real_cd_extra_len = 28u16; // 2(id)+2(size)+24(data)
-        // extralen 字段位置 = extra 块起始 - name - 16B 固定位
-        // （extralen(2)+comment(2)+disk(2)+iattr(2)+eattr(4)+offset(4)）。
-        // 首版误算 z.len()-30 → 打进 name 末两字节（'in' 被覆写）且
-        // extralen 留 0 → zip 按 0xFFFFFFFF 裸值 seek 出界。t10-d 修正。
-        let cd_extra_pos = z.len() - 28 - 16 - name.len();
+        let real_cd_extra_len = 28u16; // 2+2+24
+        // extralen 字段位于 CD 记录 offset 30（sig4+26 定段尾）：从末尾回溯
+        // 52 = 28(extra) + 8(name) + 16(46-30 定段尾段)。v1 曾用 z.len()-30
+        // （差 22 字节，补丁写进 name 尾部 + extralen 恒 0 → 容器不可解析，
+        // python/zip9 双重实证 "Bad offset for central directory"）。
+        let cd_extra_pos = z.len() - 52;
         z[cd_extra_pos..cd_extra_pos + 2].copy_from_slice(&real_cd_extra_len.to_le_bytes());
         let cd_size = z.len() as u32 - cd_off as u32;
-        // zip64 EOCD 记录 + locator + 普通 EOCD
-        // 注：size of record 是 u64（8B）——首版误写 u32 导致整条记录
-        // 字段错位（zip 报 Invalid CDFH offset），t10-d harness 发现后修正。
-        let z64_eocd_off = z.len() as u64;
+        // zip64 EOCD（v2 修正：size 字段 u64 8 字节——APPNOTE 4.4.21 +
+        // zip-rs write.rs:1504（record_size = ext + 44）；v1 曾误写 u32 4 字节）
+        let z64_off = z.len() as u64;
         z.extend_from_slice(b"PK\x06\x06");
-        z.extend_from_slice(&44u64.to_le_bytes()); // size of record（u64：自身后至记录尾）
+        z.extend_from_slice(&44u64.to_le_bytes()); // size of record（8 字节）
         z.extend_from_slice(&45u16.to_le_bytes()); // version made by
         z.extend_from_slice(&45u16.to_le_bytes()); // version needed
-        z.extend_from_slice(&0u32.to_le_bytes()); // disk
-        z.extend_from_slice(&0u32.to_le_bytes()); // cd disk
+        z.extend_from_slice(&0u32.to_le_bytes()); // this disk
+        z.extend_from_slice(&0u32.to_le_bytes()); // disk with cd
         z.extend_from_slice(&1u64.to_le_bytes()); // entries this disk
         z.extend_from_slice(&1u64.to_le_bytes()); // entries total
         z.extend_from_slice(&(cd_size as u64).to_le_bytes());
         z.extend_from_slice(&cd_off.to_le_bytes());
-        // zip64 EOCD locator（EOCD 0xFFFFFFFF 标记 → zip 库反向定位链）
+        // 注意：无 extensible data len 字段——记录定长 56B（python '<IQHHIIQQQQ'
+        // 模型 + zip-rs record_size=44=2+2+4+4+8+8+8+8；ext len 属 extensible
+        // data 段，有 ext 数据时才随数据写。v1 曾多写 4B → 记录 60B，
+        // python extrasz=4 → check2 失败"Corrupt zip64 EOCD"）
+        // zip64 EOCD Locator（PK\x06\x07，20B）——v2 补：缺失则普通 EOCD 的
+        // 0xFFFFFFFF cd offset 无法回溯 zip64 记录（v1 败因之二）
         z.extend_from_slice(b"PK\x06\x07");
-        z.extend_from_slice(&0u32.to_le_bytes()); // disk with z64 EOCD
-        z.extend_from_slice(&z64_eocd_off.to_le_bytes()); // z64 EOCD 偏移
-        z.extend_from_slice(&1u32.to_le_bytes()); // total disks
+        z.extend_from_slice(&0u32.to_le_bytes()); // disk with cd
+        z.extend_from_slice(&z64_off.to_le_bytes()); // zip64 EOCD offset
+        z.extend_from_slice(&1u32.to_le_bytes()); // number of disks
+        // 普通 EOCD（disk 字段实值 0——zip-rs 写侧同构；cd 三字段 0xFFFF 标记）
         z.extend_from_slice(b"PK\x05\x06");
-        z.extend_from_slice(&0xFFFFu16.to_le_bytes()); // disk 标记
-        z.extend_from_slice(&0xFFFFu16.to_le_bytes()); // cd disk 标记
+        z.extend_from_slice(&0u16.to_le_bytes()); // disk
+        z.extend_from_slice(&0u16.to_le_bytes()); // cd disk
         z.extend_from_slice(&0xFFFFu16.to_le_bytes()); // entries 标记
         z.extend_from_slice(&0xFFFFu16.to_le_bytes()); // total 标记
         z.extend_from_slice(&0xFFFF_FFFFu32.to_le_bytes()); // cd size 标记

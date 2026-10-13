@@ -1,16 +1,23 @@
-//! xlsx-r1 t10-c — 已有工作簿修改最小技术验证 + 保真对比（分析仓写面）。
+//! xlsx-r1 t10-c v2 — 已有工作簿修改最小技术验证 + 保真对比（分析仓写面）。
 //!
 //! 验证目标（xlsx-r1 PLAN §1 C3）：实证"calamine 读 + rust_xlsxwriter
 //! 从零新建"组合的语义 = **重建而非修改**——即使用尽力而为路径（值 +
-//! 公式文本 + 缓存值 + 合并范围全重放），未触及内容仍丢失哪些维度。
+//! 公式文本 + 缓存值 + 合并范围 + 超链接全重放），未触及内容仍丢失哪些维度。
+//!
+//! v2 勘误（2026-10-13）：v1 曾按「calamine 无超链接 API」登记超链接为
+//! 预期丢失维度——**误判**。calamine 0.36.1 hyperlinks_by_sheet_name
+//! 完整可观测（target/location/displayed_text/tooltip/range 五字段）。
+//! v2 补超链接面提取与重放，语料 dim5 同步扩展（tooltip + file 子锚）。
 //!
 //! 方法（对 dim1..dim5 五个正向语料档逐件执行）：
-//!   1. calamine 提取全部可观测面（表序/值矩阵/公式文本/合并范围）；
+//!   1. calamine 提取全部可观测面（表序/值矩阵/公式文本/合并/超链接）；
 //!   2. 模拟修改：首表 (8,8) 写入 MODIFIED 标记（各档数据区外统一位）；
 //!   3. rust_xlsxwriter 从零新建，重放全部提取面 + 修改；
+//!      超链接回放规则 = 值面驱动：锚点值面==回放 URL → 纯链接形态；
+//!      否则 write_url_with_text（自定义文本）；tooltip 透传。
 //!   4. 双重对比：
 //!      条目级 —— zip 条目名集合/内容字节对比（新增/丢失/变化三分）；
-//!      语义级 —— 值逐格、公式文本、合并范围、样式/关系面可观测性。
+//!      语义级 —— 值逐格、公式文本、合并范围、超链接逐字段、样式/关系面可观测性。
 //!   5. 输出丢失矩阵（R1 报告事实基座）。
 //!
 //! 产物：fixtures/fidelity_report.md + stdout 摘要。
@@ -19,7 +26,7 @@ use std::collections::BTreeMap;
 use std::fmt::Write as _;
 use std::io::Read;
 
-use calamine::{Data, Dimensions, Range, Reader, Xlsx};
+use calamine::{Data, Dimensions, Hyperlink, Range, Reader, Xlsx};
 use rust_xlsxwriter::Workbook;
 
 const CORPUS: &str = "fixtures/corpus";
@@ -33,6 +40,8 @@ struct Extracted {
     formulas: Vec<(String, Range<String>)>,
     /// (sheet, Vec<Dimensions>) —— 合并范围
     merges: Vec<(String, Vec<Dimensions>)>,
+    /// (sheet, Vec<Hyperlink>) —— 超链接（v2）
+    hyperlinks: Vec<(String, Vec<Hyperlink>)>,
 }
 
 fn extract(path: &str) -> Result<Extracted, Box<dyn std::error::Error>> {
@@ -41,6 +50,7 @@ fn extract(path: &str) -> Result<Extracted, Box<dyn std::error::Error>> {
     let mut values = Vec::new();
     let mut formulas = Vec::new();
     let mut merges = Vec::new();
+    let mut hyperlinks = Vec::new();
     for name in &sheet_names {
         let v = book.worksheet_range(name)?;
         values.push((name.clone(), v));
@@ -48,8 +58,10 @@ fn extract(path: &str) -> Result<Extracted, Box<dyn std::error::Error>> {
         formulas.push((name.clone(), f));
         let m = book.merge_cells_by_sheet_name(name)?;
         merges.push((name.clone(), m));
+        let h = book.hyperlinks_by_sheet_name(name)?;
+        hyperlinks.push((name.clone(), h));
     }
-    Ok(Extracted { sheet_names, values, formulas, merges })
+    Ok(Extracted { sheet_names, values, formulas, merges, hyperlinks })
 }
 
 /// 尽力而为重建：重放 calamine 全部可观测面 + 首表 (8,8) 修改标记。
@@ -73,6 +85,9 @@ fn rebuild_best_effort(ex: &Extracted) -> Result<Workbook, Box<dyn std::error::E
     // 合并索引：sheet -> Vec<Dimensions>
     let merge_idx: BTreeMap<String, Vec<Dimensions>> =
         ex.merges.iter().cloned().collect();
+    // 超链接索引（v2）：sheet -> Vec<Hyperlink>
+    let hyperlink_idx: BTreeMap<String, Vec<Hyperlink>> =
+        ex.hyperlinks.iter().cloned().collect();
 
     for (name, vr) in &ex.values {
         let ws = wb.add_worksheet();
@@ -162,6 +177,34 @@ fn rebuild_best_effort(ex: &Extracted) -> Result<Workbook, Box<dyn std::error::E
                 ws.merge_range(r0, c0 as u16, r1, c1 as u16, &text, &fmt)?;
             }
         }
+        // 超链接重放（v2）：值面驱动形态判定 + tooltip 透传
+        if let Some(hls) = hyperlink_idx.get(name) {
+            for hl in hls {
+                let (hr, hc) = (hl.range.start.0, hl.range.start.1 as u16);
+                let url: String = match (&hl.target, &hl.location) {
+                    (Some(t), Some(loc)) => format!("{}#{}", xml_unescape5(t), xml_unescape5(loc)), // 外部文件 + 子锚（file#anchor）
+                    (Some(t), None) => xml_unescape5(t),
+                    (None, Some(loc)) => format!("internal:{}", xml_unescape5(loc)),
+                    (None, None) => continue, // 无目标无位置：不可达形态，跳过
+                };
+                let val = vr
+                    .get(((hl.range.start.0 - start.0) as usize, (hl.range.start.1 - start.1) as usize))
+                    .cloned()
+                    .unwrap_or(Data::Empty);
+                let val_str = match &val {
+                    Data::String(s) => Some(s.clone()),
+                    _ => None,
+                };
+                let tip = hl.tooltip.clone().unwrap_or_default();
+                if let Some(text) = val_str.filter(|t| t != &url) {
+                    // 锚点值面 != URL → 自定义文本形态（write_url_with_text 语义）
+                    ws.write_url_with_options(hr, hc, url.as_str(), text.as_str(), tip.as_str(), None)?;
+                } else {
+                    // 值面==URL（或非字符串）：纯链接形态
+                    ws.write_url_with_options(hr, hc, url.as_str(), url.as_str(), tip.as_str(), None)?;
+                }
+            }
+        }
         // 修改标记：首表 (8,8) —— 数据区外统一位
         if name == &ex.sheet_names[0] {
             ws.write_string(8, 8, "R1-MODIFIED")?;
@@ -187,9 +230,7 @@ fn zip_entries(path: &str) -> Result<BTreeMap<String, Vec<u8>>, Box<dyn std::err
     let mut m = BTreeMap::new();
     for i in 0..za.len() {
         let mut zf = za.by_index(i)?;
-        // zip 8.6：name() 直接返回 &str（9.x 为 Result<Cow<str>>——
-        // 对齐 8.6 后简化；条目名对比语义不变）。
-        let name = zf.name().to_string();
+        let name = zf.name().to_string(); // zip 8.6：name() 返回 &str（9.x 为 Result——API 差异三处校准之一）
         let mut buf = Vec::new();
         zf.read_to_end(&mut buf)?;
         m.insert(name, buf);
@@ -356,6 +397,71 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "- 合并面：原 {m_total} 范围 → 重放后 {m_kept}{}",
             if m_total == m_kept { "（保）" } else { "（差异）" }
         );
+        // 超链接（v2）：按锚点对齐逐字段对比
+        {
+            let hl_of = |ex: &Extracted| -> BTreeMap<(u32, u32), Hyperlink> {
+                let mut m = BTreeMap::new();
+                for (_, hls) in &ex.hyperlinks {
+                    for h in hls {
+                        m.insert(h.range.start, h.clone());
+                    }
+                }
+                m
+            };
+            let a_map = hl_of(&ex);
+            let b_map = hl_of(&ex2);
+            let h_total = a_map.len();
+            let mut field_diffs = 0usize;
+            let mut details: Vec<String> = Vec::new();
+            for (anchor, oh) in &a_map {
+                match b_map.get(anchor) {
+                    None => {
+                        field_diffs += 1;
+                        details.push(format!("锚点 {anchor:?} 丢失"));
+                    }
+                    Some(nh) => {
+                        let tgt = oh.target.clone().unwrap_or_default()
+                            == nh.target.clone().unwrap_or_default();
+                        let loc = oh.location.clone().unwrap_or_default()
+                            == nh.location.clone().unwrap_or_default();
+                        // displayed_text 归一：None ≡ ""（rust_xlsxwriter 内链 display 必发、
+                        // 外链不发——形态等价比较）
+                        let disp = oh.displayed_text.clone().unwrap_or_default()
+                            == nh.displayed_text.clone().unwrap_or_default();
+                        let tip = oh.tooltip.clone().unwrap_or_default()
+                            == nh.tooltip.clone().unwrap_or_default();
+                        if !(tgt && loc && disp && tip) {
+                            field_diffs += 1;
+                            details.push(format!(
+                                "锚点 {anchor:?}：target{}/location{}/display{}/tooltip{}（原 target={:?} 新 target={:?}）",
+                                yn(tgt),
+                                yn(loc),
+                                yn(disp),
+                                yn(tip),
+                                oh.target,
+                                nh.target
+                            ));
+                        }
+                    }
+                }
+            }
+            if b_map.len() > a_map.len() {
+                details.push(format!("重建多出 {} 条（幽灵链接）", b_map.len() - a_map.len()));
+            }
+            let _ = writeln!(
+                report,
+                "- 超链接面：原 {h_total} 条 → 重放后 {} 条，字段差异 {field_diffs}{}{}",
+                b_map.len(),
+                if field_diffs == 0 && h_total > 0 {
+                    "（保）"
+                } else if h_total == 0 {
+                    "（本档无超链接）"
+                } else {
+                    ""
+                },
+                if details.is_empty() { String::new() } else { format!("——{}", details.join("；")) }
+            );
+        }
         // 修改标记在位验证
         let first2 = &ex2.values[0];
         let mod_cell = first2.1.get((8, 8)).cloned().unwrap_or(Data::Empty);
@@ -376,13 +482,31 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+fn yn(b: bool) -> &'static str {
+    if b { "✓" } else { "✗" }
+}
+
+/// calamine 0.36.1 读侧怪癖补偿：hyperlink rels Target（及 location）
+/// 属性值未做 XML 实体反转义（utils.rs:117 unescape_xml 只处理 _x00HH_
+/// 约定，非该前缀原样返回）——`&` 以 `&amp;` 字面量读出。回放前把
+/// 5 实体还原为逻辑字符，重建字节面与原档一致。注意 &amp; 必须最后
+/// 替换（&amp;amp; 正确解为字面 "&amp;"）。登记边界：真含字面
+/// "&amp;" 文本的 URL 在此补偿下有歧义（双解不可分，实际概率≈0）。
+fn xml_unescape5(s: &str) -> String {
+    s.replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", "\"")
+        .replace("&apos;", "'")
+        .replace("&amp;", "&")
+}
+
 fn data_eq(a: &Data, b: &Data) -> bool {
     match (a, b) {
         (Data::Empty, Data::Empty) => true,
         (Data::String(x), Data::String(y)) => x == y,
         (Data::Float(x), Data::Float(y)) => x == y,
-        (Data::Float(x), Data::Int(y)) => *x == *y as f64,
-        (Data::Int(x), Data::Float(y)) => *x as f64 == *y,
+        (Data::Float(x), Data::Int(y)) => *x == (*y as f64),
+        (Data::Int(x), Data::Float(y)) => (*x as f64) == *y,
         (Data::Int(x), Data::Int(y)) => x == y,
         (Data::Bool(x), Data::Bool(y)) => x == y,
         (Data::Error(x), Data::Error(y)) => x == y,

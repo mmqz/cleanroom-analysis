@@ -98,6 +98,9 @@ calamine/rust_xlsxwriter/zip 依赖**不能进 mdc-office**（自锁必红）。
 5. 阶段 B 双 crate 决策的裁决确认（§2，默认 A 执行）。
 6. 门 2 双读成本优化（受信源跳过开关）——登记待裁决（v1 已知
    成本，总量 ≤300MB 已锁）。
+7. C3 样式保真编辑需求出现时另议（umya-spreadsheet 对照件或自研
+   写侧，循 ADR 纪律；v2 勘误后风险面已收窄为样式场景——超链接
+   在尽力而为重建路径下可保真）。
 
 ## 7. 阶段 B 执行记录（2026-10-13 完成，runbook §3 七步对账）
 
@@ -134,3 +137,42 @@ MIT OR Apache-2.0（首版记 MIT；按 MIT 履行不变）。
 索引缓存布局（zip→.cache/3/z/zip 三层探测）与 etag 包装解析（
 raw_decode 流式扫描）；rg 计数管道去重修正（(\*) 后缀剥离）——
 均在档。
+
+## 8. v2 增量（2026-10-13 后半，本会话）——超链接面 + 实体怪癖 + 合并恢复
+
+**背景**：会话断点跨第五次平台重置——本地工作区回退至 dd7fb1a 期
+快照（含 t10-b/c 早期代码），远端为真源（998a7f4，t10-verify 复认证
+全绿）。本会话按「远端为真源 + v2 层叠加」合并恢复。
+
+**v1 → v2 勘误链（三处，分析仓 + mdcore 双仓同步）**：
+
+1. **超链接可观测性误判**（v1 断言「calamine 无公开 API」作废）：
+   calamine 0.36.1 hyperlinks_by_sheet_name 完整可观测（xlsx/
+   mod.rs:2190 + Hyperlink :2292 源锚）。落地：spike io.rs + mdcore
+   office-io 各加第五面（SheetData.hyperlinks）+ 五形态往返测试
+   （外链纯 / 外链 & 查询 / internal / tooltip / file 子锚）。
+2. **calamine 读侧实体怪癖**：rels `Target` 及 sheet 属性值未做 XML
+   实体反转义（unescape_xml 只处理 _x00HH_ 前缀，utils.rs:117）；
+   URL 含 `&` 以 `&amp;` 字面量读出——fidelity 实证重放双转义
+   （`&amp;amp;`，python 双向字节核验）。补偿：`unescape_xml_
+   entities5`（IO 边界统一还原，消费方拿逻辑 URL）；边界登记：
+   真含字面 `&amp;` 的 URL 双解歧义（概率≈0）。
+3. **mal6c zip64 手构装配三缺陷**（上一会话早期语料代码遗留）：
+   CD extralen 回填位 / zip64 EOCD size u32→u64 + 56B 定长模型 /
+   EOCD Locator 补齐——python + zip8.6 双解析验证；mdcore harness
+   同组修复为上会话独立完成，双仓推导互证。
+
+**实证数字（本会话重跑）**：spike lib 26/26（25+1 v2 测试）；
+corpus v2 重生成（dim5 五链接）；fidelity v2 重跑——dim5 超链接
+5/5 零字段差异 + rels 字节面与原档一致；read_proto 17/17 + 零 panic。
+mdcore 门禁（18d5bb2）：G1 362/362（361+1）+ G2-G4 79/81+6i/
+109+6i + perf 6/6 + scan 0 + wasm32 + clippy 四面 2 wasm 基线零新
++ fmt 0 + web 18/15/28；NOTICES v1.3 恒（v2 零新依赖）。
+
+**文档层**：FIDELITY.md v2（勘误链 + 丢失矩阵修正：超链接移入
+保真集）/ CAPABILITIES.md（C1 五面 + 补偿；C3 风险面收窄为样式
+场景）/ DEPS.md（zip 8.6.0 MIT 单许可——NOTICES v1.3 修正回写）
+/ 本 §8；SANITIZE_TESTS.md 维持（六族已含，X-03 修正已在档）。
+
+**mdcore 版本链**：880864e（阶段 B）→ **18d5bb2**（v2 增量）；
+fidelity.rs v2 的 zip 8.6 API 校准（name() &str 非 Result）一并落地。

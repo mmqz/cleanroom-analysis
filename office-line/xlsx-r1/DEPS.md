@@ -44,7 +44,7 @@ zip-rs/zip2 仓（crates.io 包名仍为 `zip`，9.x）。依赖声明与审计�
 registry 源码 Cargo.toml 直读，`api` 列 = crates.io API）：
 
 **根件（3）**：calamine 0.36.1 MIT · rust_xlsxwriter 0.99.1 MIT ·
-zip 8.6.0 MIT OR Apache-2.0（对齐后 zip 9.0.2 支线移出闭包）
+zip 8.6.0 **MIT 单许可**（NOTICES v1.3 修正回写：首版记双许可系上游仓历史口径混淆——锁定版本工件 LICENSE 直读为准；对齐后 zip 9.0.2 支线移出闭包）
 
 **XML/解析（4）**：quick-xml 0.41.0 MIT（api）· serde 1.0.229
 MIT OR Apache-2.0 · serde_derive 1.0.229 MIT OR Apache-2.0（api）·

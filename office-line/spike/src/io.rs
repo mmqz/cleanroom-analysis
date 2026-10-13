@@ -7,7 +7,7 @@
 //! 安全依据：office-line/SECURITY_POLICY.md §2.1 四检查 + §3 限额表；
 //! 实证：xlsx-r1 t10-d harness 17/17 零 panic（read_proto.rs）。
 
-use calamine::{Data, Dimensions, Range, Reader, Xlsx};
+use calamine::{Data, Dimensions, Hyperlink, Range, Reader, Xlsx};
 
 // ---------------------------------------------------------------------------
 // §3 限额常量（SECURITY_POLICY v1 接线——xlsx 族；阶段 B 可移配置面）
@@ -161,19 +161,21 @@ pub fn verify_actual_sizes<R: std::io::Read + std::io::Seek>(
 }
 
 // ---------------------------------------------------------------------------
-// calamine 读取包装（四 API 面）
+// calamine 读取包装（五 API 面；v2 增量：超链接）
 // ---------------------------------------------------------------------------
 
-/// 单表快照：值矩阵（含缓存值）/ 公式文本 / 合并范围。
+/// 单表快照：值矩阵（含缓存值）/ 公式文本 / 合并范围 / 超链接（v2）。
 #[derive(Debug, Default)]
 pub struct SheetData {
     pub name: String,
     pub values: Range<Data>,
     pub formulas: Range<String>,
     pub merges: Vec<Dimensions>,
+    /// 超链接（v2）：四字段，已过 IO 边界实体补偿。
+    pub hyperlinks: Vec<Hyperlink>,
 }
 
-/// 整档提取：表序 + 逐表三面（C1 读取能力产品面）。
+/// 整档提取：表序 + 逐表四面（v2：+超链接；C1 读取能力产品面）。
 #[derive(Debug)]
 pub struct Book {
     pub sheets: Vec<SheetData>,
@@ -226,19 +228,51 @@ pub fn read_book(path: &str) -> Result<Book, ReadError> {
         let merges = book
             .merge_cells_by_sheet_name(name)
             .map_err(|e| ReadError::ParseError(format!("merge[{name}]: {e}")))?;
+        let mut hyperlinks = book
+            .hyperlinks_by_sheet_name(name)
+            .map_err(|e| ReadError::ParseError(format!("hyperlinks[{name}]: {e}")))?;
+        // v2 实体补偿（与 mdcore 18d5bb2 同步）：calamine rels/sheet 属性值
+        // 未做 XML 实体反转义（unescape_xml 只处理 _x00HH_），& 以 &amp;
+        // 字面量读出——IO 边界统一还原逻辑字符。
+        for h in &mut hyperlinks {
+            if let Some(v) = h.target.as_mut() {
+                *v = unescape_xml_entities5(v);
+            }
+            if let Some(v) = h.location.as_mut() {
+                *v = unescape_xml_entities5(v);
+            }
+            if let Some(v) = h.displayed_text.as_mut() {
+                *v = unescape_xml_entities5(v);
+            }
+            if let Some(v) = h.tooltip.as_mut() {
+                *v = unescape_xml_entities5(v);
+            }
+        }
         sheets.push(SheetData {
             name: name.clone(),
             values,
             formulas,
             merges,
+            hyperlinks,
         });
     }
     Ok(Book { sheets })
 }
 
+/// calamine 0.36.1 读侧怪癖补偿（v2）：rels `Target` 及 sheet 超链接
+/// 属性值未做 XML 实体反转义（utils.rs unescape_xml 只处理 _x00HH_）。
+/// `&amp;` 最后替换序（&amp;amp; 正确解为字面 &amp;）；真含字面
+/// &amp; 的 URL 双解歧义登记（概率≈0）。
+fn unescape_xml_entities5(s: &str) -> String {
+    s.replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", "\"")
+        .replace("&apos;", "'")
+        .replace("&amp;", "&")
+}
+
 // ---------------------------------------------------------------------------
 // 单测（敌意件内联自构造——mdcore 集成测试同构）
-// ---------------------------------------------------------------------------
 
 #[cfg(test)]
 mod tests {
@@ -501,5 +535,55 @@ mod tests {
             other => panic!("expected parse error, got {other:?}"),
         }
         let _ = std::fs::remove_file(&p2);
+    }
+    #[test]
+    fn hyperlink_face_roundtrip_five_forms_v2() {
+        // v2（与 mdcore 18d5bb2 同步）：五链接形态往返 + 实体补偿钉定。
+        // ①外链纯 ②外链 & 查询（补偿核心）③internal ④tooltip ⑤file 子锚。
+        let p = tmp("links");
+        let mut wb = rust_xlsxwriter::Workbook::new();
+        {
+            let ws = wb.add_worksheet();
+            ws.set_name("Links").unwrap();
+            ws.write_url(0, 0, "https://example.com/docs").unwrap();
+            ws.write_url_with_text(1, 0, "https://example.org/path?q=1&x=2", "带文本链接")
+                .unwrap();
+            ws.write_url(2, 0, "internal:Target!A1").unwrap();
+            ws.write_url_with_options(
+                4,
+                0,
+                "https://example.com/tip",
+                "悬停有提示的链接",
+                "悬停提示文本",
+                None,
+            )
+            .unwrap();
+            ws.write_url(5, 0, "file:///C:/refs/Book2.xlsx#Sheet1!A1").unwrap();
+        }
+        let target = wb.add_worksheet();
+        target.set_name("Target").unwrap();
+        target.write_string(0, 0, "目标单元格").unwrap();
+        wb.save(&p).unwrap();
+
+        let book = read_book(&p).unwrap();
+        let links = book.sheets.iter().find(|s| s.name == "Links").unwrap();
+        assert_eq!(links.hyperlinks.len(), 5);
+        assert_eq!(
+            links.hyperlinks[1].target.as_deref(),
+            Some("https://example.org/path?q=1&x=2"),
+            "实体补偿后为逻辑 & 形态"
+        );
+        assert!(!links.hyperlinks[1].target.as_deref().unwrap_or_default().contains("&amp;"));
+        assert_eq!(links.hyperlinks[2].location.as_deref(), Some("Target!A1"));
+        assert_eq!(
+            links.hyperlinks[3].tooltip.as_deref(),
+            Some("悬停提示文本")
+        );
+        assert_eq!(
+            links.hyperlinks[4].target.as_deref(),
+            Some("file:///C:/refs/Book2.xlsx")
+        );
+        assert_eq!(links.hyperlinks[4].location.as_deref(), Some("Sheet1!A1"));
+        let _ = std::fs::remove_file(&p);
     }
 }

@@ -1990,3 +1990,55 @@ Stage Summary:
   mal7e 严格模式 / 门 2 双读成本优化 / R-O2 docx 渲染级读侧 /
   L3 遗留 D1-D3（yrs 评估 pass 最优先）。Office 域无阻塞可推进项，
   下一动作 = 用户裁决。
+
+---
+Task ID: t10-v2（xlsx-r1 v2 勘误增量 + 分叉合并恢复，本会话）
+Agent: 主代理
+Task: 从第五次重置的 stale 快照继续；v1→v2 三处勘误闭环；双仓推送
+分叉发现与合并（远端为真源）
+
+Work Log:
+- 起点（误框）：本地 = dd7fb1a + 未跟踪早期 t10-b/c 代码（corpus.rs
+  3 链接 v1 + fidelity.rs 7 编译错 + PLAN.md）——按"上一会话未竟"
+  推进：fidelity 修复运行 → 三处 v2 勘误链发现并闭环：
+  ①超链接可观测性（calamine hyperlinks_by_sheet_name 存在——
+  v1 manifest「无公开 API」作废；dim5 语料扩五链接形态；fidelity
+  补提取/回放[值面驱动形态判定]/对比——5/5 零字段差异，rels 字节
+  面单转义与原档一致）②calamine 读侧实体怪癖（rels Target 未做
+  XML 实体反转义，utils.rs:117 只处理 _x00HH_；& URL 以 &amp;
+  字面量读出 → 重放双转义实证 → xml_unescape5 补偿）③mal6c
+  zip64 装配三缺陷（CD extralen 回填位 / EOCD size u64+56B 定长 /
+  Locator 补齐；python+zip9 双解析验证）。
+- t10-d/f/g 完成（stale 框下）：read_proto 独立原型 + DEPS +
+  CAPABILITIES + FIDELITY/REPORT/SANITIZE_TESTS 各文档——mdcore
+  阶段 B v2（18d5bb2：office-io 第五面超链接 + unescape_xml_
+  entities5 + harness dim5 五形态；G1 362 全门禁绿）先行推送成功。
+- 分叉发现：分析仓推送被拒——远端超前 6 提交（0fe8ce4/91db58a/
+  e23efa9/998a7f4）：上一会话在 stale 快照之后还完成了门 2 发现轮
+  （lie86）+ C2 样式 XML 级（style_probe 9/9）+ 阶段 B 收口六文档
+  + 第 5 次重置 12 门禁复认证——本地未跟踪件为更早期快照（v1
+  认知）；SANITIZE_TESTS/io.rs/url_policy 首版**并未丢失**（远端
+  在档），本会话早段"复原注记"系误框，已在合并层修正。
+- 合并（远端为真源）：reset --hard 998a7f4 → v2 层叠加：corpus/
+  fidelity 取 v2 版（fidelity 校准 zip 8.6 name() &str）；spike
+  io.rs 补第五面 + 补偿 + 26 测试；read_proto 委托版 dim5 锚升级
+  （17/17 重跑零 panic）；CAPABILITIES 合并（C1 五面 + C3 风险面
+  收窄为样式场景）；DEPS zip 8.6.0 MIT 单许可修正；FIDELITY 置
+  v2 + 版本链注；REPORT 增 §8 v2 节 + §6 第 7 行；SANITIZE_TESTS
+  维持（六族 + X-03 修正已在档）；HANDOFF L3/L-MD 合并（18d5bb2）。
+- 全链重验：spike lib 26/26 + corpus v2 重生成 + fidelity v2 重跑
+  （dim5 超链接 5/5）+ read_proto 17/17 + style_probe 9/9 +
+  lie86 探针在役；mdcore 18d5bb2 门禁全绿（362/79/81+6i/109+6i/
+  perf6/scan0/wasm/clippy 2 基线/fmt0/web 18/15/28；NOTICES
+  v1.3 恒零新依赖）。
+
+Stage Summary:
+- xlsx-r1 v2 勘误层双仓闭环：超链接保真（C3 宣称修正）+ 实体
+  补偿 + zip64 修复；mdcore main = 18d5bb2。
+- 决策点维持（含上会话 t10-verify 登记）：xlsx-r2 C2 写面产品化 /
+  mal7e 严格模式 / 门 2 双读成本 / R-O2 docx 渲染级读侧 / D1-D3
+  （yrs 评估 pass 最优先）。
+- 教训登记：跨重置会话续作必须先 fetch 远端再定框（本地未跟踪
+  件可能滞后于远端多个提交轮）——本会话早段在误框下重复了部分
+  已推送工作（read_proto 独立版被委托版取代、SANITIZE_TESTS 复原
+  误注）；合并层已全部修正，零内容损失。
