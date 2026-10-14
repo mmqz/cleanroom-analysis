@@ -2457,3 +2457,20 @@ Stage Summary:
 - office 消费四切片全部收口：DOCX 导入（t16）/ XLSX 导入（t17）/ DOCX 导出（t18）/ XLSX 导出（t19）——双格式双方向端到端真实可用，XLSX/DOCX 各自成往返闭环
 - 开发期教训两件：①「wasm32 check 编译过」不证运行——运行时崩溃面（SystemTime/tempfile）只有真实 e2e 可暴露，可行性探针须如实分级；②引擎 feature 与目标双轴 cfg（feature"wasm" AND target"wasm32"）使特性启用对原生零行为影响——依赖边目标分裂是最小诚实修复
 - 剩余缺口（后续增量候选，非阻塞）：XLSX 数值/布尔类型面（全 Text 决策的逆方向——需单元格类型推断策略裁决）；单元格富文本（rust_xlsxwriter 富文本 API 不在 office-io 包装面）；t17 导入规模上限（16/50/32）与 t19 导出无上限的不对称（导入面边界）
+
+---
+Task ID: t19-review
+Agent: 主代理（t19 独立审查）
+Task: t19 XLSX 导出切片——代码与测试证据独立审查（重点：wasm32 运行时崩溃修复 + Cargo.lock +2 行）
+
+Work Log:
+- 提交核实：mdcore 7705b44 已推送零漂移（9 文件 +1038/−4）；Cargo.lock 恰 +2 行（rust_xlsxwriter deps 数组 +js-sys +wasm-bindgen——两包均已在 lock，零新包，最小必然 diff 如实登记）
+- wasm32 修复审查（两项一手发现，源码锚点在 Cargo.toml 注记）：①SystemTime::now() 运行时 panic → 引擎 wasm 特性切 js_sys::Date::now()（原生 cfg 恒真行为零变化）；②constant_memory tempfile 结构性质 → target-split 依赖（非 wasm32 保留 constant_memory，wasm32 仅 wasm 特性）+ add_sheet_streaming wasm32 条件化缺席（API 缺席非降级，模块文档登记）；write_roundtrip 6 测试亲跑确认 native 流式面在位
+- 测试亲跑复验：office-io 78（46+3+22+1+6）+ mdcore-wasm 43/43（31+12）；xlsx_export 9/9（含全圆环 export→import→canonical markdown 逐字互证）+ xlsx_import 9/9 + docx_export 8/8 零回归亲证；wasm 3,950,549 B 与报告一致
+- 归因勘误核验：t17「fixture builder 保活 rust_xlsxwriter」归因错误（非 wasm 导出面→cdylib 死码剥离）——t19 实测修正，诚实登记
+
+Stage Summary:
+- t19 审查通过零返工：XLSX 往返闭环完成；office 消费面四部曲齐（t16-t19：DOCX 导入/导出 + XLSX 导入/导出，双格式全圆环 e2e 字节/逐字互证）
+- 供应链纪律执行到位：wasm32 运行时崩溃是 t16 以来首个「check 过但运行崩」案例——两项发现入档教训（可行性探针只证编译不证运行；引擎结构性质面须 target-split）
+- G1 469/0/1i；八 web 套件 18/15/28/9/9/8/9 全绿；PDF 四面零漂移
+- 消费面收口后剩余缺口：t18 降级根因四件（list/monospace/hr/quote——office-io 写面未暴露，docx-rs 能力待一手核验）= 下一增量 t20 候选；MarkSpan URL payload = mdcore MD 域上游缺口（触碰域边界，需单独裁决）
