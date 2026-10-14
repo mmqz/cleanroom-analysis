@@ -2369,3 +2369,17 @@ Stage Summary:
 - t16 审查通过零返工：office-io 首个 wasm/web 消费边落地，端到端真实可用（UI 导入→容器三门→模型→markdown 映射→编辑器核心重建，可编辑可撤销）
 - 全链证据：G1 435/0/1i（+9）· PDF 四面零漂移 · clippy 2 基线 · fmt/scan 0 · wasm32 过 · web 四套件 18/15/28/9 全过
 - 剩余缺口登记在档（图片/页眉页脚/脚注内容不导入仅计数、非 Heading 样式降段、MD 结构字符语义解释、表格内链接目标丢、h7-9 钳 h6）——切片边界诚实，无范围蔓延
+
+---
+Task ID: t17-pre
+Agent: 主代理（第 8 次平台重置恢复 + t17 派发前置）
+Task: 第 8 次重置恢复（token 文件/工具链 PATH/双仓对齐）+ t17 立项（XLSX 读面 web 消费切片，t16 模式对称展开）
+
+Work Log:
+- 重置影响面：scripts/token.env 被删（会话既有 PAT 重建，有效性经克隆实证）；mdcore 目录被删（克隆恢复 main = ddeea4a）；分析仓本地退回 dd7fb1a（45 文件权限位漂移丢弃 + 陈旧未跟踪子集备份 scripts/backup-drift-8/ 后快进 9e06bf9）；rustup/cargo 被清（重装 1.99.0 钉住 channel，wasm32/fmt/clippy 组件实为在位仅 PATH 断）；web 面全失（wasm-bindgen CLI/node_modules/dist/pkg——t17 子任务恢复项，t12-b runbook 在案：registry .crate 前台可续构建）
+- cargo fetch 全量成功 + office-io check 过——依赖面完好
+- t17 立项：XLSX 读面 web 消费（import .xlsx → 容器门 → calamine 读 → sheet→GFM 表 markdown → 编辑器），复用 t16 全部模式（typed 错误码族/__importDocx 页面契约/e2e 套件模式/包体诚实登记）
+
+Stage Summary:
+- 第 8 次重置恢复完成度：双仓对齐零漂移 + 工具链在位 + 依赖缓存完好；web 面恢复归入 t17 执行（非独立阻塞）
+- 派发 t17 子代理执行，主代理审查跟进
