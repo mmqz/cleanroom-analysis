@@ -155,3 +155,32 @@ write_roundtrip.rs` 的 `read_modify_rebuild_path_evidence` 测试（经
 页眉页脚引用无条目/目标部件缺失/目标路径越出包根）严格模式 typed
 拒、兼容模式 BrokenReference 结构化警告——Phase 3 的引擎静默跳过
 （read_docx filter_map None）在两模式下均有了显式信号。
+
+### 7.1 docx-r2 增量变化（2026-10-16 / t14——遗留① 收口轮）
+
+**闭项（本轮）**：
+- **图片媒体面丢失**（Phase 3 登记「图形/图片——模型级切片不含媒体面」）
+  → **闭项（读侧）**：容器级媒体清单 `DocxDocument.images`（字节/
+  内容类型/引用关系/run 级引用计数——body_uses；引擎面三个静默
+  怪癖由自有实现绕开，docx-r1/CAPABILITY_NOTES §10.2）。**块序内
+  图片位置仍登记**（Block 无图片块——模型级文本提取边界）；
+- **first/even 页眉页脚写面**（r1 登记）→ **闭项**：四方法暴露
+  （激活语义引擎完整：first 自动 titlePg / even 自动
+  evenAndOddHeaders；同槽重复调用 = 原位替换保 rid——r1 踩踏修复）。
+
+**新暴露（损失面收窄）**：
+- 脚注写面（RunSpec.footnote）——脚注内容发射进 footnotes.xml；
+  **读面维持引擎受限登记**（读回文本不含脚注内容，模型级钉定）；
+- 简单域写面（PAGE/NUMPAGES）——域结果文本不入读回文本（域值 =
+  渲染期计算面，诚实登记非损失）。
+
+**仍登记（不变/更新）**：
+- 表格单元格内超链接目标仍丢（TableData 扁平面）；
+- 脚注/尾注**读面**仍引擎受限；图片自动转码（image 特性 +23 crate）
+  仍登记；TOC/PAGEREF 域与 HYPERLINK 域（todo!() 崩溃面）仍登记；
+- 图片**块序内位置**仍登记（清单面已闭）；
+- 域读面（instrText/fldChar 提取）仍登记（结构面在，提取面外）。
+
+**新可见性（非损失）**：媒体部件无内容类型声明（严格拒/兼容警告 +
+content_type=None）；悬空 image 关系与悬空 r:embed（严格拒/兼容
+BrokenReference）；zip 重复条目名 last-wins 语义钉定。

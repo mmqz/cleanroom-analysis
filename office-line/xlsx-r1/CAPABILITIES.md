@@ -130,10 +130,27 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      （quick-xml 解析全部 .rels 部件，门 3 同族纪律：上限恒等两
      模式、词汇表/schema 违反严格拒兼容警告、悬空引用
      BrokenReference 类）；
+   - **docx-r2 增量（2026-10-16，遗留① 收口轮）**：读 = **容器级
+     媒体清单** `DocxDocument.images`（word/media/* 枚举 + 自有
+     [Content_Types].xml 解析 + 全 .rels 表 image 型关系联接 + run 级
+     a:blip 引用计数——字节/内容类型/引用关系/body_uses 五字段；
+     悬空关系/越根/悬空 embed 严格拒兼容 BrokenReference，未声明
+     内容类型严格拒兼容警告）+ **[Content_Types].xml 词汇表纪律**
+     （Types/Default/Override）；写 = **脚注**（RunSpec.footnote
+     ——footnotes.xml 自动收集，marker 样式面忽略登记）+ **简单域**
+     （RunSpec::field_page/field_num_pages——PAGE/NUMPAGES；HYPERLINK
+     域 = 引擎 todo!() 崩溃面绝不暴露）+ **PNG 图片**（DocxWriter::
+     image——r1 勘误：`Pic::new_with_dimensions` 不受 image 特性
+     门控，自动转码面 +23 crate 仍登记）+ **first/even 页眉页脚**
+     （四方法；激活语义引擎完整，同槽重复调用 = 原位替换保 rid
+     ——r1 无条件 rIdHeader1 踩踏修复）；
    - 不支持面与数据损失在 mdcore docx.rs 模块文档逐项登记
      （docx-r1 变化：超链接目标丢弃**闭项**[表格单元格内目标
      仍丢——TableData 扁平面]；新增 WarningKind::BrokenReference
-     共享警告类别——XLSX 面无使用点）。
+     共享警告类别——XLSX 面无使用点；
+     docx-r2 变化：图片媒体面**闭项**[块序内图片位置仍登记]、
+     first/even 写面**闭项**；脚注/域读面与其余域/图片自动转码
+     维持登记——全链见 docx-r1/REPORT.md §6 + FIDELITY §7.1）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 

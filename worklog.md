@@ -2206,3 +2206,67 @@ Stage Summary:
 - 遗留①（DOCX 增量面按需）第一轮收口：OPC 关系层落地 + 解锁三面（超链接目标读/外链写/页眉页脚读写）全暴露且全实测；脚注/图片/域/first-even 写面按纪律登记不暴露（第二轮候选，引擎能力锚点在 CAPABILITY_NOTES）
 - G1 392→411（+19）；PDF 四面零波及；mdcore main 460f302→6f74b71（已推送）；cleanroom-analysis 本提交（含 t12-a/t12-b 未入档 worklog 补录 + docx-r1 目录 + 三文档增量）；NOTICES 零增量（v1.5 维持，无合规基线提交）
 - 开发期教训：①源读初判须实证复核——unwrap 面看似 panic 实则 catch-all 永不 Err（探针先行再定语义）；②docx-rs 写器恒发射空页眉 rels 部件（zipper/mod.rs:84 无条件）——净室自构造测试注入 rels 须原位改写而非追加；③引擎 Docx::header 计数递增怪癖=包装层防御先例（同 XLSX 流式纪律）
+
+---
+Task ID: t14
+Agent: subagent (DOCX 增量第二轮——脚注/图片/域, 遗留① 收口轮)
+Task: docx-r2 四面收口（脚注/图片/域/first-even）+ 全门禁 + 双仓推送
+
+Work Log:
+- 前置读取：worklog t13/t12-b/t12-a；docx-r1 CAPABILITY_NOTES（§5/§6/§7
+  二轮候选锚点）+ REPORT；mdcore main @ 6f74b71 clean；基线 G1 411
+- Phase A 一手核验（CAPABILITY_NOTES §10 增补 + 勘误链）：①脚注写=引擎
+  支持（add_footnote_reference run.rs:363-369 重置 marker 样式 + 打包
+  自动收集 mod.rs:914-938 + zipper 恒写 footnotes.xml）→ 暴露；读=引擎
+  受限（无部件读取 + reader/run.rs:63-146 无引用解析臂）→ 登记锚点
+  精确化；②图片写=**r1 勘误**：Pic::new_with_dimensions 不受 image
+  特性门控（pic.rs:66；仅 Pic::new 自动转码面被门控 pic.rs:53）→
+  PNG-only 零依赖暴露；image 特性代价=/tmp cargo tree 对照 37→60 crate
+  **+23 crate**（image v0.25.10 树逐项在档）→ 自动面登记不启用；
+  ③图片读=引擎三静默怪癖（非 PNG 默认路径丢弃 mod.rs:291-327/悬空关系
+  跳过 read_docx.rs:404-423/仅 document rels）→ 自有容器级清单绕开；
+  ④域：fldChar/instrText 元素族在（add_tc 三连先例 run.rs:202-208）→
+  PAGE/NUMPAGES 暴露；HYPERLINK=todo!() 崩溃面（instr_text.rs:32）绝不
+  暴露；TOC/PAGEREF 登记；⑤first/even 写=激活语义完整（first 自动
+  titlePg section_property.rs:95/even 自动 evenAndOddHeaders mod.rs:613）
+  → 暴露；⑥zip 8.6 重名条目=by_name 最后胜（zip_archive.rs:49-51）+
+  ZipWriter 拒重名（write.rs:1380-1386）——语义钉定
+- 开发期发现 r1 潜在缺陷：replace_default_header 无条件 rIdHeader1 在
+  多槽组合下踩踏（r1 暴露面不可达；暴露 first/even 后可达）→ r2 改
+  保持原槽 rid + 踩踏序列集成测试
+- mdcore 实现（main 6f74b71 → cbe85c0 已推送）：读面 = [Content_Types].xml
+  自有解析器（词汇表/缺属性/重复条目同 rels 层纪律 + Override>Default
+  查表）+ 媒体清单 ImageAsset 五字段（bytes/content_type/references
+  [全 .rels 表 image 型联接]/body_uses[正文+六槽位 a:blip 经属主表计数]）
+  + 敌意纪律（悬空关系/越根/悬空 embed=严格拒/兼容 BrokenReference；
+  无内容类型声明=严格拒/兼容警告+None；External 链接图与非 media 目标
+  跳过登记；孤儿媒体保留）；写面 = RunSpec.footnote/field_page/
+  field_num_pages + DocxWriter::image（PNG 签名+正尺寸 typed 验证）+
+  first/even 四方法（原位替换保 rid）；零新依赖（Cargo.lock 零 diff）
+- 测试 +15（G1 411→426）：docx.rs 单测 12→19 + docx_roundtrip 14→22
+  （脚注 XML 级[id 配对动态定位]/简单域/图片模型级全环/悬空 rel/
+  未声明+孤儿媒体/悬空 embed/重名 zip 净室手造[测试内 CRC32+手写本地
+  头/CD/EOCD；python zipfile 交叉验证 21 条目重名 2 testzip None 同
+  last-wins]/first-even 全环含踩踏序列）
+- 门禁全绿：G1 426/0/1i；PDF 三面 79/81+6i/109+6i 零漂移；clippy 恰
+  2 wasm 基线（自有 5 新警修净：2 doc_lazy_continuation+2 map_entry+
+  1 type_complexity）；fmt 0；scan 0+0；wasm32 过；web 18/15/28（资产
+  未重建——wasm 面零波及）；NOTICES 零增量（v1.5 不动，无合规基线提交）
+- 分析仓：docx-r1 CAPABILITY_NOTES §5/§6/§7 r2 交叉引用 + 新 §10
+  （10.1-10.5 含 r2 总表）；REPORT 新 §6 Round 2；xlsx-r1 CAPABILITIES
+  §2.5 docx-r2 增量行；FIDELITY 新 §7.1（闭项 2[图片媒体面+first/even
+  写面]+新暴露 2[脚注/简单域写]+仍登记更新+新可见性）；DEPS 不动
+
+Stage Summary:
+- 遗留①（DOCX 增量面）四面全部收口：脚注（写暴露/读登记）、图片
+  （读清单暴露/写 PNG 暴露[r1 勘误]/自动转码登记）、域（PAGE/NUMPAGES
+  写暴露/读登记/HYPERLINK 崩溃面绝不暴露）、first/even 写面（暴露）——
+  **无剩余无裁决面**
+- mdcore main：6f74b71 → cbe85c0（已推送）；Cargo.lock 零 diff；G1
+  411→426（+15）；PDF/web/wasm 零波及
+- 开发期教训三件：①r1「写面需 image 特性」初判被一手源推翻——特性
+  门控面要逐 API 粒度核验（构造器族可能部分门控）；②包装层无条件
+  rid 假设在暴露面扩大后失效——防御逻辑的假设面要随暴露面扩展重验
+  （踩踏序列测试钉定）；③zip 8.6 写拒重名读 last-wins——重名敌意
+  档案须净室手造（测试内 CRC32 + 手写 zip 头），python zipfile 交叉
+  验证独立确证
