@@ -175,6 +175,26 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      docx_import.rs 模块文档（docx-r1/REPORT.md §7）。**不宣称**：
      显示保真（结构映射非渲染语义）、样式语义解释（Title/自定义
      样式 → 普通段落）、图片/脚注/页眉页脚内容导入。
+   - **消费面（t18，2026-10-14——DOCX 导出方向，与 t16 合流 = 往返
+     闭环）**：**web 编辑器 .docx 导出已落地**（mdcore `crates/
+     mdcore-wasm/src/docx_export.rs` + web 工具条动作钮 +
+     `web/tests/docx_export.py`）。实测宣称口径：编辑器当前文档
+     （BlockTree 原生遍历，零 JSON hop）→ DocxWriter → zip 字节 →
+     Blob/a.download 下载（`WasmCore::export_docx` 增量方法 →
+     Uint8Array；错误码单族 `docx_build` = 引擎写/打包，映射层全函数
+     降级永不报错）。可表达面：Heading1-9（含 outline 级）+ 富段
+     加粗/斜体（strong/em 双拼写并收）+ 文本表（分隔行剔除 + `\|`
+     反转义）。**降级面显式登记**（docx_export.rs 模块文档映射表）：
+     code block（等宽/lang/fence 丢，文本逐字保留）、blockquote
+     （容器/缩进丢，子块平铺）、list（marker/depth 丢——t14 列表
+     写面未暴露）、divider（空段提示）、行内 code/del/u marks
+     （纯文本降级）；模型无链接表示（MarkSpan 无 URL 载荷）→ 导出
+     无链接 run 可产（非降级 = 无源映射）。e2e 实证：真实按钮点击
+     出合法 zip（[Content_Types].xml + document.xml + testzip）、
+     导出前后编辑器 `__md()` 逐字不变（只读性）、全环 export →
+     t16 `__importDocx` → markdown 逐字还原（非降级子集）。**不
+     宣称**：渲染保真、等宽/列表/水平线结构、页眉页脚/脚注/域/
+     PNG 写面接线（DocxWriter 能力中未暴露给本切片）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 

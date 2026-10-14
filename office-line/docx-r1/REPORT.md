@@ -379,3 +379,151 @@ wasm 包体（诚实记录，无门禁线）：`web/pkg/mdcore_wasm_bg.wasm`
 4. 夹具产线单一真源（`build_sample_docx` 一份代码：example 写盘 +
    原生测试在程 + 漂移守卫读盘三消费）——避免 example/测试/夹具
    三处漂移；漂移守卫报错内嵌再生成命令行。
+
+## 8. Round 4（t18，2026-10-14——DOCX 导出切片：编辑器 → .docx 下载，与 t16 合流 = 往返闭环）
+
+任务：web 编辑器**当前文档**（mdcore BlockTree——唯一语义真理，主档
+§9）→ office-io `DocxWriter` 写面 → zip 字节 → `Blob + a.download`
+下载 `document.docx`，端到端。与 t16（DOCX→编辑器导入）对称合流，
+DOCX 往返故事闭环。
+
+### 8.1 Phase A 裁决（映射面选型 + 证据锚点）
+
+- **纯原生树遍历，零 JSON hop**：mdcore `tree.rs` 的 `BlockTree::
+  top_level()/node()` 与 `Node{kind,text,attrs,marks,children}` 全
+  `pub`——mdc-wasm 侧 Rust 直走（t16/t17 经 markdown 字符串边界的
+  差异 = 方向性：导入终点是 MD ingestion 管道，导出起点是树本体）；
+- **marks 面（模型事实）**：`MarkSpan{start,end,kind:String}` 自由
+  kind 字符串 + **char 偏移**（op.rs `SetMark` L135 `len_chars` 契约
+  ——不可字节切片）；规范 kind = `strong`/`em`/`code`/`del`/`u`
+  （html.rs L20），spike 测试另有 `bold` 拼写——双拼写并收；
+  **模型无链接表示**（MarkSpan 无 URL 载荷；html.rs 无 `<a>` 处理）
+  → 导出无链接 run 可产（RunSpec.link 面 = 无源映射，非降级）；
+- **表 = 扁平管道行文本**（markdown.rs L152-169 连续 `|` 行合并单
+  Table 块；html.rs canonical_table_text 同形 + `\|` 转义）→ 导出需
+  管道行解析（分隔行剔除 + 反转义）；
+- 写面能力核对（docx.rs L1934-2130）：Heading1-9（样式 + outline
+  双通道）/ 富段 RunSpec(text/bold/italic/link/footnote/field)/
+  文本表 / 页眉页脚槽 / PNG——**无字体面、无列表面（t14 登记）、
+  无水平线面** → 降级表逐项登记（8.3）。
+
+### 8.2 落地面（mdcore）
+
+- `crates/mdcore-wasm/src/docx_export.rs`（新增 ~570 行，模块文档 =
+  错误码表/映射表/降级面/已知边界唯一真源随码走）：
+  - 暴露面 = **WasmCore 增量方法** `export_docx(&self) -> Result<
+    Vec<u8>, JsValue>`（t16/t17 自由函数模式的差异 = 导出读 `self`
+    状态；`#[wasm_bindgen] impl` 分文件合法，既有方法零变化）；
+    `Vec<u8>` → JS `Uint8Array`（wasm-bindgen 0.2.129 原生面，编译
+    期证实）；失败抛 JSON `{"code":"docx_build","message"}`；
+  - **错误码单族** `docx_build`（引擎写/打包——`DocxError::Io` 打包
+    失败为唯一现实路径；`Parse` = heading 越界，映射层恒钳 1-9 故
+    不可达仍完备映射；`Container` 只在读面产生——写侧不可达登记）；
+    **映射层全函数：降级永不报错**；
+  - 纯内核 `export_docx_core(&BlockTree)`（7 个纯函数：heading_level
+    / mark_style / runs_from 边界集分段 + 邻接同式合并 / text_lines
+    CRLF 剥离 / emit_rich_paragraphs 多行 char 偏移平移 / split_
+    pipe_row + is_separator_row + table_rows / emit_block 递归）——
+    零 JsValue 原生直测。
+- `web/index.html`（工具条 `export .docx` 动作钮——.import-btn 共享
+  样式 + `#docx-export-status`）；`web/src/main.ts`（t18 块镜像
+  t16/t17 约定：`__exportDocx`/`__lastDocxExport` window 面 +
+  not_ready 兜底 + JSON 错误面 + `downloadDocx` Blob/a.download +
+  状态行 `exported: X KB · N blocks · M simplified`——降级计数取
+  `__blocks()` 现场面，零新增 wasm 面）；`tsc --noEmit` 清洁。
+
+### 8.3 映射表与降级登记（BlockKind → DocxWriter）
+
+| mdcore 块 | DocxWriter | 降级（不可表达面，显式登记） |
+|---|---|---|
+| Heading（attrs.level 缺省/不可解析→1，钳 1-9） | heading()（Heading1-9 + outline） | 模型 level 任意 usize >9 钳 9；标题 marks 丢弃（heading 纯文本面） |
+| Paragraph | paragraph() run 序 | strong/bold→加粗、em/italic→斜体；**code/del/u/未知 → 纯文本**（RunSpec 无等宽/删除线/下画线面）；link kind → 纯文本（模型无 URL 载荷） |
+| CodeBlock | 每行一个纯文本段 | **等宽/字体面 + lang + fence 结构全丢**（文本逐字保留） |
+| Table | table() | 分隔行剔除；`\|` 反转义；单元格 `\n`/`\r`→空格（GFM 单行面，t17 同向）；孤立 `\` 透传（无内联转义层——t16 同边界）；0 行表跳过（空 w:tbl 非法形） |
+| Blockquote | 子块平铺递归 | 引用容器/缩进丢失 |
+| ListItem | item 富段 + 子块递归 | **marker/depth（列表结构）丢弃**（t14 登记列表写面未暴露；不注入 `- ` 伪 markdown）；次序保持 |
+| ThematicBreak | 空段落 | 无水平线面；空段 = 分隔提示 |
+
+全局文本规则：`\n` 分行 + 行尾 `\r` 剥离（CRLF 容忍），多行文本 →
+每行一段（mdcore 行级哲学，t16 w:br 同向）；mark 偏移按行区间裁剪
+平移（多行不丢格式）；相邻同 (bold,italic) run 合并（docx run 边界
+不承载语义——t16 导入侧合并登记的反向）。
+
+### 8.4 测试证据（原生 10 + web e2e 8）
+
+原生（mdcore-wasm 21→31；写→`read_docx_from_bytes`→模型断言全环）：
+1. `headings_map_to_styles_with_levels`——H1/2/6 样式 + 无样式正文；
+2. `heading_level_default_and_clamp`——level "42"→H9 / "abc"/缺失→H1；
+3. `bold_italic_marks_roundtrip`——char 偏移四段 run（plain/bold/
+   间隔空格/italic——首跑抓出我方错误预期，mapper 正确）；
+4. `mark_adjacent_merge_and_overlap`——邻接同式并 1 run；交叠四段；
+5. `unsupported_inline_marks_degrade_to_plain`——code/del/u/link →
+   单纯文本 run（文本零损）；
+6. `table_roundtrip_escaped_pipe_and_separator_drop`——分隔行剔除 +
+   `\|` 反转义（`b \| c` → `b | c`）；
+7. `code_block_degrades_to_plain_paragraphs`——两行代码 → 两无样式段；
+8. `quote_list_divider_flatten_in_order`——quote/li×2 嵌套/hr →
+   有序平铺 + 末尾空段；
+9. `multiline_paragraph_splits_with_marks_and_crlf`——多行 marks 平移
+   + `\r\n` 剥离；
+10. `empty_tree_yields_valid_minimal_docx`——空树 → PK 魔数 + 读回
+    0 块。
+
+web e2e（`web/tests/docx_export.py`，第六套，**8/8 PASS**，端口 8935）：
+1. `export_ui_present`——按钮/状态行/`__exportDocx` 面 + 契约 1.1；
+2. `happy_export_valid_zip`——**真实按钮点击**（page.click → Blob
+   下载路径）→ python `zipfile` 验证 PK 魔数/[Content_Types].xml/
+   word/document.xml/testzip + 状态行 `exported:`；
+3. `document_xml_mapping_strings`——document.xml 含标题文本 +
+   `Heading1` + `<w:outlineLvl`（style_probe 先例）；
+4. `table_export_xml`——`<w:tbl>` + 四单元格文本；
+5. `degraded_blocks_survive_export`——code/quote/list×2/divider 全
+   存活 + 状态行 `5 simplified` + **导出前后 `__md()` 逐字不变**
+   （只读性实证）；
+6. `empty_document_minimal_docx`——空文档 → 最小合法 docx + `0 blocks`；
+7. `full_circle_reimport_content`——**导出→`__importDocx`→`__md()`
+   逐字还原**（非降级子集 heading/paragraph/table——降级块型不可
+   全环属映射表登记的诚实边界，测试显式取可表达子集）；
+8. `contract_intact_no_pageerror`——契约面 + 全程 0 pageerror。
+
+### 8.5 门禁表（全部实测，mdcore main de2ecf7 + 本轮工作树）
+
+| 门禁 | 基线 | 实测 | 结论 |
+|---|---|---|---|
+| G1 `cargo test --workspace` | 447/0/1i | **457 / 0 / 1i**（+10 原生） | PASS |
+| PDF default/lopdf/pdfium/dual | 68/79/81+6i/109+6i | 68/79/81+6i/109+6i（零漂移） | PASS |
+| clippy default（--all-targets） | 仅 2 wasm 基线 | 恰 2（static_method_of） | PASS |
+| clippy 3 PDF 面 | 0 | 0/0/0 | PASS |
+| `cargo fmt --all --check` | 0 | 0（新增代码已 fmt） | PASS |
+| scan.sh product | 0 hit-paths | 0 hit-paths | PASS |
+| wasm32 check | pass（2 基线警） | pass（2 基线警） | PASS |
+| web 六套件 contract/smoke/ime/docx_import/xlsx_import/**docx_export** | 18/15/28/9/9/— | 18/15/28/9/9/**8**（全过） | PASS |
+
+依赖与 Cargo.lock：**零 diff**（无新包、无版本变动、无 path 边变化
+——office-io 依赖自 t16 在位）。
+
+wasm 包体（诚实记录，无门禁线）：`web/pkg/mdcore_wasm_bg.wasm`
+2,066,405 → **3,105,817 B**（+1,039,412 = **+50.3%**）；`dist/main.js`
+551,132 → 554,265 B（+3,133）。归因：docx-rs **写面机构**（OOXML
+序列化 + 打包）首次从导出函数可达——t16/t17 的 DocxWriter 调用点
+（夹具构建器）只被 `#[cfg(test)]`/examples 引用，cdylib 导出图内
+死码剥离；**t17「pub fixture builder 保活 rust_xlsxwriter」的归因
+解释据此勘误**（pub 性不改变 wasm-ld gc-sections 可达性判定，t17
+的 +236,916 B 应全部为 calamine 读面）。dist 侧 +3,133 B = t18
+TS 包装面。
+
+### 8.6 开发期发现登记
+
+1. **Vec<u8> wasm 返回面**：wasm-bindgen 0.2.129 原生支持
+   `Result<Vec<u8>, JsValue>`（→ Uint8Array）——与 t16/t17 String/JSON
+   面并列的第三种出入口形态，build-wasm.sh 编译即证；
+2. **blob 构造的 TS 5.9 泛型面**：`new Blob([bytes])` 受
+   Uint8Array<ArrayBufferLike> 泛型化影响——`new Blob([new
+   Uint8Array(bytes)])`（构造器产 Uint8Array<ArrayBuffer>）静态过，
+   拷贝量微（编辑器文档级）；
+3. **Playwright evaluate 传参**：非函数表达式体内无 `arguments`
+   ——`(s) => window.__inject(s)` 箭头形（docx_import.py 的 IMPORT_JS
+   先例即箭头形，直接 evaluate 字符串面新踩）；
+4. **e2e 期望锚**：`__blockCount()` = 先序**全节点**计数（含 quote
+   容器的段落子块）——DEGRADED_MD 6 块 ≠ 顶层块数 5；降级计数同源
+   （`5 simplified` 不计 quote 的段落子块——按块型过滤）。

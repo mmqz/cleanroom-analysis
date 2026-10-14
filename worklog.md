@@ -2401,3 +2401,22 @@ Stage Summary:
 - C1 消费面宣称落地（CAPABILITIES §1 t17 增量）：import .xlsx 端到端真实可用，不宣称面显式登记（numFmt/公式求值/超链接目标/样式图表图片）
 - Office 消费面双子全齐：DOCX 导入（t16）+ XLSX 导入（t17）——容器门/wasm 桥/页面契约/e2e 模式三件套完全同构，维护成本边际递减
 - 剩余缺口：DOCX 导出方向（编辑器→.docx 下载）未做；XLSX 写面 web 消费未做（C2 新建工作簿下载——决策面：是否暴露）；两者均为后续增量候选非阻塞
+
+---
+Task ID: t18
+Agent: 子代理（DOCX 导出切片）
+Task: 编辑器当前文档 → .docx 下载端到端——BlockTree 原生遍历 → office-io DocxWriter 写面 → wasm 字节出口 → web Blob 下载，与 t16 合流成 DOCX 往返闭环
+
+Work Log:
+- Phase A（锚点 scratch-t18-progress.md）：mdcore tree.rs 全 pub 原生遍历（零 JSON hop）；marks = 自由 kind 字符串 + char 偏移（strong/em 规范 + bold 拼写），**模型无链接 URL 载荷**（html.rs 无 `<a>` 面）；表 = 扁平管道行文本；office-io 写面核对：无字体/列表/水平线面 → 降级表逐项登记
+- Phase B：docx_export.rs 新增 ~570 行（纯内核 7 函数 + WasmCore::export_docx 增量方法 Result<Vec<u8>,JsValue> → Uint8Array + 错误码单族 docx_build——映射层全函数降级永不报错）；web export .docx 动作钮 + __exportDocx 契约面 + Blob/a.download + 状态行（simplified 降级计数取 __blocks 现场面）；修 2 处测试期望错（mapper 本身正确）→ 原生 10 测试全过
+- Phase C 门禁全绿：G1 **457/0/1i**（447+10）；PDF default/lopdf/pdfium/dual = 68/79/81+6i/109+6i 零漂移；clippy 恰 2 基线（PDF 三面 0）；fmt 0（新增代码已 fmt）；scan 0 hit-paths；wasm32 过；Cargo.lock 零 diff；**六套件 18/15/28/9/9/8 全过**（t16/t17 零回归实证）
+- wasm 包体诚实登记：2,066,405 → 3,105,817 B（+50.3%）——docx-rs 写面机构（OOXML 序列化+打包）首次从导出函数可达（t16/t17 夹具构建器只被 #[cfg(test)]/examples 引用，cdylib 导出图死码剥离）；**t17「pub fixture builder 保活」归因勘误**；dist/main.js +3,133 B
+- 全环实证（e2e）：真实按钮点击 → 合法 zip（PK/[Content_Types].xml/document.xml/testzip）；导出前后 __md() 逐字不变（只读性）；export → t16 __importDocx → markdown 逐字还原（非降级子集）
+- 文档：docx-r1/REPORT.md §8 Round 4（映射表+降级+测试证据+门禁表+包体归因）+ xlsx-r1/CAPABILITIES.md §2 消费面 t18 增量（导出宣称口径 + 不宣称面）
+
+Stage Summary:
+- mdcore main：de2ecf7 → **9ee7f24**（t18 已推送）；分析仓本轮提交待推
+- DOCX 往返闭环完成：t16 导入（.docx→编辑器）+ t18 导出（编辑器→.docx），双方向真实可用（UI + wasm 面 + e2e 六套件门禁）
+- 降级面诚实登记于 docx_export.rs 模块文档（单一真源随码走）：code/quote/list/divider/行内 code·del·u/link；模型级无源映射（链接 URL）非降级
+- 剩余缺口（后续增量候选，非阻塞）：降级块型的 docx 表达面（需 office-io 写面扩列表面/等宽字体面——t14 登记的逆方向）；页眉页脚/脚注/域/PNG 写面接线（DocxWriter 能力在库、未暴露给本切片）；XLSX 写面 web 消费（t17 登记缺口维持）
