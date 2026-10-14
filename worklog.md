@@ -2352,3 +2352,20 @@ Stage Summary:
 - 遗留：无阻塞。登记边界（非缺陷）：显示保真不宣称；Title/自定义
   样式→段落；图片/页眉页脚/脚注不导入（计数显式化）；MD 结构字符
   开头段落的行级解析解释（结构映射非显示保真）
+
+---
+Task ID: t16-review
+Agent: 主代理（t16 独立审查）
+Task: t16 DOCX→mdc-wasm→web 端到端切片——代码与测试证据独立审查
+
+Work Log:
+- 提交核实：mdcore ddeea4a 已推送与远端一致零漂移（9 文件 +960/−1，仅 mdc-wasm+web）；Cargo.lock 单行 = mdc-office-io 路径依赖注册（零三方包变化，NOTICES v1.5 恒成立）
+- 边界核实：wasm 导出面零 docx-rs/calamine/zip 类型泄漏（grep 实证）；错误面 6 typed 码（门 1/2/3 拒绝与引擎解析错误分立，模块文档映射表在档）；WasmCore 既有面零改动（增量边）
+- 测试亲跑复验：mdc-wasm 原生 11/11（映射逻辑原生可测 + bindgen 壳分离结构）；web docx_import.py 9/9（含敌意垃圾/截断 zip typed 错误面 + 编辑器前后字节一致断言）；web_smoke.py 15/15 pass=true（MD 零回归独立复证）
+- 包体核实：mdcore_wasm_bg.wasm = 1,829,489 B（704,325 起 +159.8%，诚实登记，无尺寸门禁违反）
+- 文档核实：REPORT §7 Round 3 + CAPABILITIES §2.5 消费面宣称 + worklog t16 均在档（分析仓 698976c 已推送）
+
+Stage Summary:
+- t16 审查通过零返工：office-io 首个 wasm/web 消费边落地，端到端真实可用（UI 导入→容器三门→模型→markdown 映射→编辑器核心重建，可编辑可撤销）
+- 全链证据：G1 435/0/1i（+9）· PDF 四面零漂移 · clippy 2 基线 · fmt/scan 0 · wasm32 过 · web 四套件 18/15/28/9 全过
+- 剩余缺口登记在档（图片/页眉页脚/脚注内容不导入仅计数、非 Heading 样式降段、MD 结构字符语义解释、表格内链接目标丢、h7-9 钳 h6）——切片边界诚实，无范围蔓延
