@@ -2286,3 +2286,18 @@ Stage Summary:
 - 子代理执行后审查模式运行 4 任务（t12-a/t12-b/t13/t14）全部审查通过，零返工
 - 开发线阻塞边界到达：遗留①穷尽；②XLSX 样式保真编辑（umya vs 自研 vs 维持读-改-重建）= 需用户裁决；③门 2 受信源跳过 = 维持否决（无基准证据）；④fork 线观察 = 常驻纪律
 - 最终态：mdcore main cbe85c0（G1 426/0/1i + PDF 四面零漂移 + clippy 2 基线 + fmt/scan 0 + wasm32 + web 61/61）；cleanroom-analysis c8fc486→0b21f04→本提交；compliance-baseline 5e144cc（NOTICES v1.5 恒，docx 两轮零新依赖）
+
+---
+Task ID: t16-pre
+Agent: 主代理（t16 裁决记录前置）
+Task: 用户三项裁决落档——①XLSX 维持 C3 读—改—重建（不引入 umya，宏/图表保真限制显式登记）②门 2 维持双读不设跳过 ③t16 立项（DOCX→mdc-wasm→web 端到端切片）
+
+Work Log:
+- 远端核实先行：mdcore main = cbe85c0（与远端一致，工作区干净）；cleanroom-analysis = 0b5b366（一致，干净）——不基于历史报告宣称
+- 裁决①落档（FIDELITY.md）：丢失矩阵补两行——宏（vbaProject.bin）【推断】丢 + 图表（chart 部件）【推断】丢，锚点一手核验：calamine 0.36.1 xlsx/mod.rs:2577 `vba_project()` 为引擎潜在能力、office-io 读路径未调用（API 面不观测）；图表无任何数据 API（仅 lib.rs:254 chartsheet 类型枚举）；§4.3 必然丢失集同步 + §4.6 选项登记改裁决落定
+- 裁决②落档（xlsx-r2 REPORT §7 遗留表）：②③状态更新——维持读—改—重建边界 + 门 2 维持双读验证不增跳过开关
+- 裁决③立项 t16：核实 mdc-wasm 现状（262 行，仅依赖 mdcore/serde_json/wasm-bindgen，纯 MD 边界）+ web 结构（src/main.ts + 三 python 测试件）——office-io 接入为全新消费路径，派发子代理执行
+- 本提交推送
+
+Stage Summary:
+- 三项裁决全部落档推送；t16 派发条件就绪（远端状态核实 + 依赖边界核实 + 消费面空白确认）
