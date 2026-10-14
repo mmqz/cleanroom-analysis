@@ -72,16 +72,42 @@
 
 ### 4. 版本链
 
-- mdcore main：18d5bb2 → **e8c3a13**（Phase 1）
-- mdcore compliance-baseline：ddc51c1 → **048f1bb**（NOTICES v1.4）
-- cleanroom-analysis：80499b4 → 本提交（xlsx-r2 报告 + xlsx-r1 三
-  文档增量）
+- mdcore main：18d5bb2 → **e8c3a13**（Phase 1）→ **042a5e4**（Phase 2）
+- mdcore compliance-baseline：ddc51c1 → **048f1bb**（NOTICES v1.4，
+  Phase 1；Phase 2 零增量）
+- cleanroom-analysis：80499b4 → 本仓提交链（xlsx-r2 报告 + xlsx-r1
+  文档增量 + SECURITY_POLICY v1.1）
 
-### 5. Phase 2/3 登记板
+### 5. Phase 2 — 读面强健化（2026-10-14 完成）
 
-- Phase 2（下一增量）：mal7e 类静默降级 → 默认严格 typed 错误 +
-  显式兼容模式（结构化警告）；门 2 与安全上限**保留不动**（受信源
-  跳过已被否决——无基准证据）。
-- Phase 3（XLSX 稳定后自动开始）：DOCX 小而可用读/写切片（复用
-  ADR-O1 docx-rs 研究结论）；模型级处理与渲染保真分离；不支持的
-  OOXML 特性与数据损失如实登记；不启渲染引擎、不重复生态调研。
+用户指令裁决落地：mal7e 类问题（畸形/无效包部件不得静默变空数据）
+→ 默认严格 typed 错误 + 显式兼容模式（结构化警告）；门 2 双读
+受信源跳过**否决**（无基准证据不得加跳过——安全上限全保留）。
+
+| 项 | 结果 | 锚点 |
+|----|------|------|
+| 门 3 部件良构性 | .xml/.rels 部件流式结构校验（quick-xml 0.41 直依赖——原 calamine 传递，闭包原位零增量零 lock 变化）：标签配对[check_end_names] + 根在位唯一 + EOF 未闭合[截断] + 深度上限 LIMIT_XML_DEPTH=1000[嵌套炸弹——SECURITY_POLICY §2.2.3 挂账闭项] | mdcore 042a5e4 io.rs `verify_pass`/`validate_xml_structure` |
+| 融合单趟 | 门 3 融合在门 2 既有解压趟内（CountingReader 适配器：尺寸计数 + 控制字节扫描）——**零额外解压成本**（双读总数不变，与裁决一致） | 同上 |
+| 默认严格 | `ReadError::InvalidPart{part, detail}` typed reject；`read_book` 签名不变行为收敛 | 同上 |
+| 显式兼容 | `ReadOptions{compat}` + `CompatibilityWarning{part, kind, detail}` 随 `Book.warnings`；兼容只放宽本层验证，引擎行为不变（mal7a 兼容下仍引擎 ParseError）；门 1/门 2/安全上限两模式**恒等** | 同上 |
+| API 兼容 | `verify_actual_sizes` 公开独立面保持（仅尺寸——历史契约不变，独立测试钉定） | io.rs + lib 单测 |
+| 行为收敛 | mal7e OK→REJECT（兼容 Ok+警告+空表）；mal7a ERR→REJECT（兼容 Err[引擎错]）；缺根闭合截断容忍→REJECT（兼容警告+值读回——xlsx-r1 分界在兼容模式完整保持）；mal7c 值面容忍**不变**+恒登记 ControlChars 警告 | corpus_harness 三测试 |
+
+**语料三分归类（Phase 2 后）**：拒绝 5（门 1/2 四件 + 门 3 mal7e）/
+解析错误 5 / 容忍 1（mal7c + 警告面）——严格/兼容双期望表逐位对照
+在档（兼容模式复扫仅门 3 两项变化）。
+
+**门禁（mdcore 042a5e4 实跑）**：G1 **385/385**（379+6）+ lopdf
+79/79 + pdfium 81/81+6i + dual 109/109+6i（PDF 四面零波及）+ clippy
+四面 2 wasm 基线零新 + fmt 0 + scan 0 + wasm32 过。
+
+**文档同步**：SECURITY_POLICY **v1.1**（§2.1 第 5 项门 3 + §2.2.3
+闭项 + §3 两行 + 生效锚）；CAPABILITIES（C1 宣称语 + §3 容忍度
+Phase 2 后口径）；DEPS（quick-xml 直依赖行）。NOTICES **零增量**
+（quick-xml 原在正文 v1.4——传递→直依赖不改变闭包面）。
+
+### 6. Phase 3 登记板（XLSX 稳定后自动开始）
+
+- DOCX 小而可用读/写切片（复用 ADR-O1 docx-rs 研究结论）；模型级
+  处理与渲染保真分离；不支持的 OOXML 特性与数据损失如实登记；
+  不启渲染引擎、不重复生态调研。

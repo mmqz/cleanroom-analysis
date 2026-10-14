@@ -14,6 +14,7 @@
 | calamine | **0.36.1** | MIT | 读 | **仅读取**（值/公式文本/合并/表名四 API 面）；无样式/关系可观测面（FIDELITY.md §4） |
 | rust_xlsxwriter | **0.99.1**（feature: constant_memory） | **MIT OR Apache-2.0**（阶段 B 修正：registry manifest 双许可直读；首版记 MIT。按 MIT 履行，ADR-C1 §1 允许域） | 写（**xlsx-r2 Phase 1 起产品 normal 面**：正式写 API src/write.rs；历史 dev 面 = 测试语料构造） | **仅从零新建**；不宣称已有工作簿编辑往返（FIDELITY.md 定谳）。注：constant_memory 特性激活可选依赖 tempfile 链（NOTICES v1.4 账提升 5 项） |
 | zip | **8.6.0**（对齐后唯一版本，与传递面一致） | **MIT**（阶段 B 修正：manifest 与 LICENSE 文件均单 MIT 直读；首版记 MIT OR Apache-2.0 系上游仓历史版本口径混淆。三链核验在档） | 容器双门 | 门 1 声明值四检查 + 门 2 尺寸诚实性（策略层，见下） |
+| quick-xml | **0.41.0** | MIT | 门 3 部件良构性（xlsx-r2 Phase 2 起升 office-io **直依赖**——原为 calamine 传递依赖，闭包原位零增量零 lock 变化） | 流式结构校验：标签配对 + 根在位唯一 + EOF 未闭合[截断] + 深度上限；仅结构级（GeneralRef 透传不展开——十亿笑声面免疫）；非 DTD/实体验证器 |
 
 **版本并存登记 + 对齐定谳（2026-10-13 实测）**：calamine 0.36.1 与
 rust_xlsxwriter 0.99.1 的传递依赖均为 **zip ^8.6.0**；spike 曾直依赖

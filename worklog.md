@@ -2064,3 +2064,23 @@ Stage Summary:
 - 五项待决裁决全部由用户指令落定：①写面产品化批准（完成）②mal7e 严格模式批准（Phase 2 进行中）③门 2 跳过否决 ④docx 改道模型级切片 ⑤D1-D3 延后
 - 开发发现四件在档：calamine 范围锚定双语义（自洽假通过陷阱）/ rust_xlsxwriter 控制字符 _xHHHH_ 转义一手核验（写面 XML 级免疫）/ constant_memory 静默丢弃（包装层 typed 拦截）/ 字符串落 sharedStrings（断言须全部件扫描）
 - 下一步：Phase 2（mal7e 默认严格 + 兼容模式）→ Phase 3（DOCX 切片），连续执行不阻塞
+
+---
+
+Task ID: t11-b
+Agent: 主代理（xlsx-r2 Phase 2 续作）
+Task: Phase 2 读面强健化——mal7e 类静默降级闭环（默认严格 typed 错误 + 显式兼容模式结构化警告）
+
+Work Log:
+- mdcore 实现（main e8c3a13 → 042a5e4 已推送）：门 3 部件良构性验证——.xml/.rels 部件流式结构校验（quick-xml 0.41 升直依赖，原 calamine 传递闭包原位零增量零 lock 变化），融合在门 2 既有解压趟内（CountingReader：尺寸计数+控制字节扫描[仅 XML 域]）零额外解压成本；校验面 = 标签配对/根在位唯一/EOF 未闭合[截断]/深度上限 1000[SECURITY_POLICY §2.2.3 挂账闭项]
+- API 面：ReadError::InvalidPart{part,detail}（默认严格）；ReadOptions{compat} + CompatibilityWarning 随 Book.warnings（兼容模式）；门 1/门 2/安全上限两模式恒等；门 2 受信源跳过按裁决不设（verify_actual_sizes 文档回写）；verify_actual_sizes 公开独立面契约不变（独立测试钉定）
+- 行为收敛（语料三分归类变化钉定）：mal7e OK→REJECT（兼容 Ok+警告+空表）；mal7a ERR→REJECT（兼容仍引擎 ParseError）；缺根闭合截断容忍→REJECT（兼容保持 xlsx-r1 分界）；mal7c 值面容忍不变+恒登记 ControlChars 警告
+- 测试：lib 25（garbage 严格拒重写 + 多根/空部件/深度边界对测/非 XML 域/独立面 五新）+ harness 3（兼容模式全语料复扫新测试 + 容忍度锚点重钉）
+- 门禁全绿：G1 385/385 + PDF 四面 79/81+6i/109+6i 零波及 + clippy 四面 2 wasm 基线零新 + fmt 0 + scan 0 + wasm32 过
+- 文档：SECURITY_POLICY v1.1（门 3 + §2.2.3 闭项 + §3 两行）；CAPABILITIES（C1 宣称语 + §3 Phase 2 后口径）；DEPS（quick-xml 行）；xlsx-r2 REPORT §5；NOTICES 零增量（quick-xml 原在正文）
+
+Stage Summary:
+- mdcore main：e8c3a13 → 042a5e4（Phase 2 已推送）；分析仓 SECURITY_POLICY v1.0→v1.1
+- mal7e 类问题闭环：畸形/无效 XML 部件（垃圾/截断/多根/空/超深）不再静默变空/部分数据——严格 typed reject + 兼容模式结构化警告双模式钉定
+- 开发教训两件在档：深度计数含 root（边界对测首版 off-by-one）；控制字节扫描须限定 XML 部件域（二进制部件如图片本就是任意字节）
+- 下一步：Phase 3 DOCX 小而可用读/写切片（模型级，复用 ADR-O1 docx-rs 结论）
