@@ -148,3 +148,33 @@ umya-spreadsheet，样式/宏/图表等保真限制在 FIDELITY 显式登记**
 受信源跳过——**已裁决：维持否决，不增跳过开关**（无基准证据，
 安全上限全保留）；④docx-rs 升级时
 fork 线观察项 + 往返测试首跑纪律。
+
+### 8. Round 2.5 / t17 — XLSX web 消费切片（2026-10-14 完成）
+
+t16（DOCX→mdc-wasm→web 端到端）模式的对称展开：XLSX 读面经 wasm
+桥导入 web 编辑器——「import .xlsx」按钮 → 容器三门 → calamine 五面
+→ 表→GFM 表 markdown → 编辑器核心重建（可编辑/可撤销）。**只读消费**
+——XLSX 维持 C3 读—改—重建裁决，本轮不经 wasm 写 xlsx。
+
+| 项 | 结果 | 锚点 |
+|--|--|--|
+| 字节入口 | office-io `read_book_from_bytes(_with_options)` 增量（wasm32 无文件系统；动机 = docx.rs `read_docx_from_bytes` 同款）+ 五面提取抽共享核 `extract_sheets`（路径/字节两入口同一实现，行为单一真源） | io.rs（+39 行，路径面行为不变既有测试全绿） |
+| wasm 模块 | `mdcore-wasm/src/xlsx_import.rs`：纯映射内核 + bindgen 壳；**calamine/zip/rust_xlsxwriter 类型零具名**（单元格经 Data Display 值面渲染——wasm 导出面零引擎类型从结构上保证）；夹具产线单一真源 `build_sample_xlsx`（写面 WorkbookWriter = C2→C1 栈复证） | mdcore main（t17 提交） |
+| 错误码族 | `container_prescan`/`container_corrupt`/`container_invalid_part` + `xlsx_parse`（与 t16 `docx_parse` 同族命名）；**族差异登记**：`container_parse` 不产生——office-io XLSX 读面过门后为单一 `ParseError`（无 docx 式 Container/Parse 二分） | xlsx_import.rs 模块文档错误码表 |
+| 映射规则 | 每表 `## {表名}` + GFM 管道表（首个使用行 = 表头）；单元格 Data Display 值面 + `\|` 转义/换行拍平；**公式格 = 缓存值**（Excel 显示语义——「缓存缺失读回 Float(0.0) 两义性」在档使「有缓存用缓存否则公式文本」不可实现）；合并 = 左上值+空（值矩阵自然编码）；超链接目标丢弃（显示文本保留）；空表 = `(empty sheet)` 注记 | 同上（映射规则节） |
+| 规模上限 | MAX_SHEETS 16 / MAX_ROWS 50 / MAX_COLS 32（使用区前缀）→ `sheets_dropped`/`rows_dropped`/`cols_dropped` stats | 同上 |
+| stats | sheets/tables/empty_sheets/rows/cells/formulas_flattened/merged_ranges/hyperlinks_dropped/三 dropped/warnings[]（12 字段——丢弃面计数显式化） | 同上 |
+| 测试 | 原生 +12（mdcore-wasm 10：写读映射全环精确等值/值面渲染/公式策略/合并/上限三 dropped/空表/错误码四臂/垃圾×3/截断/夹具漂移守卫 + office-io io 2：字节路径等价/字节敌意）；web 第五套 `xlsx_import.py` 9 检查（真实 file input 精确 markdown/块型 heading+table×2+paragraph/stats+状态行/活编辑器/undo/敌意垃圾+截断零触碰/契约完整 0 pageerror） | G1 435→447；web 18/15/28/9/9 |
+| 门禁 | G1 **447/0/1i** + PDF 三面 79/81+6i/109+6i 零漂移 + clippy 四面恰 2 wasm 基线（新代码 1 警修净）+ fmt 0 + scan 0+0 + wasm32 过 + tsc 清洁 + **Cargo.lock 零 diff**（无任何新依赖——office-io 已在图） | mdcore main（t17 提交） |
+| 包体 | wasm 1,829,489 → **2,066,405 B（+236,916 B，+12.95%，实测）**；dist/main.js +3,662 B。归因：calamine xlsx 读机制进入活调用图（t16 docx 路径从未调用——cdylib 死码剔除下不在包内）+ rust_xlsxwriter 经夹具产线 pub 面（t16 docx 写面入包同款先例）。任务书「~unchanged」预期**被实测推翻**，诚实登记（无门禁线） | build-wasm.sh 产物实测 |
+| t16 零回归 | docx_import.py 9/9 亲跑过 + web_smoke 15/15 + contract_gate 18/18 + ime_cdp 28/28（MD 面独立复证） | web/tests/results/ |
+
+**用户故事达成**：web 编辑器「import .xlsx」→ 工作簿真实导入为可编辑
+markdown 文档（每表一节 + GFM 表 + 布尔/数值/公式缓存值/合并/管道转义
+单元格），敌意输入 typed 拒绝且编辑器零触碰——XLSX 读面端到端消费
+切片全绿收口（C1 消费面宣称见 xlsx-r1/CAPABILITIES §1 增量注记）。
+
+**登记边界（非缺陷）**：numFmt 显示形态不宣称（值面：`4.5`/`9`/
+Excel 序列数日期）；公式求值不发生（缓存值即所见）；超链接目标丢弃
+（计数显式）；样式/图表/图片不进入 markdown（C1 面外，FIDELITY 真源）；
+表名换行拍平；使用区含仅格式空格的扩张（Excel 使用区语义）。

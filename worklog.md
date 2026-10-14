@@ -2383,3 +2383,21 @@ Work Log:
 Stage Summary:
 - 第 8 次重置恢复完成度：双仓对齐零漂移 + 工具链在位 + 依赖缓存完好；web 面恢复归入 t17 执行（非独立阻塞）
 - 派发 t17 子代理执行，主代理审查跟进
+
+---
+Task ID: t17
+Agent: 子代理执行（超时切断于 Phase D 前，A/B/C 全部完成）+ 主代理接管收口
+Task: XLSX 读面 web 消费切片——import .xlsx → 字节入口 → calamine 五面 → sheet→GFM 表 markdown → 编辑器（t16 模式对称）
+
+Work Log:
+- [子代理] 第 8 次重置 web 环境恢复：npm install + wasm-bindgen 0.2.129（crate 缓存亦失，static.crates.io 下载 + /tmp 前台可续构建 2m29s）+ build-wasm + dist 构建；基线复证 contract 18/18 + smoke 15/15
+- [子代理] Phase A 决策（锚点在档 scratch-t17）：office-io 字节入口增量（wasm32 无 fs，docx from_bytes 先例）；错误码族与 t16 同构（xlsx_parse 命名 + 单层 ParseError 差异登记）；值面=缓存值 Display 语义（公式文本→formulas_flattened 统计，FIDELITY §1 双歧义依据）；上限 16/50/32 + dropped 计数
+- [子代理] Phase B：io.rs 字节入口 + extract_sheets 共享核（+2 测试）；xlsx_import.rs ~660 行（纯核+壳+夹具单源+10 测试）；web 按钮/__importXlsx 契约；e2e xlsx_import.py 9 检查
+- [子代理] Phase C 全绿：G1 447/0/1i（435+12）+ PDF 三面零漂移 + clippy 仅 2 基线（1 自产新警已修）+ fmt/scan 0 + wasm32 + 五套件 18/15/28/9/9；Cargo.lock 零 diff；wasm 包体实测 +12.95%（死码剥离面转活——t16 docx 路径从不调 calamine xlsx 读机构，诚实归因在档）
+- [主代理] 超时切断后接管：读 scratch 进度核全程证据 → io.rs diff 审查（三门恒等+单一真源）→ 亲跑复验（office-io 78/mdc-wasm 21/四 web 套件 18+15+9+9 全过）→ 泄漏检查（仅模块文档注释提及 calamine，代码面零引用）→ mdcore 提交推送 de2ecf7 → 本 worklog + 文档收口
+
+Stage Summary:
+- mdcore main：ddeea4a → de2ecf7（t17 已推送）；G1 447/0/1i；wasm 2,066,405 B（+12.95% 实测）；dist/main.js +3,662 B
+- C1 消费面宣称落地（CAPABILITIES §1 t17 增量）：import .xlsx 端到端真实可用，不宣称面显式登记（numFmt/公式求值/超链接目标/样式图表图片）
+- Office 消费面双子全齐：DOCX 导入（t16）+ XLSX 导入（t17）——容器门/wasm 桥/页面契约/e2e 模式三件套完全同构，维护成本边际递减
+- 剩余缺口：DOCX 导出方向（编辑器→.docx 下载）未做；XLSX 写面 web 消费未做（C2 新建工作簿下载——决策面：是否暴露）；两者均为后续增量候选非阻塞
