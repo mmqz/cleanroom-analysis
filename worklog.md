@@ -2301,3 +2301,54 @@ Work Log:
 
 Stage Summary:
 - 三项裁决全部落档推送；t16 派发条件就绪（远端状态核实 + 依赖边界核实 + 消费面空白确认）
+
+---
+Task ID: t16
+Agent: subagent (DOCX→mdc-wasm→web 端到端切片)
+Task: office-io 首个消费边落地——.docx 导入 web 编辑器（真调用 + 错误处理 + 测试 + 文档）
+
+Work Log:
+- 前置读取：worklog t14/t15/t16-pre + t12-b；office-io docx.rs 模块文档
+  与模型（docx.rs:1282-1469 读面五类型 + 读 API + DocxError）；
+  mdcore-wasm lib.rs（262 行 + parse_source_str 纯函数先例）；
+  web/main.ts（boot/窗口面/__inject→installNewCore 重建契约）；
+  contract_gate.py（harness 范式 + boot_surface 加性安全面）；
+  REUSE.md（§0「经 wasm 桥」消费路径在册 + §5 无禁边条款——
+  三域纪律新边仅 mdcore-wasm→office-io，裁决兼容）
+- Phase A 裁决：切片 (A) 导入（复用硬化读面 + 既有 ingestion，弃 (B)
+  导出）；markdown.rs:152-169 证实 GFM 表受支持（表映射不降级）；
+  可行性探针先行——wasm32 check 一次过（calamine/rust_xlsxwriter/
+  docx-rs/zip/quick-xml 全 wasm32 可编译）+ Cargo.lock 行为实证
+- mdcore 实现（main cbe85c0 → ddeea4a）：docx_import.rs 新模块
+  （自由函数 import_docx：兼容模式读 + 纯映射内核 7 函数 + typed
+  ImportError 六错误码 + stats 摘要；build_sample_docx 夹具产线
+  单一真源）+ examples/gen_docx_fixture.rs + 提交夹具 26625B +
+  web 工具条 UI + main.ts __importDocx（成功经 __inject 重建核，
+  敌意/失败 typed 码入状态行编辑器零触碰）
+- 测试：原生 +9（mdcore-wasm 2→11：全环精确等值/标题钳位/run 合并/
+  链接四变体/表清洗补齐/跳过计数/垃圾×3+截断 typed 拒/夹具漂移
+  守卫）；新 web 第四套 docx_import.py 9 检查（真实 file input 路径
+  精确 markdown/块型/stats+状态行/活编辑器编辑块数+1/undo 契约/
+  垃圾+截断零触碰/契约完整 0 pageerror）
+- 门禁全绿：G1 426→435/0/1i；PDF 三面 79/81+6i/109+6i 零漂移；
+  clippy 恰 2 wasm 基线；fmt 0；scan 0+0；wasm32 过；web
+  18/15/28/9；tsc --noEmit 清洁
+- Cargo.lock 恰一行 diff（mdcore-wasm 条目 +mdc-office-io——工作区
+  内部 path 边机械登记；零新三方包/零版本变动）→ NOTICES v1.5
+  不动（无合规基线提交）；任务书「零 diff」字面预期对任何新 path
+  依赖不可达，最小必然 diff 如实登记
+- wasm 包体：704,325→1,829,489 B（+159.8%）；dist/main.js
+  +3,490 B——诚实记录（无门禁线）
+- 分析仓：docx-r1/REPORT.md 新 §7（Round 3：裁决/落地面/映射规则
+  与不导入面/测试证据/门禁表/开发期发现四件）；xlsx-r1/
+  CAPABILITIES §2.5 消费面宣称（实测口径校准 + 不宣称面）
+
+Stage Summary:
+- 用户故事达成：web 编辑器「import .docx」按钮 → .docx 真实导入为
+  可编辑 markdown 文档（标题/强调/链接/GFM 表），敌意输入 typed
+  拒绝且编辑器零触碰——office 首个端到端消费切片全绿收口
+- mdcore main cbe85c0→ddeea4a（9 文件 +960/−1：mdcore-wasm 4 新/改
+  + web 4 新/改 + Cargo.lock 1 行）；MD/PDF/office-io 源零触碰
+- 遗留：无阻塞。登记边界（非缺陷）：显示保真不宣称；Title/自定义
+  样式→段落；图片/页眉页脚/脚注不导入（计数显式化）；MD 结构字符
+  开头段落的行级解析解释（结构映射非显示保真）

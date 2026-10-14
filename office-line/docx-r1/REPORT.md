@@ -232,3 +232,150 @@ EMU 换算）+ [Content_Types].xml 四项（查表优先级/词汇表/缺属性+
    验证同语义；
 4. 引擎读面三个图片静默怪癖（非 PNG 丢弃/悬空跳过/仅 document
    rels）——自有清单面绕开，登记在档。
+
+## 7. Round 3（t16，2026-10-17——web 端到端消费切片：office-io 首个 wasm/web 消费边）
+
+任务：DOCX 能力 → mdcore-wasm 导出面 → web 编辑器端到端集成——最小
+真实可用切片（真调用 + 错误处理 + 测试 + 文档），非接口包装。
+
+### 7.1 Phase A 裁决（切片选型 + 证据锚点）
+
+- **选型 (A) DOCX 导入进编辑器**（备选 (B) 编辑器→DOCX 导出否决）：
+  复用已硬化的读路径（容器三门敌意输入防线 + 兼容/严格双模式）+ 既有
+  ingestion（`WasmCore::from_markdown` / web 宿主注入契约
+  `window.__inject`→`installNewCore` 全量重建，main.ts:1388-1431），
+  真实价值/表面积比最优；写面（B）需 MD→结构解析面，表面积更大。
+- 证据锚点：mdcore `markdown.rs:152-169`（`|` 起始连续行合并单 Table
+  块——**GFM 表受支持**，故 DOCX 表可映射 GFM 管道表而非降级文本）；
+  `html.rs:1381` canonical_table_text（表头行 + `---` 分隔行 + 体行
+  ——与导入映射同形）；lib.rs 纯函数先例 `parse_source_str`
+  （JsValue 非 wasm 目标构造即 panic → 映射内核须纯原生可测）；
+  REUSE.md §0「在 MD 文档域内消费……Rust 直调或**经 wasm 桥**」+
+  §5 消费契约注记——**无禁止 mdcore-wasm→office-io 条款，三域
+  纪律新边仅此一条（消费方依赖）**，裁决 = 兼容。可行性探针先行：
+  wasm32 check + Cargo.lock 行为（下）。
+
+### 7.2 落地面（mdcore）
+
+- `crates/mdcore-wasm/Cargo.toml`：+`mdc-office-io = { path = "../office-io" }`
+  （注释注明三域纪律唯一新边）；
+- `crates/mdcore-wasm/src/docx_import.rs`（新增，模块文档 = 面/错误
+  码表/映射规则/不导入面/已知边界的唯一真源随码走）：
+  - 暴露面 = **自由函数** `import_docx(bytes: &[u8]) -> Result<String,
+    JsValue>`（不碰 WasmCore 状态——既有类面零变化，加性暴露）；
+    成功 JSON `{"markdown", "stats"}`；失败抛 JSON
+    `{"code", "message"}`（typed 错误码，宿主 `JSON.parse(e)`）；
+  - 错误码表（容器门拒 ≠ 引擎解析错误）：`container_prescan` /
+    `container_corrupt` / `container_parse` / `container_invalid_part`
+    / `docx_parse` / `io`；
+  - 读模式 = **兼容**（可恢复畸形部件降级警告随 stats 返回；门 1/2
+    与全部安全上限两模式恒等——敌意输入仍 typed 拒绝）；
+  - 映射内核纯原生可测（`import_docx_core` 等 7 个纯函数零 JsValue）；
+  - `#[doc(hidden)] pub build_sample_docx()`：夹具产线单一真源
+    （office-io DocxWriter，examples/gen_docx_fixture.rs 生成
+    web/tests/fixtures/import_sample.docx——提交入库 + 原生漂移
+    守卫测试锁期望 markdown）。
+- `web/index.html`（工具条：`import .docx` 文件入口 + `#docx-status`
+  状态行）；`web/src/main.ts`（`docxImport` 薄包装：JSON 出入口 +
+  异常→typed 结果；`__importDocx`/`__lastDocxImport` window 面；
+  成功经既有 `__inject` 契约重建核，失败 = 状态行 typed 码 + 编辑器
+  现状零触碰；`tsc --noEmit` 清洁）。
+
+### 7.3 映射规则与不导入面（诚实边界——完整版 = docx_import.rs 模块文档）
+
+- 标题：`Heading1`..`Heading9` → `#`×级（**7-9 钳 6**，MD 上限 h6）；
+  Title/Subtitle/自定义样式 → 普通段落（模型级样式语义边界）；
+- run：加粗 `**` / 斜体 `*`（标记只裹非空白核）；超链接
+  `[text](target)`（URL 空/空白/`)`/`<>` → `<...>` 角括号形；锚点
+  `#anchor`；Unresolved → 降级纯文本（BrokenReference 警告随
+  stats）；**相邻同格式 run 合并**（`*a*`+`*b*` 直连 = CommonMark
+  歧义串 `*a**b*`）；
+- 表 → GFM 管道表（表头 + `---` 分隔行 + 体行；单元格 `|`→`\|`、
+  `\n`/`\r`→空格、短行补齐；空表跳过）；
+- 不导入面（计数进 stats）：图片（body_uses>0 资产；孤儿媒体不计）、
+  页眉/页脚（实际挂接槽位数）、脚注（引擎读面受限登记原样继承）；
+- 已知边界：段落文本以 MD 结构字符开头会被行级解析解释为对应块型
+  （导入 = 结构映射非显示保真）；软换行（w:br）段落原样多行（mdcore
+  行级建块拆多块）；内联转义字符不转义（mdcore 无内联转义层）；
+  表格单元格内超链接目标随扁平文本丢弃（TableData 平面）。
+
+### 7.4 测试证据（原生 9 + web e2e 9）
+
+原生（mdcore-wasm，`cargo test --workspace` 计入；crate 2→11 测试）：
+1. `writer_roundtrip_import_maps_structure`——写→读→映射全环**精确
+   markdown 等值**（含 GFM 分隔行）+ 全 stats 字段；
+2. `heading_styles_map_with_clamp`——Heading1/3/9 + Title/Normal/无样式；
+3. `adjacent_same_format_runs_merge`——合并 + 纯空白 run 无标记直出；
+4. `link_variants_render`——External 角括号/Anchor `#`/Unresolved 降级
+   + hyperlinks 计数；
+5. `table_cell_sanitization_and_padding`——`\|` 转义/换行→空格/短行
+   补齐/空表跳过；
+6. `skip_counts_cover_headers_footers_images`——孤儿媒体排除 +
+   broken_reference kind 映射；
+7. `garbage_bytes_typed_container_error`——空/垃圾/非 zip 三载荷
+   → `container_corrupt`；
+8. `truncated_docx_typed_container_error`——真档案半截 →
+   `container_corrupt`；
+9. `web_e2e_fixture_imports_expected_markdown`——入库夹具漂移守卫
+   （含再生成指引）。
+
+web e2e（`web/tests/docx_import.py`，新增第四套，9/9 PASS，端口
+8933，夹具 26625 B）：
+1. `import_ui_present`——UI 在场 + 契约面不变（启动零回归）；
+2. `happy_import_file_input_exact_markdown`——**真实 file input 路径**
+   （Playwright set_input_files → 原生 change → arrayBuffer → wasm →
+   `__inject` 重建）→ 编辑器 markdown **精确等值**（核心树规范形：
+   空行 ingestion 时跳过，块间单 `\n`——首跑即抓住我方错误预期，
+   修正测试后过）；
+3. `import_block_types`——`[heading, paragraph, table]`（块型级）；
+4. `import_stats_and_status_line`——typed 摘要 + 不导入面计数状态行
+   （`1 table`/`image skipped`）；
+5. `imported_doc_is_live_editor`——导入文档派发编辑事务 → 块数 3→4
+   （**真活文档**，全桥 op/sync/事件管道，非静态 dump）；
+6. `undo_works_after_import`——undo 键位契约在导入文档上成立；
+7. `hostile_garbage_typed_error`——垃圾字节 → `container_corrupt`
+   typed 码入状态行 + **编辑器现状零触碰**；
+8. `truncated_zip_typed_error`——截断档案同 typed 面 + `__ready`
+   仍真；
+9. `contract_intact_no_pageerror`——契约版本/inject 面在 + 全程
+   **0 pageerror**。
+
+### 7.5 门禁表（全部实测，mdcore main cbe85c0 + 本轮工作树）
+
+| 门禁 | 基线 | 实测 | 结论 |
+|---|---|---|---|
+| G1 `cargo test --workspace` | 426/0/1i | **435 / 0 / 1i**（+9 原生） | PASS |
+| PDF lopdf / pdfium / dual | 79 / 81+6i / 109+6i | 79 / 81+6i / 109+6i（零漂移） | PASS |
+| clippy default（--all-targets） | 仅 2 wasm 基线 | 恰 2（static_method_of，行号随 lib.rs 增补位移——计数口径不变） | PASS |
+| clippy 3 PDF 面 | 0 | 0/0/0 | PASS |
+| `cargo fmt --all -- --check` | 0 diff | 0 diff（新增代码已 fmt） | PASS |
+| scan product / --all | 0 / 0 | 0 / 0 | PASS |
+| wasm32 check（workspace） | pass | pass（calamine/rust_xlsxwriter/docx-rs/zip/quick-xml 全 wasm32 可编译——探针先行证实） | PASS |
+| web contract / smoke / ime / **docx** | 18 / 15 / 28 / — | 18 / 15 / 28 / **9**（全过 0 failed） | PASS |
+
+依赖与 Cargo.lock：**零三方增量**（无新包、零版本变动）→ NOTICES
+v1.5 不动（无合规基线提交）。**诚实登记**：Cargo.lock 恰一行 diff——
+mdcore-wasm 包条目 dependencies 增 `"mdc-office-io"`（工作区内部
+path 边在 lock 的机械登记；任务书「零 diff」预期对任何新 path 依赖
+不可达——这是最小必然 diff，非供应链变更）。
+
+wasm 包体（诚实记录，无门禁线）：`web/pkg/mdcore_wasm_bg.wasm`
+704,325 → **1,829,489 B**（+1,125,164 = **+159.8%**——docx-rs + zip
++ quick-xml 经 office-io 进 cdylib 图）；`dist/main.js` 543,980 →
+547,470 B（+3,490——t16 TS 面增量）。
+
+### 7.6 开发期发现登记
+
+1. **mdcore 树规范形与导入分隔**：导入串 `\n\n` 块分隔只是宿主可读
+   性面——核心 ingestion 跳过空行、`to_markdown()` 按行 join，编辑器
+   canonical 形 = 块间单 `\n`。e2e 断言应锁**规范形**而非导入串原样
+   （首跑错误预期即此发现）；
+2. wasm32 图谱先验疑虑（calamine/rust_xlsxwriter 是否 wasm32 可编
+   译）被探针一次证伪——**加依赖前先跑最小 check 探针**，免实现后
+   返工；
+3. 隐藏 `input[type=file]` + `Playwright set_input_files` 驱动真实
+   change 路径（可见性非 set_input_files 前提）——e2e 走真 UI 通道
+   而非仅 window 函数通道；
+4. 夹具产线单一真源（`build_sample_docx` 一份代码：example 写盘 +
+   原生测试在程 + 漂移守卫读盘三消费）——避免 example/测试/夹具
+   三处漂移；漂移守卫报错内嵌再生成命令行。

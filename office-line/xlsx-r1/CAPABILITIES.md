@@ -150,7 +150,20 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      共享警告类别——XLSX 面无使用点；
      docx-r2 变化：图片媒体面**闭项**[块序内图片位置仍登记]、
      first/even 写面**闭项**；脚注/域读面与其余域/图片自动转码
-     维持登记——全链见 docx-r1/REPORT.md §6 + FIDELITY §7.1）。
+     维持登记——全链见 docx-r1/REPORT.md §6 + FIDELITY §7.1）；
+   - **消费面（t16，2026-10-17——office-io 首个 wasm/web 消费边）**：
+     **web 编辑器 .docx 导入已落地**（mdcore `crates/mdcore-wasm/src/
+     docx_import.rs` + web 工具条 UI + `web/tests/docx_import.py`）。
+     实测宣称口径：.docx 字节 → 容器三门兼容模式读 → DocxDocument →
+     markdown（标题 Heading1-9[7-9 钳 6] / 加粗 / 斜体 / 超链接四变体
+     [Unresolved 降级] / GFM 管道表）→ 既有 `__inject` 重建核 →
+     可编辑活文档（e2e 实证：导入后派发编辑事务块数 +1、undo 键位
+     契约成立）；敌意/截断档案 typed 拒绝（`container_*` 错误码面）
+     且编辑器现状零触碰（e2e 实证）。不导入面计数显式化（图片/
+     页眉页脚/脚注 → stats）——映射规则与已知边界唯一真源 =
+     docx_import.rs 模块文档（docx-r1/REPORT.md §7）。**不宣称**：
+     显示保真（结构映射非渲染语义）、样式语义解释（Title/自定义
+     样式 → 普通段落）、图片/脚注/页眉页脚内容导入。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 
