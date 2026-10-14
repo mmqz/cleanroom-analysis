@@ -2437,3 +2437,23 @@ Stage Summary:
 - t18 审查通过零返工：DOCX 往返闭环完成（t16 导入 + t18 导出，全圆环 e2e 字节精确互证）
 - 消费面三部曲齐：DOCX 导入/导出 + XLSX 导入（G1 457/0/1i，六 web 套件 18/15/28/9/9/8 全绿）
 - 上游缺口定位三件（均非本层可解）：MarkSpan 无 URL payload（链接导出被模型卡死）/ office-io 写面缺 list·monospace·hr·quote 面（降级根因）/ XLSX 写面 web 消费未接线
+
+---
+Task ID: t19
+Agent: 子代理（XLSX 导出切片）
+Task: 编辑器当前文档 → .xlsx 下载端到端——BlockTree 原生遍历 → office-io WorkbookWriter 写面 → wasm 字节出口 → web Blob 下载，与 t17 合流成 XLSX 往返闭环（office 消费三部曲收口）
+
+Work Log:
+- Phase A（锚点 scratch-t19-progress.md）：write.rs 精确 API + typed 验证面（表名全规则/MAX_ROW/MAX_COL）；t18 docx_export.rs 结构模板 + GFM 管道语义三函数；t17 import_xlsx_core（原生全环对面）；main.ts/index.html t18 接线面。映射决策：Table→每表一独立 sheet（全 Text 类型不推断——前导零/日期式字符串不失真 + t17 Display 逐字等值）；非表线性块→前置 Document 表（heading 加粗/level 丢/marks 降级）；空文档→单空表 Sheet1；表名 = 表头 A1 清洗派生（非法字符剥除/截 31/History 回退/冲突后缀去重）
+- Phase B：xlsx_export.rs 新增 ~590L（纯内核 8 函数 + WasmCore::export_xlsx 增量方法 + 错误码单族 xlsx_build——映射全函数降级永不报错）；docx_export.rs 两函数 pub(crate) 共享（GFM 单一真源）；web export .xlsx 钮 + __exportXlsx/__lastXlsxExport（t18 约定镜像）+ 状态行 N sheets；原生 +12 首跑 11/12（wide_row 测试数据自身错修正后 43/43）
+- **wasm32 运行时崩溃面两项一手发现**（e2e 首跑 wasm trap "unreachable"——wasm32 check 编译期不可见，t16 可行性探针盲区勘误）：①SystemTime::now（rust_xlsxwriter DocProperties 默认时间戳链）→ 引擎 wasm 特性（js_sys::Date；原生 cfg 恒 SystemTime 零变化）；②constant_memory 使 Worksheet::new 对每表（含非流式）急切 tempfile_in(temp_dir()) → "no filesystem" → 依赖边目标分裂 + office-io add_sheet_streaming #[cfg(not(wasm32))] 条件化（流式面 = 引擎 tempfile 结构性质；诊断 = 临时 panic hook 读真实消息后移除）
+- Phase C 门禁全绿：G1 **469/0/1i**（457+12）；PDF 四面 68/79/81+6i/109+6i 零漂移；clippy 恰 2 基线（PDF 三面 0）；fmt 0；scan 0+0；wasm32 双面过；Cargo.lock 恰 +2 行（rust_xlsxwriter deps +js-sys +wasm-bindgen，两包均已在 lock——零新包零版本变动，wasm32 崩溃修复无 API 旁路的最小必然 diff，t16 先例登记）；**八套件 18/15/28/9/9/8/9 全绿**（t16/t17/t18 零回归亲证，终版 dist 复跑）
+- 全环实证（双证）：原生 export_xlsx_core → t17 import_xlsx_core → markdown 逐字等值（表 + Document 表两形态）；e2e 真实按钮 → 合法 zip → __importXlsx → 规范形 markdown 逐字（三部曲合拢）
+- 包体与归因勘误：wasm 3,105,817 → 3,950,549 B（+844,732，+27.2%）——rust_xlsxwriter 写面机构首次从导出函数可达，**t17「pub fixture builder 保活 rust_xlsxwriter」归因勘误成立**（非 wasm 导出面 → cdylib 死码剥离；t18 docx-rs 同款勘误的 XLSX 对偶）；dist/main.js +2,991 B
+- 文档：xlsx-r2/REPORT.md §9 Round 3（映射表/wasm32 崩溃面/Cargo.lock 边界/测试/门禁/归因勘误）+ xlsx-r1/CAPABILITIES.md 消费面 t19 增量（宣称口径 + 不宣称面）
+
+Stage Summary:
+- mdcore main：9ee7f24 → **7705b44**（t19 已推送，9 文件 +1038/−4）；G1 469/0/1i；八 web 套件全绿
+- office 消费四切片全部收口：DOCX 导入（t16）/ XLSX 导入（t17）/ DOCX 导出（t18）/ XLSX 导出（t19）——双格式双方向端到端真实可用，XLSX/DOCX 各自成往返闭环
+- 开发期教训两件：①「wasm32 check 编译过」不证运行——运行时崩溃面（SystemTime/tempfile）只有真实 e2e 可暴露，可行性探针须如实分级；②引擎 feature 与目标双轴 cfg（feature"wasm" AND target"wasm32"）使特性启用对原生零行为影响——依赖边目标分裂是最小诚实修复
+- 剩余缺口（后续增量候选，非阻塞）：XLSX 数值/布尔类型面（全 Text 决策的逆方向——需单元格类型推断策略裁决）；单元格富文本（rust_xlsxwriter 富文本 API 不在 office-io 包装面）；t17 导入规模上限（16/50/32）与 t19 导出无上限的不对称（导入面边界）

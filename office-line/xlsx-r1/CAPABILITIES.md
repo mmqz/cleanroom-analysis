@@ -195,6 +195,34 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      t16 `__importDocx` → markdown 逐字还原（非降级子集）。**不
      宣称**：渲染保真、等宽/列表/水平线结构、页眉页脚/脚注/域/
      PNG 写面接线（DocxWriter 能力中未暴露给本切片）。
+   - **消费面（t19，2026-10-14——XLSX 导出方向，与 t17 合流 = XLSX
+     往返闭环；office 消费三部曲 t16/t17/t18/t19 收口）**：**web
+     编辑器 .xlsx 导出已落地**（mdcore `crates/mdcore-wasm/src/
+     xlsx_export.rs` + web 工具条动作钮 + `web/tests/xlsx_export.py`）。
+     实测宣称口径：编辑器当前文档（BlockTree 原生遍历，零 JSON hop）
+     → office-io `WorkbookWriter` 栅格映射 → zip 字节 → Blob/
+     a.download 下载（`WasmCore::export_xlsx` 增量方法 → Uint8Array；
+     错误码单族 `xlsx_build` = 引擎写/打包，映射层全函数降级永不
+     报错）。**栅格映射**（XLSX = 栅格，线性文档映射固有有损——
+     显式定界）：GFM 表块**每表一独立 sheet**（文档序；表名 = 表头
+     A1 清洗派生——非法字符剥除/截 31 chars/保留名 History 回退
+     `Table {n}`/精确冲突后缀去重；全部格 **Text 类型不推断**——
+     前导零/日期式字符串不失真且 t17 读回 Display 逐字等值 = 全环
+     断言基础）；非表线性块平铺**前置 Document 表**（每文本行一行、
+     heading 加粗行[style_probe 验证面]、level 丢、marks 全降级纯
+     文本、divider = 空行）；空文档 = 单空表 `Sheet1` 最小合法工作簿。
+     **降级面显式登记**（xlsx_export.rs 模块文档映射表 + 命名策略
+     节，单一真源随码走）。e2e 实证：真实按钮点击出合法 zip
+     （[Content_Types].xml + xl/workbook.xml + worksheets/sheet1.xml
+     + testzip）、workbook.xml 表名策略证据、sharedStrings 容器级
+     all-Text 证据 + styles.xml `<b/>` 加粗证据、降级块（code/quote/
+     list/divider）不破导出且编辑器 `__md()` 逐字不变（只读性）、
+     **全环 export → t17 `__importXlsx` → 规范形 markdown 逐字等值**
+     （表数据面 GFM 逐格还原——三部曲合拢）。**不宣称**：数值/布尔
+     类型语义（全 Text——Excel 侧求值/排序按文本）、单元格富文本
+     （marks 降级）、numFmt/样式面（除 heading 加粗）、流式面
+     （wasm32 结构性缺席——引擎 tempfile 背书，write.rs 模块文档
+     登记）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 

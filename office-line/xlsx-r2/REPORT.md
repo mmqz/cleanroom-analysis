@@ -178,3 +178,36 @@ markdown 文档（每表一节 + GFM 表 + 布尔/数值/公式缓存值/合并/
 Excel 序列数日期）；公式求值不发生（缓存值即所见）；超链接目标丢弃
 （计数显式）；样式/图表/图片不进入 markdown（C1 面外，FIDELITY 真源）；
 表名换行拍平；使用区含仅格式空格的扩张（Excel 使用区语义）。
+### 9. Round 3 / t19 — XLSX 导出切片（2026-10-14 完成）
+
+t18（DOCX 导出）模式的对称展开：编辑器当前文档 → office-io 写面
+（`WorkbookWriter` 新建工作簿）经 wasm 桥 → `.xlsx` 字节下载。与
+t17（XLSX 导入）合流 = **XLSX 往返闭环**，office 消费四切片
+（t16/t17/t18/t19）全部收口。表数据面全环 = export → t17
+`import_xlsx` → GFM 逐格等值（e2e + 原生双证）。
+
+| 项 | 结果 | 锚点 |
+|--|--|--|
+| wasm 模块 | `mdcore-wasm/src/xlsx_export.rs`（~590L）：模块文档（栅格映射表/sheet 命名策略/错误码表/已知边界——单一真源随码走）+ 纯内核（sanitize_sheet_name/unique_sheet_name/table_sheet_name/collect_text_rows/collect_tables/write_document_sheet/write_table_sheet/export_xlsx_core）+ `WasmCore::export_xlsx` 增量方法（t18 `export_docx` 同款壳）；GFM 管道语义与 t18 单一真源共享（docx_export.rs `text_lines`/`table_rows` pub(crate) 化，零行为变化） | mdcore main（t19 提交） |
+| 栅格映射 | **Table → 每表一独立 sheet**（文档序；分隔行剔除 + `\|` 反转义 + 单元格换行拍平[共享 GFM 语义]；**全部格 Text 类型不推断**——前导零/日期式字符串不失真 + t17 读回 Display 逐字等值；ragged 行无补齐；空文本格不落格；0 行表跳过[防御]；行 2^20/列 2^14 防御截断）；**非表块 → 前置 Document 表**（heading 加粗行[CellStyle.bold = style_probe 验证面]、level 丢；paragraph/code 逐字行；quote 容器丢子块平铺；list marker/depth 丢；divider = 空行）；**空文档 → 单空表 Sheet1**（Excel 工作簿至少一表） | xlsx_export.rs 模块文档映射表 |
+| sheet 命名策略 | 表名 = 表头 A1 清洗（`\n\r\t`→空格、剥 `[]:*?/\`、trim 空白+单引号、截 31 chars、重 trim）→ 空/`History`（忽略大小写）→ 回退 `Table {n}`；精确冲突 → ` 2`/` 3` 后缀去重（基底重截保 ≤31）；与 `Document` 冲突同规则（文本块先占位）；清洗保证恒过 write.rs typed 表名验证（InvalidInput 构造不可达） | 同上（命名策略节） |
+| 错误码 | 单族 `xlsx_build`（WriteError 完备映射；Engine = save_to_vec 打包失败唯一现实路径）——t18 `docx_build` 同构；映射层全函数：降级永不报错 | 同上（错误码表） |
+| web 面 | `export .xlsx` 动作钮 + `__exportXlsx`/`__lastXlsxExport` 契约（t18 约定镜像：not_ready 兜底 + JSON 错误面 + Blob/a.download `document.xlsx`）；状态行 `exported: X KB · N sheets`（N = `__blocks` 块型近似——wasm 命名策略的显示面） | web/index.html + web/src/main.ts t19 块 |
+| **wasm32 运行时崩溃面（两项一手发现）** | ①`Workbook::new()`→`DocProperties::new()`→`utc_now()`→`SystemTime::now()`（rust_xlsxwriter workbook.rs:419/properties.rs:376/datetime.rs:1308）——wasm32 无时间系统运行时 panic（wasm trap "unreachable"）；修复 = 引擎 `wasm` 特性（`js_sys::Date::now()`，cfg = feature"wasm" AND target"wasm32" → 原生行为零变化）。②修复①后仍 panic "no filesystem on this platform"（std sys/paths/unsupported.rs:52）：`constant_memory` 特性使 `Worksheet::new()`（worksheet.rs:1742）对**每张表（含非流式普通表）**急切 `tempfile_in(temp_dir())`——wasm32 无文件系统；修复 = rust_xlsxwriter 依赖边**目标分裂**（非 wasm32: constant_memory+wasm / wasm32: 仅 wasm）+ office-io `add_sheet_streaming` `#[cfg(not(wasm32))]` 条件化（流式面 = 引擎 tempfile 结构性质，wasm32 缺席而非降级——3 个流式测试同 cfg 门）。诊断 = 临时 panic hook（console.error）读取真实 panic 消息后移除 | office-io Cargo.toml t19 注记 + write.rs 模块文档 + mdcore t19 提交 |
+| Cargo.lock | 恰 +2 行（rust_xlsxwriter 条目 dependencies 数组 +js-sys +wasm-bindgen）；**两包均已在 lock**（chrono/console_error_panic_hook 等既有边）——零新包、零版本变动。任务书「零 diff」字面预期对 wasm32 运行时崩溃修复不可达（无 API 旁路：`set_properties` 替换发生在 `Workbook::new()` panic 之后），最小必然 diff 如实登记（t16 path 边先例） | git diff Cargo.lock |
+| 测试 | 原生 +12（mdcore-wasm 43/43：表→栅格精确/命名策略全分支[长名截断/非法字符/去重/History/空表头/Document 冲突]/线性块 Document 表序/code 逐字/all-Text 类型判别[cell_debug `Some(String("4.5"))`/前导零 `007` 零损]/管道转义格/ragged 无补齐/空树最小工作簿/纯表无 Document/16386 宽行防御截断/**t17 全环×2**[表逐字等值 + Document 表 GFM 等值]）；web 第七套 `xlsx_export.py` 9 检查（port 8936：UI/真实按钮+valid zip/workbook.xml 表名/sharedStrings all-Text 容器证据+styles `<b/>`/降级块+只读/空文档/全环 `__importXlsx` 规范形逐字/契约零页错） | G1 457→**469**；web 八套件 |
+| 门禁 | G1 **469/0/1i** + PDF 四面 68/79/81+6i/109+6i 零漂移 + clippy 四面恰 2 wasm 基线（PDF 三面 0）+ fmt 0 + scan 0+0 + wasm32 过（mdcore-wasm + office-io 双面）+ tsc 清洁 + **八套件 18/15/28/9/9/8/9 全绿**（t16/t17/t18 零回归亲证——终版 dist 复跑） | mdcore main（t19 提交） |
+| 包体与归因勘误 | wasm 3,105,817 → **3,950,549 B（+844,732 B，+27.2%）**；dist/main.js 554,265 → 557,256（+2,991 B）。归因：rust_xlsxwriter 写面机构（OOXML 序列化 + zip 打包 + styles/theme/sharedStrings 机构）**首次从 export_xlsx 可达**——**t17「pub fixture builder 保活 rust_xlsxwriter」归因勘误成立**：`build_sample_xlsx` 为 `#[doc(hidden)]` pub 非 wasm 导出面 → cdylib 导出图死码剥离（t18 对 docx-rs 同款勘误的 XLSX 对偶；本轮实测再证） | build-wasm.sh 产物实测 |
+
+**用户故事达成**：web 编辑器「export .xlsx」→ 当前文档真实导出为
+`.xlsx` 下载（表块 → 逐表栅格 + 线性块 → Document 表平铺），导出
+只读（编辑器零触碰），全环 re-import 表数据 GFM 逐格还原——XLSX
+往返闭环与 office 消费四切片（t16/t17/t18/t19）全部收口。
+
+**登记边界（非缺陷）**：数值/布尔类型语义不宣称（全 Text——Excel
+侧求值/排序按文本；文本零损与类型语义二选一，取文本零损）；单元格
+富文本不宣称（marks 全降级纯文本——rust_xlsxwriter 富文本 API 不在
+office-io 包装面，未实测不宣称）；heading 加粗为唯一样式面（level
+不可分辨）；流式表 wasm32 结构性缺席（引擎 tempfile 背书——API
+条件化，非降级）；t17 导入侧规模上限（16 表/50 行/32 列）是导入面
+边界，不在导出面（导出无上限截断除 2^20/2^14 物理边界）。
