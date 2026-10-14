@@ -2420,3 +2420,20 @@ Stage Summary:
 - DOCX 往返闭环完成：t16 导入（.docx→编辑器）+ t18 导出（编辑器→.docx），双方向真实可用（UI + wasm 面 + e2e 六套件门禁）
 - 降级面诚实登记于 docx_export.rs 模块文档（单一真源随码走）：code/quote/list/divider/行内 code·del·u/link；模型级无源映射（链接 URL）非降级
 - 剩余缺口（后续增量候选，非阻塞）：降级块型的 docx 表达面（需 office-io 写面扩列表面/等宽字体面——t14 登记的逆方向）；页眉页脚/脚注/域/PNG 写面接线（DocxWriter 能力在库、未暴露给本切片）；XLSX 写面 web 消费（t17 登记缺口维持）
+
+---
+Task ID: t18-review
+Agent: 主代理（t18 独立审查）
+Task: t18 DOCX 导出切片——代码与测试证据独立审查
+
+Work Log:
+- 提交核实：mdcore 9ee7f24 已推送零漂移（5 文件 +965/−1，仅 mdc-wasm+web；Cargo.lock 零 diff 独立确认——git show 空 diff）
+- 边界核实：docx_export.rs 零引擎类型泄漏（grep 实证，仅模块文档）；export_docx 为 WasmCore 增量方法（既有面零改动）；映射为全函数（降级不报错）+ docx_build 单错误码族
+- 测试亲跑复验：mdc-wasm 31/31（21+10）；docx_export 8/8（含真实按钮点击 Blob 下载路径 + python zipfile 验证 + 全圆环 export→import→markdown 字节精确）；docx_import 9/9 + xlsx_import 9/9 零回归亲证
+- 包体核实：wasm 3,105,817 B（+50.3% 与报告一致）；归因诚实（docx-rs 写面机构首次可达 + t17 夹具保活归因勘误入档）
+- 文档核实：REPORT §8 Round 4 + CAPABILITIES t18 增量 + worklog t18 均在档（分析仓 fc8bc4f 已推送）
+
+Stage Summary:
+- t18 审查通过零返工：DOCX 往返闭环完成（t16 导入 + t18 导出，全圆环 e2e 字节精确互证）
+- 消费面三部曲齐：DOCX 导入/导出 + XLSX 导入（G1 457/0/1i，六 web 套件 18/15/28/9/9/8 全绿）
+- 上游缺口定位三件（均非本层可解）：MarkSpan 无 URL payload（链接导出被模型卡死）/ office-io 写面缺 list·monospace·hr·quote 面（降级根因）/ XLSX 写面 web 消费未接线
