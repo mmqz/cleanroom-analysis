@@ -2270,3 +2270,19 @@ Stage Summary:
   （踩踏序列测试钉定）；③zip 8.6 写拒重名读 last-wins——重名敌意
   档案须净室手造（测试内 CRC32 + 手写 zip 头），python zipfile 交叉
   验证独立确证
+
+---
+Task ID: t15
+Agent: 主代理（t13/t14 审查 + 阻塞边界收口）
+Task: DOCX 增量两轮主代理审查 + HANDOFF 版本链同步 + 阻塞边界呈报（遗留②③待用户裁决）
+
+Work Log:
+- t13 审查通过：6f74b71 仅 office-io 三文件（MD/PDF 零波及）；公开面零 docx-rs 类型泄漏（grep 实证）；亲跑 office-io 61 测试全绿与 G1 411 对账一致；供应链初判勘误（rels panic→引擎容忍）以探针实证入档
+- t14 审查通过：cbe85c0 仅 office-io 两文件 +1801/−33；亲跑 office-io 76 测试（44+3+22+1+6）全绿与 G1 426 对账一致；r1 缺陷修复（replace_default_header 槽位踩踏）带序列测试；图片特性门控勘误（new_with_dimensions 无门控——PNG-only 写面零新依赖暴露，自动转码 +23 crate 登记不启用）；HYPERLINK 域 todo!() 崩溃面绝不暴露
+- 遗留①穷尽确认：四面（页眉页脚/脚注/图片/域）+ first/even 槽位全部裁决——暴露面均有全环实测，engine-limited/崩溃面/dep-代价面均有源码锚点登记
+- HANDOFF.md L3/L-MD 双行版本链同步（mdcore 18d5bb2→cbe85c0 全链 + NOTICES v1.3→v1.5 + G1 362→426 + 第 7 次重置复验注记）；本提交推送
+
+Stage Summary:
+- 子代理执行后审查模式运行 4 任务（t12-a/t12-b/t13/t14）全部审查通过，零返工
+- 开发线阻塞边界到达：遗留①穷尽；②XLSX 样式保真编辑（umya vs 自研 vs 维持读-改-重建）= 需用户裁决；③门 2 受信源跳过 = 维持否决（无基准证据）；④fork 线观察 = 常驻纪律
+- 最终态：mdcore main cbe85c0（G1 426/0/1i + PDF 四面零漂移 + clippy 2 基线 + fmt/scan 0 + wasm32 + web 61/61）；cleanroom-analysis c8fc486→0b21f04→本提交；compliance-baseline 5e144cc（NOTICES v1.5 恒，docx 两轮零新依赖）
