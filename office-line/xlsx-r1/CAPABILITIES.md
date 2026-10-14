@@ -40,23 +40,39 @@ calamine 0.36.1 hyperlinks_by_sheet_name 完整可观测（v1 曾误记
 - docx/xlsx 以外格式（xls/xlsm/ods 未在本轮语料，calamine 支持
   面未验证不宣称）。
 
-### C2 新建 XLSX（已验证，可宣称）
+### C2 新建 XLSX（已验证，可宣称；**产品面已落地**——xlsx-r2 Phase 1，2026-10-14）
 
 **宣称语**：从零新建 XLSX 工作簿：多工作表、字符串/数字/布尔值、
 公式（含跨表引用与缓存值）、合并单元格、超链接（外部 URL 与内部
-表引用）。大表流式写（constant_memory）。
+表引用）。大表流式写（constant_memory）。产品 API = mdcore
+`crates/office-io/src/write.rs`（mdc-office-io，main e8c3a13）：
+rust_xlsxwriter 包装，引擎类型零泄漏（公开签名只含本 crate 类型）；
+输入验证前移（表名全规则/坐标边界/合并次序 → typed 错误）；流式
+表行序纪律 typed 强制（引擎对已刷写行的回退写静默丢弃——源级一手
+核验 worksheet.rs insert_cell，包装层拒绝，绝不静默丢数据）。
 
 **证据**：
-- 语料生成侧 = rust_xlsxwriter，五维正向件全部被 calamine 读回
-  校验（写读互证，manifest 逐件锚点）；
-- 量级：100 万格 972ms / 产物 3.33MB / 重开往返对账（T3 探针）；
-- 消费面：值/公式/合并经 fidelity 重建路径重放后 37/37 格零差异。
+- 写读全环测试（tests/write_roundtrip.rs，6 测试，经产品读路径含
+  容器双门）：五面全环（表序/值四型/公式+缓存/合并/超链接五形态）
+  + 流式 2000 行计数对账 + 样式 XML 级 9/9 + 控制字符 XML 安全
+  （全部件无裸控制字节 + _xHHHH_ 转义 + 值往返零失真）+ 读-改-重建
+  路径证据 + save_to_vec 重开；
+- 语料生成侧 = rust_xlsxwriter（历史 spike 写读互证，manifest 逐件
+  锚点）；量级：100 万格 972ms / 3.33MB（T3 探针）；
+- calamine 范围锚定语义钉定（tests/range_anchor_pinned.rs：值范围
+  锚首格/公式范围锚首个公式格——跨面配对须绝对坐标，开发期实测
+  捕获相对坐标错位的自洽假通过）；
+- 门禁：G1 379/379（基线 362 + 新增 17）+ PDF 四面零波及 + clippy
+  零新 + fmt 0 + scan 0 + wasm32 + web 全过（mdcore e8c3a13）。
 
 **边界（不宣称）**：
-- 样式写入正确性 = **XML 级验证**（style_probe 探针 9/9：bold/
-  FF0000 字色/FFFF00 填充/thin 边框/¥ 与百分比自定义 numFmt/
-  cellXfs 应用链；2026-10-13 闭项）；完整样式模型（条件格式/
-  主题色/富文本内联样式）未验证不宣称；
+- 样式写入正确性 = **XML 级验证**（style_probe 探针 9/9 + 产品 API
+  复现 9/9：bold/FF0000 字色/FFFF00 填充/thin 边框/¥ 与百分比自定义
+  numFmt/居中对齐/cellXfs 应用链；2026-10-13 闭项）；完整样式模型
+  （条件格式/主题色/富文本内联样式）未验证不宣称；
+- 数值型合并区左上格（引擎 merge_range 仅字符串面——类型扁平化
+  如实登记）；
+- 公式缓存值仅数值/文本/布尔三型（日期缓存不在面）；
 - 修改已有工作簿（见 C3）。
 
 ### C3 修改已有工作簿（**不宣称支持**——结构性限制在档）
@@ -95,7 +111,9 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
    解析器容忍，值含 NUL 落内存——**读侧不过滤**；再输出时消毒链
    （xml_control_chars）为必经路径（SANITIZE_TESTS.md §8 联动）。
 2. **垃圾部件静默降级**（mal7e）：非 XML 二进制部件被容忍，提取
-   为空表（无错误信号）——登记为已知行为；严格模式属后续裁决。
+   为空表（无错误信号）——登记为已知行为；严格模式 = xlsx-r2
+   Phase 2 落地（默认严格 typed 错误 + 显式兼容模式结构化警告，
+   见 office-line/xlsx-r2/REPORT.md）。
 3. **谎言头分层**（mal6a）：声明 16B 实际 1MB 的条目在 calamine
    语义层先报错（缺部件），未触达 zip 读界拒绝路径——分层防线
    中语义层先拦；zip 读界行为以 8.6 对齐重测为准（DEPS.md §1）。

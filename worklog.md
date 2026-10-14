@@ -2042,3 +2042,25 @@ Stage Summary:
   件可能滞后于远端多个提交轮）——本会话早段在误框下重复了部分
   已推送工作（read_proto 独立版被委托版取代、SANITIZE_TESTS 复原
   误注）；合并层已全部修正，零内容损失。
+
+---
+
+Task ID: t11
+Agent: 主代理（Super Z 会话续作，第 6 次平台重置恢复）
+Task: xlsx-r2 三阶段指令——Phase 1 XLSX 写面产品化（本轮完成）；Phase 2 mal7e 严格模式；Phase 3 DOCX 切片（连续执行）
+
+Work Log:
+- 环境恢复（第 6 次平台重置，比以往更彻底）：GITHUB_TOKEN 重置入环境变量（不落盘不回显）；cleanroom-analysis 本地 dd7fb1a → 快进 80499b4（未跟踪残留三件经逐位比对确认陈旧子集后清除，备份 .recovery-quarantine）；mdcore 目录整个被删 → 匿名克隆恢复（默认分支 compliance-baseline，切 main = 18d5bb2）；worklog.md 被删 → 本仓 worklog 为真源续写
+- 工具链恢复：rustup + Rust 1.99.0（钉住 channel + wasm32 + rustfmt/clippy）；cargo fetch；wasm-bindgen-cli 0.2.129 按锁安装；web npm install + dist 构建；pdfium 载荷按 T1-F12 bootstrap 重建（fetch-pdfium.sh SHA256 验证 + fixtures 现场生成 + spike 三探针复测全过）
+- 基线核实（改动前）：G1 362/362 全绿 = 18d5bb2 推送态逐位一致
+- Phase 1 实现：Cargo.toml rust_xlsxwriter dev→产品（constant_memory）；src/write.rs 新模块（引擎类型零泄漏 + 输入验证前移 typed + 流式行序纪律 typed 拦截[引擎静默丢弃一手核验 worksheet.rs:15840] + 公式前缀规范化 + 缓存值三型）；lib.rs C2/C3 宣称同步
+- Phase 1 测试：tests/write_roundtrip.rs 6 全环测试（经产品读路径含容器双门）；tests/range_anchor_pinned.rs 1 钉定测试；开发期捕获并修复 calamine 范围锚定双语义的相对坐标自洽假通过（修复=绝对坐标配对，fidelity abs 键同构）
+- Phase 1 门禁全绿：G1 379/379 + PDF 四面零波及（79/81+6i/109+6i）+ clippy 四面 2 wasm 基线零新 + fmt 0 + scan 0 + wasm32 + web 全过
+- Phase 1 合规：NOTICES v1.4（compliance-baseline 048f1bb）——纯面重分类零 lock diff；正文 101→106（账提升 5）+ 账 33→28 + 四面 50/64/88/101→58/71/93/106（SBOM 四面复跑 + 逐项并集实证 + 与 v1.3 对账无出入）；ASSET_CHECK 零新资产；中途捕获两处编辑失误（r-efi/find-msvc-tools 误删）并恢复，最终 28 账项逐项核验
+- 分析仓文档：xlsx-r1 CAPABILITIES（C2 产品面 + mal7e 指向 Phase 2）/ DEPS（表行 + §5 增量）/ FIDELITY（§6 产品级重放注记）+ xlsx-r2/REPORT.md 新建
+
+Stage Summary:
+- mdcore main：18d5bb2 → e8c3a13（Phase 1 已推送）；compliance-baseline：ddc51c1 → 048f1bb（NOTICES v1.4 已推送）
+- 五项待决裁决全部由用户指令落定：①写面产品化批准（完成）②mal7e 严格模式批准（Phase 2 进行中）③门 2 跳过否决 ④docx 改道模型级切片 ⑤D1-D3 延后
+- 开发发现四件在档：calamine 范围锚定双语义（自洽假通过陷阱）/ rust_xlsxwriter 控制字符 _xHHHH_ 转义一手核验（写面 XML 级免疫）/ constant_memory 静默丢弃（包装层 typed 拦截）/ 字符串落 sharedStrings（断言须全部件扫描）
+- 下一步：Phase 2（mal7e 默认严格 + 兼容模式）→ Phase 3（DOCX 切片），连续执行不阻塞

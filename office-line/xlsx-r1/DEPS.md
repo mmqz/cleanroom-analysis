@@ -12,7 +12,7 @@
 | crate | 锁定版本 | 许可证（一手核验） | 角色 | 适用边界 |
 |-------|----------|--------------------|------|----------|
 | calamine | **0.36.1** | MIT | 读 | **仅读取**（值/公式文本/合并/表名四 API 面）；无样式/关系可观测面（FIDELITY.md §4） |
-| rust_xlsxwriter | **0.99.1**（feature: constant_memory） | **MIT OR Apache-2.0**（阶段 B 修正：registry manifest 双许可直读；首版记 MIT。按 MIT 履行，ADR-C1 §1 允许域） | 写（dev 面：测试语料构造） | **仅从零新建**；不宣称已有工作簿编辑往返（FIDELITY.md 定谳） |
+| rust_xlsxwriter | **0.99.1**（feature: constant_memory） | **MIT OR Apache-2.0**（阶段 B 修正：registry manifest 双许可直读；首版记 MIT。按 MIT 履行，ADR-C1 §1 允许域） | 写（**xlsx-r2 Phase 1 起产品 normal 面**：正式写 API src/write.rs；历史 dev 面 = 测试语料构造） | **仅从零新建**；不宣称已有工作簿编辑往返（FIDELITY.md 定谳）。注：constant_memory 特性激活可选依赖 tempfile 链（NOTICES v1.4 账提升 5 项） |
 | zip | **8.6.0**（对齐后唯一版本，与传递面一致） | **MIT**（阶段 B 修正：manifest 与 LICENSE 文件均单 MIT 直读；首版记 MIT OR Apache-2.0 系上游仓历史版本口径混淆。三链核验在档） | 容器双门 | 门 1 声明值四检查 + 门 2 尺寸诚实性（策略层，见下） |
 
 **版本并存登记 + 对齐定谳（2026-10-13 实测）**：calamine 0.36.1 与
@@ -129,5 +129,13 @@ unicode-ident 两 AND 条款已随 v1.2 在档（BSD-3-Clause / Unicode-3.0
   v1.3 入账（16 新 crate：9 进产品 normal 面 + rustversion/zlib-rs
   由 v1.2 分类账提升 + 7 项 dev/lock 面）；升版触发 SECURITY_POLICY
   §5 复核纪律（zip 或解析库大版本升级 = 复核触发）。
+- **xlsx-r2 Phase 1 增量（2026-10-14，mdcore main e8c3a13）**：
+  rust_xlsxwriter 由 [dev-dependencies] 升产品 [dependencies]
+  （features = ["constant_memory"]，C2 写面产品化——正式写 API
+  src/write.rs）；Cargo.lock **零 diff**（同版本 dev→normal 纯面
+  重分类）；NOTICES **v1.4** 入账（正文 cargo 101→106 = 账提升 5
+  [rust_xlsxwriter/tempfile/fastrand/rustix/linux-raw-sys]；分类账
+  33→28；四面 50/64/88/101 → 58/71/93/106；零 UNKNOWN；GPL/AGPL
+  零命中维持）；dev-dependencies 仅存 flate2。
 - 本文件与 spike Cargo.lock 同步维护（新增依赖 = 本文件增行 +
   许可证核验补全，缺一不合并）。

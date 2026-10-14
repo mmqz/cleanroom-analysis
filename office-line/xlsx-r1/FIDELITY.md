@@ -116,3 +116,15 @@ cargo run --bin fidelity   # 本验证 v2 → fixtures/fidelity_report.md
 fidelity.rs 中修改标记位 `(8,8)`、回放策略（公式 `=` 前缀还原 /
 `_xlfn` 前缀透传 / 无缓存值按 `"0"` 重放 / 超链接值面驱动形态判定 +
 `xml_unescape5` 实体补偿）均以常量与注释在源内登记。
+
+## 6. 产品级重放测试注记（xlsx-r2 Phase 1，2026-10-14）
+
+本验证的回放策略已产品化复现：mdcore `crates/office-io/tests/
+write_roundtrip.rs` 的 `read_modify_rebuild_path_evidence` 测试（经
+产品写 API [`write`] + 产品读路径含容器双门）——五面保真对账（表序/
+值/公式文本/合并/超链接逐字段）+ 修改格在位，与本文件 §1 矩阵一致。
+开发期捕获并修复一处回放实现陷阱（登记）：**calamine 范围锚定语义**
+（值范围锚首格 / 公式范围锚首个公式格——tests/range_anchor_pinned.rs
+钉定）——跨面配对必须绝对坐标；相对坐标会产生整体错位的**自洽假
+通过**（值面按位缓存保留 + 公式列均匀平移相对重锚，两面对账均不可
+见）。spike fidelity.rs 的 abs 键策略（§4 复现源）从一开始就正确。
