@@ -128,3 +128,30 @@ write_roundtrip.rs` 的 `read_modify_rebuild_path_evidence` 测试（经
 钉定）——跨面配对必须绝对坐标；相对坐标会产生整体错位的**自洽假
 通过**（值面按位缓存保留 + 公式列均匀平移相对重锚，两面对账均不可
 见）。spike fidelity.rs 的 abs 键策略（§4 复现源）从一开始就正确。
+
+## 7. DOCX 切片数据损失登记变化（docx-r1 增量第一轮，2026-10-15）
+
+本节登记 DOCX 切片（Phase 3 落地，xlsx-r2/REPORT §6）的数据损失
+面变化；完整登记表 = mdcore docx.rs 模块文档（唯一真源随码走）。
+
+**闭项（本轮）**：
+- **超链接目标丢弃**（Phase 3 登记「超链接内文本保留、URL 丢弃」）
+  → **闭项**：自有 OPC 关系解析层（word/_rels/document.xml.rels +
+  per-part rels）承担 r:id → target 联接（引擎只透传 r:id——
+  docx-r1/CAPABILITY_NOTES §1），run 级 `HyperlinkTarget` 四变体
+  暴露（External/Internal/Anchor/Unresolved[仅兼容]）；写侧
+  `RunSpec::link` 外部 URL 全环往返（含 `&` 实体补偿链：写侧引擎
+  单次转义 + 读侧单次反转义 = 逻辑值复原，实测钉定）。
+
+**仍登记（不变/更新）**：
+- 表格单元格内超链接目标仍丢（TableData 扁平文本面——单元格文本
+  保留；悬空引用仍按严格/兼容纪律处置）；
+- 页眉/页脚内容丢失闭项（六槽位读暴露 + default 写暴露）；first/even
+  槽位**写面**与页眉内表格写面仍登记（引擎在，未实测不暴露）；
+- 脚注/尾注读面 = 引擎受限登记（docx-rs 从不读 footnotes.xml），
+  写面引擎在未暴露；图片/域/修订/批注/编号语义维持 Phase 3 登记。
+
+**新可见性（非损失，登记口径）**：悬空引用（超链接 r:id 无关系/
+页眉页脚引用无条目/目标部件缺失/目标路径越出包根）严格模式 typed
+拒、兼容模式 BrokenReference 结构化警告——Phase 3 的引擎静默跳过
+（read_docx filter_map None）在两模式下均有了显式信号。

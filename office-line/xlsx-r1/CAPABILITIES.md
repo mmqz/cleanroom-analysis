@@ -113,11 +113,27 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
    错误面均按格式独立演进。
 4. ADR-O1 O1-6（docx 渲染级读侧）维持开放裁决——Phase 3 切片为
    **模型级**（布局/分页/字体度量面外），渲染级未触碰。
-5. **DOCX 切片能力宣称**（唯一真源 = xlsx-r2/REPORT.md §6；宣称
-   纪律同本文件 §4）：模型级读（块序/样式 ID 透传/run 级文本加粗
-   斜体/超链接内文本/表格单元格拼接——含容器三门与严格/兼容双
-   模式）+ 新建写（Heading1-9[outline 级]/富文本段落/文本表格）；
-   不支持面与数据损失在 mdcore docx.rs 模块文档逐项登记。
+5. **DOCX 切片能力宣称**（唯一真源：xlsx-r2/REPORT.md §6
+   [Phase 3 基线] + docx-r1/REPORT.md [增量第一轮]；宣称纪律同
+   本文件 §4）：
+   - **Phase 3 基线（模型级）**：读 = 块序/样式 ID 透传/run 级文本
+     加粗斜体/超链接内文本/表格单元格拼接（含容器三门与严格/兼容
+     双模式）；写 = Heading1-9（outline 级）/富文本段落/文本表格；
+   - **docx-r1 增量（2026-10-15，遗留①）**：读 = **超链接目标**
+     （run 级 `HyperlinkTarget` 四变体：External[URL 原样透传永不
+     解引用]/Internal[包内目标]/Anchor[w:anchor]/Unresolved[仅
+     兼容模式]）+ **页眉页脚六槽位**（default/first/even × 页眉/
+     页脚，变体透传 + 块序提取；页眉部件自身 rels 联接页眉内
+     超链接）；写 = **外部超链接 run**（RunSpec.link——引擎关系面
+     TargetMode="External"）+ **默认页眉页脚**（单段 run 序，
+     重复调用 = 原位替换）；支撑层 = **自有 OPC 关系解析层**
+     （quick-xml 解析全部 .rels 部件，门 3 同族纪律：上限恒等两
+     模式、词汇表/schema 违反严格拒兼容警告、悬空引用
+     BrokenReference 类）；
+   - 不支持面与数据损失在 mdcore docx.rs 模块文档逐项登记
+     （docx-r1 变化：超链接目标丢弃**闭项**[表格单元格内目标
+     仍丢——TableData 扁平面]；新增 WarningKind::BrokenReference
+     共享警告类别——XLSX 面无使用点）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 

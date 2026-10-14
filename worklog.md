@@ -2105,3 +2105,104 @@ Stage Summary:
 - G1 362→392（+30）；PDF 四面零波及逐位一致；三仓版本链：mdcore main 18d5bb2→460f302、compliance-baseline ddc51c1→5e144cc、cleanroom-analysis 80499b4→本提交链
 - xlsx-r2 五项遗留裁决全部执行完毕；新遗留四项登记（DOCX 增量面按需/XLSX 样式保真编辑另议/门 2 跳过维持不设/docx-rs fork 线观察）
 - 开发期教训：git stash 与未跟踪新模块文件并行时 pop 可能失败（改用 worktree 或避免）；docx-rs Table/TableRow 构造器为 Vec 参数非 builder 链
+
+---
+Task ID: t12-a
+Agent: subagent (env recovery + gate re-verification)
+Task: 7th platform reset toolchain recovery + independent re-verification of xlsx-r2 three-phase gate claims at mdcore 460f302
+
+Work Log:
+- Read worklog t11/t11-b/t11-c sections (lines 2048-2107) as recovery precedent
+- Repo state verified before any action: mdcore main = 460f302, compliance-baseline = 5e144cc, cleanroom-analysis = 6d0fd1e; both working trees clean; rust-toolchain.toml pins 1.99.0 + wasm32 + rustfmt/clippy
+- Toolchain rebuilt from zero (~/.cargo and ~/.rustup absent, 7th reset confirmed): rustup 1.29.1 installed via rustup-init with --default-toolchain 1.99.0 → rustc/cargo 1.99.0, rustfmt 1.10.0, clippy, wasm32-unknown-unknown std (auto-added via rust-toolchain.toml on first cargo run in repo)
+- cargo fetch: OK, Cargo.lock = 144 entries (matches 142→144 Phase 3 claim: docx-rs + base64); zero network failures
+- G1 cargo test --workspace (plain run, ignored stay ignored): 392 passed / 0 failed / 1 ignored (mdshell_native BLUEPRINT_NOTE doc-test baseline) across 49 summary lines; claim 392/392 = PASS
+- PDF feature faces (payloads bootstrapped per T1-F12): fetch-pdfium.sh OK (chromium/8086, SHA256 verified, libpdfium.so 7942208B at spike bin/lib/); pdf_a_spike --release: fixtures small.pdf 1026B / large.pdf 124524B / small_annotated.pdf 1497B + 3 probes pass (load 0ms, render 3ms, lopdf→pdfium cross-read OK); formfill_probe --release: form_probe.pdf 731B + S6 pass; payload discovery found spike bin/lib candidate path automatically (no env vars needed)
+- Feature faces re-verified with per-binary accounting (awk pairing of Running↔result lines): lopdf 79/0/0 (36 skeleton + 23 cache_worker + 9 session_flush + 11 security); pdfium 81/0/6i (36+23+13 engine+9, pdfc_perf 6 ignored); dual 109/0/6i (36+23+13+9+17 writer+11 security) — all three match claims exactly
+- Stretch perf face: pdfc_perf --ignored = 6/6 ok (0.11s)
+- cargo fmt --all -- --check: 0 diff, exit 0
+- compliance/scan.sh: product scope 0 hits exit 0; --all scope 0 hits exit 0 (both conventions run)
+- clippy 4 faces: default --workspace --all-targets = exactly 2 warnings (mdcore-wasm lib.rs:188/:197 static_method_of = known baseline, zero new); lopdf / pdfium / dual -p mdc-pdf faces = 0 warnings each, all exit 0
+- cargo check --workspace --target wasm32-unknown-unknown: pass, exit 0
+- Purity check at end: mdcore git status clean (zero modifications — pure verification, no commit/push); cleanroom-analysis tree clean (0 lines)
+- Progress notes appended incrementally to /home/z/my-project/scratch-t12a-progress.md (9 milestones)
+
+Stage Summary:
+- Verified claims table (claim vs actual):
+  | Gate | Claim | Actual | Verdict |
+  | G1 test --workspace | 392/392 | 392 passed / 0 failed / 1i doc-test baseline | PASS |
+  | PDF lopdf face | 79/79 | 79 passed / 0 failed / 0 ignored | PASS |
+  | PDF pdfium face | 81/81 + 6i | 81 passed / 0 failed / 6 ignored | PASS |
+  | PDF dual face | 109/109 + 6i | 109 passed / 0 failed / 6 ignored | PASS |
+  | clippy 4 faces | 2 wasm baseline, zero new | default: exactly 2 (lib.rs:188/:197); 3 feature faces: 0 | PASS |
+  | fmt | 0 diff | 0 diff, exit 0 | PASS |
+  | scan product | 0 hits | 0 hits (20 terms) | PASS |
+  | scan --all | 0 hits | 0 hits | PASS |
+  | wasm32 check | pass | pass, exit 0 | PASS |
+  | perf stretch (non-claimed) | 6/6 (optional) | 6/6 | PASS |
+- Blockers found: none. Zero deviations from t11 recovery procedure were necessary (wasm32 target auto-installed via rust-toolchain.toml instead of manual add — same as t11 precedent note; `cargo run --release` in spike needed explicit `--bin pdf_a_spike` due to two binaries, no default-run key — cosmetic only, not a procedure deviation in substance)
+- All xlsx-r2 three-phase gate claims at mdcore 460f302 reproduce exactly in a from-zero environment: independent re-verification confirms t11-c stage summary with zero drift
+- Toolchain state for successors: rustup 1.29.1 / rustc 1.99.0 (b940084d7) / cargo 1.99.0 (5f94df478) / rustfmt 1.10.0-stable / clippy installed / targets: x86_64-unknown-linux-gnu + wasm32-unknown-unknown; pdfium payload at cleanroom-analysis/md-line/pdf-a/spike/bin/lib/libpdfium.so (chromium/8086); spike fixtures at .../spike/fixtures/ (4 files); both repos clean at 460f302 / 6d0fd1e
+
+---
+Task ID: t12
+Agent: 主代理（第 7 次平台重置恢复 + 三阶段复验编排）
+Task: 平台重置恢复（双仓对齐 + 凭据重置）+ t12-a 复验编排 + 总计划进度汇报
+
+Work Log:
+- 第 7 次平台重置恢复：GITHUB_TOKEN 重置入 scripts/token.env（600 权限，不回显）；cleanroom-analysis dd7fb1a → 快进 6d0fd1e（未跟踪冲突三件备份至 scripts/backup-drift/ 后清除；stash 存平台漂移残留）；mdcore 目录被删 → token 克隆恢复（main = 460f302，compliance-baseline = 5e144cc）
+- 权威状态核实：三阶段已全部收口于远端（Phase 1 e8c3a13 / Phase 2 042a5e4 / Phase 3 460f302；xlsx-r2 REPORT §7 三阶段总表 + 遗留四项登记）
+- 派发 t12-a（子代理）：工具链从零重建（rustup 1.29.1 + rustc/cargo 1.99.0 + wasm32 + fmt/clippy）+ T1-F12 载荷 bootstrap（fetch-pdfium SHA256 验证 + fixtures 字节一致）+ 全门禁独立复验
+- t12-a 审查通过：G1 392/392 + PDF 四面 79/81+6i/109+6i + clippy 四面仅 2 wasm 在档基线 + fmt 0 + scan 0+0 + wasm32 过 + perf 6/6（stretch）——全部声明复现零漂移，零阻塞
+- 总计划进度汇报发送会话（三阶段收口+复验表 + 遗留四项定位 + 继续推进路径）
+
+Stage Summary:
+- 三阶段（xlsx-r2）完成态经从零环境独立复验确认；环境恢复完成度 = 核心 + feature 面 + perf；web 面待复验（t12-b）
+- 遗留定位：①DOCX 增量面 = 唯一无阻塞开发项；②③为用户裁决阻塞项；④常驻纪律
+- 下一步：t12-b web 冒烟基线复验 → t13 DOCX 增量第一轮（子代理执行后审查模式持续）
+---
+Task ID: t12-b
+Agent: subagent (web environment recovery + web smoke baseline re-verification)
+Task: 7th reset web env recovery (wasm-bindgen 0.2.129 + npm + dist) + re-verify web smoke claims (18/15/28) at mdcore 460f302
+
+Work Log:
+- Context read first: worklog t12-a/t12 (L2110-2162), web/README.md (build + serve + test conventions), build-wasm.sh (two-step: cargo wasm32 release → wasm-bindgen 0.2.129 exact-per-lock → web/pkg/), package.json (build = node build.mjs; serve dist), contract_gate.py (18 checks, port 8931, playwright chromium), web_smoke.py (15 tests W1-W13+G1/G2, ephemeral port, chromium launch with --js-flags=--expose-gc --enable-precise-memory-info), ime_cdp.py (28 checks IC1-IC6 via CDP Input.imeSetComposition/insertText, DIFF_baseline evidence-only), REUSE.md L70 claim, gates.md L406 (15/15 + 28/28) — check counts independently pre-verified by static count (contract_gate 18; ime_cdp 6+4+5+4+5+4=28)
+- Environment state before recovery: node v24.21.0 / npm 11.19.0 / python 3.12.15 (venv, playwright 1.57.0 module present), ms-playwright cache survived reset (chromium-1200 + chromium_headless_shell-1200 + ffmpeg-1011, dated 2026-10-13 = t11-era install, matching playwright 1.57.0 browsers.json expectation); NO system chromium (not needed — tests use playwright bundled); wasm-bindgen absent from ~/.cargo/bin; web/ had no node_modules/pkg/dist (7th reset confirmed)
+- npm install in web/: OK — added 15 packages, 0 vulnerabilities (package-lock respected, ~1s)
+- wasm-bindgen-cli 0.2.129 install: `cargo install` background attempts (nohup &, setsid nohup &) were killed by the sandbox when tool calls returned (log died mid-compile after 3 crates, no error output); sources were already in the registry cache — workaround: extracted wasm-bindgen-cli-0.2.129 from ~/.cargo/registry (shipped Cargo.lock, 254 pkgs) to /tmp/wbg-src, then `cargo build --release --locked --bin wasm-bindgen` (resumable fingerprints, 2m33s on 2 cores) → copied to ~/.cargo/bin/wasm-bindgen; `wasm-bindgen --version` = wasm-bindgen 0.2.129 (exact lock match, zero version drift)
+- bash web/build-wasm.sh: OK — cargo build -p mdcore-wasm --target wasm32-unknown-unknown --release finished 18.74s with only the 2 documented baseline warnings (mdcore-wasm static_method_of, matches t12-a clippy baseline); wasm-bindgen --target web → web/pkg/ 4 files (mdcore_wasm.js 20608B, mdcore_wasm_bg.wasm 704325B, d.ts ×2)
+- npm run build: OK — esbuild via node build.mjs, dist/main.js 531.2kb + index.html + mdcore_wasm_bg.wasm (self-contained dist/)
+- SUITE 1 `python3 tests/contract_gate.py`: 18/18 PASS, exit 0 (all checks verbatim PASS: ready/contract_version v1.1/boot surface/bridge inventory/inject+chunk rebuild+event family/undo key contract/unit constitution/settings v1.1 read+write+rejects/progressive-only members both sides)
+- SUITE 2 `python3 tests/web_smoke.py`: 15/15 PASS (total 15, failed 0, pass true), exit 0; W4 1MB evidence: load 254.2ms, typing p95 17.3ms, 20448 blocks; G1 4/4 gate_verdict "PASS — cursor p95 0.9ms < 16ms（R15 装饰增量窗口化后）"; G2 6/6 gate_verdict PASS（10MB JS heap 58MB 达标 per R19 split; wasm linear 425MB transparent; undo no-op + undo_entries==0 per ADR-B4）
+- SUITE 3 `python3 tests/ime_cdp.py`: 28/28 PASS (total 28, failed 0, pass true), exit 0 — IC1 6 + IC2 4 + IC3 5 + IC4 4 + IC5 5 + IC6 4, all verbatim PASS; chromium-1200 CDP accepted the imeSetComposition {text} param shape (protocol_note in script references chromium-1243 measurements — current build behaves identically, no BLOCKER); DIFF_baseline_synthetic = evidence-only (no checks key, correctly excluded from count)
+- Purity at end: mdcore git status clean @ 460f302 (web/pkg, dist/, node_modules/, tests/results/ all covered by web/.gitignore — zero tracked-file modifications, no commit, no push); no lingering http.server/chromium processes after suites; evidence files at web/tests/results/{results_contract.json, results.json, results_ime.json}
+- Progress milestones appended incrementally to /home/z/my-project/scratch-t12b-progress.md (5 entries)
+
+Stage Summary:
+- Claims vs actual (all at mdcore main 460f302, from-zero 7th-reset environment):
+  | Suite | Claim | Actual | Verdict |
+  | contract_gate.py | 18 tests | 18/18 PASS, exit 0 | PASS |
+  | web_smoke.py (W1-W13 + G1/G2) | 15 tests, 0 failed | 15/15 PASS, 0 failed, exit 0 | PASS |
+  | ime_cdp.py | 28 tests | 28/28 PASS, 0 failed, exit 0 | PASS |
+  | TOTAL | 61 | 61/61 | PASS |
+- Blockers: none. One environment workaround required: background `cargo install` is killed by sandbox between tool calls — replaced with foreground resumable `cargo build --release --locked` from the registry-cached .crate (same pinned 0.2.129 source + shipped Cargo.lock); binary installed to ~/.cargo/bin, version verified. Browser = playwright 1.57.0 bundled chromium-1200 (survived reset in ~/.cache/ms-playwright; no system chromium needed; IME CDP text-param shape works on this build)
+- Web environment recovered to full working state for successors: node 24.21.0 / npm 11.19.0 / playwright 1.57.0 + chromium-1200 / wasm-bindgen 0.2.129 @ ~/.cargo/bin / web node_modules + pkg + dist built; combined with t12-a core gates, ALL gates at 460f302 now re-verified from zero post-7th-reset
+
+---
+Task ID: t13
+Agent: subagent (DOCX 增量第一轮)
+Task: docx-rs 0.4.22 能力一手核验 + OPC 关系解析层 + 超链接目标/页眉页脚模型级暴露 + 全门禁 + 双仓推送
+
+Work Log:
+- 前置读取：worklog t11-c/t12/t12-a/t12-b（L2090-2189）；基线 mdcore main @ 460f302 clean；docx-rs 0.4.22 源一手逐文件核验（~/.cargo/registry/src/*/docx-rs-0.4.22/）
+- Phase A 裁决（CAPABILITY_NOTES.md 九节 + 暴露/登记总表，源码锚点在档）：①超链接读=引擎部分支持（rid 透传、无联接、内部目标丢——reader/hyperlink.rs:13-26 + read_docx.rs:386-398）→ 自有 rels 层联接后暴露；②页眉页脚读=支持（六槽位挂接；引用悬空=引擎静默跳过 read_docx.rs:15-24）→ 暴露（静默→严格拒/兼容警告）；③页眉页脚写=支持（Docx::header 六 API + 计数递增怪癖[重复调用自产悬空引用]）→ 暴露 default 槽位 + 包装层原位替换防御；④超链接写=支持（"Now support external only"）→ 暴露；⑤脚注读=引擎受限（从不读 footnotes.xml）→ 登记；⑥⑦图片/域=字节/字符串面在 → 登记不暴露
+- 实证勘误（重要）：§8 初判「rels 未知元素 → 引擎 unwrap panic」被探针推翻——XMLElement::from_str catch-all Ok(Unsupported)（xml_element.rs:447）永不 Err；引擎静默容忍不崩溃（整包直调返回 Ok，探针测试在档）；自有层语义=严格拒[OPC ECMA-376 Part 2 词汇表]/兼容警告+跳过（可见化）
+- mdcore 实现（main 460f302 → 6f74b71 已推送）：src/docx.rs 自有 OPC 关系层（quick-xml 解析全部 .rels 部件：document 主表 + per-part 表[页眉自身 rels] + 条目名集；门 3 同族纪律：LIMIT_RELATIONSHIPS=10_000 两模式恒拒/词汇表·schema 严格拒兼容降级/悬空引用[无条目·部件缺失·路径逃逸../../越根词法检出]严格拒兼容 BrokenReference 警告；属性实体补偿 &amp;→&；降级去重）+ 读面（RunData.hyperlink 四变体 External/Internal/Anchor/Unresolved；DocxDocument.headers/footers 六槽位变体透传+块序；页眉内超链接 per-part rels 联接）+ 写面（RunSpec.link 外链 run；DocxWriter::header/footer 重复调用=原位替换防御）；io.rs WarningKind::BrokenReference 增量变体（XLSX 面零使用点）；零新依赖（quick-xml 直依赖第二使用面；Cargo.lock 零变化 → NOTICES v1.5 不动）
+- 测试 +19（G1 392→411）：docx.rs 单测 2→12 + docx_roundtrip 5→14（外链全环含 &-实体链[写侧 escape_owned 单次转义+attr 原样写=读回单次反转义复原]/锚点读/悬空×双模式/页眉页脚全环+替换语义/页眉引用敌意三面/整包重复 Id[rId 动态定位]/整包词汇表/引擎容忍探针/页眉内链接净室自构造——写器恒发射空页眉 rels 部件原位改写）
+- 门禁全绿：G1 411/0/1i；PDF 四面 79/81+6i/109+6i 零波及；clippy 四面仅 2 wasm 在档基线（修复自有 2 处：闭包去 mut + match→if let）；fmt 0；scan 0+0；wasm32 过（office-io 不进 wasm 闭包，web 资产未重建）；web 18/15/28
+- 分析仓：docx-r1/ 新建（CAPABILITY_NOTES.md[一手证据底稿+勘误链] + REPORT.md[裁决表/落地面/测试/门禁表/开发期发现 4 项]）；xlsx-r1/CAPABILITIES §2.5 增量；FIDELITY §7 新增（超链接目标闭项+仍登记面+新可见性）；DEPS quick-xml 角色注记（零新增）
+
+Stage Summary:
+- 遗留①（DOCX 增量面按需）第一轮收口：OPC 关系层落地 + 解锁三面（超链接目标读/外链写/页眉页脚读写）全暴露且全实测；脚注/图片/域/first-even 写面按纪律登记不暴露（第二轮候选，引擎能力锚点在 CAPABILITY_NOTES）
+- G1 392→411（+19）；PDF 四面零波及；mdcore main 460f302→6f74b71（已推送）；cleanroom-analysis 本提交（含 t12-a/t12-b 未入档 worklog 补录 + docx-r1 目录 + 三文档增量）；NOTICES 零增量（v1.5 维持，无合规基线提交）
+- 开发期教训：①源读初判须实证复核——unwrap 面看似 panic 实则 catch-all 永不 Err（探针先行再定语义）；②docx-rs 写器恒发射空页眉 rels 部件（zipper/mod.rs:84 无条件）——净室自构造测试注入 rels 须原位改写而非追加；③引擎 Docx::header 计数递增怪癖=包装层防御先例（同 XLSX 流式纪律）
