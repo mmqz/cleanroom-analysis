@@ -2084,3 +2084,24 @@ Stage Summary:
 - mal7e 类问题闭环：畸形/无效 XML 部件（垃圾/截断/多根/空/超深）不再静默变空/部分数据——严格 typed reject + 兼容模式结构化警告双模式钉定
 - 开发教训两件在档：深度计数含 root（边界对测首版 off-by-one）；控制字节扫描须限定 XML 部件域（二进制部件如图片本就是任意字节）
 - 下一步：Phase 3 DOCX 小而可用读/写切片（模型级，复用 ADR-O1 docx-rs 结论）
+
+---
+
+Task ID: t11-c
+Agent: 主代理（xlsx-r2 Phase 3 续作——三阶段收口）
+Task: Phase 3 DOCX 小而可用读/写切片（模型级）+ 三阶段全部收口
+
+Work Log:
+- 引擎接入（复用 ADR-O1 O1-3 既有研究，零新生态调研）：docx-rs 0.4.22（MIT；default-features=false 关 image 巨树）+ base64 0.22.1（MIT OR Apache-2.0）——闭包仅 +2，lock 142→144；三链核验 lock==.crate 2/2 + cargo 传递 index cksum；fork 线供应链观察项纪律常驻化（docx_roundtrip.rs 升级首跑拦截）
+- mdcore 实现（main 042a5e4 → 460f302 已推送）：src/docx.rs 独立模块（CAPABILITIES §2 边界裁决：自有模型 + 自有错误面 DocxError + docx-rs 类型零泄漏；共享面仅容器门基础设施[io::verify_gates crate 内复用]与消毒链）；读 = 三门复用 + 模型提取（块序/样式透传/run 级/超链接内文本[目标丢弃]/表格拼接/Tab·Break·CR 保真）；写 = DocxWriter 仅新建语义（Heading1-9 样式定义 outline 级 + 富文本段落 + 文本表格）；字节入口同三门；不支持面与数据损失逐项登记（模块文档登记表）
+- 实测行为差异钉定：docx-rs 读引擎对原始控制字符自身硬拒（Parse）——较 calamine/XLSX 值面容忍更严；门 3 警告在该错误路径不可达；两模式同拒
+- 测试：tests/docx_roundtrip.rs 5 测试（写读全环 6 块序逐面 + 容器门复用钉定[截断/垃圾/路径逃逸 × 严格/兼容双模式] + 字节入口同门 + save_to_vec + 控制字符行为）+ docx.rs 单测 2
+- 门禁全绿：G1 392/392 + PDF 四面 79/81+6i/109+6i 零波及 + clippy 四面 2 wasm 基线零新 + fmt 0 + scan 0 + wasm32 过；四面闭包 58/71/93/106 → 62/75/95/108
+- 合规：NOTICES v1.5（compliance-baseline 048f1bb → 5e144cc 已推送）：正文 106→108（docx-rs[MIT 族 +1]/base64[MIT OR Apache-2.0 族 +1]）+ 分类账 28 恒 + default +4[含 thiserror/thiserror-impl 原仅 lopdf 面] + ASSET_CHECK 零新资产
+- 分析仓：xlsx-r2/REPORT §6 Phase 3 收口 + §7 三阶段总表 + 遗留登记四项；DEPS docx-rs 行；CAPABILITIES §2 切片落地 + DOCX 宣称口径
+
+Stage Summary:
+- 三阶段全部收口：Phase 1 写面产品化（e8c3a13/NOTICES v1.4）→ Phase 2 门 3 严格+兼容（042a5e4/SECURITY_POLICY v1.1）→ Phase 3 DOCX 切片（460f302/NOTICES v1.5）
+- G1 362→392（+30）；PDF 四面零波及逐位一致；三仓版本链：mdcore main 18d5bb2→460f302、compliance-baseline ddc51c1→5e144cc、cleanroom-analysis 80499b4→本提交链
+- xlsx-r2 五项遗留裁决全部执行完毕；新遗留四项登记（DOCX 增量面按需/XLSX 样式保真编辑另议/门 2 跳过维持不设/docx-rs fork 线观察）
+- 开发期教训：git stash 与未跟踪新模块文件并行时 pop 可能失败（改用 worktree 或避免）；docx-rs Table/TableRow 构造器为 Vec 参数非 builder 链
