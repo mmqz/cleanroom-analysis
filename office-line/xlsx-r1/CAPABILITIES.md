@@ -342,3 +342,11 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
 （C1 已验证可宣称 / C2 写面验证态·产品面本轮不在直移面 / C3 不
 宣称支持 + 丢失矩阵引用），容忍度发现三件随 crate 文档同步发布；
 对外宣称语仍以本文件为唯一真源，crate 文档为引用摘要不得超出。
+
+   - **DOCX 读面保真增量（r4-t3，2026-10-15）**：numPr 结构读面完整
+     承载（numId/ilvl/kind/原生 numFmt format 字段——悬空严格拒/兼容
+     警告）+ ind 读面完整承载（left/right/FirstLine/Hanging）；
+     ParagraphData +2 Option 字段只增不改（既有消费方零破坏）。
+     写回经自有抽象的降级显式化（可诊断非静默）。完整五态矩阵见
+     `docx-r1/FIDELITY.md`（完整承载 10/部分 4/降级 2/丢失 8/未验证
+     0）。全量 OOXML 无损编辑**不宣称**。

@@ -290,3 +290,21 @@ docx_roundtrip.rs。零新依赖（Cargo.lock 零 diff）。
   MAX_PARAGRAPHS）**沙箱 OOM kill（exit 137）**——线性外推
   ≈3.9GB：限值为防御上界，实际包络受宿主内存约束（未实测不宣称
   可达）。SECURITY_POLICY v1.2 §3.1。
+
+## 12. r4-t3 增量：numPr/ind 读面承载 + 保真矩阵单一真源
+
+- **numPr 读面**（完整承载）：`ParagraphNumbering{num_id, ilvl, kind,
+  format}`——NumberingIndex 解析链（numId→num 桥→abstractNum→ilvl 级
+  numFmt）一手核验引擎全公开字段面；numId=0 去编号惯例；悬空 numId
+  严格拒/兼容 BrokenReference 警告 + 结构承载；numStyleLink/超定义域
+  软警告。
+- **ind 读面**（完整承载）：`ParagraphIndent{left, right, special:
+  FirstLine/Hanging}`——reader 全属性（left/start/right/end/hanging/
+  firstLine）；Chars 单位变体登记不承载。
+- **降级可诊断**：format 字段承载原生 numFmt（lowerLetter 等）——写回
+  经自有抽象（100/101 decimal/bullet）的降级显式化。
+- 引擎面私有性一手核验（本轮证据）：Bold.val/Strike.val/Underline.val/
+  RunFonts/ParagraphBorders 六槽均无私有 getter——presence-only 承载会
+  对显式关闭形态（w:val="none"/"false"）误报，宁缺毋错，登记不承载。
+- **保真矩阵单一真源**：`docx-r1/FIDELITY.md`（24 项五态 + 方案论证 +
+  往返证据）——本轮起 DOCX 读写保真宣称以该文件为准。
