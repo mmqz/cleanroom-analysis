@@ -2599,3 +2599,18 @@ Stage Summary:
 - mdcore 本地 **ef74282**（4 文件 +443/−66：office-io/src/docx.rs、office-io/tests/docx_roundtrip.rs、mdc-wasm/docx_export.rs、web/tests/docx_export.py；不 push——主代理审查后推）；分析仓本轮本地提交（worklog t22 + REPORT §9 Round 5 追记 + CAPABILITIES t20 增量处补注；不 push）
 - t20 残余登记项「多行 item 续行缩进」翻转为已表达：一个列表项 = 一个 OOXML 段落（w:br 软换行 + 段落级 hanging ind 与编号抽象层级同值）——续行与首行文字列对齐；单行项字节级零变化
 - Office 线机械增量彻底清空后的最后一件收口：残余降级全部带裁决前置（code lang/fence 库层、link URL 域边界、读面往返承载模型扩列、多列族/自定义编号包装面）——下一增量必须先过主代理裁决
+---
+Task ID: t22-review
+Agent: 主代理（t22 独立审查）
+Task: t22 DOCX 导出多行列表项续行缩进——微增量审查
+
+Work Log:
+- 提交核实：mdcore ef74282（4 文件 +443/−66——office-io/docx.rs 新面 list_item_lines + LIST_HANGING_INDENT 常量 + add_spec_to_paragraph 纯搬移；docx_export.rs 多行接线；docx_roundtrip.rs +103 测试；docx_export.py +1 断言）；Cargo.lock 零 diff 实证；分析仓 2d6c8ff（REPORT §9.6 追记 + CAPABILITIES 补注 + worklog）
+- 边界核实：docx_export.rs 增量零 docx-rs 类型泄漏（grep 0）；既有 list_item 签名与单行导出路径零漂移（字节级回归锚定在测试）；设计选择合规（单段 w:br + 段落级 hanging ind——OOXML 语义正确形态，源码一手核验 + /tmp 探针双证）
+- 测试亲跑复验：G1 全量 481/0/1i（478+3）+ e2e docx_export 13/13（12 既有零改动 + t22_list_item_multiline 新断言 + full_circle 维持）——与汇报零漂移
+- 包体核实：wasm 3,970,827 B（+0.042% 纯胶水兑现）；dist/main.js 零变化
+
+Stage Summary:
+- t22 审查通过零返工：t20 登记残余「多行 item 续行缩进」翻转为已表达（单段 w:br + 悬挂几何与编号抽象层级同值对齐）
+- **Office 线无需用户裁决的机械增量至此彻底清空**：全部剩余缺口带裁决前置——①code lang/fence（库层无语法高亮面）②link URL（MarkSpan 域边界，mdcore MD 域上游）③numPr/pBdr/ind/rFonts 读面往返承载（读模型扩字段）④多列族/自定义编号格式（包装面暴露按需）⑤XLSX 数值/布尔类型推断策略 ⑥导入导出上限对称性 ⑦富文本（模型无 marks 载荷=无消费方）
+- mdcore e967cf2 → ef74282 推送；G1 481/0/1i 新基线
