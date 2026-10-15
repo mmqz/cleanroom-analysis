@@ -2737,3 +2737,18 @@ Stage Summary:
 - Round 4 四轮全部收口：XLSX 类型语义（CellData 三分模型）+ 资源安全（33 项限额全执行 + 稀疏炸弹闭环）+ DOCX 保真（numPr/ind 承载 + 矩阵单一真源）+ 端到端终态（G1 481→517 零回归）
 - 暂缓事项遵守：富文本/MarkSpan URL/自定义编号格式/code lang/统一 CRDT 未触碰（登记维持）
 - 双仓终态：mdcore 7055595 / 分析仓本节提交——推送后核对远端 HEAD 一致、工作区干净
+---
+Task ID: r5-t0
+Agent: 主代理（Round 5 执行计划 T0）
+Task: 环境与基线确认——双仓状态/工具链/门禁基线复跑/凭据检查
+
+Work Log:
+- 双仓核实：mdcore 7055595（r4-t3）= 远端 HEAD 零漂移；分析仓 a5c0e4a（r4-t4）= 远端 HEAD 零漂移；双工作区 clean 零未提交改动（Round 4 收口态延续，无回滚发生；初始「ahead 6/16」为陈旧远端跟踪引用，fetch 后归零）
+- 工具链核实：rustc/cargo 1.99.0 + wasm32-unknown-unknown + clippy/rustfmt 在位；node v24.21.0；web node_modules/dist（main.js + mdcore_wasm_bg.wasm）在位；wasm-bindgen CLI 在位
+- 凭据核实：token.env 600 权限在仓外 /home/z/my-project/scripts/，不在任何 git 追踪面
+- 门禁基线复跑（全部亲跑，零历史引用）：G1 **517/0/1i**；PDF 四面 68/79/81+6i/109+6i 零漂移 + perf --ignored 6/6；clippy native --all-targets 恰 2（wasm_bindgen static_method_of lib.rs:212/221 基线；grep 计数 4 = 2 实体 + 2 汇总行，实体即基线）+ PDF 三面 0 + wasm32 --all-targets 2 同基线；fmt 0；scan 0 hit-paths；wasm32 check+--all-targets 过；web 七套件 **18/15/28/9/9/9/13 全绿**（smoke/ime 经 results JSON summary failed=0 核验）
+- T1 现状锚点核实（为派发准备）：docx_import.rs `docx_to_markdown` Block::Paragraph 分支完全忽略 `p.numbering`（列表降级为普通段落——FIDELITY.md L67 登记的「web 消费链 list 映射」缺口即本轮主题）；office-io 读面 ParagraphNumbering{num_id,ilvl,kind,format}（r4-t3）+ NumberingIndex 解析链已在位待消费；mdcore list 解析语义锚点 markdown.rs `list_item_of`（缩进 2 空格/级、`- `/`* `/`+ ` 无序、`N. `/`N) ` 有序）；夹具链 build_sample_docx→gen_docx_fixture.rs→web/tests/fixtures/import_sample.docx→docx_import.py 9 checks
+
+Stage Summary:
+- T0 通过：环境与基线与 r4-t4 收口态完全一致，零异常零回归，Round 5 起点干净
+- 立即启动 T1（DOCX 列表导入映射）派发子代理执行
