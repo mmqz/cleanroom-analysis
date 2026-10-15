@@ -2826,3 +2826,19 @@ Stage Summary:
 - mdcore 提交推送（新基线 530/0/1i）；分析仓 CAPABILITY_NOTES §13 + FIDELITY + worklog 提交推送
 - 裁决问题待用户：①office-io 锚点写面 A[最小加性扩] vs 0[维持登记待 MarkSpan URL 一并做] ②若 A 书签写面同批/分离/不做 ③Internal 引擎不可达/HYPERLINK 域红线维持（陈述性）
 - T3（集成与收口）即刻执行
+---
+Task ID: r5-t3
+Agent: 主代理（Round 5 T3 集成与收口）
+Task: 端到端收口——文档链同步（能力矩阵/保真/夹具说明/HANDOFF）+ 全门禁快照 + 终审 + 双仓终态
+
+Work Log:
+- 文档链同步：REPORT.md r5 追记（§9 历史表 numPr/ind 行翻转留痕指向 FIDELITY 单一真源 + r5-t1 列表映射增量 + r5-t2 评估指针 + 夹具 26,625→31,733 B 说明）；HANDOFF L-MD 行（main 7055595→00ad88b、链尾 +a5c314b[G1 525]/00ad88b[G1 530] 两节点、九门禁 517→530、web 七套件 docx_import 9→11）+ L3 行 Round 5 段（t1 列表映射全语义/t2 评估与裁决点/t3 收口，两轮 lock 零 diff）
+- 全门禁快照（主代理亲跑，当前 HEAD 一次完整快照）：G1 **530/0/1i**；PDF 四面 68/79/81+6i/109+6i 零漂移 + perf 6/6；clippy native 恰 2（wasm_bindgen 基线）+ PDF 三面 0 + wasm32 --all-targets 2；fmt 0；scan 0 hit-paths；wasm32 check+--all-targets 过；Cargo.lock 零 diff；web 七套件 **18/15/28/11/13/9/9 全绿**（本轮补跑 contract/smoke/ime/xlsx×2 五套件与 t2 审查时点 docx 两套件合并成完整快照；smoke/ime 经 results JSON failed=0 核验）
+- 终审核对：①代码差异——Round 5 两轮 mdcore 恰 6 文件（t1 产品面 4：docx_import.rs+main.ts+docx_import.py+夹具；t2 tests-only 2），office-io 产品代码与 mdcore crate 零改动；②依赖——Cargo.lock 两轮零 diff 实证，NOTICES v1.5 恒（零新三方依赖）；③文档声明——FIDELITY §5/CAPABILITY_NOTES §13/CAPABILITIES/REPORT 追记/HANDOFF 全部与代码对齐，未实测不宣称零违例（t2 web 端到端不可达边界、t1 非连续续号降级、复合往返不宣称均显式登记）；④裁决纪律——RunSpec 公开模型扩面未实施（t2 STOP 点遵守），裁决三问成文
+- Round 5 执行纪律核对：先 T1 后 T2 未重复派发 ✓；两子代理均一次通过零返工（审查通过即推送：a5c314b/00ad88b + dda71e1/9854e29）✓；暂缓项零触碰（富文本/MarkSpan URL/CRDT/融合——t2 评估引用为上游上下文未实施）✓；无裁决外等待（连续执行 T0→T3）✓
+
+Stage Summary:
+- Round 5 三轮全部收口：DOCX 列表导入映射落地（FIDELITY §3 登记缺口闭项——列表段从降级普通段升级结构化映射，e2e 证列表达 BlockTree 终端消费面）+ 超链接锚点写回评估交付（tests-only 五探针 + §13 方案，公开模型零变更，裁决三问呈用户）
+- 新基线：G1 **530/0/1i**、web 七套件 18/15/28/**11**/13/9/9、PDF 四面与 clippy/fmt/scan/wasm32 全基线恒、NOTICES v1.5 恒
+- 待用户裁决：①office-io 锚点写面 Option A[RunSpec+anchor 加性扩] vs 0[维持登记待 MarkSpan URL 一并做] ②若 A 书签写面 bookmark_paragraph 同批/分离/不做 ③（陈述性）Internal 写回引擎不可达/HYPERLINK 域红线/MarkSpan URL 暂缓——维持登记
+- 双仓终态：mdcore 00ad88b = 远端零漂移工作区 clean；分析仓本节提交推送后核对

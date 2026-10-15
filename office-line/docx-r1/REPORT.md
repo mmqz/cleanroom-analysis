@@ -662,3 +662,15 @@ dist −45 B = TS 面注释剥除 + degradedBlockCount Set 字面量缩短。
 软换行 + 段落级 hanging `w:ind`〔left = 720×(ilvl+1)、hanging 360，
 与编号抽象层级同值〕→ 续行与首行文字列对齐；单行项字节级零变化），
 mdcore ef74282，详见 worklog t22 节。
+
+**r5 追记（2026-10-17，Round 5 DOCX 消费链补全）**：上表「numPr/
+pBdr/ind/rFonts 读面往返」行已被 r4-t3 翻转（numPr/ind 读面完整承载
+——保真判定自 r4-t3 起**单一真源 = docx-r1/FIDELITY.md**，本表为
+t20 时点历史快照）。Round 5 两增量：① r5-t1 **DOCX 列表导入映射**
+（`docx_import.rs` 消费 r4-t3 numbering 读面——列表段此前降级普通
+段落，现 Bullet→`- `/Ordered→`{n}.`/嵌套 2×min(ilvl,8) 空格/降级面
+五类 stats 计数可诊断；映射语义与降级登记 = FIDELITY §5；夹具
+`import_sample.docx` 扩列表节 26,625→31,733 B，web e2e 9→11 checks）
+；② r5-t2 **超链接锚点写回评估**（tests-only 五探针 + 方案与裁决点
+= CAPABILITY_NOTES §13——RunSpec 公开模型扩面**未实施**，呈用户
+裁决）。mdcore a5c314b/00ad88b，G1 517→530 零回归。
