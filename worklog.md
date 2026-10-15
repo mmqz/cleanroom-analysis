@@ -2704,3 +2704,20 @@ Stage Summary:
 - r4-t2 完成度：限制清单 33 项全部有执行点或明确登记理由（无「仅文档宣称」残留——SECURITY_POLICY v1.2 全量校准）；G1 491→512；七套件零断言改动全绿；Cargo.lock 零 diff；包体 −32,374 B（死码剥离面变化）
 - 稀疏包围盒炸弹修复 = 本轮最高价值安全闭环（550GB 分配面 → 门 3 前置 typed 拒）
 - mdcore 1dd5cb2 → 6da3d10；分析仓文档四件 + 本 worklog 节提交推送（主代理）
+---
+Task ID: r4-t3
+Agent: 子代理（矩阵+方案+实施，三连切断于门禁/文档阶段）+ 主代理接管（门禁亲跑+文档+提交）
+Task: Round 4 T3 DOCX 读写保真与内容承载——内容损失矩阵 + 最小保真方案 + numPr/ind 读面承载实施
+
+Work Log:
+- T3.1 矩阵：24 项五态判定（以产品代码与测试一手判定，不据引擎理论能力）——完整承载 8→10（+numPr/+ind 本轮）、部分承载 4、写入降级 2（可诊断）、读取丢失 8（3 项引擎私有性结构性）、尚未验证 0（逐行锚点）；落档新建 docx-r1/FIDELITY.md（DOCX 保真单一真源，循 xlsx-r1/FIDELITY §8 先例）
+- 引擎面一手核验（CAPABILITY_NOTES §12）：numbering 链全公开（numId→kind 解析读面可达）；Bold.val/Strike.val/Underline.val/RunFonts/ParagraphBorders 六槽私有——presence-only 承载对显式关闭形态（w:val="none"/"false"）会误报，宁缺毋错登记不承载；Indent 全公开可承载；HyperlinkType::Anchor 写面在但 RunSpec 扩字段另行裁决
+- T3.2 方案论证：A 原始 XML 保留（模型侵入大+触红线）否决 / C 拒绝不安全重写（零增益——numPr/ind 是 pPr 结构性字段）否决 / **B 最小版选定**（模型 +2 Option 字段只增不改，循 r4-t1 CellData 先例）
+- T3.3 实施（子代理完成代码，主代理验证）：ParagraphNumbering{num_id, ilvl, kind, format} + NumberingIndex 解析链 + 悬空/numId=0/numStyleLink 边界三分处置 + ParagraphIndent{left,right,special} + docx_roundtrip 三新测试（读承载逐字段 / 悬空+自定义 lowerLetter numFmt 注入严格拒 vs 兼容承载 / 读→改→写→读全环 ZIP 部件+rels 对比——预期丢失集恰={footnotes.xml, media/*} 非意外删除）
+- 子代理切断事故：三次超时派发（矩阵阶段死→b 轮接力做矩阵+方案+实施→门禁阶段死）——主代理接管亲跑全门禁 + 补写分析仓三文档（FIDELITY.md 新建/CAPABILITY_NOTES §12/CAPABILITIES 补注）
+- 门禁（主代理亲跑全绿）：G1 **517/0/1i**（512+5：docx_roundtrip 26→28 + 内联 +2）；PDF 四面 68/79/81+6i/109+6i 零漂移；clippy native 2 + wasm32 --all-targets 2；fmt 0；scan 0；wasm32 check+--all-targets 过；Cargo.lock 零 diff；web contract 18 + smoke 15 + docx_import 9 + docx_export 13 全绿
+
+Stage Summary:
+- r4-t3 完成：numPr/ind 读面完整承载（写回降级显式化可诊断），保真矩阵 24 项全部有锚点判定，读→改→写全环验证非目标内容不意外删除；全量 OOXML 无损编辑不宣称（验收红线遵守）
+- t20 登记的「读面往返承载（需读模型扩字段裁决）」缺口正式闭环（numPr/ind 两面）
+- mdcore 6da3d10 → 本轮提交；分析仓文档四件（FIDELITY.md 单一真源建立）+ 本 worklog 节推送
