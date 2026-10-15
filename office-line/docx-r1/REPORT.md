@@ -655,3 +655,10 @@ dist −45 B = TS 面注释剥除 + degradedBlockCount Set 字面量缩短。
 | 引用上下文非段落子块不挂 ind/pBdr | 登记（防御形态） | markdown 解析器不产此形态（attach 恒 root） |
 | numPr/pBdr/ind/rFonts 读面往返 | 未核不宣称 | 读模型无字段（t20-a 遗留④——读面扩字段需单独裁决） |
 | 多列族混排/自定义编号格式 | 未暴露 | office-io 包装面（引擎能力在，按需增量） |
+
+**t22 追记（2026-10-16）**：上表「多行 list item 续行缩进对齐」已
+从登记残余**翻转为已表达**（office-io `DocxWriter::list_item_lines`：
+一个列表项 = 一个 OOXML 段落——行间 `w:br w:type="textWrapping"`
+软换行 + 段落级 hanging `w:ind`〔left = 720×(ilvl+1)、hanging 360，
+与编号抽象层级同值〕→ 续行与首行文字列对齐；单行项字节级零变化），
+mdcore ef74282，详见 worklog t22 节。

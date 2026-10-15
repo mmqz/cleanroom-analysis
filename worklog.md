@@ -2580,3 +2580,22 @@ Stage Summary:
 - t21 审查通过零返工：t20-review 观察项闭合，wasm32 测试面进门禁（此后 check 与 clippy 双 --all-targets 全绿为基线）
 - mdcore 5028ec4 → e967cf2 推送；G1 478/0/1i 维持
 - Office 线无需裁决的机械增量至此清空：剩余缺口全部带裁决前置（XLSX 类型面策略/导入导出上限对称/富文本消费方/MarKSpan URL 域边界/读面往返承载模型扩列）
+---
+Task ID: t22
+Agent: 子代理（多行列表项续行缩进微增量）
+Task: DOCX 导出多行列表项续行缩进对齐——t20 登记的映射层残余项（最后一件无需裁决的机械增量），office-io 新面 + docx_export 映射接线 + 测试三面
+
+Work Log:
+- 现状确认：ListItem 多行文本（op 面可构造——ReplaceText 无换行校验 op.rs:127-139；markdown 解析恒单行）当前导出 = 首行编号段 + 余行普通段（每行独立 body 级段落，无 numPr 无 ind——续行视觉顶格 = 不对齐根因，亦是项结构散失）；e2e 既有 12 断言零踩踏（DEGRADED_MD 全单行 item）
+- 设计选择（映射层内部决策，任务优先项落地）：**单段落 + w:br + 段落级 hanging indent**——一手源码核验无 API 障碍（`Run::add_break(BreakType::TextWrapping)` run.rs:247、`Paragraph::indent` 四参 + `SpecialIndentType::Hanging`——退回形态未启用）；理由：①一个列表项 = 一个 OOXML 段落（numPr 单点）语义最正确，块内 `\n` = 项内软换行正是 w:br 语义；②对齐几何 = 编号抽象层级既有悬挂缩进（marker 列 = 720×ilvl+360、首行文字列 = left = 720×(ilvl+1)），br 续行起于段落 left → 与首行文字列精确同列；③新方法同值显式直挂段落级 `w:ind`（Word 自产文档惯例形态；document.xml 自含几何 + 渲染器对 numbering 层级 pPr 应用不全时更鲁棒）；④读面对称（office-io 读面 br→`\n` docx.rs:1633 t16 约定——多行项读回单段含 `\n`，文本层多行形态保持；列表 kind 往返等值仍不宣称，读模型无 numPr 登记维持）
+- /tmp 独立探针（docx-rs 0.4.22 raw build）先证序列化形：`<w:pPr>…<w:numPr>…</w:numPr><w:ind w:left="720" w:right="0" w:hanging="360" /></w:pPr>` + `<w:r><w:rPr /><w:br w:type="textWrapping" /></w:r>`（邻接串 = 同段性断言基础）
+- office-io 扩面（只增不改）：新 `DocxWriter::list_item_lines(&[Vec<RunSpec>], ListKind, ilvl)`（ilvl typed 验证 + numbering 三层接线同 list_item；空行 = 空 run 组仅 br 分隔）+ 新 pub const `LIST_HANGING_INDENT=360`（t20 抽象层原字面 360 改引此常量——零行为变化，单一真源）；内部 `specs_to_paragraph` per-spec 构造抽 `add_spec_to_paragraph`（纯代码搬移，既有 specs_expand_* 测试锁零漂移）+ 新 `spec_lines_to_paragraph`（行组间插 br run）；既有 `list_item` 签名与行为零漂移
+- 映射改法（docx_export.rs ListItem 分支）：rich_lines 行切后单行（≤1）走既有 `list_item` 路径**不动**（无显式 ind，单行项导出字节级零变化——翻转测试内单行对照断言锚定）；多行走 `list_item_lines`（每行 run 序 = rich_lines 平移行内 marks 后 runs_from）；模块文档 t22 节 + 映射表 ListItem 行 + 全局文本行规则 ListItem 例外注记
+- 测试三面：office-io 内联 `list_item_lines_model_level`（ilvl 拒 + 模型级 numPr/ind 双挂 + br run 行边界子序）+ docx_roundtrip `t22_list_item_multiline_xml_level`（numPr ×3 单点 + br ×3 空行也 br + ilvl0/1 邻接 ind 步进 720/1440 hanging 360 + 单行项 pPr 止于 numPr 零漂移对照 + 读回 br→\n 单段零损）；mdc-wasm t20 平铺断言**语义翻转改写**（`list_multiline_item_first_numbered_rest_plain` → `list_multiline_item_single_paragraph_br_hanging`：单段 numPr+br+ind 断言 + CRLF 单段 + 单行零漂移对照）+ 新增 `list_multiline_item_nested_depth_and_marks`（depth 2 → ind 1440、三行含空行 br ×2、strong 跨行 char 平移）；e2e docx_export.py **+1 断言** `t22_multiline_item_br_hanging_xml`（markdown 注入单行 item → op 面 replace_text 插 `\n` 构造多行 → 导出 XML：单段 numPr + br + hanging ind 邻接串 + 文本在场——既有 12 断言零改动）
+- 门禁全绿（亲跑）：G1 **481/0/1i**（478 基线 +3 只增：office-io 82→84〔内联 +1 + roundtrip +1〕、mdc-wasm 48→49〔翻转净 0 + 嵌套新测 +1〕）；PDF 四面 68/79/81+6i/109+6i 零漂移 + perf --ignored 6/6；clippy native --all-targets 恰 2 基线（1 条新 doc_lazy_continuation 已修——续行不以 `+` 开头）+ PDF 三面 0；fmt 0；scan 0 hit-paths；wasm32 check + clippy 双 --all-targets 过（恰 2 同基线，t21 收严口径）；Cargo.lock 零 diff；web 七套件 **18/15/28/9/9/9/13** 全绿（contract/smoke/ime/docx_import/xlsx_import/xlsx_export 零回归 + docx_export 13/13 = 12 零改动 + 1 新）
+- 包体：wasm 3,969,144 → **3,970,827 B（+1,683 = +0.042%）**——纯胶水近零增长兑现；dist/main.js 557,211 B 零变化（web 面无代码改动，仅测试文件 +1 断言）
+
+Stage Summary:
+- mdcore 本地 **ef74282**（4 文件 +443/−66：office-io/src/docx.rs、office-io/tests/docx_roundtrip.rs、mdc-wasm/docx_export.rs、web/tests/docx_export.py；不 push——主代理审查后推）；分析仓本轮本地提交（worklog t22 + REPORT §9 Round 5 追记 + CAPABILITIES t20 增量处补注；不 push）
+- t20 残余登记项「多行 item 续行缩进」翻转为已表达：一个列表项 = 一个 OOXML 段落（w:br 软换行 + 段落级 hanging ind 与编号抽象层级同值）——续行与首行文字列对齐；单行项字节级零变化
+- Office 线机械增量彻底清空后的最后一件收口：残余降级全部带裁决前置（code lang/fence 库层、link URL 域边界、读面往返承载模型扩列、多列族/自定义编号包装面）——下一增量必须先过主代理裁决

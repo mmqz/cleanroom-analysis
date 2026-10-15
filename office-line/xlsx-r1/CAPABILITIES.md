@@ -241,6 +241,17 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      字段——e2e 只做导出 XML 面 + 文本面回归，往返承载面待读面
      扩字段裁决）、多列族混排/自定义编号格式（引擎能力在、包装
      面未暴露）。
+   - **消费面补注（t22，2026-10-16——DOCX 导出多行列表项续行
+     缩进微增量：t20 登记残余翻转）**：mdcore ef74282（office-io
+     `DocxWriter::list_item_lines` + docx_export 映射多行接线）。
+     多行 list item 文本（op 面可构造）导出 = **一个列表项 = 一个
+     OOXML 段落**（行间 `w:br w:type="textWrapping"` 软换行 +
+     段落级 hanging `w:ind`：left = 720×(ilvl+1)、hanging 360——
+     与编号抽象层级同值悬挂几何）→ 续行与首行文字列对齐；单行项
+     字节级零变化。e2e 实证（docx_export.py 12→13/13，既有 12
+     断言零改动）：op 面构造多行 item → 单段 numPr + br +
+     hanging ind 邻接串断言。**不宣称**：列表 kind 往返等值
+     （读模型无 numPr——维持 t20 口径）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 
