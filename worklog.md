@@ -2530,3 +2530,21 @@ Stage Summary:
 - t18 登记降级整批消解：list（numbering 三层 + rels 接线）/行内 code（rFonts）/行内 del·u（strike·underline——§2.6 顺带）/hr（pBdr bottom）/quote（ind+pBdr left 嵌套步进）/块级 code（双通道等宽）——web 状态行降级计数 5→1（仅 code_block lang/fence 库层不可达维持）
 - 探针→产品测试移植闭环：t20-a spike 16 断言 = office-io `t20_write_faces_xml_level` 产品 API 移植 + mdc-wasm/e2e XML 面直断言三通道
 - 剩余缺口（后续增量候选，非阻塞）：读面 numPr/pBdr/ind/rFonts 模型承载（往返等值前提——需 office-io 读模型扩字段）；code lang/fence（库层）；link URL（MarkSpan 上游——mdcore MD 域裁决前置）；多列族混排/自定义编号格式（引擎在、包装面未暴露）
+---
+Task ID: t20-review
+Agent: 主代理（t20 独立审查）
+Task: t20 DOCX 导出消降级切片——代码与测试证据独立审查（重点：遗留提交 5028ec4 采信 + 全门禁亲跑）
+
+Work Log:
+- 局面核实：首次 t20 派发超时（context deadline）但服务端实际执行至代码提交（5028ec4）后被切断——b 轮子代理发现遗留提交、对照 WRITE_FACE_PROBE §2/§4 逐面审查（两陷阱规避/六行映射/三域纪律/锁零 diff）后零改动采纳 + 补全门禁亲跑与文档；主代理对遗留提交独立四维复核
+- 提交核实：mdcore 5028ec4（5 文件 +1029/−56：docx.rs +374/docx_export.rs +417/docx_roundtrip.rs +244/web main.ts +9/docx_export.py +41——范围恰为 docx 导出面）；Cargo.lock 零 diff 独立实证（git show 空 diff）；分析仓 9781371（REPORT §9 Round 5 + CAPABILITIES t20 + worklog t20，3 文件 +164）
+- 边界核实：docx_export.rs 增量零 docx-rs/calamine 类型泄漏（grep 空匹配）；RunSpec 扩位既有构造器恒 false 零漂移；三域纪律在位
+- 测试亲跑复验：office-io 82（48+3+24+1+6，+4）+ mdc-wasm 48（+5）+ G1 **478/0/1i** 全量亲跑；clippy native 恰 2 wasm_bindgen 基线 + PDF 三面 0；fmt 0；scan 0+0；wasm32 check 过；e2e docx_export **12/12**（四个 t20 XML 结构面新断言 + full_circle_reimport 维持 + contract 无 pageerror）——全部与汇报零漂移
+- 额外发现（登记观察项非回退）：`cargo clippy --target wasm32-unknown-unknown --all-targets` 下 write_roundtrip 编译失败（add_sheet_streaming 在 wasm32 cfg 缺席 + 测试 244 行未同步 cfg）——**t19 target-split 既存结构性边界**（write.rs 最后改动即 t19 提交，t20 未触碰；门禁口径 wasm32 仅 check 不含 --all-targets，t19-review「双面过」与口径自洽）；修复选项（测试面 cfg 化）留微增量裁决，「既有测试只增不改」红线不自行扩动
+- 文档核实：REPORT §9 Round 5 五扩表（含幂等续写钉定/常量面/两陷阱实录）+ 映射翻转表 + 包体 +0.47% 胶水兑现登记；CAPABILITIES t20 可表达面翻转 + 往返承载不宣称口径在档
+
+Stage Summary:
+- t20 审查通过零返工：t18 登记降级整批消解（list/monospace/hr/quote/块级 code 等宽/行内 del·u），G1 469→478，e2e docx_export 8→12，wasm 包体 +0.47% 预判兑现
+- 残余降级四件维持登记：code lang/fence（库层）、link URL（MarkSpan 上游 mdcore MD 域裁决前置）、多行 item 续行缩进（映射登记）、读面往返承载（读模型扩字段裁决）
+- 消费面四部曲后首个增量化收口：office 消费面全宣称与真实能力对齐（可表达面全表达，不可表达面显式登记）
+- mdcore 7705b44 → 5028ec4 推送；观察项（wasm32 --all-targets 测试编译）登记待微增量
