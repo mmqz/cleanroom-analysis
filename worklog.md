@@ -2666,3 +2666,22 @@ Stage Summary:
 - 用户裁决四方向全部落地并实测：①默认保留（前导零/数字文本 Text 原样——探针+往返双证）②日期必须依据（numFmt/t="d" 证据进模型，纯序列数=Number；显式转换无据→None）③公式两通道区分（values/typed=缓存值，formulas/formula_at=文本，replay_cell 联接）④不支持类型可诊断（Error 码文本保留；ISO/Error 写面降级登记；DurationIso 防御性承载）
 - t22-review 裁决前置项⑤「XLSX 数值/布尔类型推断策略」收口：读面类型模型 + kind 保持重放实测（DateTime/Duration kind 往返经 numFmt 证据链；Text/Number/Boolean 保持；1904 历法保持）；wasm 导出面全 Text 维持为裁决正确语义（BlockTree 类型载荷 = mdcore 域上游裁决登记）
 - 登记缺口：BlockTree 扩类型载荷（若立项 wasm 导出可升级按 kind 分派——replay 通道已就绪）；numFmt 显示形态维持不宣称；公式求值引擎未立项
+---
+Task ID: r4-t1-review
+Agent: 主代理（r4-t1 独立审查）
+Task: T1 XLSX 类型推断与转换规则——四维独立审查
+
+Work Log:
+- 派发事故说明：T1 子代理派发两次均网关超时（context deadline），但服务端实际完整执行——scratch 212 行全程锚点 + mdcore 1dd5cb2 + 分析仓 e9745e4 双本地提交在位（未 push 合规）；主代理循 t20 先例对遗留产物独立审查
+- 提交核实：mdcore 1dd5cb2（4 文件 +1095/−15：io.rs +427 CellData/CellGrid/typed/formula_at/replay_cell、cell_types.rs +606 九测试、xlsx_import.rs 渲染切换、xlsx_export.rs 文档登记）；Cargo.lock 零 diff 实证（git show 空 diff）
+- 边界核实：mdcore-wasm 增量 5 处 calamine 匹配逐条精查全为注释（模块文档+行内），代码面零泄漏；CellData 独立 pub enum（office-io 自有类型层）；既有 values: Range<Data> 面不变（write_roundtrip/corpus_harness/range_anchor_pinned/docx 面零改动——既有消费方零破坏实证）；三域纪律在位
+- 测试亲跑复验：office-io 93/0（84+9）+ G1 全量 491/0/1i + web xlsx_import 9/9 + xlsx_export 9/9（零断言改动全过 = 显示面兼容 e2e 亲证，R12 规则兑现）
+- 文档核实：FIDELITY §8.1 R1-R13 类型规则依据表（每条：规则/一手源码依据/测试锚点——R4 日期 numFmt 证据/R7 公式两通道/R10 显式转换有据/R11 1904 纪元/R13 类型保持重放）+ §8.2 降级登记 + §8.3 模型面 API 清单 + CAPABILITIES C1 增量 + xlsx-r2 REPORT §10
+- 裁决落地核对：用户四条裁决方向逐条兑现——默认保留（R1）/日期明确依据（R4-R6 numFmt 或 t="d" 证据，纯 Float 永不升级）/公式两通道区分（R7 formula_at 安全联接）/可诊断结果（R9 错误格码文本 + §8.2 降级登记非静默）
+- flake 登记采信：r23_fingerprint 负载敏感一次失败（mdcore 域时间型测试，与 office 改动零代码路径交集；隔离 8/8 + 后续两次全量绿）——如实登记不改码，合规
+
+Stage Summary:
+- r4-t1 审查通过零返工：XLSX 类型语义层落地（CellData 九变体三分——原始值/推断类型/显式转换），G1 481→491，t22-review 裁决前置项⑤「XLSX 数值/布尔类型推断策略」正式闭环
+- mdcore ef74282 → 1dd5cb2 推送；分析仓 e9745e4 → 本节提交推送
+- 显示面兼容策略兑现：import markdown 逐字不变（t17 既有断言即钉定），类型信息进模型供 replay/导出/未来消费方
+- T2（导入/导出资源上限与安全边界）即刻派发
