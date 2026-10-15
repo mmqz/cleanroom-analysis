@@ -20,9 +20,9 @@
 | 9 | 图片（PNG）与媒体关系 | 读取丢失（位置/尺寸不读；媒体清单读 t14）；写面可达 | media 清单 | — | add_image | t14 |
 | 10 | PAGE/NUMPAGES 域 | 部分承载（读面缓存文本保留；域结构不承载——渲染期计算语义，登记） | 文本透传 | — | add_page_number 族 | t14 |
 | 11 | HYPERLINK 域 | **绝不暴露**（引擎 todo!() 崩溃面——t14 登记，红线维持） | — | — | — | — |
-| 12 | 列表编号 numPr 结构 | **完整承载（r4-t3 本轮）** | carry_numbering（NumberingIndex：numId→num 桥→abstractNum→ilvl 级 numFmt 解析） | ParagraphNumbering{num_id, ilvl, kind, format} | list_item/list_item_lines（自有抽象 100/101） | r4t3_numbering_and_indent_read_carry |
-| 13 | numPr 语义解析边界 | 完整承载（numId=0 = OOXML 去编号惯例→非列表；num 桥悬空严格拒/兼容 BrokenReference 警告+结构承载 kind=None；numStyleLink/ilvl 超定义域软警告+结构承载） | NumberingIndex::build | 同上 | — | r4t3_numbering_dangling_custom_format_injected_ind |
-| 14 | 自定义编号格式（lowerLetter 等原生 numFmt） | 写入降级（format 字段承载原生 numFmt 使降级**可诊断**——写回经自有抽象 100/101 decimal/bullet，原生格式不回写） | format: Option<String> | 同上 | ListKind 两态 | 同上（自定义 numFmt 注入测试） |
+| 12 | 列表编号 numPr 结构 | **完整承载（r4-t3 本轮）** | carry_numbering（NumberingIndex：numId→num 桥→abstractNum→ilvl 级 numFmt 解析） | ParagraphNumbering{num_id, ilvl, kind, format} | list_item/list_item_lines（自有抽象 100/101） | r4t3_numbering_and_indent_read_carry + **web 消费链映射 r5-t1**（docx_import 8 测试 + e2e，见 §5） |
+| 13 | numPr 语义解析边界 | 完整承载（numId=0 = OOXML 去编号惯例→非列表；num 桥悬空严格拒/兼容 BrokenReference 警告+结构承载 kind=None；numStyleLink/ilvl 超定义域软警告+结构承载） | NumberingIndex::build | 同上 | — | r4t3_numbering_dangling_custom_format_injected_ind；**消费面（r5-t1）：kind=None / numFmt `none` → 普通段落降级（非崩溃非静默列表，`list_items_degraded` 计数）** |
+| 14 | 自定义编号格式（lowerLetter 等原生 numFmt） | 写入降级（format 字段承载原生 numFmt 使降级**可诊断**——写回经自有抽象 100/101 decimal/bullet，原生格式不回写）；**导入消费面（r5-t1）同步降级：有序序号标准化 decimal（`list_markers_normalized` 计数）** | format: Option<String> | 同上 | ListKind 两态 | 同上（自定义 numFmt 注入测试）+ docx_import list_custom_numfmt_normalizes_to_decimal |
 | 15 | 段落缩进 ind | **完整承载（r4-t3 本轮）** | carry_indent（reader 全属性：left/start/right/end/hanging/firstLine） | ParagraphIndent{left,right,special: FirstLine/Hanging} | quote_paragraph/list_item（固定步进 720/360） | r4t3_numbering_and_indent_read_carry |
 | 16 | ind Chars 单位变体 | 部分承载（hanging_chars 等字段读面可达但单位换算语义不承载——登记） | reader | — | — | — |
 | 17 | 段落边框 pBdr | 写入降级（写面 t20 hr/quote 左框；读面 ParagraphBorders 六槽字段私有不可承载） | — | — | horizontal_rule/quote | t20 |
@@ -64,7 +64,8 @@
 - anchor 超链接写回：引擎 HyperlinkType::Anchor 写面在，但 RunSpec
   扩锚点字段触碰公开模型语义——另行裁决。
 - 脚注/图片读面：引擎结构性不读部件（footnotes.xml / 图片位置）。
-- web 消费链 list 映射（docx_import 列表→markdown）：下一轮候选。
+- ~~web 消费链 list 映射（docx_import 列表→markdown）：下一轮候选~~
+  **r5-t1 已落地闭项**（映射语义与降级登记见 §5）。
 - 全量 OOXML 无损编辑：**不宣称**（验收红线）。
 
 ## 4. 往返验证证据（T3.3）
@@ -83,3 +84,60 @@
   68/79/81+6i/109+6i 零漂移；clippy native 2 + wasm32 --all-targets 2
   基线；fmt 0；scan 0；wasm32 check+--all-targets 过；Cargo.lock 零
   diff；web contract 18 + smoke + docx_import 9 + docx_export 13 全绿。
+
+## 5. web 消费链列表映射（r5-t1，2026-10-17）
+
+`crates/mdcore-wasm/src/docx_import.rs` `docx_to_markdown` 消费
+`ParagraphData.numbering`（此前 `p.numbering` 被完全忽略——列表段降级
+普通段落，即本节闭项的登记缺口）。映射语义（模块文档单一真源随码走）：
+
+- **映射面**：`kind: Some(Bullet)` → `- `；`kind: Some(Ordered)` →
+  `{n}. `（n = 连续列表 run 内计数器）；嵌套缩进 = 2×min(ilvl, 8) 空格
+  （mdcore `list_item_of` depth = indent/2+1——ilvl 0 = 顶级；钳 8 对称
+  写面九级抽象域，`list_depth_clamped` 计数）；计数器 key =
+  (num_id, ilvl)——不同 numId = 独立实例（Word 语义），同 numId 更浅级
+  推进 → 深级清零（Word 多级：父项推进子级重起）。
+- **降级面（全部 stats 计数可诊断 + 模块文档登记）**：
+  - `kind=None`（悬空 numId / numStyleLink / ilvl 超定义域；兼容模式
+    读面 BrokenReference 警告随 stats.warnings）→ 普通段落
+    （`list_items_degraded`）；
+  - numFmt `"none"`（Word 该级不显示 marker）→ 普通段落——不发明数字
+    （宁缺毋错；`list_items_degraded`）；
+  - 有序起始值假定 1（读模型不承载 `w:start`）；同 numId 非连续段
+    **中断重启**（markdown 无持久列表身份；Word 对同 numId 非连续段
+    续号——降级登记）——任何非列表映射块（普通段/标题/表/降级段）
+    清零计数器；
+  - 自定义 numFmt（lowerLetter/upperRoman/…）→ 序号标准化 decimal
+    （`list_markers_normalized`）；
+  - 标题段带 numPr → 标题赢（Word 编号标题仍显示为标题），编号丢弃
+    （`list_numbering_dropped`）且该标题中断列表 run；
+  - ilvl > 8 → 钳 8（`list_depth_clamped`）；空列表项 → marker + 尾
+    空格行（mdcore 解析为空 ListItem——结构保真）；多行列表项
+    （`w:br` 软换行）首行带 marker、续行脱离列表项（既有软换行族降级）。
+- **stats 新增（additive）**：`list_items` / `list_items_degraded` /
+  `list_numbering_dropped` / `list_depth_clamped` /
+  `list_markers_normalized`——既有 key 零变化。
+- **验证证据**（全部亲跑）：原生 8 新测试（映射矩阵+mdcore 解析闭环
+  `list_numbering_maps_to_markdown_lines`/`list_markdown_parses_back_
+  in_mdcore`、降级 `list_degraded_cases_count_and_warn`、标准化
+  `list_custom_numfmt_normalizes_to_decimal`、钳位
+  `list_depth_clamp_at_ilvl8`、标题优先
+  `list_heading_precedence_drops_numbering`、空项
+  `list_empty_item_emits_marker_only`、夹具全链
+  `fixture_markdown_parses_to_list_tree`）+ 夹具扩展（build_sample_docx
+  有序×2 + 嵌套 ilvl1 + 无序×2）+ e2e `docx_import.py` 9→11 checks
+  （`import_list_nesting_depth` 先序深度 + `import_list_markers_and_
+  md_depth` marker/深度逐项；既有 exact 断言同步扩展不降强度——
+  EXPECTED_MD/块类型/计数/undo 回到导入态）。导入→编辑器消费闭环
+  （docx → markdown → BlockTree 嵌套父子/marker）经
+  `mdcore::markdown::markdown_to_tree` 直测 + e2e 双面背书。
+- **不宣称**：列表渲染保真（marker 字形/编号起点/多级拼号形态——
+  `%1.%2.` outline 与 `w:lvlText` 读模型不承载）；editor 列表 → 导出 →
+  重导入单测复合往返（t18/t20 写面、r4-t3 读面、本节消费面三段各自
+  实测，未做单 e2e 复合断言）；`w:start` 起始值 / `w:suff` / isLgl
+  （读模型无字段——扩字段另行裁决）。
+- **门禁（r5-t1 全量亲跑）**：G1 **525/0/1i**（517+8）；PDF 四面
+  68/79/81+6i/109+6i 零漂移 + perf 6/6；clippy native 2（基线）+
+  PDF 三面 0 + wasm32 --all-targets 2；fmt 0；scan 0；wasm32
+  check+--all-targets 过；Cargo.lock 零 diff；web 七套件
+  **18/15/28/11/13/9/9** 全绿（docx_import 9→11）。

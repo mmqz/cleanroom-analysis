@@ -2752,3 +2752,41 @@ Work Log:
 Stage Summary:
 - T0 通过：环境与基线与 r4-t4 收口态完全一致，零异常零回归，Round 5 起点干净
 - 立即启动 T1（DOCX 列表导入映射）派发子代理执行
+
+---
+Task ID: r5-t1
+Agent: 子代理 r5-t1（DOCX 列表导入映射，全阶段一次通过）
+Task: Round 5 T1 DOCX 列表导入映射——numbering 读面承载（r4-t3）→ docx_import 消费链落地（列表段不再降级普通段落）
+
+Work Log:
+- 协议执行：worklog 尾三节（r5-t0/r4-t4/r4-t3）+ FIDELITY/CAPABILITIES + docx_import.rs/docx.rs/markdown.rs/docx_export.rs/main.ts/docx_import.py 全链一手读；scratch 全程在档（/home/z/my-project/scratch-r5t1-progress.md）
+- T1.1 盘点（一手，锚点在档）：读面 ParagraphNumbering{num_id, ilvl, kind, format}（docx.rs:1413）+ 解析链 carry_numbering（docx.rs:1804——悬空严格拒/兼容警告+kind=None、numId=0→None、ilvl 不钳位）；不可达面（w:start/lvlText/isLgl/suff）不扩模型；mdcore list_item_of（markdown.rs:283——depth=indent/2+1、marker 存 attrs、`- `/`1. ` 尾空格项解析为空 ListItem、空行跳过使 `\n\n` 连接与紧凑列表同构树——测试实测验证）；写面对称面 docx_export list_shape（marker 馞字符数字→Ordered + ilvl 钳 0-8）
+- T1.2 映射规则（scratch 定案后实现）：Bullet→`- `；Ordered→`{n}. `（计数器 key=(numId,ilvl)，同 numId 父项推进子级重起，不同 numId 独立，**任何非列表映射块中断清零重启**——Word 续号降级登记）；嵌套 2×min(ilvl,8) 空格钳 8（写面九级域对称）；kind=None（悬空/numStyleLink/超定义域）与 numFmt "none"（Word 该级不显示 marker——不发明数字宁缺毋错）→ 普通段落降级；自定义 numFmt→decimal 标准化；标题+numPr→标题赢编号丢弃；空项→marker+尾空格行（mdcore 空 ListItem 结构保真）；多行列表项续行脱离列表（既有软换行族）；stats additive 五键（list_items/list_items_degraded/list_numbering_dropped/list_depth_clamped/list_markers_normalized）
+- T1.3 实现（docx_import.rs 单文件 +666 行；office-io/mdcore 零改动）：模块文档扩（映射规则+列表降级已知边界）+ IMPORT_MAX_ILVL/ListCounters（HashMap retain 清同 numId 深级）/ListMapping/list_marker_line + docx_to_markdown 列表分支（标题优先→列表分支→共享段落尾——降级段走段落尾自然中断 run）；build_sample_docx +列表节（ordered×2+嵌套 ilvl1+bullet×2——读回 100/101 全 decimal/bullet → e2e 无降级路径）；夹具再生 26,625→31,733 B
+- T1.4 原生测试（docx_import 10→18，+8）：映射矩阵（多级计数/中断重启/独立 numId/无序混合 exact 断言）+ mdcore 解析闭环（markdown_to_tree 顶级序/嵌套父子/marker/depth——docx→markdown→BlockTree 消费链原生证明）+ 降级面（dangling kind=None + numFmt none + 空文本降级 + 警告透传 + 降级段中断重起）+ 自定义 numFmt 标准化 + ilvl 钳位（恰 8 不计/9/99 钳 16 空格 depth 9）+ 标题优先（中断重起）+ 空项 + 夹具全链（fixture_markdown_parses_to_list_tree）；既有 writer_roundtrip（exact md+stats 扩展不降强度）与漂移守卫强化（+list_items==5）；严格模式悬空 = office-io r4t3 zip 锚点（导入面恒 compat——strict 在导入不可达，零漂移）
+- T1.5 web e2e：main.ts DocxImportStats +list_items + 状态行条件段 "N list items"（>0 显示——同 images/slots 惯例）；docx_import.py 9→11 checks（EXPECTED_MD 扩列表行 exact、EXPECTED_BLOCKS 嵌套 depth 1、import_list_nesting_depth 先序深度、import_list_markers_and_md_depth marker/深度逐项、stats 四降级键==0 + "5 list items" 状态行、live editor blockCount 9+列表存活、undo 回到 EXPECTED_MD）；wasm+dist 重建后 11/11 全绿
+- T1.6 门禁（全部亲跑最终源码态）：G1 改动前 517/0/1i（亲跑基线）→ **525/0/1i**（+8 零回归）；PDF 四面 68/79/81+6i/109+6i 零漂移 + perf 6/6；clippy native 恰 2（static_method_of 基线）+ mdc-pdf 三组合 0 + wasm32 --all-targets 2；fmt 0；scan 0；wasm32 check+--all-targets 过；Cargo.lock 零 diff；web 七套件 **18/15/28/11/13/9/9**（docx_import 9→11）全绿；三域纪律 office-io 零改动实证（grep mdcore 仅 description 声明+文档注释）；包体信息面 wasm 3,969,548→3,953,796 B（−15,752）+ dist/main.js +149 B
+- 中途修正三处（如实登记）：HashMap::retain 闭包双参签名；clippy doc_lazy_continuation 新告警（doc 行首 `+ ` 误判嵌套 marker → 措辞改「加空内容行」）——修后回恰 2 基线；两测试期望修正（mdcore 先序语义：中断段落落根层文档序 + 夹具嵌套项为子项非顶级——一手 trace 修正非放宽）
+- 文档三面：FIDELITY.md 矩阵行 12/13/14 消费面注 + §3 缺口闭项（~~web 消费链 list 映射~~）+ 新 §5（映射语义/降级面/stats/证据/不宣称/门禁）；CAPABILITIES.md t16 宣称口径 +列表 + 新「消费面增量（r5-t1）」条 + t20/t22 不宣称口径按现状收窄留痕
+
+Stage Summary:
+- r5-t1 完成：docx 列表导入映射落地（`p.numbering` 完全忽略 → 全语义消费），r4-t3 读面承载首次接入 web 消费链；FIDELITY 登记缺口「web 消费链 list 映射」闭项
+- mdcore 4 文件 +732/−30（docx_import.rs +666、main.ts +11、docx_import.py +85−24、夹具 Bin 26,625→31,733）；office-io/mdcore 域零改动；Cargo.lock 零 diff；不 push（主代理审查后提交）
+- 降级面全登记可诊断（stats 五键 + 兼容警告透传 + 模块文档/§5）；不宣称：列表渲染保真（lvlText 拼号/w:start）、editor→export→import 单 e2e 复合往返（三段各自实测）
+- 待派发：T2（按 Round 5 计划）
+---
+Task ID: r5-t1-review
+Agent: 主代理（r5-t1 独立审查）
+Task: Round 5 T1 DOCX 列表导入映射——四维独立审查
+
+Work Log:
+- 提交核实：mdcore 恰 4 文件（docx_import.rs +666[映射+模块文档+夹具+8 测试]/main.ts +11[类型+状态行 additive]/docx_import.py +85−24[9→11 checks]/夹具二进制再生成 26,625→31,733 B）；office-io 与 mdcore crate 零改动（三域纪律在位）；Cargo.lock 零 diff 实证
+- 边界核实：ListCounters key=(num_id,ilvl) retain 清深级语义精查正确（父项推进子级重起=Word 多级；不同 numId 独立）；降级路径三分（kind=None/format="none"→普通段+计数；标题带 numPr→标题赢+list_numbering_dropped；ilvl>8 钳 8+计数）全部走显式登记非静默；stats 五键 additive 既有 key 零变化；既有断言全部强化非弱化（undo 从「不含尾串」升级为 exact==EXPECTED_MD；块类型 exact 8 序；stats 加严）
+- 测试亲跑复验：G1 全量 **525/0/1i**（517+8，八新测试逐一过含 mdcore 解析闭环/降级/标准化/钳位/标题优先/空项/夹具树/漂移守卫）；PDF 四面 79/81+6i/109+6i + perf 6/6 零漂移；clippy native 恰 2 基线 + PDF 三面 0 + wasm32 --all-targets 2；fmt 0；scan 0；wasm32 check 双面过；web 七套件 **18/15/28/11/13/9/9 全绿**（docx_import 9→11：import_list_nesting_depth 先序嵌套深度 + import_list_markers_and_md_depth marker/深度逐项——列表确达 BlockTree 终端消费面）；ignored=1 疑点排查为我方 awk 列位口径（$6=failed 列），BLUEPRINT_NOTE ignored 测试在位无漂移
+- 产物链核实：dist 再生（main.js 557,360 B +149；wasm 3,953,796 B −15,752/−0.40%）；e2e 11/11 过 = 新 wasm+main.js 实际生效亲证；夹具漂移守卫过 = 夹具与 build_sample_docx 同源
+- 文档核实：FIDELITY.md L67 缺口闭项（删除线+§5 新建：映射语义/降级面/验证证据/不宣称面全量落档——w:start 起始值/非连续续号/单 e2e 复合往返均明确不宣称）；矩阵 12-14 行消费面增量补注；CAPABILITIES.md（xlsx-r1 中央文件——消费面宣称唯一真源所在地）r5-t1 增量条 + t20/t22 不宣称面历史口径精确化（list kind/深度三段各自实测）
+
+Stage Summary:
+- r5-t1 审查通过零返工：FIDELITY 登记的「web 消费链 list 映射」缺口正式闭环（t16 列表降级→结构化映射），G1 517→525，docx_import e2e 9→11
+- mdcore 提交推送（本轮新基线 525/0/1i + web 11）；分析仓 FIDELITY/CAPABILITIES/worklog 提交推送
+- T2（超链接锚点写回评估）即刻派发

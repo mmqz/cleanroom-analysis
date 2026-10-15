@@ -226,14 +226,14 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      docx_import.rs` + web 工具条 UI + `web/tests/docx_import.py`）。
      实测宣称口径：.docx 字节 → 容器三门兼容模式读 → DocxDocument →
      markdown（标题 Heading1-9[7-9 钳 6] / 加粗 / 斜体 / 超链接四变体
-     [Unresolved 降级] / GFM 管道表）→ 既有 `__inject` 重建核 →
-     可编辑活文档（e2e 实证：导入后派发编辑事务块数 +1、undo 键位
-     契约成立）；敌意/截断档案 typed 拒绝（`container_*` 错误码面）
-     且编辑器现状零触碰（e2e 实证）。不导入面计数显式化（图片/
-     页眉页脚/脚注 → stats）——映射规则与已知边界唯一真源 =
-     docx_import.rs 模块文档（docx-r1/REPORT.md §7）。**不宣称**：
-     显示保真（结构映射非渲染语义）、样式语义解释（Title/自定义
-     样式 → 普通段落）、图片/脚注/页眉页脚内容导入。
+     [Unresolved 降级] / GFM 管道表 / **列表[r5-t1 增量，见下条]**）→
+     既有 `__inject` 重建核 → 可编辑活文档（e2e 实证：导入后派发编辑
+     事务块数 +1、undo 键位契约成立）；敌意/截断档案 typed 拒绝
+     （`container_*` 错误码面）且编辑器现状零触碰（e2e 实证）。
+     不导入面计数显式化（图片/页眉页脚/脚注 → stats）——映射规则与
+     已知边界唯一真源 = docx_import.rs 模块文档（docx-r1/REPORT.md
+     §7）。**不宣称**：显示保真（结构映射非渲染语义）、样式语义解释
+     （Title/自定义样式 → 普通段落）、图片/脚注/页眉页脚内容导入。
    - **消费面（t18，2026-10-14——DOCX 导出方向，与 t16 合流 = 往返
      闭环）**：**web 编辑器 .docx 导出已落地**（mdcore `crates/
      mdcore-wasm/src/docx_export.rs` + web 工具条动作钮 +
@@ -296,9 +296,11 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      **不宣称**：code lang/fence 结构（库层不可达——docx-rs 无
      语法高亮/元数据面，降级维持）、link URL（模型层上游缺口
      ——MarkSpan 无 URL 载荷维持）、list/quote/hr/等宽的**导出→
-     重导入往返等值**（office-io 读模型无 numPr/pBdr/ind/rFonts
-     字段——e2e 只做导出 XML 面 + 文本面回归，往返承载面待读面
-     扩字段裁决）、多列族混排/自定义编号格式（引擎能力在、包装
+     重导入往返等值**（t20 时点读模型无 numPr/pBdr/ind/rFonts
+     字段——e2e 只做导出 XML 面 + 文本面回归；**r4-t3 读面已承载
+     numPr/ind + r5-t1 导入消费已落地 list——list 的 kind/深度面
+     三段各自实测（未做单 e2e 复合断言），pBdr/rFonts/quote 往返
+     仍不宣称**）、多列族混排/自定义编号格式（引擎能力在、包装
      面未暴露）。
    - **消费面补注（t22，2026-10-16——DOCX 导出多行列表项续行
      缩进微增量：t20 登记残余翻转）**：mdcore ef74282（office-io
@@ -309,8 +311,36 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      与编号抽象层级同值悬挂几何）→ 续行与首行文字列对齐；单行项
      字节级零变化。e2e 实证（docx_export.py 12→13/13，既有 12
      断言零改动）：op 面构造多行 item → 单段 numPr + br +
-     hanging ind 邻接串断言。**不宣称**：列表 kind 往返等值
-     （读模型无 numPr——维持 t20 口径）。
+     hanging ind 邻接串断言。**不宣称**（t22 时点口径）：列表 kind
+     往返等值（读模型当时无 numPr；**r4-t3 读面已承载 + r5-t1 导入
+     消费已落地——kind/深度面见 r5-t1 增量条，自定义格式往返仍
+     不宣称**）。
+   - **消费面增量（r5-t1，2026-10-17——DOCX 导入列表映射：t16 登记
+     的列表降级闭项）**：`docx_import.rs` `docx_to_markdown` 消费
+     r4-t3 numbering 读面承载（此前 `p.numbering` 被完全忽略——
+     列表段降级普通段落）。**实测宣称口径**：`kind: Some(Bullet)` →
+     `- ` 无序项；`kind: Some(Ordered)` → `{n}. ` 有序项（n = 连续
+     列表 run 内计数器，key=(numId, ilvl)——不同 numId 独立实例
+     [Word 语义]、同 numId 父项推进子级重起、任何非列表映射块中断
+     清零重启）；嵌套缩进 = 2×min(ilvl,8) 空格（mdcore depth =
+     indent/2+1；钳 8 对称写面九级域）。**降级面显式登记（stats
+     additive 计数可诊断：`list_items`/`list_items_degraded`/
+     `list_numbering_dropped`/`list_depth_clamped`/
+     `list_markers_normalized`）**：kind=None（悬空 numId/
+     numStyleLink/ilvl 超定义域——兼容警告随 stats）与 numFmt
+     `"none"` → 普通段落（不发明 marker）；自定义 numFmt
+     （lowerLetter 等）→ 序号标准化 decimal；标题段带 numPr →
+     标题赢编号丢弃；有序起始值假定 1（`w:start` 读模型不承载）；
+     多行列表项续行脱离列表（既有软换行族）。e2e 实证
+     （docx_import.py 9→11/11，夹具扩列表节：嵌套 ilvl1 →
+     BlockTree 子块 depth 1 + marker/深度逐项断言 + 编辑/undo 后
+     列表存活；既有 exact 断言同步扩展不降强度）：导入 markdown →
+     mdcore 解析 → 列表树结构闭环（原生 `fixture_markdown_
+     parses_to_list_tree` 镜像）。单一真源 = docx_import.rs 模块
+     文档 + docx-r1/FIDELITY.md §5。**不宣称**：列表渲染保真
+     （marker 字形/编号起点/`w:lvlText` 拼号形态——读模型无字段）；
+     editor 列表 → 导出 → 重导入单 e2e 复合往返（t18/t20 写面 +
+     r4-t3 读面 + 本消费面三段各自实测）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 
