@@ -2721,3 +2721,19 @@ Stage Summary:
 - r4-t3 完成：numPr/ind 读面完整承载（写回降级显式化可诊断），保真矩阵 24 项全部有锚点判定，读→改→写全环验证非目标内容不意外删除；全量 OOXML 无损编辑不宣称（验收红线遵守）
 - t20 登记的「读面往返承载（需读模型扩字段裁决）」缺口正式闭环（numPr/ind 两面）
 - mdcore 6da3d10 → 本轮提交；分析仓文档四件（FIDELITY.md 单一真源建立）+ 本 worklog 节推送
+---
+Task ID: r4-t4
+Agent: 主代理（Round 4 收口：全门禁快照 + 终审 + HANDOFF 同步）
+Task: Round 4 T4 端到端集成与收口——全量门禁 + 终审五面 + 文档链同步 + 双库终态
+
+Work Log:
+- 全门禁快照（主代理亲跑，一次完整快照）：G1 **517/0/1i**；perf 6/6（pdfc_perf --ignored 正确口径）；PDF 四面 68/79/81+6i/109+6i 零漂移；clippy native 2 + PDF 三面 0 + wasm32 --all-targets 2（恰 wasm_bindgen 基线）；fmt 0；scan 0+0（含 --all 全仓模式）；wasm32 check+--all-targets 过；Cargo.lock 零 diff；web 七套件 **18/15/28/9/9/9/13 全绿**（smoke/ime 经 results JSON summary 字段核验 failed=0 pass=true——套件输出行格式差异不掩盖状态）
+- 链路验证核对：XLSX 导入→类型→导出链（t1 replay_cell 类型保持 + t2 限额 + xlsx_import/export e2e 9+9）；DOCX 读取→修改→写出→重开链（r4t3_roundtrip_read_modify_write ZIP+rels 对比）；mdc-wasm/web 消费接口零变化（r4 三轮全部只增不改——contract 18 断言零改动全过即互证），无新增端到端测试需求
+- 终审五面（主代理逐项）：①代码差异——三轮 15 文件全量复核（t1: io.rs CellData/CellGrid/replay_cell；t2: io.rs 限额 + write.rs 计数器 + docx.rs 限额；t3: docx.rs numPr/ind 承载），全部只增不改、既有消费方零破坏；②错误处理——三分对齐（PrescanRejected 安全类/WriteError::Limit·DocxError::Limit 资源类/InvalidInput 格式类），wasm 码兼容（container_prescan 不变）+ 新码 xlsx_limit/docx_limit；③测试质量——边界三件套（恰=限过/限+1 拒/极端值）+ 双模式同限 + 敌意载荷复用 + flake 如实登记（r23_fingerprint 负载敏感）；④依赖变化——零新三方依赖（Cargo.lock 三轮零 diff 实证），NOTICES v1.5 恒；⑤文档声明——FIDELITY §8（xlsx 类型规则 R1-R13）+ FIDELITY.md（docx 保真矩阵 24 项）+ SECURITY_POLICY v1.2（限额表 33 项）+ CAPABILITIES/CAPABILITY_NOTES 增量全部与代码对齐，「未实测不宣称」零违例
+- HANDOFF 同步：L-MD 行版本链 ef74282→7055595（+r4 三节点 + 基线 517）+ L3 行 Round 4 段（四轮全记录）+ 产物清单 docx-r1 四件
+- Round 4 执行纪律核对：每轮代码或可验证工程交付 ✓；主代理独立复核（T1 四维/T2 接管复验/T3 接管复验）✓；每阶段即时推送 ✓；复用既有探针门禁 ✓；平台切断四次的恢复（t1 服务端完整执行 / t2 a+b 轮接力 + 主代理接管 / t3 三连切断接管）✓；无裁决请求（无真实架构阻塞）✓
+
+Stage Summary:
+- Round 4 四轮全部收口：XLSX 类型语义（CellData 三分模型）+ 资源安全（33 项限额全执行 + 稀疏炸弹闭环）+ DOCX 保真（numPr/ind 承载 + 矩阵单一真源）+ 端到端终态（G1 481→517 零回归）
+- 暂缓事项遵守：富文本/MarkSpan URL/自定义编号格式/code lang/统一 CRDT 未触碰（登记维持）
+- 双仓终态：mdcore 7055595 / 分析仓本节提交——推送后核对远端 HEAD 一致、工作区干净
