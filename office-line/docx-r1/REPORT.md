@@ -527,3 +527,131 @@ TS 包装面。
 4. **e2e 期望锚**：`__blockCount()` = 先序**全节点**计数（含 quote
    容器的段落子块）——DEGRADED_MD 6 块 ≠ 顶层块数 5；降级计数同源
    （`5 simplified` 不计 quote 的段落子块——按块型过滤）。
+
+## 9. Round 5（t20，2026-10-15——写面消降级切片：office-io DocxWriter 五面扩 + docx_export 六行映射改法，t18 登记降级整批消解）
+
+任务：依 WRITE_FACE_PROBE.md（t20-a 一手核验 + 探针 16/16）把
+t18 登记的四件降级（list/monospace/hr/quote）+ 块级 code 等宽 +
+行内 del·u（§2.6 顺带）**整批消解**——office-io `DocxWriter` 写面
+五面新增 + `docx_export.rs` 六行映射改法 + 探针断言集移植为原生/
+e2e 测试。mdcore main 7705b44 → **5028ec4**（5 文件 +1029/−56：
+office-io/src/docx.rs +374、mdc-wasm/docx_export.rs +417、
+office-io/tests/docx_roundtrip.rs +244、web main.ts/docx_export.py）。
+
+### 9.1 office-io 写面五扩（DocxWriter 公共契约面）
+
+| 面 | 新增 API | 语义要点 |
+|---|---|---|
+| numbering 定义面 | `ListKind`（Ordered/Bullet）+ 常量 `ORDERED_NUM_ID=100`/`BULLET_NUM_ID=101`/`MAX_LIST_LEVEL=8` + 私有 `ensure_numberings`（**惰性注册**：首个 `list_item` 时注入） | ordered = decimal outline 式 9 级（lvlText 逐级拼号 `%1.`…`%1.…%9.`，left=720×(i+1) 悬挂 360）；bullet = `•` 9 级同构；numId=abstractNumId=100/101 **避开引擎内建 numId=1**；`save_to_vec` 基态重置含注册位（幂等续写钉定） |
+| 列表段面 | `list_item(&[RunSpec], ListKind, ilvl)`（ilvl typed 验证 0-8） | **必走 `Paragraph::numbering`**（同置 has_numbering → 打包时 document.xml.rels 发射 numbering 关系） |
+| 等宽 run 面 | `RunSpec` 扩 `mono`/`strike`/`underline` 三位 + `styled_full` 构造器 + 常量 `MONO_FONT="Consolas"`/`CODE_FONT="Courier New"` | mono → `Run::fonts(rFonts 三槽 ascii/hAnsi/cs)`；strike → `w:strike`；underline → `w:u single`；既有构造器三位恒 false（零漂移） |
+| hr 面 | `horizontal_rule()` | 空段 + **`ParagraphBorders::with_empty().set(单边 Bottom)`**（size=6/space=1——§2.3 探针参数） |
+| quote 面 | `quote_paragraph(&[RunSpec], depth)` + 常量 `QUOTE_INDENT_STEP=720`/`MAX_QUOTE_DEPTH=8` | `indent(left=720×depth 钳 8)` + `with_empty().set(Left)`（size=12/space=4）；无内建 Quote 样式 → 直接格式 |
+
+块级 code 面：`code_line(text)` = **双通道等宽**（段落级
+`Paragraph::fonts` → `pPr>rPr>rFonts` 兜段落标记 + run 级 rFonts
+保真——同一 `RunFonts` 值复用，零成本双设）。
+
+### 9.2 docx_export.rs 六行映射改法（t18 降级 → t20 表达翻转表）
+
+| 块/mark | t18（Round 4 §8.3） | t20 实测 | 残余 |
+|---|---|---|---|
+| ListItem | marker/depth 丢弃，富段平铺 | `list_shape`：marker 首字符 ASCII 数字 → Ordered（`1.`/`1)` 两形态），`-`/`*`/`+`/缺失 → Bullet；depth（1 基）→ ilvl=depth−1 **钳 0-8**（九级抽象域，越界防御全函数）；首行 = 编号段（marks 保持），余行（op 面多行防御）= 普通段；子块递归保持 | 多行 item 续行无同级缩进对齐（登记）；多列族混排/自定义编号格式（office-io 未暴露，引擎能力在） |
+| 行内 code mark | 纯文本 | `mark_style` 五位；rFonts 三槽 Consolas；runs_from 合并键扩五位 | — |
+| 行内 del/u mark | 纯文本 | strike/`w:u single` 位（§2.6 顺带消解） | — |
+| ThematicBreak | 空段落（无水平线面） | `horizontal_rule()` 空段下边框 | — |
+| Blockquote | 子块平铺（容器/缩进丢） | `quote_paragraph`：ind 720×depth 嵌套步进 + 左边框；段落/嵌套引用承载引用面 | 引用上下文中的 heading/table/code/list/hr 子块不挂 ind/pBdr（markdown 解析器不产此形态，防御递归保持 t18 行为，登记） |
+| CodeBlock | 每行纯文本段（等宽全丢） | 每行 `code_line` 双通道 Courier New | **lang/fence 仍丢**（docx-rs 无语法高亮/元数据面——库层不可达，登记维持） |
+| link mark | 纯文本（模型无 URL 载荷） | 不变 | **上游缺口维持**（MarkSpan 无 URL 载荷——mdcore MD 域裁决前置，非本层降级） |
+
+工程重构：`rich_lines`（行切分 + mark char 偏移平移）提取为单一
+真源（ListItem 首行/余行分道与引用段落共用）；`emit_block` 增
+`quote_depth` 参数（Blockquote 子块递归传 depth+1）。
+
+### 9.3 陷阱两项实录（WRITE_FACE_PROBE §2 核验 → 产品落地验证）
+
+1. **悬空 numPr**：`ParagraphProperty::numbering_property` 直挂路径
+   不置 `has_numbering` → 打包时 document.xml.rels 缺 numbering
+   关系 → 合法包但 Word 无列表渲染。产品面恒走
+   `Paragraph::numbering(NumberingId, IndentLevel)`；e2e 断言
+   `relationships/numbering` 在 rels（反证在位：docx_roundtrip
+   `t20_write_faces_xml_level` ① + web `t20_list_numbering_xml`）。
+2. **`ParagraphBorders::new()` 四边全 Single**（Default impl）——hr
+   若用 default 画整框而非水平线。产品面恒
+   `with_empty().set(单边)`；e2e 断言 pBdr 内**恰单边**子元素
+   （`<w:pBdr><w:bottom …/></w:pBdr>` 精确串匹配 = 反证）。
+
+### 9.4 测试证据（原生 +9 office-io +4·mdc-wasm +5；e2e 8→12）
+
+原生 office-io（46→48 内联 + 22→24 roundtrip）：
+- `t20_write_faces_xml_level`——探针 16 断言集的**产品 API 移植**
+  （zip 结构 numbering part + rels 接线 / numbering.xml 双抽象 +
+  num 桥 + 9 级 + 多级 lvlText / document.xml numPr 精确配对
+  〔100×2 ilvl0 + 100×1 ilvl1 + 101×2 ilvl0〕/ 行内 rFonts /
+  hr pBdr / quote ind 720+2160 步进 + pBdr left / code 双通道 /
+  写读全环文本零损 11 段 + warnings 空）；
+- `t20_numbering_lazy_registration_and_reset`——无列表档
+  numbering.xml 保持内建形态（100/101 不在，内建 abstractNum 1
+  恒在）+ save 后续写重注册（基态重置钉定）；
+- 内联 `list_item_ilvl_validation`（0-8 过 / 9 拒）+
+  `specs_expand_mono_strike_underline`（三位引擎接线 + plain run
+  零新位）。
+
+原生 mdc-wasm（43→48；**XML 面直断言新通道** `zip_stored_part`
+——docx-rs 打包恒 Stored 无压缩 → 本地头遍历零解压直切，zip
+依赖不进 mdc-wasm〔Cargo.lock 零 diff 纪律〕）：
+`inline_mono_del_u_expressed_link_plain`（t18 降级断言语义翻转
+为 XML 表达 + 文本零损双面）、`code_block_mono_dual_channel_xml`、
+`list_mapping_numbering_xml`、`list_marker_forms_and_depth_clamp`
+（`1)` 形 / depth 99 钳 8 / 缺失防御）、
+`list_multiline_item_first_numbered_rest_plain`、
+`quote_and_hr_mapping_xml`。
+
+web e2e（docx_export.py 8→**12/12**）：+`t20_list_numbering_xml`
+（numPr 配对 + bullet 抽象 + **rels 接线**）/`t20_quote_indent_
+border_xml`/`t20_hr_bottom_border_xml`/`t20_code_block_mono_
+rfonts_xml`（双通道）；`degraded_blocks_survive_export` 期望
+`5 simplified` → **`1 simplified`**（web 状态行降级计数缩为
+code_block——lang/fence 登记维持）。**既有断言零回归**：六套件
+contract 18 / smoke 15 / ime 28 / xlsx_import 9 / docx_import 9 /
+xlsx_export 9 全绿（亲跑复验）。
+
+**诚实边界（t20-a 遗留④，维持登记不宣称）**：导出→t16 重导入
+往返中 numPr/pBdr/ind/rFonts 的读面模型承载未核（office-io 读
+模型无对应字段）——e2e 断言只做导出 XML 面 + 既有文本面回归，
+**不宣称 list/quote/hr/等宽的往返等值**；`full_circle_reimport_
+content` 维持可表达子集（heading/paragraph/table）。
+
+### 9.5 门禁表（全部亲跑实测，mdcore 5028ec4）
+
+| 门禁 | 基线（t19） | 实测 | 结论 |
+|---|---|---|---|
+| G1 `cargo test --workspace` | 469/0/1i | **478 / 0 / 1i**（+9 只增） | PASS |
+| PDF default/lopdf/pdfium/dual | 68/79/81+6i/109+6i | 同值零漂移（+perf --ignored 6/6） | PASS |
+| clippy default（--all-targets） | 仅 2 wasm 基线 | 恰 2（static_method_of） | PASS |
+| clippy 3 PDF 面 | 0 | 0/0/0 | PASS |
+| `cargo fmt --all --check` | 0 | 0 | PASS |
+| scan.sh product | 0 hit-paths | 0 hit-paths | PASS |
+| wasm32 check | pass（2 基线警） | pass（2 基线警） | PASS |
+| web 七套件 | 18/15/28/9/9/9/8 | 18/15/28/9/9/9/**12**（docx_export 扩展） | PASS |
+
+Cargo.lock：**零 diff**（docx-rs 0.4.22 自 t16 在 office-io 依赖
+面，五面扩全部在既有 API 面——无新包无版本变动）。
+
+wasm 包体（诚实记录）：`web/pkg/mdcore_wasm_bg.wasm`
+3,950,549 → **3,969,144 B（+18,595 = +0.47%）**；`dist/main.js`
+557,256 → **557,211 B（−45）**。归因：docx-rs 写面机构 t18 已付
+（+50.3%），本轮增量 = 纯映射胶水（numbering 构造 + 三 run 位 +
+两段落属性面）——WRITE_FACE_PROBE §4.3「预期近乎零增长」兑现；
+dist −45 B = TS 面注释剥除 + degradedBlockCount Set 字面量缩短。
+
+### 9.6 残余降级登记（t20 后全景）
+
+| 项 | 状态 | 根因层 |
+|---|---|---|
+| code lang/fence 结构 | 降级维持 | 库层（docx-rs 无语法高亮/元数据面） |
+| link mark URL | 无源映射维持 | 模型层（MarkSpan 无 URL 载荷——mdcore MD 域上游裁决前置） |
+| 多行 list item 续行缩进对齐 | 登记（op 面可构造形态） | 映射层哲学（续行普通段不重复编号） |
+| 引用上下文非段落子块不挂 ind/pBdr | 登记（防御形态） | markdown 解析器不产此形态（attach 恒 root） |
+| numPr/pBdr/ind/rFonts 读面往返 | 未核不宣称 | 读模型无字段（t20-a 遗留④——读面扩字段需单独裁决） |
+| 多列族混排/自定义编号格式 | 未暴露 | office-io 包装面（引擎能力在，按需增量） |

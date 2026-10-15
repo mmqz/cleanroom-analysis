@@ -2512,3 +2512,21 @@ Stage Summary:
 - t20-a 审查通过零返工：t18 四件降级（list/monospace/hr/quote）+ 块级 code 等宽 + 顺带 del·u 全部库层面可行（docx-rs 0.4.22 一手核验 + 探针 16/16 双通道实证）；残项仅链接 URL（模型上游缺口维持）与 code lang（库无此面登记维持）
 - 第 10 次回滚恢复完成：分析仓 2b04b11 即时推送；mdcore clone 在位（7705b44）；工具链在位；PAT 在位
 - t20 主体实施路径就绪：WRITE_FACE_PROBE.md §4（office-io 五面扩 + docx_export.rs 六行映射改法 + 测试门禁预置），即刻派发
+---
+Task ID: t20
+Agent: 子代理（docx 导出消降级切片·b 轮接力）
+Task: docx 导出消降级——office-io DocxWriter 写面五扩 + docx_export.rs 六行映射改法，整批消解 t18 登记的降级项（list/monospace/hr/quote + 块级 code 等宽 + 行内 del·u）；底稿 = WRITE_FACE_PROBE.md（t20-a 一手核验 + 探针 16/16）
+
+Work Log:
+- 局面勘察：mdcore 本地 HEAD = 5028ec4（ahead 1 未推送）——**上轮 t20 子代理已完成代码并本地提交**（5 文件 +1029/−56，提交信息与本任务描述逐字吻合）但被中断于分析仓文档前（无 t20 worklog 节/REPORT Round 5/CAPABILITIES 增量）；本轮 = 遗留提交审查 → 亲跑全门禁 → 补文档收口（代码零改动采纳）
+- 遗留提交审查（对照 WRITE_FACE_PROBE §2/§4 逐面）：office-io 五面全在且两项陷阱规避到位（list_item 恒走 Paragraph::numbering 接通 has_numbering→rels；hr/quote 恒 with_empty().set 单边——四边全画陷阱反证注记在模块文档）；RunSpec 三位（mono/strike/underline）既有构造器恒 false 零漂移；numbering 惰性注册 + save 基态重置；docx_export 六行映射（rich_lines 提取单一真源、list_shape marker 判序+depth 钳 0-8、quote_depth 步进、code 双通道）；三域纪律（office-io 零 mdcore 依赖）与 Cargo.lock 零 diff 核实
+- 门禁全绿（亲跑）：G1 **478/0/1i**（基线 469+9 只增：office-io 内联 46→48 + roundtrip 22→24〔探针 16 断言移植 + 惰性注册钉定〕、mdc-wasm 43→48〔5 新测试 + 1 语义翻转；XML 面直断言新通道 zip_stored_part——打包恒 Stored 零解压直切，zip 依赖不进 mdc-wasm〕）；PDF 四面 68/79/81+6i/109+6i 零漂移 + perf --ignored 6/6；clippy 恰 2 wasm 基线 + PDF 三面 0；fmt 0；scan 0+0；wasm32 过；web 七套件 18/15/28/9/9/9/**12** 全绿（docx_export 8→12：+4 t20 XML 结构面断言〔numbering/rels/pBdr/ind/rFonts〕，degraded 计数 5→1 翻转；六既有套件零回归亲证）
+- 包体：wasm 3,950,549 → **3,969,144 B（+18,595 = +0.47%）**——WRITE_FACE_PROBE §4.3「docx-rs 写面机构 t18 已付、本轮纯映射胶水近零增长」兑现；dist/main.js 557,256 → 557,211 B（−45：注释剥除 + Set 字面量缩短）
+- 诚实边界登记：numPr/pBdr/ind/rFonts 的读面往返承载未核（t20-a 遗留④）——e2e 只做导出 XML 面 + 文本面回归，不宣称 list/quote/hr/等宽往返等值；code lang/fence 与 link URL 维持降级/无源登记
+- 文档：docx-r1/REPORT.md §9 Round 5（五面表/六行翻转表/陷阱两项实录/测试证据/门禁表/残余全景）+ xlsx-r1/CAPABILITIES.md 消费面 t20 增量（可表达面翻转 + 不宣称清单）+ 本节
+
+Stage Summary:
+- mdcore 本地 5028ec4（未推送——主代理审查后推）；分析仓本轮提交待推（REPORT §9 + CAPABILITIES t20 + worklog t20）
+- t18 登记降级整批消解：list（numbering 三层 + rels 接线）/行内 code（rFonts）/行内 del·u（strike·underline——§2.6 顺带）/hr（pBdr bottom）/quote（ind+pBdr left 嵌套步进）/块级 code（双通道等宽）——web 状态行降级计数 5→1（仅 code_block lang/fence 库层不可达维持）
+- 探针→产品测试移植闭环：t20-a spike 16 断言 = office-io `t20_write_faces_xml_level` 产品 API 移植 + mdc-wasm/e2e XML 面直断言三通道
+- 剩余缺口（后续增量候选，非阻塞）：读面 numPr/pBdr/ind/rFonts 模型承载（往返等值前提——需 office-io 读模型扩字段）；code lang/fence（库层）；link URL（MarkSpan 上游——mdcore MD 域裁决前置）；多列族混排/自定义编号格式（引擎在、包装面未暴露）

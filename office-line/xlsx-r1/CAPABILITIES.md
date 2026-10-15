@@ -223,6 +223,24 @@ rels 字节面与原档一致——FIDELITY.md v2）**；**丢** = 单元格样�
      （marks 降级）、numFmt/样式面（除 heading 加粗）、流式面
      （wasm32 结构性缺席——引擎 tempfile 背书，write.rs 模块文档
      登记）。
+   - **消费面（t20，2026-10-15——DOCX 导出消降级轮：t18 登记降级
+     整批消解）**：mdcore 7705b44 → 5028ec4（office-io DocxWriter
+     写面五扩 + docx_export 六行映射改法 + 探针 16 断言集移植）。
+     **可表达面翻转**（docx_export.rs 模块文档映射表 = 单一真源
+     随码走）：list（marker 判序 ordered/bullet + depth→ilvl 钳
+     0-8，numPr rels 接线）、行内 code（rFonts 三槽 Consolas）、
+     行内 del/u（strike/w:u single——顺带消解）、hr（空段下边框
+     pBdr）、blockquote（ind 720×depth 嵌套步进 + 左边框）、块级
+     code（双通道等宽 Courier New：段落级 + run 级）。e2e 实证
+     （docx_export.py 8→12/12）：numbering/rels/pBdr/ind/rFonts
+     四结构面 XML 直断言 + 状态行降级计数 5→1（仅 code_block）。
+     **不宣称**：code lang/fence 结构（库层不可达——docx-rs 无
+     语法高亮/元数据面，降级维持）、link URL（模型层上游缺口
+     ——MarkSpan 无 URL 载荷维持）、list/quote/hr/等宽的**导出→
+     重导入往返等值**（office-io 读模型无 numPr/pBdr/ind/rFonts
+     字段——e2e 只做导出 XML 面 + 文本面回归，往返承载面待读面
+     扩字段裁决）、多列族混排/自定义编号格式（引擎能力在、包装
+     面未暴露）。
 
 ## 3. 容忍度发现登记（t10-d 实证；**Phase 2 后口径——两项已闭环**）
 
