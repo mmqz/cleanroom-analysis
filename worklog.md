@@ -2548,3 +2548,20 @@ Stage Summary:
 - 残余降级四件维持登记：code lang/fence（库层）、link URL（MarkSpan 上游 mdcore MD 域裁决前置）、多行 item 续行缩进（映射登记）、读面往返承载（读模型扩字段裁决）
 - 消费面四部曲后首个增量化收口：office 消费面全宣称与真实能力对齐（可表达面全表达，不可表达面显式登记）
 - mdcore 7705b44 → 5028ec4 推送；观察项（wasm32 --all-targets 测试编译）登记待微增量
+
+---
+Task ID: t21
+Agent: 子代理（wasm32 测试面修复微增量）
+Task: 修复 wasm32 `--all-targets` 测试面编译失败（t20-review 登记观察项）+ REUSE.md §4 门禁口径收严
+
+Work Log:
+- 影响面全查（`cargo check --workspace --target wasm32-unknown-unknown --all-targets`）：全 workspace 测试面恰 **1 个**失败点 = E0599 `crates/office-io/tests/write_roundtrip.rs:244`（`w.add_sheet_streaming("大表")`——t19 target-split 条件化缺席 API 的测试侧对偶面）；其余 crate（mdshell/mdc-settings/mdc-pdf/mdcore/shell-native/mdc-office/mdcore-wasm）wasm32 测试面全部编译通过——定性：结构性缺席 API 引用，非真问题，t19 内联单测已 cfg 化（write.rs 622/640/718 行），仅集成测试漏同步
+- 修复（断言语义零改动，仅编译门控 + 注释）：①`streaming_sheet_full_circle` 测试加 `#[cfg(not(target_arch = "wasm32"))]` + 注释锚点「t21：wasm32 结构性缺席，native 全跑」（锚到 write.rs 模块文档 t19 注记）；②`NonEmpty` trait + impl（该测试唯一私有辅助）随动同 cfg——防 wasm32 下 dead_code 警告（不随动则 trait/impl 无消费者告警，污染警告面）；与 write.rs t19 既有内联 cfg 模式（#[test] 后置 #[cfg]）同构
+- 验证全绿：wasm32 `--all-targets` check 过 + clippy 过（警告面 = mdcore-wasm lib 恰 2 wasm_bindgen `static_method_of` 在档基线〔212/221 行，lib test duplicate 同源〕，修复零新增——NonEmpty 随动门控生效实证）；native 零回归：office-io **82**（48+3+24+1+6，write_roundtrip 6/6 含 streaming native 全跑）+ G1 **478/0/1i** 逐数对齐；native clippy --all-targets 恰 2 基线；fmt 0；scan 0 hit-paths；**Cargo.lock 零 diff 实证**（git diff 空——纯 cfg 属性 + 注释，无依赖面变化）
+- 门禁收严：REUSE.md §4 wasm32 check 行后追加 `cargo check --workspace --target wasm32-unknown-unknown --all-targets` + `cargo clippy --workspace --target wasm32-unknown-unknown --all-targets` 两行 + 四行注释（t21 起收严 + 观察项修复锚点 + 此后 wasm32 结构性缺席面 API 与测试 cfg 须同步）
+- web 面不跑理由：本轮零 dist/wasm 产物变更（无 lib 面改动、Cargo.lock 零 diff、无 web 文件触碰）→ wasm 产物位元不变，web 套件（G2）被测对象零漂移，无复跑必要
+
+Stage Summary:
+- mdcore 本地 **e967cf2**（2 文件 +12/−0：write_roundtrip.rs +6 / REUSE.md +6；不 push——主代理审查后推）；分析仓本轮本地提交（worklog t21 节；不 push）
+- t20-review 观察项闭环：wasm32 门禁口径从「仅 lib check」收严为「lib + --all-targets check/clippy 双面」——t19 target-split 的 API/测试 cfg 同步纪律自此进成文门禁
+- 修复面极小且诚实：单测试 + 单辅助 trait 纯编译门控，native 82/G1 478 零回归，Cargo.lock 零 diff，无任何断言语义/依赖/产物变化
