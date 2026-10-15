@@ -2790,3 +2790,39 @@ Stage Summary:
 - r5-t1 审查通过零返工：FIDELITY 登记的「web 消费链 list 映射」缺口正式闭环（t16 列表降级→结构化映射），G1 517→525，docx_import e2e 9→11
 - mdcore 提交推送（本轮新基线 525/0/1i + web 11）；分析仓 FIDELITY/CAPABILITIES/worklog 提交推送
 - T2（超链接锚点写回评估）即刻派发
+---
+Task ID: r5-t2
+Agent: 子代理 r5-t2（超链接锚点写回评估——矩阵+探针+方案+裁决点，零实施红线遵守）
+Task: Round 5 T2 超链接锚点写回评估——DOCX 读模型/写接口/RunSpec 三面承载能力盘点 + 四类目标区分探针 + 最小接口变更方案 + 裁决点（r4-t3 登记「anchor 写回另行裁决」的评估收口；公开模型变更零实施）
+
+Work Log:
+- 协议执行：worklog 尾三节（r5-t1-review/r5-t1/r5-t0）+ FIDELITY/CAPABILITY_NOTES + docx.rs/docx_import.rs/docx_export.rs/markdown.rs/tree.rs + 引擎注册源（docx-rs-0.4.22 一手）全读；scratch 全程在档（/home/z/my-project/scratch-r5t2-progress.md）
+- T2.1 盘点（一手锚点全档）：RunSpec 链接面 = External URL only（link 字段 + 单点发射 docx.rs:2819-2822 HyperlinkType::External；无锚点字段）；DocxWriter 19 方法零锚点/零书签面；HyperlinkTarget 读面四变体全可达（自有 rels 层联接——引擎自身不联接且只收带 TargetMode 关系，本层补面）；引擎写面 Anchor+书签**全公开**（hyperlink.rs:42-44 w:anchor 属性形无 r:id；update_dependencies 只收 External 进 rels → 锚点零 rels 面；paragraph.rs:224-234 书签对；无书签存在性校验）；书签定义读面 = 引擎解析进模型但本层 extract_paragraph 静默丢弃（零警告零字段）；HYPERLINK 域 todo!() 红线维持（w:anchor 属性形与域形不相交）；全链往返 = DOCX 外链→`[t](url)` GFM 完整 / MD→树 = 字面文本（行级解析无 marks）/ 树→导出 = 零 w:hyperlink（MarkSpan 无 URL 上游缺口）
+- T2.2 探针（5 新增全绿，只增不改）：①Internal 整包面（无 TargetMode 关系→Internal，严格过零警告——引擎自身丢此面/自有层补面的整包实证）②锚点优先序（w:anchor + 可解析 r:id 双属性→Anchor，引擎 reader/hyperlink.rs:14-26 行为镜像）③书签定义行为（静默丢弃零警告+被包裹 run 文本零损+锚点目标存在性读面不可辨——存在/不存在同形 Anchor 透传）④链接形态文本导出面（mdcore-wasm：markdown `[t](url)` 入树字面文本→导出零 w:hyperlink+字面逐字保留+重导入文本零损——「文本层往返成立/超链接层不成立」钉定）⑤**引擎直构 spike**（docx_rs 直调不经 DocxWriter：w:anchor 属性形+rels 超链接条目恰 1（外链对照——锚点零 rels 无懒注册陷阱）+书签 Start/End 对发射+引擎写→自有读全环 Anchor 透传零警告——Option A 实施面一手去风险）
+- T2.3 方案（CAPABILITY_NOTES §13 落档，13.1 承载矩阵 15 行全锚点 + 13.2 缺口 + 13.3 选项）：**Option 0** 现状维持（成本 0 收益 0）/ **Option A 最小加性扩**（RunSpec +anchor: Option<String> 字段 + anchor_link() 构造器 + 发射点锚点分支 + 可并入 bookmark_paragraph 书签写面〔id 计数器包装层唯一化〕——加性非破坏循 r4-t1/r4-t3 Option 字段先例；struct-literal 位点 = office-io 内部 4 处机械面；外部消费者全构造器面零改动 grep 全证）/ **Option B 类型化枚举**（LinkSpec{External,Anchor}——类型安全但公开字段类型变更破坏性 + 能力增量 0，不推荐）/ **Option C writer 方法 only**（段落级包裹 ≠ run 级粒度、段落族面爆炸，不推荐）；保真边界诚实登记：web 端到端 TODAY 不可达（MarkSpan URL + 行内链接解析 = mdcore MD 域两处暂缓项上游）；Internal 写回引擎结构性不可达（rels 发射面 external-only）登记维持
+- T2.4 裁决点（STOP 如约）：**零接口变更实施**（红线 #1 遵守——公开模型面只在方案中呈现 API 形状）；T2.4 逃生条款核查：外链经既有 API 已全环（hyperlink_roundtrip_external 既有在档）无需补测试，本轮交付 = 探针 only；裁决问题三项（A vs 0 时机 / 书签写面同批否 / Internal+红线陈述项）落档 §13.4
+- T2.5 门禁（全部亲跑最终源码态）：G1 **530/0/1i**（525+5 探针：docx_roundtrip 28→32 + mdc-wasm 61→62）；PDF 四面 68/79/81+6i/109+6i 零漂移 + perf pdfc_perf --ignored 6/6；clippy native 恰 2（static_method_of 基线）+ PDF 三面 0 + wasm32 --all-targets 2；fmt 0；scan 0 hit-paths；wasm32 check+--all-targets 过；Cargo.lock 零 diff；web 七套件 **18/15/28/11/13/9/9** 全绿（dist 未重建亦无需——本轮改动全在 #[cfg(test)] 面，wasm 产物位元不变）；途中事故如实登记：根盘 100% 满（target/debug/incremental 1.7G）致 PDF clippy 建指纹失败——清 incremental 缓存（纯缓存零源影响）后全门禁复验绿
+- 文档三面：CAPABILITY_NOTES §13（矩阵/缺口/选项/推荐/裁决点/探针清单/门禁——评估单一真源）+ FIDELITY §3 anchor 登记行闭项留痕（指向 §13，矩阵口径不变零实施）+ FIDELITY 矩阵行 6 证据列补 r5-t2 探针 + 本节
+
+Stage Summary:
+- r5-t2 完成：锚点写回评估收口——读面四变体/引擎写面/书签名面全部一手实证（5 探针），方案 Option A/B/C/0 落档 CAPABILITY_NOTES §13，**公开模型零实施**（r4-t3「另行裁决」正式呈报主代理转用户）
+- mdcore 2 文件 +333/-0（office-io tests/docx_roundtrip.rs +4 探针 / mdcore-wasm docx_export.rs #[cfg(test)] +1 探针）——tests-only 零接口变更；不 push（主代理审查后提交）
+- 裁决问题三项待用户：①office-io 锚点写面现在扩（A）vs 待 MarkSpan URL 裁决后一并做（0）②若 A：bookmark_paragraph 书签写面同批/分离/不做 ③Internal 写回引擎结构性不可达 + HYPERLINK 域红线 + mdcore MD 域暂缓项（陈述性维持）
+- 关键去风险证据：探针⑤ 引擎直构整包实证（锚点零 rels 面/书签对/引擎写→自有读全环）——若裁决选 A，实施面 = 纯包装层胶水（无 t20 numbering 式接线陷阱、无 t14 域崩溃面）
+---
+Task ID: r5-t2-review
+Agent: 主代理（r5-t2 独立审查）
+Task: Round 5 T2 超链接锚点写回评估——四维独立审查
+
+Work Log:
+- 提交核实：mdcore 恰 2 文件全 tests-only（office-io/tests/docx_roundtrip.rs +295[四探针]、mdcore-wasm/docx_export.rs +38[cfg(test) 探针④——mod tests 内确认]）；产品代码零改动 = 公开模型未扩（红线遵守实证）；Cargo.lock 零 diff
+- 边界核实：探针⑤ 引擎直构 spike 断言集精查（w:anchor 属性形 + rels 自含性[锚点零 rels 面，外链对照恰 1] + 书签 Start/End 对 + 引擎写→自有读全环）= Option A 真实去风险证据非纸面宣称；HYPERLINK 域 todo!() 红线未触（w:anchor 属性形路径不相交——核实）；MarkSpan URL/富文本暂缓项零触碰
+- 测试亲跑复验：G1 全量 **530/0/1i**（525+5，五探针逐一过）；clippy native 恰 2 + wasm32 --all-targets 2 + PDF 三面 0；fmt 0；scan 0；lock 零 diff；web docx_import 11/11 + docx_export 13/13（dist 未动合理——改动全 cfg(test)）
+- 文档核实：CAPABILITY_NOTES §13 承载矩阵 14 行全带锚点（RunSpec External-only/DocxWriter 19 方法零锚点书签/读面四变体/引擎写面 Anchor+书签在/HYPERLINK 域红线/全链各跳现状）+ §13.2 缺口分析（读 4/写 1 对称缺口 + 书签落点正交性 + web 端到端 TODAY 不可达诚实边界）+ §13.3 选项 0/A/B/C（A 加性非破坏循 r4-t1/r4-t3 先例、grep 全消费者核实、B 破坏性否决、C 粒度错配否决）+ §13.4 裁决三问；FIDELITY §3 anchor 行闭项留痕（评估落档指针）+ 矩阵行 6 补注
+- 纪律核对：T2.4 STOP 点遵守——RunSpec 扩字段未实施，裁决问题成文呈用户（本轮汇报转呈）
+
+Stage Summary:
+- r5-t2 审查通过零返工：评估交付 = 5 只增探针（tests-only）+ §13 方案与裁决点；公开模型面零变更
+- mdcore 提交推送（新基线 530/0/1i）；分析仓 CAPABILITY_NOTES §13 + FIDELITY + worklog 提交推送
+- 裁决问题待用户：①office-io 锚点写面 A[最小加性扩] vs 0[维持登记待 MarkSpan URL 一并做] ②若 A 书签写面同批/分离/不做 ③Internal 引擎不可达/HYPERLINK 域红线维持（陈述性）
+- T3（集成与收口）即刻执行

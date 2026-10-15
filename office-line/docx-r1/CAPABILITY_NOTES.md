@@ -308,3 +308,143 @@ docx_roundtrip.rs。零新依赖（Cargo.lock 零 diff）。
   对显式关闭形态（w:val="none"/"false"）误报，宁缺毋错，登记不承载。
 - **保真矩阵单一真源**：`docx-r1/FIDELITY.md`（24 项五态 + 方案论证 +
   往返证据）——本轮起 DOCX 读写保真宣称以该文件为准。
+
+## 13. r5-t2 增量：超链接锚点写回评估（承载矩阵 + 最小接口变更方案 + 裁决点）
+
+> 任务边界：**评估止于方案与裁决点**——RunSpec/DocxWriter 为 office-io
+> 公开模型面，r4-t3 起登记「另行裁决」（FIDELITY §3），本轮不实施任何
+> 接口变更；交付 = 5 只增探针测试（tests/docx_roundtrip.rs 28→32 +
+> mdcore-wasm/docx_export.rs +1）+ 本节。全部断言一手亲跑（未实测
+> 不宣称）。
+
+### 13.1 承载能力矩阵（证据锚点）
+
+| 面 | 现状 | 证据锚点 |
+|---|---|---|
+| RunSpec 链接表达 | **External URL only**（`link: Option<String>` → 引擎 `HyperlinkType::External` 单点发射） | docx.rs:2216-2219 字段 / 2287 link() / 2819-2822 发射点 |
+| DocxWriter 锚点/书签方法 | **无**（19 公开方法全列无一面） | docx.rs:2368-2759 |
+| 读面 External | 完整（自有 rels 联接 + `&` 实体补偿） | resolve_link docx.rs:1658-1698；hyperlink_roundtrip_external |
+| 读面 Internal | 完整（自有 rels 层全量收条目；**引擎自身只收带 TargetMode 的关系**——本层补面） | 探针① r5t2_hyperlink_internal_target_read（整包面）+ hyperlink_resolution_dispatch（函数面） |
+| 读面 Anchor | 完整（字符串透传；**目标存在性读面不可辨**——引擎无书签存在性校验） | hyperlink_anchor_read + 探针②③ |
+| 读面 Unresolved | 兼容 only（严格拒 + 兼容 BrokenReference 警告） | hyperlink_dangling_strict_rejects_compat_unresolved |
+| 读面书签定义 | **静默丢弃**（引擎解析进模型，本层 extract_paragraph 跳过——无字段、零警告、文本零损） | docx.rs:1912-1913 + 探针③ |
+| 读面锚点优先序 | `w:anchor` 优先于 r:id（同元素双属性 → Anchor，可解析 r:id 被忽略） | 引擎 reader/hyperlink.rs:14-26 + 探针② |
+| 引擎写面 Anchor | **在**（`Hyperlink::new(name, HyperlinkType::Anchor)` → `w:anchor` 属性形，无 r:id；**零 rels 面**——update_dependencies 只收 External 进 hyperlink_map；无书签存在性校验——悬空锚点合法形） | hyperlink.rs:42-44/107-118 + documents/mod.rs:1014-1017 + **探针⑤ 整包实证** |
+| 引擎写面书签 | **在**（`Paragraph::add_bookmark_start(id,name)`/`add_bookmark_end(id)`；`Docx::add_bookmark_start`；XML = `<w:bookmarkStart w:id w:name/>` 对） | paragraph.rs:224-234 + mod.rs:556-563 + **探针⑤ 整包实证** |
+| 引擎 HYPERLINK 域 | **todo!() 崩溃面——红线维持绝不暴露**（w:anchor 属性形与域形两条不相交路径，方案不触域形） | instr_text.rs:32；FIDELITY 矩阵行 11 |
+| web 导入链（锚点→MD） | `#anchor` GFM 渲染在位 | docx_import.rs:175-183 + link_variants_render |
+| web 导入链（MD→编辑器树） | **结构丢失、字面文本存活**（mdcore 行级解析不产行内 marks——`[t](#a)` 入树 = 段落字面文本） | markdown.rs:8 模块文档 + 探针④ |
+| web 导出链 | 链接不可表达（MarkSpan 无 URL 载荷——mark "link" → 纯文本；字面文本路径同样零 `w:hyperlink`） | tree.rs:41-45 + docx_export.rs:124-135 + 探针④ |
+| office-io 读→写回放示范 | **External only**（runs_to_specs 只映射 External——Anchor/Internal/Unresolved 静默丢弃） | tests/docx_roundtrip.rs:2071-2081（r4t3_roundtrip_read_modify_write 内） |
+
+### 13.2 缺口分析（锚点写回需要什么）
+
+1. **run 级锚点表达**：RunSpec 无锚点字段——读面四变体中 Anchor 在
+   写侧无对应面（对称缺口：读 4 / 写 1〔External〕）。
+2. **书签定义写面**（锚点的落点）：无 DocxWriter 方法。无书签定义的
+   锚点链 = 悬空（合法 OOXML，Word 点击报「书签未定义」）——「锚点
+   写回」若只做链接不做落点 = 半成品（但落点本身可独立裁决：TOC/
+   heading 书签 `_Toc` 族是引擎 TOC 面的内部机制，非本面必需）。
+3. 引擎面两者**全部公开可用**（探针⑤ 整包实证：锚点发射/零 rels/
+   书签对/引擎写→自有读全环）——实施面 = 纯包装层胶水，**无**
+   numbering 式懒注册/rels 接线陷阱（t20），**无** HYPERLINK 域
+   todo!() 面（t14 红线，w:anchor 属性形不相交）。
+4. 上游依赖链（诚实边界）：**web 端到端 TODAY 不可达**——即使
+   RunSpec 扩锚点，docx_export 无源可映射（MarkSpan 无 URL/锚点载荷
+   〔mdcore MD 域暂缓项〕+ markdown 行级解析不产链接 mark〔同域〕）；
+   消费者 TODAY = office-io 直接用户（读→改→写回放示范可修对称缺口）
+   与未来 web 链（MarkSpan URL 裁决落地后）。
+
+### 13.3 选项（最小接口变更方案）
+
+**Option 0 现状维持（零改动）**
+- 锚点写回维持 FIDELITY §3 登记；读面四变体 + 写面 External-only
+  不变。消费链无恶化（web 链今天本就无任何链接导出能力）。
+- 成本 0；收益 0（对称缺口 + 回放静默丢面维持）。
+
+**Option A 最小加性扩（推荐）**
+- API 形（exact）：
+  ```rust
+  pub struct RunSpec {
+      // …既有字段零变化…
+      pub link: Option<String>,      // 外部 URL（既有）
+      pub anchor: Option<String>,    // 新增：文档内锚点名（w:anchor）
+      // footnote/field 既有
+  }
+  impl RunSpec {
+      pub fn anchor_link(text: impl Into<String>, anchor: impl Into<String>) -> Self;
+  }
+  // 写面发射点单分支扩（add_spec_to_paragraph）：
+  //   anchor.is_some() → Hyperlink::new(anchor, HyperlinkType::Anchor)
+  //   优先序：footnote > field > anchor > link（与探针② 读面优先序
+  //   镜像——anchor 与 link 同 Some 时 anchor 赢，文档登记）
+  ```
+- 可并入正交件（书签定义写面）：
+  ```rust
+  impl DocxWriter {
+      /// 书签包裹段（bookmarkStart … runs … bookmarkEnd；id 由写器
+      /// 计数器唯一化——引擎不校验，包装层保证）。
+      pub fn bookmark_paragraph(&mut self, runs: &[RunSpec], name: &str);
+  }
+  ```
+- 兼容性：**加性非破坏**（循 r4-t1 CellData / r4-t3 ParagraphNumbering
+  Option-字段先例）——全部既有构造器恒 `anchor: None` 零漂移；struct
+  literal 位点 = office-io 内部 4 处（code_line 用 `..base` 语法不动 +
+  内联测试 3 处机械补）；外部消费者（docx_export.rs / docx_import.rs
+  build_sample_docx / gen_docx_fixture.rs / docx_roundtrip.rs 测试）全
+  构造器面零改动（grep 全量核实）。
+- 测试范围：docx_roundtrip 锚点写读全环（探针⑤ 断言集移植产品面）+
+  书签 XML 面 + 悬空锚点写（合法形断言）+ id 唯一性（两书签段）+
+  `runs_to_specs` 回放示范扩 Anchor 变体（修 §13.1 末行静默丢面）+
+  RunSpec 构造器零漂移断言（run_spec_constructors 扩）。
+- 保真边界：office-io 层「锚点链接读→写回放等值」可达；**web 端到端
+  不可达**（§13.2-4 诚实维持）；Internal 变体写回**引擎结构性不可达**
+  （rels 发射面 external-only——documents/mod.rs:1210 "Now support
+  external only"，登记维持）。
+
+**Option B 类型化单字段（不推荐）**
+- API 形：`pub enum LinkSpec { External(String), Anchor(String) }` +
+  `RunSpec.link: Option<LinkSpec>`——类型安全（link/anchor 互斥编码
+  进类型）。
+- 兼容性：**破坏性**（`link: Some(String)` 字面构造全部失效——外部
+  虽只有 office-io 内部测试用 struct literal，但公开字段类型变更 =
+  公开 API 语义变更）；churn 大于 A，能力增量 = 0。
+
+**Option C writer 方法面 only（不推荐）**
+- API 形：`DocxWriter::anchor_paragraph(runs, anchor)`（不改 RunSpec）。
+- 缺陷：段落级整段包裹语义 ≠ run 级粒度（同段普通 run + 锚点 run +
+  外链 run 混排不可表达）；与读面 RunData.hyperlink run 级模型不对称；
+  header/footer/list_item/quote 段落族需各复制一遍方法（面爆炸）。
+
+### 13.4 推荐与裁决点
+
+**推荐：Option A**（含正交件书签写面可同批或分离）——理由：加性
+非破坏先例在位 / 引擎面探针⑤ 一手去风险 / 修读→写回放静默丢面 /
+web 端到端收益诚实为 0（MarkSpan URL 裁决前无 web 消费者——若用户
+优先级是 web 链接端到端，应先裁决 mdcore MD 域，office-io 扩面自然
+排后到那时一并做）。
+
+**裁决问题（T2.4 STOP 点——主代理呈用户）**：
+1. office-io 锚点写面是否现在扩？（A：库级对称 + 回放保真，web 暂无
+   消费者 / 0：维持登记，待 MarkSpan URL 裁决后与 web 链一并做）
+2. 若 A：书签定义写面（`bookmark_paragraph`）同批 or 分离 or 不做
+   （接受悬空锚点=合法形的半成品边界）？
+3. （陈述性，无需决策）Internal 变体写回引擎结构性不可达，登记维持；
+   HYPERLINK 域红线维持；MarkSpan URL / 行内链接解析 = mdcore MD 域
+   既有暂缓项，本评估不触碰。
+
+### 13.5 探针清单（本轮交付证据基座）
+
+| # | 测试（文件） | 钉定行为 | 结果 |
+|---|---|---|---|
+| ① | r5t2_hyperlink_internal_target_read（office-io） | 无 TargetMode 关系 → Internal（整包面；引擎自身丢此面、自有 rels 层补面） | PASS |
+| ② | r5t2_hyperlink_anchor_wins_over_rid（office-io） | w:anchor 优先于可解析 r:id（双属性形零警告） | PASS |
+| ③ | r5t2_bookmark_definitions_dropped_anchor_carried（office-io） | 书签定义静默丢弃（零警告+文本零损）；锚点目标存在性读面不可辨（同形 Anchor 透传） | PASS |
+| ④ | r5t2_markdown_link_literal_text_not_hyperlink（mdcore-wasm/docx_export） | 链接形态文本导出：零 w:hyperlink + 字面逐字保留 + 重导入文本零损（文本层往返成立/超链接层不成立） | PASS |
+| ⑤ | r5t2_engine_anchor_and_bookmark_write_spike（office-io） | 引擎直构：w:anchor 属性形 + 零 rels 面 + 书签对发射 + 引擎写→自有读全环（Option A 去风险） | PASS |
+
+门禁（r5-t2 全量亲跑）：G1 525→**530/0/1i**（+5 探针）；PDF 四面
+68/79/81+6i/109+6i 零漂移 + perf 6/6；clippy native 恰 2 基线 + PDF
+三面 0 + wasm32 --all-targets 2；fmt 0；scan 0；wasm32 check+
+--all-targets 过；Cargo.lock 零 diff；web 七套件 18/15/28/11/13/9/9
+全绿（零漂移——本轮无 wasm/web 产物变更）。
