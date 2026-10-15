@@ -2629,3 +2629,17 @@ Stage Summary:
 - HANDOFF 双行对齐实况：分析仓与 mdcore 版本链/门禁基线/裁决状态全部到位，无欠账
 - Office 线 Round 3（消费面）完整入档：机械增量清空呈报，剩余缺口七项全部带用户裁决前置
 - 分析仓 9d2b563 → 本节提交推送
+---
+Task ID: r4-t0
+Agent: 主代理（Round 4 执行计划 T0）
+Task: 环境与基线确认——双仓状态/工具链/门禁基线复跑/凭据检查
+
+Work Log:
+- 双仓核实：mdcore ef74282 / 分析仓 b9d1b33，本地=远端零漂移，双工作区 clean 零未提交改动（上一轮 t23 收口态延续，无回滚发生）
+- 工具链核实：cargo 1.99.0 + wasm32 + clippy/rustfmt 在位；node v24.21.0；web 环境（node_modules/dist/wasm pkg）在位
+- 门禁基线复跑（全部亲跑）：G1 481/0/1i；PDF 四面 68/79/81+6i/109+6i 零漂移；clippy native 2 + wasm32 --all-targets 2（均恰 wasm_bindgen 基线）；fmt 0；scan 0 hit-paths；wasm32 check+--all-targets 过（t21 收严口径）
+- 凭据核实：token.env 600 权限在仓外 /home/z/my-project/scripts/，不在任何 git 追踪面，日志不回显全文
+
+Stage Summary:
+- T0 通过：环境与基线与 t22/t23 收口态完全一致，零异常零回归，Round 4 起点干净
+- 立即启动 T1（XLSX 类型推断与转换规则）派发子代理执行
