@@ -2565,3 +2565,18 @@ Stage Summary:
 - mdcore 本地 **e967cf2**（2 文件 +12/−0：write_roundtrip.rs +6 / REUSE.md +6；不 push——主代理审查后推）；分析仓本轮本地提交（worklog t21 节；不 push）
 - t20-review 观察项闭环：wasm32 门禁口径从「仅 lib check」收严为「lib + --all-targets check/clippy 双面」——t19 target-split 的 API/测试 cfg 同步纪律自此进成文门禁
 - 修复面极小且诚实：单测试 + 单辅助 trait 纯编译门控，native 82/G1 478 零回归，Cargo.lock 零 diff，无任何断言语义/依赖/产物变化
+---
+Task ID: t21-review
+Agent: 主代理（t21 独立审查）
+Task: t21 wasm32 测试面修复 + 门禁收严——微增量审查
+
+Work Log:
+- 提交核实：mdcore e967cf2（2 文件 +12/−0——write_roundtrip.rs 两处 cfg 门控 + 注释锚点、REUSE.md §4 六行收严注记；断言语义零改动零删除实证，diff 全文 52 行逐行可读）；分析仓 375b487（worklog t21 节）；Cargo.lock 零 diff
+- 亲跑复验：wasm32 --all-targets check Finished 过（观察项闭合）+ native office-io 82/0（write_roundtrip 6/6 streaming native 全跑）+ G1 全量 478/0/1i 零回归逐数对齐
+- 修法合规性核验：恰 1 失败点定性正确（t19 target-split 对偶面，write.rs:303 cfg 与测试 244 行漏同步）；NonEmpty/SheetData 随动门控防 dead_code 污染——处置得当；其余 crate wasm32 测试面全过无遗漏
+- 门禁收严核验：REUSE.md §4 wasm32 --all-targets check/clippy 两行入册 + 「结构性缺席面 API 与测试 cfg 须同步」纪律注记——口径外盲区转正式门禁
+
+Stage Summary:
+- t21 审查通过零返工：t20-review 观察项闭合，wasm32 测试面进门禁（此后 check 与 clippy 双 --all-targets 全绿为基线）
+- mdcore 5028ec4 → e967cf2 推送；G1 478/0/1i 维持
+- Office 线无需裁决的机械增量至此清空：剩余缺口全部带裁决前置（XLSX 类型面策略/导入导出上限对称/富文本消费方/MarKSpan URL 域边界/读面往返承载模型扩列）
