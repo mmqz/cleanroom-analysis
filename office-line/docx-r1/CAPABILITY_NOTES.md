@@ -256,3 +256,37 @@ docx_roundtrip.rs。零新依赖（Cargo.lock 零 diff）。
 | 域（读） | 结构面在、提取面外 | **登记**（域值 = 渲染期计算） | §10.3 |
 | first/even 页眉页脚（写） | 支持（激活语义完整） | **暴露**（四方法 + 原位替换保 rid——r1 踩踏修复） | §10.4 |
 | [Content_Types].xml 解析 | 引擎 FromXML 宽容（depth==1 全收） | 自有解析器词汇表纪律（严格拒/兼容警告） | §10.2 |
+
+## 11. r4-t2 写面资源上限核验（段/run 计数漏斗，2026-10-17；Round 4 T2 b 轮）
+
+一手源同 §0。落地面 = mdcore `crates/office-io/src/docx.rs`
+（`DocxError::Limit` + `MAX_PARAGRAPHS`/`MAX_RUNS` +
+`check_document_scale`）+ docx.rs 内联 6 测试 + mdcore-wasm
+`docx_limit` 码两处。零新依赖。
+
+- **引擎无内建上限（一手核验——本轮资源限的存在依据）**：
+  docx-rs 段落模型 = `Document.children: Vec<ParagraphChild>` 无界
+  push（documents/mod.rs:158-160 add_paragraph 链式）；run 同构
+  （run push 无计数/无校验）——写面规模唯一界 = 调用方自律。包装
+  层补面：`DocxWriter` 段/run 计数（全部 14 个发射方法接线——
+  heading/paragraph[含脚注内容段 +1段+1run]/table[每格]/六槽位
+  页眉页脚/code_line/horizontal_rule[零 run]/quote/list_item/
+  list_item_lines/image），`save_to_vec`/`save_to_path` 统一漏斗
+  typed 拒（发射方法不可变签名 = 既有 API 契约，逐调用拒结构性
+  不可用——漏斗 + `check_document_scale` 消费方预检共用单点比较）。
+- **读面族分化（v1.2）**：docx 读路径此前误用 xlsx 族 300MB 声明
+  常量——本轮 `prescan_docx` 对齐 50MB（office-b checkInputLimits
+  格式族分档）；输入字节上限 52MB（=50MB+2MB 边距）四入口统一，
+  path 入口元数据检查先于 `fs::read`（原无前置 = 真实内存面）；
+  bytes 入口去 `to_vec` 复制（全借用化——大档双倍峰值消除）。
+- **计数接线准确性锚**：`docx_paragraph_run_counting_wiring`
+  （14 发射面 → 14 段/17 run 逐位断言）；边界锚 =
+  `document_scale_limit_boundaries`（恰=限过/段+1/run+1 拒）；
+  **超限导出零产物**锚 = `docx_save_funnel_rejects_over_scale_
+  no_artifact`（save_to_path 错误路径零文件——fs::write 只在成功
+  save 后执行）。
+- **基准（examples/bench_limits.rs，沙箱 2CPU/3GB）**：100k 段 =
+  801ms / 390.0MiB（≈3.9KB/段——引擎模型重量）；1M 段（恰=
+  MAX_PARAGRAPHS）**沙箱 OOM kill（exit 137）**——线性外推
+  ≈3.9GB：限值为防御上界，实际包络受宿主内存约束（未实测不宣称
+  可达）。SECURITY_POLICY v1.2 §3.1。

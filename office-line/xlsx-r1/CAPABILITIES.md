@@ -57,6 +57,27 @@ ISO/Error 写面降级登记）。**不宣称面**（§8.2）：numFmt 显示形
 性边界）。实测锚点 = office-io tests/cell_types.rs（9 测试）+
 mdcore-wasm 显示面测试；G1 481→491 / web 七套件零断言改动全绿。
 
+**r4-t2 资源上限增量（2026-10-17，Round 4 T2——导入/导出资源
+上限与安全边界）**：C1 读面新增**五类资源上限全部实装**（此前
+SECURITY_POLICY §3 多项为「仅文档宣称」——本轮全部翻转为已执行或
+明确标注无执行点，v1.2）：①**输入字节上限**（xlsx 族 302MB =
+族声明总量 + 2MB 结构边距，四入口[xlsx/docx × path/bytes]统一
+拒于任何全量读/解析之前）；②**docx 族分化**（声明总量 50MB——
+此前 docx 读路径误用 xlsx 族 300MB 常量，v1.2 执行点补齐）；
+③**稠密包围盒格面积上限 4M**（稀疏包围盒炸弹实证闭项：1588B
+两格档 → calamine `Range::from_sparse` 稠密化实测 ~550GB 分配
+abort → 门 3 坐标镜像扫描[GridScan，镜像 cells_reader 位置语义]
+先于 calamine 拒绝 + extract 全簿 Σ 累计[多表名倍增面]）；
+④**表数上限 1,000**（空表名洪水 CPU 面，提取前拒）；⑤全部新限
+**严格/兼容两模式恒等**（typed `PrescanRejected` 安全拒绝类）。
+渲染窗（mdcore-wasm 16 表/50 行/32 列）= 读面全提取之上的消费
+子集截断（越限计数进 stats 非拒绝）——两层关系登记不收敛。
+实测锚点 = office-io lib 测试 8 项新增（稀疏炸弹/面积边界恰=限
+过+超拒/Σ 拒带表名/表数 1000 恰+1001 拒/GridScan 镜像语义六面/
+输入字节边界×双模式）+ 读面基准（50 万格 38.5MiB/517ms，
+4M 格恰=限 278.9MiB/4410ms——examples/bench_limits.rs 可复现）。
+详见 SECURITY_POLICY v1.2（限额表全量校准）。
+
 **证据**：
 - 7 维语料正向 5 维 + 对照件全过（read_proto 17/17，锚点断言含
   表序/非空格数/公式数/合并数逐档对账）；
@@ -101,6 +122,23 @@ rust_xlsxwriter 包装，引擎类型零泄漏（公开签名只含本 crate 类
   捕获相对坐标错位的自洽假通过）；
 - 门禁：G1 379/379（基线 362 + 新增 17）+ PDF 四面零波及 + clippy
   零新 + fmt 0 + scan 0 + wasm32 + web 全过（mdcore e8c3a13）。
+
+**r4-t2 写面资源/格式上限增量（2026-10-17）**：C2 写面新增
+**资源限 typed `WriteError::Limit`（wasm 码 `xlsx_limit`）+ 格式限
+typed InvalidInput 前移**：①**全簿格预算 MAX_CELLS = 1,000,000**
+（write/write_row/merge[按面积]/write_hyperlink 共享计数器，写时
+拒——引擎内存 Vec 与流式 tempfile 双无界面的统一界；基准：非流式
+143.4MiB/1139ms、流式 5.1MiB/1221ms）；②**表数 MAX_SHEETS =
+256**（**b 轮实测校准**：a 轮 512 被 fd 实测证伪——引擎
+constant_memory 特性下每表[含非流式]急切 tempfile，双簿并发 512+
+512 = EMFILE@1024；256 双簿并发余量 1.8×；自产 256 表档 ≈264
+条目 < 自身读面 10,000 条目界）；③**文本格式限**（单格/缓存/
+合并左上格/超链接显示文本 32,767 chars 引擎同值镜像；**超链接
+url 2,080 chars = 引擎 url.rs MAX_URL_LEN 真值镜像**[b 轮探针
+2080 过/2081 拒——a 轮「同 32767」被证伪：2081-32767 区间引擎
+先拒落 Engine 类]；公式 8,192 chars Excel 规格）。超限导出零产物
+字节（错误路径即无返回值）。测试锚 = write.rs 内联 4 测试（含
+流式 256 表 fd 面 + 预算算术钉定）。
 
 **边界（不宣称）**：
 - 样式写入正确性 = **XML 级验证**（style_probe 探针 9/9 + 产品 API

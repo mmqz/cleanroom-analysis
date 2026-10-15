@@ -271,3 +271,79 @@ office-io 包装面，未实测不宣称）；heading 加粗为唯一样式面�
 - numFmt 显示形态（¥/百分比/日历显示）维持 C1 不宣称（值面语义
   ——样式面 calamine 不可观测，FIDELITY §3 丢失矩阵不变）；
 - 公式求值引擎（T4 威胁面）未立项——缓存值即所见维持。
+
+## 11. Round 4 / r4-t2 — 导入/导出资源上限与安全边界（2026-10-17 完成，a/b 轮接力）
+
+> 定位：Round 4 T2——读面五类资源上限补面 + 写面资源/格式限整面 +
+> docx 族分化 + 基准。a 轮子代理完成 T2.2 实现清单 1-4 项（6 文件
+> +673/−48）后在基准/门禁阶段被平台切断；b 轮子代理接力：审查遗留
+> 改动逐项核对 → 测试 21 项 → 基准 → 门禁 → 文档 → 双仓提交。
+> 规格单一真源 = 分析仓 SECURITY_POLICY **v1.2**（限额表全量校准
+> ——每项：执行点锚点 + 默认值 + 测试锚点）。
+
+### 11.1 b 轮对 a 轮实现的两处实测证伪校准（以代码语义为准修正）
+
+| 项 | a 轮设计 | b 轮实测 | 校准 |
+|--|--|--|--|
+| W3 表数 | 512（「512 < fd 软限 1024，进程其余 fd 需求 ≤ 数十」） | 引擎 `constant_memory` 特性下 `Worksheet::new()` 对**每张表**（含非流式）急切 tempfile → fd = 表数；单簿 512 隔离过，**双簿并发 = EMFILE（code 24）**——本套件门禁自身即两个 max-scale 写测试并发形态 | **512 → 256**（双簿并发 512 fd + 开销 ≈ 560，余量 1.8×；真实工作簿百表级以内） |
+| W4 超链接 url | 同 32767（「引擎 write_url 路径无 32767 检查」） | 引擎**有**自己的限：url.rs:13 `MAX_URL_LEN` = 2,080（探针 2080 过/2081 `MaxUrlLengthExceeded`）；a 轮 32767 检查在 2081-32767 区间永不触发（引擎先拒、落 Engine 类） | **新常量 `MAX_URL_TEXT` = 2,080** 镜像引擎真值 typed 前移；显示文本 32767 维持（探针 32767 过/32768 拒） |
+
+另两处小缺口补齐：merge() 左上格文本长度限（W4 单格文本面之一）；
+mdcore-wasm xlsx_import 两层关系登记（R13——a 轮只在 io.rs 登记）。
+其余 a 轮实现（io.rs 五类上限 / docx.rs 计数漏斗 / write.rs 预算 /
+wasm 码三处 / 四入口字节限 / docx 字节入口借用化）逐项核对无缺口，
+原样采纳。
+
+### 11.2 落地面（产品码四件套：常量 + 执行点 + typed 错误 + 测试）
+
+| 面 | 落地 | 锚点 |
+|--|--|--|
+| 读·输入字节 | 四入口（xlsx/docx × path/bytes）门 0，先于任何全量读/分配；xlsx 302MB / docx 52MB（=族声明总量+2MB 边距） | io.rs `check_input_size` + docx.rs 门 0 |
+| 读·族分化 | `prescan_docx`（docx 族 50MB——此前误用 xlsx 300MB 常量；共享核 `prescan_family` 参数化） | io.rs |
+| 读·稀疏包围盒 | 门 3 `GridScan` 坐标镜像扫描（calamine cells_reader 位置语义——显式 r/顺序游标/载荷=v·is·f 并集/styled 空格不计/sheetData 后停读）→ 单部件面积 ≤4M；`extract_sheets` 全簿 Σ 累计（多表名倍增面） | io.rs（探针：1588B 两格 → ~550GB 分配 abort 闭环） |
+| 读·表数 | `extract_sheets` 循环前 1,000 上限（空表名洪水 CPU 面） | io.rs |
+| 写·XLSX | `MAX_CELLS`=1M（write/write_row/merge 面积/hyperlink 共享计数器）+ `MAX_SHEETS`=256 + `MAX_CELL_TEXT`=32767/`MAX_URL_TEXT`=2080/`MAX_FORMULA_TEXT`=8192（typed 前移）；`WriteError::Limit` 新变体 | write.rs |
+| 写·DOCX | `MAX_PARAGRAPHS`=1M/`MAX_RUNS`=4M，全部 14 发射方法计数接线 → save 面统一漏斗 + `check_document_scale` 预检单点；`DocxError::Limit` 新变体；**超限导出零产物**（save_to_path 错误路径零文件） | docx.rs |
+| wasm 码 | `xlsx_limit`/`docx_limit`（资源限与格式/引擎类可区分）；读面新拒绝经既有 `container_prescan` 码（web 断言零改动兼容） | mdcore-wasm 三模块 |
+| 读·DOCX | 字节入口去 `to_vec` 复制（全借用化——大档双倍峰值消除） | docx.rs |
+
+### 11.3 测试与基准
+
+- **测试 +21**（office-io lib 49→67[+18]：io.rs 8 项[稀疏炸弹双模式/
+  面积边界恰=限过+超拒/Σ 拒带表名/表数 1000 恰+1001 拒/GridScan
+  镜像六面/输入字节边界×双模式×双入口/docx 族三面] + write.rs 4 项
+  [表数/流式 fd/预算算术/五类文本限] + docx.rs 6 项[W9/W10 边界/
+  漏斗无产物/计数接线 14 面/输入字节双入口/族分化端到端]；
+  mdcore-wasm 50→53[+3 码映射]）。每限三类覆盖：恰=限过 / 限+1
+  拒可诊断（reason + entry）/ 极端（4× 输入、稀疏炸弹 17G 面积）；
+  strict/compat 同限钉定；ZIP 异常与压缩炸弹复用 mal 语料既有面
+  （mal6a/6c/6d——勿重复造）零改动全绿。
+- **基准**（examples/bench_limits.rs，release，沙箱 2CPU/3GB；
+  计量 = Instant + /proc VmHWM——与 /usr/bin/time -v 同源口径，
+  沙箱无该二进制登记替代）：读 500k 格 517ms/38.5MiB；读 4M 格
+  （恰=限）4410ms/278.9MiB；写 1M 格非流式 1139ms/143.4MiB、
+  流式 1221ms/5.1MiB；DOCX 100k 段 801ms/390.0MiB（≈3.9KB/段）；
+  DOCX 1M 段（恰=限）**沙箱 OOM kill**——限值为防御上界非可达
+  承诺（未实测不宣称）。**不设门禁阈值，只记可复现基准**。
+
+### 11.4 门禁（b 轮亲跑全绿）
+
+| 门 | 结果 |
+|--|--|
+| G1 | **512/0/1i**（491 基线 +21 只增）；既有测试零改动 |
+| PDF 四面 | 68/79/81+6i/109+6i 零漂移 + perf --ignored 6/6 |
+| clippy | native --all-targets 恰 2（wasm_bindgen 基线）+ PDF 三面 0 + wasm32 --all-targets 2 同基线 |
+| fmt / scan / lock | fmt 0；scan 0 hit-paths；Cargo.lock 零 diff（零新依赖） |
+| wasm32 | check + --all-targets 过（bench 示例 wasm32 空壳 cfg——t21 收严口径） |
+| web 七套件 | **18/15/28/9/9/9/13 全绿零断言改动** |
+| 包体 | wasm 3,969,548 → **3,937,174 B（−32,374 B）**；dist/main.js 557,211 → 557,251 B（+40） |
+
+### 11.5 遗留与登记
+
+- dimension 巨量声明维持登记观察（无执行点有意不设——实测无害；
+  实际载荷坐标面已由 GridScan 闭环）；输出文件大小/流式临时文件/
+  DOCX 写文本长度 = 组合界登记（无独立执行点，理由在档 v1.2 §3）；
+- wasm 渲染窗（16/50/32）与读面全提取（1000/4M）两层关系登记
+  不收敛（读面 = C1 能力面，渲染窗 = GFM 产出可预期性）；
+- 宿主资源层（RLIMIT/超时/配额，§2.3）维持宿主接线轮——§3.1
+  基准即装配预算一手输入。

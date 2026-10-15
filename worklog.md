@@ -2685,3 +2685,22 @@ Stage Summary:
 - mdcore ef74282 → 1dd5cb2 推送；分析仓 e9745e4 → 本节提交推送
 - 显示面兼容策略兑现：import markdown 逐字不变（t17 既有断言即钉定），类型信息进模型供 replay/导出/未来消费方
 - T2（导入/导出资源上限与安全边界）即刻派发
+---
+Task ID: r4-t2
+Agent: 子代理 a 轮（T2.2 实现，基准阶段被切断）+ 子代理 b 轮（审查校准 + 测试 + 基准 + 门禁 + 文档，commit 前被切断）+ 主代理接管（复验 + 提交）
+Task: Round 4 T2 导入/导出资源上限与安全边界——限制清单逐项核实 + 缺口修补 + 边界测试 + 基准
+
+Work Log:
+- a 轮（超时派发服务端执行）：T2.1 四段清单（XLSX 读 R1-R13/DOCX 读 D1-D8/XLSX 写 W1-W8/DOCX 写 W9-W12 + 错误三分）+ T2.2 实现 6 文件 +673/−48；切断于基准阶段
+- b 轮接力（超时派发服务端执行）：对 a 轮逐项审查修正四处（W3 表数 512→256——引擎 constant_memory 每表急切 tempfile、双簿并发 1024 fd EMFILE 实测证伪；W4 URL 限 32767→2080——引擎 url.rs MAX_URL_LEN 真值镜像、a 轮检查在 2081-32767 区间永不触发实测证伪；W4 补 merge 左上格面；补 wasm 渲染窗 16/50/32 与读面 1000/4M 两层关系登记）+ 测试 21 个 + 基准六场景 + 门禁全绿亲跑 + 文档四件（SECURITY_POLICY v1.2/CAPABILITIES×2/REPORT）+ spike sparse_bomb.rs 探针；切断于 commit 前
+- 主代理接管：G1 全量 512/0/1i（491+21）+ sparse_grid_bomb_rejected_both_modes + sheet_count 三测试（读限/写限/fd 面）+ xlsx e2e 9/9 亲跑复验全过 → mdcore 6da3d10 提交
+- **重大安全发现（稀疏包围盒炸弹）**：calamine 0.36.1 Range::from_sparse 按包围盒稠密化——1588 字节 xlsx（A1+XFD1048576 两格）→ ~550GB 分配 abort（ulimit 双形态同结果）；本轮以门 3 流式坐标镜像扫描修复（先于 calamine，strict/compat 两模式恒拒）——读面语义层无限制的实证闭环
+- 补限制清单终态：读面 R1/R2（输入字节 302MB/52MB 双族——fs 元数据前置，先于任何读）、R10（表数 1000——空表名洪水 CPU 面）、R11（稠密包围盒 4M——稀疏炸弹面）+ DOCX D1/D2/D3（50MB 族对齐——修原 xlsx 300MB 常量误用）+ 写面 W2（全簿 1M 格预算）、W3（256 表 fd 校准）、W4/W4'/W5（文本 32767/URL 2080/公式 8192）+ DOCX W9/W10（段落/run 计数）——每项四件套（常量/执行点/typed 错误/测试）齐
+- 错误分类三分对齐：读面新拒 → PrescanRejected（安全类，wasm 码 container_prescan 兼容不变）；写面 W2/W3 → WriteError::Limit（新变体）、W4/W5 → InvalidInput；DOCX W9/W10 → DocxError::Limit；wasm 新码 xlsx_limit/docx_limit
+- 基准记录（examples/bench_limits.rs，VmHWM 口径，不设门禁阈值）：读 500k 格 517ms/38.5MiB；读 4M 格（恰=限）4410ms/278.9MiB；写 1M 格非流式 1139ms/143.4MiB vs 流式 1221ms/5.1MiB（RSS 28× 差）；DOCX 100k 段 801ms/390MiB（≈3.9KB/段）；DOCX 1M 段沙箱 OOM kill 诚实登记（限值=防御上界，实际包络受宿主内存约束——未实测不宣称可达）
+- 登记不设面（有理由在档）：R6 压缩后单条目（≤输入自身非膨胀面）、R12 dimension 巨量声明（T3 实测无害维持）、D6 读文本长（族总量界内子集）、D8 媒体（族界联合）、W6/W12 输出大小（代理界 = 计数×长度）、W11 DOCX 写文本（Word 无规格限+引擎不检登记）、W7 临时文件（联合界 W3+W2）
+
+Stage Summary:
+- r4-t2 完成度：限制清单 33 项全部有执行点或明确登记理由（无「仅文档宣称」残留——SECURITY_POLICY v1.2 全量校准）；G1 491→512；七套件零断言改动全绿；Cargo.lock 零 diff；包体 −32,374 B（死码剥离面变化）
+- 稀疏包围盒炸弹修复 = 本轮最高价值安全闭环（550GB 分配面 → 门 3 前置 typed 拒）
+- mdcore 1dd5cb2 → 6da3d10；分析仓文档四件 + 本 worklog 节提交推送（主代理）
