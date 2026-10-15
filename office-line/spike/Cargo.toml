@@ -13,3 +13,7 @@ calamine = "0.36"
 rust_xlsxwriter = { version = "0.99", features = ["constant_memory"] }
 zip = { version = "8.6", default-features = false, features = ["deflate"] }
 flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+# t20-a 写面探针新增（与 mdcore 产品 office-io 同版本）：docx-rs 写面
+# 四件 API（numbering/rFonts/pBdr/ind）一手核验 + 探针 bin。仅新增，
+# 不动上方既有依赖。
+docx-rs = "0.4.22"

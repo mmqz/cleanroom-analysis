@@ -2474,3 +2474,24 @@ Stage Summary:
 - 供应链纪律执行到位：wasm32 运行时崩溃是 t16 以来首个「check 过但运行崩」案例——两项发现入档教训（可行性探针只证编译不证运行；引擎结构性质面须 target-split）
 - G1 469/0/1i；八 web 套件 18/15/28/9/9/8/9 全绿；PDF 四面零漂移
 - 消费面收口后剩余缺口：t18 降级根因四件（list/monospace/hr/quote——office-io 写面未暴露，docx-rs 能力待一手核验）= 下一增量 t20 候选；MarkSpan URL payload = mdcore MD 域上游缺口（触碰域边界，需单独裁决）
+
+---
+Task ID: t20-a
+Agent: 子代理（docx-rs 写面四件 API 一手核验）
+Task: docx-rs 0.4.22 写面能力边界一手核验（t18 四件降级项 + 块级 code 等宽）——源码 API 签名 + spike 探针实证，t20 扩写面消降级的前置可行性证据
+
+Work Log:
+- 2026-10-15 第 10 次环境回滚后重写恢复：原 588891b 提交（工作区文件 + git 对象 + /tmp 探针产物）被平台回滚删除，本节与四产物按 transcript 逐字重建，探针 16/16 在恢复环境重跑复证（release 构建）
+- 读 worklog t18/t18-review/t19/t19-review 四节 + docx-r1/REPORT.md §8 Round 4——四件降级语义核对（list=marker/depth 丢、行内 code=无等宽面、hr=无水平线面、quote=缩进丢失；另 CodeBlock 等宽全丢 = t19-review 遗留顺带项）
+- spike Cargo.toml 仅新增 docx-rs = "0.4.22"（与产品 office-io 同版；不动既有四依赖）；Cargo.lock +282/-2 = 30 新包（docx-rs default features=["image"] 拉 png/gif/tiff 解码链；其 zip=8.6.0 与 spike 既有同版零分裂）——spike 钉版提交设计内
+- 一手源码核验（crate 源 ~/.cargo/registry/src/.../docx-rs-0.4.22/src/）：numbering 三层 API（Docx::add_abstract_numbering/add_numbering + AbstractNumbering::add_level(Level::new(ilvl,Start,NumberFormat,LevelText,LevelJc)) + Paragraph::numbering(NumberingId,IndentLevel)）；Run::fonts(RunFonts) / Paragraph::fonts；ParagraphBorder/ParagraphBorders + ParagraphProperty::set_border（pub 字段挂接）；Paragraph::indent(SpecialIndentType)——全锚点入 WRITE_FACE_PROBE.md §2
+- 关键机制发现：word/numbering.xml 无条件写入（t18 现有输出已含）+ 内建 abstractNum id=1/numId=1；条件项 = document.xml.rels 关系（has_numbering 链）——t20 必须走 Paragraph::numbering 方法（numbering_property 路径不置位→悬空 numPr）；ParagraphBorders::new()=四边全 Single 陷阱（hr/quote 须 with_empty().set(单边)）
+- 探针 src/bin/docx_write_probe.rs（新 bin）：五类表达面全构造 → /tmp docx → 进程内 zip 读回 16 断言；首跑 15/16（唯一 FAIL=探针断言自身计数错，XML 正确）修正后 **16/16 PASS exit=0**；独立第二通道复证（unzip -l/-p grep 四结构面 + python zipfile testzip OK + rels rId7→numbering.xml）
+- 顺带发现：Run::strike/dstrike/underline 在库——t18 行内 del·u 降级库层面同可达（t20 RunSpec 扩面可同批消解）；链接 mark 维持模型上游缺口（MarkSpan 无 URL 载荷）非库层面
+- 文档：docx-r1/WRITE_FACE_PROBE.md（§1 目的/§2 五件核验表/§3 探针实证/§4 t20 实施映射草案〔office-io 五面新增 + docx_export.rs 映射改法 + 测试门禁预置〕/§5 结论）
+
+Stage Summary:
+- **四件降级 + 块级 code 等宽全部库层面可达（可行），无「库也不可行」项**——t20 扩 office-io 包装面即可整批消解；残项仅链接 URL（模型上游）与 code lang/fence（库无语法高亮面）维持登记
+- 探针 16/16 全过（双通道实证：进程内断言 + unzip/python 复证）；探针断言集可直接移植为 t20 原生/e2e 测试模板
+- 已知怪癖如实登记：docx-rs pPr 子序非 ECMA-376 典范序（rPr 恒居首）——t18 既有输出同形，与 t18 基线同边界，t20 不新增风险面
+- 产物：spike 新 bin + Cargo.toml/lock 增量 + WRITE_FACE_PROBE.md（分析仓本地提交，无 push 权限）；mdcore 仓本轮不可访问未触碰
