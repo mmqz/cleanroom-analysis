@@ -2643,3 +2643,26 @@ Work Log:
 Stage Summary:
 - T0 通过：环境与基线与 t22/t23 收口态完全一致，零异常零回归，Round 4 起点干净
 - 立即启动 T1（XLSX 类型推断与转换规则）派发子代理执行
+---
+Task ID: r4-t1
+Agent: 子代理（Round 4 T1：XLSX 类型推断与转换规则——用户裁决落地轮）
+Task: office-io 读面类型化单元格值模型（CellData/CellGrid/formula_at/replay_cell）+ 探针与 kind 往返实测 + GFM 映射显示面兼容切换 + 文档三面（CAPABILITIES C1/FIDELITY §8/xlsx-r2 REPORT §10）
+
+Work Log:
+- 协议阅读：worklog 尾三节（t22-review 裁决前置清单⑤即本轮主题/r4-t0 基线 481）+ FIDELITY（t17 缓存值 Display 语义/C3 丢失矩阵）+ CAPABILITIES（C1/C2/C3）+ 产品四文件（io.rs/write.rs/xlsx_import.rs/xlsx_export.rs）
+- calamine 0.36.1 一手核验（registry 源码，不凭记忆）：**Data::DateTime 判定 = numFmt 证据非「Float+猜测」**（cells_reader.rs read_v：数字经 format_excel_f64_ref[n，cell_format，is_1904]；cell_format = s 属性→cellXfs→numFmtId→builtin 14-22/45/47 表或自定义格式码 d/m/h/y/s token 检测[formats.rs，openpyxl 移植]）；t="d"→DateTimeIso 原串；t="e"→Error（8 变体码文本）；t="b"→Bool；xlsx 数值恒 Float（Int 仅 pivot 路径 mod.rs:3621）；DurationIso xlsx 不可达；ExcelDateTime Display = 裸序列数（datatype.rs:986）；to_ymd_hms_milli 无 chrono 门控；has_1904_epoch 构造期 eager（new 内 read_workbook）——与用户裁决方向逐条对齐（日期依据已内建于引擎判定机制，模型层缺承载）
+- T1.1 探针（tests/cell_types.rs 前四测试，raw XML zip 自构造 14 格：数字/前导零文本/布尔/日期双 numFmt 面/纯序列数/ISO/公式/空格/错误/2^53+1/0.1+0.2/时长/t="str" + 1904 纪元变体）：Data 面 + Display 面逐格实测钉定——前导零 `00123` 原样、纯序列数 44927 = Number（不认日期）、日期格 Display = 裸序列数（与纯数值同串不可分→类型面必要性实证）、2^53+1 落盘即 9007199254740992、1904 同 serial = 2027-01-02（+1462 天）
+- 缺口证明（scratch）：读面模型无自有类型层（values 直暴露 calamine::Data 引擎类型）；读-改-重建对 DateTime/DateTimeIso/DurationIso/Error 四类静默丢格（write_roundtrip.rs None 分支——「不支持类型给可诊断结果」不满足）；序列数→ISO 无公开转换；公式坐标联接易错（锚定语义踩坑在档）
+- 实现（office-io 只增不改，既有调用方零破坏）：**CellData 九变体**（Text/Number/Boolean/DateTime{serial,is_1904}/DateTimeIso/Duration{serial,is_1904}/DurationIso/Error(String)/Empty——三分纪律：原始值/推断类型/显式转换；kind 依据表 = 变体文档）+ display()（t17 Display 语义同源）+ as_iso_datetime()/as_iso_duration()（显式转换——无据 → None，纯 Number 序列数不转换）+ to_write_parts()（kind 分派 → (write::CellValue, Option<CellStyle>) 成对返回防样式漏配；DateTime/Duration → Number+DATE_REPLAY_FORMAT/DURATION_REPLAY_FORMAT；1904→1900 纪元换算 epoch_to_1900[+1462，写面引擎恒 1900 纪元]；ISO/Error → Text 原样[写面无对应面——值保持+kind 降级登记]）；**CellGrid**（与 values 同一包围盒/坐标系单点派生；get 相对+get_abs 绝对双坐标面）+ SheetData.typed 字段 + **formula_at**（公式文本独立通道，锚定换算内化）+ **replay_cell**（读-改-重建单调用点：公式联接[缓存 kind 映射——DateTime→序列数缓存+日期样式/Error→码文本缓存/Empty→None 两义性在档]+kind 分派）；extract_sheets 附建（is_1904 = has_1904_epoch 一次查询）
+- GFM 映射（xlsx_import）：渲染切至 typed.get().display()（显示面字节零变化——模块自此零 calamine 面接触）；公式计数/规模上限/stats 零变化；新 wasm 测试 typed_display_face_kinds_preserve_text_semantics（前导零逐字+日期格=序列数+数值/布尔 t17 同源）
+- wasm 导出（xlsx_export）：**零代码变化**——BlockTree 文本模型无单元格类型载荷，「数字文本不擅自转数字」裁决使从文本推断类型不可行（前导零会失真）→ 全 Text 维持 = 裁决正确语义（任务书最小版路径：读面类型模型+导出按模型 kind 分派[office-io 层 replay_cell 已实测]）；模块文档 lang 语义登记（模型扩类型载荷 = mdcore 域上游裁决未立项不宣称）
+- 测试（T1.3 全类覆盖）：cell_types.rs 9 测试（探针 4：Data 七类/Display 钉定/公式两通道/日期组件+1904；类型面 5：typed 七类 kind+双坐标越界/display 全格等值[typed.display == Data.to_string 逐字——t17 切换安全依据]/显式转换证据规则[含 E1 纯序列数→None]/formula_at+replay_cell 联接/kind 保持全链往返[探针档 replay→重读 kind+值双断言，含 1904 历法保持链]）；wasm +1；既有测试零改动（write_roundtrip/corpus_harness/range_anchor_pinned 的 Data 面断言原样全绿=既有消费方零破坏实证）
+- 门禁全绿（亲跑）：G1 **491/0/1i**（481 基线+10：office-io 84→93、mdcore-wasm 49→50）；一次全量跑 r23_fingerprint 出现 14+1（负载敏感 flake——mdcore 域时间型测试与本轮零代码路径交集；隔离 8/8 绿+后续两次全量 491/0/1i 绿，如实登记）；PDF 四面 68/79/81+6i/109+6i 零漂移+perf --ignored 双面 6/6；clippy native --all-targets 恰 2 基线+PDF 三面 0+wasm32 --all-targets 2 同基线；fmt 0；scan 0；wasm32 check+--all-targets 过；Cargo.lock 零 diff；web 七套件 **18/15/28/9/9/9/13 全绿零断言改动**（显示面兼容 e2e 亲证）
+- 包体：wasm 3,970,827 → **3,969,548 B（−1,279 B / −0.032%**——CellData::display 替代 wasm 面 calamine Data Display 路径净缩）；dist/main.js 557,211 B 零变化
+- 文档三面：CAPABILITIES.md C1 r4-t1 类型语义增量（宣称口径+不宣称面）+ FIDELITY.md §8 类型规则（R1-R13 依据表[每条规则一行：规则/依据/测试锚点]+§8.2 不支持面与降级登记+§8.3 模型面）+ xlsx-r2/REPORT.md §10（工程收口：落地面/探针与往返/门禁/遗留）
+
+Stage Summary:
+- mdcore 本地 **c62d19e**（4 文件 +1,095/−15：office-io/src/io.rs[+427 模型与文档]、office-io/tests/cell_types.rs[新 606L 九测试]、mdcore-wasm/src/xlsx_import.rs[渲染切换+测试+文档]、mdcore-wasm/src/xlsx_export.rs[文档登记]；不 push——主代理审查后推）；分析仓本轮本地提交（worklog r4-t1 + FIDELITY §8 + CAPABILITIES C1 增量 + xlsx-r2 REPORT §10；不 push）
+- 用户裁决四方向全部落地并实测：①默认保留（前导零/数字文本 Text 原样——探针+往返双证）②日期必须依据（numFmt/t="d" 证据进模型，纯序列数=Number；显式转换无据→None）③公式两通道区分（values/typed=缓存值，formulas/formula_at=文本，replay_cell 联接）④不支持类型可诊断（Error 码文本保留；ISO/Error 写面降级登记；DurationIso 防御性承载）
+- t22-review 裁决前置项⑤「XLSX 数值/布尔类型推断策略」收口：读面类型模型 + kind 保持重放实测（DateTime/Duration kind 往返经 numFmt 证据链；Text/Number/Boolean 保持；1904 历法保持）；wasm 导出面全 Text 维持为裁决正确语义（BlockTree 类型载荷 = mdcore 域上游裁决登记）
+- 登记缺口：BlockTree 扩类型载荷（若立项 wasm 导出可升级按 kind 分派——replay 通道已就绪）；numFmt 显示形态维持不宣称；公式求值引擎未立项

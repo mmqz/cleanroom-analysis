@@ -192,3 +192,56 @@ write_roundtrip.rs` 的 `read_modify_rebuild_path_evidence` 测试（经
 **新可见性（非损失）**：媒体部件无内容类型声明（严格拒/兼容警告 +
 content_type=None）；悬空 image 关系与悬空 r:embed（严格拒/兼容
 BrokenReference）；zip 重复条目名 last-wins 语义钉定。
+
+## 8. XLSX 类型规则（r4-t1，2026-10-17——Round 4 T1 用户裁决落地）
+
+> 定位：XLSX 单元格**类型推断与转换规则**的依据表与边界登记。
+> 用户裁决方向（2026-10-17）：默认保留标识符/前导零/数字文本不擅自
+> 转数字；日期转换必须有明确依据；公式读取结果与公式文本区分；
+> 不支持类型给可诊断结果。产品面 = mdcore office-io `io.rs`
+> CellData/CellGrid/SheetData（r4-t1 提交）；实测锚点 =
+> office-io tests/cell_types.rs（9 测试）；规则表镜像 =
+> io.rs CellData 文档（单一真源随码走）。
+
+### 8.1 类型规则依据表（每条规则一行：规则 / 依据 / 测试锚点）
+
+| # | 规则 | 依据（一手核验 calamine 0.36.1 源码 + 探针实测） | 测试锚点（tests/cell_types.rs） |
+|---|------|------|------|
+| R1 | **前导零/数字文本/标识符 = Text 原样，绝不转数字** | 存储类型 = 字符串恒读 `Data::String`（cells_reader.rs read_v t="s"/t="str"/inlineStr/无 t 非数字回退）——存储面无转换发生，本层零新增推断 | `data_face_seven_kinds_pinned` B1；`kind_preserving_replay_roundtrip` B1 前导零往返 |
+| R2 | **数值 = Number（f64）**，显示面 = Rust 格式化 | xlsx 数值存储面恒 IEEE 754 double（read_v 数字路径只产 `DataRef::Float`；`Data::Int` 仅 pivot 路径不可达，xlsx/mod.rs:3621） | A1（123→"123"）；K1（0.1+0.2 → "0.30000000000000004" 最短往返） |
+| R3 | **>2^53 整数精度边界**：9007199254740993 落盘即 9007199254740992 | Excel 数值面 = double（Excel 自身 15 位有效数字同限——存储面结构性边界，非读侧缺陷） | J1 双面钉定 |
+| R4 | **日期认定必须 numFmt 证据**：serial + cellXfs numFmtId（builtin 14-22/45/47 或自定义格式码 d/m/h/y/s 计 token）→ DateTime；**纯 Float 永不升级为日期** | formats.rs `format_excel_f64_ref`（numFmt 判定驱动，非「Float+猜测」）——判定机制本身可靠（builtin 表 + openpyxl 移植 token 检测双面）；保真边界 = numFmt 证据可被生产行为影响（如文本格配日期格式不触发——数值路径才判型） | D1（numFmt14）/L1（自定义 yyyy-mm-dd）vs E1（同 serial 无 numFmt = Number） |
+| R5 | **ISO 日期 = DateTimeIso（t="d" 显式存储）**——第二类明确依据 | read_v t="d" → `Data::DateTimeIso(原串)`（文件生产者定型，无推断） | F1 |
+| R6 | **时长 = Duration（TimeDelta numFmt 证据）**：builtin 46 `[h]:mm:ss` 或自定义 `[…]` 时长格式码 | formats.rs TimeDelta 判定分支 | M1（1.5 天 → Duration；as_iso_duration = PT36H0M0S） |
+| R7 | **公式两通道区分**：值面 = 缓存计算结果（values/typed）；公式文本 = 独立通道（formulas/`formula_at`）——禁止缓存值误当公式文本 | calamine `worksheet_range`（含缓存值）与 `worksheet_formula`（文本，无 `=` 前缀）两 API 分立；安全联接 = `SheetData::formula_at`（锚定换算内化——range_anchor_pinned 锚定语义免坑） | `formula_text_channel_distinct_from_cached_value`；`formula_at_safe_join_and_replay_junction` |
+| R8 | **无缓存值公式两义性**（读回 Float(0.0) 与真值 0 不可区分） | FIDELITY §1 既有登记（读侧库行为边界）；r4-t1 维持——replay_cell 对 Empty 缓存 → cached None（读回 Float(0.0)） | write_roundtrip.rs 既有断言（本轮未改） |
+| R9 | **错误格 = Error（码文本保留）**：#DIV/0!/#N/A/#NAME?/#NULL!/#NUM!/#REF!/#VALUE!/#DATA! | t="e" → `Data::Error`（CellErrorType 8 变体，Display = 码文本）；可诊断不丢弃不 panic | I1；replay → Text(码文本)（降级登记） |
+| R10 | **显式转换有据才发生**：`as_iso_datetime` 仅 DateTime/DateTimeIso；`as_iso_duration` 仅 Duration/DurationIso；纯 Number 序列数 → None | 裁决「日期转换必须有明确依据」——无据转换不发生（映射层零静默语义转换）；序列数→组件 = calamine `to_ymd_hms_milli`（无 chrono 门控；1900/1904 双纪元 + Excel 1900 闰年怪癖由引擎承载） | `typed_explicit_conversions_ruled_by_evidence`（E1 → None 钉定） |
+| R11 | **1904 纪元正确解码**：workbookPr date1904 → is_1904 进模型；同 serial 不同历法（+1462 天） | `Xlsx::has_1904_epoch`（构造期 eager 解析——xlsx/mod.rs read_workbook 在 new 内）；写面联接 = epoch_to_1900（写面引擎恒 1900 纪元） | 1904 探针（44927 = 2027-01-02）；往返历法保持 |
+| R12 | **显示面兼容**：CellData::display() 与 calamine Data Display 逐字等值（t17「缓存值 Display 语义」不变） | display 按 Data Display 语义逐变体实现；日期格 Display = 裸序列数（ExcelDateTime Display = value——datatype.rs:986） | `typed_display_equivalence_with_data_display` 全格等值 + web 七套件零断言改动 |
+| R13 | **类型保持重放**（读-改-重建联接）：Text/Number/Boolean kind 保持；DateTime/Duration → Number(serial)+日期 numFmt 样式（写回经 numFmt 证据再判型）；1904→1900 纪元换算；DateTimeIso/DurationIso/Error → Text（引擎无对应写面——值保持 + kind 降级登记，可诊断） | `SheetData::replay_cell` 单调用点（公式联接 + kind 分派 + 样式配对成对返回防漏配）；t22-review 前置裁决项「⑤XLSX 数值/布尔类型推断策略」的落地答案 | `kind_preserving_replay_roundtrip`（14 格全链 + 1904 链） |
+
+### 8.2 不支持面与降级登记（可诊断，非静默）
+
+- **wasm BlockTree→xlsx 导出面维持全 Text**（t19 口径）：markdown
+  表格单元格 = 文本模型（无类型载荷）；「数字文本不擅自转数字」裁决
+  使从文本推断类型不可行（前导零会因推断失真）。类型保持写面在
+  office-io 层（replay_cell）供有类型源消费；BlockTree 扩类型载荷
+  = mdcore 域上游裁决，未立项不宣称（xlsx_export.rs 模块文档登记）。
+- **写面无 t="d"（ISO 存储）面**：DateTimeIso/DurationIso 重放为
+  Text 原串（值保持，kind 降级）。
+- **写面无错误格**：Error 重放为 Text(码文本)（码可诊断，kind 降级）。
+- **DurationIso 在 xlsx 读路径不可达**（t="d" 恒产 DateTimeIso；
+  DurationIso 仅 ODS）——防御性承载保 kind 完整性。
+- **无缓存值公式**（R8）与 **>2^53 精度**（R3）= 存储面/引擎面
+  结构性边界，非缺陷。
+
+### 8.3 模型面（新公开 API——office-io，只增不改）
+
+`io::CellData`（九变体 + display/as_iso_datetime/as_iso_duration/
+to_write_parts）、`io::CellGrid`（get/get_abs 双坐标系）、
+`SheetData.typed` 字段、`SheetData::formula_at`、
+`SheetData::replay_cell`、`io::DATE_REPLAY_FORMAT`/
+`DURATION_REPLAY_FORMAT` 常量；既有 `values: Range<Data>` 面不变
+（既有消费方零破坏——write_roundtrip/corpus_harness/
+range_anchor_pinned/docx 面零改动验证）。

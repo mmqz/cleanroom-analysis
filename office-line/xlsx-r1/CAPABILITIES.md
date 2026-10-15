@@ -36,6 +36,27 @@ markdown（每表 `## {表名}` 节 + 管道表；公式格 = 缓存值[Excel �
 公式求值（缓存值即所见）/超链接目标进 markdown/样式图表图片——
 丢弃面计数显式化（xlsx-r2 REPORT §8 映射规则与登记边界）。
 
+**r4-t1 类型语义增量（2026-10-17，Round 4 T1——用户裁决落地）**：
+C1 读面新增**类型化单元格值模型**（office-io `io::CellData` 九变体
++ `io::CellGrid` + `SheetData.typed`）——宣称口径：**单元格类型
+（Text/Number/Boolean/DateTime/DateTimeIso/Duration/DurationIso/
+Error/Empty）可判读**，kind 判定 = 存储类型 + numFmt 证据的忠实
+转译（依据表与规则 = FIDELITY.md §8.1 R1-R13，单一真源随码走 =
+io.rs CellData 文档）；**默认保留**（前导零/数字文本/标识符原样
+Text，绝不转数字）；**日期必须 numFmt 或 t="d" 证据**（纯序列数
+= Number）；**公式两通道区分**（缓存值 vs 公式文本——`formula_at`
+安全联接）；**错误格码文本保留**；**显式转换有据才发生**
+（`as_iso_datetime`/`as_iso_duration`——无据 → None 不转换）；
+1904 纪元正确解码（is_1904 进模型）。**类型保持重放**（读-改-重建
+路径经 `SheetData::replay_cell`：kind 分派 + 纪元换算 + numFmt 样式
+配对）实测 kind 往返（Text/Number/Boolean/DateTime/Duration 保持；
+ISO/Error 写面降级登记）。**不宣称面**（§8.2）：numFmt 显示形态
+（日期格显示 = 裸序列数——值面语义）、wasm BlockTree 导出类型推断
+（全 Text 维持 = 裁决正确语义——文本模型无类型载荷）、写面 ISO/
+错误格（降级登记）、无缓存值公式两义性与 >2^53 精度（存储面结构
+性边界）。实测锚点 = office-io tests/cell_types.rs（9 测试）+
+mdcore-wasm 显示面测试；G1 481→491 / web 七套件零断言改动全绿。
+
 **证据**：
 - 7 维语料正向 5 维 + 对照件全过（read_proto 17/17，锚点断言含
   表序/非空格数/公式数/合并数逐档对账）；

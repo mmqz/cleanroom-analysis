@@ -211,3 +211,63 @@ office-io 包装面，未实测不宣称）；heading 加粗为唯一样式面�
 不可分辨）；流式表 wasm32 结构性缺席（引擎 tempfile 背书——API
 条件化，非降级）；t17 导入侧规模上限（16 表/50 行/32 列）是导入面
 边界，不在导出面（导出无上限截断除 2^20/2^14 物理边界）。
+
+## 10. Round 4 / r4-t1 — XLSX 类型推断与转换规则（2026-10-17 完成）
+
+> 定位：Round 4 T1——用户裁决「默认保留标识符/前导零/数字文本不
+> 擅自转数字；日期转换必须有明确依据；公式读取结果与公式文本区分；
+> 不支持类型给可诊断结果」的落地轮（t22-review 前置裁决项⑤
+> 「XLSX 数值/布尔类型推断策略」的答案）。规则依据表唯一真源 =
+> xlsx-r1/FIDELITY.md §8（R1-R13，每条规则一行：规则/依据/测试
+> 锚点）；本节为工程收口记录。
+
+### 10.1 落地面（office-io 只增不改；既有调用方零破坏）
+
+| 项 | 结果 | 锚点 |
+|--|--|--|
+| 类型化值模型 | `io::CellData` 九变体（Text/Number/Boolean/DateTime{serial,is_1904}/DateTimeIso/Duration{serial,is_1904}/DurationIso/Error(String)/Empty）——原始值/推断类型/显式转换三分：变体即 kind（日期类携带依据），`display()` = t17 Display 语义同源，`as_iso_datetime()`/`as_iso_duration()` = 显式转换（无据 → None），`to_write_parts()` = kind 分派 → (write::CellValue, Option<CellStyle>) 成对返回（防样式漏配） | mdcore r4-t1 提交 io.rs |
+| 类型化矩阵 | `io::CellGrid`（与 values 同一 used-range 包围盒/坐标系——单点派生自 values 零漂移；`get` 相对 + `get_abs` 绝对双坐标面 = range_anchor_pinned 锚定语义免坑）+ `SheetData.typed` 字段（Default 兼容） | 同上 |
+| 公式安全联接 | `SheetData::formula_at(row, col)`（公式文本独立通道——锚定换算内化；无 `=` 前缀在档）+ `SheetData::replay_cell(row, col)`（读-改-重建单调用点：公式两通道联接[缓存 kind 映射含 DateTime→序列数缓存+日期样式、Error→码文本缓存降级] + kind 分派） | 同上 |
+| 纪元 | `Xlsx::has_1904_epoch()` 构造期 eager 解析进模型；写面联接 epoch_to_1900（+1462 换算，写面引擎恒 1900 纪元——历法日期保持） | 同上 |
+| GFM 映射 | xlsx_import 渲染切至 `typed.get().display()`（显示面字节零变化——既有断言即钉定 + 新等值测试 + web 七套件零断言改动）；模块自此零 calamine 面接触 | mdcore-wasm xlsx_import.rs |
+| wasm 导出面 | 零代码变化；模块文档 lang 语义登记：BlockTree 文本模型无类型载荷，「数字文本不擅自转数字」裁决使文本推断不可行 → 全 Text 维持为正确语义；类型保持联接在 office-io 层 replay_cell | mdcore-wasm xlsx_export.rs |
+
+### 10.2 探针与往返实测（kind + 值双面）
+
+- **T1.1 探针**（tests/cell_types.rs 前四测试，raw XML zip 自构造
+  14 格七类+边界）：数字/前导零文本/布尔/日期（builtin numFmt14 +
+  自定义 yyyy-mm-dd）/纯序列数（不认日期）/ISO（t="d"）/公式
+  （=1+1 两通道）/空格/错误（#DIV/0!）/2^53+1 长整数/浮点形态
+  （0.1+0.2）/时长（[h]:mm:ss）/t="str"——Data 面 + Display 面
+  逐格钉定（44927 = 2023-01-01；1904 纪元同 serial = 2027-01-02）。
+- **kind 保持往返**（`kind_preserving_replay_roundtrip`）：探针档 →
+  replay_cell 全格重放 → 重读——Text/Number/Boolean kind 保持
+  （前导零 `00123` 零损）；DateTime（双 numFmt 面）与 Duration
+  kind 往返（写 Number(serial)+日期格式 → calamine 经 numFmt 证据
+  再判型）；纯序列数仍 Number（kind 不漂移）；公式两通道往返
+  （缓存 Number(2) + 文本 "1+1"）；错误/ISO → Text（写面降级
+  登记，值保持）；2^53+1 精度随存储面恒在；1904 链历法日期保持
+  （44927 → 46389 → 2027-01-02）。
+- **显示面等值**（`typed_display_equivalence_with_data_display`）：
+  typed.display() 与 Data::to_string 全格逐字等值——t17 消费切换
+  安全依据。
+
+### 10.3 门禁（全部亲跑）
+
+| 门 | 结果 |
+|--|--|
+| G1 | **491/0/1i**（481 基线 +10：office-io 84→93[cell_types.rs +9]、mdcore-wasm 49→50[+1]；既有测试零改动）；一次全量跑 r23_fingerprint 出现 14+1 负载敏感 flake（mdcore 域时间型测试，与本轮零代码路径交集）——隔离 8/8 绿 + 后续两次全量 491/0/1i 绿，如实登记 |
+| PDF 四面 | 68/79/81+6i/109+6i 零漂移 + perf --ignored 双面 6/6 |
+| clippy | native --all-targets 恰 2（wasm_bindgen 基线）+ PDF 三面 0 + wasm32 --all-targets 2（同基线） |
+| fmt / scan / lock | fmt 0；scan 0（全仓凭据模式）；Cargo.lock 零 diff（零新依赖）；wasm32 check + --all-targets 过 |
+| web 七套件 | **18/15/28/9/9/9/13 全绿**（contract/smoke/ime/docx_import/xlsx_import/xlsx_export/docx_export——零断言改动，显示面兼容 e2e 亲证） |
+| 包体 | wasm 3,970,827 → **3,969,548 B（−1,279 B / −0.032%**，CellData::display 替代 wasm 面 calamine Data Display 路径净缩）；dist/main.js 557,211 B 零变化 |
+
+### 10.4 遗留与后续
+
+- BlockTree 扩单元格类型载荷（BlockKind::Table 表格带类型）= mdcore
+  域上游裁决——若立项，wasm 导出面可升级为按模型 kind 分派
+  （replay 通道已就绪）；
+- numFmt 显示形态（¥/百分比/日历显示）维持 C1 不宣称（值面语义
+  ——样式面 calamine 不可观测，FIDELITY §3 丢失矩阵不变）；
+- 公式求值引擎（T4 威胁面）未立项——缓存值即所见维持。
