@@ -2495,3 +2495,20 @@ Stage Summary:
 - 探针 16/16 全过（双通道实证：进程内断言 + unzip/python 复证）；探针断言集可直接移植为 t20 原生/e2e 测试模板
 - 已知怪癖如实登记：docx-rs pPr 子序非 ECMA-376 典范序（rPr 恒居首）——t18 既有输出同形，与 t18 基线同边界，t20 不新增风险面
 - 产物：spike 新 bin + Cargo.toml/lock 增量 + WRITE_FACE_PROBE.md（分析仓本地提交，无 push 权限）；mdcore 仓本轮不可访问未触碰
+---
+Task ID: t20-a-review
+Agent: 主代理（t20-a 独立审查 + 第 10 次回滚恢复 + PAT 解锁）
+Task: PAT 恢复接入 + 第 10 次回滚事故处置（产物重建）+ t20-a 四维独立审查
+
+Work Log:
+- PAT 解锁：新凭据写入 scripts/token.env（600 权限）实证有效——mdcore 私有仓 ls-remote 通（远端 main = 7705b44 与 t19 记录一致）+ clone 恢复（工作区 clean 零漂移）
+- 第 10 次回滚事故定性：回滚窗口精确命中 t20-a 原提交（588891b/0677e35）之后、token.env 写入之前——分析仓工作区与 .git 双双回退至 dd7fb1a 旧快照（原两提交对象删除、WRITE_FACE_PROBE.md/spike 探针/scratch 全失），token.env 与 mdcore clone 幸存；~/.cargo 与 ~/.rustup 亦被清（第二次工具链丢失，重装 1.99.0+wasm32+clippy+rustfmt 同链）
+- 恢复路径：主代理 reset --hard origin/main（2b0268b）→ resume t20-a 子代理按 transcript 逐字重写五产物 → 新提交 2b04b11（5 文件 +927/−2，与原 588891b 零逻辑差异，仅两处恢复注记行）→ 探针 release 重跑 16/16 PASS exit=0 亲验 + unzip/python 第二通道计数一致；诚实勘误随恢复入档：原「30 新包」为首轮 head -30 截断计数，全集 31 包（漏计 zune-jpeg），包集合与锁形态 +282/−2 两轮完全一致
+- t20-a 审查（对 2b04b11）：提交范围核实（docx-r1 文档 + spike Cargo.toml/lock/bin + worklog，既有四依赖零改动）；亲跑复验 16/16（numbering 三层/有序无序多级/行内与块级 rFonts 双通道/pBdr hr/quote ind+左框全 XML 结构面）；WRITE_FACE_PROBE.md 五节全（§2 源码锚点 + §4 t20 实施映射草案——office-io 五面新增/docx_export 六行映射表/测试预置）
+- 关键机制复核采信：numbering.xml 无条件写 + rels 条件接线（必须走 Paragraph::numbering 否则悬空 numPr）+ ParagraphBorders::new() 四边全画陷阱（须 with_empty().set 单边）——两项一手发现纳入 t20 实施要点
+- 防再丢措施：本轮起恢复完成即即时推送（远端为持久真源），不再积压本地提交
+
+Stage Summary:
+- t20-a 审查通过零返工：t18 四件降级（list/monospace/hr/quote）+ 块级 code 等宽 + 顺带 del·u 全部库层面可行（docx-rs 0.4.22 一手核验 + 探针 16/16 双通道实证）；残项仅链接 URL（模型上游缺口维持）与 code lang（库无此面登记维持）
+- 第 10 次回滚恢复完成：分析仓 2b04b11 即时推送；mdcore clone 在位（7705b44）；工具链在位；PAT 在位
+- t20 主体实施路径就绪：WRITE_FACE_PROBE.md §4（office-io 五面扩 + docx_export.rs 六行映射改法 + 测试门禁预置），即刻派发
