@@ -3046,3 +3046,64 @@ Stage Summary:
 - 两处与在档裁决的联动显式化：R4.5（锚点映射依赖 r5-t2 三问结果）与
   B3.4（栈上限与 R-3 联动）——跨线冲突面提前登记不预设。
 - mdcore 零接触零提交维持；呈用户确认边界文档后开实施轮（启动条件四项）。
+
+---
+
+Task ID: r-o2-t1
+Agent: 主代理（office 线）
+Task: R-O2 docx 渲染级读侧独立评估（ADR-O1 O1-6 开放项）——生态盘点
+一手核验 + LO 转换路线 spike 实证 + 评估文档落档。用户指令：独立评估，
+不混入协同内核改造（D1 线零交互遵守）。
+
+Work Log:
+- 需求锚定：office-d §6.3 目标线三要素操作化（结构忠实 = 在场可辨不静默
+  丢弃；显式分页 = 显式标记真实页边界可断言、lastRenderedPageBreak 不
+  采信；按需渲染 = 首屏不随总页数线性劣化）；消费场景三分类登记。
+- 生态盘点（全一手，2026-10-17）：
+  * docx-preview：Apache-2.0（repo+npm 双确认）/2121★/活跃（0.4.1
+    2026-09-21 发版）——能力上限转引 office-d §6.1 在档锚点（容器
+    裁剪分页/wrapSquare 静默丢弃/全量 DOM 无虚拟化）；
+  * mammoth：BSD-2-Clause/1.13.0/2026-09-26——语义 HTML 无分页，
+    生态位被自有 t16 链覆盖，排除；
+  * LibreOffice：上游稳定 26.8.1（2026-09-21，官网双页交叉）；仓 =
+    三许可并存（根 COPYING GPL-3.0 + COPYING.LGPL + COPYING.MPL 逐件
+    直读——GitHub API 检 GPL-3.0 的原因钉定）；**许可判定 = 子进程
+    形态走 ComfyUI 进程隔离先例（canvas-d），嵌入/UNO 形态才入 MPL
+    义务面**；
+  * Univer OSS：Apache-2.0/22.6k★/极活跃，docs 引擎族 11 包在
+    （engine-render 含 shaping/linebreaking = 自有排版栈）但 **docx
+    导入器 0 命中**（importer/docxImporter/importDocx 三搜索式 + 30
+    处 docx 提及全为内部布局代码）——导入 = Pro 面；判定 = 采用其
+    渲染需自建导入桥 = 变相自研；其排版栈源码可作 B 路线算法参照；
+  * SuperDoc（AGPL-3.0 npm 一手）/OnlyOffice x2t（office-b §3 在档）/
+    云查看器（local-first 冲突）/pandoc（GPL+生态位覆盖双理由）——
+    四件排除登记；
+  * crates.io "docx" 搜索 10 件全列：**全模型级/模板级，零渲染级
+    crate**——Rust 供给侧空位实证。
+- **C 路线 spike**（office-line/spike-ro2/lo_convert_spike.py，python
+  stdlib 手搓 OOXML 零三方依赖 + soffice 子进程 + poppler 校验）：
+  * A 结构样本（Heading1/2 + 粗斜混排 + 2×3 表 + 1 分页符）：8 关键串
+    全在场 + 页数恰 2 ——全过；
+  * B 分页样本（5 显式分页符）：**页数恰 6 硬断言过**——显式分页保真
+    定谳（要素②）；
+  * C 真实夹具（mdcore t16 import_sample.docx 只读复制）：转换过
+    （1 页/166 字符抽取）；
+  * 延迟：冷启动 1,024 ms / 热态中位 304 ms（小文档口径登记，大文档
+    待实施轮）。
+- 评估文档落档 `office-line/office-f_docx渲染级读侧评估pass.md`：候选
+  矩阵（三要素 × 许可 × 集成形态）+ 三路线总对照（C：LO→PDF→mdc-pdf
+  零新 crate 三要素即时满足 / A'：docx-preview 过渡件 / B：Rust 自研
+  生态空位）+ 裁决问题三组（Q1 立项与否 / Q2 路线与时机含组合序
+  1→3、2 备援 / Q3 C 实施形态三分）+ 与 D3/锚点三问/PDF 线联动登记 +
+  遗留五项 + 已核带源清单。
+- 与 O1-6 原问的差异显式化：原问只有「JS 参照件过渡 vs 直接 Rust
+  自研」两肢，本 pass 新增 C 路线选项（依据 = mdc-pdf 阅读面在产 +
+  spike 实证）——差异在文档附录声明。
+
+Stage Summary:
+- O1-6 的证据面从「空位登记」推进到「三路线可裁决」：开源生态无单点
+  全满足件定谳；C 路线（转换 + 资产复用）spike 全过 = 三要素即时
+  满足的起步线候选（推荐序登记，终裁留用户）。
+- mdcore 零接触零提交（只读复制一件二进制夹具）；D1/collab 线零交互。
+- spike 可复跑（脚本 + .gitignore 排除 out/ 产物）；LO 版本差
+  （本机 25.2.3.2 vs 上游 26.8.1）与敌意面/大文档口径登记为实施轮项。
