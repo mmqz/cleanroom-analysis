@@ -32,7 +32,8 @@ Acrobat Pro DC 26.002.21931 安装器（TLS+MD5+Authenticode 四重验证）黑�
 ### L3 · 办公与画布线（2026-10-10~15 全阶段收官）+ collab 线
 - `05` 规划文档（388 行）：16 候选总览、11 维方法论裁剪、批次表、排除清单
 - **14 篇深读/pass 报告**（`canvas-line/` 7 + `office-line/` 4 + `office-e` 选型 + `pdf-line/06` 综合与裁决建议 458 行）全部经独立复审+修补；终裁问题 D1/D2/D3 留用户（06 §8.1）
-- **collab 线**（`collab-line/`）：`collab-a` Yjs 协议 pass + `affine-a` AFFiNE 双态 pass + **`yrs-a` yrs 评估 pass（2026-10-16：MIT 定谳 / 双语言 wire 互证实证 / spike 六探针 / 批量装载内存放大发现 / 闭包 45 包零 copyleft——D1② 证据就绪）**
+- **collab 线**（`collab-line/`）：`collab-a` Yjs 协议 pass + `affine-a` AFFiNE 双态 pass + **`yrs-a` yrs 评估 pass（2026-10-16：MIT 定谳 / 双语言 wire 互证实证 / spike 六探针 / 批量装载内存放大发现 / 闭包 45 包零 copyleft——D1② 证据就绪）** + **`yrs-b` D1-a 集成验证边界（2026-10-17：#676 定谳链闭环[ASan 复现/混合部署证伪/skip_gc 全编队不变量] + 四项边界[GC/UAF 隔离·事务粒度·撤销栈归属·稳定锚点跨模型映射] + 适配层契约草案——用户裁 D1② 走 a 后产出，实施轮待边界确认）**
+- **office 线**：office-f docx 渲染级读侧评估（2026-10-17：生态盘点一手核验 + LO headless 转换 spike 全过[显式分页保真硬断言] + 三路线对照与裁决问题——O1-6 开放项证据闭环，`office-line/office-f_docx渲染级读侧评估pass.md`）
 - office 开发轮全线（office-impl/xlsx-r1/xlsx-r2/docx-r1/r2/消费面 t16-t22/Round 4/Round 5）见 `office-line/` 各 REPORT 与 `HANDOFF.md` L3 行
 
 ## 新 AI / 新读者入口

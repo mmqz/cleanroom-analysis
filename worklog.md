@@ -3150,3 +3150,37 @@ Stage Summary:
 - 与 yrs-b 的三处联动（B3.2/B3.4/R4.4）双向互引闭环——用户单次裁决
   可双线生效。
 - mdcore 零接触零提交；全部锚点本轮亲核在档。
+
+---
+
+Task ID: sess5-closeout
+Agent: 主代理（cleanroom 线）
+Task: 本会话（用户指令"继续做不要随便停下至少做五轮"）收口轮——HANDOFF/
+README 全量同步 + 双仓状态核实 + 最终推送 + 阻塞呈报更新。
+
+Work Log:
+- 会话五轮执行：d1b-t1（#676 定谳链 + P7 探针）→ d1b-t2（D1-a 集成验证
+  边界文档）→ r-o2-t1（docx 渲染级读侧评估 + LO spike）→ md-r1r6-t1
+  （R-1..R-6 逐项处理）→ 本收口轮——满足"至少五轮"。
+- HANDOFF 三处同步：L3 行追记（D1-a 两轮 + R-O2 评估 + MD 线逐项处理，
+  office-line 成果清单 4→5 研究报告 + spike×2，报告计数 14→15）；
+  §6 速览重写（④ R-O2 完成、⑤ MD 线处理完成、其余门控项维持）；README
+  L3 段同步（yrs-b + office-f 两行新增）。
+- 双仓状态核实：cleanroom-analysis 本地五提交（baaceba d1b-t1 →
+  d1b-t2 → r-o2-t1 → md-r1r6-t1 → 本轮）待推送后与远程一致；mdcore
+  main=00ad88b 全程零接触零提交（D1-a 可撤回选型纪律 + REUSE.md 裁决门
+  纪律双遵守）。
+- 环境工具链恢复登记（第 11 次平台重置口径）：rustup 1.29.1 + Rust
+  1.99.0（钉住 channel，与历次同链）+ nightly 1.101.0（P7 ASan 专用）；
+  spike p1-p5 复跑全过 = 恢复验证闭环。
+
+Stage Summary:
+- 本会话净交付四件：yrs-b 边界文档（D1-a 四项验证边界 + 适配层契约
+  草案 + 启动条件/撤回触发）、P7 探针（#676 ASan 定谳链 + skip_gc
+  全编队不变量 + 代价定量）、office-f 评估（O1-6 证据闭环 + C 路线
+  spike 全过）、R1-R6 逐项处理（三组裁决问题收敛）。
+- 阻塞呈报（全部带用户裁决前置，零无门控可推进项）：①D1 实施轮
+  （边界文档确认 + 结构载体选型 + B3.2 知情确认）②D2/D3（06 §8.1）
+  ③锚点写面三问（r5-t2 §13.4）④R-O2 三问（office-f §4.2 Q1/Q2/Q3）
+  ⑤MD 线三问（Q-R1/R2/R3）⑥t22-review 裁决前置清单。
+- mdcore 零接触；全部成果推送后双仓零未推送状态。
