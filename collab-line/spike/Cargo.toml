@@ -8,7 +8,8 @@ publish = false
 # 依赖 = 被 evaluate 的对象本尊 yrs（crates.io 钉版经 Cargo.lock）。
 
 [dependencies]
-yrs = "0.28"
+# features=["sync"] 自 P7 起开启：对齐 #676 上报口径（feature sync + 默认 GC）。
+yrs = { version = "0.28", features = ["sync"] }
 
 [[bin]]
 name = "p1_basics"
@@ -33,6 +34,10 @@ path = "src/bin/p4_undo_origins.rs"
 [[bin]]
 name = "p5_scale_sanity"
 path = "src/bin/p5_scale_sanity.rs"
+
+[[bin]]
+name = "p7_gc_undo_safety"
+path = "src/bin/p7_gc_undo_safety.rs"
 
 [profile.release]
 opt-level = 3

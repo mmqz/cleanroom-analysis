@@ -2924,3 +2924,71 @@ Stage Summary:
   源码 + Cargo.lock/package-lock 钉版 + worklog + HANDOFF/README 同步）。
 - 会话五轮（yrs-t0..t4）满足"至少 5 轮"；此后所有剩余缺口带用户裁决前置
   （D1/D2/D3 + R-O2 + 锚点三问 + R-1..R-6 + 裁决前置清单①②④⑦）——阻塞呈报。
+
+---
+
+Task ID: d1b-t1
+Agent: 主代理（cleanroom 线）
+Task: D1-a 集成边界证据轮——#676 状态复查 + GC/undo/快照 API 面锚点 + P7 探针
+（ASan 确定性复现与缓解矩阵 + skip_gc 代价定量）。D1 用户裁决 a（yrs 候选内核
++ 隔离适配层 + 可撤回选型）后的第一执行轮；四项验证边界文档（d1b-t2）的证据前置。
+
+Work Log:
+- 环境恢复（第 11 次平台重置）：双仓本地 = 远程（de186f7 / 00ad88b main）；PAT
+  经 credential store 配置（本网关 Basic 口径）；rustup 1.29.1 + Rust 1.99.0 钉住
+  channel 重装（与历次恢复同链）+ nightly 1.101.0（2026-10-15 构建，ASan 探针用）。
+- #676 状态复查（GitHub API 一手）：**仍 open、零评论、零修复**（2026-09-29 报告，
+  更新时间 = 创建时间）；上游自评估基线 ac33960（2026-09-30）后仅 2 提交（均
+  ywasm 面，ac33960 本身即其一）——**UAF 在当前 HEAD 仍在**。issue 全文落
+  tool-results/issue676_full.txt：复现形状逐字可得 + 上报者口径「skip_gc: true
+  makes it clean」+ ASan 栈（slice.rs:210 ItemSlice::encode ← store.rs:244/212）。
+- 上游源码锚点补强（_upstream/yrs 本地克隆，零新克隆）：
+  * skip_gc = Doc Options 字段（doc.rs:492，默认 false = GC 开）；commit 期 GC
+    执行点 = transaction.rs:1111（step 5 `if !self.store.skip_gc { GCCollector::collect }`）；
+  * **显式压缩 API**：TransactionMut::gc(Option<&IdSet>)（transaction.rs:1357，
+    「even if a document was created with skip_gc」——受控压缩点存在性钉定）；
+  * **快照编码硬门**：Store::encode_state_from_snapshot 在 !skip_gc 时返回
+    Err(Error::Gc)（store.rs:152-157）——**skip_gc 与 D1③ 权威快照同向**；
+  * 上游自有测试 nested_undo（yjs#317 移植）与 undo_block_bug（yjs#343 移植）
+    **均设 skip_gc: true**（undo.rs:1457/1665）——上游测试面隐性承认 undo+嵌套
+    map+GC 是危险组合；
+  * StickyIndex API 面（sticky_index.rs）：from_id/get_offset/Encode/Decode/
+    Serialize/Deserialize——锚点可 wire 化可持久化，「不受文档变更影响」语义。
+- spike P7 探针（src/bin/p7_gc_undo_safety.rs，新增）：#676 形状逐字移植
+  （peer/insert/set_color/remove/sync 五函数对齐上报者代码；捕获窗 0 + 恒 0
+  timestamp 关闭时间合并面）。**Cargo.toml 开启 features=["sync"] 对齐 #676
+  上报口径**；Cargo.lock 零 diff（sync 只门控同 crate 内代码，闭包仍 45 包——
+  许可结论不受影响）；p1-p5 + p3_interop_read 全部复跑 PASS（feature 开启
+  零回归）。
+- **P7a（ASan 确定性复现）**：nightly + `-Zsanitizer=address`，MODE=asan 默认
+  GC 单发 → **heap-use-after-free 首发命中**（READ of size 8，216B region，
+  EXIT=1）——与上游报告逐点一致，UAF 在 0.28.0 本机定谳。
+- **P7b 缓解矩阵（ASan + release 双口径）**：
+  * b1 双端 skip_gc：ASan 干净 + 收敛（EXIT=0）——缓解实证；
+  * b2 混合模式（本轮重大发现）：**release 收敛但 ASan 口径 MIXED=1
+    （a=skip_gc,b=GC）仍确定性 UAF**——「缓解可单端部署」被证伪；MIXED=2
+    （a=GC,b=skip_gc）本形状干净（触发条件 = 接收远端删除 + 本地 undo 栈 +
+    GC 的组合，任何 peer 都可能进入 b 角色）→ **skip_gc 须全编队一致
+    （fleet-wide invariant），适配层单点构造强制**；
+  * b3 快照编码门：skip_gc → Ok / 默认 GC → Err(Error::Gc) 双断言钉定；
+  * b4 显式压缩点：clear_all 后 txn.gc(None) 可用不 panic，压缩后全量同步
+    收敛（55B）。
+- **方法论发现登记**：release 口径的收敛断言对 #676 类内存安全**零证实力**
+  （MIXED=1 release 收敛而 ASan 崩溃）——边界文档须把 ASan 门禁定为该类
+  面的验收口径。
+- **P7c skip_gc 代价定量**（CYCLES=20000 轮嵌套 map 插入+删除）：
+  * 默认 GC：终态 RSS +7,376 kB / 全量 update 348,903 B；
+  * skip_gc：终态 RSS +26,536 kB（**3.6×**）/ 全量 update 817,893 B（**2.34×**，
+    未 GC 的删除块保留内容并被编码）；
+  * 显式 gc(None) 后：update 尺寸 348,903 B（**精确回到 GC 基线**——压缩对
+    wire 尺寸是硬恢复）；RSS +27,680 kB（分配器保持策略，无 OS 侧回落——
+    诚实登记：RSS 降幅不可作为压缩收益指标，update 尺寸可以）。
+
+Stage Summary:
+- #676 定谳链闭环：仍 open 零修复 → 本机 ASan 确定性复现 → 双端 skip_gc
+  干净 → 混合部署被证伪（全编队不变量）→ 显式 gc() 压缩点存在且有效。
+- 四项验证边界的证据面就绪：①GC/UAF 隔离（skip_gc 全编队 + 显式压缩点 +
+  ASan 门禁口径）②事务粒度（yrs-a §4.5 已有）③撤销栈归属（clear_all 前置 +
+  P4 分栈）④稳定锚点（StickyIndex wire 化）——d1b-t2 边界文档可直接引用。
+- spike 面零污染：Cargo.lock 零 diff、p1-p5 零回归、新探针独立成文件；
+  mdcore 零接触零提交。
