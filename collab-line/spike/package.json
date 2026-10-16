@@ -1,0 +1,13 @@
+{
+  "name": "collab-spike-interop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "yrs 评估 pass P3 互操作探针的 JS 侧（npm yjs 原版）——钉版 yjs 13.6.33",
+  "scripts": {
+    "interop": "node interop_js.mjs"
+  },
+  "dependencies": {
+    "yjs": "13.6.33"
+  }
+}

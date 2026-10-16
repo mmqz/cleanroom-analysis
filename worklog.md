@@ -2842,3 +2842,85 @@ Stage Summary:
 - 新基线：G1 **530/0/1i**、web 七套件 18/15/28/**11**/13/9/9、PDF 四面与 clippy/fmt/scan/wasm32 全基线恒、NOTICES v1.5 恒
 - 待用户裁决：①office-io 锚点写面 Option A[RunSpec+anchor 加性扩] vs 0[维持登记待 MarkSpan URL 一并做] ②若 A 书签写面 bookmark_paragraph 同批/分离/不做 ③（陈述性）Internal 写回引擎不可达/HYPERLINK 域红线/MarkSpan URL 暂缓——维持登记
 - 双仓终态：mdcore 00ad88b = 远端零漂移工作区 clean；分析仓本节提交推送后核对
+---
+Task ID: yrs-t0..t4（yrs 评估 pass 全轮，L3 线后续轮——06 §8.2 建议 1 执行）
+Agent: 主代理
+Task: 按 pdf-line/06 §8.2 建议 1 + HANDOFF §6 ⑤（yrs 评估 pass 最优先）+ 用户"继续"
+指令（2026-10-16，凭据随消息传递），执行 D1② 证据轮：上游一手核验 / 协议与 API
+深读 / spike 六探针 / 闭包许可 / 评估报告。证据先行零终裁，mdcore 零接触。
+
+Work Log:
+- **yrs-t0 环境与基线**：第 11 次平台重置恢复——分析仓本地 dd7fb1a 陈旧 + 45 文件
+  纯模式位变更，fetch 核验远端 1c6066a（r5-t3 收口态，含此前多会话 office 线
+  ~40 提交）为唯一真源 → reset --hard 零内容损失；mdcore 重克隆 main=00ad88b
+  （depth 30，PAT extraheader 单次传递，.git/config 零残留复核）；**核心 crate
+  输入有效性钉定**：git log 03815b6..HEAD -- crates/mdcore/src/ 空输出（EXIT=0）
+  ——boundary-audit p1-p5 op 模型锚点对当前 main 完全有效；rustup 1.99.0 前台
+  重装（后台两次被平台清理）；node v24.21.0 幸存；凭据双仓 ls-remote 验证通过。
+- **yrs-t1 上游一手核验**：yjs/y-crdt 克隆（真实仓 = y-crdt/y-crdt，API 重定向
+  定谳；全量历史 1237 提交意外获得）；LICENSE 逐字直读 = 标准 MIT（Copyright
+  2020 Kevin Jahns【Yjs 原作者】+ Bartosz Sypytkowski；GitHub API license 字段
+  NOASSERTION = 分类失败怪癖，登记）；crates.io：yrs 0.28.0（2026-09-17，82 版
+  线）总下载 4,131,530 / 近期 2,122,625；提交节奏 2026 年 138（近 90 天 43）；
+  **AppFlowy-Cloud Cargo.lock 实证 yrs 0.23.5 生产采用**（raw 直读）；语言绑定
+  家族 7 件；**lib0 已吸收进树内**（yrs/src/encoding，README 组件表述陈旧——
+  勘误登记）；**开放问题面 API 逐条核验**：#676（0.28.0 现行版 heap use-after-
+  free：并发 undo+map remove+默认 GC，2026-09-29 新档，直接命中 undo/encode_diff
+  组合面）/ #373（堆损坏，2024 陈化）/ #445（内存泄漏，疑似 §发现2 已知面）/
+  #458/#518。crates.io API 为本网关受限镜像（无 license 字段）——闭包许可转
+  cargo metadata 路线。
+- **yrs-t2 协议与 API 深读**：sync 模块（feature 门控）消息常量与 y-protocols
+  精确一致（MSG_SYNC=0/AWARENESS=1/AUTH=2/QUERY_AWARENESS=3 +
+  SyncStep1/2/Update=0/1/2，protocol.rs:347-433）；awareness LWW+clock+观察者；
+  update v1/v2 双格式 + merge/merge_updates（服务端零实例合并）+ encode_diff
+  （SV 差量）；TransactionMut：origin 事务溯源 + before/after_state + insert/
+  delete_set + encode_update_v1/v2 + apply_update；UndoManager：expand_scope/
+  include_origin/exclude_origin/undo_blocking/redo_blocking + capture_timeout_
+  millis 捕获窗；StickyIndex 稳定位置锚；DocPrelim 不存在（0.28 API 演进为
+  In::Doc）；四类型根方法均为 trait 方法（Text/Map/Array/XmlFragment/GetString/
+  ReadTxn/WriteTxn/Encode/Decode/ToJson——探针开发期逐项校准）。
+- **yrs-t3 spike 六探针**（collab-line/spike，分析仓工作区零进 mdcore；依赖仅
+  yrs=0.28 + npm yjs 13.6.33）：
+  * P1 基本面过：四类型根 + v1/v2 往返 + SV 差量（空=全量/自≈空）+ 子文档 guid 占位；
+  * P2 双端收敛过 + **发现 1**：并发冲突交换后状态收敛等值 + 幂等复交换 + 三方
+    SV 差量同步；但全量 update 编码字节非确定（121B vs 117B——块布局随整合历史
+    异形）→ 支持权威快照单点编码（D1③ 方向）；
+  * P3 互操作过（杀手级证据）：yrs 0.28 ↔ yjs 13.6.33 双向 wire 互证——Rust
+    全量态 JS 精确重建 → JS 编辑回写 → Rust 精确重建（逐字节匹配）+ 反向 SV 差量；
+  * P4 origin 分栈过：human/ai 事务分离追踪，undo 仅回退 human 面 ×3、ai 隔离
+    不可 undo、redo 复原（= mdcore Source 溯源分栈的 yrs 对应物实证）；
+  * P5 装载模式对比过 + **发现 2（重量级）**：单事务批量小串追加 commit 期内存
+    二次放大（10k×8B=80KB 文本 → +415MB；20k → +1,581MB，比率 3.81≈4×；100k
+    外推 >4GB 两次实测 OOM kill）；机制锚点 commit 第 7 步 squash_left
+    （block_store.rs:222）→ try_squash（block.rs:2053），算术核验 8B×10k²/2=
+    400MB≈415MB；array 批量同受影响更重（10k → 全程峰值 1.49GB）；**缓解面
+    实测双零成本**：8KB 大块单事务（0.2ms/+0kB）与分事务（118ms/+0kB）；
+  * P6 官方编辑轨迹基准 5/5 过（release 本机沙箱口径）：friendsforever 30ms /
+    sveltecomponent 320ms / rustcode 1633ms / seph-blog1 21,277ms（137k 事务）/
+    automerge-paper 25,814ms（260k 事务，逐键粒度 ≈99μs/键）；
+  * **API 使用纪律发现**：async-lock 非重入——活跃写事务内 get_or_insert_* 或
+    同语句读写双锁 → 死锁挂起（探针开发期两处实测定谳；纪律 = 引用先取/事务后
+    开/读写分语句）；
+  * 闭包许可（cargo metadata 45 包逐件）：32× MIT OR Apache-2.0 + 6× Apache
+    OR MIT + 4× MIT + Unlicense OR MIT + unicode-ident（AND Unicode-3.0，office
+    线 NOTICES 同例）+ r-efi（OR 集内 LGPL 可避）——**零 GPL/AGPL 零强制
+    copyleft**。
+- **yrs-t4 收口**：yrs-a_yrs评估pass.md 落档（对象锚定/成熟度与开放问题面/协议
+  兼容实证/六探针含两发现/闭包许可/op 映射八行矩阵——四向核心面映射可行且溯源
+  与事件面净收益、revision 与语义序列化需适配层、结构载体映射留实施轮/对 D1②
+  证据输入双向清单/遗留五项/已核带源清单/执行纪律对账含全部过程修正）；
+  HANDOFF L3 行 + §6 速览 + README L3 段（原"待启动"严重滞后，收口级同步）+
+  根 .gitignore（collab-line/_upstream/）+ spike/.gitignore（target/out/
+  node_modules）。
+
+Stage Summary:
+- yrs 评估 pass 完整交付：D1② 裁决的证据输入就绪——(a) 路线实证支撑（双语言
+  wire 互证/MIT+闭包零 copyleft/溯源分栈映射/事件面净收益/活跃维护）与风险清单
+  （批量装载内存放大【有零成本缓解】/#676 现行版 UAF/编码非确定/死锁纪律）成对
+  在档；(b) 自研路线获得规格参照基线。零终裁（D1①②③ 全留用户）。
+- 两大原始发现：编码字节非确定性（支持权威快照设计）；单事务批量装载 commit 期
+  二次内存放大（机制锚点+算术核验+双零成本缓解面——若走 (a) 须立装载纪律门禁）。
+- mdcore 零改动零提交（全程只读）；分析仓本节提交（yrs-a 报告 + spike 六探针
+  源码 + Cargo.lock/package-lock 钉版 + worklog + HANDOFF/README 同步）。
+- 会话五轮（yrs-t0..t4）满足"至少 5 轮"；此后所有剩余缺口带用户裁决前置
+  （D1/D2/D3 + R-O2 + 锚点三问 + R-1..R-6 + 裁决前置清单①②④⑦）——阻塞呈报。

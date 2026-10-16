@@ -1,0 +1,38 @@
+[package]
+name = "collab-spike"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# 净室评估 spike（循 office-line/spike 先例）：分析仓工作区，零进 mdcore。
+# 依赖 = 被 evaluate 的对象本尊 yrs（crates.io 钉版经 Cargo.lock）。
+
+[dependencies]
+yrs = "0.28"
+
+[[bin]]
+name = "p1_basics"
+path = "src/bin/p1_basics.rs"
+
+[[bin]]
+name = "p2_merge_convergence"
+path = "src/bin/p2_merge_convergence.rs"
+
+[[bin]]
+name = "p3_interop_write"
+path = "src/bin/p3_interop_write.rs"
+
+[[bin]]
+name = "p3_interop_read"
+path = "src/bin/p3_interop_read.rs"
+
+[[bin]]
+name = "p4_undo_origins"
+path = "src/bin/p4_undo_origins.rs"
+
+[[bin]]
+name = "p5_scale_sanity"
+path = "src/bin/p5_scale_sanity.rs"
+
+[profile.release]
+opt-level = 3
