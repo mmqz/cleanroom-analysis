@@ -3184,3 +3184,56 @@ Stage Summary:
   ③锚点写面三问（r5-t2 §13.4）④R-O2 三问（office-f §4.2 Q1/Q2/Q3）
   ⑤MD 线三问（Q-R1/R2/R3）⑥t22-review 裁决前置清单。
 - mdcore 零接触；全部成果推送后双仓零未推送状态。
+
+---
+
+Task ID: d1c-t1
+Agent: 主代理（collab 线）
+Task: D1-a 适配层原型启动轮（用户"有条件确认边界"口径落地：允许可撤回
+适配层原型、不批准全面集成；验证面 = 内存上限/撤销语义/跨模型锚点映射）。
+
+Work Log:
+- 前置核验（用户指令的必要检查）：远端 HEAD 复核 = 7746d96（sess5-closeout，
+  本地落后两提交已拉齐）；yrs-b 边界文档四项边界与用户口径逐条对齐确认
+  （B1 skip_gc 全编队 ↔ "skip_gc 必须全编队一致"；B2/B3/B4 ↔ 三验证面）；
+  office-f C 路线 spike 与用户 R-O2 裁决对齐；#676 复查（yrs-b §7 启动
+  条件②实施轮启动日复查）：仍 open/0 评论/0 修复，上游最新提交仍
+  ac33960（ywasm 面）——B1.1 维持强制性。
+- 环境恢复（第 12 次平台重置）：rustup + Rust 1.99.0 钉住（与历次同链）；
+  spike p1/p2/p4/p5/p7（release 口径）复跑全过 = 恢复验证闭环；LO
+  25.2.3.2/pdftotext/pdfinfo/node v24.21.0 在位（R-O2 轮备用）。
+- 本地漂移定性：双仓大量 "M" 全部为文件模式位漂移（644→755，0
+  insertions/0 deletions）——工作区恢复痕迹非内容漂移，双仓
+  core.fileMode=false 静默后状态归零。
+- **collab-adapter 原型 crate 落地**（spike workspace 化：根包 + adapter/
+  成员；crate 边界 = 可撤回边界，yrs-b §6 隔离不变量 (a) 公开 API 零
+  yrs 类型）：构造面 open()（B1.1 skip_gc 无条件 true + B1.2 单点构造，
+  SessionOptions 刻意无 skip_gc 字段）；装载面 load_bulk_text（B2.1(a)
+  8KiB 大块单事务）/load_blocks（B2.1(b) 512/批分事务）/edit_stream
+  （逐笔事务 + origin 标注，B2.3 三同点入参面）——无裸长事务入口；
+  同步面 state_vector/encode_diff/apply_update（B1.6 限额 + catch_unwind
+  panic 隔离）；撤销面 undo/redo per-origin（B3.2 origin 常量表
+  mdc:human/mdc:ai + 捕获窗 1000ms = COALESCE_MS 语义连续性；B3.4 栈
+  上限参数预留）。interim 载体 = text 根 + blocks Array-of-Map 根（载体
+  选型证据轮 d1c-t3 前的承载面，与装载/撤销/同步面正交）。
+- **P8 探针全过**（src/bin/p8_adapter_load.rs，SCALE 可调默认 20k）：
+  a1 skip_gc 外部可观测 true；a2 快照门 Ok（skip_gc 与权威快照同向）；
+  b1 edit_stream 20k×8B 逐事务 ΔRSS +1828kB/476ms；b2 load_bulk_text
+  160KB 大块 ΔRSS +768kB/2ms；b3 load_blocks 20k 块 ΔRSS +24092kB/
+  5439ms（三路径全部远低断言上限——对照直接 yrs A1 形状 10k 笔即
+  +415MB 在档）；b4 禁止形状 API 面不可表达；b5 输入限额 52MiB 生效；
+  c1 origin 分栈（捕获窗合并 human×3 为单栈项——undo×1 全回退，ai 栈
+  不被消耗，redo 复原）；d1 双适配器双向差量收敛（text 逐字 + blocks
+  20000 项）；d2 敌意 update 解码层拒绝 + 引擎未毒化 + 超限拒绝。
+- 门禁：cargo build 零警告；p1/p2/p4 旧探针复跑零回归；Cargo.lock +8
+  行（仅 collab-adapter 自身条目，yrs 0.28.0 锁定不动）；mdcore 零接触。
+
+Stage Summary:
+- D1 用户三验证面之二（内存上限装载面 + 撤销语义冒烟）在适配层 API 上
+  实证闭环；第三面（跨模型锚点映射）留 d1c-t3。
+- 原型 crate 结构性满足隔离不变量 (a)：公开 API 零 yrs 类型（EditOrigin/
+  BlockSpec/SessionOptions/AdapterError 全部本地类型）；B1.1/B1.2/B2.1
+  全部构造期/API 面强制，不依赖调用方纪律。
+- 遗留：undo_stack_limit 仅参数预留（逐出依赖 observe API 面验证 = yrs-b
+  §9 待核项）；快照面完整语义 + 锚点面 + 载体选型证据在 d1c-t2/t3；
+  敌意 update 的 panic 面（非解码层拒绝形状）需 ASan/深验补（d1c-t2）。

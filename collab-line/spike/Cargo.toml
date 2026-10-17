@@ -6,10 +6,17 @@ publish = false
 
 # 净室评估 spike（循 office-line/spike 先例）：分析仓工作区，零进 mdcore。
 # 依赖 = 被 evaluate 的对象本尊 yrs（crates.io 钉版经 Cargo.lock）。
+#
+# d1c 起为 workspace：成员 adapter/ = D1-a 隔离适配层原型 crate
+# （crate 边界 = 可撤回边界，yrs-b §6；yrs 版本与根包一致钉 0.28）。
+
+[workspace]
+members = ["adapter"]
 
 [dependencies]
 # features=["sync"] 自 P7 起开启：对齐 #676 上报口径（feature sync + 默认 GC）。
 yrs = { version = "0.28", features = ["sync"] }
+collab-adapter = { path = "adapter" }
 
 [[bin]]
 name = "p1_basics"
@@ -38,6 +45,10 @@ path = "src/bin/p5_scale_sanity.rs"
 [[bin]]
 name = "p7_gc_undo_safety"
 path = "src/bin/p7_gc_undo_safety.rs"
+
+[[bin]]
+name = "p8_adapter_load"
+path = "src/bin/p8_adapter_load.rs"
 
 [profile.release]
 opt-level = 3

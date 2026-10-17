@@ -1,0 +1,14 @@
+[package]
+name = "collab-adapter"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# D1-a 隔离适配层原型（yrs-b §6 契约草案的实证载体）：
+# - crate 边界 = 可撤回边界（yrs-b §6 隔离不变量 (a)：本 crate 公开 API 零 yrs 类型）
+# - 唯一 yrs 接触点（B1.2 单点构造），mdcore 零接触维持
+# - 版本钉住与主 spike 一致：yrs 0.28（workspace 共享 Cargo.lock）
+# - release 优化口径继承 workspace 根 [profile.release]（成员 crate 不设 profile）
+
+[dependencies]
+yrs = { version = "0.28", features = ["sync"] }
