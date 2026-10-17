@@ -3699,3 +3699,51 @@ Stage Summary:
   代码一致（含 STATUS 陈旧修正）✓、全部成果已提交推送 ✓。
 - mdcore 全门禁零漂移复现（第 13 次重置后首次全量复验）——office
   线基线可信度维持。
+
+---
+Task ID: sprint2-t0
+Agent: 主代理（冲刺恢复轮）
+Task: 环境恢复（第 14 次平台重置）+ 双仓远端核对。
+
+Work Log:
+- 远端核对：cleanroom-analysis 本地 de186f7 落后远端 main=ec9a7df
+  （d1c/d1d/anchor/md-deci/e-review/e-gates 六轮已推送态）→ ff-only
+  拉齐；mdcore 本地 = 00ad88b = 缓存 origin/main（fetch 无凭据 401，
+  以缓存 ref + 用户指令口径一致为准）。两仓工作树仅 mode-bit 伪漂移
+  （core.fileMode false 定性归零，零内容 diff）。
+- 环境恢复：rustup 1.29.1 + Rust 1.99.0 钉住 + nightly-2026-10-15
+  （rust-src，ASan 口径）重装；LibreOffice 25.2.3.2 在场（= 套件钉定
+  版本，26.8.1 仍为上游复跑目标）；collab-adapter 基线 38/38 复现；
+  R-O2 回归套件 14=9+5+0 SUITE PASS 复现；mdcore cargo check
+  --workspace 干净（2 wasm_bindgen 警告 = 既有基线）。
+- 推送凭据：GITHUB_TOKEN 环境变量缺席（脚本纪律 = 不落盘）——本轮
+  全部提交先本地落账，推送在会话尾统一尝试，若 401 呈用户。
+
+Stage Summary:
+- 恢复一次完成，基线全部复现；无重复调查。
+
+---
+Task ID: sprint2-t1
+Agent: 主代理（决策映射轮）
+Task: DECISIONS.md 十七项类别 3 裁决 → 五依赖组映射（用户指令
+Task 1+2：每组推荐默认/备选/具体后果/不可安全推断的精确决策，
+转引在档证据零重写）。
+
+Work Log:
+- 落档 DECISION_GROUPS.md（仓库根，与 DECISIONS.md 并列）：17 行
+  → G1 载体与适配层边界（#4①/#5/#6/#19）/ G2 撤销与逻辑锚点身份
+  （#4②/#1/#2）/ G3 撤销栈资源上限（#3=4③/#15/#16）/ G4 Office
+  锚点写 API 含保真载荷族（#8/#9/#10/#11/#12）/ G5 DOCX 渲染器
+  部署治理含安全回归基建（#7/#18/#17）。
+- 每组四件套齐全（默认/备选/后果/不可推断点）+ 组间依赖图 + 最小
+  裁决批次建议（批次 1 D1 解锁包 = 载体+B3.2+栈上限三件同批；批次
+  2 锚点 Option A；批次 3 Q3 预装+子进程；批次 4 低优先合批）。
+- 证据锚点全部转引（yrs-c §4/§6、yrs-d §2.2/§3/§4/§5、office-f
+  §4.2/§5.2/§8.4、office-g §12/§13、06 §3/§5.2/§8、md-r1r6-t1、
+  r-o2-t3 REGRESSION）——零重调查零再推导。
+
+Stage Summary:
+- 十七项裁决从平表升级为依赖组视图：用户四批批注即可全线解锁；
+  「不可安全推断」逐项显式化（载体终裁/D2D3 立项/B3.2 知情确认/
+  REUSE §R5 裁决门/栈上限值/Phase 触发授权/Q3 分发授权等）。
+
