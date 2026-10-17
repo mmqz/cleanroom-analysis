@@ -136,9 +136,14 @@ constant_memory 特性下每表[含非流式]急切 tempfile，双簿并发 512+
 合并左上格/超链接显示文本 32,767 chars 引擎同值镜像；**超链接
 url 2,080 chars = 引擎 url.rs MAX_URL_LEN 真值镜像**[b 轮探针
 2080 过/2081 拒——a 轮「同 32767」被证伪：2081-32767 区间引擎
-先拒落 Engine 类]；公式 8,192 chars Excel 规格）。超限导出零产物
-字节（错误路径即无返回值）。测试锚 = write.rs 内联 4 测试（含
-流式 256 表 fd 面 + 预算算术钉定）。
+先拒落 Engine 类]；**超链接 tooltip 255 chars = 引擎
+MAX_PARAMETER_LEN 真值镜像**[d1e-t2 补检：引擎 url.rs initialize()
+对超限抛 ParameterError，此前包装层漏检该第三字符串字段——恰 255
+过/256 拒 typed 前移]；公式 8,192 chars Excel 规格）。超限导出零产物
+字节（错误路径即无返回值）。测试锚 = write.rs 内联 5 测试（含
+流式 256 表 fd 面 + 预算算术钉定 + write_row 列域边界[恰 16384 列
+过/16385 拒——MAX_COL=16383 域镜像；u16 宽度检查实测为不可达
+防御：u16 域 65535 > 16383 恒先触发，防御纵深保留]）。
 
 **边界（不宣称）**：
 - 样式写入正确性 = **XML 级验证**（style_probe 探针 9/9 + 产品 API

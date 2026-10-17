@@ -3776,3 +3776,46 @@ Stage Summary:
 - 撤销/重做 × 锚点身份的行为面从「单一删除面测试」扩展为六面
   回归锁；复活=新 ID 族语义的跨端收敛性 + 逻辑映射表替换语义
   首次钉定；redo 侧深度观测面入 API（B3.4 证据链补强）。
+
+---
+Task ID: d1e-t2（含 mdcore r5-t3）
+Agent: 主代理（资源限全覆盖轮——用户 Task 3b）
+Task: 「Harden resource-limit coverage across every write entry
+point」——适配层全入向入口边界矩阵 + mdcore office-io 写面补检。
+
+Work Log:
+- 适配层入口清点（B1.6 全量）：7 检查位在册（load_bulk_text/
+  load_blocks/AppendText/InsertBlock/InsertBlockBefore/apply_update/
+  import_anchor_sidecar）+ 3 缺口补检——①RemoveBlock 查找键（与
+  e-review 先例 before 键同纪律「查找键同为入向输入」）；②bind
+  语义锚字符串（写入 anchor_table 并经侧车导出——单笔入向账目
+  统一；绑定**条数**上限维持 yrs-d §4 开放裁决面不预设）；③
+  encode_diff remote_sv（读面但解码入向输入——纪律统一，合法 SV
+  恒远低于限额不构成正常路径约束）。
+- 新测试文件 adapter/tests/limit_boundaries.rs（10 测试）：全部
+  入向入口「== limit 恰过门 + limit+1 恰拒」两钉（size/limit 字段
+  精确）；算术口径路径（id+text+64[+before]）按精确账目构造、
+  wire 路径用真实工件钉（差量 57B/全零 SV 256B/侧车 32B——先
+  观测尺寸再定限额）；RemoveBlock == limit 过门到达搜索面
+  （InvalidInput not found ≠ Limit 证明检查先于搜索）。
+- mdcore 写面全入口核查（office-io）：XLSX 五限 + DOCX 段落/run
+  双限边界在册完备（r4-t2/r4-t2b）——两真缺口补检：①
+  write_hyperlink tooltip 无限长直写 XML 属性（引擎
+  MAX_PARAMETER_LEN=255 真值镜像 typed 前移——url 2080/显示文本
+  32767 在检而第三字符串字段漏检；MAX_TOOLTIP_TEXT 常量 + 恰 255
+  过/256 拒）；②write_row 列域边界（恰 16384 列过/16385 拒）+
+  发现登记：u16 宽度检查为不可达防御（u16 域 65535 > 列域
+  16383，check_coord 恒先触发）。
+- 门禁：适配层 54/54（25 matrix + 13 hostile + 6 anchor_undo_redo
+  + 10 limit_boundaries）全绿 + ASan 口径 54/54 零报告 + 零编译
+  警告（cargo fix 收敛）；mdcore G1 530→531 零失败 + clippy
+  native/wasm32 恰既有 2 wasm_bindgen 基线 + fmt 0 + scan 0 +
+  Cargo.lock 零 diff + web 面零 tooltip 消费核实不受影响。
+- 文档登记：xlsx-r1/CAPABILITIES.md 写面限增量（tooltip 255 镜像
+  + write_row 列域边界 + 测试锚 4→5）；mdcore 提交 b15c0ab。
+
+Stage Summary:
+- 「every write entry point」两面收口：适配层 10 入口全检全边界
+  钉定（3 补检 + 7 复验）；mdcore 写面 2 真缺口修复（tooltip 255
+  引擎镜像 + write_row 列域）——全部为既有纪律补齐，零新限额
+  发明、零公开 API 签名变更。

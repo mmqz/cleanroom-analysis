@@ -400,6 +400,15 @@ impl CollabAdapter {
                 }
             }
             StreamEdit::RemoveBlock { block_id } => {
+                // B1.6 限额（d1e-t2 补检）：查找键同为入向输入——与
+                // InsertBlockBefore 的 before 键同纪律（e-review 先例）；
+                // 删除面不写新内容，但入向字节账目全路径统一。
+                if block_id.len() > self.options.input_byte_limit {
+                    return Err(AdapterError::Limit {
+                        size: block_id.len(),
+                        limit: self.options.input_byte_limit,
+                    });
+                }
                 let array = self.doc.get_or_insert_array("blocks");
                 let mut txn = self.doc.transact_mut_with(origin.wire());
                 let len = array.len(&txn);
@@ -443,7 +452,17 @@ impl CollabAdapter {
     }
 
     /// 差量编码（remote_sv = 对端 `state_vector()` 产物）。
+    ///
+    /// B1.6 入向字节限额（d1e-t2 补检）：读面但解码入向输入——限额
+    /// 前置统一（超限先拒后解码；合法 SV 体积 = 客户端数比例，恒远
+    /// 低于限额，不构成正常路径约束）。
     pub fn encode_diff(&self, remote_sv: &[u8]) -> Result<Vec<u8>, AdapterError> {
+        if remote_sv.len() > self.options.input_byte_limit {
+            return Err(AdapterError::Limit {
+                size: remote_sv.len(),
+                limit: self.options.input_byte_limit,
+            });
+        }
         let sv = StateVector::decode_v1(remote_sv)
             .map_err(|e| AdapterError::Decode(e.to_string()))?;
         Ok(self.doc.transact().encode_diff_v1(&sv))
@@ -554,6 +573,21 @@ impl CollabAdapter {
     /// 位置快照定位（R4.5 弱绑定形态——锚点写面维持现状公开 API 期间
     /// 的入向退化面，书签定义静默丢弃面由消费侧悬空警告兜底）。
     pub fn bind(&mut self, semantic: &SemanticAnchor) -> Result<CrdtAnchor, AdapterError> {
+        // B1.6 限额（d1e-t2 补检）：语义锚字符串 = 入向输入，写入
+        // anchor_table 并经侧车导出——单笔入向字节账目统一。绑定**条数**
+        // 上限维持 yrs-d §4 登记的开放面（实施轮 B1.6 定参轮），本检查
+        // 不预设该裁决。
+        let inbound = match semantic {
+            SemanticAnchor::MdBlock { block_id } => block_id.len(),
+            SemanticAnchor::OfficeBookmark { name, .. } => name.len(),
+            SemanticAnchor::PdfAnnotRef { label, .. } => label.len(),
+        };
+        if inbound > self.options.input_byte_limit {
+            return Err(AdapterError::Limit {
+                size: inbound,
+                limit: self.options.input_byte_limit,
+            });
+        }
         let array = self.doc.get_or_insert_array("blocks");
         let txn = self.doc.transact();
         let len = array.len(&txn);
