@@ -3423,3 +3423,48 @@ Stage Summary:
   XmlFragment]/B3.2 知情确认/B3.4×R-3 栈上限）+ D2/D3 + 锚点写面
   Phase 1/2 触发 + R-O2 Q3 实施形态 + MD 线三问 + t22-review 清单。
 - mdcore 零接触；全部成果双仓推送后零未推送状态。
+
+---
+Task ID: r-o2-t3
+Agent: 子代理（R-O2 回归套件）+ 主代理亲验集成
+Task: R-O2 渲染管线回归套件固化：spike 证据（A-I 样本）→ 确定性
+CI 可跑 14 用例回归套件（9 有效硬断言 + 5 畸形行为钉定）。
+
+Work Log:
+- 新建 spike-ro2/regress.py（套件主体：用例注册表 + 冷/暖双次转换
+  [隔离 -env:UserInstallation profile] + 进程组超时杀除 + /proc 残留
+  检测 + 逐断言 expected/actual 记录 + JSON 全量报告 + CLI
+  --filter/--timeout/--json-out/--list）；ro2_fixtures.py（确定性夹具
+  构建器：固定 zip 时间戳 + sha256 计数器流垃圾字节，9 有效 + 5 畸形）；
+  rss_wrapper.py（每转换独立子进程峰值 RSS——/usr/bin/time 不存在，
+  getrusage(RUSAGE_CHILDREN) 替代口径登记）；fixtures/import_sample.docx
+  真件副本（sha256 与 mdcore 原件一致）；REGRESSION.md 报告。
+- 全量运行：python3 regress.py → 14 用例 = 9 pass + 5 pinned + 0 fail，
+  131 断言全绿，exit 0，~16s；连续 3 次全量绿 + 跨运行页数/图片数/
+  尺寸零漂移 + 夹具 sha256 台账 5+ 次运行字节级一致。
+- 超时治理双验证（--timeout 0.3 与 --timeout 1 各一）：kill=killed_pg、
+  soffice 残留 PID []（零孤儿）、套件非零退出、无挂起。
+- 畸形输入两条新发现登记：①垃圾字节 → LO 文本导入兜底（rc=0 + 乱码
+  PDF 产出，"转换成功"≠合法 DOCX，消毒五面前置更必要）；②加载失败
+  rc 仍为 0（truncated/bad-xml/missing-content-types：失败只在 stderr
+  "source file could not be loaded" + PDF 缺席）——退出码不是失败信号，
+  检出策略 = PDF 产出核验 + 输出扫描 + 转换后要素计数断言（发现①的
+  教训推广为通用口径）。勘误登记：spike2「A5 横」实为 A4 旋转尺寸
+  （842×595pt），套件按实测 pt 断言。
+- 保真边界维持：要素级非视觉级；poppler 仅检视面；mdc-pdf 消费腿
+  Q3-gated 未覆盖；LO 25.2.3.2 vs 26.8.1 版本差维持登记（钉定破裂 =
+  版本差信号，复核后更新）。
+- 两前序 spike 脚本零改动复跑全过（SPIKE/SPIKE2 PASS）；mdcore 零接触
+  （只读复制真件一件）。
+- 主代理亲验集成：全量重跑 14/14（9+5+0）复现 + 超时路径亲跑
+  （REAL_EXIT=1 无孤儿）+ REGRESSION.md 通读 + 文件范围核查（仅
+  spike-ro2/ 内）。
+
+Stage Summary:
+- C 路线证据形态升级：一次性 spike → 可重复回归资产（一条命令 16s，
+  CI 可跑；JSON 报告 + 确定性门 + 超时治理内置）。
+- 敌意输入面证据补强：静默丢弃钉定（w:p 级 drawing → pdfimages=0）
+  + 两条新发现（垃圾字节兜底产出 / 加载失败 rc=0）→ 实施轮
+  SECURITY_POLICY 的 LO 子进程治理与检出策略输入就绪。
+- Q3 输入更新：mdc-pdf 消费腿口径（CJK 归一化 + pdfium 差异）维持
+  实施轮必做；上游 26.8.1 复跑套件为版本差核对前置动作。
