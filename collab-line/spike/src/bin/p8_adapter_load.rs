@@ -49,6 +49,13 @@ fn main() {
         .ok()
         .and_then(|v| v.parse().ok())
         .unwrap_or(20_000);
+    // 内存预算乘数：ASan 插桩（redzone+shadow）膨胀 RSS ~2-3×——预算断言
+    // 按 release 口径校准，ASan 构建下按乘数放宽；安全检测（ASan 报告数）
+    // 不受此影响（B1.4 验收 = 零报告，非预算面）。
+    let mem_mult: i64 = std::env::var("MEM_BUDGET_MULT")
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(1);
     println!("P8 适配层原型第一轮（scale={}）", scale);
 
     // ── P8a 构造不变量 ────────────────────────────────────────────
@@ -83,7 +90,7 @@ fn main() {
         b1_rss,
         t0.elapsed().as_millis()
     );
-    assert!(b1_rss < 32 * 1024, "b1 ΔRSS {} kB 超断言上限 32MB", b1_rss);
+    assert!(b1_rss < 32 * 1024 * mem_mult, "b1 ΔRSS {} kB 超断言上限 {}kB", b1_rss, 32 * 1024 * mem_mult);
     assert_eq!(
         a.__probe_text().len(),
         scale * 8,
@@ -106,7 +113,7 @@ fn main() {
         b2_rss,
         t0.elapsed().as_millis()
     );
-    assert!(b2_rss < 32 * 1024, "b2 ΔRSS {} kB 超断言上限 32MB", b2_rss);
+    assert!(b2_rss < 32 * 1024 * mem_mult, "b2 ΔRSS {} kB 超断言上限 {}kB", b2_rss, 32 * 1024 * mem_mult);
     assert_eq!(b.__probe_text(), bulk, "b2 内容逐字一致");
 
     // b3: load_blocks 结构化小批（512/批分事务）
@@ -127,7 +134,7 @@ fn main() {
         b3_rss,
         t0.elapsed().as_millis()
     );
-    assert!(b3_rss < 64 * 1024, "b3 ΔRSS {} kB 超断言上限 64MB", b3_rss);
+    assert!(b3_rss < 64 * 1024 * mem_mult, "b3 ΔRSS {} kB 超断言上限 {}kB", b3_rss, 64 * 1024 * mem_mult);
     assert_eq!(c.__probe_block_ids().len(), scale, "b3 块数");
     assert_eq!(c.__probe_block_text("blk-000000").as_deref(), Some("cell0000"));
 

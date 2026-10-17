@@ -3280,3 +3280,46 @@ Stage Summary:
 - 遗留至 d1c-t4：结构载体选型证据（XmlFragment vs Array-of-Map——
   yrs-b §7 启动条件③）、隔离不变量终验（公开 API 零 yrs 符号面核验）、
   ASan 门禁（nightly 恢复 + P7/适配层形状）、原型报告 yrs-c。
+
+---
+
+Task ID: d1c-t4
+Agent: 主代理（collab 线）
+Task: D1-a 适配层原型第四轮（收口）：载体选型证据 + 隔离终验 + ASan
+门禁 + 原型报告 yrs-c。
+
+Work Log:
+- **P11 载体对照探针**（XmlFragment vs Array-of-Map，同内容 1000 块同
+  skip_gc 六维）：wire 128,927B vs 120,573B（XML +7% 扁平）；装载
+  4.1ms/ΔRSS+1,580kB vs 3.8ms/+2,904kB；全量遍历 0.20ms vs 2.35ms
+  （**XML 快 ~12×** children 迭代器 vs 索引 get 链）；中段插删一致；
+  StickyIndex 双载体同保持（500→497）；树性表达 XML 原生（嵌套
+  [li-1,li-2] + 行内混排 "文本<bold>粗体</bold>尾" 交织）vs AoM 扁平
+  depth 字段单文本字段；嵌套 wire XML 反而更小（227B vs 289B）。
+- **隔离不变量终验**：签名级静态检查——公开 fn 22 个 + pub 字段 8 个
+  零 yrs 类型（解析器双检；探针面 5 个 __probe_* doc(hidden) 分离）。
+- **ASan 门禁**（nightly 1.101.0 + -Zsanitizer=address）：P7 MODE=asan
+  默认 GC **heap-use-after-free 复现**（#676 威胁模型维持）/ 
+  asan_mitigated skip_gc 干净；**适配层 p8/p9/p10 三探针 ASan 构建全过
+  零报告**（B1.4 验收满足）；p8 预算断言 ASan 口径加 MEM_BUDGET_MULT
+  仪器乘数（插桩膨胀 ~36×@b1 方法论登记——预算断言 release 校准，
+  安全检测=零报告不受影响）；release 回归恒（乘数默认 1 全过）。
+- **原型报告 yrs-c** 落档：三验证面证据明细 + yrs-b 规则→API→探针
+  对账表（22 条规则全对应）+ 载体六维证据与建议倾向（XmlFragment，
+  理由 = BlockTree 近同构 + 行内混排原生表达 + 遍历快 12× + 嵌套
+  wire 更小；代价 = 扁平 +7%——待完整映射矩阵随裁决呈报）+ 实施轮
+  前置三裁决（载体选型/B3.2 知情确认/B3.4×R-3 协同）+ 遗留登记
+  （含两项新增：OfficeBookmark 强绑定依赖锚点写面裁决联动、ASan
+  常跑项常态化）。
+- 门禁：p1/p2/p4/p8/p9/p10/p11 全绿；cargo build 零警告；mdcore
+  零接触（四轮维持）。
+
+Stage Summary:
+- D1-a 适配层原型四轮全收口：用户三验证面（内存上限/撤销语义/跨模型
+  锚点映射）+ 隔离不变量 + ASan 门禁全部实证闭环；yrs-b 22 条边界
+  规则全部有 API 面与探针对应。
+- B3.4（yrs-b §9 待核项）闭环：栈上限不可经公开 API 实现——呈
+  B3.4×R-3 协同裁决。
+- 实施轮输入就绪：三裁决呈用户（载体选型[建议倾向 XmlFragment]/
+  B3.2 撤销语义变更知情确认/栈上限三选项）+ 设计文档工作面清单。
+- 原型可撤回性维持：crate 边界即撤回边界，mdcore 四轮零提交。

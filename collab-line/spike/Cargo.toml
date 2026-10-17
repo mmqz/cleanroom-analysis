@@ -60,3 +60,7 @@ path = "src/bin/p9_adapter_sync_undo.rs"
 [[bin]]
 name = "p10_adapter_anchor_snapshot"
 path = "src/bin/p10_adapter_anchor_snapshot.rs"
+
+[[bin]]
+name = "p11_carrier_comparison"
+path = "src/bin/p11_carrier_comparison.rs"
