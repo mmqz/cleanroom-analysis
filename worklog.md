@@ -3468,3 +3468,62 @@ Stage Summary:
   SECURITY_POLICY 的 LO 子进程治理与检出策略输入就绪。
 - Q3 输入更新：mdc-pdf 消费腿口径（CJK 归一化 + pdfium 差异）维持
   实施轮必做；上游 26.8.1 复跑套件为版本差核对前置动作。
+
+---
+Task ID: d1d-t1
+Agent: 主代理（collab 线，加固轮）
+Task: D1-a 适配层加固（用户六项交付口径）：测试矩阵资产化 + 敌意
+输入/不变量测试 + skip_gc 强制面 + RSS/wire 循环测量 + 无界增长登记
++ XmlFragment 选型级深验。mdcore 零接触。
+
+Work Log:
+- adapter/tests/matrix.rs 25 测试（用户八类一一对应 + 锚点/侧车面）：
+  装载三路径/UTF-8 边界/限额 ==+1；edit_stream 四变体+错误面；跨端
+  单向收敛+幂等复交换；双端不相交并发+同位置冲突收敛；删除/重加/
+  撤销复原；快照恢复+gc 后快照；origin 分栈/捕获窗合并与分离（显式
+  sleep 确定性）/一笔装载/效果全局/redo；维护 gc 治理+幂等；锚点
+  ID 稳定/悬空显式化/跨端/侧车往返——全绿（含 ASan 25/25 零报告）。
+- adapter/tests/hostile.rs 13 测试：malformed（空/全零=合法空更新
+  钉定/伪随机/高字节/全前缀截断/尾翻转——零 panic 零挂起引擎未
+  毒化）；oversized 五路径小限额全拒；invalid bind/resolve 全面；
+  删除锚点永不返回邻居；sidecar 六敌意面（含尾部冗余新收紧）；
+  skip_gc 构造强制+GC 型对端内容级互通+盲区活文档——全绿（含
+  ASan 13/13）。
+- lib.rs 两处硬化：client_id 53 位构造期 fail-closed（yrs 仅
+  debug_assert，release 静默污染 ID 编码——新发现）；侧车尾部
+  冗余拒绝（原静默忽略）。
+- p14_gc_evidence 四源对照实证：GC 源 wire 恰缩 55B=被删内容
+  （ItemContent::Deleted 标记）；四源公开 API 观测全同（blocks
+  pub(crate) 盲区）；**case D 证明 maintenance_gc 与未授权 GC 产出
+  同族 wire——不可区分性强于盲区**；中继传播 502B 实证；上游 API
+  请求候选两项登记。
+- p12_sync_undo_cycles（SCALE/CYCLES 可调）：20 轮编辑→同步→
+  undo→同步→redo→同步全收敛；RSS 恒定 8244kB 零增长；全量 wire
+  +302B/轮；维护窗 B 治理 2.0% 而 A（作者端）0.0%——undo/redo 链
+  钉住作者端墓碑（观察登记，机制假设未验证）；撤销栈每轮净留 1 项
+  （redo 返回栈项——B3.4 无界面具体形态）；ASan 口径复现零报告。
+- p13_xml_carrier_deep 七面深验全过（含 ASan）：序列化往返逐节点
+  相等；混排三段交织+文本中段分裂插入+元素间插入序保持；ID 稳定
+  （下标 10→11 同 ID）+删除悬空（位置语义 vs 身份级两步口径与适配
+  层 resolve 一致）；父子树删子锚点悬空；复原=结构等价重插新 ID 族
+  （与适配层发现同构）；双端并发混排收敛；深嵌套 wire 148B/li vs
+  浅形 135B/段（嵌套开销 ~10%）。
+- 三处探针代码死锁 bug 定性与修复（async_lock 非重入纪律三实例
+  复登：commit() 不释放 guard 只有 Drop 释放——shadowing/未出
+  作用域开读/跨文档链式临时值三形态；正确形态=一事务一作用域；
+  适配层 API 面天然满足=隔离设计再实证）。
+- 报告落档 collab-line/yrs-d_D1a适配层加固轮.md（交付总表+强制面
+  文档+无界增长清单+深验结论+待核清单）。
+- 回归：p8/p9/p10/p11 复跑全过（lib.rs 硬化零破坏）。
+
+Stage Summary:
+- 适配层原型从「探针证据」升级为「可重复测试资产」（cargo test
+  一条命令 38 测试 + 三新探针，release + ASan 双口径全绿）。
+- 三项新发现定谳：①undo/重插复原=新 ID 族（锚点跟随需 redone 链
+  映射——上游 API 候选+事件面联动登记）；②GC 证据 wire 存在但
+  公开 API 不可见且与 maintenance_gc 不可区分（强制面=构造+部署+
+  快照门三件套定谳）；③client_id 53 位域 release 静默污染面（已
+  fail-closed 补上）。
+- XmlFragment 七面深验全过——D1 载体裁决证据链补全（完整映射
+  矩阵仍属实施轮设计文档）；B3.4 无界面新增 redo 返回栈项形态。
+- mdcore 零接触零提交；全部成果在分析仓 spike workspace。

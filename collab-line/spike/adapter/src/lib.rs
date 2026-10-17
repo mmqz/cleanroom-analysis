@@ -189,6 +189,15 @@ impl CollabAdapter {
     /// B1.1：`skip_gc: true` 无条件设置——本函数体内是整个原型唯一的
     /// `DocOptions` 触点；#676 上游 UAF 未修复期间这是全编队不变量。
     pub fn open(options: SessionOptions) -> Result<CollabAdapter, AdapterError> {
+        // fail-closed 硬化（d1d-t1）：client_id 必须落在 53 位（yjs 兼容
+        // 上界——yrs ClientID::new 仅 debug_assert，release 构建超界值
+        // 会静默破坏 ID 编码）。适配层在构造期显式拒绝。
+        if options.client_id & (u64::MAX << 53) != 0 {
+            return Err(AdapterError::InvalidInput(format!(
+                "client_id {} 超出 53 位上界（yjs 兼容域）",
+                options.client_id
+            )));
+        }
         // B1.1 全编队不变量（无条件，无 if，无配置面）
         let mut opts = DocOptions::with_client_id(ClientID::new(options.client_id));
         opts.skip_gc = true;
@@ -766,6 +775,15 @@ impl CollabAdapter {
             ]);
             pos += 4;
             table.insert(semantic, CrdtAnchor { client, clock });
+        }
+        // fail-closed 硬化（d1d-t1）：声明条目读尽后仍有残余字节 → 拒绝
+        // （此前静默忽略尾部——敌意载荷可借尾部夹带；侧车是适配层自有
+        // 格式，无兼容性负担，直接收紧）。
+        if pos != bytes.len() {
+            return Err(AdapterError::SidecarFormat(format!(
+                "尾部冗余 {}B（声明条目后必须恰好读完）",
+                bytes.len() - pos
+            )));
         }
         let n = table.len();
         self.anchor_table = table;
