@@ -55,9 +55,27 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-17 加固会话完成后：r-o2-t3 + d1d-t1/t2 +
-> anchor-t2/t3 + md-deci-t1 + e-review + e-gates，六轮证据态见
-> git 历史）**：office 开发轮全线完成（mdcore main=00ad88b，本轮
+> **当前态速览（2026-10-17 冲刺会话完成后：decis-g1 + d1e-t1/t2/t3
+> + r-o2-t4 + mdcore r5-t3，本轮五件交付见 git 历史）**：**门控收敛
+> 于 DECISIONS.md（17 项）+ DECISION_GROUPS.md（五依赖组映射 + 最小
+> 裁决批次——用户四批批注即全线解锁）**。本轮五件：①**决策组映射**
+> （decis-g1：17 项 → G1 载体与边界/G2 撤销与锚点身份/G3 栈与资源
+> 上限/G4 Office 锚点写 API/G5 渲染器部署治理，每组默认/备选/后果/
+> 不可推断四件套）；②**适配层撤销×锚点回归**（d1e-t1：六面回归锁
+> + redo_depth 观测面 + 复活新 ID 族跨端收敛钉定，44→54 测试 ASan
+> 零报告）；③**资源限全覆盖**（d1e-t2 + mdcore r5-t3：适配层 3
+> 缺口补检[RemoveBlock 键/bind 语义锚/encode_diff SV] + 10 测试全
+> 入口边界矩阵；mdcore 写面 2 真缺口[tooltip 255 引擎镜像/write_row
+> 列域]——G1 531）；④**R-O2 扩展**（r-o2-t4：14→21 用例/188 断言
+> ——转换失败三面 + 畸形补充四面 + 跨进程确定性门[字节不同一钉定/
+> 内容同一硬断言] + 内容嗅探改道发现）；⑤**锚点 Phase 1+2 就绪
+> 补丁**（d1e-t3：mdcore 隔离分支 office-g-phase1-anchor@c4856f7 +
+> office-line/*.patch 评审件——裁决 = 合入 main 一句话）。mdcore
+> main = b15c0ab（r5-t3 写面补检）；环境第 14 次重置已恢复（1.99.0
+> + nightly-ASan + LO 25.2.3.2）。
+>
+> **前一加固会话速览（2026-10-17：r-o2-t3 + d1d-t1/t2 + anchor-t2/t3
+> + md-deci-t1 + e-review + e-gates）**：office 开发轮全线完成（mdcore main=00ad88b，本轮
 > 全门禁亲跑复验零漂移：G1 530/0/1i + PDF 四面 68/79/81+6i/109+6i +
 > perf 6/6 + clippy 双面恰 2 基线 + fmt/scan 0 + wasm32 双面 + web
 > 七套件 18/15/28/11/13/9/9 + Cargo.lock 零 diff）。**本轮五件交付**：
