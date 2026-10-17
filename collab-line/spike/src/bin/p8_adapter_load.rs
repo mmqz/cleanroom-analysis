@@ -58,7 +58,7 @@ fn main() {
 
     a.edit_stream(EditOrigin::Human, StreamEdit::AppendText { text: "hello ".into() })
         .unwrap();
-    match a.__probe_snapshot_gate() {
+    match a.authoritative_snapshot() {
         Ok(bytes) => println!("P8a2: 快照门 Ok（{}B——skip_gc 与权威快照同向）", bytes.len()),
         Err(e) => panic!("P8a2 快照门必须 Ok（skip_gc 文档）: {:?}", e),
     }

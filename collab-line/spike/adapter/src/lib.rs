@@ -22,16 +22,18 @@
 //! 装载/撤销/同步面与载体选择正交）。
 
 use std::collections::HashSet;
+use std::collections::HashMap;
 use std::panic::AssertUnwindSafe;
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use yrs::undo::Options as UndoOptions;
 use yrs::updates::decoder::Decode;
-use yrs::updates::encoder::{Encode, Encoder};
+use yrs::updates::encoder::{Encode, Encoder, EncoderV1};
 use yrs::{
-    Array, ClientID, Doc, GetString, In, Map, MapPrelim, Options as DocOptions, Origin,
-    ReadTxn, StateVector, Text, Transact, UndoManager, Update,
+    Array, Assoc, ClientID, Doc, GetString, ID, In, IndexedSequence, Map, MapPrelim,
+    Options as DocOptions, Origin, ReadTxn, StateVector, StickyIndex, Text, Transact,
+    UndoManager, Update,
 };
 
 /// 适配层错误（公开面零 yrs 类型；引擎错误转译为语义化变体）。
@@ -45,6 +47,10 @@ pub enum AdapterError {
     Panic(String),
     /// 调用面语义错误（参数不合法等）
     InvalidInput(String),
+    /// 锚点悬空：目标块已被删除（R4.3 解析失败面显式化——不静默返回邻居）
+    AnchorDangling { client: u64, clock: u32 },
+    /// 锚点侧车格式不合法/版本不受支持（R4.3 验收：格式版本化）
+    SidecarFormat(String),
 }
 
 impl std::fmt::Display for AdapterError {
@@ -56,6 +62,10 @@ impl std::fmt::Display for AdapterError {
             AdapterError::Decode(m) => write!(f, "wire decode failed: {}", m),
             AdapterError::Panic(m) => write!(f, "engine panic isolated: {}", m),
             AdapterError::InvalidInput(m) => write!(f, "invalid input: {}", m),
+            AdapterError::AnchorDangling { client, clock } => {
+                write!(f, "anchor dangling (deleted target): ({}, {})", client, clock)
+            }
+            AdapterError::SidecarFormat(m) => write!(f, "anchor sidecar format: {}", m),
         }
     }
 }
@@ -122,8 +132,40 @@ pub enum StreamEdit {
     AppendText { text: String },
     /// 追加一个结构化块
     InsertBlock { block: BlockSpec },
+    /// 在某块之前插入（中段插入——锚点保持验证的结构性编辑面）
+    InsertBlockBefore { before: String, block: BlockSpec },
     /// 删除块（按 block_id 定位；不存在 → InvalidInput）
     RemoveBlock { block_id: String },
+}
+
+/// 跨模型锚点本位币（R4.1：CRDT ID 的不透明包装——三模型语义锚的
+/// 唯一交换格式；永不重编，撤 yrs 时随适配层拆除）。
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct CrdtAnchor {
+    pub client: u64,
+    pub clock: u32,
+}
+
+/// 三模型语义锚（各线在自己模型内产生，R4.2 入向面）。
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum SemanticAnchor {
+    /// MD 线：BlockId 寻址（boundary-audit p2 双轨中的意图/锚点轨）
+    MdBlock { block_id: String },
+    /// Office 线：书签名 + 位置快照（R4.5 弱绑定形态——锚点写面维持
+    /// 现状公开 API 时的入向退化面；block_index = bind 时刻位置）
+    OfficeBookmark { name: String, block_index: u32 },
+    /// PDF 线：标注引用（页号 + 标签 + bind 时刻的块位置——页语义在
+    /// 消费侧，适配层只登记引用→位置映射）
+    PdfAnnotRef { page: u32, label: String, block_index: u32 },
+}
+
+/// 锚点解析结果（R4.3 出向：当前结构位置 + 可辨的语义重建）。
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ResolvedAnchor {
+    /// 目标块当前下标（含随结构性编辑的漂移——ID 稳定，下标漂移）
+    pub block_index: u32,
+    /// 目标块当前 block_id（删除后不可辨 → AnchorDangling 错误面）
+    pub block_id: String,
 }
 
 /// 大块装载分块尺寸（B2.1(a)：≥KB 级；8KiB 对齐 yrs-a §4.5 A2 实测口径）。
@@ -137,6 +179,8 @@ pub struct CollabAdapter {
     undo_human: UndoManager,
     undo_ai: UndoManager,
     options: SessionOptions,
+    /// R4.2 映射表（会话/文档级资产；侧车序列化面见 export_anchor_sidecar）
+    anchor_table: HashMap<SemanticAnchor, CrdtAnchor>,
 }
 
 impl CollabAdapter {
@@ -168,6 +212,7 @@ impl CollabAdapter {
             undo_human,
             undo_ai,
             options,
+            anchor_table: HashMap::new(),
         })
     }
 
@@ -299,6 +344,42 @@ impl CollabAdapter {
                 array.insert(&mut txn, idx, map);
                 txn.commit();
                 Ok(())
+            }
+            StreamEdit::InsertBlockBefore { before, block } => {
+                let array = self.doc.get_or_insert_array("blocks");
+                let map = MapPrelim::from([
+                    ("block_id", In::Any(block.block_id.clone().into())),
+                    ("text", In::Any(block.text.clone().into())),
+                ]);
+                let mut txn = self.doc.transact_mut_with(origin.wire());
+                let len = array.len(&txn);
+                let mut found: Option<u32> = None;
+                for i in 0..len {
+                    if let Some(yrs::Out::YMap(m)) = array.get(&txn, i) {
+                        if let Some(yrs::Out::Any(yrs::Any::String(id))) =
+                            m.get(&txn, "block_id")
+                        {
+                            if &*id == before {
+                                found = Some(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+                match found {
+                    Some(i) => {
+                        array.insert(&mut txn, i, map);
+                        txn.commit();
+                        Ok(())
+                    }
+                    None => {
+                        drop(txn);
+                        Err(AdapterError::InvalidInput(format!(
+                            "before-block {:?} not found",
+                            before
+                        )))
+                    }
+                }
             }
             StreamEdit::RemoveBlock { block_id } => {
                 let array = self.doc.get_or_insert_array("blocks");
@@ -440,6 +521,276 @@ impl CollabAdapter {
             .len()
     }
 
+    // ── 锚点面（R4.2/R4.3——用户验证面"跨模型锚点映射"）────────────
+
+    /// R4.2 入向映射：语义锚 → 当前解析位置 → CRDT ID，成对入映射表。
+    ///
+    /// MdBlock 按 block_id 定位；OfficeBookmark/PdfAnnotRef 按 bind 时刻
+    /// 位置快照定位（R4.5 弱绑定形态——锚点写面维持现状公开 API 期间
+    /// 的入向退化面，书签定义静默丢弃面由消费侧悬空警告兜底）。
+    pub fn bind(&mut self, semantic: &SemanticAnchor) -> Result<CrdtAnchor, AdapterError> {
+        let array = self.doc.get_or_insert_array("blocks");
+        let txn = self.doc.transact();
+        let len = array.len(&txn);
+        // 定位 bind 时刻的目标下标
+        let target_index: u32 = match semantic {
+            SemanticAnchor::MdBlock { block_id } => {
+                let mut found = None;
+                for i in 0..len {
+                    if let Some(yrs::Out::YMap(m)) = array.get(&txn, i) {
+                        if let Some(yrs::Out::Any(yrs::Any::String(id))) = m.get(&txn, "block_id") {
+                            if &*id == block_id {
+                                found = Some(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+                found.ok_or_else(|| {
+                    AdapterError::InvalidInput(format!("md block {:?} not found", block_id))
+                })?
+            }
+            SemanticAnchor::OfficeBookmark { block_index, .. }
+            | SemanticAnchor::PdfAnnotRef { block_index, .. } => {
+                if *block_index >= len {
+                    return Err(AdapterError::InvalidInput(format!(
+                        "block_index {} out of range (len {})",
+                        block_index, len
+                    )));
+                }
+                *block_index
+            }
+        };
+        // Assoc::After + 下标 N → 第 N 项自身首 item 的 ID（R4.1 本位币）；
+        // （Assoc::Before 在 index 0 时退化为 Root 上下文无 ID，故用 After）
+        let sticky = array
+            .sticky_index(&txn, target_index, Assoc::After)
+            .ok_or_else(|| AdapterError::InvalidInput("sticky_index 解析失败".into()))?;
+        let id = sticky
+            .id()
+            .cloned()
+            .ok_or_else(|| AdapterError::InvalidInput("空集合无 ID 可锚（Root 上下文）".into()))?;
+        let anchor = CrdtAnchor {
+            client: id.client.get(),
+            clock: id.clock,
+        };
+        self.anchor_table.insert(semantic.clone(), anchor);
+        Ok(anchor)
+    }
+
+    /// R4.3 出向解析：CRDT ID → StickyIndex → 当前结构位置 → 语义重建。
+    ///
+    /// 悬空面显式化：目标块已删除 → `AnchorDangling`（不静默返回邻居）。
+    pub fn resolve(&self, anchor: CrdtAnchor) -> Result<ResolvedAnchor, AdapterError> {
+        let array = self.doc.get_or_insert_array("blocks");
+        let txn = self.doc.transact();
+        let sticky =
+            StickyIndex::from_id(ID::new(ClientID::new(anchor.client), anchor.clock), Assoc::After);
+        let offset = sticky
+            .get_offset(&txn)
+            .ok_or(AdapterError::AnchorDangling {
+                client: anchor.client,
+                clock: anchor.clock,
+            })?;
+        let idx = offset.index;
+        if idx >= array.len(&txn) {
+            // 目标删除后位置塌缩到序列尾外
+            return Err(AdapterError::AnchorDangling {
+                client: anchor.client,
+                clock: anchor.clock,
+            });
+        }
+        // 悬空检测：当前位置块的自身首 ID 必须等于锚点 ID
+        // （删除后的墓碑会把 get_offset 塌缩到邻居——静默错配即 R4.3 反例）
+        let here = array
+            .sticky_index(&txn, idx, Assoc::After)
+            .and_then(|s| s.id().cloned());
+        match here {
+            Some(id2)
+                if id2.client.get() == anchor.client && id2.clock == anchor.clock =>
+            {
+                let block_id = array
+                    .get(&txn, idx)
+                    .and_then(|out| match out {
+                        yrs::Out::YMap(m) => match m.get(&txn, "block_id") {
+                            Some(yrs::Out::Any(yrs::Any::String(s))) => Some(s.to_string()),
+                            _ => None,
+                        },
+                        _ => None,
+                    })
+                    .ok_or_else(|| {
+                        AdapterError::InvalidInput("位置块缺 block_id 字段（载体损坏）".into())
+                    })?;
+                Ok(ResolvedAnchor {
+                    block_index: idx,
+                    block_id,
+                })
+            }
+            _ => Err(AdapterError::AnchorDangling {
+                client: anchor.client,
+                clock: anchor.clock,
+            }),
+        }
+    }
+
+    /// 映射表查询（语义锚 → 已登记的 CRDT ID；None = 未登记）。
+    pub fn anchor_of(&self, semantic: &SemanticAnchor) -> Option<CrdtAnchor> {
+        self.anchor_table.get(semantic).copied()
+    }
+
+    /// R4.3 验收：映射表侧车序列化（适配层自有格式，版本化，不进三方
+    /// 文档格式）。布局：magic "MDCA" + ver u8 + count u32 + 逐条
+    /// {tag u8, 变长字段, anchor client u64 LE / clock u32 LE}。
+    pub fn export_anchor_sidecar(&self) -> Vec<u8> {
+        let mut out = Vec::with_capacity(16 + self.anchor_table.len() * 32);
+        out.extend_from_slice(b"MDCA");
+        out.push(1u8); // 版本 1
+        out.extend_from_slice(&(self.anchor_table.len() as u32).to_le_bytes());
+        // 确定性序：HashMap 无序 → 按 (tag, 字段) 排序保证字节稳定
+        let mut entries: Vec<(&SemanticAnchor, &CrdtAnchor)> = self.anchor_table.iter().collect();
+        entries.sort_by(|a, b| semantic_key(a.0).cmp(&semantic_key(b.0)));
+        for (sem, anc) in entries {
+            match sem {
+                SemanticAnchor::MdBlock { block_id } => {
+                    out.push(1u8);
+                    push_str(&mut out, block_id);
+                }
+                SemanticAnchor::OfficeBookmark { name, block_index } => {
+                    out.push(2u8);
+                    push_str(&mut out, name);
+                    out.extend_from_slice(&block_index.to_le_bytes());
+                }
+                SemanticAnchor::PdfAnnotRef { page, label, block_index } => {
+                    out.push(3u8);
+                    out.extend_from_slice(&page.to_le_bytes());
+                    push_str(&mut out, label);
+                    out.extend_from_slice(&block_index.to_le_bytes());
+                }
+            }
+            out.extend_from_slice(&anc.client.to_le_bytes());
+            out.extend_from_slice(&anc.clock.to_le_bytes());
+        }
+        out
+    }
+
+    /// 侧车导入（替换式；返回导入条数）。
+    pub fn import_anchor_sidecar(&mut self, bytes: &[u8]) -> Result<usize, AdapterError> {
+        if bytes.len() < 9 || &bytes[0..4] != b"MDCA" {
+            return Err(AdapterError::SidecarFormat("magic 缺失".into()));
+        }
+        if bytes[4] != 1u8 {
+            return Err(AdapterError::SidecarFormat(format!(
+                "不支持的版本 {}",
+                bytes[4]
+            )));
+        }
+        let count = u32::from_le_bytes([bytes[5], bytes[6], bytes[7], bytes[8]]) as usize;
+        let mut pos = 9usize;
+        let mut table = HashMap::with_capacity(count);
+        let read_str = |pos: &mut usize| -> Result<String, AdapterError> {
+            if *pos + 4 > bytes.len() {
+                return Err(AdapterError::SidecarFormat("字符串长度越界".into()));
+            }
+            let n = u32::from_le_bytes([
+                bytes[*pos],
+                bytes[*pos + 1],
+                bytes[*pos + 2],
+                bytes[*pos + 3],
+            ]) as usize;
+            *pos += 4;
+            if *pos + n > bytes.len() {
+                return Err(AdapterError::SidecarFormat("字符串体越界".into()));
+            }
+            let s = String::from_utf8(bytes[*pos..*pos + n].to_vec())
+                .map_err(|_| AdapterError::SidecarFormat("UTF-8 解码失败".into()))?;
+            *pos += n;
+            Ok(s)
+        };
+        let read_u32 = |pos: &mut usize| -> Result<u32, AdapterError> {
+            if *pos + 4 > bytes.len() {
+                return Err(AdapterError::SidecarFormat("u32 越界".into()));
+            }
+            let v = u32::from_le_bytes([
+                bytes[*pos],
+                bytes[*pos + 1],
+                bytes[*pos + 2],
+                bytes[*pos + 3],
+            ]);
+            *pos += 4;
+            Ok(v)
+        };
+        for _ in 0..count {
+            let tag = *bytes
+                .get(pos)
+                .ok_or_else(|| AdapterError::SidecarFormat("tag 越界".into()))?;
+            pos += 1;
+            let semantic = match tag {
+                1u8 => SemanticAnchor::MdBlock {
+                    block_id: read_str(&mut pos)?,
+                },
+                2u8 => SemanticAnchor::OfficeBookmark {
+                    name: read_str(&mut pos)?,
+                    block_index: read_u32(&mut pos)?,
+                },
+                3u8 => SemanticAnchor::PdfAnnotRef {
+                    page: read_u32(&mut pos)?,
+                    label: read_str(&mut pos)?,
+                    block_index: read_u32(&mut pos)?,
+                },
+                other => {
+                    return Err(AdapterError::SidecarFormat(format!(
+                        "未知语义锚 tag {}",
+                        other
+                    )))
+                }
+            };
+            if pos + 12 > bytes.len() {
+                return Err(AdapterError::SidecarFormat("anchor 载荷越界".into()));
+            }
+            let client = u64::from_le_bytes([
+                bytes[pos],
+                bytes[pos + 1],
+                bytes[pos + 2],
+                bytes[pos + 3],
+                bytes[pos + 4],
+                bytes[pos + 5],
+                bytes[pos + 6],
+                bytes[pos + 7],
+            ]);
+            pos += 8;
+            let clock = u32::from_le_bytes([
+                bytes[pos],
+                bytes[pos + 1],
+                bytes[pos + 2],
+                bytes[pos + 3],
+            ]);
+            pos += 4;
+            table.insert(semantic, CrdtAnchor { client, clock });
+        }
+        let n = table.len();
+        self.anchor_table = table;
+        Ok(n)
+    }
+
+    // ── 快照面（D1③ 权威快照——单点编码）─────────────────────────
+
+    /// 权威快照：当前时刻状态的 update 编码（skip_gc 与快照同向，yrs-b
+    /// §2.1 事实 6——只有 skip_gc 文档能产出）。**单点编码语义**：收敛
+    /// 双端的本地全量编码字节可能不同（yrs-a 发现①），权威端以此为唯
+    /// 一权威产物；对端以 `apply_update` 消费。
+    pub fn authoritative_snapshot(&self) -> Result<Vec<u8>, AdapterError> {
+        let doc = &self.doc;
+        std::panic::catch_unwind(AssertUnwindSafe(|| {
+            let snap = doc.transact_mut().snapshot();
+            let mut enc = EncoderV1::new();
+            doc.transact_mut()
+                .encode_state_from_snapshot(&snap, &mut enc)
+                .map_err(|e| AdapterError::InvalidInput(e.to_string()))?;
+            Ok(enc.to_vec())
+        }))
+        .unwrap_or_else(|p| Err(AdapterError::Panic(panic_message(&p))))
+    }
+
     // ── 探针面（#[doc(hidden)]——仅为探针/测试暴露，非产品面）────────
 
     /// B1.1 外部可观测证明：skip_gc 生效（读 DocOptions 单点真源）。
@@ -448,21 +799,28 @@ impl CollabAdapter {
         self.doc.skip_gc()
     }
 
-    /// 快照门（yrs-b §2.1 事实 6：skip_gc 与权威快照同向——Ok 即证
-    /// skip_gc；对照面默认 GC → Err(Error::Gc)）。权威快照的完整语义
-    /// （单点编码 + 维护窗压缩）在 d1c-t3 实装。
+    /// StickyIndex wire 往返（yrs-b §5.3 验收第一项）：锚点 ID →
+    /// StickyIndex → Encode → Decode → get_offset，返回解算下标；
+    /// 与直接 get_offset 的一致性由探针断言。
     #[doc(hidden)]
-    pub fn __probe_snapshot_gate(&self) -> Result<Vec<u8>, AdapterError> {
-        let doc = &self.doc;
-        std::panic::catch_unwind(AssertUnwindSafe(|| {
-            let snap = doc.transact_mut().snapshot();
-            let mut enc = yrs::updates::encoder::EncoderV1::new();
-            doc.transact_mut()
-                .encode_state_from_snapshot(&snap, &mut enc)
-                .map_err(|e| AdapterError::InvalidInput(e.to_string()))?;
-            Ok(enc.to_vec())
-        }))
-        .unwrap_or_else(|p| Err(AdapterError::Panic(panic_message(&p))))
+    pub fn __probe_sticky_wire_roundtrip(
+        &self,
+        anchor: CrdtAnchor,
+    ) -> Result<Option<u32>, AdapterError> {
+        let array = self.doc.get_or_insert_array("blocks");
+        let txn = self.doc.transact();
+        let sticky =
+            StickyIndex::from_id(ID::new(ClientID::new(anchor.client), anchor.clock), Assoc::After);
+        // wire 往返：encode → decode
+        let bytes = sticky.encode_v1();
+        let restored = StickyIndex::decode_v1(&bytes)
+            .map_err(|e| AdapterError::Decode(e.to_string()))?;
+        assert_eq!(restored, sticky, "wire 往返保真（StickyIndex Eq）");
+        let direct = sticky.get_offset(&txn).map(|o| o.index);
+        let via_wire = restored.get_offset(&txn).map(|o| o.index);
+        assert_eq!(direct, via_wire, "直接与 wire 往返解算一致");
+        let _ = array;
+        Ok(via_wire)
     }
 
     /// text 根当前内容（探针断言用）。
@@ -516,6 +874,25 @@ fn panic_message(p: &Box<dyn std::any::Any + Send>) -> String {
     } else {
         "<non-string panic payload>".to_string()
     }
+}
+
+/// 语义锚的确定性排序键（侧车字节稳定用）。
+fn semantic_key(s: &SemanticAnchor) -> (u8, String, u32, String) {
+    match s {
+        SemanticAnchor::MdBlock { block_id } => (1u8, block_id.clone(), 0, String::new()),
+        SemanticAnchor::OfficeBookmark { name, block_index } => {
+            (2u8, name.clone(), *block_index, String::new())
+        }
+        SemanticAnchor::PdfAnnotRef { page, label, block_index } => {
+            (3u8, label.clone(), *page, format!("b{}", block_index))
+        }
+    }
+}
+
+/// 侧车字符串写入（u32 LE 长度前缀 + UTF-8 体）。
+fn push_str(out: &mut Vec<u8>, s: &str) {
+    out.extend_from_slice(&(s.len() as u32).to_le_bytes());
+    out.extend_from_slice(s.as_bytes());
 }
 
 

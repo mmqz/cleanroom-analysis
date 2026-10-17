@@ -3237,3 +3237,46 @@ Stage Summary:
 - 遗留：undo_stack_limit 仅参数预留（逐出依赖 observe API 面验证 = yrs-b
   §9 待核项）；快照面完整语义 + 锚点面 + 载体选型证据在 d1c-t2/t3；
   敌意 update 的 panic 面（非解码层拒绝形状）需 ASan/深验补（d1c-t2）。
+
+---
+
+Task ID: d1c-t3
+Agent: 主代理（collab 线）
+Task: D1-a 适配层原型第三轮：锚点面 + 快照面（用户验证面之三
+"跨模型锚点映射"闭环 + D1③ 权威快照）。
+
+Work Log:
+- 适配器 API 演进：StreamEdit 增 InsertBlockBefore（中段插入——锚点
+  保持验证的结构性编辑面）；公开类型增 CrdtAnchor（R4.1 本位币）/
+  SemanticAnchor（MdBlock·OfficeBookmark·PdfAnnotRef 三模型入向）/
+  ResolvedAnchor + AdapterError 增 AnchorDangling/SidecarFormat 变体；
+  锚点面方法 bind/resolve/anchor_of + 侧车 export/import（MDCA magic +
+  版本 1 + 确定性排序字节稳定）；快照面 authoritative_snapshot（D1③
+  单点编码）；探针面 __probe_sticky_wire_roundtrip。占位
+  __probe_snapshot_gate 移除（被 authoritative_snapshot 取代，p8 调用点
+  同步更新）。
+- **P10 探针全过**：a1 MD 锚点保持——bind blk-00042（下标 42）→ 前插
+  5 + 前删 3 → resolve 下标 44 且 block_id 复原（ID 稳定下标漂移——
+  对照 mdcore BlockId 条件保真的跨会话漂移面被 CRDT ID 消解）；a2
+  StickyIndex wire 往返（Encode→Decode→get_offset == 直接解算，yrs-b
+  §5.3 验收第一项）；a3 目标删除面显式化（Err(AnchorDangling) 不静默
+  返回邻居——R4.3 反例封堵，墓碑塌缩检测 = 位置块首 ID 与锚点比对）；
+  b1 Office 书签弱绑定（bind 位 50 → 漂移后解析到当前位 50 的
+  blk-00048——R4.5 维持现状公开 API 的位置语义，身份漂移诚实展示）；
+  b2 PDF 标注登记面；c1 侧车往返（123B/4 条全复原/字节稳定）+ c2 敌意
+  三面全拒（坏 magic/坏版本/截断）；d1 跨端锚点（A bind → 全量同步 →
+  B resolve 同一 block_id——CRDT ID 跨进程稳定）；e1 权威快照恢复
+  （9226B → 新会话 101 块逐块一致）；e2 快照→维护窗压缩→再快照
+  （45780B→25476B 内容保真——B1.3 与 D1③ 同点）；e3 收敛双端全量编码
+  字节一致（本形状未触发发现①——历史依赖面，诚实登记不外推）。
+- 门禁：cargo build 零警告；p8/p9 回归全过；mdcore 零接触。
+
+Stage Summary:
+- 用户三验证面全部闭环：内存上限（d1c-t1 装载三路径 + 限额）、撤销
+  语义（d1c-t2 栈本地/捕获窗/一笔装载/压缩前置）、跨模型锚点映射
+  （本轮 ID 稳定/删除显式化/三模型入向/侧车/跨端）。
+- yrs-b 四项边界全部有适配层 API 面与探针证据对应；D1③ 权威快照
+  单点编码面落地。
+- 遗留至 d1c-t4：结构载体选型证据（XmlFragment vs Array-of-Map——
+  yrs-b §7 启动条件③）、隔离不变量终验（公开 API 零 yrs 符号面核验）、
+  ASan 门禁（nightly 恢复 + P7/适配层形状）、原型报告 yrs-c。

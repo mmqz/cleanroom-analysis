@@ -56,3 +56,7 @@ opt-level = 3
 [[bin]]
 name = "p9_adapter_sync_undo"
 path = "src/bin/p9_adapter_sync_undo.rs"
+
+[[bin]]
+name = "p10_adapter_anchor_snapshot"
+path = "src/bin/p10_adapter_anchor_snapshot.rs"
