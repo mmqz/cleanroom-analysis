@@ -90,9 +90,14 @@
 4. ~~**PDF-a 侦察收口 + spike**~~ ✅ 已完成（ADR-P1 选型定谳 + 安全策略表
    v1 + 三探针；md-line/pdf-a/）
 5. R24-d 壳实体合入 = **开发环境轮**（需要 R22-a..f 实体所在环境执行）
-6. PDF-f+ 宿主接线遗留项（T2 系列移交）：`render_watchdog_ms` 生产消费点、
-   看门狗收报面登记（T2-verify2）、README 双引擎面口径补全；fuzz 战役
-   排期（SECURITY_POLICY S6 表）
+6. PDF-f+ 宿主接线遗留项（T2 系列移交）——**2026-10-17 陈旧性修正
+   （DECISIONS.md §1.1，类别 1 实施）**：~~`render_watchdog_ms` 生产
+   消费点~~（✅ 已消费：pdf/src/worker.rs:16-17 watchdog 工厂 +
+   超时监控线程）、~~看门狗收报面登记（T2-verify2）~~（✅ 已登记：
+   worker.rs:24/197/255/269/293 三收报形态 + 死亡可观测语义）、
+   ~~README 双引擎面口径补全~~（✅ 已补全：README:17-18/46-48）；
+   **真遗留**：fuzz 战役排期（SECURITY_POLICY S6 表——决策登记
+   DECISIONS.md #17）
 7. ~~**MD 现有模块复用审计**~~ ✅ **已完成（2026-10-12，P0-P7 全阶段
    连续执行）**：门禁九项全绿复现（259/78/80+6i/108+6i + perf 6/6 + scan
    0 + wasm32 + clippy + fmt，B11 零漂移）+ B1-B14 对账（B12 证伪校准：
