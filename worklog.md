@@ -3323,3 +3323,40 @@ Stage Summary:
 - 实施轮输入就绪：三裁决呈用户（载体选型[建议倾向 XmlFragment]/
   B3.2 撤销语义变更知情确认/栈上限三选项）+ 设计文档工作面清单。
 - 原型可撤回性维持：crate 边界即撤回边界，mdcore 四轮零提交。
+
+---
+
+Task ID: r-o2-t2
+Agent: 主代理（office 线）
+Task: R-O2 C 路线原型第二轮：复杂文档夹具扩展（用户裁决"补充复杂
+文档夹具，验证分页、跨页表格、页眉页脚、分节、缺失字体和图片"执行轮）。
+
+Work Log:
+- 新探针 `spike-ro2/lo_convert_spike2.py`（stdlib 手搓 OOXML 六样本
+  D-I + zlib/struct 生成最小 PNG + pdfinfo/pdftotext/pdfimages/
+  pdffonts 四工具断言；承接第一轮 A/B/C）。
+- **六样本全过**：D 跨页表格（80 行 2 页，首行页 1/末行页 2 跨页
+  实证 + tblHeader 重复表头）；E 页眉页脚（header1/footer1 部件 +
+  sectPr 引用，页眉页脚**逐页**在场断言）；F 分节（段内 sectPr +
+  body 尾 sectPr 双处，逐页尺寸 595×842 → 842×595pt 钉定 + 文本
+  落位）；G 缺失字体（TotallyMissingFont123 → 转换不失败 + 文本
+  不丢 + pdffonts 无幻影嵌入，替换字体 NotoSerifSC/Carlito 在场）；
+  H 图片（8×8 PNG media+rels+ct 接线，pdfimages 计数 1）；I 组合
+  夹具（全要素 4 页，六要素关键串 + 图片 + 页眉逐页全过）。
+- 三个工程发现登记：①**w:drawing 必须 run 级**（直接置于 w:p 下
+  = 非法 OOXML，LO 静默丢弃不报错——C 路线敌意输入的消毒联动关注
+  点 + 实施轮要素计数断言策略）；②pdftotext CJK/拉丁边界插空格
+  （断言需归一化——消费侧文本比对口径）；③真件对照判别法（mdcore
+  真实夹具图片存活 → 区分系统性丢弃 vs 手搓缺陷——夹具调试标准动作）。
+- 保真边界诚实登记：要素级保真（六类不失败 + 文本层 + 结构断言），
+  非视觉级（字体替换视觉近似/表格度量/色彩管理/first-even 槽位不
+  主张）；系统性视觉校验维持实施轮必做。
+- office-f 报告 §8 追记（结果矩阵 + 工程发现 + 保真边界 + Q3 细化
+  输入两条）；第一轮 spike 回归全过（A/B/C 热中位 296ms 口径续档）。
+- mdcore 零接触（只读复制其 web/tests/fixtures 真件一件用于对照）。
+
+Stage Summary:
+- 用户指定的六类复杂夹具全部要素级验证过——C 路线从"链路可行"升级
+  为"要素级保真证据"；视觉级保真维持实施轮登记（FIDELITY 矩阵法）。
+- Q3（C 实施形态）新增两条细化输入：静默丢弃面检出策略 + CJK 归一化
+  口径。
