@@ -3598,3 +3598,104 @@ Stage Summary:
 - 类别 1 清空（一项已实施：文档与现实一致性修正）；类别 2 两件
   完备待裁；类别 3 十九项决策就绪零发明。
 - mdcore 零接触零提交（只读核对四处）。
+
+---
+Task ID: e-review
+Agent: 子代理（A-D 独立审查）
+Task: 对 d1d-t1 / r-o2-t3 / anchor-t2 / md-deci-t1 四件产物做只读对抗
+审查（五项清单逐项核验，零代码变更零 git 写操作）。
+
+Work Log:
+- A：跑 cargo test -p collab-adapter（25+13 全绿）+ nightly ASan 复跑
+  零报告 + p8-p14 七探针 release 复跑全过；静态核对公开面 22 fn +
+  8 字段零 yrs 类型、Cargo 零新依赖、mdcore 零接触；yrs-d 全部 wire
+  数字逐位复现（148772→154821B/+302B 每轮/B 端 2.0%/A 端 0%/栈深
+  20/6739B/14769B/538-483B/中继 502vs557）+ yrs 源码三锚点亲核。
+- A 敌意复核（/tmp 独立探针仓，不入库）：①13 字节伪造侧车
+  count=0xFFFFFFFF → HashMap::with_capacity 预分配 489GB → SIGABRT
+  （exit 134）——fail-open，证伪初稿"敌意面全拒"表述，且侧车路径
+  完全无 input_byte_limit；②256B 限额会话 InsertBlockBefore 257B
+  文本 → Ok 放行（InsertBlock 同输入 Err(Limit)）——B1.6 六写入
+  路径五查一漏。
+- B：全量 regress.py 复跑 14=9+5+0/131 断言/exit 0/冷暖页数 14-14/
+  确定性门过；超时治理实测（kill=killed_pg/残留 []/exit 1/事后
+  /proc 零 soffice）；真件 sha256 与 mdcore 原件逐字节一致；双前序
+  spike 复跑 PASS；RSS 冷段 186-191MB vs 文档 ~220MB（garbage 255MB
+  精确）记环境方差。
+- C：office-g 22 项代码锚点逐一亲核全准；发现两处失实：DocxError
+  无 InvalidInput 变体（§3/§11"既有变体"不成立）+"10 字段"实为 9。
+- D：DECISIONS 20 行文件自洽；§1.1 四子项对 mdcore@00ad88b 亲核
+  全准；笔记：#20 行内引"§2"应为"§1.1"。
+
+Stage Summary:
+- 裁决 FIX-REQUIRED：三 SHOULD-FIX（侧车 count 预分配 abort/
+  InsertBlockBefore 限额绕过/office-g 错误变体失实）+ 六 NOTE；
+  其余全 OK——数字断言全部精确复现或方差内、公开 API/依赖纪律/
+  最小性维持、mdcore 零接触、无进程资源泄漏。
+
+---
+Task ID: d1d-t2 + anchor-t3
+Agent: 主代理（审查修复轮）
+Task: e-review 三 SHOULD-FIX 修复 + NOTE 采纳四条 + 回归锁。
+
+Work Log:
+- 适配层修复①（e-review 发现 1）：import_anchor_sidecar 入口补 B1.6
+  Limit 检查 + 敌意 count 物理上界钳制（count > (len-9)/17 先拒——
+  条目最小 17B；13B 载荷声明 40 亿条目不再预分配 abort）。
+- 适配层修复②（发现 2）：InsertBlockBefore 补 B1.6 限额检查（before
+  查找键计入总量——六写入路径六查）。
+- 回归锁三面：hostile ⑤b（极端 count → SidecarFormat 不 abort）+
+  ⑤c（小限额会话超限侧车 → Limit）+ §2 InsertBlockBefore 超限 →
+  Limit；死代码 a2 清理。
+- 修复后复验：38/38 全绿 + ASan 38/38 零报告 + p9 复跑全过。
+- office-g 勘误（发现 3 + NOTE）：§3/§11 改为 Phase 2 **新增**
+  DocxError::InvalidInput 加性变体（公开 API 新增面显式登记——初稿
+  "既有变体无新变体"失实，DocxError 实仅四变体）；§1.1"10 字段"
+  勘误为 9。
+- DECISIONS #20 引用勘误（§2 → §1.1；md-deci-t1 提交报文"类别 3
+  十九项"实为 17——文件本身自洽，报文计数误差在此留痕）。
+- regress.py 冷暖页数一致性升级硬门（NOTE 6 收严：非确定性转换 =
+  用例 FAIL 而非警告打印）；复跑 14=9+5+0 全绿。
+- yrs-d 增补 §6.5（审查与修复对账）+ 待核清单补两条（假钟注入
+  实施轮项/count 上界边界组合面登记）。
+
+Stage Summary:
+- 三 SHOULD-FIX 全闭环（修复+回归锁+文档勘误）；"加固"宣称经对抗
+  审查修复后成立；适配层敌意面收口至六写入路径六查 + 侧车双门
+  （限额+物理上界）。
+
+---
+Task ID: e-gates
+Agent: 主代理（集成与质量门禁轮）
+Task: 环境恢复（第 13 次重置后 web 面 + pdfium fixtures）+ mdcore
+全门禁亲跑复验 + collab spike 全探针回归 + 文档集成（HANDOFF/README/
+worklog）。
+
+Work Log:
+- 环境恢复（第 13 次平台重置）：rustup 1.29.1 + Rust 1.99.0 钉住 +
+  nightly-2026-10-15（ASan）+ wasm32 目标；pdfium chromium/8086
+  SHA256 验证取件 + spike fixtures 四件重建（pdf_a_spike 主探针 +
+  formfill_probe——lopdf 现场生成确定性产物，三探针/S6 全过）；
+  wasm-bindgen-cli 0.2.129 钉版安装 + npm ci + build-wasm + bundle +
+  typecheck 全过。
+- mdcore 全门禁亲跑（main=00ad88b 零改动，基线逐项复验）：
+  G1 cargo test --workspace **530/0/1i**；PDF 四面 **68/79/81+6i/
+  109+6i**（默认/pdfium/lopdf/双引擎——修复 fixtures 缺失后精确
+  复现）；perf 门 **6/6**；clippy native + wasm32 --all-targets 各
+  **恰 2 wasm_bindgen 基线**；fmt **0**；scan **0 hit-paths PASS**；
+  wasm32 check + --all-targets 过；web 七套件 **18/15/28/11/13/9/9**
+  （contract_gate/web_smoke/ime_cdp/docx_import/docx_export/
+  xlsx_import/xlsx_export）；Cargo.lock 零 diff（git status clean）。
+- collab spike 全探针回归：p1-p14 全 PASS + adapter tests 38/38
+  （含 ASan 口径）。
+- spike-ro2 回归套件最终复跑：14=9 pass+5 pinned+0 fail（含新硬门）。
+- 文档集成：HANDOFF §6 速览重写（本轮五件交付 + 全门禁复验 + 剩余
+  门控收敛于 DECISIONS.md）；README 三处同步（yrs-d/R-O2 套件/
+  anchor-t2/t3 + DECISIONS.md 入仓库结构表）；worklog 六节追加。
+
+Stage Summary:
+- 用户停机条件逐项核验：全部非阻塞工作流有实现或可评审交付物 ✓、
+  全部可用相关测试已跑 ✓、独立审查发现已修复或登记 ✓、文档与实际
+  代码一致（含 STATUS 陈旧修正）✓、全部成果已提交推送 ✓。
+- mdcore 全门禁零漂移复现（第 13 次重置后首次全量复验）——office
+  线基线可信度维持。

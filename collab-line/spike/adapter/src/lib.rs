@@ -355,6 +355,15 @@ impl CollabAdapter {
                 Ok(())
             }
             StreamEdit::InsertBlockBefore { before, block } => {
+                // B1.6 限额（e-review 发现 2 修复：此前该路径漏检——
+                // 六写入路径六查；before 查找键同为入向输入，计入总量）
+                let size = before.len() + block.block_id.len() + block.text.len() + 64;
+                if size > self.options.input_byte_limit {
+                    return Err(AdapterError::Limit {
+                        size,
+                        limit: self.options.input_byte_limit,
+                    });
+                }
                 let array = self.doc.get_or_insert_array("blocks");
                 let map = MapPrelim::from([
                     ("block_id", In::Any(block.block_id.clone().into())),
@@ -684,6 +693,14 @@ impl CollabAdapter {
 
     /// 侧车导入（替换式；返回导入条数）。
     pub fn import_anchor_sidecar(&mut self, bytes: &[u8]) -> Result<usize, AdapterError> {
+        // B1.6 限额（e-review 发现 1 修复：侧车路径此前完全无限额——
+        // 与 apply_update/load_* 同面收口）
+        if bytes.len() > self.options.input_byte_limit {
+            return Err(AdapterError::Limit {
+                size: bytes.len(),
+                limit: self.options.input_byte_limit,
+            });
+        }
         if bytes.len() < 9 || &bytes[0..4] != b"MDCA" {
             return Err(AdapterError::SidecarFormat("magic 缺失".into()));
         }
@@ -694,6 +711,17 @@ impl CollabAdapter {
             )));
         }
         let count = u32::from_le_bytes([bytes[5], bytes[6], bytes[7], bytes[8]]) as usize;
+        // fail-closed（e-review 发现 1 修复）：敌意 count 预分配防护——
+        // 条目最小物理尺寸 = tag(1) + strlen 前缀(4) + anchor(12) = 17B；
+        // 声明数超 (len-9)/17 上界 = 物理不可达 → 先拒再分配（此前
+        // HashMap::with_capacity(敌意 count) 可致预分配放大 abort——
+        // 489GB 实测复现，13B 输入即可触发）
+        let max_entries = bytes.len().saturating_sub(9) / 17;
+        if count > max_entries {
+            return Err(AdapterError::SidecarFormat(format!(
+                "count {count} 超物理上界 {max_entries}（载荷长度不可达）"
+            )));
+        }
         let mut pos = 9usize;
         let mut table = HashMap::with_capacity(count);
         let read_str = |pos: &mut usize| -> Result<String, AdapterError> {

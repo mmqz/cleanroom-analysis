@@ -34,8 +34,9 @@ external-only——documents/mod.rs:1210，结构性不可达）；HYPERLINK 域
 
 ```rust
 pub struct RunSpec {
-    // …既有 10 字段零变化（text/bold/italic/mono/strike/underline/
-    //    link/footnote/field——docx.rs:2205-2231）…
+    // …既有 9 字段零变化（text/bold/italic/mono/strike/underline/
+    //    link/footnote/field——docx.rs:2205-2231；e-review 勘误：
+    //    初稿「10 字段」计数失实，实为 9）…
     /// 文档内锚点链接（Some = 本 run 发射 `w:hyperlink w:anchor`
     /// 属性形——引擎 HyperlinkType::Anchor，零 rels 面，悬空合法）。
     /// 与 `link` 互斥语义：同 Some 时 anchor 优先（读写镜像，见 1.2）。
@@ -113,7 +114,8 @@ impl DocxWriter {
     /// id 由写器内部计数器唯一化（引擎不校验唯一性——包装层保证；
     /// 与 TOC `_Toc` 族命名空间冲突面：**保留名前缀 `_Toc` 拒绝**
     /// （InvalidInput）——引擎 TOC 内部机制不被用户面踩踏）。
-    /// 校验面 V1-V6（§11）→ `DocxError::InvalidInput`。
+    /// 校验面 V1-V6（§11）→ `DocxError::InvalidInput`（**新增变体**，
+    /// 见 §11 勘误——既有 DocxError 仅 Container/Parse/Io/Limit 四变体）。
     pub fn bookmark_paragraph(
         &mut self,
         runs: &[RunSpec],
@@ -283,7 +285,14 @@ r5-t2 登记面），即"锚点存在性不可辨"。Phase 1/2 是**写面**方�
 | V7 | `anchor_link` 空 anchor | `InvalidInput` | 同 V1 |
 | V8 | anchor 与 link 同 Some | **非错误**——anchor 赢、link 忽略（文档登记语义，读写镜像，T2） | §1.2 优先序 |
 
-错误面全部经既有 `DocxError::InvalidInput` 变体（无新变体——最小性）。
+**e-review 勘误（anchor-t3）**：初稿「全部经既有 `DocxError::InvalidInput`
+变体（无新变体）」失实——mdcore 现行 `DocxError` 仅
+Container/Parse/Io/Limit 四变体（docx.rs:212-224）；`InvalidInput`
+仅存在于 XLSX 侧 `WriteError`（write.rs:159）。修正后的错误面设计：
+**Phase 2 新增 `DocxError::InvalidInput(String)` 变体**（加性枚举变体
+——workspace 内 exhaustive match 机械补齐，office-io 外部零消费者
+grep 在档 §2.1；这是本方案唯一的公开 API 新增面之一，已在 §1.1
+字段扩之外显式登记）。V1-V6 校验全部经该新变体。
 V4 的 ASCII 域取舍是**显式设计决定**（非能力缺失）——CJK 书签名需求
 出现时升级为独立裁决点（Word 支持 ≠ 全引擎支持，跨引擎保真是本
 管线约束——office-f 路线约束传导）。

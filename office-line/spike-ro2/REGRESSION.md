@@ -218,4 +218,9 @@ python 3.12 stdlib only。产物目录 `out/`（gitignored）；LO profile 在
 | `out/`（gitignored） | 运行产物：夹具、冷/暖 PDF、JSON 报告、sha256 台账 |
 
 退出码语义：**exit 0 ⟺ 全部用例 pass/pinned 且夹具确定性门通过**；
-任一 fail（含钉定破裂、超时）→ exit 1；`--filter` 无匹配 → exit 2。
+任一 fail（含钉定破裂、超时、**冷/暖页数不一致**）→ exit 1；
+`--filter` 无匹配 → exit 2。
+
+**e-review 收严（anchor-t3 同批）**：冷/暖页数一致性从「警告打印」
+升级为**硬门**（非确定性转换 = 用例 FAIL）——非确定性 flake 不再
+可能静默通过。

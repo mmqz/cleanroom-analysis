@@ -9,6 +9,7 @@ AI 工作台引擎净室分析研究的**全部工作成果**集中仓库（用�
 | 路径 | 内容 | 规模 |
 |------|------|------|
 | [HANDOFF.md](HANDOFF.md) | **新会话 AI 接手指南**（项目状态/纪律/下一步/环境备忘） | — |
+| [DECISIONS.md](DECISIONS.md) | **裁决包三分类**（类别 1 安全实现/类别 2 完整提案/类别 3 精确决策问题——20 项单一登记表） | — |
 | [worklog.md](worklog.md) | 全程工作日志（事实登记，追加式） | 60+ KB |
 | [pdf-line/](pdf-line/) | L2·PdfCraft 净室分析四篇 + L3·办公/画布线规划 | 5 文档 1765 行 |
 | [agents-md-audit/](agents-md-audit/) | L0·AGENTS.md 架构级安全审计（9 分析 + 5 证据 + 5 工具） | 20 文件 |
@@ -32,8 +33,8 @@ Acrobat Pro DC 26.002.21931 安装器（TLS+MD5+Authenticode 四重验证）黑�
 ### L3 · 办公与画布线（2026-10-10~15 全阶段收官）+ collab 线
 - `05` 规划文档（388 行）：16 候选总览、11 维方法论裁剪、批次表、排除清单
 - **14 篇深读/pass 报告**（`canvas-line/` 7 + `office-line/` 4 + `office-e` 选型 + `pdf-line/06` 综合与裁决建议 458 行）全部经独立复审+修补；终裁问题 D1/D2/D3 留用户（06 §8.1）
-- **collab 线**（`collab-line/`）：`collab-a` Yjs 协议 pass + `affine-a` AFFiNE 双态 pass + **`yrs-a` yrs 评估 pass（2026-10-16：MIT 定谳 / 双语言 wire 互证实证 / spike 六探针 / 批量装载内存放大发现 / 闭包 45 包零 copyleft——D1② 证据就绪）** + **`yrs-b` D1-a 集成验证边界（2026-10-17：#676 定谳链闭环[ASan 复现/混合部署证伪/skip_gc 全编队不变量] + 四项边界[GC/UAF 隔离·事务粒度·撤销栈归属·稳定锚点跨模型映射] + 适配层契约草案——用户裁 D1② 走 a 后产出，实施轮待边界确认）** + **`yrs-c` D1-a 适配层原型报告（2026-10-17 d1c-t1..t4：collab-adapter 原型 crate[crate 边界=可撤回边界，公开 API 22 fn 零 yrs 类型] + 用户三验证面闭环[内存上限/撤销语义/跨模型锚点映射] + P8-P10 探针 + ASan 门禁零报告 + P11 载体对照[XmlFragment vs Array-of-Map 六维，建议倾向 XmlFragment 呈裁决]——用户"有条件确认边界"执行轮）**
-- **office 线**：office-f docx 渲染级读侧评估（2026-10-17：生态盘点一手核验 + LO headless 转换 spike 全过[显式分页保真硬断言] + 三路线对照与裁决问题——O1-6 开放项证据闭环，`office-line/office-f_docx渲染级读侧评估pass.md`） + office-f §8 复杂夹具扩展（2026-10-17 r-o2-t2：用户裁 C 路线进原型阶段后六类要素夹具全过[跨页表格/页眉页脚逐页/分节逐页尺寸/缺失字体替换/图片/组合] + 三工程发现[w:drawing 必须 run 级 LO 静默丢弃/CJK 空格归一化/真件对照判别法]） + office-g 锚点写面最小扩展方案（2026-10-17：用户裁③"暂维持公开 API 方案先行"执行——Phase 0 生效/Phase 1 RunSpec.anchor 实施就绪规格/Phase 2 bookmark_paragraph 正交件/兼容性一手全量清单[字面 4 处=1 免疫+3 机械补]/yrs-b R4.5 弱→强绑定升级路径）
+- **collab 线**（`collab-line/`）：`collab-a` Yjs 协议 pass + `affine-a` AFFiNE 双态 pass + **`yrs-a` yrs 评估 pass（2026-10-16：MIT 定谳 / 双语言 wire 互证实证 / spike 六探针 / 批量装载内存放大发现 / 闭包 45 包零 copyleft——D1② 证据就绪）** + **`yrs-b` D1-a 集成验证边界（2026-10-17：#676 定谳链闭环[ASan 复现/混合部署证伪/skip_gc 全编队不变量] + 四项边界[GC/UAF 隔离·事务粒度·撤销栈归属·稳定锚点跨模型映射] + 适配层契约草案——用户裁 D1② 走 a 后产出，实施轮待边界确认）** + **`yrs-c` D1-a 适配层原型报告（2026-10-17 d1c-t1..t4：collab-adapter 原型 crate[crate 边界=可撤回边界，公开 API 22 fn 零 yrs 类型] + 用户三验证面闭环[内存上限/撤销语义/跨模型锚点映射] + P8-P10 探针 + ASan 门禁零报告 + P11 载体对照[XmlFragment vs Array-of-Map 六维，建议倾向 XmlFragment 呈裁决]——用户"有条件确认边界"执行轮）** + **`yrs-d` D1-a 适配层加固轮（2026-10-17 d1d-t1/t2：测试矩阵资产化[matrix 25 + hostile 13 含 ASan 零报告] + 两处 fail-closed 硬化[client_id 53 位/侧车尾部冗余→e-review 后再补敌意 count 钳制与 B1.6 同面收口] + p12 循环测量[20 轮同步/撤销全收敛 RSS 恒定] + p13 XmlFragment 七面深验全过[D1 载体裁决证据链补全] + p14 GC 证据 wire 可检测性实证[maintenance_gc 与未授权 GC 同族 wire 不可区分定谳] + 三新发现[undo 复活=新 ID 族/公开 API 盲区/redo 返回栈项]）**
+- **office 线**：office-f docx 渲染级读侧评估（2026-10-17：生态盘点一手核验 + LO headless 转换 spike 全过[显式分页保真硬断言] + 三路线对照与裁决问题——O1-6 开放项证据闭环，`office-line/office-f_docx渲染级读侧评估pass.md`） + office-f §8 复杂夹具扩展（2026-10-17 r-o2-t2：用户裁 C 路线进原型阶段后六类要素夹具全过[跨页表格/页眉页脚逐页/分节逐页尺寸/缺失字体替换/图片/组合] + 三工程发现[w:drawing 必须 run 级 LO 静默丢弃/CJK 空格归一化/真件对照判别法]） + office-g 锚点写面最小扩展方案（2026-10-17：用户裁③"暂维持公开 API 方案先行"执行——Phase 0 生效/Phase 1 RunSpec.anchor 实施就绪规格/Phase 2 bookmark_paragraph 正交件/兼容性一手全量清单[字面 4 处=1 免疫+3 机械补]/yrs-b R4.5 弱→强绑定升级路径） + **R-O2 回归套件 r-o2-t3（2026-10-17：14 用例确定性 CI 资产[9 硬断言+5 畸形行为钉定，131 断言 ~16s] + 超时治理进程组杀除 + 两条新发现[垃圾字节文本导入兜底 rc=0 乱码产出/加载失败 rc=0——退出码不是失败信号，检出=产物断言通则] + 冷暖一致性硬门）** + **anchor-t2/t3 锚点写面完整设计（2026-10-17：office-g §7-§13 六维度补全[调用示例/三层身份模型/生命周期五行/迁移零破坏链/校验 V1-V8/四备选最小性论证] + e-review 勘误[DocxError 新增变体显式登记/字段计数]）**
 - office 开发轮全线（office-impl/xlsx-r1/xlsx-r2/docx-r1/r2/消费面 t16-t22/Round 4/Round 5）见 `office-line/` 各 REPORT 与 `HANDOFF.md` L3 行
 
 ## 新 AI / 新读者入口

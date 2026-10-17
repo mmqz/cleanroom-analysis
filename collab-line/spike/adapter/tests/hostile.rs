@@ -240,6 +240,21 @@ fn oversized_load_paths_rejected() {
         small.load_blocks(EditOrigin::Ai, &many),
         Err(collab_adapter::AdapterError::Limit { .. })
     ));
+    // InsertBlockBefore 超限（e-review 发现 2 回归锁：六写入路径六查——
+    // 此前该路径漏检，同输入 InsertBlock 拒而 InsertBlockBefore 放行）
+    assert!(matches!(
+        small.edit_stream(
+            EditOrigin::Human,
+            StreamEdit::InsertBlockBefore {
+                before: "any".into(),
+                block: BlockSpec {
+                    block_id: "z".repeat(200),
+                    text: "w".repeat(200),
+                }
+            }
+        ),
+        Err(collab_adapter::AdapterError::Limit { .. })
+    ));
 }
 
 // ── §3 invalid anchors ───────────────────────────────────────────
@@ -369,6 +384,28 @@ fn sidecar_hostile_faces_fail_closed() {
         a.import_anchor_sidecar(&bad_count),
         Err(collab_adapter::AdapterError::SidecarFormat(_))
     ));
+    // ⑤b 敌意极端 count（e-review 发现 1 回归锁：u32::MAX 预分配放大
+    // abort 反例——13B 载荷声明 40 亿条目必须先拒后分配，绝不 abort）
+    let mut extreme = good.clone();
+    extreme[5..9].copy_from_slice(&u32::MAX.to_le_bytes());
+    assert!(
+        matches!(
+            a.import_anchor_sidecar(&extreme),
+            Err(collab_adapter::AdapterError::SidecarFormat(_))
+        ),
+        "极端 count 必须拒（物理上界钳制）而非预分配 abort"
+    );
+    // ⑤c 侧车字节限额（B1.6 同面收口——小限额会话拒绝超限侧车）
+    let mut small = CollabAdapter::open(SessionOptions {
+        client_id: 7_000_222,
+        input_byte_limit: 32,
+    })
+    .expect("open small");
+    assert!(good.len() > 32, "夹具尺寸需大于小限额（实际 {}B）", good.len());
+    assert!(matches!(
+        small.import_anchor_sidecar(&good),
+        Err(collab_adapter::AdapterError::Limit { .. })
+    ));
     // ⑥ 尾部冗余字节（fail-closed 硬化面：拒绝而非静默忽略）
     let mut trailing = good.clone();
     trailing.extend_from_slice(&[0x00, 0x01, 0x02]);
@@ -445,12 +482,6 @@ fn gced_peer_update_applies_and_content_converges() {
         StreamEdit::AppendText { text: "local-after-gc".into() },
     )
     .expect("edit after gc-source apply");
-    let mut a2 = CollabAdapter::open(SessionOptions {
-        client_id: 7_000_217,
-        input_byte_limit: 52 * 1024 * 1024,
-    })
-    .expect("open a2");
-    let _ = &mut a2;
     a.maintenance_gc().expect("maintenance_gc after gc-source apply");
     let snap = a.authoritative_snapshot().expect("snapshot after gc-source apply");
     let b = sess(7_000_218);

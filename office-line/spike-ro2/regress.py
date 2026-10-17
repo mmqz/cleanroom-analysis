@@ -593,13 +593,9 @@ def run_case(case: dict, timeout: float, baseline_soffice: set[int],
                   note="断言器异常——按失败记录并继续")
 
     all_pass = rec.all_pass
-    if case["kind"] == "valid":
-        result = "pass" if all_pass else "fail"
-    else:
-        result = "pinned" if all_pass else "fail"
 
     fixture_sha = hashlib.sha256(fixture.read_bytes()).hexdigest()
-    return {
+    record = {
         "case": name,
         "kind": case["kind"],
         "desc": case["desc"],
@@ -618,11 +614,20 @@ def run_case(case: dict, timeout: float, baseline_soffice: set[int],
         "assertions": rec.items,
         "assertion_count": len(rec.items),
         "failed_assertions": rec.fail_count,
-        "result": result,
+        "result": None,  # 由下方一致性门后回填
         **({"pin_broken": True,
             "pin_note": "钉定破裂——LO 行为变化（版本差信号）：复核后更新钉定"}
            if case["kind"] == "malformed-pinned" and not all_pass else {}),
     }
+    # e-review NOTE 6 收口：冷/暖页数一致性 = 硬门（非确定性转换 → FAIL；
+    # 此前仅警告打印——套件语义收严）
+    if not record["conversion"]["cold_warm_page_count_consistent"]:
+        all_pass = False
+    if case["kind"] == "valid":
+        record["result"] = "pass" if all_pass else "fail"
+    else:
+        record["result"] = "pinned" if all_pass else "fail"
+    return record
 
 
 # ── 环境 meta ───────────────────────────────────────────────────────────────

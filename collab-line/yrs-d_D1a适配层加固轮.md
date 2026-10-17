@@ -169,6 +169,24 @@ yrs-a 登记的 async_lock 非重入死锁纪律，本轮以三个实例复验�
 正确形态 = **一事务一作用域**（独立块）。适配层 API 面天然满足（每
 方法自开自释，调用方不可见事务）——隔离设计的又一实证。
 
+## 6.5 e-review 独立审查与三缺陷修复（d1d-t2，同会话）
+
+独立审查子代理（五项清单对抗审查，只读零改动）裁决 FIX-REQUIRED——
+三 SHOULD-FIX 已全部修复并回归锁：
+
+| # | 发现（审查复现证据） | 修复 | 回归锁 |
+|---|---|---|---|
+| 1 | `import_anchor_sidecar` 敌意 count 预分配放大：13B 侧车声明 u32::MAX 条目 → `HashMap::with_capacity` 试图分配 489GB → **SIGABRT（exit 134）**——fail-open，证伪本轮初稿"敌意面全拒"表述；且侧车路径完全无 B1.6 限额 | ①入口补 `Limit` 检查；②count 物理上界钳制（`count > (len-9)/17` 先拒——条目最小 17B） | hostile ⑤b（极端 count → SidecarFormat 不 abort）+ ⑤c（小限额会话超限侧车 → Limit） |
+| 2 | `StreamEdit::InsertBlockBefore` **绕过 input_byte_limit**（六写入路径五查一漏：InsertBlock 有检查、Before 变体无）——256B 限额会话 257B 文本 Before 变体 Ok 放行 | Before 变体补 Limit 检查（before 查找键计入总量） | hostile §2 InsertBlockBefore 超限 → Limit |
+| 3 | （office-g 文档面，anchor-t3 修）`DocxError::InvalidInput` 变体不存在（实际仅 Container/Parse/Io/Limit）——Phase 2 错误面设计失实 | office-g §3/§11 勘误：Phase 2 **新增** `DocxError::InvalidInput` 加性变体（公开 API 新增面显式登记） | 文档修正（无代码） |
+
+修复后复验：38/38 全绿（含三新回归锁）+ ASan 38/38 零报告 + p9 复跑
+全过。审查同时确认：公开面恰 22 fn + 8 字段零 yrs 类型（静态枚举）、
+Cargo 零新依赖、mdcore 零接触、零进程泄漏、yrs-d 全部数字断言逐位
+复现（RSS ±1% 环境方差）。NOTE 采纳四条：coalesce 测试理论 flake
+（假钟注入 = 实施轮项登记）/ hostile 死代码已清 / regress.py 冷暖
+页数一致性升级硬门（本轮同批收严）/ 环境方差口径维持。
+
 ## 7. 已核带源 / 待核清单
 
 **已核带源（一手）**：
@@ -183,6 +201,9 @@ yrs-a 登记的 async_lock 非重入死锁纪律，本轮以三个实例复验�
 
 **待核（登记）**：
 - 作者端墓碑钉住机制（§3 假设未验证）；
+- 捕获窗测试的假钟注入（e-review NOTE——实现全确定性，实施轮）；
+- 侧车敌意 count 上界公式 (len-9)/17 的边界用例（空串条目 0 长度
+  已由 ⑤b/⑤c 覆盖，极端组合面维持登记）；
 - GC 证据上游 API 请求的正式提交（§2.2-2 候选）；
 - redone 链映射的锚点跟随（undo 复活新 ID 语义的适配层对策——
   事件面遗留项联动）；
