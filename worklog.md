@@ -3907,3 +3907,48 @@ Stage Summary:
 - DECISIONS #8 的裁决成本从「读设计文档想象实现」降为「看已测试
   补丁批注合入」——Phase 1+2 全量代码 + 门禁证据 + 两条实施发现
   就绪；gated API 纪律维持（main 干净，分支隔离）。
+
+---
+Task ID: sprint2-final
+Agent: 主代理（冲刺收口轮——推送 + 收尾验证 + 决策单）
+Task: 用户指令收尾件——「Commit and push each independently
+reviewed increment; end with a concise decision sheet (decisions
+needed, recommended defaults, what each unlocks, work completed
+without decisions)」+ 停机条件兑现（全部可执行任务完成 +
+测试/评审通过 + 剩余事项确实被门控 → 最终报告）。
+
+Work Log:
+- 环境核对（恢复一次纪律）：工作区持续未重置（双仓本地提交在
+  场）；远端核对 cleanroom-analysis main=ec9a7df / mdcore
+  main=00ad88b（= 指令基线），本地领先 = 上会话冲刺五件已提交
+  未推送；工具链仅 PATH 新鲜（~/.cargo/env 重源即复：1.99.0 +
+  nightly-2026-10-15；LO 25.2.3.2 在场）。
+- 推送积压增量（用户提供凭据）：cleanroom-analysis main
+  ec9a7df→141c482（五件：decis-g1/d1e-t1/d1e-t2+r5-t3/r-o2-t4/
+  d1e-t3+HANDOFF）；mdcore main 00ad88b→b15c0ab（r5-t3）+ 新
+  分支 office-g-phase1-anchor（c4856f7——锚点 Phase 1+2 就绪
+  补丁呈批件）。
+- token 零落盘纪律自纠：推送时曾以 PAT 嵌 remote URL（.git/config
+  落盘违反 HANDOFF §5-2 铁律）→ 推送毕立即双仓 set-url 还原 +
+  grep 验证零残留（exit 1 = clean）。
+- 收尾验证三件（本会话亲跑，推送态精确复现）：适配层 cargo test
+  -p collab-adapter = 54/54（matrix 25 + hostile 13 +
+  anchor_undo_redo 6 + limit_boundaries 10）零失败；mdcore
+  cargo test --workspace = 531/531 零失败（= b15c0ab 口径）；
+  R-O2 回归套件 = 21 用例 9 pass + 12 pinned + 0 fail + 夹具
+  确定性门 pass + 跨进程确定性门 pass，SUITE PASS。
+- 决策单落档 DECISION_SHEET.md（仓库根，与 DECISIONS/
+  DECISION_GROUPS 并列）：四批批注版（批次 1 D1 解锁包三件/
+  批次 2 锚点合入一句话/批次 3 Q3 预装+子进程/批次 4 低优先
+  合批）+ 每批解锁面 + 本轮零裁决已完成五件表 + 收尾验证证据 +
+  剩余风险五条（#676/栈无界/LO 版本差/字节级非确定/沙箱真机
+  不可比）——全部转引 DECISION_GROUPS 对应组节零重复。
+- HANDOFF §6 速览更新：推送态（141c482/b15c0ab/c4856f7）+
+  DECISION_SHEET 用户回答入口 + 收尾验证三大件全绿口径。
+
+Stage Summary:
+- 停机条件达成：五件冲刺交付全部推送在档（含 mdcore 隔离分支
+  呈批件）；三大件测试本会话亲跑全绿零漂移；剩余事项全部为
+  类别 2/3 门控项（DECISIONS §1 类别 1 已清空）——用户四批
+  批注（DECISION_SHEET.md）即全线解锁；无未推送提交、无未登记
+  工作、无环境缺口。
