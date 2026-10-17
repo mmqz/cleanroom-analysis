@@ -3952,3 +3952,58 @@ Stage Summary:
   类别 2/3 门控项（DECISIONS §1 类别 1 已清空）——用户四批
   批注（DECISION_SHEET.md）即全线解锁；无未推送提交、无未登记
   工作、无环境缺口。
+
+---
+Task ID: sprint2-b2
+Agent: 主代理（批次 2 裁决执行轮——office-g Phase 1+2 合入 main）
+Task: 用户裁决 DECISION_SHEET 批次 2：检查 office-g-phase1-anchor
+与 mdcore main 的提交关系/共同祖先/文件差异，满足条件（分支目标
+正确、不覆盖 main 独有提交、无未解决冲突、架构兼容）则合入 +
+跑门禁 + 推送；合并后更新 HANDOFF 记录最终提交/验证结果/已知
+风险/待决策事项；不扩大范围。
+
+Work Log:
+- 环境恢复（第 15 次重置，恢复一次纪律）：双仓本地回旧态
+  （cleanroom de186f7 / mdcore 00ad88b，本地分支丢失）→ 瞬态
+  URL fetch 恢复远端 refs（mdcore main=b15c0ab + origin/office-g-
+  phase1-anchor=c4856f7；cleanroom main=ae41cea）→ 双仓 ff-only
+  拉齐 + 本地分支重建 + core.fileMode false 归零 mode-bit 漂移；
+  工具链随重置丢失 → 重装钉住口径（rustup 1.29.1 + 1.99.0
+  minimal + wasm32 target + clippy/rustfmt + nightly-2026-10-15
+  [rust-src]）。
+- 合并前置检查四件全过：①merge-base = main HEAD（b15c0ab）→
+  main 为分支祖先，ff 可合零冲突可能；②main 独有提交 = 0（零
+  覆盖）；③分支独有提交恰 1（c4856f7——office-g Phase 1+2 实施
+  批）；④差异面 4 文件 +398/-3（office-io/src/docx.rs +366 /
+  tests/docx_roundtrip.rs +17 / mdcore-wasm/docx_export.rs +12 /
+  docx_import.rs +6）——零公开模型（BlockTree/mdcore 核心 crate）
+  触碰，与 CAPABILITY_NOTES §13 Option A 加性扩承诺一致。
+- ff 合入：main b15c0ab→c4856f7（线性历史维持，无 merge commit）。
+- 全门禁本会话亲跑（合并后 main 上）：G1 cargo test --workspace
+  = **538/538 零失败**（531 既有零回归 + 7 新测试全过，= 分支声明
+  口径精确复现）；clippy native + wasm32 双面恰 2 wasm_bindgen
+  基线（lib.rs:212/221 static_method_of 属性误判——既有基线，非
+  分支触碰文件）；cargo fmt --all --check = 0；compliance/scan.sh
+  product = 0 hit-paths PASS；Cargo.lock 相对 b15c0ab 零 diff；
+  wasm32 check --workspace clean。
+- 推送：mdcore main b15c0ab→c4856f7（瞬态 URL，.git/config 零
+  token 残留 grep 验证）。
+- 文档收口（cleanroom-analysis）：CAPABILITY_NOTES §13 头部裁决
+  落定注记（Option A Phase 1+2 全批 + 合并证据 + §13.4 问题 1/2
+  闭环、问题 3 陈述维持）；DECISION_GROUPS 批次 2 翻转「已裁决已
+  执行」；DECISION_SHEET 批次 2 节改为结果表（合入方式/差异面/
+  门禁复验/解锁面/已知风险）；HANDOFF L-MD 行（main=c4856f7 +
+  版本链追加 b15c0ab/c4856f7 两环 + 九门禁 538）与 §6 速览
+  （批次 2 执行后态 + 剩余门控批次 1/3/4 + 第 15 次重置恢复记录）。
+
+Stage Summary:
+- DECISIONS #8（G4 锚点写面 Phase 1/2 触发）闭环：Option A 裁决
+  → 前置检查四件全过 → ff 合入 → 全门禁绿复验 → 推送。锚点
+  写读对称达成（读 4/写 4：External/Internal/Anchor/Unresolved
+  读面 vs External/anchor/anchor_link/bookmark_paragraph 写面）；
+  R4.5 强绑定升级路径开通（OfficeBookmark 弱→强绑定）。
+- 已知风险登记：悬空锚点=合法形（Phase 2 书签独立可用，V 边界
+  已校验）；wasm 面 docx_invalid_input 当前不可达（BlockTree 无
+  锚点载荷，②⑦ 门控维持 = DECISIONS #10/#12）。
+- 剩余门控：DECISION_SHEET 批次 1（D1 解锁包三件——最优先）/
+  批次 3（Q3 渲染管线）/批次 4（低优先合批）。

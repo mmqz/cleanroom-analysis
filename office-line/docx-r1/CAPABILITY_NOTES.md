@@ -316,6 +316,16 @@ docx_roundtrip.rs。零新依赖（Cargo.lock 零 diff）。
 > 接口变更；交付 = 5 只增探针测试（tests/docx_roundtrip.rs 28→32 +
 > mdcore-wasm/docx_export.rs +1）+ 本节。全部断言一手亲跑（未实测
 > 不宣称）。
+>
+> **裁决落定（2026-10-17，批次 2）**：用户裁 **Option A，Phase 1+2
+> 全批**（含书签写面正交件）——实施批 = mdcore `c4856f7`（原隔离
+> 分支 office-g-phase1-anchor，ff 合入 main 全门禁绿：G1 538/538 /
+> clippy 双面恰 2 wasm_bindgen 基线 / fmt 0 / scan PASS / lock 零
+> diff / wasm32 check 过；合并前置检查：merge-base=main HEAD、main
+> 独有提交 0、差异面 4 文件 +398/-3 全在 office-io+mdcore-wasm 零
+> 公开模型触碰）。§13.4 裁决问题 1/2 就此闭环；问题 3 陈述维持
+> （Internal 写回引擎不可达登记 / HYPERLINK 域红线 / MarkSpan URL
+> 维持 mdcore MD 域门控 = DECISIONS #10）。
 
 ### 13.1 承载能力矩阵（证据锚点）
 

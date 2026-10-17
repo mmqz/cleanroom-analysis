@@ -305,16 +305,14 @@ Phase 2 可分离裁决）；① 接受永久降级；② 与 #8 同批裁决（
 **最小裁决批次**（用户单次批注即可全线推进）：
 1. **批次 1（D1 解锁包）**：G1 载体=XmlFragment + G2 B3.2 采纳 +
    G3 栈上限=维持无限（或选他项）——三件同批 = D1 实施轮启动。
-2. **批次 2（锚点解锁包）**：G4 #8=Option A Phase 1（Phase 2 可
-   分离）——单件 = 写面对称 + R4.5 前置。**实施就绪补丁已备**（本轮
-   d1e-t3）：mdcore 隔离分支 `office-g-phase1-anchor`（c4856f7）+
-   评审件 `office-line/0001-office-g-Phase-1-2-*.patch`——Phase 1+2
-   全量实现（RunSpec.anchor/anchor_link/bookmark_paragraph/
-   InvalidInput 变体/V1-V7 校验/T1-T7 测试），全门禁绿（G1 538/
-   clippy 双面基线/fmt 0/scan PASS/lock 零 diff）；裁决 = 「合入
-   main」一句话，撤回 = 弃分支零残留。实施发现两条已登记（V5 校验
-   序前移——否则被 V3 遮蔽不可达；V7 粘性错误不 take 不重置——
-   错误路径与 Limit 同语义）。
+2. **批次 2（锚点解锁包）：已裁决已执行（2026-10-17）**——用户裁
+   Option A Phase 1+2 全批；mdcore main `b15c0ab→c4856f7` ff 合入
+   （合并前置检查全过：merge-base=main HEAD/main 独有提交 0/差异
+   4 文件 +398/-3 零公开模型触碰）+ 全门禁绿复验（G1 538/538/
+   clippy 双面恰 2 基线/fmt 0/scan PASS/lock 零 diff/wasm32 check
+   过）+ 已推送。R4.5 强绑定升级路径开通；LO 回归套件锚点存活
+   用例扩列 = 后续增量（office-g §13 联动项）。实施发现两条在档
+   （V5 校验序前移 / V7 粘性错误不 take 不重置）。
 3. **批次 3（渲染解锁包）**：G5 Q3=预装+子进程+发行版基线——
    单件 = 渲染管线产品化定参。
 4. **批次 4（低优先合批）**：R-1=A（若批次 1 已含 B3.2 则同源

@@ -25,16 +25,19 @@
 
 **批注：`批次 1 = ________`**
 
-## 批次 2（锚点解锁包）——Office 写面对称【补丁已备，裁决 = 一句话】
+## 批次 2（锚点解锁包）——✅ 已裁决已执行（2026-10-17）
 
-| # | 裁决项 | 推荐默认 | 解锁 |
-|---|---|---|---|
-| G4 #8 | 锚点写面 Phase 1/2 触发 | **Option A**：RunSpec.anchor 加性扩 + anchor_link（Phase 1）+ bookmark_paragraph（Phase 2，可分离裁决） | 裁决 = 「合入 main」——mdcore 隔离分支 `office-g-phase1-anchor`（c4856f7）**全量实现 + 全门禁绿已备**（G1 538/clippy 双面基线/fmt 0/scan PASS/lock 零 diff + T1-T7 测试组）；R4.5 强绑定升级路径开通；LO 回归套件可同批扩锚点存活用例 |
+**裁决：Option A，Phase 1+2 全批（含 bookmark_paragraph 正交件）——已合入并推送。**
 
-撤回 = 弃分支零残留（mdcore main 零接触）。两条实施发现已登记（V5 校验序前移 / V7 粘性错误不 take 不重置——d1e-t3）。
-注意：这是 gated 公开 API 扩面（office-io 公开面变更）——授权必须显式，不可自行合入。
+| 项 | 结果 |
+|---|---|
+| 合入方式 | ff 合入（merge-base=main HEAD，main 独有提交 0，零冲突零覆盖）；mdcore main `b15c0ab→c4856f7` |
+| 差异面 | 4 文件 +398/-3（office-io docx.rs +366 / docx_roundtrip.rs +17 / mdcore-wasm docx_export.rs +12 / docx_import.rs +6）零公开模型触碰 |
+| 门禁复验 | G1 **538/538** 零失败 / clippy 双面恰 2 wasm_bindgen 基线（lib.rs:212/221 既有，非分支文件）/ fmt 0 / scan 0 hit-paths PASS / Cargo.lock 零 diff / wasm32 check 过 |
+| 解锁面 | R4.5 强绑定升级路径开通；锚点写读对称（读 4/写 4）；LO 回归套件锚点存活用例扩列成为后续增量（office-g §13 联动项） |
+| 已知风险 | 悬空锚点=合法形（Phase 2 书签写面独立可用，锚点目标不在场时 V 边界已校验）；wasm 面 docx_invalid_input 错误码当前不可达（BlockTree 无锚点载荷，②⑦ 门控维持） |
 
-**批注：`批次 2 = ________`**
+（原推荐表与备选见 DECISION_GROUPS G4——历史依据保留不删。）
 
 ## 批次 3（渲染解锁包）——R-O2 管线产品化定参
 
