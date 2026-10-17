@@ -98,7 +98,7 @@ fn main() {
     for i in 0..scale {
         bulk.push_str(&format!("cell{:04}", i % 10_000));
     }
-    b.load_bulk_text(&bulk).unwrap();
+    b.load_bulk_text(EditOrigin::Ai, &bulk).unwrap();
     let b2_rss = vm("VmRSS") as i64 - rss0 as i64;
     println!(
         "  b2 load_bulk_text {}B（8KiB 大块单事务）: ΔRSS {:+} kB, {} ms（A2 形状）",
@@ -119,7 +119,7 @@ fn main() {
             text: format!("cell{:04}", i % 10_000),
         })
         .collect();
-    c.load_blocks(&blocks).unwrap();
+    c.load_blocks(EditOrigin::Ai, &blocks).unwrap();
     let b3_rss = vm("VmRSS") as i64 - rss0 as i64;
     println!(
         "  b3 load_blocks {} 块（512/批分事务）: ΔRSS {:+} kB, {} ms",
@@ -137,7 +137,7 @@ fn main() {
     // b5: 输入限额
     let limit = SessionOptions::default().input_byte_limit;
     let big = "x".repeat(limit + 1);
-    match b.load_bulk_text(&big) {
+    match b.load_bulk_text(EditOrigin::Ai, &big) {
         Err(AdapterError::Limit { size, limit: l }) => {
             assert_eq!(size, limit + 1);
             assert_eq!(l, limit);
@@ -193,7 +193,7 @@ fn main() {
         ..Default::default()
     })
     .unwrap();
-    e.load_bulk_text(&bulk).unwrap();
+    e.load_bulk_text(EditOrigin::Ai, &bulk).unwrap();
     let sv_local = c.state_vector();
     let diff = e.encode_diff(&sv_local).expect("encode_diff");
     c.apply_update(&diff).expect("apply_update");

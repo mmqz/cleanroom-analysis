@@ -52,3 +52,7 @@ path = "src/bin/p8_adapter_load.rs"
 
 [profile.release]
 opt-level = 3
+
+[[bin]]
+name = "p9_adapter_sync_undo"
+path = "src/bin/p9_adapter_sync_undo.rs"

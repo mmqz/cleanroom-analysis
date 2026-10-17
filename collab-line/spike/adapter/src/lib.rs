@@ -91,16 +91,18 @@ pub struct BlockSpec {
 ///
 /// **刻意不含 skip_gc**（B1.1：全编队不变量，构造期无条件强制，调用方
 /// 不可覆盖——本类型的存在本身就是该不变量的 API 面证明）。
+///
+/// **刻意不含 undo_stack_limit**（B3.4 定谳：yrs 0.28 UndoManager 的
+/// observer_added/updated/popped/cleared 字段全部私有、无公开 observe
+/// API、无栈逐出/容量 API——栈上限不可经公开 API 实现；d1c-t2 源码
+/// 核验。选项 = 上游 API 请求 / 粗粒度 clear_all 阈值 / 无限维持
+/// 现状——与 mdcore R-3 协同裁决（yrs-b B3.4 联动））。
 #[derive(Debug, Clone)]
 pub struct SessionOptions {
     pub client_id: u64,
     /// 入向字节限额（B1.6；默认 52MiB = SECURITY_POLICY v1.2 声明总量族
     /// 口径的占位对齐——实施轮按最终部署面定参）。
     pub input_byte_limit: usize,
-    /// 撤销栈上限（B3.4：默认 None = 无限，维持 mdcore R-3 现状口径；
-    /// 产品裁决后一处启用。原型轮只预留参数，逐出实现依赖 observe API
-    /// 面充分性验证——yrs-b §9 待核项）。
-    pub undo_stack_limit: Option<usize>,
 }
 
 impl Default for SessionOptions {
@@ -108,7 +110,6 @@ impl Default for SessionOptions {
         SessionOptions {
             client_id: 7_000_001,
             input_byte_limit: 52 * 1024 * 1024,
-            undo_stack_limit: None,
         }
     }
 }
@@ -193,9 +194,15 @@ impl CollabAdapter {
 
     /// B2.1(a) 大块路径：整段文本装载（AI 生成态典型形状）。
     ///
+    /// origin 标注（B2.2/B3.2）：生成态装载走 Ai 面；捕获窗内的事务切分
+    /// 合并为**一个 undo 栈项**（"一笔装载"语义）+ 单一 origin 溯源。
     /// 内部把内容切为 ≥8KiB 大块后在**单事务**内逐块入文档（yrs-a §4.5
     /// A2 实测零放大的形状）；输入字节超限 → `Limit`（B1.6）。
-    pub fn load_bulk_text(&self, content: &str) -> Result<(), AdapterError> {
+    pub fn load_bulk_text(
+        &self,
+        origin: EditOrigin,
+        content: &str,
+    ) -> Result<(), AdapterError> {
         if content.len() > self.options.input_byte_limit {
             return Err(AdapterError::Limit {
                 size: content.len(),
@@ -203,7 +210,7 @@ impl CollabAdapter {
             });
         }
         let text = self.doc.get_or_insert_text("text");
-        let mut txn = self.doc.transact_mut();
+        let mut txn = self.doc.transact_mut_with(origin.wire());
         let bytes = content.as_bytes();
         let mut pos = 0usize;
         while pos < bytes.len() {
@@ -224,8 +231,13 @@ impl CollabAdapter {
 
     /// B2.1(b) 小批分事务路径：结构化块批量装载。
     ///
+    /// origin 标注同 `load_bulk_text`（捕获窗内小批合并为一个栈项）；
     /// 每 512 块一事务（"每小批独立事务"）；总量超限 → `Limit`。
-    pub fn load_blocks(&self, blocks: &[BlockSpec]) -> Result<(), AdapterError> {
+    pub fn load_blocks(
+        &self,
+        origin: EditOrigin,
+        blocks: &[BlockSpec],
+    ) -> Result<(), AdapterError> {
         let total: usize = blocks
             .iter()
             .map(|b| b.block_id.len() + b.text.len() + 64)
@@ -238,7 +250,7 @@ impl CollabAdapter {
         }
         let array = self.doc.get_or_insert_array("blocks");
         for batch in blocks.chunks(BLOCK_BATCH) {
-            let mut txn = self.doc.transact_mut();
+            let mut txn = self.doc.transact_mut_with(origin.wire());
             for b in batch {
                 let map = MapPrelim::from([
                     ("block_id", In::Any(b.block_id.clone().into())),
@@ -392,6 +404,40 @@ impl CollabAdapter {
             EditOrigin::Human => &self.undo_human,
             EditOrigin::Ai => &self.undo_ai,
         }
+    }
+
+    // ── 维护面（B1.3 受控压缩点）────────────────────────────────
+
+    /// B1.3 受控压缩点：全栈 `clear_all`（B3.3 前置**内置**——不依赖
+    /// 调用方纪律）后显式 `txn.gc(None)`。
+    ///
+    /// 语义：只允许在两类受控点调用（会话撤销栈清空后 / 权威端维护窗）
+    /// ——本方法即前者的适配层形态；**压缩后撤销历史不可恢复**
+    /// （clear_all 已清栈），这是 B1.3 的代价面。返回压缩前后全量
+    /// update 字节数（供探针断言 wire 治理效果）。
+    pub fn maintenance_gc(&mut self) -> Result<(usize, usize), AdapterError> {
+        let before = self.state_vector_full_update_len();
+        // B3.3 压缩前置：先清全部撤销栈（撤销栈是 GC 安全的引用持有方，
+        // P7b4 实证 clear_all → gc 安全）
+        self.undo_human.clear_all();
+        self.undo_ai.clear_all();
+        let doc = &self.doc;
+        std::panic::catch_unwind(AssertUnwindSafe(|| {
+            let mut txn = doc.transact_mut();
+            txn.gc(None);
+            txn.commit();
+        }))
+        .map_err(|p| AdapterError::Panic(panic_message(&p)))?;
+        let after = self.state_vector_full_update_len();
+        Ok((before, after))
+    }
+
+    /// 全量 update 字节数（维护面观测——非同步协议面）。
+    fn state_vector_full_update_len(&self) -> usize {
+        self.doc
+            .transact()
+            .encode_diff_v1(&StateVector::default())
+            .len()
     }
 
     // ── 探针面（#[doc(hidden)]——仅为探针/测试暴露，非产品面）────────
