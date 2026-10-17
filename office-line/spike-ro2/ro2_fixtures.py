@@ -424,3 +424,89 @@ def build_drawing_at_paragraph_level(path: Path) -> None:
         + p(r("图片后段落文本——文本应完好。"))
     )
     write_docx(path, body, sect_pr(11906, 16838), with_image=True)
+
+
+# ── r-o2-t4 扩展面（转换失败 / 畸形补充 / 治理钉定，2026-10-17）───────────
+# 全部形状先经探针观测（LO 25.2.3.2 实测，worklog r-o2-t4）再钉定——
+# 观测结论：
+#   · 不存在源文件 → rc=0、无 PDF、stderr "source file could not be loaded"
+#   · 0 字节源文件 → rc=0、**PDF 产出**（writer_pdf_Export，1 页零文本）
+#   · PDF 字节改 .docx 扩展 → rc=0、**PDF 产出**（draw_pdf_Export——
+#     LO 内容嗅探改走 Draw 导入，扩展名不决定过滤器）
+#   · 外来 zip（非 OOXML 部件）→ rc=0、无 PDF、load 失败
+#   · OOXML 缺 word/document.xml 主部件 → rc=0、无 PDF、load 失败
+#   · document.xml 根元素错（html）→ rc=0、**PDF 产出**（1 页零文本——
+#     静默空产物，与 garbage-bytes 同族）
+#   · zip 声明尺寸炸弹（声明解压 1GB/实际 32B）→ rc=0、无 PDF、
+#     load 失败、0.55s 快速拒绝（无分配放大/悬挂）
+
+def build_foreign_zip(path: Path) -> None:
+    """畸形补充：合法 zip 但非 OOXML（单条目 hello.txt）。"""
+    write_zip(path, {"hello.txt": "hi"})
+
+
+def build_missing_document_part(path: Path) -> None:
+    """畸形补充：包骨架有效（Content_Types + _rels）但缺 word/document.xml 主部件。
+
+    与 missing-content-types 互补：两者都落在 load 失败族，但缺位部件
+    不同（缺主部件 vs 缺内容类型清单）——分别钉定。
+    """
+    write_zip(path, {
+        "[Content_Types].xml": content_types(),
+        "_rels/.rels": RELS,
+    })
+
+
+def build_wrong_root_element(path: Path) -> None:
+    """畸形补充：word/document.xml 在位但根元素为 html（非 w:document）。
+
+    LO 25.2.3.2 实测：rc=0、PDF 产出但**内容为空**（1 页零文本）——
+    『转换成功 ≠ 内容合法』族的第三个成员（garbage-bytes 乱码产出 /
+    wrong-root 静默空产出）。
+    """
+    write_zip(path, {
+        "[Content_Types].xml": content_types(),
+        "_rels/.rels": RELS,
+        "word/document.xml": '<html><body><p>not a word document</p></body></html>',
+    })
+
+
+def build_declared_size_bomb(path: Path) -> None:
+    """畸形补充：zip 声明尺寸炸弹（LFH 声明解压 1GB / 实际数据 32B 截断）。
+
+    手工构造 local file header（无中央目录）——解压器要么信任声明
+    预分配（放大面）要么数据耗尽拒绝。LO 25.2.3.2 实测：快速 load
+    失败（0.55s，无分配放大、无悬挂）——钉定为资源面回归锚。
+    """
+    import struct
+    name = b"bomb.bin"
+    comp_data = b"A" * 32
+    lfh = struct.pack(
+        "<IHHHHHIIIHH",
+        0x04034B50,  # local file header signature
+        20,          # version needed
+        0,           # flags
+        8,           # method = deflate
+        0, 0,        # mod time / date
+        0,           # crc32（恶意置 0）
+        len(comp_data),       # compressed size（真实）
+        0x40000000,   # uncompressed size（声明 1GB——谎言）
+        len(name), 0,
+    ) + name + comp_data
+    path.write_bytes(lfh)
+
+
+def build_empty_source_file(path: Path) -> None:
+    """转换失败面：0 字节源文件。LO 以 writer_pdf_Export 装载为空 Writer
+    文档 → 产出 1 页零文本 PDF（静默空产物族）。"""
+    path.write_bytes(b"")
+
+
+def build_pdf_renamed_docx(path: Path) -> None:
+    """治理钉定面：合法 PDF 字节 + .docx 扩展名。LO 内容嗅探（不信任
+    扩展名）→ Draw 导入 → draw_pdf_Export 产出。子进程治理含义：文件
+    类型纪律必须在调用 LO 之前由我方执行（扩展名 ≠ 内容类型）。"""
+    path.write_bytes(
+        b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\n"
+        b"trailer\n<< /Root 1 0 R >>\n%%EOF\n"
+    )

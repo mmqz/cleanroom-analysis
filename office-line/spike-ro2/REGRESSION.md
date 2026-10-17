@@ -224,3 +224,54 @@ python 3.12 stdlib only。产物目录 `out/`（gitignored）；LO profile 在
 **e-review 收严（anchor-t3 同批）**：冷/暖页数一致性从「警告打印」
 升级为**硬门**（非确定性转换 = 用例 FAIL）——非确定性 flake 不再
 可能静默通过。
+
+## 9. r-o2-t4 扩展轮（用户 Task 3c，2026-10-17）：转换失败 / 畸形补充 / 跨进程确定性
+
+**用例 14 → 21**（9 有效硬断言不变 + 畸形钉定 5 → 9 + 转换失败/治理
+钉定 0 → 3），总断言 131 → **188**。全部新形状**先探针观测（LO
+25.2.3.2 实测）后钉定**——探针观测结论逐条入 `ro2_fixtures.py` 构建
+器注释。
+
+### 9.1 转换失败面（conv-fail-pinned，3 用例）
+
+| 用例 | 形状 | 钉定行为 |
+|---|---|---|
+| `nonexistent-source` | 源文件不存在 | **rc=0 族的极端成员**：连文件都不在场也不返回非零；无 PDF + stderr `source file could not be loaded`——产物断言是唯一可靠检出 |
+| `empty-source-file` | 0 字节 .docx | **PDF 产出**：以 Writer 文档装载（`as a Writer document`）→ 1 页零文本空 PDF——静默空产物族 |
+| `pdf-renamed-docx` | 合法 PDF 字节 + .docx 扩展 | **内容嗅探改道**：以 **Draw** 文档装载（`as a Draw document`，draw_pdf_Export）→ 1 页——**扩展名不决定导入路径**；治理含义：文件类型纪律必须在调用 LO 之前由我方执行（office-f §8.4 检出策略通则的输入侧对偶） |
+
+### 9.2 畸形补充面（malformed-pinned，+4 用例）
+
+| 用例 | 形状 | 钉定行为 |
+|---|---|---|
+| `foreign-zip` | 合法 zip 但非 OOXML（hello.txt 单条目） | load 失败族（rc=0 无 PDF） |
+| `missing-document-part` | 包骨架在（Content_Types + _rels）但缺 word/document.xml | load 失败族——与 missing-content-types 互补（缺主部件 vs 缺类型清单，分别钉定） |
+| `wrong-root-element` | document.xml 根 = html | **静默空产物**：rc=0 + PDF 产出 + 1 页零文本——『转换成功 ≠ 内容合法』族第三成员（garbage-bytes 乱码 / wrong-root 空） |
+| `declared-size-bomb` | zip LFH 声明解压 1GB / 实际 32B 截断 | **快速 load 失败**（实测 ~0.6s < 15s 门）——无分配放大、无悬挂；资源面回归锚 |
+
+### 9.3 跨进程产物确定性门（套件级新门，8 断言）
+
+同夹具（basic-structure）两次**全新 profile** 冷转换的逐面对照：
+
+- **字节级不同一（钉定）**：PDF 元数据面差异（CreationDate 等）——
+  跨进程转换的字节 sha256 天然不稳定；
+- **内容级同一（硬断言）**：页数相等 + 归一化文本逐字节相等 + 字体
+  清单相等 + 尺寸同量级（<1KB 差）。
+
+**消费含义（mdc-pdf 腿 / Q3 输入）**：产物指纹、缓存、去重策略必须
+走**内容级摘要**（页数 + 文本 + 要素计数），不能走字节级 sha256。
+若未来 LO 版本变为字节确定 → `pin_bytes_differ` 破裂 = 版本差信号
+（可升级为更强断言）。
+
+### 9.4 台账语义精化（套件扩展的正确形态）
+
+sha256 台账对比语义精化：**新增**夹具键 = 良性扩展（首跑基线落账，
+不判失败）；**变更/移除**键 = 非确定性回归（维持硬门）。此前语义将
+新增键也计为 mismatch——套件自身扩展（本轮 14 → 21）会误触门。
+
+### 9.5 断言面工程注记
+
+滤镜名断言（writer_pdf_Export / draw_pdf_Export）在长仓路径下超出
+240B stdout 摘要窗——改用**位置稳健的文档类型短语**（`as a Writer
+document` / `as a Draw document`，出现于源路径后、摘要窗内）；滤镜
+名在探针观测结论中登记，不作为断言依赖。

@@ -297,13 +297,24 @@ def build_all_fixtures() -> dict[str, Path]:
     fx.build_bad_xml(fdir / "bad-xml.docx")
     fx.build_missing_content_types(fdir / "missing-content-types.docx")
     fx.build_drawing_at_paragraph_level(fdir / "drawing-at-paragraph-level.docx")
-    return {p.stem: p for p in sorted(fdir.glob("*.docx"))}
+    # r-o2-t4 扩展面（畸形补充 4 + 转换失败/治理 3）
+    fx.build_foreign_zip(fdir / "foreign-zip.docx")
+    fx.build_missing_document_part(fdir / "missing-document-part.docx")
+    fx.build_wrong_root_element(fdir / "wrong-root-element.docx")
+    fx.build_declared_size_bomb(fdir / "declared-size-bomb.docx")
+    fx.build_empty_source_file(fdir / "empty-source-file.docx")
+    fx.build_pdf_renamed_docx(fdir / "pdf-renamed-docx.docx")
+    fixtures = {p.stem: p for p in sorted(fdir.glob("*.docx"))}
+    # nonexistent-source：用例本质 = 文件不在场——只登记路径，不落盘
+    fixtures["nonexistent-source"] = fdir / "nonexistent-source.docx"
+    return fixtures
 
 
 def check_fixture_determinism(fixtures: dict[str, Path]) -> dict:
     """sha256 台账：与上次运行（同工作区）对比——字节级确定性回归门。"""
     ledger_path = OUT_DIR / "fixture-hashes.json"
-    current = {name: hashlib.sha256(p.read_bytes()).hexdigest()
+    current = {name: (hashlib.sha256(p.read_bytes()).hexdigest() if p.exists()
+                      else "absent-by-design")
                for name, p in sorted(fixtures.items())}
     report: dict = {"current_sha256": current}
     if ledger_path.exists():
@@ -314,17 +325,76 @@ def check_fixture_determinism(fixtures: dict[str, Path]) -> dict:
         if prev is None:
             report.update({"all_match": None, "note": "旧台账不可解析——本轮重写为基线"})
         else:
+            # r-o2-t4 语义精化：**新增**夹具 = 良性扩展（首跑基线落账）；
+            # **变更/移除** = 非确定性回归（既有键的 sha 漂移或消失）。
+            added = sorted(n for n in current if n not in prev)
             mismatches = {n: {"prev": prev.get(n), "curr": current.get(n)}
                           for n in set(prev) | set(current)
-                          if prev.get(n) != current.get(n)}
+                          if (n in prev and n in current and prev[n] != current[n])
+                          or (n in prev and n not in current)}
             report["all_match"] = not mismatches
             report["mismatches"] = mismatches
-            report["note"] = ("同工作区重跑确定性复验（非首次）" if not mismatches
-                              else "夹具字节漂移——非确定性回归！")
+            report["added"] = added
+            report["note"] = (f"同工作区重跑确定性复验（非首次；新增 {len(added)} 键"
+                              " 首跑基线落账）" if not mismatches and added
+                              else ("同工作区重跑确定性复验（非首次）" if not mismatches
+                                    else "夹具字节漂移——非确定性回归！"))
     else:
         report.update({"all_match": None, "note": "首次运行——台账基线落档"})
     ledger_path.write_text(json.dumps(current, indent=2, ensure_ascii=False))
     return report
+
+
+def check_cross_process_determinism(baseline_soffice: set[int], timeout: float) -> dict:
+    """跨进程产物确定性（r-o2-t4）：同夹具两次**全新 profile** 冷转换。
+
+    实测钉定（LO 25.2.3.2，worklog r-o2-t4）：
+    - 字节级**不**同一（PDF 元数据面差异——CreationDate 等）；
+    - 内容级同一：页数 / 归一化文本 / 字体清单。
+    消费含义（mdc-pdf 腿）：产物指纹/缓存/去重策略必须走**内容级摘要**
+    （页数+文本+要素计数），不能走字节级 sha256——字节级在跨进程
+    转换下天然不稳定。若未来 LO 版本变为字节确定，本钉定破裂 =
+    版本差信号（可升级为更强断言）。
+    """
+    fixture = OUT_DIR / "fixtures" / "basic-structure.docx"
+    if not fixture.exists():
+        return {"skipped": "basic-structure 夹具未构建", "gate": None}
+    rec = Rec()
+    outs = []
+    for i in (1, 2):
+        profile = PROFILE_ROOT / f"xproc-det-{i}"
+        shutil.rmtree(profile, ignore_errors=True)
+        outdir = OUT_DIR / "xproc-det" / f"run{i}"
+        shutil.rmtree(outdir, ignore_errors=True)
+        conv = convert(fixture, outdir, profile, timeout, baseline_soffice)
+        pdf = outdir / (fixture.stem + ".pdf")
+        info = inspect_pdf(pdf) if pdf.exists() else {"exists": False}
+        outs.append((conv, info, pdf))
+
+    (c1, i1, p1), (c2, i2, p2) = outs
+    rec.value("both_converted", "eq", True, bool(i1.get("exists") and i2.get("exists")))
+    rec.value("no_timeout_run1", "eq", True, not c1["timeout"])
+    rec.value("no_timeout_run2", "eq", True, not c2["timeout"])
+    if i1.get("exists") and i2.get("exists"):
+        b1, b2 = p1.read_bytes(), p2.read_bytes()
+        rec.value("pages_equal", "eq", i1.get("pages"), i2.get("pages"))
+        t1, t2 = norm(pdf_text(p1)), norm(pdf_text(p2))
+        rec.value("text_equal", "eq", t1, t2, note="内容级同一：归一化文本逐字节相等")
+        rec.value("fonts_equal", "eq", sorted(i1.get("fonts") or []),
+                  sorted(i2.get("fonts") or []))
+        rec.value("pin_bytes_differ", "eq", True, b1 != b2,
+                  note="钉定：跨进程字节**不**同一（PDF 元数据面差异）——"
+                       "内容级摘要才是稳定指纹面；若此处破裂（字节变确定）"
+                       "= LO 版本差信号")
+        rec.value("sizes_close", "eq", True,
+                  abs(len(b1) - len(b2)) < 1024,
+                  note="尺寸同量级（<1KB 差——元数据差数量级）")
+    return {
+        "gate": "pass" if rec.all_pass else "FAIL",
+        "assertions": rec.items,
+        "assertion_count": len(rec.items),
+        "failed_assertions": rec.fail_count,
+    }
 
 
 # ── 用例断言逻辑 ────────────────────────────────────────────────────────────
@@ -519,6 +589,84 @@ def checks_drawing_at_paragraph_level(rec: Rec, conv: dict, info: dict, pdf: Pat
                       note="文本完好（静默丢弃只丢图片，不丢文本）")
 
 
+
+# ── r-o2-t4 扩展 checks（转换失败 / 畸形补充 / 治理钉定）──────────────────
+
+def checks_foreign_zip(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    _pins_load_failure(rec, conv, info)
+
+
+def checks_missing_document_part(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    _pins_load_failure(rec, conv, info)
+
+
+def checks_wrong_root_element(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    """静默空产物族：rc=0 + PDF 产出 + 1 页零文本（转换成功 ≠ 内容合法）。"""
+    common_no_timeout(rec, conv)
+    rec.value("pin_exit_code_cold", "eq", 0, conv["cold"]["exit_code"],
+              note="钉定：document.xml 根元素错（html）→ LO 以 Writer 装载为空文档，"
+                   "退出码 0、转换『成功』")
+    rec.value("pin_exit_code_warm", "eq", 0, conv["warm"]["exit_code"])
+    rec.value("pin_pdf_produced_warm", "eq", True, info["exists"],
+              note="PDF 产出（静默空产物——与 garbage-bytes 同族）")
+    rec.value("pin_pages_eq_1_warm", "eq", 1, info.get("pages"))
+    rec.value("pin_zero_text_warm", "eq", "", (info.get("ntext") or "").strip(),
+              note="钉定核心：产物内容为空——**检出策略：转换产物必须做内容断言，"
+                   "『有 PDF』不等于『有内容』**")
+
+
+def checks_declared_size_bomb(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    """资源面钉定：声明 1GB/实际 32B 的 zip 炸弹 → 快速 load 失败（无放大/悬挂）。"""
+    _pins_load_failure(rec, conv, info)
+    fast_cold = conv["cold"].get("wall_s") is not None and conv["cold"]["wall_s"] < 15.0
+    fast_warm = conv["warm"].get("wall_s") is not None and conv["warm"]["wall_s"] < 15.0
+    rec.value("pin_fast_reject_cold", "eq", True, fast_cold,
+              note="钉定：快速拒绝（实测 ~0.6s；15s 门 = 悬挂回归的宽松上界）——"
+                   "无分配放大、无悬挂")
+    rec.value("pin_fast_reject_warm", "eq", True, fast_warm)
+
+
+def checks_nonexistent_source(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    """转换失败面：源文件不存在。rc=0 族的极端成员——连文件都没有也
+    不返回非零；唯一检出 = 产物断言 + stderr 消息。"""
+    _pins_load_failure(rec, conv, info)
+
+
+def checks_empty_source_file(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    """转换失败面：0 字节源文件 → writer_pdf_Export 装载为空文档。"""
+    common_no_timeout(rec, conv)
+    rec.value("pin_exit_code_cold", "eq", 0, conv["cold"]["exit_code"])
+    rec.value("pin_exit_code_warm", "eq", 0, conv["warm"]["exit_code"])
+    rec.value("pin_pdf_produced_warm", "eq", True, info["exists"],
+              note="钉定：0 字节 .docx → LO 装载为空 Writer 文档、PDF 正常产出")
+    rec.value("pin_writer_doc_type_warm", "eq", True,
+              "as a Writer document" in conv["warm"]["stdout_digest"],
+              note="钉定：以 Writer 文档装载（stdout 文档类型短语扫描——路径长度"
+                   "无关的位置稳健断言面；滤镜名 writer_pdf_Export 在长路径下"
+                   "超出 240B 摘要窗，登记不依赖）")
+    rec.value("pin_pages_eq_1_warm", "eq", 1, info.get("pages"))
+    rec.value("pin_zero_text_warm", "eq", "", (info.get("ntext") or "").strip(),
+              note="产物为 1 页零文本空 PDF")
+
+
+def checks_pdf_renamed_docx(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    """治理钉定：PDF 字节 + .docx 扩展 → LO 内容嗅探改走 Draw 导入。
+    子进程治理含义：扩展名不决定过滤器；文件类型纪律必须在调用 LO
+    之前由我方执行（office-f §8.4 检出策略通则的输入侧对偶）。"""
+    common_no_timeout(rec, conv)
+    rec.value("pin_exit_code_cold", "eq", 0, conv["cold"]["exit_code"])
+    rec.value("pin_exit_code_warm", "eq", 0, conv["warm"]["exit_code"])
+    rec.value("pin_pdf_produced_warm", "eq", True, info["exists"])
+    rec.value("pin_draw_doc_type_warm", "eq", True,
+              "as a Draw document" in conv["warm"]["stdout_digest"],
+              note="钉定核心：以 **Draw** 文档装载——LO 内容嗅探改道，扩展名不决定"
+                   "导入路径（stdout 文档类型短语扫描——位置稳健断言面；滤镜名 "
+                   "draw_pdf_Export 在长路径下超出 240B 摘要窗，登记不依赖）")
+    rec.value("pin_draw_doc_type_cold", "eq", True,
+              "as a Draw document" in conv["cold"]["stdout_digest"])
+    rec.value("pin_pages_eq_1_warm", "eq", 1, info.get("pages"))
+
+
 # ── 用例注册表 ──────────────────────────────────────────────────────────────
 
 CASES = [
@@ -551,6 +699,26 @@ CASES = [
     {"name": "drawing-at-paragraph-level", "kind": "malformed-pinned",
      "checks": checks_drawing_at_paragraph_level,
      "desc": "w:p 直接子级 w:drawing（非法 OOXML）——钉定静默丢弃（登记发现①）"},
+    {"name": "foreign-zip", "kind": "malformed-pinned", "checks": checks_foreign_zip,
+     "desc": "合法 zip 但非 OOXML（hello.txt）——钉定 load 失败族"},
+    {"name": "missing-document-part", "kind": "malformed-pinned",
+     "checks": checks_missing_document_part,
+     "desc": "包骨架在但缺 word/document.xml 主部件——钉定 load 失败族"},
+    {"name": "wrong-root-element", "kind": "malformed-pinned",
+     "checks": checks_wrong_root_element,
+     "desc": "document.xml 根元素 = html——钉定静默空产物（转换成功≠内容合法）"},
+    {"name": "declared-size-bomb", "kind": "malformed-pinned",
+     "checks": checks_declared_size_bomb,
+     "desc": "zip 声明解压 1GB/实际 32B——钉定快速 load 失败（资源面）"},
+    {"name": "nonexistent-source", "kind": "conv-fail-pinned",
+     "checks": checks_nonexistent_source,
+     "desc": "源文件不存在——钉定 rc=0 族极端成员（产物断言唯一可靠检出）"},
+    {"name": "empty-source-file", "kind": "conv-fail-pinned",
+     "checks": checks_empty_source_file,
+     "desc": "0 字节源文件——钉定 writer_pdf_Export 空文档装载（1 页零文本）"},
+    {"name": "pdf-renamed-docx", "kind": "conv-fail-pinned",
+     "checks": checks_pdf_renamed_docx,
+     "desc": "PDF 字节 + .docx 扩展——钉定内容嗅探改道 Draw 导入（治理面）"},
 ]
 
 
@@ -594,13 +762,14 @@ def run_case(case: dict, timeout: float, baseline_soffice: set[int],
 
     all_pass = rec.all_pass
 
-    fixture_sha = hashlib.sha256(fixture.read_bytes()).hexdigest()
+    fixture_sha = (hashlib.sha256(fixture.read_bytes()).hexdigest() if fixture.exists()
+                   else "absent-by-design")
     record = {
         "case": name,
         "kind": case["kind"],
         "desc": case["desc"],
         "fixture": str(fixture.relative_to(HERE)),
-        "fixture_bytes": fixture.stat().st_size,
+        "fixture_bytes": (fixture.stat().st_size if fixture.exists() else -1),
         "fixture_sha256": fixture_sha,
         "conversion": {
             "cold": {**cold, "pdf_pages": cold_pages},
@@ -730,6 +899,16 @@ def main() -> int:
             print(f"       ⚠ 冷/暖页数不一致（flake 信号）："
                   f"cold={cold.get('pdf_pages')} warm={warm.get('pdf_pages')}")
 
+    # 跨进程产物确定性（r-o2-t4，不受 --filter 影响——与夹具台账同位面）
+    xproc = check_cross_process_determinism(baseline_soffice, args.timeout)
+    print(f"跨进程确定性门: {xproc.get('gate', 'n/a')}"
+          + (f"（{xproc['assertion_count']} 断言）" if xproc.get("assertion_count") else ""))
+    if xproc.get("gate") == "FAIL":
+        for item in xproc["assertions"]:
+            if not item["pass"]:
+                print(f"       ✗ {item['name']}: expected={item['expected']!r} "
+                      f"actual={item['actual']!r}")
+
     # 汇总
     n_pass = sum(1 for r in results if r["result"] == "pass")
     n_pinned = sum(1 for r in results if r["result"] == "pinned")
@@ -747,6 +926,7 @@ def main() -> int:
         "pin_semantics": ("malformed-pinned 用例通过 = 钉定行为（LO 25.2.3.2 实测）被确认；"
                           "版本升级导致破裂 = 版本差信号，复核后更新钉定"),
         "fixture_determinism": determinism,
+        "cross_process_determinism": xproc,
         "suite_timeout_s": args.timeout,
         "soffice_baseline_pids": sorted(baseline_soffice),
         "cases": results,
@@ -757,6 +937,7 @@ def main() -> int:
             "pinned": n_pinned,
             "fail": n_fail,
             "fixture_determinism_gate": "pass" if det_ok else "FAIL",
+            "cross_process_determinism_gate": xproc.get("gate"),
         },
     }
     json_path = Path(args.json_out)
@@ -764,10 +945,12 @@ def main() -> int:
     json_path.write_text(json.dumps(report, indent=2, ensure_ascii=False))
 
     print()
+    xproc_ok = xproc.get("gate") == "pass"
     print(f"汇总: {len(results)} 用例 = {n_pass} pass + {n_pinned} pinned + {n_fail} fail"
-          f"（夹具确定性门 {'pass' if det_ok else 'FAIL'}）")
+          f"（夹具确定性门 {'pass' if det_ok else 'FAIL'}，"
+          f"跨进程确定性门 {xproc.get('gate', 'n/a')}）")
     print(f"JSON 报告: {json_path}")
-    suite_ok = n_fail == 0 and det_ok
+    suite_ok = n_fail == 0 and det_ok and xproc_ok
     print("SUITE " + ("PASS" if suite_ok else "FAIL"))
     return 0 if suite_ok else 1
 

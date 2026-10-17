@@ -3819,3 +3819,49 @@ Stage Summary:
   钉定（3 补检 + 7 复验）；mdcore 写面 2 真缺口修复（tooltip 255
   引擎镜像 + write_row 列域）——全部为既有纪律补齐，零新限额
   发明、零公开 API 签名变更。
+
+---
+Task ID: r-o2-t4
+Agent: 主代理（R-O2 回归扩展轮——用户 Task 3c）
+Task: 「Extend R-O2 regression tests for conversion failures,
+malformed inputs, and deterministic fixture verification」——
+14 → 21 用例，全部新形状先探针观测后钉定。
+
+Work Log:
+- 探针观测八面（临时脚本，跑完即删，LO 25.2.3.2 实测）：不存在
+  源文件→rc=0 无 PDF；0 字节→writer_pdf_Export 装载为空 Writer
+  文档→1 页零文本 PDF；PDF 字节改 .docx 扩展→**内容嗅探改道
+  draw_pdf_Export（Draw 导入）**；外来 zip→load 失败；缺
+  word/document.xml→load 失败；根元素错（html）→**rc=0 + 1 页
+  零文本静默空产物**；声明 1GB/实际 32B zip 炸弹→0.55s 快速
+  load 失败（无分配放大）；跨进程双冷转→同尺寸 34224B 但字节
+  不同一、归一化文本同一。
+- 转换失败面 3 用例（conv-fail-pinned 新类）：nonexistent-source
+  （rc=0 族极端成员——产物断言唯一可靠检出）/ empty-source-file
+  （writer 装载空文档 + 1 页零文本）/ pdf-renamed-docx（Draw 改道
+  ——治理含义：文件类型纪律必须调用 LO 之前由我方执行）。
+- 畸形补充面 4 用例（malformed-pinned）：foreign-zip /
+  missing-document-part（与 missing-content-types 互补分别钉定）/
+  wrong-root-element（静默空产物族第三成员——『转换成功≠内容
+  合法』）/ declared-size-bomb（快速拒绝资源面锚，15s 宽松门）。
+- 跨进程产物确定性门（套件级新门，8 断言）：字节级不同一（钉定
+  ——PDF 元数据面差异）+ 内容级同一（页数/归一化文本/字体清单
+  硬断言）——mdc-pdf 腿指纹/缓存/去重策略必须走内容级摘要。
+- 台账语义精化：新增夹具键 = 良性扩展（首跑基线）；变更/移除 =
+  非确定性回归（维持硬门）——此前语义套件自身扩展会误触门。
+- 断言面工程自纠一处：滤镜名（writer_pdf_Export/draw_pdf_Export）
+  在长仓路径下超出 240B stdout 摘要窗 → 改位置稳健文档类型短语
+  （as a Writer/Draw document），滤镜名登记不依赖。
+- 门禁：全量 21 用例 = 9 pass + 12 pinned + 0 fail（188 断言，
+  SUITE PASS）双次复跑稳定（台账非首次零漂移 + 跨进程门恒过）；
+  nonexistent-source 夹具 absent-by-design 守卫（台账/报告/尺寸
+  三处）。
+- 文档：REGRESSION.md §9（扩展轮四节：转换失败面/畸形补充面/
+  跨进程确定性门/台账语义精化 + 断言面工程注记）；DECISION_GROUPS
+  G5 证据增量（r-o2-t4 治理输入——Q3 的文件类型纪律输入侧对偶）。
+
+Stage Summary:
+- R-O2 回归资产从「畸形行为钉定」扩展为三族全覆盖：转换失败
+  （rc=0 族全景）/ 畸形输入（9 钉定）/ 产物确定性（内容级同一
+  硬门）——三项新治理发现（内容嗅探改道/静默空产物第三成员/
+  字节级非确定）直接服务 Q3 裁决输入。
