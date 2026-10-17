@@ -491,6 +491,13 @@ impl CollabAdapter {
         self.manager_ref(origin).undo_stack().len()
     }
 
+    /// 重做栈深度（p12「redo 返回栈项」形态的观测面——B3.4 无界增长
+    /// 清单的 redo 侧：已消耗的撤销历史经 redo 可再生产出栈项，栈深
+    /// 与编辑史长度同阶；yrs `redo_stack()` 公开 API 直读，零推断）。
+    pub fn redo_depth(&self, origin: EditOrigin) -> usize {
+        self.manager_ref(origin).redo_stack().len()
+    }
+
     fn manager_mut(&mut self, origin: EditOrigin) -> &mut UndoManager {
         match origin {
             EditOrigin::Human => &mut self.undo_human,

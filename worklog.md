@@ -3747,3 +3747,32 @@ Stage Summary:
   「不可安全推断」逐项显式化（载体终裁/D2D3 立项/B3.2 知情确认/
   REUSE §R5 裁决门/栈上限值/Phase 触发授权/Q3 分发授权等）。
 
+
+---
+Task ID: sprint2-t2
+Agent: 主代理（适配层回归补强轮——撤销/重做 × 锚点身份）
+Task: 用户指令 Task 3a——deleted-anchor undo/redo 与逻辑 ID 映射
+回归覆盖（不发明 yrs 未支持行为：全部断言先观测后钉定）。
+
+Work Log:
+- 观测探针（临时 bin，跑完即删）：①重做被撤插入 = 块回归但锚点
+  恒悬空 + 重绑定新 ID（clock 3→6）；②窗外分离项深度记账全链
+  [A]1/0 [B]2/0 [C]1/1 [D]0/2 [E]1/1 [F]2/0——redo 弹 1 压 1
+  （返回栈项对称守恒）；③maintenance_gc 后已删锚点仍显式悬空；
+  ④跨端复活收敛（对端旧锚点同悬空 + 对端重绑定 = 作者端新锚点
+  完全一致）。
+- 新测试文件 adapter/tests/anchor_undo_redo.rs（6 测试）：重做
+  新 ID 族钉定 / 深度记账对称性 / 多循环复活互异 ID + anchor_of
+  映射表替换 / 跨端复活收敛与逻辑映射一致 / 侧车陈旧映射导入后
+  显式悬空（权威面在 resolve）/ GC 后悬空显式。
+- API 加性扩一件：redo_depth()（undo_depth 镜像，yrs redo_stack()
+  公开 API 直读——p12「redo 返回栈项」B3.4 观测面的确定性形状）。
+- 门禁：cargo test -p collab-adapter 44/44（25 matrix + 13 hostile
+  + 6 新增）全绿；nightly-2026-10-15 ASan 口径 44/44 零报告；
+  p8/p9/p10 前序探针 release 复跑全过；一处测试设计自纠（插入须
+  Human origin 独立于 Ai 装载——撤销面才可独立触达）。
+
+Stage Summary:
+- 撤销/重做 × 锚点身份的行为面从「单一删除面测试」扩展为六面
+  回归锁；复活=新 ID 族语义的跨端收敛性 + 逻辑映射表替换语义
+  首次钉定；redo 侧深度观测面入 API（B3.4 证据链补强）。
