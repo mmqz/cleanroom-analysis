@@ -3360,3 +3360,66 @@ Stage Summary:
   为"要素级保真证据"；视觉级保真维持实施轮登记（FIDELITY 矩阵法）。
 - Q3（C 实施形态）新增两条细化输入：静默丢弃面检出策略 + CJK 归一化
   口径。
+
+---
+
+Task ID: anchor-t1
+Agent: 主代理（office 线）
+Task: Office 锚点写面最小扩展方案与兼容性分析（用户裁决③"暂维持现有
+公开 API，方案先行，不提前扩大 RunSpec"执行轮——文档面零代码变更）。
+
+Work Log:
+- 兼容性一手核实（mdcore @ 00ad88b，grep 全量）：RunSpec 全消费面
+  清单——struct 字面位点仅 4 处（docx.rs:2688 code_line 用 ..base 语法
+  免疫 + 2996/3011/3026 run_spec_constructors 测试断言机械补 anchor:
+  None 三处）；外部消费者（mdcore-wasm docx_export/docx_import + 集成
+  测试）全构造器面零改动；RunSpec 无 serde derive（序列化漂移面不
+  存在）；发射点 add_spec_to_paragraph（docx.rs:2777）+ 读分发
+  （docx.rs:1708）+ runs_to_specs 回放（tests:2074-2083 External-only
+  映射 Anchor 静默丢）逐点亲读。
+- **office-g 方案文档** 落档（office-line/office-g_锚点写面最小扩展
+  方案.md）：三阶段（Phase 0 现状维持=本轮生效 / Phase 1 RunSpec.anchor
+  实施就绪规格[字段/anchor_link 构造器/发射单分支/优先序 footnote>
+  field>anchor>link 读写镜像] / Phase 2 bookmark_paragraph 正交件
+  [id 计数唯一化 + _Toc 保留名拒绝]）+ 兼容性全量清单表 + 加性证明
+  （CellData/ParagraphNumbering Option-字段先例对齐）+ 测试计划
+  T1-T7（预期 G1 +7~9）+ yrs-b R4.5 联动升级路径表（弱绑定→强绑定
+  = 适配层单点改动，office-io 不感知协同——非耦合面维持）+ 不做面
+  登记（Internal 结构性不可达/HYPERLINK 域红线/MarkSpan 前置）。
+- mdcore 零接触零提交（纯分析仓文档 + grep/读源一手）。
+
+Stage Summary:
+- 用户口径③完整落地：公开 API 零变化（Phase 0 生效），Phase 1/2
+  实施就绪规格 + 兼容性全量清单在档——用户任何时点裁决即可开工，
+  无前置调查欠账。
+- 与 D1 线联动闭环：yrs-c 原型弱绑定形态 ↔ office-g Phase 1+2 强绑定
+  升级路径互引。
+
+---
+
+Task ID: sess6-closeout
+Agent: 主代理（cleanroom 线）
+Task: 本会话（用户指令"持续推进6轮"）收口轮——HANDOFF/README 全量
+同步 + 双仓状态核实 + 最终推送 + 阻塞呈报更新。
+
+Work Log:
+- 会话六轮执行：d1c-t1（构造/装载 + 前置核验三件套 + 第 12 次平台
+  重置恢复）→ d1c-t2（同步/撤销深验 + 压缩点 + B3.4 定谳）→ d1c-t3
+  （锚点/快照）→ d1c-t4（载体证据 + 隔离终验 + ASan 门禁 + yrs-c
+  报告）→ r-o2-t2（复杂夹具六类 + 三工程发现）→ anchor-t1（office-g
+  方案）→ 本收口轮——满足"持续推进 6 轮"。
+- HANDOFF §6 速览重写（六轮成果 + 剩余门控全量）；README collab/office
+  两行同步（yrs-c + office-f §8 + office-g）。
+- 双仓状态核实：cleanroom-analysis 本会话六提交全部推送远端；mdcore
+  main=00ad88b 全程零接触零提交（D1 可撤回纪律 + 用户口径④[D2/D3/
+  MD 线/t22-review 不放行]双遵守）。
+
+Stage Summary:
+- 本会话净交付六件：collab-adapter 原型 crate（P8-P10 探针）+ yrs-c
+  原型报告（三验证面闭环 + 22 条规则对账）+ P11 载体对照证据 +
+  ASan 门禁（适配层零报告）+ r-o2-t2 复杂夹具六类全过（office-f §8）+
+  office-g 锚点写面方案（兼容性全量清单）。
+- 阻塞呈报（全部带用户裁决前置）：D1 实施轮三裁决（载体选型[建议
+  XmlFragment]/B3.2 知情确认/B3.4×R-3 栈上限）+ D2/D3 + 锚点写面
+  Phase 1/2 触发 + R-O2 Q3 实施形态 + MD 线三问 + t22-review 清单。
+- mdcore 零接触；全部成果双仓推送后零未推送状态。
