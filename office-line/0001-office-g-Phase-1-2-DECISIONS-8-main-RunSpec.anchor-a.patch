@@ -1,0 +1,659 @@
+From c4856f7825d6efb68b8b080a9296354d386f3aa4 Mon Sep 17 00:00:00 2001
+From: Z User <z@container>
+Date: Sat, 17 Oct 2026 08:33:19 +0000
+Subject: [PATCH] =?UTF-8?q?office-g=20Phase=201+2=20=E9=94=9A=E7=82=B9?=
+ =?UTF-8?q?=E5=86=99=E9=9D=A2=E5=AE=9E=E6=96=BD=E6=89=B9=EF=BC=88=E9=9A=94?=
+ =?UTF-8?q?=E7=A6=BB=E5=88=86=E6=94=AF=E2=80=94=E2=80=94DECISIONS=20#8=20?=
+ =?UTF-8?q?=E7=94=A8=E6=88=B7=E8=A3=81=E5=86=B3=E8=A7=A6=E5=8F=91=E5=89=8D?=
+ =?UTF-8?q?=E4=B8=8D=E8=BF=9B=20main=EF=BC=89=EF=BC=9ARunSpec.anchor=20?=
+ =?UTF-8?q?=E5=8A=A0=E6=80=A7=E5=AD=97=E6=AE=B5=20+=20anchor=5Flink=20?=
+ =?UTF-8?q?=E6=9E=84=E9=80=A0=E5=99=A8=EF=BC=88w:hyperlink=20w:anchor=20?=
+ =?UTF-8?q?=E5=B1=9E=E6=80=A7=E5=BD=A2[=E5=BC=95=E6=93=8E=20HyperlinkType:?=
+ =?UTF-8?q?:Anchor]=E9=9B=B6=20rels=20=E9=9D=A2=EF=BC=9BV8=20anchor=20?=
+ =?UTF-8?q?=E8=B5=A2=20link=20=E5=BF=BD=E7=95=A5=E2=80=94=E2=80=94?=
+ =?UTF-8?q?=E8=AF=BB=E5=86=99=E9=95=9C=E5=83=8F=EF=BC=89+=20bookmark=5Fpar?=
+ =?UTF-8?q?agraph=EF=BC=88bookmarkStart/End=20=E5=AF=B9=20+=20=E5=86=99?=
+ =?UTF-8?q?=E5=99=A8=E8=AE=A1=E6=95=B0=E5=99=A8=20id=20=E5=94=AF=E4=B8=80?=
+ =?UTF-8?q?=E5=8C=96[=C2=A78=20=E4=B8=8D=E4=BD=9C=E4=B8=BA=E8=BA=AB?=
+ =?UTF-8?q?=E4=BB=BD=E2=80=94=E2=80=94=E5=85=AC=E5=BC=80=E8=BA=AB=E4=BB=BD?=
+ =?UTF-8?q?=3D=E4=B9=A6=E7=AD=BE=E5=90=8D]=EF=BC=89+=20DocxError::InvalidI?=
+ =?UTF-8?q?nput=20=E5=8A=A0=E6=80=A7=E5=8F=98=E4=BD=93=EF=BC=88=E6=9C=AC?=
+ =?UTF-8?q?=E6=96=B9=E6=A1=88=E5=94=AF=E4=B8=80=E6=9E=9A=E4=B8=BE=E6=96=B0?=
+ =?UTF-8?q?=E5=A2=9E=E9=9D=A2=EF=BC=89+=20V1-V6=20=E6=A0=A1=E9=AA=8C?=
+ =?UTF-8?q?=EF=BC=88V5=20=5FToc=20=E4=BF=9D=E7=95=99=E5=90=8D=E5=89=8D?=
+ =?UTF-8?q?=E7=A7=BB=20V3=20=E5=89=8D=E2=80=94=E2=80=94specific-before-gen?=
+ =?UTF-8?q?eral=EF=BC=8C=E5=90=A6=E5=88=99=20'=5F'=20=E9=A6=96=E5=AD=97?=
+ =?UTF-8?q?=E7=AC=A6=E6=81=92=E5=85=88=E8=A7=A6=E5=8F=91=20V3=20=E4=BD=BF?=
+ =?UTF-8?q?=20V5=20=E4=B8=8D=E5=8F=AF=E8=BE=BE[=E5=AE=9E=E6=96=BD=E5=8F=91?=
+ =?UTF-8?q?=E7=8E=B0]=EF=BC=89+=20V7=20=E7=A9=BA=E9=94=9A=E7=82=B9?=
+ =?UTF-8?q?=E7=B2=98=E6=80=A7=E6=A0=A1=E9=AA=8C=EF=BC=88=E6=9E=84=E9=80=A0?=
+ =?UTF-8?q?=E5=99=A8=E4=BF=9D=E6=8C=81=E4=BA=BA=E4=BD=93=E5=B7=A5=E5=AD=A6?=
+ =?UTF-8?q?=E7=AD=BE=E5=90=8D=EF=BC=8Ccount=5Fspecs=20=E5=8D=95=E7=82=B9?=
+ =?UTF-8?q?=E6=BC=8F=E6=96=97=E8=90=BD=E8=B4=A6=EF=BC=8Csave=20=E6=BC=8F?=
+ =?UTF-8?q?=E6=96=97=E9=A6=96=E6=9F=A5=E6=8B=92=E7=BB=9D[=E4=B8=8D=20take?=
+ =?UTF-8?q?=20=E4=B8=8D=E9=87=8D=E7=BD=AE=E2=80=94=E2=80=94=E9=94=99?=
+ =?UTF-8?q?=E8=AF=AF=E8=B7=AF=E5=BE=84=E4=B8=8E=20Limit=20=E5=90=8C?=
+ =?UTF-8?q?=E8=AF=AD=E4=B9=89=EF=BC=8C=E6=97=A0=E6=95=88=20run=20=E5=B7=B2?=
+ =?UTF-8?q?=E8=BF=9B=E5=BC=95=E6=93=8E=E6=96=87=E6=A1=A3=E6=81=92=E6=8B=92?=
+ =?UTF-8?q?]=EF=BC=89+=20wasm=20=E9=94=99=E8=AF=AF=E7=A0=81=20docx=5Finval?=
+ =?UTF-8?q?id=5Finput=20=E5=AE=8C=E5=A4=87=E6=80=A7=E6=98=A0=E5=B0=84?=
+ =?UTF-8?q?=EF=BC=88=E5=BD=93=E5=89=8D=20wasm=20=E9=9D=A2=E4=B8=8D?=
+ =?UTF-8?q?=E5=8F=AF=E8=BE=BE=E2=80=94=E2=80=94BlockTree=20=E6=97=A0?=
+ =?UTF-8?q?=E9=94=9A=E7=82=B9=E8=BD=BD=E8=8D=B7=20=E2=91=A1=E2=91=A6=20?=
+ =?UTF-8?q?=E9=97=A8=E6=8E=A7=EF=BC=89+=20T1-T7=20=E5=85=A8=E6=B5=8B?=
+ =?UTF-8?q?=E8=AF=95=E7=BB=84=EF=BC=88=E5=86=99=E8=AF=BB=E5=85=A8=E7=8E=AF?=
+ =?UTF-8?q?/=E4=BC=98=E5=85=88=E5=BA=8F/=E6=82=AC=E7=A9=BA=E5=90=88?=
+ =?UTF-8?q?=E6=B3=95/=E4=B9=A6=E7=AD=BE=20XML=20=E9=9D=A2/=E6=A0=A1?=
+ =?UTF-8?q?=E9=AA=8C=E7=9F=A9=E9=98=B5/=E7=B2=98=E6=80=A7=E6=8B=92?=
+ =?UTF-8?q?=E7=BB=9D=E9=9B=B6=E4=BA=A7=E7=89=A9/=E6=9E=84=E9=80=A0?=
+ =?UTF-8?q?=E5=99=A8=E6=81=92=E7=AD=89=EF=BC=89+=20T6=20runs=5Fto=5Fspecs?=
+ =?UTF-8?q?=20Anchor=20=E5=9B=9E=E6=94=BE=E5=88=86=E6=94=AF=EF=BC=88Intern?=
+ =?UTF-8?q?al/Unresolved=20=E7=BB=B4=E6=8C=81=E9=9D=99=E9=BB=98=E4=B8=A2?=
+ =?UTF-8?q?=E2=80=94=E2=80=94=E6=97=A0=20RunSpec=20=E6=89=BF=E8=BD=BD?=
+ =?UTF-8?q?=E9=9D=A2=E8=AF=9A=E5=AE=9E=E7=99=BB=E8=AE=B0=EF=BC=89=EF=BC=9B?=
+ =?UTF-8?q?G1=20531=E2=86=92538/=E9=9B=B6=E5=A4=B1=E8=B4=A5/clippy=20?=
+ =?UTF-8?q?=E5=8F=8C=E9=9D=A2=E6=81=B0=202=20wasm=5Fbindgen=20=E5=9F=BA?=
+ =?UTF-8?q?=E7=BA=BF/fmt=200/scan=20PASS/lock=20=E9=9B=B6=20diff/wasm32=20?=
+ =?UTF-8?q?check=20=E8=BF=87?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ crates/mdcore-wasm/src/docx_export.rs    |  12 +
+ crates/mdcore-wasm/src/docx_import.rs    |   6 +
+ crates/office-io/src/docx.rs             | 366 ++++++++++++++++++++++-
+ crates/office-io/tests/docx_roundtrip.rs |  17 +-
+ 4 files changed, 398 insertions(+), 3 deletions(-)
+
+diff --git a/crates/mdcore-wasm/src/docx_export.rs b/crates/mdcore-wasm/src/docx_export.rs
+index 90830d1..b253f3b 100644
+--- a/crates/mdcore-wasm/src/docx_export.rs
++++ b/crates/mdcore-wasm/src/docx_export.rs
+@@ -96,6 +96,14 @@ fn map_error(e: &DocxError) -> ExportError {
+             code: "docx_limit",
+             message: format!("docx writer resource limit: {m}"),
+         },
++        // office-g Phase 1/2：输入校验拒绝（V1-V7）——与引擎面可区分。
++        // 当前 wasm 面不可达（BlockTree 无锚点载荷——DECISIONS ②⑦
++        // 门控；RunSpec 构造不经 wasm）——完备性映射，公开面暴露
++        // 后即时生效。
++        DocxError::InvalidInput(m) => ExportError {
++            code: "docx_invalid_input",
++            message: format!("docx writer invalid input: {m}"),
++        },
+         other => ExportError {
+             code: "docx_build",
+             message: format!("docx writer engine error: {other}"),
+@@ -1065,6 +1073,10 @@ mod tests {
+                 "docx_build",
+             ),
+             (mdc_office_io::docx::DocxError::Io("x".into()), "docx_build"),
++            (
++                mdc_office_io::docx::DocxError::InvalidInput("V7: x".into()),
++                "docx_invalid_input",
++            ),
+         ] {
+             assert_eq!(map_error(&err).code, code);
+         }
+diff --git a/crates/mdcore-wasm/src/docx_import.rs b/crates/mdcore-wasm/src/docx_import.rs
+index 4b14d8b..dbc2f84 100644
+--- a/crates/mdcore-wasm/src/docx_import.rs
++++ b/crates/mdcore-wasm/src/docx_import.rs
+@@ -134,6 +134,12 @@ fn map_error(e: &DocxError) -> ImportError {
+             code: "docx_limit",
+             message: format!("docx writer resource limit: {m}"),
+         },
++        // office-g Phase 1/2：读面不可达（InvalidInput 仅写面校验产生
++        // ——V1-V7；完备性映射防未来漂移）。
++        DocxError::InvalidInput(m) => ImportError {
++            code: "docx_invalid_input",
++            message: format!("docx writer invalid input: {m}"),
++        },
+     }
+ }
+ 
+diff --git a/crates/office-io/src/docx.rs b/crates/office-io/src/docx.rs
+index 0e23ed9..c7ff43f 100644
+--- a/crates/office-io/src/docx.rs
++++ b/crates/office-io/src/docx.rs
+@@ -221,6 +221,11 @@ pub enum DocxError {
+     /// 安全类，与解析[格式]错误可区分；save 面统一漏斗 typed 拒，
+     /// 超限调用无产物返回）。
+     Limit(String),
++    /// 写面输入校验拒绝（office-g Phase 1/2——V1-V7 校验矩阵：
++    /// 书签名域/保留名/重名/空锚点；fail-closed 宁缺毋错）。
++    /// **加性枚举变体**（office-g §11 e-review 勘误后口径——本方案
++    /// 唯一枚举新增面；workspace 内 exhaustive match 机械补齐）。
++    InvalidInput(String),
+ }
+ 
+ impl std::fmt::Display for DocxError {
+@@ -230,6 +235,7 @@ impl std::fmt::Display for DocxError {
+             DocxError::Parse(m) => write!(f, "parse error: {m}"),
+             DocxError::Io(m) => write!(f, "io error: {m}"),
+             DocxError::Limit(m) => write!(f, "resource limit: {m}"),
++            DocxError::InvalidInput(m) => write!(f, "invalid input: {m}"),
+         }
+     }
+ }
+@@ -2217,6 +2223,15 @@ pub struct RunSpec {
+     /// TargetMode="External"——引擎写面 "Now support external only"
+     /// [documents/mod.rs:1209]，锚点写面不暴露）。
+     pub link: Option<String>,
++    /// **内部锚点链接目标**（office-g Phase 1——书签名载荷；Some = 本
++    /// run 以 `w:hyperlink w:anchor` 属性形发射[零 rels 面——引擎
++    /// HyperlinkType::Anchor]，与 `link` 同 Some 时 **anchor 赢、link
++    /// 忽略**（V8 优先序——读写镜像：读面 r5-t2 探针② 钉定 w:anchor
++    /// 优先于 r:id）。悬空锚点（目标书签不存在）= **合法形**（T3——
++    /// 存在性检查是消费侧责任，读面不暴露书签定义）。经
++    /// [`RunSpec::anchor_link`] 构造；空串 = V7 违规（save 漏斗经写器
++    /// 粘性校验错误拒绝——见 `DocxWriter::validation_error`）。
++    pub anchor: Option<String>,
+     /// 脚注内容（docx-r2；Some = 本 run 为脚注引用 marker——`text`/
+     /// `bold`/`italic`/`link` 域值**忽略**：引擎 `add_footnote_reference`
+     /// 重置 run_property 为 FootnoteReference 字符样式
+@@ -2240,6 +2255,7 @@ impl RunSpec {
+             strike: false,
+             underline: false,
+             link: None,
++            anchor: None,
+             footnote: None,
+             field: None,
+         }
+@@ -2254,6 +2270,7 @@ impl RunSpec {
+             strike: false,
+             underline: false,
+             link: None,
++            anchor: None,
+             footnote: None,
+             field: None,
+         }
+@@ -2277,6 +2294,7 @@ impl RunSpec {
+             strike,
+             underline,
+             link: None,
++            anchor: None,
+             footnote: None,
+             field: None,
+         }
+@@ -2293,6 +2311,28 @@ impl RunSpec {
+             strike: false,
+             underline: false,
+             link: Some(url.into()),
++            anchor: None,
++            footnote: None,
++            field: None,
++        }
++    }
++
++    /// **内部锚点链接 run**（office-g Phase 1——目录/交叉引用形态：
++    /// 链接文本 + 目标书签名；`w:hyperlink w:anchor` 属性形，零 rels
++    /// 面，悬空合法[T3]）。与 [`RunSpec::link`] 并存；同 Some 时
++    /// anchor 赢（V8 优先序——读写镜像，读面探针② 钉定）。
++    /// 空锚点名 = V7 违规：构造不失败（人体工学签名），save 漏斗经
++    /// 写器粘性校验错误拒绝（见 `DocxWriter::validation_error`）。
++    pub fn anchor_link(text: impl Into<String>, anchor: impl Into<String>) -> Self {
++        Self {
++            text: text.into(),
++            bold: false,
++            italic: false,
++            mono: false,
++            strike: false,
++            underline: false,
++            link: None,
++            anchor: Some(anchor.into()),
+             footnote: None,
+             field: None,
+         }
+@@ -2309,6 +2349,7 @@ impl RunSpec {
+             strike: false,
+             underline: false,
+             link: None,
++            anchor: None,
+             footnote: Some(note.into()),
+             field: None,
+         }
+@@ -2324,6 +2365,7 @@ impl RunSpec {
+             strike: false,
+             underline: false,
+             link: None,
++            anchor: None,
+             footnote: None,
+             field: Some(FieldSpec::Page),
+         }
+@@ -2339,6 +2381,7 @@ impl RunSpec {
+             strike: false,
+             underline: false,
+             link: None,
++            anchor: None,
+             footnote: None,
+             field: Some(FieldSpec::NumPages),
+         }
+@@ -2363,6 +2406,20 @@ pub struct DocxWriter {
+     paragraphs: u64,
+     /// r4-t2：run 累计（发射 run + 图片 run + 脚注内容 run）。
+     runs: u64,
++    /// office-g Phase 1/2：**粘性校验错误消息**（V7 空锚点等构造期
++    /// 不可 Result 化的违规——构造器保持 §7.1 人体工学签名，首个
++    /// 违规在此落账，save 漏斗首查以 `DocxError::InvalidInput` 拒绝
++    /// [零产物语义维持]；fail-closed：不产出半合法文档。存消息而非
++    /// 错误值——`DocxError` 无 Clone（公开面不加 derive），且粘性面
++    /// 恒为 InvalidInput 族）。
++    validation_error: Option<String>,
++    /// office-g Phase 2：书签名注册表（V6 重名拒绝 + id 唯一化的
++    /// 名字面账本）。
++    bookmark_names: std::collections::HashSet<String>,
++    /// office-g Phase 2：bookmarkStart/End 的 w:id 计数器（引擎内
++    /// 部 id——§8：仅单次导出会话内稳定，**不作为身份**；公开身份
++    /// = 书签名）。
++    bookmark_next_id: usize,
+ }
+ 
+ impl DocxWriter {
+@@ -2388,6 +2445,9 @@ impl DocxWriter {
+             numbering_registered: false,
+             paragraphs: 0,
+             runs: 0,
++            validation_error: None,
++            bookmark_names: std::collections::HashSet::new(),
++            bookmark_next_id: 0,
+         }
+     }
+ 
+@@ -2422,11 +2482,45 @@ impl DocxWriter {
+         self.count_specs(1, runs);
+     }
+ 
++    /// **书签定义段**（office-g Phase 2——生产侧：被链接的目标）。
++    /// 发射 `bookmarkStart(w:id, w:name)` … runs … `bookmarkEnd(w:id)`
++    /// 对；`w:id` 由写器内部计数器唯一化（§8：仅单次导出会话内稳定，
++    /// **不作为身份**——公开身份 = 书签名，与协同侧车
++    /// OfficeBookmark.name 同源）。
++    ///
++    /// 校验矩阵 V1-V6（office-g §11，全部 typed `InvalidInput`——
++    /// 宁缺毋错）：
++    /// V1 非空 / V2 ≤ 40 字符（Word 上限）/ V3 首字符字母 /
++    /// V4 仅 `[A-Za-z0-9_]`（保守 ASCII 域 = 跨引擎最稳交集——放宽
++    /// 为后续裁决点）/ V5 `_Toc` 保留名拒绝（TOC 内部机制不踩踏）/
++    /// V6 同文档重名拒绝（Word 容忍重名但跳转不可预期——显式拒绝）。
++    pub fn bookmark_paragraph(&mut self, runs: &[RunSpec], name: &str) -> Result<(), DocxError> {
++        validate_bookmark_name(name, &self.bookmark_names)?;
++        let id = self.bookmark_next_id;
++        self.bookmark_next_id += 1;
++        self.bookmark_names.insert(name.to_string());
++        let mut p = specs_to_paragraph(runs);
++        p = p.add_bookmark_start(id, name.to_string());
++        p = p.add_bookmark_end(id);
++        self.docx = std::mem::take(&mut self.docx).add_paragraph(p);
++        self.count_specs(1, runs);
++        Ok(())
++    }
++
+     /// r4-t2：段/run 计数单点（paras 含本段；脚注规格 +1 段 +1 run）。
+     fn count_specs(&mut self, paras: u64, runs: &[RunSpec]) {
+         self.paragraphs += paras;
+         self.runs += runs.len() as u64;
+         for r in runs {
++            // office-g V7（空锚点）粘性检查——构造期不可 Result 化的
++            // 违规在此落账，save 漏斗拒绝（零产物语义维持）。
++            if self.validation_error.is_none() {
++                if let Some(a) = &r.anchor {
++                    if a.is_empty() {
++                        self.validation_error = Some("V7: anchor_link 目标书签名为空串".into());
++                    }
++                }
++            }
+             if r.footnote.is_some() {
+                 self.paragraphs += 1;
+                 self.runs += 1;
+@@ -2579,6 +2673,14 @@ impl DocxWriter {
+     /// 资源限统一在本漏斗执行（消费面预检经
+     /// [`check_document_scale`] 共用同一单点比较）。
+     pub fn save_to_vec(&mut self) -> Result<Vec<u8>, DocxError> {
++        // office-g V7 粘性校验首查（fail-closed：半合法文档零产出——
++        // 与超限零产物同语义）。**不 take 不重置**：错误路径与 Limit
++        // 路径同语义（写器保持原状）；无效 run 已发射进引擎文档，
++        // 粘性错误持续存在——后续 save 恒拒，唯一解 = 去除违规规格
++        // 重建写器。
++        if let Some(msg) = &self.validation_error {
++            return Err(DocxError::InvalidInput(msg.clone()));
++        }
+         check_document_scale(self.paragraphs, self.runs)?;
+         let mut cursor = std::io::Cursor::new(Vec::new());
+         let built = std::mem::take(&mut self.docx).build();
+@@ -2763,6 +2865,51 @@ impl DocxWriter {
+ /// 打包收集]；域 run → fldChar begin/instrText/end 三连；普通 run
+ /// 直挂）。t20：mono/strike/underline 三位 → rFonts 三槽 / w:strike /
+ /// w:u single。
++/// office-g §11 V1-V6 书签名校验（fail-closed——宁缺毋错对齐：
++/// 静默双书签/截断/踩踏 TOC 机制均显式拒绝）。
++fn validate_bookmark_name(
++    name: &str,
++    existing: &std::collections::HashSet<String>,
++) -> Result<(), DocxError> {
++    if name.is_empty() {
++        return Err(DocxError::InvalidInput("V1: 书签名为空".into()));
++    }
++    if name.chars().count() > 40 {
++        return Err(DocxError::InvalidInput(format!(
++            "V2: 书签名超 40 字符上限（实得 {}）",
++            name.chars().count()
++        )));
++    }
++    // 校验序 = specific-before-general：V5（_Toc 保留名）先于 V3（首
++    // 字母）——'_' 非 ASCII 字母，若 V3 先行则 V5 恒不可达（office-g
++    // §11 矩阵为校验面清单，求值序由实现定；保留名是更具体的拒绝面）。
++    if name.starts_with("_Toc") {
++        return Err(DocxError::InvalidInput(
++            "V5: _Toc 前缀保留名拒绝（TOC 内部机制不踩踏）".into(),
++        ));
++    }
++    let first = name.chars().next().unwrap();
++    if !first.is_ascii_alphabetic() {
++        return Err(DocxError::InvalidInput(format!(
++            "V3: 书签名首字符须为字母（实得 {:?}）",
++            first
++        )));
++    }
++    if !name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') {
++        return Err(DocxError::InvalidInput(
++            "V4: 书签名仅允许 [A-Za-z0-9_]（保守 ASCII 域——跨引擎最稳交集；放宽为后续裁决点）"
++                .into(),
++        ));
++    }
++    if existing.contains(name) {
++        return Err(DocxError::InvalidInput(format!(
++            "V6: 同文档书签名重名（{:?}）——Word 容忍重名但跳转不可预期，包装层显式拒绝",
++            name
++        )));
++    }
++    Ok(())
++}
++
+ fn specs_to_paragraph(runs: &[RunSpec]) -> docx_rs::Paragraph {
+     let mut p = docx_rs::Paragraph::new();
+     for spec in runs {
+@@ -2816,7 +2963,14 @@ fn add_spec_to_paragraph(p: docx_rs::Paragraph, spec: &RunSpec) -> docx_rs::Para
+         rp = rp.fonts(mono_fonts(MONO_FONT));
+     }
+     run.run_property = rp;
+-    if let Some(url) = &spec.link {
++    // office-g Phase 1 发射分支：anchor 赢、link 忽略（V8 优先序——
++    // 读面 HyperlinkData 解析顺序镜像[r5-t2 探针②]）；anchor 形 =
++    // w:anchor 属性（零 rels 面）；悬空锚点发射不拒（T3 合法形）。
++    if let Some(anchor) = &spec.anchor {
++        p.add_hyperlink(
++            docx_rs::Hyperlink::new(anchor.as_str(), docx_rs::HyperlinkType::Anchor).add_run(run),
++        )
++    } else if let Some(url) = &spec.link {
+         p.add_hyperlink(
+             docx_rs::Hyperlink::new(url.as_str(), docx_rs::HyperlinkType::External).add_run(run),
+         )
+@@ -3001,6 +3155,7 @@ mod tests {
+                 strike: false,
+                 underline: false,
+                 link: None,
++                anchor: None,
+                 footnote: None,
+                 field: None,
+             }
+@@ -3016,6 +3171,7 @@ mod tests {
+                 strike: false,
+                 underline: false,
+                 link: Some("https://x.example/".into()),
++                anchor: None,
+                 footnote: None,
+                 field: None,
+             }
+@@ -3031,6 +3187,7 @@ mod tests {
+                 strike: false,
+                 underline: false,
+                 link: None,
++                anchor: None,
+                 footnote: Some("注".into()),
+                 field: None,
+             }
+@@ -4011,4 +4168,211 @@ mod tests {
+         //（indent.rs 测试 test_left）——读面模型承载的是解析值非发射形。
+         assert_eq!(bare.right, None);
+     }
++
++    // ── office-g Phase 1/2 锚点写面（实施批 T1-T7——分支待裁决）────────
++
++    /// 测试辅助：读 zip 部件文本（缺失 = None）。
++    fn zip_part(bytes: &[u8], name: &str) -> Option<String> {
++        let cursor = std::io::Cursor::new(bytes);
++        let mut za = match zip::ZipArchive::new(cursor) {
++            Ok(z) => z,
++            Err(_) => return None,
++        };
++        let entry = za.by_name(name);
++        match entry {
++            Ok(mut zf) => {
++                let mut data = String::new();
++                use std::io::Read;
++                zf.read_to_string(&mut data).ok()?;
++                Some(data)
++            }
++            Err(_) => None,
++        }
++    }
++
++    /// 从读回文档中收集全部 hyperlink 目标（run 级）。
++    fn collect_hyperlinks(doc: &DocxDocument) -> Vec<HyperlinkTarget> {
++        let mut out = Vec::new();
++        for block in &doc.blocks {
++            if let Block::Paragraph(pd) = block {
++                for r in &pd.runs {
++                    if let Some(h) = &r.hyperlink {
++                        out.push(h.clone());
++                    }
++                }
++            }
++        }
++        out
++    }
++
++    /// T1：anchor_link 写→读全环——w:anchor 属性形 + 零 rels 面 +
++    /// 自有读 Anchor 变体复原。
++    #[test]
++    fn anchor_t1_roundtrip_attribute_form_zero_rels() {
++        let mut w = DocxWriter::new();
++        w.paragraph(&[
++            RunSpec::text("参见 "),
++            RunSpec::anchor_link("第 3 节 方法论", "secMethods"),
++            RunSpec::text("。"),
++        ]);
++        let bytes = w.save_to_vec().expect("悬空锚点 = 合法形（T3 同批钉定）");
++        // XML 级：w:anchor 属性形在场；零 r:id 超链接形
++        let doc_xml = zip_part(&bytes, "word/document.xml").expect("document.xml");
++        assert!(
++            doc_xml.contains(r#"w:anchor="secMethods""#),
++            "w:anchor 属性形在场"
++        );
++        assert!(
++            !doc_xml.contains("<w:hyperlink r:id="),
++            "零 r:id 面（锚点形不经关系层）"
++        );
++        // rels 级：无 hyperlink 关系条目（部件可能整缺席——两者皆零面）
++        if let Some(rels) = zip_part(&bytes, "word/_rels/document.xml.rels") {
++            assert!(!rels.contains("hyperlink"), "零 hyperlink 关系：{rels}");
++        }
++        // 读回：Anchor 变体复原（r5-t2 读面既有变体——写读镜像）
++        let doc = read_docx_from_bytes(&bytes).expect("read back");
++        let links = collect_hyperlinks(&doc);
++        assert_eq!(
++            links,
++            vec![HyperlinkTarget::Anchor {
++                anchor: "secMethods".into()
++            }],
++            "自有读 Anchor 变体复原"
++        );
++    }
++
++    /// T2：anchor 与 link 同 Some → anchor 赢、link 忽略（V8 优先序——
++    /// 读写镜像：写侧发射 w:anchor 无 r:id；读回 Anchor 变体）。
++    #[test]
++    fn anchor_t2_priority_over_external_link() {
++        let mut w = DocxWriter::new();
++        let mut spec = RunSpec::anchor_link("内部跳转", "secMethods");
++        spec.link = Some("https://example.com/ext".into()); // 同 Some 对抗位
++        w.paragraph(&[spec]);
++        let bytes = w.save_to_vec().unwrap();
++        let doc_xml = zip_part(&bytes, "word/document.xml").unwrap();
++        assert!(doc_xml.contains(r#"w:anchor="secMethods""#));
++        assert!(!doc_xml.contains("<w:hyperlink r:id="), "link 被忽略");
++        let doc = read_docx_from_bytes(&bytes).unwrap();
++        assert_eq!(
++            collect_hyperlinks(&doc),
++            vec![HyperlinkTarget::Anchor {
++                anchor: "secMethods".into()
++            }],
++            "读回 anchor 赢（V8）"
++        );
++    }
++
++    /// T3：悬空锚点（目标书签不存在）= 合法形——发射不拒、读回不拒。
++    #[test]
++    fn anchor_t3_dangling_is_legal_form() {
++        let mut w = DocxWriter::new();
++        w.paragraph(&[RunSpec::anchor_link("指向不存在书签", "noSuchBookmark")]);
++        let bytes = w
++            .save_to_vec()
++            .expect("悬空 = 合法形（存在性检查是消费侧责任）");
++        let doc = read_docx_from_bytes(&bytes).expect("读回不拒");
++        assert_eq!(collect_hyperlinks(&doc).len(), 1);
++    }
++
++    /// T4：bookmark_paragraph XML 面——bookmarkStart/End 对 + 两书签段。
++    #[test]
++    fn anchor_t4_bookmark_paragraph_xml_face() {
++        let mut w = DocxWriter::new();
++        w.bookmark_paragraph(&[RunSpec::text("3. 方法论")], "secMethods")
++            .expect("V1-V6 合法名");
++        w.bookmark_paragraph(&[RunSpec::text("附录 A")], "appendixA")
++            .expect("第二书签 id 唯一");
++        let bytes = w.save_to_vec().unwrap();
++        let doc_xml = zip_part(&bytes, "word/document.xml").unwrap();
++        assert!(doc_xml.contains(r#"w:name="secMethods""#), "书签名 1");
++        assert!(doc_xml.contains(r#"w:name="appendixA""#), "书签名 2");
++        assert!(doc_xml.contains("bookmarkStart"), "Start 对");
++        assert!(doc_xml.contains("bookmarkEnd"), "End 对");
++        let starts: Vec<&str> = doc_xml
++            .match_indices("bookmarkStart")
++            .map(|(i, _)| &doc_xml[i..i + 40])
++            .collect();
++        assert_eq!(starts.len(), 2, "恰两 bookmarkStart");
++    }
++
++    /// T5 + V1-V6 校验矩阵：空名/超长/首字符/字符域/保留名/重名——
++    /// 全部 typed InvalidInput 且消息可诊断。
++    #[test]
++    fn anchor_t5_validation_matrix_v1_to_v6() {
++        let mut w = DocxWriter::new();
++        let cases: &[(&str, &str)] = &[
++            ("", "V1"),
++            ("a", "OK"),
++            ("a2345678901234567890123456789012345678901", "V2"),
++            ("1abc", "V3"),
++            ("bad name", "V4"),
++            ("bad-name", "V4"),
++            ("中文书签", "V3"), // CJK 首字符 → V3 先拒（校验序：首字符先于字符域）
++            ("a中文", "V4"),    // 首字符过 V3、域内含 CJK → V4
++            ("_Toc123", "V5"),
++            ("Toc_ok", "OK"),
++        ];
++        for (name, expect) in cases {
++            let mut w2 = DocxWriter::new();
++            let r = w2.bookmark_paragraph(&[RunSpec::text("x")], name);
++            if *expect == "OK" {
++                assert!(r.is_ok(), "{name:?} 应合法");
++            } else {
++                match r {
++                    Err(DocxError::InvalidInput(m)) => {
++                        assert!(m.contains(expect), "{name:?} 消息含 {expect:?}: {m}");
++                    }
++                    other => panic!("{name:?} 期望 InvalidInput({expect}), 实得 {other:?}"),
++                }
++            }
++        }
++        // V6 重名：同名第二段拒绝
++        w.bookmark_paragraph(&[RunSpec::text("x")], "dupName")
++            .unwrap();
++        match w.bookmark_paragraph(&[RunSpec::text("y")], "dupName") {
++            Err(DocxError::InvalidInput(m)) => assert!(m.contains("V6"), "{m}"),
++            other => panic!("期望 V6 重名拒绝, 实得 {other:?}"),
++        }
++    }
++
++    /// V7：anchor_link 空锚点——构造不失败（人体工学签名），save 漏斗
++    /// 经粘性校验错误拒绝（零产物语义维持）。
++    #[test]
++    fn anchor_v7_empty_anchor_sticky_reject_at_save() {
++        let mut w = DocxWriter::new();
++        w.paragraph(&[RunSpec::anchor_link("坏锚点", "")]);
++        match w.save_to_vec() {
++            Err(DocxError::InvalidInput(m)) => assert!(m.contains("V7"), "{m}"),
++            other => panic!("期望 V7 粘性拒绝, 实得 {other:?}"),
++        }
++        // save_to_path 同漏斗（委托 save_to_vec）——零产物文件
++        let p = std::env::temp_dir().join(format!("mdc_anchor_v7_{}.docx", std::process::id()));
++        let ps = p.to_string_lossy().into_owned();
++        assert!(w.save_to_path(&ps).is_err());
++        assert!(!p.exists(), "V7 拒绝零产物文件");
++        let _ = std::fs::remove_file(&p);
++    }
++
++    /// T7：构造器零漂移——anchor_link 恒等断言（既有构造器 anchor: None
++    /// 由 run_spec_constructors 结构字面锁定）。
++    #[test]
++    fn anchor_t7_constructor_identity() {
++        assert_eq!(
++            RunSpec::anchor_link("a", "sec1"),
++            RunSpec {
++                text: "a".into(),
++                bold: false,
++                italic: false,
++                mono: false,
++                strike: false,
++                underline: false,
++                link: None,
++                anchor: Some("sec1".into()),
++                footnote: None,
++                field: None,
++            }
++        );
++    }
+ }
+diff --git a/crates/office-io/tests/docx_roundtrip.rs b/crates/office-io/tests/docx_roundtrip.rs
+index 0bb625f..a9347c3 100644
+--- a/crates/office-io/tests/docx_roundtrip.rs
++++ b/crates/office-io/tests/docx_roundtrip.rs
+@@ -2072,8 +2072,21 @@ fn r4t3_roundtrip_read_modify_write() {
+         runs.iter()
+             .map(|r| {
+                 let mut s = RunSpec::styled_full(&r.text, r.bold, r.italic, false, false, false);
+-                if let Some(HyperlinkTarget::External { target }) = &r.hyperlink {
+-                    s.link = Some(target.clone());
++                match &r.hyperlink {
++                    // T6（office-g Phase 1）：Anchor 变体不再静默丢——
++                    // 读回的内部锚点链接在回放面保真。
++                    Some(HyperlinkTarget::External { target }) => {
++                        s.link = Some(target.clone());
++                    }
++                    Some(HyperlinkTarget::Anchor { anchor }) => {
++                        s.anchor = Some(anchor.clone());
++                    }
++                    // Internal（包内相对路径）/Unresolved（悬空 r:id，
++                    // 仅兼容模式）无 RunSpec 承载面——维持回放静默丢
++                    //（读面 BrokenReference 警告已在读侧可观测）。
++                    Some(HyperlinkTarget::Internal { .. })
++                    | Some(HyperlinkTarget::Unresolved { .. })
++                    | None => {}
+                 }
+                 s
+             })
+-- 
+2.47.3
+

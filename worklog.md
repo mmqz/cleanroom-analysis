@@ -3865,3 +3865,45 @@ Stage Summary:
   （rc=0 族全景）/ 畸形输入（9 钉定）/ 产物确定性（内容级同一
   硬门）——三项新治理发现（内容嗅探改道/静默空产物第三成员/
   字节级非确定）直接服务 Q3 裁决输入。
+
+---
+Task ID: d1e-t3
+Agent: 主代理（实施就绪补丁轮——用户 Task 3d）
+Task: 「Prepare implementation-ready patches or small isolated
+branches where semantics are already settled」——锚点写面 Phase 1+2
+（office-g §7-§13 六维度完备设计 + DECISIONS #8 门控）以隔离分支
+形态实施，main 零接触。
+
+Work Log:
+- mdcore 隔离分支 office-g-phase1-anchor（b15c0ab → c4856f7）：
+  Phase 1（RunSpec.anchor 加性字段 + anchor_link 构造器[w:anchor
+  属性形零 rels——引擎 HyperlinkType::Anchor 直用] + V8 优先序
+  发射分支[anchor 赢 link 忽略——读写镜像]）+ Phase 2
+  （bookmark_paragraph[bookmarkStart/End 对 + 写器计数器 id 唯一
+  化]）+ DocxError::InvalidInput 加性变体（office-g 唯一枚举新增
+  面登记兑现）+ V1-V6 校验矩阵 + V7 空锚点粘性校验 + wasm
+  docx_invalid_input 错误码完备性映射（当前 wasm 面不可达——
+  BlockTree 无锚点载荷，②⑦ 门控诚实登记）。
+- 测试组 T1-T7 全量（7 新测试 + T6 回放分支）：写读全环（w:anchor
+  XML 形 + 零 rels 断言 + Anchor 变体复原）/ 优先序对抗位 / 悬空
+  合法形 / 书签 XML 面 / V1-V6 矩阵（含 CJK 双面）/ V7 粘性拒绝
+  零产物 / 构造器恒等。
+- 实施发现两条（超出设计文档的实施层决策，均已在代码注释与分支
+  提交留痕）：①**V5 校验序**——office-g §11 矩阵为校验面清单而非
+  求值序；'_' 非 ASCII 字母，若 V3 先行则 _Toc 保留名检查恒不可达
+  ——实现取 specific-before-general（V5 前移 V3 前）；②**V7 粘性
+  错误语义**——不 take 不重置（错误路径与 Limit 路径同语义；无效
+  run 已发射进引擎文档，后续 save 恒拒，唯一解 = 去除违规规格重建
+  ——首版 take+重置实现被自测证伪后修正）。
+- 分支门禁全绿：G1 531→538 零失败 / clippy native+wasm32 恰既有
+  2 wasm_bindgen 基线 / fmt 0 / scan PASS / Cargo.lock 零 diff /
+  wasm32 check 过。
+- main 零接触回退：checkout main（b15c0ab 状态与分支前完全一致，
+  office-io lib 70/70 复验）；评审件落档 office-line/0001-office-g-
+  Phase-1-2-*.patch（format-patch 产物）；DECISION_GROUPS 批次 2
+  更新为「裁决 = 合入 main 一句话，撤回 = 弃分支零残留」。
+
+Stage Summary:
+- DECISIONS #8 的裁决成本从「读设计文档想象实现」降为「看已测试
+  补丁批注合入」——Phase 1+2 全量代码 + 门禁证据 + 两条实施发现
+  就绪；gated API 纪律维持（main 干净，分支隔离）。

@@ -306,7 +306,15 @@ Phase 2 可分离裁决）；① 接受永久降级；② 与 #8 同批裁决（
 1. **批次 1（D1 解锁包）**：G1 载体=XmlFragment + G2 B3.2 采纳 +
    G3 栈上限=维持无限（或选他项）——三件同批 = D1 实施轮启动。
 2. **批次 2（锚点解锁包）**：G4 #8=Option A Phase 1（Phase 2 可
-   分离）——单件 = 写面对称 + R4.5 前置。
+   分离）——单件 = 写面对称 + R4.5 前置。**实施就绪补丁已备**（本轮
+   d1e-t3）：mdcore 隔离分支 `office-g-phase1-anchor`（c4856f7）+
+   评审件 `office-line/0001-office-g-Phase-1-2-*.patch`——Phase 1+2
+   全量实现（RunSpec.anchor/anchor_link/bookmark_paragraph/
+   InvalidInput 变体/V1-V7 校验/T1-T7 测试），全门禁绿（G1 538/
+   clippy 双面基线/fmt 0/scan PASS/lock 零 diff）；裁决 = 「合入
+   main」一句话，撤回 = 弃分支零残留。实施发现两条已登记（V5 校验
+   序前移——否则被 V3 遮蔽不可达；V7 粘性错误不 take 不重置——
+   错误路径与 Limit 同语义）。
 3. **批次 3（渲染解锁包）**：G5 Q3=预装+子进程+发行版基线——
    单件 = 渲染管线产品化定参。
 4. **批次 4（低优先合批）**：R-1=A（若批次 1 已含 B3.2 则同源
