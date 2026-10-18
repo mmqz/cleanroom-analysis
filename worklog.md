@@ -4058,3 +4058,23 @@ Stage Summary:
   渲染产物零影响。
 - 批次 2 全部后续（合入 + 门禁 + 联动用例）收口；剩余门控维持
   批次 1/3/4（DECISION_SHEET）。
+
+---
+Task ID: r-o2-t5-doc（一致性收尾）
+Agent: 主代理（文档-现实一致性翻转）
+Task: 批次 2 合入后保真矩阵单一真源同步（类别 1 纪律：文档与实际
+代码一致）。
+
+Work Log:
+- FIDELITY.md #6 行翻转：超链接行从「External-only 写回 + RunSpec
+  无锚点字段」翻转为「External + Anchor 内链双变体写回（c4856f7
+  批次 2 裁决合入）」+ 测试锚点列补 T1-T7 锚点组与 R-O2
+  anchor-survival（LO 存活钉定）；§2 anchor 论证行补闭环注记。
+- CAPABILITY_NOTES §13.1 头部加时点注记（「现状」列 = r5-t2 评估
+  时点，其中两行已被 c4856f7 翻转——防陈旧读取，证据行原样保留）。
+- mdcore CONTRACT.md 核查：契约面辖设置/会话（宿主↔桥↔核），不辖
+  office-io 公开 API——锚点合入无契约遗漏。
+
+Stage Summary:
+- 保真矩阵/能力注记/裁决文档三处与 mdcore main c4856f7 现实一致；
+  零新调查，纯一致性翻转。

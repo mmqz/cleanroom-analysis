@@ -14,7 +14,7 @@
 | 3 | bold/italic 行内 | 部分承载 | **读取丢失**（Bold.val 私有——w:val="false" 显式关闭形态不可辨，presence 会误报 → 不做 presence 承载，登记）；写面完整 | RunSpec.bold/italic | bold/italic | t18 既有 |
 | 4 | strike/underline 行内 | 写入降级（写面 t20 已达；读面同 #3 理由丢失：Strike.val/Underline.val 私有） | — | RunSpec.strike/underline | strike/underline | t20 |
 | 5 | 等宽 rFonts | 写入降级（写面 t20 双通道；读面 RunFonts 私有不可承载） | — | RunSpec.mono | fonts() | t20 |
-| 6 | 超链接（External） | 部分承载 | t13 四变体读面 | HyperlinkData | hyperlink 写回 External-only（Anchor 变体引擎在但 RunSpec 无锚点字段——r5-t2 评估与裁决点见 CAPABILITY_NOTES §13） | t13 既有 + r5-t2 探针①②⑤ |
+| 6 | 超链接（External + Anchor 内链） | 部分承载（**锚点写面写读对称已达成**：External/Anchor 双变体写回[mdcore c4856f7 批次 2 裁决合入]；Internal 变体写面引擎结构性不可达登记维持；书签定义读面静默丢——存在性不可辨 r5-t2 探针③） | t13 四变体读面 | HyperlinkData | hyperlink（External）+ anchor_link/RunSpec.anchor（w:anchor 属性形零 rels）+ bookmark_paragraph（书签目标段）——裁决落定注记见 CAPABILITY_NOTES §13 头部 | t13 既有 + r5-t2 探针①②⑤ + T1-T7 锚点组（c4856f7）+ R-O2 anchor-survival（LO 链接存活钉定） |
 | 7 | 页眉/页脚六槽位 | 部分承载（first/even/default 读写两面在；default 占位语义 replace 踩踏 t14 已修） | headers/footers | HeaderFooterData | add_header/add_footer 族 | t13/t14 |
 | 8 | 脚注 | 读取丢失（引擎不读 footnotes.xml 部件——t14 登记）；写面可达 | — | — | add_footnote | t14 |
 | 9 | 图片（PNG）与媒体关系 | 读取丢失（位置/尺寸不读；媒体清单读 t14）；写面可达 | media 清单 | — | add_image | t14 |
@@ -66,7 +66,10 @@
   与裁决点落档 CAPABILITY_NOTES §13；本文件矩阵口径不变——本轮
   零实施，只增 5 探针测试：tests/docx_roundtrip.rs 28→32〔Internal
   整包面/锚点优先序/书签静默丢弃+存在性不可辨/引擎直构 spike〕+
-  mdcore-wasm docx_export.rs +1〔链接形态文本导出面〕）。
+  mdcore-wasm docx_export.rs +1〔链接形态文本导出面〕）。**后续
+  闭环（2026-10-17）：批次 2 裁决 Option A Phase 1+2 全批合入 mdcore
+  main c4856f7**（RunSpec.anchor/anchor_link/bookmark_paragraph/
+  V1-V7 校验/T1-T7 测试——矩阵 #6 行已同步翻转，本论证行闭环）。
 - 脚注/图片读面：引擎结构性不读部件（footnotes.xml / 图片位置）。
 - ~~web 消费链 list 映射（docx_import 列表→markdown）：下一轮候选~~
   **r5-t1 已落地闭项**（映射语义与降级登记见 §5）。

@@ -329,6 +329,11 @@ docx_roundtrip.rs。零新依赖（Cargo.lock 零 diff）。
 
 ### 13.1 承载能力矩阵（证据锚点）
 
+> 时点注记：下表「现状」列 = **r5-t2 评估时点**（2026-10-17）——
+> 其中「RunSpec 链接表达 External-only」「DocxWriter 锚点/书签方法
+> 无」两行已被批次 2 裁决翻转（c4856f7 合入，见 §13 头部裁决落定
+> 注记）；其余行为面（读面四变体/书签静默丢/引擎私有面）维持。
+
 | 面 | 现状 | 证据锚点 |
 |---|---|---|
 | RunSpec 链接表达 | **External URL only**（`link: Option<String>` → 引擎 `HyperlinkType::External` 单点发射） | docx.rs:2216-2219 字段 / 2287 link() / 2819-2822 发射点 |
