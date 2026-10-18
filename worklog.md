@@ -4078,3 +4078,38 @@ Work Log:
 Stage Summary:
 - 保真矩阵/能力注记/裁决文档三处与 mdcore main c4856f7 现实一致；
   零新调查，纯一致性翻转。
+---
+Task ID: sprint2-c（推送核实与停机复验轮）
+Agent: 主代理（上下文恢复 + 双仓推送态核实）
+Task: 「继续」指令——上轮 r-o2-t5/r-o2-t5-doc 收口后推送态核实
+与停机条件复验。
+
+Work Log:
+- 环境核查：双仓工作区干净零漂移；cleanroom main=ae4aa4d（含
+  r-o2-t5 锚点存活轮 + r-o2-t5-doc 一致性翻转两提交）；mdcore
+  main=c4856f7。工具链未重置（第 16 次恢复后环境保持）。
+- 推送态核实（关键发现）：本地 status 显示 cleanroom ahead 2，
+  但瞬态 URL push 返回 up-to-date → fetch 证实远端 main 实际
+  = ae4aa4d = 本地 HEAD——**上轮已完成推送，仅本地 origin/main
+  tracking ref 陈旧**（瞬态推送不更新 tracking ref 所致假象）；
+  update-ref 更正后 ahead 2 消失。
+- owner 勘误：首次瞬态推送误猜 owner=cleanroom-universe（404
+  Repository not found）→ remote -v 核实正确 owner=mmqz；token
+  有效性经 GitHub API /user 探针确认（200, login=mmqz）。
+- mdcore 私有仓同步验证：匿名 fetch 不可达（私有仓需凭证），
+  瞬态 URL fetch 证实远端 main = c4856f7 = 本地 HEAD ✅。
+- token 零落盘 grep 复验：仓内 ghp_ 命中 3 处（HANDOFF.md
+  §5-2 纪律说明 / acrobat-audit WORKLOG 历史记述 / push 脚本
+  用法注释）——**均为 ghp_xxx 占位符文档，非真实 token**，零
+  落盘纪律维持。
+- HANDOFF 版本链核查：L-MD 行 c4856f7 ✅；§6 行 73「b3a6faf
+  基础上」为回溯性时点描述（冲刺五件推送时点基准）语义正确，
+  非漂移——零编辑。
+
+Stage Summary:
+- 双仓与远端精确同步（cleanroom ae4aa4d / mdcore c4856f7），
+  零积压零未推送提交。
+- 停机条件维持：类别 1（可执行决策无关任务）清空；上轮门禁
+  全绿在档（R-O2 22 用例双次复跑 / mdcore G1 538）；剩余全部
+  门控 = DECISION_SHEET 批次 1（D1 解锁包，最优先）/批次 3
+  （Q3 渲染管线）/批次 4（低优先合批）——等待用户批注。
