@@ -4150,3 +4150,31 @@ Stage Summary:
 - 两条语义差异 D-1/D-2 首次显式成表（此前散在 p13 观察注记），
   进 DECISION_SHEET 批次 1 联动注记候选（R5 汇总轮处理）；
 - p15/p16/p17 就绪探针需求清单定稿（§7 第三列），驱动 R2-R4。
+---
+Task ID: d1p-t2（十轮计划 R2）
+Agent: 主代理（D1 就绪系列）
+Task: p15 探针——映射矩阵结构实证（yrs-e §2 主表九 kind 形状全量）。
+
+Work Log:
+- 新增 src/bin/p15_mapping_structure.rs（注册 Cargo.toml）：
+  p15-A1 九 kind 精确形状装载（p/h[level]/pre[lang] 多行原样/
+  hr 空/tbl GFM 文本叶/blockquote 自有文本+子块交织/li[marker]
+  首行文本+嵌套子项+项内段落）→ 确定性读回签名全等断言；
+  p15-A2 wire 快照→新文档 apply 结构相等；p15-A3 属性开放面
+  透传（未知键/转义敏感值 a<b>&"'/非 ASCII 零丢失——映射 §2.1
+  开放编码不发明白名单实证）；p15-B 全顶层块 StickyIndex 锚定
+  → 前插 3 前删 2（删新插者）→ 5 锚点 ID 全等值 + 序保持
+  （p13-V3 判定形态泛化到全块）；p15-C 交织容器子块前插/删除
+  后序保持（自有文本首位恒定）。
+- API 形态对齐 p13 先例（sticky_index 位置锚定 + id() 等值比较 /
+  remove_range(start,len) / encode_diff_v1）；修复构建三错
+  （括号/usize→u32/字符串类型统一）。
+- 门禁：p15 release 跑 ALL PASS（5 断言组）+ 适配层 54/54 零
+  回归（matrix25+hostile13+anchor6+limit10）+ 全 15 探针构建
+  零错误。
+
+Stage Summary:
+- 映射矩阵 §2 结构主表 + §2.1 属性编码 + §4.2 身份基础的实证
+  闭环：九 kind 形状全保真（含 wire 往返）、开放键面零丢失、
+  全块锚点邻居编辑稳定、交织容器序保持——结构面零缺口。
+- yrs-e §7 证据列 p15-A/B/C 行可回填（R5 汇总轮统一处理）。

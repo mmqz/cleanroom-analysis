@@ -76,3 +76,7 @@ path = "src/bin/p12_sync_undo_cycles.rs"
 [[bin]]
 name = "p13_xml_carrier_deep"
 path = "src/bin/p13_xml_carrier_deep.rs"
+
+[[bin]]
+name = "p15_mapping_structure"
+path = "src/bin/p15_mapping_structure.rs"
