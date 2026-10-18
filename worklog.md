@@ -4351,3 +4351,28 @@ Stage Summary:
   即可提交上游；
 - DECISION_GROUPS G1 #19 的「择机呈上游」具体化为三选项 +
   默认建议——治理决策入口清晰化。
+---
+Task ID: docs-audit（十轮计划 R9）
+Agent: 主代理（双仓一致性审计）
+Task: 单一真源对账 + 版本引用核对 + 跟踪卫生八项审计。
+
+Work Log:
+- ① 探针注册对账：Cargo.toml bin 注册 vs src/bin 文件 = 18/18
+  一致（p1-p14 + p15/p16/p17 全注册）。
+- ② 版本引用核对：cleanroom 文档引用提交号 31 个——28 个 mdcore
+  跨仓引用全部存在；3 个（1adced2/5e144cc/ddc51c1）经全分支
+  fetch 定位为 **compliance-baseline 远端分支**提交（NOTICES 演进
+  链）——**零真悬空**。审计用 origin-mirror 临时 refs 已清理。
+- ③ 交叉引用：yrs-e/f/g 三件 + 证据链文件全部在位。
+- ④ REGRESSION 章节序：§0-§10 + §10.5（ro2-t6）/§10.6（ro2-t7）
+  连贯无断号。
+- ⑤ 跟踪卫生：git ls-files 零构建产物（out/target/node_modules）。
+- ⑥ worklog：139 个 Task ID 节完整，R1-R8 全登记。
+- ⑦ DECISION_SHEET 三批次批注行完好未被注记插坏。
+- ⑧ mdcore 终态：工作区干净，main=c4856f7=远端。
+
+Stage Summary:
+- 八项审计全过零漂移：双仓文档与现实一致、零悬空引用、零跟踪
+  污染、批注入口完好——批次 1/3/4 呈批态有效。
+- 审计副产物：compliance-baseline 为远端独立分支（本地单分支
+  clone 不含）——跨分支引用核对方法已验证可用。
