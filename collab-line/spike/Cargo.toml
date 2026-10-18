@@ -85,3 +85,7 @@ path = "src/bin/p15_mapping_structure.rs"
 name = "p16_mapping_ops"
 path = "src/bin/p16_mapping_ops.rs"
 
+
+[[bin]]
+name = "p17_mapping_undo"
+path = "src/bin/p17_mapping_undo.rs"

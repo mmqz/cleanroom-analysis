@@ -4214,3 +4214,32 @@ Stage Summary:
   +1）钉定。
 - yrs-e 文档随实测同步修正（§3.1 重写 + §6 D-3 行 + §7 证据表
   两行已验翻转）。
+---
+Task ID: d1p-t4（十轮计划 R4）
+Agent: 主代理（D1 就绪系列）
+Task: p17 探针——撤销栈 B3.2 形态在 XmlFragment 载体复验 + redo
+新 ID 族 + 物化解耦两轴钉定。
+
+Work Log:
+- 新增 p17_mapping_undo（六断言组）：A1-A4 per-origin 双栈互不干扰
+  （human undo 仅撤 human 面 ai 保留 / ai 独立可撤 / 双 redo 跨栈
+  序保持全量复原）；B/C redo 复原三合一断言（结构等价 + block_id
+  属性保持[BlockTree 身份轴连续] + 载体 StickyIndex ID 换新族
+  [协同轴独立]——§4.3 双轴解耦钉定，InsertBlock.id=Some 物化路径
+  模拟）；D 混合序列跨栈交叉 LIFO（H/A/H 交替 → human 栈两撤
+  LIFO / ai 栈独立一撤 / 三 redo 全量复原）。
+- 适配层形态移植：双 UndoManager[human/ai] + include_origin +
+  expand_scope(XmlFragmentRef) + capture_timeout=0（每事务一栈项
+  ——p4 对照面；1000ms 合并窗语义已由 p4/适配层锁定不重复）。
+- 构建修正：XmlFragment 是 trait 非 type → 参数类型用
+  XmlFragmentRef。
+- 门禁：p17 release ALL PASS + 适配层 54/54 零回归 + 全探针构建
+  零错误。
+
+Stage Summary:
+- B3.2 撤销栈语义（per-origin 分栈/LIFO/跨栈独立/redo 复原）在
+  XmlFragment 载体上与适配层既有 Array-of-Map 载体行为**完全
+  同构**——载体更换不动撤销面（正交性实证，批次 1 G2① 裁决的
+  载体侧风险清零）。
+- redo 新 ID 族经 UndoManager 路径复验（p13-V5 同构）；双轴身份
+  解耦（block_id 连续 + 载体换族）钉定——D1 就绪系列证据链齐。
