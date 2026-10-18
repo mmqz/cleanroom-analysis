@@ -18,8 +18,8 @@
 | 项 | 值 |
 |---|---|
 | soffice | `/usr/bin/soffice` → LibreOffice **25.2.3.2** 520(Build:2) |
-| poppler | pdftotext / pdfinfo / pdfimages / pdffonts 全部 **25.03.0** |
-| python | 3.12.15（**stdlib only**，零第三方依赖） |
+| poppler | pdftotext / pdfinfo / pdfimages / pdffonts / pdftohtml 全部 **25.03.0**（pdftohtml 自 r-o2-t5 起为链接检视面，§10） |
+| python | 3.12.15（**stdlib only**，零第三方依赖——r-o2-t5 维持：链接注记检视走 poppler pdftohtml，不引入 PyMuPDF/pypdf） |
 | `/usr/bin/time` | **不存在**（已核实）→ 峰值 RSS 用替代口径（§5.2） |
 | 内核 | Linux；/proc/*/comm 可读（soffice 残留检测用） |
 
@@ -275,3 +275,57 @@ sha256 台账对比语义精化：**新增**夹具键 = 良性扩展（首跑基
 240B stdout 摘要窗——改用**位置稳健的文档类型短语**（`as a Writer
 document` / `as a Draw document`，出现于源路径后、摘要窗内）；滤镜
 名在探针观测结论中登记，不作为断言依赖。
+
+## 10. r-o2-t5 锚点存活轮（批次 2 联动项，2026-10-17）：office-g §13 联动件
+
+> 触发链：用户裁 DECISION_SHEET 批次 2（Option A Phase 1+2 全批
+> 合入 mdcore main c4856f7）→ office-g §13 登记的联动项「LO 侧
+> 回归套件可同批扩锚点存活用例」即本节。用例 +1（21→22），断言
+> +16（188→204）；全部断言先探针观测后钉定（临时探针跑完即删）。
+
+### 10.1 用例 anchor-survival（kind: valid，16 断言）
+
+夹具形状**精确镜像** mdcore c4856f7 发射面（office-io docx.rs
+T1/T5 钉定形状）：`w:hyperlink w:anchor` 属性形零 rels（anchor_link）
++ `bookmarkStart/End` 对（bookmark_paragraph，链接段页 1 / 书签
+目标段页 2 经显式分页分离——内链跨页导航才具存活语义）+ 孤立书签
+（orphanTarget 无入链）+ 外链对照（r:id 形 TargetMode=External）。
+mdcore 侧钉 XML 形状、本套件钉 LO 行为——**产品 API 形状 → LO →
+PDF 链接存活全链闭合**。
+
+| # | 断言 | 钉定 | 实测 |
+|---|---|---|---|
+| 1-5 | 通用（rc/超时/产出/页数=2） | 链接段页 1 + 书签目标段页 2 | 全过 |
+| 6-10 | 文本存活五串（标题/跳转到/链接文本/目标段/孤立段） | 双侧归一化包含 | 全过 |
+| 11 | internal_link_hrefs_p1 = 1 | **w:anchor → 恰一内链 GOTO 注记存活** | anchor-survival.html#2 |
+| 12 | internal_link_target_href = `{stem}.html#2` | **目标页 = 2 = 书签所在页**（pdftohtml fragment 承载） | 精确匹配 |
+| 13 | external_link_hrefs_p1 = 1（URL 精确） | 外链 → URI 注记（类型可区分：fragment 形 vs 原始 URL） | 全过 |
+| 14 | link_count_p2 = 0 | 书签目标页零链接注记 | 全过 |
+| 15 | internal_link_text_contains_linktext | 内链注记与链接文本 run 关联（归一化包含） | 全过 |
+
+### 10.2 行为发现（探针观测，供治理登记）
+
+1. **锚点存活定谳**：`w:hyperlink w:anchor` 经 LO → PDF **GOTO
+   Link 注记存活**，目标为书签所在页的直接 XYZ 目的地（72, 769.889,
+   zoom 0——坐标为观察值不断言，布局敏感）。**C 路线保留内部导航**
+   ——R-O2 管线不因转换丢失文档内链。
+2. **书签不导出命名目的地**（PyMuPDF probe 一次性观测
+   resolve_names() = 空，未入套件依赖）：LO 在转换期把书签消解为
+   直接目的地，PDF 命名树不出现书签名——**mdc-pdf 消费腿的链接
+   到达形态 = GOTO 显式目的地**，命名目的地而依赖的检索/去重策略
+   不可行（内容级摘要口径维持 r-o2-t4 结论）。
+3. **孤立书签零可观测面**：无入链书签在 PDF 无注记、无目的地、无
+   outline 差异——治理含义：书签定义单独存在时对渲染产物零影响。
+4. **Heading1 → PDF outline 条目**（观察值，未断言——样式映射面
+   非本轮语义）：标题样式段进大纲面板。
+5. **pdftohtml 链接关联为文本块粒度**（断言面工程注记）：`<a>`
+   包裹可吸收相邻非链接文本（实测吸收了前置普通 run「跳转到 」
+   但不含后置「。」）——链接文本断言用**包含语义**不用相等；依赖
+   poppler pdftohtml 25.03.0（套件依赖面零三方维持）。
+
+### 10.3 门禁与台账
+
+全量 22 用例 = 10 pass + 12 pinned + 0 fail（204 断言，SUITE PASS）
+**双次复跑稳定**（台账非首次零漂移 + 夹具确定性门 + 跨进程确定性门
+恒过）；新夹具键 anchor-survival = 良性首跑基线（§9.4 语义）。LO
+版本差警示维持（§1）：全部断言含 26.8.1 上游复跑前置。

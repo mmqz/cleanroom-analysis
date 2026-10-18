@@ -25,6 +25,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -105,6 +106,28 @@ def pdf_font_names(pdf: Path) -> list[str]:
         if line.strip():
             fonts.append(line.split()[0])
     return fonts
+
+
+def pdf_links_by_page(pdf: Path) -> dict[int, list[tuple[str, str]]]:
+    """链接注记检视（r-o2-t5：pdftohtml -xml，poppler 家族零三方依赖）。
+
+    返回 {page_no: [(href, link_text), ...]}——同一注记跨多个 text run
+    时逐 run 收集（观测：pdftohtml 的 <a> 包裹为**文本块粒度**，可吸
+    收相邻非链接文本——断言用包含语义，登记见 REGRESSION §10）。
+    内链 href 形如 "{pdf_stem}.html#{目标页}"（fragment 承载目标页）；
+    外链为原始 URL。页外注记（page=0）不应出现——出现即异常信号。
+    """
+    xml = _run(["pdftohtml", "-xml", "-stdout", str(pdf)])
+    links: dict[int, list[tuple[str, str]]] = {}
+    page = 0
+    for m in re.finditer(r'<page number="(\d+)"|<a href="([^"]*)">', xml):
+        if m.group(1):
+            page = int(m.group(1))
+        else:
+            href = m.group(2) or ""
+            text = xml[m.end():].split("</a>", 1)[0]
+            links.setdefault(page, []).append((href, text))
+    return links
 
 
 def inspect_pdf(pdf: Path) -> dict:
@@ -290,6 +313,8 @@ def build_all_fixtures() -> dict[str, Path]:
     fx.build_embedded_image(fdir / "embedded-image.docx")
     fx.build_composite(fdir / "composite.docx")
     fx.copy_real_fixture(fdir / "real-fixture.docx", FIXTURES_DIR / "import_sample.docx")
+    # r-o2-t5（批次 2 联动项）：锚点写面发射形状存活钉定
+    fx.build_anchor_survival(fdir / "anchor-survival.docx")
     # 畸形输入（truncated-zip 派生自 basic-structure 字节）
     fx.build_garbage_bytes(fdir / "garbage-bytes.docx")
     fx.build_truncated_zip(fdir / "truncated-zip.docx",
@@ -542,6 +567,40 @@ PIN_NOTE_LOAD_FAIL = ("钉定：rc=0 但 PDF 不产出 + 输出含 'Error: sourc
                       "PDF 产出核验 + 输出扫描。rc 作为观察值记录（版本差敏感）。")
 
 
+def checks_anchor_survival(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
+    """r-o2-t5（批次 2 联动项，office-g §13）：锚点存活钉定。
+
+    mdcore c4856f7 发射形状（w:anchor 属性形零 rels + bookmarkStart/End
+    对）经 LO 25.2.3.2 → PDF：内链 GOTO 注记**存活**且指向书签所在页；
+    外链 URI 注记类型可区分；书签不导出命名目的地（probe 观测登记，
+    套件面 = pdftohtml 可见面——命名树非 poppler 可检）。全部断言先
+    探针观测后钉定（probe_anchor 临时脚本，跑完即删）。"""
+    common_valid(rec, conv, info)
+    rec.value("page_count", "eq", 2, info.get("pages"),
+              note="链接段页 1 + 显式分页后书签目标段页 2——内链跨页导航才具存活语义")
+    for kw in ["锚点存活样本", "跳转到", fx.ANCHOR_LINK_TEXT, "书签目标段", "孤立书签段"]:
+        rec.contains_norm(f"text_{kw[:6]}", kw, info.get("ntext", ""))
+    links = pdf_links_by_page(pdf)
+    p1 = links.get(1, [])
+    p1_hrefs = {h for h, _ in p1}
+    internal = {h for h in p1_hrefs if h.startswith(f"{pdf.stem}.html#")}
+    rec.value("internal_link_hrefs_p1", "eq", 1, len(internal),
+              note="w:anchor 锚点恰一内链 href——GOTO 注记存活（LO 转换保留内部导航）")
+    rec.value("internal_link_target_href", "eq", f"{pdf.stem}.html#2",
+              next(iter(internal), None),
+              note="目标页 = 2（书签 secMethods 所在页）——pdftohtml fragment 承载")
+    rec.value("external_link_hrefs_p1", "eq", 1,
+              len([h for h in p1_hrefs if h == fx.ANCHOR_EXTERNAL_URL]),
+              note="外链对照 → URI 注记（注记类型可区分：内链 fragment 形 vs 外链原始 URL）")
+    rec.value("link_count_p2", "eq", 0, len(links.get(2, [])),
+              note="书签目标页零链接注记")
+    # 链接文本关联（包含语义——pdftohtml <a> 块粒度吸收相邻文本，工程注记在档）
+    internal_text = "".join(t for h, t in p1 if h in internal)
+    rec.value("internal_link_text_contains_linktext", "eq", True,
+              norm(fx.ANCHOR_LINK_TEXT) in norm(internal_text),
+              note="内链注记与锚点链接文本 run 关联（双侧归一化包含比对）")
+
+
 def checks_garbage_bytes(rec: Rec, conv: dict, info: dict, pdf: Path) -> None:
     common_no_timeout(rec, conv)
     rec.value("pin_exit_code_cold", "eq", 0, conv["cold"]["exit_code"],
@@ -688,6 +747,8 @@ CASES = [
      "desc": "全要素组合：页眉页脚+分节+跨页表+图片+缺失字体+分页（承 I）"},
     {"name": "real-fixture", "kind": "valid", "checks": checks_real_fixture,
      "desc": "mdcore import_sample.docx 真件（承第一轮 C；fixtures/ 已提交副本）"},
+    {"name": "anchor-survival", "kind": "valid", "checks": checks_anchor_survival,
+     "desc": "锚点存活（r-o2-t5 批次 2 联动）：mdcore c4856f7 发射形状 w:anchor+bookmarkStart/End → 内链 GOTO 存活指向书签页 + 外链 URI 对照"},
     {"name": "garbage-bytes", "kind": "malformed-pinned", "checks": checks_garbage_bytes,
      "desc": "4096B 确定性伪随机字节（非 zip）——钉定 LO 文本导入兜底"},
     {"name": "truncated-zip", "kind": "malformed-pinned", "checks": checks_truncated_zip,

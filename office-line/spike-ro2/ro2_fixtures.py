@@ -350,6 +350,79 @@ def copy_real_fixture(path: Path, src: Path) -> None:
     path.write_bytes(data)
 
 
+# 锚点链接文本/书签名（mdcore c4856f7 anchor API 语义域——V4 ASCII 域）
+ANCHOR_LINK_TEXT = "第 3 节 方法论"
+ANCHOR_BOOKMARK = "secMethods"
+ANCHOR_ORPHAN_BOOKMARK = "orphanTarget"
+ANCHOR_EXTERNAL_URL = "https://example.com/dest"
+
+
+def build_anchor_survival(path: Path) -> None:
+    """用例 anchor-survival（r-o2-t5——批次 2 联动项，office-g §13）。
+
+    形状**精确镜像** mdcore c4856f7 锚点写面发射形状（office-io
+    src/docx.rs T1/T5 钉定面；mdcore 侧钉 XML 形状，本套件钉 LO 行为
+    ——链条闭合）：
+      - anchor_link（Phase 1）：`<w:hyperlink w:anchor="secMethods">`
+        属性形**零 rels 面**（引擎 HyperlinkType::Anchor）；
+      - bookmark_paragraph（Phase 2）：`bookmarkStart(w:id,w:name)` …
+        runs … `bookmarkEnd(w:id)` 对（写器计数器 id 唯一化镜像）；
+      - 孤立书签（orphanTarget，无入链）：命名目的地导出面观测位；
+      - 外链对照（r:id 形 + TargetMode="External"）：注记类型对照位。
+    布局：链接段在第 1 页，显式分页后书签目标段 + 孤立书签段在第 2 页
+    ——内链须跨页导航才有存活语义。
+    """
+    body = (
+        p(r("锚点存活样本标题", bold=True),
+          '<w:pPr><w:pStyle w:val="Heading1"/></w:pPr>')
+        # anchor_link 发射形（T1：w:anchor 属性形，无 r:id）
+        + p(
+            r("跳转到 ")
+            + f'<w:hyperlink w:anchor="{ANCHOR_BOOKMARK}">'
+            + r(ANCHOR_LINK_TEXT)
+            + "</w:hyperlink>"
+            + r("。")
+        )
+        # 外链对照（r:id 联接形——与锚点形互斥的发射面）
+        + p(
+            r("外链对照 ")
+            + '<w:hyperlink r:id="rIdExt">'
+            + r("example.com")
+            + "</w:hyperlink>"
+            + r("。")
+        )
+        + PAGE_BREAK
+        # bookmark_paragraph 发射形（T5：Start/End 对 + 内部 runs）
+        + "<w:p>"
+        + f'<w:bookmarkStart w:id="0" w:name="{ANCHOR_BOOKMARK}"/>'
+        + r(f"{ANCHOR_LINK_TEXT}——书签目标段（第 2 页）。")
+        + '<w:bookmarkEnd w:id="0"/>'
+        + "</w:p>"
+        # 孤立书签（无入链）——LO 是否导出为命名目的地的观测位
+        + "<w:p>"
+        + f'<w:bookmarkStart w:id="1" w:name="{ANCHOR_ORPHAN_BOOKMARK}"/>'
+        + r("孤立书签段（无入链）。")
+        + '<w:bookmarkEnd w:id="1"/>'
+        + "</w:p>"
+    )
+    doc_rels = (
+        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'
+        '<Relationship Id="rIdExt" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" '
+        f'Target="{ANCHOR_EXTERNAL_URL}" TargetMode="External"/>'
+    )
+    write_zip(path, {
+        "[Content_Types].xml": content_types(),
+        "_rels/.rels": RELS,
+        "word/document.xml": doc_xml(body, sect_pr(11906, 16838)),
+        "word/_rels/document.xml.rels": (
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            + doc_rels + "</Relationships>"
+        ),
+        "word/styles.xml": STYLES,
+    })
+
+
 # ── 畸形输入夹具 ───────────────────────────────────────────────────────────
 
 

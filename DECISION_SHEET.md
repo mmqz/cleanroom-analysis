@@ -34,7 +34,7 @@
 | 合入方式 | ff 合入（merge-base=main HEAD，main 独有提交 0，零冲突零覆盖）；mdcore main `b15c0ab→c4856f7` |
 | 差异面 | 4 文件 +398/-3（office-io docx.rs +366 / docx_roundtrip.rs +17 / mdcore-wasm docx_export.rs +12 / docx_import.rs +6）零公开模型触碰 |
 | 门禁复验 | G1 **538/538** 零失败 / clippy 双面恰 2 wasm_bindgen 基线（lib.rs:212/221 既有，非分支文件）/ fmt 0 / scan 0 hit-paths PASS / Cargo.lock 零 diff / wasm32 check 过 |
-| 解锁面 | R4.5 强绑定升级路径开通；锚点写读对称（读 4/写 4）；LO 回归套件锚点存活用例扩列成为后续增量（office-g §13 联动项） |
+| 解锁面 | R4.5 强绑定升级路径开通；锚点写读对称（读 4/写 4）；LO 回归套件锚点存活用例**已执行**（r-o2-t5：21→22 用例/204 断言——内链 GOTO 存活指向书签页定谳 + 书签不导出命名目的地治理发现，REGRESSION §10） |
 | 已知风险 | 悬空锚点=合法形（Phase 2 书签写面独立可用，锚点目标不在场时 V 边界已校验）；wasm 面 docx_invalid_input 错误码当前不可达（BlockTree 无锚点载荷，②⑦ 门控维持） |
 
 （原推荐表与备选见 DECISION_GROUPS G4——历史依据保留不删。）

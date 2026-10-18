@@ -4007,3 +4007,54 @@ Stage Summary:
   锚点载荷，②⑦ 门控维持 = DECISIONS #10/#12）。
 - 剩余门控：DECISION_SHEET 批次 1（D1 解锁包三件——最优先）/
   批次 3（Q3 渲染管线）/批次 4（低优先合批）。
+
+---
+Task ID: r-o2-t5
+Agent: 主代理（锚点存活轮——批次 2 联动项执行）
+Task: 用户「继续」指令 → 批次 2（已裁决）解锁的联动项：office-g §13
+「LO 侧回归套件可同批扩锚点存活用例」——mdcore c4856f7 锚点写面
+发射形状经 LO → PDF 的链接存活行为钉定。批次 1/3/4 为不可代签产品
+裁决，不在本轮范围。
+
+Work Log:
+- 环境恢复（第 16 次重置，会话中途发生）：双仓本地回旧态
+  （cleanroom de186f7 / mdcore 00ad88b）→ 瞬态 URL fetch + ff 拉齐
+  （cleanroom b3a6faf / mdcore c4856f7）+ 工具链重装（1.99.0 +
+  wasm32 + clippy/rustfmt + nightly-2026-10-15）；全部成果已在远端
+  零损失。
+- 探针观测（临时脚本跑完即删）：mdcore 发射形状（w:hyperlink
+  w:anchor 属性形零 rels + bookmarkStart/End 对 + 孤立书签 + 外链
+  对照）→ LO 25.2.3.2 → PDF：①w:anchor 内链 = GOTO Link 注记
+  **存活**，目标页 2 = 书签所在页，直接 XYZ 目的地（72,769.889,
+  0——坐标为观察值）；②书签**不导出命名目的地**（PyMuPDF
+  resolve_names() 空——LO 转换期消解为直接目的地）；③孤立书签零
+  可观测面（无注记/无目的地/无 outline 差异）；④外链 URI 注记
+  类型可区分；⑤Heading1 → PDF outline 条目（观察值）。
+- 断言面工程选型：链接检视走 **poppler pdftohtml -xml**（内链 href
+  = {stem}.html#{目标页} fragment 承载 + <a> 包裹文本关联）——套件
+  **零三方依赖性质维持**（PyMuPDF 仅探针一次性观测用，不入依赖）；
+  <a> 包裹为文本块粒度（实测吸收前置普通 run 不吸收后置句号）→
+  链接文本断言用包含语义不用相等。
+- 实施三件：ro2_fixtures.py build_anchor_survival（夹具精确镜像
+  mdcore T1/T5 发射形状——链接段页 1 / 书签目标段页 2 显式分页分离
+  + 孤立书签 + 外链对照 rels）+ regress.py pdf_links_by_page 检视器
+  + checks_anchor_survival 十六断言（通用 5 + 文本 5 + 链接 6：
+  内链恰一/目标页精确/外链恰一 URL 精确/页 2 零注记/链接文本关联）
+  + CASES/build_all_fixtures 注册。
+- 门禁：全量 22 用例 = 10 pass + 12 pinned + 0 fail（204 断言）
+  SUITE PASS **双次复跑稳定**；夹具确定性门 + 跨进程确定性门恒过；
+  新夹具键 anchor-survival = 良性首跑基线（§9.4 语义）。
+- 文档：REGRESSION.md §1（poppler 行加 pdftohtml + stdlib only
+  维持注记）+ §10 新增（10.1 断言表/10.2 行为发现五条/10.3 门禁与
+  台账）；DECISION_GROUPS 批次 2 联动执行注记 + G5 证据增量；
+  DECISION_SHEET 批次 2 解锁面更新；HANDOFF §6 速览同步。
+
+Stage Summary:
+- 产品 API 形状 → LO → PDF 链接存活**全链闭合**：mdcore 侧 T1/T5
+  钉 XML 形状，本套件钉 LO 行为——w:anchor 内链 GOTO 存活且指向
+  书签页（C 路线保留内部导航定谳），office-g §13 联动项闭环。
+- 治理输入两条：书签不导出命名目的地（mdc-pdf 消费腿链接到达
+  形态 = GOTO 显式目的地——命名树依赖策略不可行）；孤立书签对
+  渲染产物零影响。
+- 批次 2 全部后续（合入 + 门禁 + 联动用例）收口；剩余门控维持
+  批次 1/3/4（DECISION_SHEET）。

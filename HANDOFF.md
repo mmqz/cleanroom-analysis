@@ -55,19 +55,23 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-17 批次 2 裁决执行后）**：**DECISIONS #8 已
-> 裁决执行**——用户裁 Option A Phase 1+2 全批，office-g-phase1-anchor
-> 经合并前置检查（merge-base=main HEAD / main 独有提交 0 / 差异 4
-> 文件 +398/-3 零公开模型触碰）ff 合入 mdcore main（`b15c0ab→c4856f7`）
-> + 全门禁绿复验（**G1 538/538** / clippy 双面恰 2 wasm_bindgen 基线
-> / fmt 0 / scan PASS / lock 零 diff / wasm32 check 过）+ 已推送；
-> **锚点写读对称达成（读 4/写 4），R4.5 强绑定升级路径开通**。
+> **当前态速览（2026-10-17 批次 2 裁决执行 + 联动项收口后）**：
+> **DECISIONS #8 已裁决执行**——用户裁 Option A Phase 1+2 全批，
+> office-g-phase1-anchor 经合并前置检查（merge-base=main HEAD /
+> main 独有提交 0 / 差异 4 文件 +398/-3 零公开模型触碰）ff 合入
+> mdcore main（`b15c0ab→c4856f7`）+ 全门禁绿复验（**G1 538/538**
+> / clippy 双面恰 2 wasm_bindgen 基线 / fmt 0 / scan PASS / lock
+> 零 diff / wasm32 check 过）+ 已推送；**锚点写读对称达成（读 4/
+> 写 4），R4.5 强绑定升级路径开通**；§13 联动项**已执行**（r-o2-t5
+> 锚点存活轮：R-O2 套件 21→22 用例/204 断言——w:anchor → GOTO
+> 注记存活指向书签页定谳 + 书签不导出命名目的地治理发现，
+> REGRESSION §10，双次复跑 SUITE PASS）。
 > **剩余门控 = DECISION_SHEET.md 批次 1/3/4**（批次 1 D1 解锁包三件
-> = 最优先；批次 3 Q3 渲染管线；批次 4 低优先合批）。第 15 次环境
-> 重置已恢复（双仓 ff 拉齐 + 分支重建 + 工具链 1.99.0/nightly-2026-
-> 10-15/wasm32 重装 + 门禁全量亲跑复验）。上一冲刺五件交付（decis-g1
-> + d1e-t1/t2/t3 + r-o2-t4 + r5-t3）与收口件（DECISION_SHEET.md）已
-> 推送在档（本仓 main=`ae41cea` 基础上）。本轮五件：①**决策组映射**
+> = 最优先；批次 3 Q3 渲染管线；批次 4 低优先合批）。第 16 次环境
+> 重置已恢复（双仓 ff 拉齐 + 工具链重装 + 门禁亲跑复验）。上一冲刺
+> 五件交付（decis-g1 + d1e-t1/t2/t3 + r-o2-t4 + r5-t3）与收口件
+> （DECISION_SHEET.md）已推送在档（本仓 main=`b3a6faf` 基础上）。
+> 本轮五件：①**决策组映射**
 > （decis-g1：17 项 → G1 载体与边界/G2 撤销与锚点身份/G3 栈与资源
 > 上限/G4 Office 锚点写 API/G5 渲染器部署治理，每组默认/备选/后果/
 > 不可推断四件套）；②**适配层撤销×锚点回归**（d1e-t1：六面回归锁
