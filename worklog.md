@@ -4297,3 +4297,29 @@ Stage Summary:
   前置缺口，批次 3 版本基线裁决从「需先复跑」变为「直接可裁」；
 - 唯一版本差 = garbage-bytes fail-closed 改进（安全面利好非
   风险）；anchor 存活跨版本稳定。
+---
+Task ID: ro2-t7（十轮计划 R7）
+Agent: 主代理（渲染线就绪系列）
+Task: 渲染守护器就绪原型——批次 3 实施轮机械项（单实例并发锁/
+RSS 看门狗/超时杀组）决策无关预置。
+
+Work Log:
+- 新增 render_guard.py（渲染守护器三合一，stdlib only）：G1 单实例
+  并发锁（flock 排他 + 阻塞串行化 + 锁超时 fail-closed——内存
+  上界 = 单转换 footprint）；G2 RSS 看门狗（/proc 进程树 VmRSS
+  后代展开轮询——软限告警不杀/硬限 SIGKILL 整进程组）；G3 超时
+  杀组（r-o2-t3 语义守护器化收编，start_new_session 独立进程组）。
+- 新增 render_guard_test.py 四断言组：T1 串行化（3 并发真实
+  soffice 转换全成功 + 锁等待 [0.704,1.024,0.0]s + 总墙钟 1.39s
+  串行证据）；T2 RSS 正常面（软限告警不误杀，峰值 187MB 树 2
+  进程）；T3 硬限 fail-closed（合成吞噬者 500MB + 限 200MB →
+  峰值 243MB 触杀 rc=-9）；T4 超时杀组（sleep30 + 限时 2s →
+  wall 2.015s rc=-9）。ALL PASS。
+- REGRESSION §10.6 落档（含产品化映射：套件内联超时/杀组收敛
+  守护器单点；单实例锁与 RSS 硬限 = 部署参数挂 SECURITY_POLICY
+  限额表；看门狗在飞防护与 wrapper 事后计量互补）。
+
+Stage Summary:
+- 批次 3 裁决后的实施轮机械项全部预置完毕——裁决落地时零设计
+  缺口（守护器已验证，参数化即产品）；
+- 套件文件零触碰（纯新增两文件），R-O2 22 用例面不受影响。

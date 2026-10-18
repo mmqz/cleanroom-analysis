@@ -359,3 +359,31 @@ True→False，方向 = fail-closed 语义改进，安全面利好）；anchor
 **复现**：`PATH=<lo26>/opt/libreoffice26.8/program:$PATH python3
 regress.py`（tarball 于 tool-results/lo26/，不入仓）。
 
+
+## 10.6 渲染守护器就绪原型（ro2-t7，render_guard.py）——批次 3 机械项预置
+
+**性质**：批次 3 G5 #7（Q3 子进程 + 宿主预装）实施轮机械项的 spike
+就绪原型（d1e-t3 先例模式——决策无关预置，裁决后产品化落位）。
+
+三机械面单守护器（`render_guard.py`，stdlib only）：
+- **G1 单实例并发锁**：flock 排他 + 阻塞串行化 + 锁超时
+  fail-closed——内存上界 = 单转换 footprint（LO 并发转换 = RSS
+  上界钳制实施形态）；
+- **G2 RSS 看门狗**：/proc 进程树 VmRSS 轮询（后代展开）——软限
+  告警记录不杀 / 硬限 SIGKILL 整进程组（防 OOM 拖垮宿主）；
+- **G3 超时杀组**：r-o2-t3 既有语义守护器化收编（start_new_session
+  独立进程组）。
+
+四断言组验证（render_guard_test.py，全过 2026-10-18）：
+| 组 | 断言 | 实测 |
+|---|---|---|
+| T1 串行化 | 3 并发真实 soffice 转换全成功 + 锁等待证据 + 总墙钟串行下界 | 锁等待 [0.704, 1.024, 0.0]s，总 1.39s |
+| T2 RSS 正常面 | 软限告警不误杀 + 峰值记录 + 树进程计数 | 峰值 187MB，树 2 进程 |
+| T3 RSS 硬限 | 合成吞噬者 500MB + 硬限 200MB → SIGKILL 组 | 峰值 243MB 触杀，rc=-9 |
+| T4 超时杀组 | sleep 30 + 限时 2s → 按时杀组 | wall 2.015s，rc=-9 |
+
+**产品化映射**（裁决后）：套件内联的超时/杀组逻辑（regress.py）
+收敛到守护器单点；单实例锁与 RSS 硬限 = 部署参数（SECURITY_
+POLICY 限额表挂点）；RSS 口径与 rss_wrapper 峰值口径互补（看门狗
+= 在飞防护，wrapper = 事后计量）。
+
