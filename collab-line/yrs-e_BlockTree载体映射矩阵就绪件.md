@@ -198,15 +198,15 @@ mdcore 物化路径（undo/redo/replay 回写原 BlockId）与载体身份
 
 | 映射行 | 已有证据（零新增动作） | 就绪探针（本文档同批） |
 |---|---|---|
-| 结构 9 kinds | p13-V1（全量序列化逐节点相等）/ V7（深嵌套） | p15-A：9 kinds 全量装载读回全等 + 邻居编辑结构稳定（V3 同构扩列） |
-| mixed content（Blockquote/ListItem 交织） | p13-V2 | p15-B：交织块前后插删子块序保持断言 |
-| 属性开放面 | — | p16-A：开放键透传 + 全量替换终态（含转义键） |
-| 行内 mark 拆分 | — | p16-B：重叠 marks 拆分读回语义等价；p16-C：mark 边界推移文本稳定（**已验**） |
+| 结构 9 kinds | p13-V1 / V7 + **p15-A1/A2 已验**（九 kind 精确形状装载读回全等 + wire 快照往返结构相等） | p15-B：邻居编辑稳定（**已验**：5 锚点前插3前删2 ID 全等值） |
+| mixed content（Blockquote/ListItem 交织） | p13-V2 + **p15-C 已验**（子块前插/删除后序保持，自有文本首位恒定） | — |
+| 属性开放面 | **p15-A3 已验**（未知键/转义敏感值/非 ASCII 零丢失）+ **p16-A 已验**（SetAttrs 终态替换非合并 + 身份域解耦） | — |
+| 行内 mark 拆分 | **p16-B/C 已验**（重叠拆分读回语义相等并集还原 + 边界推移覆盖随文本扩张） | — |
 | 偏移域换算 D-3 | — | p16 实测：XmlText 字节域定谳 + c2b 换算全环（**已验**——E1 中文 op5/op7 断言） |
-| SetBlockType D-1 | — | p16-D：改名子树搬移 BlockId 连续性断言（侧车保持 + 载体新族） |
-| ops 7 条 | 适配层 matrix 25（text/Array-of-Map 载体六面）| p16-E：7 ops 在 XmlFragment 载体全环（含对端 apply 收敛） |
-| 身份双轨 §4.3 | p13-V3/V4/V5 + anchor_undo_redo 6 | p17：物化路径（id=Some）与载体新族解耦断言 |
-| 撤销 B3.2 分栈 | p4/p9 + d1e-t1 六面回归 | p17：per-origin 分栈在 XmlFragment 载体复验 + redo 新 ID 族 |
+| SetBlockType D-1 | **p16-D 已验**（删旧建新搬子树：结构等价 + block_id 连续 + 载体身份换新族三断言） | — |
+| ops 7 条 | 适配层 matrix 25 + **p16-E 已验**（七 op 翻译器微缩全环：结构断言 + 对端 wire apply 收敛 + 增量二轮再收敛，含 own-text 偏移路径翻译） | — |
+| 身份双轨 §4.3 | p13-V3/V4/V5 + anchor_undo_redo 6 + **p17-B/C 已验**（redo 复原 block_id 连续 + 载体换新族双轴解耦） | — |
+| 撤销 B3.2 分栈 | p4/p9 + d1e-t1 六面回归 + **p17 已验**（per-origin 双栈互不干扰/LIFO/跨栈交叉/双 redo 全量复原——XmlFragment 载体与既有载体完全同构，G2① 载体侧风险清零） | — |
 
 ## 8. 裁决联动与升格路径
 
