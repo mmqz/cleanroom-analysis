@@ -4113,3 +4113,40 @@ Stage Summary:
   全绿在档（R-O2 22 用例双次复跑 / mdcore G1 538）；剩余全部
   门控 = DECISION_SHEET 批次 1（D1 解锁包，最优先）/批次 3
   （Q3 渲染管线）/批次 4（低优先合批）——等待用户批注。
+---
+Task ID: d1p-t1（十轮计划 R1）
+Agent: 主代理（D1 就绪系列）
+Task: BlockTree→XmlFragment 载体完整映射矩阵就绪件（批次 1 G1①
+门控实施轮设计文档的预置件，d1e-t3 先例模式）。
+
+Work Log:
+- 环境第 17 次重置恢复：rustup 全家桶重装（1.99.0 minimal +
+  clippy/rustfmt + wasm32 target + nightly-2026-10-15[rust-src]）
+  + 双仓 fetch 同步复验（cleanroom a688e70 / mdcore c4856f7 零
+  漂移）+ core.fileMode false 双仓。
+- 模型面盘点（mdcore c4856f7 一手核验）：9 BlockKind 三分类
+  （虚根 1 + 文本叶 5[Paragraph/Heading/CodeBlock/ThematicBreak/
+  Table——Table 为 GFM 原文文本叶非行列容器] + 容器 2
+  [Blockquote/ListItem 交织]）+ attrs 键面 3（level/lang/marker，
+  类型开放 BTreeMap）+ MarkSpan 行内区间 + 寻址双轨
+  （NodePath fragile 事务内 / BlockId 稳定注册表）+ Op 七操作
+  全签名（InsertBlock.id 物化语义单列）。
+- 就绪件落档 collab-line/yrs-e：§0 结论速览（全模型面 9/9 kinds +
+  7/7 ops + 双轨零死角映射，两条语义差异 D-1/D-2 呈确认，零硬
+  阻塞）+ §2 结构主表（元素名/属性开放编码/文本承载/子结构 +
+  证据锚点列）+ §3 行内面（mark 包裹元素模型 + 重叠拆分最小区间
+  等价覆盖 + 嵌套序确定性规约 + 段内分裂读回合并）+ §4 身份面
+  （双轨解耦：BlockId 侧车 ↔ StickyIndex 两步解析 + InsertBlock.id
+  物化与载体新 ID 族分轴不污染）+ §5 ops→载体事务七行表 + §6
+  差异两条（D-1 SetBlockType 元素重命名子树截断[删旧建新搬子树，
+  BlockId 连续载体换族]/D-2 marks 重叠→非重叠拆分[读回语义等价
+  非字面]）+ §7 证据锚点与缺口闭环表（已有证据 vs p15/p16/p17
+  就绪探针指向）+ §8 裁决联动（XmlFragment 升格路径/Array-of-Map
+  降格对照参考 + 方法论迁移面）+ §9 遗留三条。
+
+Stage Summary:
+- 批次 1 G1① 裁决的就绪基础件完成：裁决落定即可开实施轮，
+  设计文档写作量从「从零」降为「回填验证 + 细化签名」；
+- 两条语义差异 D-1/D-2 首次显式成表（此前散在 p13 观察注记），
+  进 DECISION_SHEET 批次 1 联动注记候选（R5 汇总轮处理）；
+- p15/p16/p17 就绪探针需求清单定稿（§7 第三列），驱动 R2-R4。
