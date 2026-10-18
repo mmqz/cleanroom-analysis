@@ -4376,3 +4376,28 @@ Stage Summary:
   污染、批注入口完好——批次 1/3/4 呈批态有效。
 - 审计副产物：compliance-baseline 为远端独立分支（本地单分支
   clone 不含）——跨分支引用核对方法已验证可用。
+---
+Task ID: final（十轮计划 R10）
+Agent: 主代理（十轮收口）
+Task: 三大件门禁全量亲跑复验 + 十轮台账 + 终态推送。
+
+Work Log:
+- 门禁亲跑（本会话收口态）：mdcore workspace **538/538** 零失败；
+  适配层 **54/54**（matrix25+hostile13+anchor6+limit10）+ p15/
+  p16/p17 三探针 release 复跑 ALL PASS；R-O2 **22 用例 SUITE
+  PASS**（10 pass + 12 pinned + 0 fail，系统 LO 25.2.3.2 基线，
+  双确定性门恒过）。
+- HANDOFF §6 速览更新至十轮终态（新态前置 + 历史保留）。
+- 十轮台账对账：R1 d1p-t1 映射矩阵（2578f2f）/ R2 d1p-t2 p15
+  （9e1f8e0）/ R3 d1p-t3 p16+D-3（1fe2f01）/ R4 d1p-t4 p17
+  （d525730）/ R5 d1p-t5 就绪包（73f3d44）/ R6 ro2-t6 LO 跨版本
+  （e87c44a）/ R7 ro2-t7 守护器（b99b9a8）/ R8 yrs-up 上游跟踪
+  （90065a8）/ R9 docs-audit 审计（1d8d0d1）/ R10 final 收口
+  （本轮）——十轮十提交全推送。
+
+Stage Summary:
+- 十轮计划全收口：批次 1 就绪包（证据链完整批注即开实施轮）+
+  批次 3 证据就位（26.8.1 复跑完成 + 机械项守护器预置）+
+  上游候选定稿 + 双仓零漂移 + 门禁全绿。
+- mdcore 零接触维持（c4856f7）；全部工作在分析仓 spike/文档面
+  （d1e-t3 先例纪律）。
