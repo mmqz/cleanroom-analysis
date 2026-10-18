@@ -99,12 +99,16 @@ None=现场分配 / Some=物化恢复（undo/redo/replay 路径）——载体�
 
 ## 3. 行内面映射（text + marks → mixed content）
 
-### 3.1 无 mark 文本
+### 3.1 无 mark 文本（【实测修正】偏移域边界换算）
 
 单文本子节点，`ReplaceText{start,end,insert}` → 载体文本节点
-`insert(start, …)/remove(range,…)`——**char 域对 char 域**（双方
-偏移单位同为 char；实施轮在适配层边界做 char↔char 直传 + UTF-8
-字节域只在 wire 编码层出现，不进语义面）。
+`insert(pos,…)/remove(range,…)`。**偏移域实测定谳（p16
+sem_probe 实证）：yrs 0.28 `XmlText` 索引/长度 = UTF-8 字节域**
+（"第一段".len()=15；insert(3) 落在第/一字节边界间；部分覆盖
+删除不整块误删——yrs 内部分块正确处理）——非 Text(YText) 的
+UTF-16 域非 char 域。BlockTree ReplaceText/SetMark = char 域 →
+**适配层边界 char↔byte 无损换算**（ropey char→byte 原生支持；
+实施轮边界工程项 D-3，非语义差异）。
 
 ### 3.2 mark 承载（包裹元素模型）
 
@@ -179,12 +183,13 @@ mdcore 物化路径（undo/redo/replay 回写原 BlockId）与载体身份
 = 内存放大缓解既证结论复用**（yrs-a spike：单事务批量 commit 期
 二次放大 → 分事务零成本）。
 
-## 6. 语义差异清单（实施轮呈用户确认，两条）
+## 6. 语义差异清单（实施轮呈用户确认：两条语义差异 + 一条工程项）
 
 | # | 差异 | 形状 | 建议 |
 |---|---|---|---|
 | D-1 | **SetBlockType 元素重命名子树截断** | 载体无原位改名 → 实施形状 = 删旧建新搬子树。**后果**：①子树节点载体身份全部换新族（StickyIndex 新族——但**侧车 BlockId 映射随子树搬移保留**，BlockId 语义连续 ✅）；②对端 wire 收到的是 删除+插入 对而非改名（收敛正确、字节面非最小） | 接受（收敛正确性优先；改名字节优化留上游 API 请求候选） |
 | D-2 | **marks 重叠 → 非重叠拆分** | mdcore 允许重叠 marks，载体树形嵌套不表重叠 → 最小区间等价覆盖拆分；读回**语义等价但字面区间切分可不同** | 接受（往返断言取语义相等；字面还原仅当输入本就非重叠） |
+| D-3 | **偏移域边界换算**（p16 实测发现，工程项非语义差异） | 载体 XmlText = UTF-8 字节域（实测 len/insert 均字节）；BlockTree = char 域 → 适配层边界无损换算 | 接受（纯边界工程，零语义损失；适配层单点换算不暴露字节域） |
 
 （其余面零差异：寻址双轨解耦 §4.3、attrs 终态替换 §2.1、move 原子
 §5 均为同构映射非语义变更。）
@@ -196,7 +201,8 @@ mdcore 物化路径（undo/redo/replay 回写原 BlockId）与载体身份
 | 结构 9 kinds | p13-V1（全量序列化逐节点相等）/ V7（深嵌套） | p15-A：9 kinds 全量装载读回全等 + 邻居编辑结构稳定（V3 同构扩列） |
 | mixed content（Blockquote/ListItem 交织） | p13-V2 | p15-B：交织块前后插删子块序保持断言 |
 | 属性开放面 | — | p16-A：开放键透传 + 全量替换终态（含转义键） |
-| 行内 mark 拆分 | — | p16-B：重叠 marks 拆分读回语义等价；p16-C：mark 边界推移文本稳定 |
+| 行内 mark 拆分 | — | p16-B：重叠 marks 拆分读回语义等价；p16-C：mark 边界推移文本稳定（**已验**） |
+| 偏移域换算 D-3 | — | p16 实测：XmlText 字节域定谳 + c2b 换算全环（**已验**——E1 中文 op5/op7 断言） |
 | SetBlockType D-1 | — | p16-D：改名子树搬移 BlockId 连续性断言（侧车保持 + 载体新族） |
 | ops 7 条 | 适配层 matrix 25（text/Array-of-Map 载体六面）| p16-E：7 ops 在 XmlFragment 载体全环（含对端 apply 收敛） |
 | 身份双轨 §4.3 | p13-V3/V4/V5 + anchor_undo_redo 6 | p17：物化路径（id=Some）与载体新族解耦断言 |

@@ -4178,3 +4178,39 @@ Stage Summary:
   闭环：九 kind 形状全保真（含 wire 往返）、开放键面零丢失、
   全块锚点邻居编辑稳定、交织容器序保持——结构面零缺口。
 - yrs-e §7 证据列 p15-A/B/C 行可回填（R5 汇总轮统一处理）。
+---
+Task ID: d1p-t3（十轮计划 R3）
+Agent: 主代理（D1 就绪系列）
+Task: p16 探针——操作保真环（7 ops 翻译器微缩 + marks/attrs 编码
++ 对端收敛），含偏移域重大实测发现。
+
+Work Log:
+- 新增 p16_mapping_ops（七断言组）：A SetAttrs 终态替换（清旧写新
+  非增量合并 + block_id 身份域解耦不触）；B 重叠 marks 拆分读回
+  语义相等（em[0,10)∩strong[5,15) → 三段最小区间等价覆盖 → 并集
+  还原）；C mark 边界推移（首插+尾插后覆盖随文本扩张）；D
+  SetBlockType D-1 形态（删旧建新搬子树 + block_id 连续 + 载体身份
+  换新族 StickyIndex ID 不等钉定）；E 七 op 翻译器微缩全环
+  （InsertBlock×4 含嵌套 own-text 偏移路径翻译/ReplaceText/SetAttrs
+  /SetMark/MoveBlock/RemoveBlock → 结构断言 → wire diff 对端 apply
+  收敛 → 增量二轮 SV diff 再收敛）。
+- 【重大实测发现】yrs 0.28 XmlText 索引/长度 = **UTF-8 字节域**
+  （sem_probe 一次性验证："第一段".len()=15；insert(3) 落在第/一
+  字节边界间；部分覆盖删除不整块误删）——非 Text(YText) 的
+  UTF-16 域非 char 域。yrs-e §3.1 原「char 域直传」判断**错误
+  已修正**：适配层边界 char↔byte 无损换算（ropey 原生支持），
+  登记为 D-3 工程项（非语义差异）。临时探针跑毕即删（纪律维持）。
+- 修复链：括号/usize→u32/Arc<str> 比较/Out::to_string(txn) 签名/
+  XmlFragment 是 trait 非 type（方法来源导入）/split_at 字节域
+  panic → c2b 字符→字节换算。
+- 门禁：p16 release ALL PASS（7 断言组）+ 适配层 54/54 零回归 +
+  全探针（15 个）构建零错误。
+
+Stage Summary:
+- 映射矩阵 §5 操作表 + §3 行内面 + §6 差异 D-1/D-2 全部实证闭环；
+  D-3 新增（偏移域换算——实施轮边界工程项，零语义损失）。
+- 七 op 在 XmlFragment 载体全环成立：结构断言 + 对端收敛 + 增量
+  再收敛三层验证；own-text 偏移路径翻译规则（blockquote/li 子块
+  +1）钉定。
+- yrs-e 文档随实测同步修正（§3.1 重写 + §6 D-3 行 + §7 证据表
+  两行已验翻转）。
