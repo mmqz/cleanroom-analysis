@@ -105,3 +105,43 @@
 - yrs 新版本发布：映射矩阵（yrs-e）+ 适配层（B1.2 单点）影响面
   核对，破坏性变更命中适配层无法吸收面 → 撤回触发②评估；
 - 撤回触发③（性能）：正式基准套件（yrs-a §8.1）建成后生效。
+
+
+## 5. 缺陷候选 #4（2026-10-19 p20 发现，未呈递——本仓复现在档）
+
+**标题（英文呈递稿）**：Undo of a capture-window-merged stack item
+applies only its first sub-range and subsequent redo panics in
+`Store::materialize` (multiple UndoManagers with disjoint origins)
+
+**触发面（p20 四配置矩阵定谳，bin p20_undo_window_repro）**：
+- 复现：**两个及以上 UndoManager 各自 track 不同 origin** +
+  `capture_timeout_millis > 0` + 同窗内同 origin 多次编辑被其他
+  origin 编辑隔断（非连续区间合并项）
+- 表现①：undo 对合并项仅应用首个子区间（H1..H2 合并项被 A1 隔断
+  → 仅 H1 移除）
+- 表现②：后续 redo 于 `yrs::store::Store::materialize`
+  `Option::unwrap()` on None panic（经 `UndoManager::pop_blocking`）
+- 干净对照：单 manager（全窗连续合并）/ 双 manager + timeout=0 /
+  单 manager + timeout=0 三配置全部正确
+
+**最小复现（raw yrs 0.28，Text 根）**：
+```rust
+// 双 manager（include_origin 各 "human"/"ai"，expand_scope 同根，
+// capture_timeout_millis = 1000）
+// 同窗交错追加："H1"(human) "A1"(ai) "H2"(human) "A2"(ai)
+// → undo(human) 得 "A1H2A2"（期望 "A1A2"——仅首段应用）
+// → redo(human) panic: store.rs:340 Store::materialize unwrap None
+```
+
+**影响**：适配层现产配置（双 manager + 1000ms 窗——B2.1(b) 口径）
+下公开 API undo/redo 可达：交错 origin 同窗编辑 + undo + redo =
+进程 panic。与 #676（encode_diff heap UAF）独立。
+
+**处置（呈批，非本仓自决）**：
+- 选项 A（推荐）：适配层捕获窗改 0（cfg-2 实证干净）——撤销粒度
+  变逐事务（产品语义变更 → DECISION_GROUPS G2 批注项；p19 实测
+  粒度成本 437.9 B/操作从上界转常态）；
+- 选项 B：维持 1000ms 窗 + 临时禁用公开 undo/redo 面（等上游修
+  复——呈递本候选 + 跟踪）；
+- 选项 C：维持现状知情（钉定测试 soak-3 在档——每跑必红提醒）。
+- 上游呈递与候选 ①②③ 合批（§3 时机选项默认 a 维持）。

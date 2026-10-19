@@ -4539,3 +4539,45 @@ Stage Summary:
   需求亦有数字支撑）。
 - 栈保留性格实证（undo 不释放内存）确认 B3.4 知情面的「已消耗
   仍在栈」认知。
+
+---
+Task ID: a5-r4（五轮自主计划 R4：soak 收敛轮——猎获 yrs 0.28 新缺陷）
+Agent: 主代理
+
+Task: 适配层随机化长跑收敛测试（确定性种子 PRNG，零三方依赖）。
+
+Work Log:
+- 新测试文件 `adapter/tests/soak_convergence.rs`（xorshift64* 种子
+  PRNG）+ 新探针 `p20_undo_window_repro.rs`（bin 第 21 号）。
+- soak-1 双端随机并发（60 轮 × 每端 8 随机操作：四变体流编辑 ×
+  双 origin × 穿插随机 undo/redo，每轮双向同步后三面全等断言 +
+  每 20 轮幂等复验）PASS。
+- 【重大发现】soak-2 初版（全量复原不变量）失败 → 最小观测 →
+  **yrs 0.28 新缺陷定谳（p20 四配置矩阵）**：双 UndoManager 各自
+  track 不同 origin + capture_timeout>0 时，同窗内同 origin 编辑
+  被其他 origin 隔断形成**非连续合并项** → ① undo 仅应用首子区间
+  ② 后续 redo 在 Store::materialize panic（unwrap None，经
+  pop_blocking）。干净对照：双 mgr+窗0 / 单mgr+窗1000 / 单mgr+窗0
+  全部正确。**适配层现产配置（1000ms 窗）公开 API 今日可达**（交错
+  origin 同窗编辑 + undo + redo = 进程 panic）。
+- soak-2 重设计为长跑收敛稳定（3000 操作无撤销面：追踪面活跃 +
+  双端收敛 + 幂等 + gc 存活）PASS；soak-3 = 缺陷钉定测试
+  （catch_unwind 钉 panic + 终态断言钉部分撤销——修复/改配置后
+  必失败强制解钉）PASS。
+- 过程自纠两件：①p20 首版死锁挂起——get_or_insert_text 在事务内
+  调用（p18-F 同族：先取根后开事务纪律）；②soak-1 150 轮 205s
+  过慢 → 60 轮 30s（门禁可常跑）。
+- 文档：yrs-g §5 新增缺陷候选 #4（英文呈递稿 + 最小复现 + 处置
+  三选项 A[推荐]窗改0/B 维持+禁面/C 知情维持）；DECISION_GROUPS
+  G2 增补 p20 呈批输入（撤销粒度语义 = 产品决策，与 #4② 同批或
+  先行批注）。
+- 门禁：全套件 **57/57**（54 既有 + 3 soak）零失败；soak 文件 +
+  p20 rustfmt 过。
+
+Stage Summary:
+- 缺陷猎获入档：#676 之外第二个 yrs 0.28 缺陷（undo 捕获窗 × 多
+  manager），适配层现产配置可达、复现矩阵干净、上游呈递稿就绪、
+  钉定测试每跑必红。
+- 决策面新增呈批输入：G2/B3.2 捕获窗处置三选项（推荐 A 窗改 0
+  ——cfg-2 实证干净；p19 粒度成本 437.9 B/操作转常态的取舍入注）。
+- 测试面 +3：随机并发收敛 / 长跑稳定 / 缺陷钉定。

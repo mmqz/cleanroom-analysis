@@ -97,3 +97,7 @@ path = "src/bin/p18_char_byte_conv.rs"
 [[bin]]
 name = "p19_undo_stack_mem"
 path = "src/bin/p19_undo_stack_mem.rs"
+
+[[bin]]
+name = "p20_undo_window_repro"
+path = "src/bin/p20_undo_window_repro.rs"

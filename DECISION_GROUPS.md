@@ -106,6 +106,12 @@ G5 的部署治理主题 / G3 的资源环境主题各挂靠一组），零组�
 
 - B3.2 形态四轮探针校验（d1c-t2 p9：栈本地+效果全局、捕获窗双向、
   一笔装载单栈项；origin 常量表 d1c-t1）。
+- **p20 缺陷新输入（2026-10-19 a5-r4，呈批）**：yrs 0.28 双
+  UndoManager + 捕获窗 >0 下，同窗非连续合并项 undo 仅应用首段 +
+  后续 redo panic（Store::materialize）——适配层现产配置（1000ms
+  窗）公开 API 可达。处置三选项见 yrs-g §5（A 窗改 0[推荐] /
+  B 维持窗+临时禁 undo 面 / C 知情维持）——**撤销粒度语义属产品
+  决策，与 #4② 同批或先行批注**；钉定测试 soak-3 在档。
 - R-1 接 A 的依据：settings 六锚点 plumbing 完整 = 原设计意图；
   默认值==COALESCE_MS → 默认行为零变化；实施锚点全定位（History
   coalesce_ms 字段 serde default+skip = 持久化格式零变化 + Core
