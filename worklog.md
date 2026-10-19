@@ -4401,3 +4401,49 @@ Stage Summary:
   上游候选定稿 + 双仓零漂移 + 门禁全绿。
 - mdcore 零接触维持（c4856f7）；全部工作在分析仓 spike/文档面
   （d1e-t3 先例纪律）。
+
+---
+Task ID: recover-18（第 18 次重置恢复与停机复验轮）
+Agent: 主代理（新会话「继续」指令恢复轮）
+
+Task: 环境第 18 次重置后双仓恢复 + 工具链重建 + 推送终态全门禁
+复验 + 停机条件核验 + 落档推送。
+
+Work Log:
+- 发现与恢复：本地 log 顶 = ae4aa4d（回滚态）且 status 假 ahead 2
+  ——瞬态 URL 推送陷阱特征。fetch 核实远端真实态：origin/main =
+  **defc055（十轮收口）**，即「至少10轮」任务上一会话已完整完成
+  （R1-R10 十提交链：2578f2f/9e1f8e0/1fe2f01/d525730/73f3d44/
+  e87c44a/b99b9a8/90065a8/1d8d0d1/defc055 全推送）。ff 恢复本地
+  main→defc055，树净。mdcore=c4856f7 同步树净零接触维持。
+- 工具链重建（重置抹除 cargo/rustc）：rustup 1.99.0 minimal +
+  clippy/rustfmt + wasm32-unknown-unknown target +
+  nightly-2026-10-15[rust-src] 全装；双仓 core.fileMode false；
+  LO 25.2.3.2 系统基线存活（与钉定基线一致零重装）。
+- 全门禁恢复复验（重建环境亲跑）：适配层 **54/54**（matrix25 +
+  hostile13 + anchor_undo_redo6 + limit_boundaries10）；mdcore
+  workspace **G1 538/538 零失败**；clippy 双面恰 2 wasm_bindgen
+  基线（lib.rs:212/221 static_method_of——grep 4 行命中甄别 =
+  2 真警告基线 + 2 摘要行，零增量）；fmt 0；p15/p16/p17 release
+  复跑 ALL PASS；R-O2 **22 用例 SUITE PASS**（10 pass + 12
+  pinned + 0 fail，夹具确定性门 + 跨进程确定性门双过，系统 LO
+  25.2.3.2 基线）；scan.sh 双口径（product / --all）0 hit-paths
+  PASS。双仓树净 = Cargo.lock 零 diff 蕴含。
+- #676 重置恢复复查（跟踪纪律三条之「重置恢复后复查」）：匿名
+  API 限流 403 → 瞬态 token 认证复查（零落盘）——state=open /
+  updated=2026-09-29（与 yrs-g 快照零漂移）/ comments=0；
+  crates.io yrs max_version=0.28.0=钉版维持。撤回触发三条零触发
+  （skip_gc 不变量维持）。
+- 文档落档：HANDOFF §6 新态速览前置（第 18 次重置恢复 + 停机
+  复验；历史速览全保留）；本 worklog 条目。
+
+Stage Summary:
+- 第 18 次重置恢复完成：重建环境完整复现推送终态（defc055），
+  全门禁亲跑全绿零漂移；十轮计划收口态维持有效。
+- 停机条件维持：类别 1（决策无关可执行面）清空——批次 1 就绪包
+  完整、批次 3 证据就位、上游候选定稿、审计八项全过；剩余全部
+  = DECISION_SHEET.md 批次 1/3/4 用户裁决门控，按纪律如实报告
+  不伪造工作。
+- 批次 1 批注即开实施轮（载体切换→双向转换器→集成边界，预告
+  3-5 轮）；批次 3 批注即开渲染管线轮（26.8.1 复跑证据 +
+  render_guard.py 守护器已预置）。
