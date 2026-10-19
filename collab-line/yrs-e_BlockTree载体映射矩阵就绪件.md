@@ -202,7 +202,7 @@ mdcore 物化路径（undo/redo/replay 回写原 BlockId）与载体身份
 | mixed content（Blockquote/ListItem 交织） | p13-V2 + **p15-C 已验**（子块前插/删除后序保持，自有文本首位恒定） | — |
 | 属性开放面 | **p15-A3 已验**（未知键/转义敏感值/非 ASCII 零丢失）+ **p16-A 已验**（SetAttrs 终态替换非合并 + 身份域解耦） | — |
 | 行内 mark 拆分 | **p16-B/C 已验**（重叠拆分读回语义相等并集还原 + 边界推移覆盖随文本扩张） | — |
-| 偏移域换算 D-3 | — | p16 实测：XmlText 字节域定谳 + c2b 换算全环（**已验**——E1 中文 op5/op7 断言） |
+| 偏移域换算 D-3 | p16 实测：XmlText 字节域定谳 + c2b 换算全环（E1 中文 op5/op7 断言） | **p18 已验**（完备双向模块 PoC：六语料精确对 + 活体一致性 + 全位置穷举往返 + ReplaceText 四案逐字相等 + 错误面三态——见 §9 增补 4） |
 | SetBlockType D-1 | **p16-D 已验**（删旧建新搬子树：结构等价 + block_id 连续 + 载体身份换新族三断言） | — |
 | ops 7 条 | 适配层 matrix 25 + **p16-E 已验**（七 op 翻译器微缩全环：结构断言 + 对端 wire apply 收敛 + 增量二轮再收敛，含 own-text 偏移路径翻译） | — |
 | 身份双轨 §4.3 | p13-V3/V4/V5 + anchor_undo_redo 6 + **p17-B/C 已验**（redo 复原 block_id 连续 + 载体换新族双轴解耦） | — |
@@ -229,3 +229,17 @@ mdcore 物化路径（undo/redo/replay 回写原 BlockId）与载体身份
    **读回方**对未知 kind 的 BlockTree 落位（保留 MarkSpan 原样）
    为实施轮转换器行为规约——语义零丢失、表示零发明；
 3. **wasm 桥面**（yrs-a §8.3）维持遗留——本件不影响其正交性。
+
+4. **D-3 换算完备 PoC（p18，2026-10-19 五轮自主计划 a5-r2 增补）**：
+   c2b/b2c 双向函数 + 边界拒止（mid-codepoint 显式 Err——适配层不得
+   静默错位）+ 六语料穷举（空/ASCII/BMP/非 BMP/组合符/混合——char ≠
+   UTF-16 ≠ byte 三域分立证据）+ ReplaceText char 区间→字节区间四案
+   与 Rust 侧 char 域真值逐字相等 + 活体 XmlText 一致性（len=字节域
+   复证）。**实施轮直接采纳 p18 函数形态**（c2b 显式 None 越界、
+   b2c 三态 Err、末哨兵 == len）；
+5. **事务锁纪律（p18-F 实测发现，实施轮硬约束）**：yrs 0.28
+   `TransactionMut::commit()` **不释放写锁——锁随 Drop 释放**。
+   同一作用域保活已 commit 的写事务再开任何事务（含只读）= **死锁
+   挂起**（p18 首版 B2 踩中实测复现）。纪律：每写事务独立块作用域
+   （或显式 drop）。适配层既有代码经全测试面未触发此坑，实施轮
+   扩写时必须维持该纪律——建议以 clippy/评审检查项固化。

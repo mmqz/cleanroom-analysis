@@ -4468,3 +4468,40 @@ Stage Summary:
 - 抗重置强化：环境再重置时，两仓已验证态可经标签名一步定位
   （不必依赖 log 检索）；标签自带门禁证据摘要。
 - 零代码接触：纯 ref 面操作，双仓树净维持，无门禁影响。
+
+---
+Task ID: a5-r2（五轮自主计划 R2：p18 D-3 换算完备 PoC）
+Agent: 主代理
+
+Task: 把 p16 的单向临时 c2b 升格为完备双向偏移域换算模块 PoC
+（批次 1 已登记工程项 D-3 的实施前置）。
+
+Work Log:
+- 新探针 `p18_char_byte_conv.rs`（bin 注册第 19 号）：c2b（char→
+  字节，越界显式 None + 末哨兵 == len）/ b2c（字节→char，三态
+  Err：byte-out-of-range / mid-codepoint / Ok）双函数。
+- 五面 12 断言组全部 PASS：A1 六语料精确对表（空/ASCII/BMP/
+  非 BMP/组合符/混合——含手算真值全表）· B1-B4 活体 XmlText
+  一致性（len=13 byte ≠ 6 char ≠ 7 UTF-16 三域分立复证 + 读回
+  零畸变 + c2b 偏移 insert 落点 + remove_range 字节域口径）·
+  C1-C3 全位置穷举（往返恒等 + 末哨兵 + 非边界字节全数拒止零
+  误拒）· D ReplaceText 真实路径四案（char 区间→字节区间删除
+  插入与 Rust 侧 char 域真值逐字相等——含区间内多字节/边界恰
+  多字节/全清空/ASCII 退化）· E1-E3 错误面三态。
+- 【实测发现 p18-F】yrs 0.28 `TransactionMut::commit()` 不释放
+  写锁——锁随 Drop 释放；同作用域保活已 commit 写事务再开任何
+  事务 = 死锁挂起（首版 B2 踩中，分步标记定位，独立块作用域
+  重构后全绿）。实施轮硬约束登记。
+- 向量表一处真值笔误自纠（nonbmp 3 字符误写 4 行 → c2b(4)
+  期望越界 None 实测揭穿后修正）。
+- yrs-e 增补：§7 D-3 证据行回填 p18（完备模块 PoC 已验）+
+  §9 增补 4/5（p18 函数形态采纳建议 + p18-F 事务锁纪律）。
+- 门禁：p18 release ALL PASS 零警告；p18 文件 rustfmt 过
+  （spike 仓无 fmt 门禁史——adapter/lib.rs 既有格式差异非本轮
+  触碰未动）；适配层 54/54 零回归。
+
+Stage Summary:
+- D-3 工程项从「p16 两断言佐证」升格为「完备模块 PoC + 实施轮
+  直接采纳形态」——批次 1 就绪包证据面再加固。
+- p18-F 事务锁死锁发现为批次 1 实施轮新增硬约束（写事务作用域
+  纪律），已登记 yrs-e §9-5。

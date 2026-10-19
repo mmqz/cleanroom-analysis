@@ -89,3 +89,7 @@ path = "src/bin/p16_mapping_ops.rs"
 [[bin]]
 name = "p17_mapping_undo"
 path = "src/bin/p17_mapping_undo.rs"
+
+[[bin]]
+name = "p18_char_byte_conv"
+path = "src/bin/p18_char_byte_conv.rs"
