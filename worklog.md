@@ -4613,3 +4613,52 @@ Stage Summary:
 - 呈批面更新：G2 新增 p20 捕获窗处置三选项（推荐 A 窗改 0）；
   批次 1/3/4 维持待批注。全部工作在分析仓（mdcore c4856f7 零
   接触维持）。
+
+---
+Task ID: s0-t2/s0-t3（修订实施计划 S0：协作缺陷缓解 + 资源清单）
+Agent: 主代理
+
+Task: 用户 2026-10-21 修订实施计划（S0-S5）S0 阶段——工程收口与风险
+止损：仓库状态核实、p20 复现与缓解（捕获窗→0）、交错回归补齐、
+粒度代价记录、撤销栈量化与低成本限制验证、一页资源限制与缺口清单。
+附加用户澄清：标书证据系统只是需求之一，优先通用基础功能（S1 重排
+为通用数据契约/sidecar/薄命令层先行，证据闭环为首个消费者）。
+
+Work Log:
+- 环境第 19 次重置恢复：rustup 全失→重装 1.99.0（clippy/rustfmt）
+  + nightly-2026-10-15 后台；cleanroom 本地 main 假领先（重置回滚
+  fetch）→ 认证 fetch + ff 恢复 7ac6b9e；mdcore c4856f7 零接触核对。
+- 修复前复现（S0-任务2）：钉定测试 debug 口径确定性失败——新观测
+  第三副面孔：undo 阶段 Item::splice `clock+offset-1` u32 下溢当场
+  panic（block.rs:652）；release 口径复现部分撤销+redo panic（上会话
+  57/57 绿为 release 口径——口径差揭穿：debug 抓下溢/release 抓静默
+  回绕）。机制统一：合并非连续栈项 undo 应用时 offset=0/clock=0 下溢。
+- 修复（S0-任务3）：adapter lib.rs capture_timeout_millis 1000→0
+  （硬编码非配置面）；仅协作路径——mdcore COALESCE_MS 零接触。
+- 测试改造：soak-3 解钉→dual_manager_interleaved_undo_redo_full_cycle
+  回归锁（逐事务粒度/LIFO/origin 隔离/redo 全复原/双 origin 交叉
+  全环）；soak-4 新增 blocks 载体交错回归（首版断言 LIFO 序算错
+  自纠：撤完删除后次项=插 h2 而非 h1）；matrix 窗合并测试反转锁
+  逐事务粒度 + boundary 测试并入（窗语义消亡）；anchor 三处 1100ms
+  sleep 移除（断言零改动全过）。p20 探针复跑留证：cfg-1 原始 yrs
+  层仍 panic=true（上游未修，适配层免疫）。
+- 门禁：57/57（matrix24+hostile13+anchor6+limit10+soak4）debug+
+  release 双口径零失败；clippy 增量零新（存量 16-18 登记）；fmt
+  全仓漂移为历史存量（spike 从未 fmt 门禁——探针代码=归档证据，
+  清收留产品化轮）；token 零落盘（env 单次传递，grep 验证）。
+- 一页清单（S0-任务5/6）：collab-line/S0-资源限制与缺口清单.md——
+  已有六限制/撤销栈定量 437.9B/op·6M≈2.4GiB/低成本限制验证结论
+  （无合规逐出面，监控就绪，上游 API 呈递稿在档）/粒度代价与五条
+  未覆盖路径（诚实边界：修复已知触发条件≠全面安全）/缺口六项按
+  风险排序。
+
+Stage Summary:
+- S0 六项全收口：仓库状态✓（双仓同步零未提交）/复现✓（三副面孔
+  机制统一）/缓解✓（窗0+回归锁双口径）/代价记录✓/栈定量与限制
+  验证✓（维持无限+监控，不虚报不清空）/一页清单✓。
+- 决策面变化：G2 p20 选项 A 已裁已执行（用户 S0 指令原文）；批次 1
+  解锁（XmlFragment/B3.2/栈上限）被修订计划 S3 后置取代——协作
+  产品化等真实多端需求，不再阻塞主线；批次 3 渲染产品化后置 S4。
+- 下一阶段：S1 通用基础优先——DocumentRef/Locator/Command/
+  AuditEvent 最小契约 + 本地 sidecar 存储 + 薄命令层（幂等键/预期
+  版本/路径允许列表），证据系统作为首个消费者落闭环；不预设 UI。
