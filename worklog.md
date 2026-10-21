@@ -4748,3 +4748,58 @@ Stage Summary:
 - 下一轮 s1-r3：工作台编排层（mdc-workbench 新 crate，依赖倒置
   注入 office-io 读写）+ 合成样例八步端到端闭环（验收门禁 12 条
   显式定义并逐条映射测试）。
+
+---
+Task ID: s1-r3（修订计划 S1 第三轮：工作台编排层 + 八步闭环）
+Agent: 主代理
+
+Task: S1 收口轮——mdc-workbench 编排层（新 crate）+ 合成样例八步
+端到端闭环 + 验收门禁 12 条显式定义与测试映射。
+
+Work Log:
+- mdcore 新 crate crates/workbench（第十成员，2041 行）：ingest
+  （XLSX 语义指纹 = 非空格 sheet|A1|值表示序——样式噪声不失效；
+  DOCX 段落 trim 规范化指纹；仅段落计号对齐 DocxParagraph 口径）
+  + pipeline（Workbench 会话：start/open/ingest_source/
+  propose_binding/propose_calculation/recalc_current/refresh_body/
+  reverify_source/reverify_claim/review/export_clean）+ report
+  （三态分列 Markdown，刻意无汇总列）。
+- 三条结构性纪律：正文零写入（干净导出=先三验证[可解析+零标记
+  +字节同一]后产出）；AI 提议/程序验证（数值/指纹/摘录全部程序
+  从真实文件提取，fail-closed 三前置：正文/来源指纹 fresh + 目标
+  存在 + claimed_value 必须在场段落文本）；无任意路径/SQL/Shell。
+- evidence crate 增量：CalcInput.source_doc_id 加性字段（v1 数据
+  serde(default) 加载不破）+ sidecar 四方法（review_evidence 迁移
+  矩阵含复位拒绝 / refresh_document claim 锚失效 / reverify_claim
+  对称恢复通道 / push_audit_public）+ recalculate_calc 补 linkage
+  门槛（非 Valid 级联 InputUnavailable——来源不实不许复算通过）
+  + 五项再导出。
+- tests/eight_step_loop.rs 四集成测试全绿：主闭环（4210.000 目标
+  标度 3 含 rescale 轨迹 + 来源改写 Stale 级联 + 复位拒绝 + 删除
+  sidecar 正文照常）+ 全恢复路径（重验→InputMismatch→旧证拒→
+  新计算 5000.00→正文更正 claim 锚断→新证→通过→过审；审计五
+  事件 + 序号单调）+ fail-closed 八拒绝路径 + 导出标记检测
+  （污染被抓 + 失败零产出）。
+- 自纠三件：①export_clean 先写后验违反"失败不产出"→ 重排为先
+  验证后落产物；②C7 读回 336.8（scale 1）非 336.80——主循环精度
+  改 target_scale 3 以覆盖 rescale 轨迹 + 跨标度相等闭环；③
+  WorkbookWriter::new 非 Result（测试夹具修正）。
+- 报告落档：workbench-line/S1-证据系统MVP验收报告.md——验收
+  门禁 12 条逐条映射测试 + 三项选型决策显式登记（①sidecar JSON
+  非 SQLite：零新三纪律+一文档一文件可携带+MVP 规模够用，升级
+  路径 Store 抽象——**待用户追认**；②PDF 只读契约就位接入后置
+  S4；③FNV-1a 非密码学，威胁模型=意外失效）。
+- 门禁（亲跑）：G1 588→**595**（evidence 50→53 + workbench
+  0→4）零失败；clippy native+wasm32 双面恰 2 基线；fmt 0；scan
+  0 hit-paths；wasm32 check --all-targets 过；Cargo.lock +9 行纯
+  新成员块零新三方（NOTICES 恒）。
+
+Stage Summary:
+- S1 三轮全收口（r1 契约/r2 求值器/r3 编排+闭环）：八步闭环端到
+  端可运行，§四.3/§四.5 全语义（双侧失效/双侧重验/三态正交/
+  AI 提议程序验证/人工归宿）从计划文本变为类型与测试钉定的代码
+  语义。
+- mdcore main c529b49→40e65a7 已推送。
+- 待用户面：sidecar JSON vs SQLite 选型追认（报告 §3.1）。
+- 下一轮 s2-r1：S2 写入安全（路径允许列表/命令信封分发/发布
+  单点纪律/规模限制），随后 S3/S4/S5 决策记录轮 + 终收口。
