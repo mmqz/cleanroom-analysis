@@ -4701,3 +4701,50 @@ Stage Summary:
 - mdcore main c4856f7→8cd97cf 已推送。
 - 下一轮（s1-r2）：表达式白名单求值器（数量×单价/求和/比例/单位
   换算四式 + CalcStatus 复算闭环）→ s1-r3 合成样例端到端八步闭环。
+
+---
+Task ID: s1-r2（修订计划 S1 第二轮：表达式白名单求值器 + 复算闭环）
+Agent: 主代理
+
+Task: S1 §四.4 受限确定性公式子集——白名单求值器（四式覆盖）
++ CalcStatus 复算闭环 + sidecar 级联执行点。
+
+Work Log:
+- mdcore crates/evidence 新模块 expr.rs（~570 行含测试）：
+  白名单文法（NUMBER/IDENT/+-*/括号/单层一元负号；函数/幂/字符串/
+  比较/科学记法/非 ASCII 标识符全部显式拒绝——白名单=文法本身）。
+- 四式覆盖测试：数量×单价（qty*price=4210.00 + 轨迹两行）、求和
+  链（左结合两步轨迹）、比例（part/total*100——除法按记录级精度，
+  precision 2 vs 6 对照钉定确定性随精度走）、单位换算（因子字面量
+  ×10000；因子正确性归人工审核——单位代数不发明）。
+- 资源四限 fail-closed：表达式 256B/原子 32/括号深度 12/输入 16
+  （恰过恰拒边界测试）。
+- 单位面诚实边界：加减 operands 已声明且不同 → UnitMismatch 硬拒；
+  乘除复合串（件*万元/万元）仅报告 computed_unit 不判定；结果单位
+  与声明单位对照不机器验证（无单位本体）。
+- recalc 四步链：InputUnavailable（含长度不齐）/InputMismatch
+  （跨标度数值相等不算不符）/EvaluationError/PrecisionMismatch
+  （篡改登记值或精度规则被改均捕获）；final_value=None 不可复算
+  通过（先 evaluate+apply_evaluation 落值）；intermediates 刻意
+  不比对（呈现层可演化，权威锚=值；threat model 本地可信存储）。
+- evidence.rs 加性扩：claimed_value 字段（#[serde(default)] +
+  legacy v1 JSON 加载测试）+ Calculated 型必填（新错误码
+  CalculatedMissingValue）。sidecar.rs：apply_evaluation（拒覆写
+  AlreadyEvaluated）+ recalculate_calc（失败同因级联/通过对照
+  claimed_value → ResultMismatch 第五步）+ 审计两事件。
+- 自纠三件：①ratio 测试期望值算错（0.807984×100=80.798400）
+  ②深度边界差一（>= 改 >，12 层恰过 13 层拒）③sed 转义 & 损坏
+  测试行（Edit 修复）。doctest 误捕文法块 → ```text 标记。
+- 门禁（亲跑）：G1 564→**588**（evidence 26→50，+24 恰为求值器
+  与复算测试）零失败；clippy native+wasm32 双面恰 2 wasm_bindgen
+  在档基线零新增（useless_vec 一处即改）；fmt 0；scan 0 hit-paths
+  PASS；Cargo.lock 零 diff 零新三方（NOTICES 恒）。
+
+Stage Summary:
+- §四.4 "计算保留输入公式精度可复算" 从契约语义变为可执行语义：
+  evaluate（确定性）+ recalc（四步）+ sidecar 级联（五步含正文
+  主张值对照）全链落地。
+- mdcore main 8cd97cf→c529b49 已推送。
+- 下一轮 s1-r3：工作台编排层（mdc-workbench 新 crate，依赖倒置
+  注入 office-io 读写）+ 合成样例八步端到端闭环（验收门禁 12 条
+  显式定义并逐条映射测试）。

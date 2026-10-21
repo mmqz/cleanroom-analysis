@@ -55,6 +55,21 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
+> **当前态速览（2026-10-21 S1 第二轮求值器落地后）**：
+> S1-R1 契约层之上，**mdc-evidence 表达式白名单求值器 + 复算闭环
+> 落地并推送（main 8cd97cf→c529b49）**——expr.rs 白名单文法（四式
+> 覆盖：数量×单价/求和/比例/单位换算；函数/幂/科学记法显式拒绝；
+> 资源四限 fail-closed）+ 求值轨迹 + 单位传播（加减同类硬拒、
+> 复合串仅报告——单位代数不发明）+ **recalc 四步链**（输入可用/
+> 现值对照/求值/登记值对照——PrecisionMismatch 捕获篡改与精度
+> 规则漂移）+ sidecar 复算级联（失败同因级联 + claimed_value
+> 第五步正文主张值对照 + 审计）+ EvidenceRecord.claimed_value
+> 加性字段（v1 数据 serde(default) 加载不破）。门禁：G1
+> 564→**588**（+24）零失败 / clippy 双面恰 2 基线 / fmt 0 /
+> scan PASS / lock 零 diff 零新三方。**下一轮 s1-r3**：工作台
+> 编排层（新 crate 依赖倒置注入 office-io）+ 合成样例八步闭环
+> （验收门禁 12 条显式定义逐条映射测试）。
+>
 > **当前态速览（2026-10-21 S1 第一轮 mdc-evidence 契约层落地后）**：
 > S0 全收口（见下条）后立即进入 S1 通用基础：**mdcore 第九 crate
 > `crates/evidence`（mdc-evidence）契约层落地并推送（main
