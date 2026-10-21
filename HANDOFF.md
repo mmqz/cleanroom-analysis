@@ -55,6 +55,28 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
+> **当前态速览（2026-10-21 协作与 Canvas 正式交付全链收口·终态）**：
+> 用户 governing 指令①-④**全部完成**：①收尾验证（wrap-t1：
+> sidecar 持久化/异常恢复——实抓并修复 Workbench::open() 三处恢复
+> 保真缺口 + 六测试 + 门禁口径修正）→ ②协作引擎（collab-r1：
+> mdc-collab 第 11 crate，23 测试——XmlFragment 载体七操作/命令
+> 接口/身份双轨/双栈撤销/同步快照恢复；三处上游观察面产品收口 +
+> 撤销耦合防护新发现）→ ③Canvas 引擎（canvas-r1：mdc-canvas 第
+> 12 crate，13 测试——图形状独立领域模型/Map 键身份稳定/键级 LWW/
+> 证据契约 CanvasObject 定位器；yrs map-undo 交错语义钉定）→
+> ④端到端验证（e2e-r1：五幕 12 检查点可运行演示 `cargo run -p
+> mdc-canvas --example e2e_demo`）。产品线 = mdcore **12 crate**，
+> G1 **642** 零失败，NOTICES v1.6（yrs 闭包入账 + v1.5 后面漂移
+> 补账——合规缺口修复 + 纪律恢复）。四分报告（已实现/已验证/
+> 仍待集成/实际风险）= `collab-line/协作与Canvas正式交付报告.md`。
+> **仍待集成六项**：mdcore op 层对接（BlockId 映射决策）/workbench
+> 协同组合/事件订阅面/awareness/前端（未选型纪律维持）/服务端
+> 中继。**风险四面**（全缓解有对策）：yrs 上游缺陷族（#676 skip_gc
+> /p20 窗 0/map-undo 交错——上游询问候选）/撤销耦合写入方约定/
+> D-1·SetMark 重建语义/撤销栈默认无界（建议部署设限）。mdcore
+> main = **f91b6be**；cleanroom main = da67696。下轮从报告 §3
+> 六项集成面按依赖序恢复（mdcore op 对接为最近前置）。
+>
 > **当前态速览（2026-10-21 wrap-t1 收尾验证轮后）**：用户新
 > governing 指令 = 协作引擎与 Canvas 转为**正式交付目标**（不再
 > 是"等真实多端需求"的延期项）。收尾轮完成：JSON sidecar 持久化
