@@ -55,6 +55,20 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
+> **当前态速览（2026-10-21 S1 第一轮 mdc-evidence 契约层落地后）**：
+> S0 全收口（见下条）后立即进入 S1 通用基础：**mdcore 第九 crate
+> `crates/evidence`（mdc-evidence）契约层落地并推送（main
+> c4856f7→8cd97cf）**——DocumentRef/Locator（五变体 A1 域校验）/
+> 三态正交（类型级排除单字段 verified）/Decimal 确定性十进制
+> （checked_* + 三舍入 + 除法双路径论证）/Evidence+Calculation 双
+> 记录（构造不变量 + 单向降级）/Command 信封（幂等/预期版本）/
+> sidecar v1（schema 门 + 原子写 + **失效只降不升 + 显式重验唯一
+> 恢复通道** + 幂等重放）。纯 serde 零新三方（NOTICES 零增量）。
+> 门禁：G1 538→**564**（+26）零失败 / clippy 四面恰 2 基线 /
+> fmt 0 / scan 0 / wasm32 过 / lock +8 行包块。**下一轮 s1-r2**：
+> 表达式白名单求值器（四式 + CalcStatus 复算闭环）→ s1-r3 合成
+> 样例八步端到端闭环（验收门禁 12 条见计划 §九）。
+>
 > **当前态速览（2026-10-21 修订实施计划 S0 收口后）**：用户新
 > governing 指令 = 《AI + Human 文档工作台：修订实施计划》（S0-S5
 > 五阶段），主线 = **外挂式文档证据系统**；用户澄清：标书只是需求

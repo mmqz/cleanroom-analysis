@@ -4662,3 +4662,42 @@ Stage Summary:
 - 下一阶段：S1 通用基础优先——DocumentRef/Locator/Command/
   AuditEvent 最小契约 + 本地 sidecar 存储 + 薄命令层（幂等键/预期
   版本/路径允许列表），证据系统作为首个消费者落闭环；不预设 UI。
+
+---
+Task ID: s1-r1（修订计划 S1 第一轮：mdc-evidence 契约层）
+Agent: 主代理
+
+Task: S1 通用基础第一轮——最小稳定数据契约 + sidecar v1（用户澄清
+落位：通用基础优先，证据系统为首个消费者，不为标书特化）。
+
+Work Log:
+- 落位决策：产品主线已裁（修订计划 governing）→ 产品仓 mdcore 新
+  crate crates/evidence（workspace 第九成员，循 office 系三域纪律：
+  对其他 crate 零 path 依赖；纯 serde 依赖零新三方——NOTICES 零增量
+  是选型约束：指纹走 trait + FNV-1a 64 默认而非引 sha2，算法前缀
+  编码 + 跨算法恒不等保证升级路干净）。
+- 契约面：refs（DocumentRef 四元组 + 算法前缀强制）/fingerprint
+  （trait + 公开向量钉死）/locator（五变体 + A1 域校验镜像 office-io
+  读面域）/status（三态正交——单字段 verified 类型级排除 + Valid
+  才可复算级联门槛）/calc（i128 定点十进制 checked_* 显式错误算术，
+  三舍入模式，除法双路径含 e′<0 安全降标论证）/evidence（Evidence/
+  Calculation 双记录 + 构造不变量 + degrade 单向）/command（信封 +
+  幂等键域 + 预期版本三态 + 五结果）/audit（追加式序号）/sidecar
+  v1（schema 门/原子写/失效登记即检测/显式重验唯一恢复通道/幂等
+  重放表）。
+- 自纠三件：div 首版移位代数 e′<0 分支错误 + 双重舍入（重写双路径
+  + 论证）；Ceiling 舍入负数方向歧义（砍掉该模式只留三个无歧义项）；
+  mark_source_unavailable 的 debug_assert 在测试故意传非法态时崩溃
+  （改状态机单向语义保证，不靠断言）。
+- 门禁（mdcore 全套亲跑）：G1 538→**564**（+26 恰为契约层单测）
+  零失败；clippy 四面恰 2 wasm_bindgen 在档基线零新增；fmt 全仓 0；
+  scan 0 hit-paths PASS；wasm32 check --all-targets 过；Cargo.lock
+  +8 行新包块；NOTICES 零变化；web 面零触碰。
+
+Stage Summary:
+- S1 通用基础第一轮收口：数据契约 + 状态语义 + sidecar 存储全落地，
+  §四.5 铁律（指纹不匹配只降不升/显式重验唯一恢复/绝不静默重绑）
+  从文档语义变为类型与测试钉死的代码语义。
+- mdcore main c4856f7→8cd97cf 已推送。
+- 下一轮（s1-r2）：表达式白名单求值器（数量×单价/求和/比例/单位
+  换算四式 + CalcStatus 复算闭环）→ s1-r3 合成样例端到端八步闭环。
