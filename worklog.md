@@ -4849,3 +4849,55 @@ Stage Summary:
 - 呈用户三项待裁决：①sidecar JSON vs SQLite（S1 报告 §3.1）
   ②S3/S4 重启条件 ③前端选型与 wasm 接入节奏。
 - 按计划停止条件停。后续会话从 HANDOFF §6 顶部速览恢复。
+
+---
+Task ID: wrap-t1（收尾轮：JSON sidecar 持久化与异常恢复验证）
+Agent: 主代理
+
+Task: 用户新指令第一步——验证 JSON sidecar 的持久化与异常恢复，
+运行 mdc-workbench 八步闭环及必要门禁；环境第 20 次重置恢复
+（双仓 ff：cleanroom ae4aa4d→63c5528 / mdcore c4856f7→f6aa9e7；
+工具链重装 1.99.0 + clippy/rustfmt + wasm32 + nightly-2026-10-15）。
+
+Work Log:
+- 验证实抓缺陷：`Workbench::open()` 恢复保真三缺口（此前零测试
+  覆盖——open 路径从未被任何测试调用）——body_doc_id 置空（重开
+  后 refresh_body 会把空 doc_id 写进 sidecar.document）/ body_version
+  硬编码 1（重开后版本回退与历史登记碰撞）/ SourceRegistration
+  .version 硬编码 1（来源重登记版本碰撞）。修复 = 全部从 sidecar
+  单一真源恢复（document.doc_id / document.version / source_docs
+  按匹配恢复，未登记默认 1）。
+- tests/persistence_recovery.rs 六测试（反向验证成立：git stash
+  还原旧代码恰使版本单调与 doc_id 两测试失败）：①会话重开全量
+  状态保真（证据/计算/审核/审计序号/幂等表）+ 重开后继续操作
+  （复算 Passed / refresh_body 版本 2→3 单调续增 / 干净导出字节
+  同一）②跨会话幂等重放（Replayed 返首果 + 零副作用 + 
+  command_replayed 审计在档）③来源版本跨会话单调（v2 重开后再
+  登记恰 v3；新来源首登记 v1 不受影响）④截断/损坏/未来版本/缺
+  文件四异常 fail-closed（显式 Sidecar 错误，不静默新会话——那
+  等于丢证据库；完好文件恢复加载正常）⑤中断发布 .publish.tmp
+  残留不破加载，下次发布原子覆盖零残留 ⑥会话间正文改写 → 重开
+  提议 BodyStale（指纹持久化生效），refresh_body 后恢复可提议。
+- 门禁口径修正（存量发现登记，非本轮引入）：f6aa9e7 上 wasm32
+  --all-targets 实存编译错误（command_layer symlink 测试 
+  std::os::unix）与 drop_non_drop×2 漂移——上轮"wasm32 check
+  过"口径不含 --all-targets 全测试面。本轮修复：symlink 用例
+  #[cfg(all(test, target_family = "unix"))] 门控（非 Unix 编译面
+  排除，宿主行为面不变）+ 三测试夹具 drop(sh) 改作用域块
+  （SheetWriter 借用语义等价）。
+- 八步闭环复跑：eight_step_loop 四集成测试全绿（主闭环 4210.000
+  + 来源改写 Stale 级联 + 复位拒绝 + fail-closed 八拒绝路径 +
+  导出标记检测）。
+- 门禁（亲跑）：G1 600→**606** 零失败 / clippy native + wasm32
+  --all-targets 双面恰 2 static_method_of 基线（mdcore-wasm 既有）
+  零错误 / fmt 0 / scan 0 hit-paths PASS / wasm32 check
+  --all-targets 零错误 / Cargo.lock 零 diff。
+
+Stage Summary:
+- mdcore main f6aa9e7→**1db4a6c** 已推送（wrap-t1）。
+- sidecar JSON 选型（S1 报告 §3.1 待追认项①）现在有完整持久化与
+  异常恢复证据链：原子发布/版本门/损坏拒/跨会话幂等/恢复保真
+  全部测试钉定。
+- 下一步（用户新指令）：协作引擎正式实施（适配层产品化进
+  mdcore——undo/redo 已知缺陷处置 + 内存边界 + 命令接口 + 并发
+  + 对象身份 + 故障恢复 + 端到端原型），随后 Canvas 引擎。
