@@ -95,28 +95,27 @@ fn redo_of_undone_insert_mints_new_id_old_anchor_stays_dangling() {
     assert_eq!(resolved.block_id, "ri-1");
 }
 
-/// 窗外分离项的 delete/undo/redo 深度记账：双栈镜像对称、项数守恒
-/// （探针观测 2 精修：[A]1/0 [B]2/0 [C]1/1 [D]0/2 [E]1/1 [F]2/0）。
+/// 逐事务分离项的 delete/undo/redo 深度记账：双栈镜像对称、项数守恒
+/// （探针观测 2 精修：[A]1/0 [B]2/0 [C]1/1 [D]0/2 [E]1/1 [F]2/0；
+/// 捕获窗 0 后逐事务分离是固有语义，无需 sleep 制造窗外分离）。
 /// 「redo 返回栈项」= 重做会同时弹 redo 项并压新 undo 项——B3.4
 /// 无界增长观测面的确定性形状（栈深与编辑史同阶，见 yrs-d §3/§4）。
 #[test]
 fn delete_undo_redo_cycle_depth_bookkeeping_is_symmetric() {
     let mut a = sess(7_100_202);
     a.load_blocks(EditOrigin::Ai, &vec![one("db-0")]).expect("load");
-    std::thread::sleep(std::time::Duration::from_millis(1100));
     a.edit_stream(
         EditOrigin::Human,
         StreamEdit::InsertBlock { block: one("db-1") },
     )
     .expect("insert");
     assert_eq!((a.undo_depth(EditOrigin::Human), a.redo_depth(EditOrigin::Human)), (1, 0), "[A] 插入后");
-    std::thread::sleep(std::time::Duration::from_millis(1100));
     a.edit_stream(
         EditOrigin::Human,
         StreamEdit::RemoveBlock { block_id: "db-1".into() },
     )
     .expect("remove");
-    assert_eq!((a.undo_depth(EditOrigin::Human), a.redo_depth(EditOrigin::Human)), (2, 0), "[B] 删除后（窗外分离项）");
+    assert_eq!((a.undo_depth(EditOrigin::Human), a.redo_depth(EditOrigin::Human)), (2, 0), "[B] 删除后（逐事务分离项）");
 
     a.undo(EditOrigin::Human); // 撤删除 → 复活（新 ID）
     assert_eq!((a.undo_depth(EditOrigin::Human), a.redo_depth(EditOrigin::Human)), (1, 1), "[C] 撤删除后");
@@ -147,7 +146,6 @@ fn revive_cycles_mint_distinct_ids_and_rebind_replaces_logical_mapping() {
     let mut seen = vec![a1];
 
     for cycle in 0..3 {
-        std::thread::sleep(std::time::Duration::from_millis(1100));
         a.edit_stream(
             EditOrigin::Human,
             StreamEdit::RemoveBlock { block_id: "rv-1".into() },

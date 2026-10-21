@@ -8,13 +8,16 @@
 //!      复同步幂等（收敛态再同步零变化）。
 //!   soak-2 长跑收敛稳定：3000 混合操作（无 undo/redo）→ 追踪面
 //!      活跃 + 双端收敛 + 幂等 + maintenance_gc 状态存活。
-//!   soak-3 钉定缺陷（p20 发现）：双 manager + 捕获窗 1000（适配器
-//!      现产配置）× 交错 origin 同窗追加 → 非连续合并项 = undo 部分
-//!      应用 + redo panic（yrs 0.28 Store::materialize）——断言缺陷
-//!      **在场**；配置改窗 0 或上游修复后本测试失败强制解钉。
+//!   soak-3 交错 origin undo/redo 全环回归锁（p20 缓解后，2026-10-21
+//!      窗 0）：双 manager × 交错同窗追加/块操作——修复前（窗 1000）
+//!      非连续合并项 → undo 部分应用（release）/ Item::splice u32 下溢
+//!      panic（debug）+ redo panic（Store::materialize）；修复后逐事务
+//!      分离 = LIFO 全环完整 + 双面交叉复原。**双口径（debug+release）
+//!      必跑**：debug 抓下溢、release 抓静默回绕后的部分应用。
+//!   soak-4 交错块级双 origin undo/redo（blocks 载体面同型验证）。
 //!
-//! 既有 54 用例（matrix25 + hostile13 + anchor6 + limit10）的
-//! 结构性覆盖不重复——本文件补随机形状面与缺陷钉定。
+//! 既有 54 用例（matrix24 + hostile13 + anchor6 + limit10）的
+//! 结构性覆盖不重复——本文件补随机形状面与交错回归锁。
 
 use collab_adapter::{BlockSpec, CollabAdapter, EditOrigin, SessionOptions, StreamEdit};
 
@@ -204,18 +207,17 @@ fn soak_long_run_converge_stability() {
     assert_eq!(a.__probe_block_ids(), ids0, "soak-2 gc 后 ids 破");
 }
 
-/// soak-3【钉定缺陷】：双 manager + 捕获窗 1000（适配器现产配置）×
-/// 交错 origin 同窗追加 → 非连续合并项。yrs 0.28 表现 = undo 部分应用
-/// + 后续 redo panic（Store::materialize unwrap None——p20 cfg-1 复现，
-/// cfg-2/3/4 干净对照）。**本测试断言缺陷在场**（catch_unwind 钉 panic
-/// + 终态文本断言钉部分撤销）——配置改窗 0 或上游修复后本测试将失败，
-/// 强制解钉 + 关闭 DECISION_GROUPS G2 对应决策项。
+/// soak-3【p20 缓解后回归锁】：双 manager × 交错 origin 同窗追加
+/// H1/A1/H2/A2 —— 修复前（窗 1000）：H1+H2 合并非连续栈项，undo 应用
+/// 时 `clock + offset - 1` u32 下溢（debug 立即 panic；release 静默
+/// 回绕 → 部分撤销 "A1H2A2" + 后续 redo panic Store::materialize）。
+/// 缓解后（窗 0）：每事务独立栈项——本测试锁 LIFO 逐项撤销、双面
+/// 隔离、redo 全复原、双 origin 交叉全环。窗>0 回升前本测试必须在
+/// 窗 0 语义下全绿（回升撞门条件）。
 #[test]
-fn pinned_undo_window_defect_dual_manager() {
-    use std::panic::{catch_unwind, AssertUnwindSafe};
-
+fn dual_manager_interleaved_undo_redo_full_cycle() {
     let mut a = sess(7_002_005);
-    // 同窗交错：H1 A1 H2 A2（Human 项区间 [0,2)+[4,6) 非连续）
+    // 同窗交错：H1 A1 H2 A2（Human 项区间 [0,2)+[4,6) 非连续——原缺陷形状）
     a.edit_stream(
         EditOrigin::Human,
         StreamEdit::AppendText { text: "H1".into() },
@@ -232,22 +234,93 @@ fn pinned_undo_window_defect_dual_manager() {
         .expect("e4");
     assert_eq!(a.__probe_text(), "H1A1H2A2");
 
-    // undo(Human)：合并项部分应用（仅 H1 移除——终态 "A1H2A2" ≠ 期望
-    // "A1A2"）——钉定部分撤销
-    let _ = a.undo(EditOrigin::Human);
+    // 逐事务粒度：无合并（修复前此深度 = 1[合并项]，现在 = 2）
     assert_eq!(
-        a.__probe_text(),
-        "A1H2A2",
-        "钉定失败：部分撤销表现消失（若此断言失败=缺陷已修，解钉 soak-3）"
+        (a.undo_depth(EditOrigin::Human), a.redo_depth(EditOrigin::Human)),
+        (2, 0),
+        "Human 两笔 = 两独立栈项（无合并非连续项）"
+    );
+    assert_eq!(
+        (a.undo_depth(EditOrigin::Ai), a.redo_depth(EditOrigin::Ai)),
+        (2, 0),
+        "Ai 两笔 = 两独立栈项"
     );
 
-    // redo(Human)：panic 钉定（catch_unwind 捕获 = 缺陷在场）
-    let panicked = catch_unwind(AssertUnwindSafe(|| {
-        let _ = a.redo(EditOrigin::Human);
-    }))
-    .is_err();
-    assert!(
-        panicked,
-        "钉定失败：redo panic 消失（若此断言失败=缺陷已修，解钉 soak-3）"
+    // LIFO 撤 Human：先撤 H2 再撤 H1；Ai 面零扰动（origin 分栈隔离）
+    assert!(a.undo(EditOrigin::Human), "撤 H2");
+    assert_eq!(a.__probe_text(), "H1A1A2", "仅移除 H2（完整应用，非部分）");
+    assert_eq!(a.undo_depth(EditOrigin::Ai), 2, "Human undo 不扰动 Ai 栈");
+    assert!(a.undo(EditOrigin::Human), "撤 H1");
+    assert_eq!(a.__probe_text(), "A1A2", "Human 面撤尽，Ai 面完整");
+
+    // redo 全复原（修复前此路径 panic——Store::materialize unwrap None）
+    assert!(a.redo(EditOrigin::Human), "redo H1");
+    assert_eq!(a.__probe_text(), "H1A1A2");
+    assert!(a.redo(EditOrigin::Human), "redo H2");
+    assert_eq!(a.__probe_text(), "H1A1H2A2", "redo 全复原");
+    assert_eq!(
+        (a.undo_depth(EditOrigin::Human), a.redo_depth(EditOrigin::Human)),
+        (2, 0),
+        "redo 后深度镜像对称（弹 1 压 1）"
     );
+
+    // 双 origin 交叉全环：撤空 Ai → 复原；Human 深度全程不受影响
+    assert!(a.undo(EditOrigin::Ai), "撤 A2");
+    assert_eq!(a.__probe_text(), "H1A1H2");
+    assert!(a.undo(EditOrigin::Ai), "撤 A1");
+    assert_eq!(a.__probe_text(), "H1H2");
+    assert_eq!(a.undo_depth(EditOrigin::Human), 2, "Ai undo 不扰动 Human 栈");
+    assert!(a.redo(EditOrigin::Ai), "redo A1");
+    assert!(a.redo(EditOrigin::Ai), "redo A2");
+    assert_eq!(a.__probe_text(), "H1A1H2A2", "双面交叉后终态全量复原");
+}
+
+/// soak-4【p20 缓解后回归锁，blocks 载体面】：交错双 origin 块级操作
+/// （H 插块 / A 插块 / H 删块 / A 删块）全环 undo/redo——与 soak-3
+/// 同型但走 blocks 载体（Array 结构编辑而非 Text 追加），验证窗 0
+/// 缓解在结构编辑面同样成立。
+#[test]
+fn dual_manager_interleaved_blocks_undo_redo() {
+    let mk = |id: &str| BlockSpec { block_id: id.into(), text: format!("{id} 正文") };
+    let mut a = sess(7_002_006);
+    a.edit_stream(EditOrigin::Human, StreamEdit::InsertBlock { block: mk("ib-h1") })
+        .expect("e1");
+    a.edit_stream(EditOrigin::Ai, StreamEdit::InsertBlock { block: mk("ib-a1") })
+        .expect("e2");
+    a.edit_stream(EditOrigin::Human, StreamEdit::InsertBlock { block: mk("ib-h2") })
+        .expect("e3");
+    a.edit_stream(EditOrigin::Ai, StreamEdit::InsertBlock { block: mk("ib-a2") })
+        .expect("e4");
+    let ids = a.__probe_block_ids();
+    assert_eq!(ids.len(), 4, "四块全在");
+    assert!(ids.contains(&"ib-h1".to_string()) && ids.contains(&"ib-a2".to_string()));
+
+    // 交错删除：H 删 H 面块、A 删 A 面块（交错结构编辑面）
+    a.edit_stream(EditOrigin::Human, StreamEdit::RemoveBlock { block_id: "ib-h1".into() })
+        .expect("e5");
+    a.edit_stream(EditOrigin::Ai, StreamEdit::RemoveBlock { block_id: "ib-a1".into() })
+        .expect("e6");
+    assert_eq!(a.__probe_block_ids().len(), 2, "删后余两块");
+
+    // 撤 Human（LIFO：栈序 = 插 h1 → 插 h2 → 删 h1，先撤删除再撤插入 h2）
+    assert!(a.undo(EditOrigin::Human), "撤 H 的删除");
+    assert!(a.__probe_block_ids().contains(&"ib-h1".to_string()), "ib-h1 复活");
+    assert!(a.undo(EditOrigin::Human), "撤 H 的插入 h2（LIFO 第二项）");
+    let ids_after = a.__probe_block_ids();
+    assert!(!ids_after.contains(&"ib-h2".to_string()), "ib-h2 随插入撤销消失");
+    assert!(ids_after.contains(&"ib-h1".to_string()), "ib-h1 保持（复活态不随 h2 撤销消失");
+    assert_eq!(a.undo_depth(EditOrigin::Ai), 3, "Ai 栈不受 Human 消耗影响");
+
+    // redo 全环（LIFO 镜像：先 redo 插 h2，再 redo 删 h1 → 回到删后态）
+    assert!(a.redo(EditOrigin::Human), "redo H 插入 h2");
+    assert!(a.__probe_block_ids().contains(&"ib-h2".to_string()), "ib-h2 回归");
+    assert!(a.redo(EditOrigin::Human), "redo H 删除 h1");
+    let ids_h = a.__probe_block_ids();
+    assert_eq!(ids_h.len(), 2, "H 面全环后回到删后态 = h2 + a2");
+    assert!(ids_h.contains(&"ib-h2".to_string()) && ids_h.contains(&"ib-a2".to_string()));
+    // Ai 面独立全环：撤尽（删 a1 逆→插 a2 逆→插 a1 逆）仅余 h2，再全复原
+    while a.undo(EditOrigin::Ai) {}
+    assert_eq!(a.__probe_block_ids(), vec!["ib-h2".to_string()], "Ai 面撤尽后仅 h2");
+    while a.redo(EditOrigin::Ai) {}
+    assert_eq!(a.__probe_block_ids(), vec!["ib-h2".to_string(), "ib-a2".to_string()], "Ai 面全环后终态 = h2 + a2（双面交叉全量复原）");
 }

@@ -208,7 +208,16 @@ impl CollabAdapter {
         let blocks = doc.get_or_insert_array("blocks");
         let _ = (text.len(&doc.transact()), blocks.len(&doc.transact()));
 
-        // B3.2：每 origin 一栈；捕获窗 1000ms = mdcore COALESCE_MS 语义连续性
+        // B3.2：每 origin 一栈。捕获窗 = 0（p20 缺陷缓解，2026-10-21
+        // 用户 S0 指令）：yrs 0.28 双 UndoManager + 窗>0 下同 origin
+        // 交错编辑合并出非连续栈项，undo 应用时 Item::splice 计算
+        // `clock + offset - 1` 在 offset=0/clock=0 处 u32 下溢——debug
+        // 构建当场 panic，release 静默回绕坏 ID → 部分撤销 + 后续
+        // redo panic（Store::materialize）。窗改 0 = 每事务独立栈项，
+        // 非连续合并不再发生（p20 cfg-2 实证 + soak-3 解钉回归锁）。
+        // 代价：撤销粒度变细（逐事务一格），mdcore COALESCE_MS=1000
+        // 的本地编辑器合并语义不再延续到协同面——本地面不受影响。
+        // 回升条件：上游修复落定 + 交错回归测试在窗>0 下全绿后再评估。
         let mut undo_human = Self::new_undo_manager(&doc, EditOrigin::Human);
         let mut undo_ai = Self::new_undo_manager(&doc, EditOrigin::Ai);
         undo_human.expand_scope(&doc, &doc.get_or_insert_text("text"));
@@ -229,8 +238,11 @@ impl CollabAdapter {
         let mut tracked = HashSet::new();
         tracked.insert(origin.wire());
         let _ = doc; // doc 仅用于生命周期锚定说明；scope 在 open() 内展开
+        // capture_timeout_millis: 0 —— p20 缺陷缓解（见 open() 注释块）。
+        // 硬编码非配置面：窗>0 是已定谳缺陷触发条件，不作为可调参数
+        // 暴露（回升需上游修复 + 回归测试，非运行期开关）。
         UndoManager::with_options(UndoOptions {
-            capture_timeout_millis: 1000,
+            capture_timeout_millis: 0,
             tracked_origins: tracked,
             capture_transaction: None,
             timestamp: Arc::new(|| {

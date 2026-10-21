@@ -5,8 +5,8 @@
 //! snapshot restoration, undo/redo, and maintenance GC.」
 //!
 //! 本文件 = 把 d1c-t1..t4 探针证据（p8/p9/p10 手跑 bin）固化为
-//! `cargo test -p collab-adapter` 可重复矩阵。断言全部确定性（无时间
-//! 敏感断言，除捕获窗边界语义测试显式 sleep——B3.2 语义核心）。
+//! `cargo test -p collab-adapter` 可重复矩阵。断言全部确定性（零时间敏感
+//! 断言——捕获窗 1000ms→0 缓解后无窗语义面，见 s0-t2/p20）。
 //!
 //! 矩阵章节（与用户八类一一对应 + 锚点/侧车面）：
 //!   §1 bulk loading（bulk_text / blocks / 限额边界 / UTF-8 切分）
@@ -15,7 +15,7 @@
 //!   §4 concurrent edits（双端并发 + 冲突收敛）
 //!   §5 deletion（删除 / 重加 / 撤销复原）
 //!   §6 snapshot restoration（快照恢复 / gc 后快照）
-//!   §7 undo/redo（origin 分栈 / 捕获窗 / 一笔装载 / 效果全局 / redo）
+//!   §7 undo/redo（origin 分栈 / 逐事务粒度 / 一笔装载 / 效果全局 / redo）
 //!   §8 maintenance GC（墓碑治理 / 幂等 / 内容保真 / 栈清零）
 //!   §9 anchors & sidecar（ID 稳定 / 悬空显式化 / 撤销复原 / 侧车往返）
 
@@ -383,8 +383,10 @@ fn undo_origin_stacks_are_independent() {
 }
 
 #[test]
-fn undo_capture_window_coalesces() {
-    // 窗内三笔 → 一次 undo 全回退（COALESCE_MS=1000 语义连续性）
+fn undo_consecutive_ops_are_separate_items() {
+    // 逐事务粒度（p20 缓解后语义，窗 0）：连续三笔追加 = 三个独立栈项，
+    // 单次 undo 只回退最后一笔（修复前窗 1000 会三笔合一、一次全清——
+    // 即交错场景下合并非连续项触发 yrs 0.28 undo 部分应用/下溢的根源）
     let mut a = sess(7_000_124);
     a.edit_stream(
         EditOrigin::Human,
@@ -401,33 +403,17 @@ fn undo_capture_window_coalesces() {
         StreamEdit::AppendText { text: "3".into() },
     )
     .expect("e3");
-    assert!(
-        a.undo(EditOrigin::Human),
-        "窗内三笔合一栈项，单次 undo 全回退"
-    );
-    assert_eq!(a.__probe_text(), "");
-}
-
-#[test]
-fn undo_capture_window_boundary_separates() {
-    // 窗外（>1s）逐项成栈——显式 sleep 是 B3.2 捕获窗语义的确定性手段
-    let mut a = sess(7_000_125);
-    a.edit_stream(
-        EditOrigin::Human,
-        StreamEdit::AppendText { text: "1".into() },
-    )
-    .expect("e1");
-    std::thread::sleep(std::time::Duration::from_millis(1200));
-    a.edit_stream(
-        EditOrigin::Human,
-        StreamEdit::AppendText { text: "2".into() },
-    )
-    .expect("e2");
-    // 两次分离的撤销（窗外逐项）
+    assert_eq!(a.undo_depth(EditOrigin::Human), 3, "逐事务粒度：三笔 = 三栈项");
+    // LIFO：单次 undo 只撤最后一笔
     assert!(a.undo(EditOrigin::Human));
-    assert_eq!(a.__probe_text(), "1");
+    assert_eq!(a.__probe_text(), "12", "单次 undo 仅回退最后一笔");
+    // 撤尽 + redo 全复原（深度对称）
+    assert!(a.undo(EditOrigin::Human));
     assert!(a.undo(EditOrigin::Human));
     assert_eq!(a.__probe_text(), "");
+    assert_eq!(a.redo_depth(EditOrigin::Human), 3, "redo 深度镜像");
+    while a.redo(EditOrigin::Human) {}
+    assert_eq!(a.__probe_text(), "123", "redo 全复原");
 }
 
 #[test]
