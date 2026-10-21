@@ -4803,3 +4803,49 @@ Stage Summary:
 - 待用户面：sidecar JSON vs SQLite 选型追认（报告 §3.1）。
 - 下一轮 s2-r1：S2 写入安全（路径允许列表/命令信封分发/发布
   单点纪律/规模限制），随后 S3/S4/S5 决策记录轮 + 终收口。
+
+---
+Task ID: s2-r1 + s3s4s5（修订计划 S2 实施 + S3/S4/S5 决策记录 + 终收口）
+Agent: 主代理
+
+Task: S2 写入安全四件（路径允许列表/幂等/临时区发布/规模限制）
++ S3/S4/S5 阶段决策记录（计划原义 = 决策轮非实施轮）+ 停止条件
+核对。
+
+Work Log:
+- security.rs：PathPolicy（canonicalize 符号链接逃逸拒；check/
+  check_dest 读写两面）+ 规模门（证据 1000/计算 500/16MiB 字节门
+  ——超限拒发布旧文件不动）+ publish 发布单点（同目录临时文件 +
+  rename POSIX 原子）。
+- command.rs：WorkbenchCommand 受控命令集（八步枚举，无任意路径/
+  SQL/Shell）+ execute 分发——幂等重放返首果 + 审计；Exactly 预期
+  版本乐观并发；记录规则（Succeeded/Failed 入表，Conflict/Rejected
+  不入不毒化重试）；错误映射（路径/规模→Rejected）。
+- pipeline 接线：start/open 强制 policy 五路径面全检（含
+  fresh_source/recalc_current 注册路径复查——符号链接改指根外
+  fail-closed 级联 Unavailable）；条数门前置；save 走发布单点；
+  reverify_claim 工作台方法补齐（fail-closed + 程序提取指纹）。
+- tests/command_layer.rs 五测试：根外四路径全拒（含拒绝零产出）/
+  符号链接逃逸拒 / 幂等-版本语义全矩阵（重放零副作用、冲突不毒化
+  重试、MustBeNew、失败重放同果）/ 八步全走命令分发面 / 规模四门
+  恰过恰拒。既有四测试升级受限策略构造（安全面即默认面）。
+- 时间面决策：结构性有界（输入字节门+表达式资源门+条数门三链），
+  不设墙钟计时器（非确定性 + wasm 不可移植）。
+- S3/S4/S5 决策记录（workbench-line/S2-S5收口与阶段决策记录.md）：
+  S3 协作产品化等真实多端需求（S0 缓解已执行 + 重启条件两条）；
+  S4 渲染不阻塞不捆绑（R-O2 资产在档 + C 路线重启条件）；S5 Canvas
+  后置（Locator 加性扩展位）。均无代码——计划原义。
+- 停止条件核对：12 门禁全过（S1 报告 §2 + S2 门禁 11 升级为分发面
+  钉定）+ 提交推送（mdcore f6aa9e7）+ 交接完整（HANDOFF/worklog/
+  双报告）→ 满足计划 §十停止条件。
+- 门禁（亲跑）：G1 595→**600**（workbench 4→9）零失败；clippy
+  native+wasm32 双面恰 2 基线；fmt 0；scan 0 hit-paths PASS；
+  Cargo.lock 零 diff 零新三方。
+
+Stage Summary:
+- 修订实施计划 S0-S5 全部阶段收口：S0 止损 / S1 三轮 MVP /
+  S2 写入安全 / S3-S5 决策记录。产品线 = mdcore 十 crate（新增
+  evidence + workbench，零新三方依赖），G1 538→600。
+- 呈用户三项待裁决：①sidecar JSON vs SQLite（S1 报告 §3.1）
+  ②S3/S4 重启条件 ③前端选型与 wasm 接入节奏。
+- 按计划停止条件停。后续会话从 HANDOFF §6 顶部速览恢复。
