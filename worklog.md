@@ -4901,3 +4901,61 @@ Stage Summary:
 - 下一步（用户新指令）：协作引擎正式实施（适配层产品化进
   mdcore——undo/redo 已知缺陷处置 + 内存边界 + 命令接口 + 并发
   + 对象身份 + 故障恢复 + 端到端原型），随后 Canvas 引擎。
+
+---
+Task ID: collab-r1（协作引擎正式实施第一轮：mdc-collab 产品化落地）
+Agent: 主代理
+
+Task: 用户新指令②——协作引擎实施：在现有 yrs 适配器基础上继续，
+先处理 undo/redo 已知缺陷和内存边界，再接入实际文档操作与共享状态；
+人类和 AI 共用命令接口、并发修改处理、对象身份、撤销/重做及故障
+恢复；可自动验证的端到端原型（不停留在设计文档和探针阶段）。
+
+Work Log:
+- mdcore 新 crate crates/collab（第十一成员，产品面唯一 yrs 接触
+  点——公开 API 零 yrs 类型）：spike 适配器（997 行研究代码）全部
+  证据链产品化 + yrs-e 映射矩阵形状落地（XmlFragment 载体、九
+  kind 元素承载、开放属性 _xHHHH_ 转义、mark 包裹元素 D-2、
+  char↔byte 换算 D-3 单点）。
+- CollabCommand 九命令（LoadBlocks/InsertBlock[id 物化面]/
+  RemoveBlock/ReplaceText/SetBlockType[D-1]/SetAttrs[终态钦定]/
+  SetMark[归一化重建]/MoveBlock[环回拒]）——人类/AI 同一入口，
+  每命令一事务一 origin。
+- Actor 双撤销栈 + 三处上游观察面的产品收口：①每栈只跟自己
+  origin + capture_transaction 拒 None-origin（远端应用不入本地
+  栈——撤销域=本地；spike len==1 回退致 p12"对端墓碑 2%"）②
+  撤销栈软上限 undo_stack_limit（B3.4 粗粒度 clear_all 显式回执
+  undo_cleared——清理时置标志，事后重算不可见）③**撤销耦合防护
+  （实施新发现）**：文本承载块出生恒带空文本节点 + SetMark 重建
+  尾随空节点——否则首笔编辑才建节点时 undo 首笔=删整个节点含
+  后续并发内容（探针实证 'hahahaha' 撤 4 笔得 '' 而非 'aaaa'，
+  修复后恰 'aaaa'）。
+- 事务纪律修复：set_block_type 读事务遮蔽死锁（yrs 读写事务同锁，
+  commit 不消费借用随 Drop 释放——全部 op 事务显式作用域化）。
+- 身份双轨：block_id 属性承载（远端块免侧车寻址）× CrdtAnchor
+  （sticky 首项 ID；邻居编辑稳定；删除 AnchorDangling 显式悬空；
+  undo 复活=新 ID 族重绑恢复；D-1/MoveBlock 重建后锚点表自动
+  重指）+ MDCC v1 侧车（敌意 count 物理上界 + 尾部零冗余）。
+- 同步/恢复：state_vector/encode_diff/apply_update（限额+panic
+  隔离）/authoritative_snapshot/restore（撤销栈不随快照走）/
+  maintenance_gc（清栈+显式 gc）。
+- 23 测试五套件：matrix 7 / concurrency 4（双端全量+增量收敛、
+  并发删+并发插收敛、三方链式、撤销跨端只能撤自己）/ undo_redo 4
+  （七操作全环、p20 交错回归锁——上游回归或配置回退必失败强制
+  解钉、软上限、删除撤销复活身份）/ recovery 4 / hostile 4。
+- 门禁（亲跑）：G1 606→**629** 零失败 / clippy 双面恰 2 基线 /
+  fmt 0 / scan PASS / Cargo.lock +15（yrs 0.28 闭包 14 外部，全
+  MIT/Apache 零 copyleft）。
+- 合规：NOTICES v1.6 落 compliance-baseline（53b8438）——yrs 闭包
+  入账 + v1.5 后未随轮复跑的面漂移补账（serde 族经 evidence/
+  workbench + futures/js-sys 六项账→正文经 rust_xlsxwriter 特性
+  面）+ 四面复跑 75/88/108/121 + 纪律恢复（lock/feature 变化轮次
+  NOTICES 增量随批）。
+
+Stage Summary:
+- mdcore main 1db4a6c→**b3ec4da** 已推送（collab-r1）；
+  compliance-baseline 5e144cc→**53b8438**（NOTICES v1.6）。
+- 协作引擎核心形态达成：可自动验证（23 测试）的共享文档状态机，
+  含并发收敛/身份/撤销/故障恢复全链路——用户指令②的实现主体完成。
+- 下一步：指令③ Canvas 引擎（独立领域模型 + 同一命令接口模式）
+  → 指令④端到端验证（含证据系统关联画布对象）。
