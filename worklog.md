@@ -4959,3 +4959,57 @@ Stage Summary:
   含并发收敛/身份/撤销/故障恢复全链路——用户指令②的实现主体完成。
 - 下一步：指令③ Canvas 引擎（独立领域模型 + 同一命令接口模式）
   → 指令④端到端验证（含证据系统关联画布对象）。
+
+---
+Task ID: canvas-r1 + e2e-r1（Canvas 引擎 + 端到端验证：正式交付目标③④）
+Agent: 主代理
+
+Task: 用户新指令③④——Canvas 引擎实施（独立领域模型：节点/连线/
+位置/尺寸/分组；同一命令接口）+ 端到端验证（人类操作/AI 命令/
+并发修改/状态同步/撤销重做/删除复原/证据系统对画布对象的关联
+能力——可运行演示而非独立单测）。
+
+Work Log:
+- mdcore 新 crate crates/canvas（第十二成员）：画布 = 图形状独立
+  领域模型（Node/Edge/Group × 几何 × 端点 × 成员 × 开放属性），
+  与文档域并列各自 Doc——不建跨引擎统一 CRDT；根 Map 载体（对象
+  ID = 键 → 删除撤销复原 = 同 ID 回归——画布域身份特性，测试钉定
+  指纹同一）；键级 LWW（并发同键写双端收敛钉定）。
+- CanvasCommand 八命令 + Actor 分栈（与 mdc-collab 同构模式）；
+  不变量集同源同构（skip_gc/窗 0/53 位域/限额+panic 隔离/
+  capture_transaction 拒 None-origin/软上限回执）。实施自纠：
+  new_undo_manager 抄漏 actor 参数化（双栈都跟 mdc:human）+
+  set_props 读事务遮蔽死锁（p18 纪律读侧扩展）。
+- mdc-evidence 加性扩展：EngineKind::Canvas + Locator::CanvasObject
+  （v1 数据 serde 兼容）；对象语义指纹（位置漂移即语义变更 = 画布
+  域证据粒度决策）。
+- **yrs 0.28 map-undo 交错语义定谳（实施新发现，探针→钉定）**：
+  同会话内同键交错写（Human/Ai 轮流 MoveNode）撤销 = 逐笔回退
+  （撤第 k 笔恢复该历史点值 3→2→1）+ pop-until-productive（undo
+  弹到有产出为止——无产出项[内容已被对栈撤销的 redo 链复刻的
+  原插入项]被丢弃，一次 undo 可消耗多项 depth 4→1）；跨会话编辑
+  撤销不受影响（evidence_assoc：AI 独立会话编辑撤销干净复原）。
+  上游询问候选，测试钉定观测行为防静默漂移。
+- 13 测试四套件：matrix 4 / undo_redo 4 / concurrency 4 /
+  evidence_assoc 1（画布受证全链：登记 Valid→拖动 Stale→重验
+  Valid→AI 端并发改写再失效→AI 撤销→重验复原→三态正交）。
+- e2e_demo（examples/e2e_demo.rs，mdc-collab 为演示专用
+  dev-dep）：五幕 12 检查点断言内嵌——文档协作（AI 骨架+人类
+  修订+并发插入双向收敛+origin 分域撤销跨端传播 redo 复原）×
+  画布协作（人类搭图+AI 并发补充读模型一致）× 证据关联（文档
+  主张↔画布节点跨引擎 Locator→拖动失效→重验恢复）× 删除与复原
+  （文档块 block_id 连续+载体身份换新族重绑；画布同 ID+指纹同一；
+  复原跨端传播）× 权威快照存档恢复。
+- 门禁（亲跑）：G1 629→**642** 零失败 / clippy 双面恰 2 基线 /
+  fmt 0 / scan PASS / Cargo.lock 零三方增量。
+
+Stage Summary:
+- mdcore main b3ec4da→3289d41（canvas-r1）→**f91b6be**（e2e-r1）
+  已推送。
+- 用户指令①-④全链完成：协作引擎（23 测试）+ Canvas 引擎（13
+  测试）+ 证据契约扩展 + 可运行演示（12 检查点）——已实现/已验证/
+  仍待集成/实际风险四分报告落档 collab-line/协作与Canvas正式交付
+  报告.md。
+- 仍待集成六项（mdcore op 对接/workbench 组合/事件面/awareness/
+  前端/中继）+ 风险四面（yrs 缺陷族全缓解/写入方约定/重建语义/
+  资源默认值）——详见报告 §3/§4。
