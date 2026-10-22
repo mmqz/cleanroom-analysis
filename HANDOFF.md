@@ -55,6 +55,20 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
+> **当前态速览（2026-10-22 integ-r2 事件/订阅面落地后）**：
+> 集成项推进（用户「继续持续做」）：**项③ 事件/订阅面已落地**
+> （mdcore `02067ad`：mdc-collab/mdc-canvas events 模块——来源
+> 五态与公共入口一一对应/updates 逐事务可转发/一入口一事件/
+> 失败不产事件/canvas touched 对象 ID 双路径提取；延迟派发纪律
+> [事务释放后派发+回调不可重入+Drop 退订]；21 新测试；G1 688
+> 零失败/clippy 恰 2 基线/fmt 0/scan PASS/wasm32 0 错）。同轮：
+> integ-r1 推送态复验全绿（G1 667 精确复现）+ mdbridge 测试面
+> clippy 漂移卫生补丁（`d3bbb12`）。**剩余待集成四项**（依赖序）：
+> ④awareness（在线状态/光标——yrs sync feature 在位未暴露）→
+> ②workbench↔协同组合（mdbridge 前置已齐）→ ⑥服务端中继 →
+> ⑤前端（用户裁决项维持门控）。mdcore main = **02067ad**；
+> cleanroom main = 本提交。下轮从集成项④ 起按依赖序恢复。
+>
 > **当前态速览（2026-10-22 integ-r1 落地确认 + 推送态复验 + 集成项①收口后）**：
 > 环境第 17 次重置恢复（双仓 ff 拉齐 cleanroom 07a9681 / mdcore
 > 1789493 + 工具链重装 1.99.0+nightly-2026-10-15+wasm32 + pdfium
