@@ -5220,3 +5220,49 @@ Stage Summary:
 - 集成项② 收口：协同正文 × 证据闭环全链闭合（选择失效/重绑/撤销
   回退/并发/导出）。剩余待集成 = ⑥服务端中继、⑤前端（用户裁决
   项维持门控）。
+
+---
+Task ID: integ-r5
+Agent: 主代理
+
+Task: 集成项⑥——服务端中继（交付报告 §3.6：多端常驻协作需要
+权威端/中继形态；快照单点编码语义已就位）。
+
+Work Log:
+- mdcore 第 14 crate crates/relay（61f1ea8）：**传输无关中继状态机**
+  ——入向 RelayMessage（Join/Leave/DocUpdate/PresenceUpdate/
+  SyncRequest）→ 出向 RelayDelivery 表（DocUpdate/PresenceUpdate
+  广播 + SyncResponse 定向）；零网络/线程/进程面（Headless 纪律
+  延伸——宿主桥接真实传输；from 字段 = 传输层已认证身份，中继不
+  重签，文档化边界）。
+- **领域无关接入**：SyncReplica 门面 trait（state_vector/
+  encode_diff/apply_update/snapshot 四操作——文档域 CollabSession
+  与画布域 CanvasSession 同步 API 同构）；门面类型属宿主侧（孤儿
+  规则），本 crate 零域引擎依赖；测试双域 harness 均接入并收敛。
+- 语义面：DocUpdate = 权威副本先应用（fail-closed 失败零扇出）+
+  CRDT 字节原样扇出（幂等/交换律——不重编码）；SyncRequest =
+  差量追平；PresenceUpdate = 中继在场层聚合（组合⑥×④——integ-r3
+  的 Presence 单点归属直接复用）；快照检查点（手动 + 间隔自动
+  latest_snapshot）；崩溃恢复 = 新副本 + 快照经 DocUpdate 应用
+  （update 即状态迁移）；限额/隔离继承域会话面（B1.6——无第二套）。
+- 测试 9 新增（事件驱动 harness——组合⑥×③：客户端订阅自己的
+  命令事件产 update 送中继，Remote 不回发无回声环）：三端扇出
+  收敛/晚到端差量追平/在场扇出/画布域同构/快照检查点+新中继恢复/
+  间隔自动检查点/离开停投/失败零扇出/加入幂等+中枢在场限额。
+- 环境事件：本轮磁盘满（target/debug/incremental 1.6G + /tmp LO
+  解压残留 3G）→ clippy/wasm32 报 No space left（非代码错误）→
+  清理增量目录/spike target/LO 临时件 → 全门禁复验绿。
+- 实施自纠：harness 初版 thread_local+mem::forget 过度复杂重写为
+  Net 持有订阅句柄与共享队列；测试限额断言初版误设独立 Presence
+  而非中枢构造参数。
+- 门禁（亲跑）：G1 702→**711** 零失败 / clippy --workspace
+  --all-targets 恰 2 wasm_bindgen 基线 / fmt 0 / scan PASS /
+  wasm32 check --all-targets 0 错误 / Cargo.lock 纯成员行。
+
+Stage Summary:
+- mdcore main 80e097a→**61f1ea8**（integ-r5）已推送。
+- 集成项⑥ 收口：P2P 直连形态升级为可常驻中枢形态（权威副本/
+  扇出/差量/在场/检查点/恢复全链钉定）。
+- **交付报告 §3 集成清单工程侧全部收口**：①②③④⑥ 已落地（G1
+  642→711，四轮 integ-r2..r5 + 复验轮），仅剩 ⑤ 前端 = 用户裁决
+  项（未选型不得指定框架——维持门控）。
