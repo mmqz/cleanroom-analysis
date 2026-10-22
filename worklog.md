@@ -5578,3 +5578,36 @@ Stage Summary:
 - mdcore main 3d2e578→**fc25f06**（p34-verify）已推送。
 - 下一步 = 阶段 5 渲染表面（宿主 A = web 面扩展；wry 壳真机编译 =
   选型记录既列前置项）。
+
+---
+Task ID: p5-t1
+Agent: 主代理
+
+Task: 六阶段计划阶段 5 启动——第一个前置件：表格表面数据面 wasm
+出口（§八.3「切片、虚拟滚动」的数据源；宿主 A = web 面已定谳）。
+
+Work Log:
+- **xlsx_grid 模块**（crates/mdcore-wasm/src/xlsx_grid.rs）：WasmBook
+  一次解析常驻句柄（Book 生命周期挂 JS 侧——与 WasmCore 同模式）；
+  sheets_json（表名/使用区行列）；slice_json 可视窗切片（typed
+  kind/原值/display 三件套；窗外钳制 = empty 填充 = 虚拟滚动空白区
+  语义）；cell_display/cell_kind 单格面（编辑定位/证据高亮钩子）。
+- **单一真值纪律**：typed 值与 display 均出自 mdc-office-io 读面
+  （read_book_from_bytes——同一套安全门：字节 52MB/表数/包围盒
+  三前置检查）；宿主不建第二份表格数据（§二.1 架构约束的执行面）。
+- **安全**：MAX_SLICE_CELLS=100k 单窗硬上限（读面总量门同纪律）；
+  typed 错误码三枚（grid_read_failed/grid_sheet_index/
+  grid_slice_too_large——宿主 JSON.parse 可结构化）。
+- **测试**：纯内核 pub 化（sheets_core/slice_core JsValue-free）+
+  2 原生测试（合成簿往返：数值原值/前导零文本原样[007 不变 number]/
+  部分窗/百行外空窗钳制恰 4 empty/表索引错误/窗规模错误/上限常量）。
+- 门禁（亲跑）：G1 **730/730** 零失败（+2）/ fmt 0 / clippy 恰 2
+  wasm_bindgen 基线 / wasm32 check -p mdcore-wasm --all-targets
+  0 错误 / web pkg 重建（build-wasm.sh）。
+
+Stage Summary:
+- 阶段 5 启动：表格表面数据面就绪（表格 UI 产品化的数据源）。
+- mdcore main fc25f06→**e8bbc7f**（p5-t1）已推送。
+- 阶段 5 后续路线（§八 依序）：表格 UI 产品化 → 证据界面 wasm 化
+  （workbench 字节入口 + 内存 sidecar 两前置件）→ PDF 表面渲染
+  路径设计决策 → Canvas 表面 → wry 壳真机集成（选型记录既列）。
