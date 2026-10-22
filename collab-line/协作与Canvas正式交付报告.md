@@ -94,8 +94,11 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
 > canvas touched 对象 ID；21 新测试，G1 667→688）。**项④ 已落地**
 > （mdcore `e2dfc7c` integ-r3：presence 模块——在线状态/光标
 > JSON 在场层，独立 wire 通道；null 离线语义/陈旧 clock 取舍/
-> 限额+隔离/standalone 画布宿主路径；11 新测试，G1 688→699）。
-> **剩余待集成 = 项②⑤⑥ 三项。**
+> 限额+隔离/standalone 画布宿主路径；11 新测试，G1 688→699）。**项②
+> 已落地**（mdcore `80e097a` integ-r4：协同文档作为受证正文——应用层
+> 组合[会话=唯一编辑面/文件=持久化投影]；3 组合测试+五幕 12 检查点
+> 可运行演示，G1 699→702）。
+> **剩余待集成 = 项⑤⑥ 两项（⑤为用户裁决项）。**
 
 1. ~~**mdcore（MD 引擎）↔ mdc-collab 的 op 层对接**~~ **已落地**
    （integ-r1 `1789493` + 卫生补丁 `d3bbb12`，2026-10-22 复验
@@ -103,10 +106,11 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
    check 零错误）。身份映射裁决项已定谳：本端 shadow u64 ↔
    `md:{client_id}:{n}` 确定性编解码 + 外端持久双向映射表 + 同族
    伪造水位纪律；publish = 重映射语义（fresh family u64）。
-2. **workbench 八步闭环 ↔ 协同会话组合**：evidence_assoc 演示的是
-   直组侧车（evidence + canvas/collab 直接组合）；workbench 的
-   XLSX/DOCX 摄取管线与协同态的组合（协同文档作为受证正文）留
-   后续轮。mdbridge 落地后此组合的技术前置已齐备。
+2. ~~**workbench 八步闭环 ↔ 协同会话组合**~~ **已落地**（integ-r4
+   `80e097a`：协同文档作为受证正文——应用层组合零 workbench 改动；
+   选择性失效[润色段 Stale/相邻 Valid]/重绑恢复/撤销回退/双端并发
+   收敛/干净导出全链钉定；3 测试 + 五幕 12 检查点可运行演示
+   `cargo run -p mdc-workbench --example collab_body_demo`）。
 3. ~~**事件/订阅面**：前端宿主需要变更通知（推式）~~ **已落地**
    （integ-r2 `02067ad`：mdc-collab/mdc-canvas events 模块——
    延迟派发/一入口一事件/updates 逐事务可转发/失败不产事件；

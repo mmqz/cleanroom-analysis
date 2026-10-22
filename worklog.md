@@ -5181,3 +5181,42 @@ Stage Summary:
 - 集成项④ 收口：在线状态/光标的完整 API 面暴露（含离线语义与
   安全边界钉定）；前端集成第二前置件解除。剩余待集成 = ②workbench
   ↔协同组合、⑥服务端中继、⑤前端（用户裁决项）。
+
+---
+Task ID: integ-r4
+Agent: 主代理
+
+Task: 集成项②——workbench 八步闭环 ↔ 协同会话组合（交付报告
+§3.2：协同文档作为受证正文；mdbridge 落地后技术前置已齐备）。
+
+Work Log:
+- 组合架构定谳：**会话是唯一编辑面（真相源），文件是持久化投影**
+  ——检查点落盘模式（materialize 会话读模型 → DocxWriter 写回
+  body_path），workbench 的失效/重绑/导出机件对协同正文照常运转
+  ——零 workbench crate 代码改动（组合纯在应用层，§六架构约束
+  践行；workbench 只增 dev-deps：mdbridge/mdcore/collab 纯路径
+  依赖）。
+- 组合测试 3 新增（crates/workbench/tests/collab_composition.rs）：
+  ①AI 润色受证段（数字保持纯润色）→ 落盘 → refresh_body 恰该
+  主张 Stale + 相邻主张 Valid（选择性失效——指纹面钉定）→ 人工
+  审核 + reverify 重绑恢复（§四.5 润色后允许失效）→ AI 撤销润色
+  回退 → 再失效再重绑（指纹双向）→ export_clean 协同终态零标记；
+  ②双端并发（A 端 AI 润色 + B 端人类补记来源段）→ 双向收敛 →
+  单点落盘 → 选择性失效 → 重绑；③组合②×③——裸对端订阅 Remote
+  事件 + updates 可转发。
+- 可运行演示（examples/collab_body_demo.rs）：五幕 12 检查点断言
+  内嵌（证据闭环[双绑定+程序求值 4210.000]/协同正文上线[5 块发布
+  读模型段落序一致]/并发编辑收敛+事件观察/选择性失效/人工闭环
+  [重绑+撤销回退+干净导出]）——cargo run -p mdc-workbench
+  --example collab_body_demo 亲跑全过。
+- 实施自纠两处：双向同步初版只单向（B→A）→ 双向 diff 收敛修正；
+  人类补记插入位 char 差一（14→15 句号后）。
+- 门禁（亲跑）：G1 699→**702** 零失败 / clippy --workspace
+  --all-targets 恰 2 wasm_bindgen 基线 / fmt 0 / scan PASS /
+  wasm32 check --all-targets 0 错误 / Cargo.lock 纯成员行。
+
+Stage Summary:
+- mdcore main e2dfc7c→**80e097a**（integ-r4）已推送。
+- 集成项② 收口：协同正文 × 证据闭环全链闭合（选择失效/重绑/撤销
+  回退/并发/导出）。剩余待集成 = ⑥服务端中继、⑤前端（用户裁决
+  项维持门控）。
