@@ -5266,3 +5266,78 @@ Stage Summary:
 - **交付报告 §3 集成清单工程侧全部收口**：①②③④⑥ 已落地（G1
   642→711，四轮 integ-r2..r5 + 复验轮），仅剩 ⑤ 前端 = 用户裁决
   项（未选型不得指定框架——维持门控）。
+
+---
+Task ID: harden-r1
+Agent: 主代理
+
+Task: 风险面加固轮（交付报告 §4 工程侧收口——用户指令「前端⑤裁决期
+并行推进非前端项」）+ 新 governing 计划落档（用户同消息下达《文档
+工作台后续完整实施计划》）。
+
+Work Log:
+- **mdc-collab audit 模块**（§4.2 撤销耦合防护收口）：audit_update
+  （隔离暂存 Doc 应用前审计——B1.1 skip_gc 同构 + panic 隔离 +
+  限额同门 B1.6）/ audit_self（在位验证）/ repair_text_nodes
+  （机械修复——origin=mdc:maintenance 不进 Human/Ai 撤销栈；产物
+  经 Maintenance 事件 updates 可转发 = 对端同步获得防护；幂等）。
+  违规分级：Error 5 类（MissingTextNode/MissingBlockId/
+  DuplicateBlockId/ForeignRootType/WalkFailure）+ Warning 9 类
+  （UnknownTag/RootLevelText/FragmentChild/ThematicBreakWithText/
+  MarkMissingKind/MarkForeignChild/NonCanonicalAttrKey/
+  NestedUnderNonContainer/TextAfterChildren/ForeignRootData——
+  全部静默丢弃或强转面逐项登记）。
+- **根类型判别探针定谳**（实施新发现）：update 应用后的根为
+  UndefinedRef（yrs 根类型 = 本地约定，wire 不携带）——按
+  XmlFragment 视图走查 + 内容判别面（MapRef::len 键值条目 /
+  frag.len 与 children() 走查数差额 = 数组序列条目——两者对
+  children() 均不可见）。
+- **set_block_type 形状外泄修复**（audit 口径反噬发现）：重建原
+  无条件复制子节点——p带文本→hr / 容器带子块→非容器 / hr→p
+  转换均可产出引擎书写约定外形状（后者 = 撤销耦合隐患：无出生
+  文本节点的文本承载块）。修复 = 承载面前置校验（KindIncompatible
+  拒——镜像 insert 守卫）+ 重建按目标种类过滤 + 文本承载目标恒补
+  出生文本节点（build_prelim 同约定）。
+- **p18 死锁新面**（实施自纠）：get_or_insert_xml_fragment 内部开
+  写事务——持读事务调用 = 死锁（repair 首版即踩，测试挂起定位）；
+  修复 = 先 get_or_insert 后开事务（session.rs document() 同序）。
+- **撤销耦合防护端到端证明**（tests/audit.rs）：对照组（外部脏块
+  不修复——undo 首笔删整节点，B 端并发内容随删除传播全编队丢失）
+  vs 修复组（repair + updates 转发——undo 恒只撤字符项，B 端并发
+  内容存活「 world」）。10 新测试全绿。
+- **relay_demo 中枢可运行演示**（13 检查点断言内嵌，cargo run -p
+  mdc-relay --example relay_demo）：三端上线在场聚合/Join 幂等/
+  并发扇出三端一致/权威态 SyncResponse 互证/字节直转发逐字节对照
+  （位置插入 update 携带邻居依赖——独立应用到空端待决 = CRDT 正确
+  语义，差量才是追平通道——检查点⑤初版误设「独立应用应有产出」
+  自纠为逐字节对照）/晚到端 Join 零投递 + 差量追平/B 撤销跨端
+  四端回退 + 分栈不受波及/检查点崩溃恢复（**快照 = 检查点时刻态
+  诚实语义**——快照后的撤销不在内；间隔与丢失窗 = 部署取舍面）/
+  恢复后继续扇出收敛/全编队 audit 姿态（组合⑥×audit）。
+- **clippy 卫生**（integ-r4/r5 漂移 6 警告 + 本轮新码 3 警告清零）：
+  is_multiple_of/Default impl ×2/clone_on_copy ×2/to_path_buf/
+  field_reassign ×2/useless vec!——复归恰 2 wasm_bindgen 基线。
+- **上游询问候选落档**（collab-line/upstream/）：p20 捕获窗缺陷
+  bug 报告草案 + map-undo 交错语义澄清草案（英文、最小复现件内嵌、
+  触发条件矩阵）；独立验证 crate（scripts/upstream_repro_verify/
+  仓外工件）release profile 亲跑：p20 两症状逐字复现（部分撤销
+  "A1H2A2" + store.rs:340 unwrap None panic；附加发现 debug profile
+  更早触发 block.rs:652 subtract overflow——同路径溢出面，草案
+  已注明）；map-undo 3→2→1 逐笔回退 + 单次 undo 消耗 3 栈项且键
+  整体移除（<none>——行为 2 最强形态）。ready-to-file，**呈用户
+  择机提交**（提交前复验：0.28.0 仍最新 / 上游无同题 issue）。
+- **新 governing 计划落档**：workbench-line/文档工作台完整实施
+  计划.md（用户原文逐字 + 实施侧对照批注——前端⑤从「悬置裁决」
+  升级为「阶段 1 基准 + 双原型对照后定谳」）。
+- 门禁（亲跑）：G1 711→**721** 零失败（+10 audit 测试）/
+  clippy --workspace --all-targets 恰 2 基线 / fmt 0 / scan
+  PASS / wasm32 check --all-targets 0 错 / Cargo.lock 零 diff /
+  三演示全绿（e2e 13 + collab_body 12 + relay 13 检查点）。
+
+Stage Summary:
+- mdcore main 61f1ea8→**ef830dd**（harden-r1）已推送。
+- 交付报告 §4：风险②（撤销耦合防护）工程侧收口（audit/repair +
+  set_block_type 修复 + 端到端证明）；风险①（yrs 缺陷族）上游
+  草案两份备稿 ready-to-file。
+- 前端⑤之外的全部工程面收口。新计划（六阶段）已接管后续路线：
+  下轮 = 阶段 0 核实 + 阶段 1 四类性能基准 + 宿主选型前置盘点。
