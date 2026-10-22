@@ -5341,3 +5341,61 @@ Stage Summary:
   草案两份备稿 ready-to-file。
 - 前端⑤之外的全部工程面收口。新计划（六阶段）已接管后续路线：
   下轮 = 阶段 0 核实 + 阶段 1 四类性能基准 + 宿主选型前置盘点。
+
+---
+Task ID: p0-verify + p1-bench
+Agent: 主代理
+
+Task: 新计划（文档工作台完整实施计划）阶段 0 收口核实 + 阶段 1 前半
+（四类性能基准 headless 面 + 前端能力盘点）。
+
+Work Log:
+- **阶段 0（复用为主，亲跑补证）**：harden-r1 收口推送（mdcore
+  ef830dd / cleanroom 7f73dba，PAT 环境变量单次传递 + 用毕 unset）；
+  workbench 四测试面亲跑复现（八步闭环 4 + sidecar 持久化/异常恢复
+  6 + 命令层 5 + 协同组合 3）；Office 锚点合并状态核实（office-g
+  Phase 1+2 已在 main——c4856f7 历史链）；yrs 三缺陷处置结论复核
+  （p20 窗 0 + 回归锁 + 上游草案 ready；#676 skip_gc；map-undo 钉定
+  + 草案）；协作/Canvas 定性 = 产品实现（14 crate / G1 721 / 三演示
+  可运行）；HANDOFF §6 五分类现状表（已实现/已验证/部分集成/延期/
+  未实施）+ 新计划落档（workbench-line/文档工作台完整实施计划.md，
+  原文逐字 + 实施侧对照索引）。
+- **阶段 1 基准①（bench_long_doc，新 example 六场景）**：ingest
+  10k=44ms/51MB、100k=471ms/456MB 线性；bindings 54.8ms/笔@10k×
+  1000、494.5ms/笔@100k×100——**发现：每笔绑定 = 正文重摄取
+  O(n)（fail-closed fresh-read 纪律代价）**；refresh_body 533ms
+  含重摄取+全指纹对照、选择性失效恰 1 条（外部改写 1 段 → 恰 1
+  主张 Stale）；reverify 8.3ms/条；persistence/report 亚毫秒。
+  实施自纠三处：heading 占段索引 0 的锚段偏移；gen_body 被改写体
+  同名自删（ParentUnavailable 定位）；主张值须嵌入锚段文本
+  （ClaimedValueNotInParagraph 校验）。
+- **阶段 1 基准②（bench_limits 扩展两场景）**：slice500k 可视区
+  窗口（50×20）2µs/窗（typed 网格内存访问）；edit500k C3 单笔
+  编辑提交全链 读536+重放64+写492 ≈ 1.1s@500k 格——**C3 读改重建
+  的提交下界，阶段 5 局部更新/延迟提交的量化论据**。
+- **阶段 1 基准③（PDF perf 门复跑）**：6/6 过（TTI 0.16ms / 首屏
+  9.38ms / 顺序渲染 p95 0.82ms / 抽取 56k 页/s / 翻页命中 0.51µs）；
+  冷进程首跑 43.7ms = 页缓存方差（三次复跑 12.9/8.4/9.4ms 过阈值）
+  ——环境特性登记非回归。
+- **阶段 1 基准④（bench_canvas，新 example 七场景双档）**：装载
+  6µs/op；MoveNode p50 3-5µs；find ~1µs；删除+撤销 p50 11µs（模型
+  面无瓶颈）；**objects() 全量快照 p50 1.0ms@1k / 13.3ms@10k——
+  渲染每帧消费面 = 增量读论据（事件 touched 面已在位）**；全画布
+  指纹 2.1/24.3ms；同步全量差量 1k=149KB/5ms、10k=1.5MB/61ms。
+- **前端能力盘点（选型前置，不预判）**：web/ CM6 桥在位（MD 面）；
+  shell-native 蓝图态；候选 A = web+wry（存量复用最高）B = 原生
+  UI（Slint 不因 Kokoa 默认）；对照操作集 = 四类基准负载。
+- **基准报告落档**：workbench-line/阶段1性能基线报告.md（数字+命令
+  +环境口径+三项结构性行动项）。
+- 门禁（亲跑）：基准代码 clippy 零新增（恰 2 wasm_bindgen 基线）/
+  fmt 0；受影响 crate 测试 41/41；mdcore main ef830dd→**82884cc**
+  已推送。
+
+Stage Summary:
+- 阶段 0 验收达成：成果可复现（四测试面亲跑）、缺陷处置结论明确
+  （yrs 三缺陷+set_block_type 修复）、HANDOFF 与仓库一致（五分类表）。
+- 阶段 1 前半验收达成：四类基线可复现在档（命令+数字）；PDF 6/6；
+  三项结构性行动项进入阶段 5 议程（表格提交策略/Canvas 增量读/
+  证据批量通道）。
+- 下一步：阶段 1 后半双宿主原型对照（A web+wry / B 原生）→ 选型
+  记录 → 阶段 2 证据复验。
