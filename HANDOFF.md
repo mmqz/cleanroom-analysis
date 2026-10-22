@@ -55,6 +55,29 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
+> **当前态速览（2026-10-22 integ-r1 落地确认 + 推送态复验 + 集成项①收口后）**：
+> 环境第 17 次重置恢复（双仓 ff 拉齐 cleanroom 07a9681 / mdcore
+> 1789493 + 工具链重装 1.99.0+nightly-2026-10-15+wasm32 + pdfium
+> chromium/8086 取件 + fixtures 三件再生成）。**integ-r1 落地确认**
+> （mdcore `1789493`，前会话推送但本仓零记录——本轮补账）：第 13
+> crate **mdc-mdbridge**——mdcore op 层 ↔ mdc-collab 对接（交付报告
+> §3.1 集成项①）：身份映射三面（family u64↔`md:{client}:{n}` 确定性
+> 编解码/foreign 持久双向表/孤儿分配）+ plan→shadow 增量→collab
+> 命令执行序 + CollabSession 唯一真相源（shadow 纯投影+失败自愈
+> 重物化）+ dual_run 双跑锁 + publish 重映射语义；25 新测试。
+> **推送态复验（本会话亲跑）**：G1 **667/667** 零失败（= integ-r1
+> 声明口径精确复现）/ fmt 0 / scan PASS / wasm32 check --all-targets
+> 零错误 / **clippy 发现 integ-r1 漂移**——其提交时 clippy 口径未含
+> --all-targets 测试面，mdbridge 测试 7 警告（3 unused import + 4
+> 不必要 mut）→ 卫生补丁 `d3bbb12` 清零（保留 81/376 两处真实可变
+> 借用）→ 修复后恰 2 wasm_bindgen 基线恒，已推送。文档侧：交付报告
+> §3.1 翻转已落地 + 本速览。**剩余待集成五项**（依依赖序推进）：
+> ③事件/订阅面（前端宿主推式通知）→ ④awareness（在线状态/光标）
+> → ②workbench↔协同组合（mdbridge 前置已齐）→ ⑥服务端中继 →
+> ⑤前端（用户裁决项——未选型不得指定框架，维持门控）。mdcore
+> main = **d3bbb12**；cleanroom main = 本提交。下轮从集成项③ 起
+> 按依赖序恢复。
+>
 > **当前态速览（2026-10-21 协作与 Canvas 正式交付全链收口·终态）**：
 > 用户 governing 指令①-④**全部完成**：①收尾验证（wrap-t1：
 > sidecar 持久化/异常恢复——实抓并修复 Workbench::open() 三处恢复

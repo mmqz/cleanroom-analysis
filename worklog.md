@@ -5013,3 +5013,76 @@ Stage Summary:
 - 仍待集成六项（mdcore op 对接/workbench 组合/事件面/awareness/
   前端/中继）+ 风险四面（yrs 缺陷族全缓解/写入方约定/重建语义/
   资源默认值）——详见报告 §3/§4。
+
+---
+Task ID: integ-r1（补账登记——前会话已实施推送，本仓当时未留记录）
+Agent: 主代理
+
+Task: 交付报告 §3.1 集成项①——mdcore（MD 引擎）↔ mdc-collab op 层
+对接（应用层组合点）：BlockTree 七操作过桥、身份映射、真相源纪律、
+publish 面。用户指令「继续持续做」背景下的前会话实施轮。
+
+Work Log:
+- mdcore 第 13 crate crates/mdbridge（1789493）：身份映射三面定谳
+  ——family（本端 shadow u64 ↔ md:{client_id}:{n} 确定性编解码，
+  client_id 域多端零撞号）/ foreign（外端 id 持久双向映射表，跨重
+  物化稳定）/ 孤儿（空 block_id 或撞号重复 id = 分配不入表，结构
+  保真身份不稳定——敌意面登记）。
+- 核心执行序：plan（预态路径解析 + 协作域约束镜像预检，零副作用
+  失败）→ shadow 增量（mdcore apply_op 原子应用 + id 回写）→
+  collab 命令（失败 → shadow 自愈重物化 + 显式错误）；真相源纪律
+  = CollabSession 唯一，shadow 纯投影。
+- 翻译语义钉定：MoveBlock to_index 两侧同为摘除后坐标直传不改写
+  （dual_run 双跑锁——同 op 序列过桥 vs 裸树覆盖等价断言）；
+  SetBlockType D-1 载体换新族 block_id 连续 shadow u64 稳定；
+  SetMark D-2 归一化字面形状允许差。
+- collab 加性读面：BlockInfo.marks 展平区间（mdbridge materialize
+  消费面）。
+- publish 身份语义 = 重映射（import）：源树与 family 两分配器空间
+  都从 1 起 → 每块 fresh family u64 + 回执 top_ids 即映射表；adopt
+  （保 u64 活会话交接）无消费方不预制——登记留裁决。
+- 测试 25 新增（bridge_ops 9 + bridge_publish 4 + bridge_sync 6 +
+  collab marks_readback 4 + codec 2）；G1 642→667。
+
+Stage Summary:
+- mdcore main 1789493（integ-r1）已推送；集成项① 落地，交付报告
+  §3 待集成清单剩五项（②③④⑤⑥）。
+- 本条为补账：实施发生在前会话，本轮（integ-r1-verify）复验确认
+  后补记——详见下一节复验记录。
+
+---
+Task ID: integ-r1-verify
+Agent: 主代理
+
+Task: 环境第 17 次重置恢复 + integ-r1 推送态复验 + cleanroom 记录
+补账 + 门禁卫生补丁（用户「继续持续做」——按依赖序恢复执行）。
+
+Work Log:
+- 环境恢复：GH_TOKEN 环境变量重建（零落盘纪律维持）→ 双仓瞬态
+  header fetch + ff 拉齐（cleanroom 07a9681 / mdcore 1789493——
+  远端较本地 stale ref 多 27/9 提交，纯落后零分叉）→ 工具链重装
+  （rustup 1.29.2 + 1.99.0 + nightly-2026-10-15[rust-src] + wasm32）
+  → pdfium chromium/8086 脚本取件（SHA256 验证过）+ fixtures 三件
+  再生成（spike 双 bin 跑通三探针 + S6 表单探针全过）。
+- 推送态复验（本会话亲跑，mdcore 1789493）：G1 cargo test
+  --workspace = **667/667 零失败**（= integ-r1 声明口径精确复现）；
+  fmt 0；scan PASS（0 hit-paths）；wasm32 check --workspace
+  --all-targets 零错误；**clippy --workspace --all-targets 发现
+  integ-r1 漂移**——mdbridge 测试面 7 警告（bridge_ops 6：
+  family_id/markdown unused import + 4 不必要 mut；bridge_publish
+  1：family_id unused import），根因 = integ-r1 提交时 clippy 口径
+  未含 --all-targets 测试面。
+- 门禁卫生补丁（mdcore d3bbb12）：机械修复 7 警告（3 unused
+  import 删除 + 4 mut 删除；实施自纠：replace_all 误伤 81/376 两处
+  真实可变借用[apply_op/materialize 消费面]——编译错误即捕获即
+  还原）；修复后 clippy 双面恰 2 wasm_bindgen 基线恒 + mdbridge
+  21/21 零失败 + fmt 0；已推送（瞬态 header，token 零残留验证）。
+- cleanroom 记录补账：integ-r1 worklog 补账条 + 交付报告 §3.1
+  翻转（已落地 + 复验口径 + 剩余五项）+ HANDOFF §6 新速览块。
+
+Stage Summary:
+- 集成项① 全链收口确认（实施 1789493 + 卫生 d3bbb12 + 双仓文档
+  同步）；推送态可复现性验证通过（漂移仅 clippy 测试面口径差）。
+- 剩余待集成五项依赖序定谳：③事件/订阅面 → ④awareness →
+  ②workbench↔协同组合 → ⑥服务端中继 → ⑤前端（用户裁决项维持
+  门控）。

@@ -84,14 +84,23 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
 
 ## 3. 仍待集成（诚实边界——已实现但不在此轮闭环内）
 
-1. **mdcore（MD 引擎）↔ mdc-collab 的 op 层对接**：BlockSpec/命令
-   语义与 mdcore op.rs 七操作对齐，但未直接消费 BlockTree 类型——
-   引擎间接入按架构约束在应用层组合（§六），对接轮需要 mdcore
-   BlockId(u64) ↔ 协作域 BlockId(String) 的身份映射决策。
+> **状态更新（2026-10-22）**：项① 已于后续轮落地并推送
+> （mdcore `1789493` integ-r1：第 13 crate **mdc-mdbridge**——
+> 身份映射三面定谳[family/foreign/孤儿]、plan→shadow 增量→collab
+> 命令核心执行序、真相源纪律[CollabSession 唯一、shadow 纯投影]、
+> dual_run 双跑锁翻译语义钉定、25 新测试；补丁 `d3bbb12` 清测试面
+> clippy 漂移）。**剩余待集成 = 项②③④⑤⑥ 五项。**
+
+1. ~~**mdcore（MD 引擎）↔ mdc-collab 的 op 层对接**~~ **已落地**
+   （integ-r1 `1789493` + 卫生补丁 `d3bbb12`，2026-10-22 复验
+   G1 667 零失败 / clippy 恰 2 基线 / fmt 0 / scan PASS / wasm32
+   check 零错误）。身份映射裁决项已定谳：本端 shadow u64 ↔
+   `md:{client_id}:{n}` 确定性编解码 + 外端持久双向映射表 + 同族
+   伪造水位纪律；publish = 重映射语义（fresh family u64）。
 2. **workbench 八步闭环 ↔ 协同会话组合**：evidence_assoc 演示的是
    直组侧车（evidence + canvas/collab 直接组合）；workbench 的
    XLSX/DOCX 摄取管线与协同态的组合（协同文档作为受证正文）留
-   后续轮。
+   后续轮。mdbridge 落地后此组合的技术前置已齐备。
 3. **事件/订阅面**：前端宿主需要变更通知（推式）；当前为拉取式读
    模型。yrs 观察者在位但未包装暴露。
 4. **awareness（在线状态/光标）**：yrs sync feature 在位，未暴露
