@@ -5086,3 +5086,49 @@ Stage Summary:
 - 剩余待集成五项依赖序定谳：③事件/订阅面 → ④awareness →
   ②workbench↔协同组合 → ⑥服务端中继 → ⑤前端（用户裁决项维持
   门控）。
+
+---
+Task ID: integ-r2
+Agent: 主代理
+
+Task: 集成项③——事件/订阅面（交付报告 §3.3：前端宿主推式通知；
+此前拉取式读模型，yrs 观察者未包装暴露）。双域（文档/画布）同轮
+落地。
+
+Work Log:
+- mdc-collab events 模块：CollabEvent{source,updates}——来源五态
+  （Command{actor}/Undo{actor}/Redo{actor}/Remote/Maintenance）与
+  公共变更入口一一对应（方法上下文标注，不依赖 origin 推断）；
+  updates=逐事务 wire 字节（每条可独立 apply_update 转发）；一公共
+  入口恰一事件（LoadBlocks 512/txn 小批多事务合并为单事件 updates
+  序——600 块=2 批=1 事件钉定）；失败命令不产事件（错误显式返回，
+  双通道不重复）；touched 面刻意不提供（XML 载体 block 级提取需
+  属性级事件解释——诚实登记延后）。
+- mdc-canvas events 模块（同构镜像 + 画布域增量）：
+  CanvasEvent{source,updates,touched}——touched=受触对象 ID 字典序
+  去重；提取双路径（根 Map 自身事件 path 空 → MapEvent::keys 提取
+  [对象增删]；嵌套事件 path 首段 [几何/属性/端点/组成员深变更]）。
+- 派发纪律（结构性安全，全部文档化）：延迟派发（观察者只在事务
+  提交期收字节；订阅者派发在公共方法返回前事务已释放后——p18
+  读写同锁纪律的观察者面扩展）；回调不可重入会话（只收 &Event，
+  借用检查器结构性阻止）；回调 panic 正常传播（宿主代码非引擎
+  代码）；Drop 退订即时（派发中至多一次尾随调用）；锁序无自杀锁
+  （注册表锁短暂持有→逐订阅者自身锁）。
+- 维护窗事件恒发（updates 可能为空——GC 无新 CRDT 操作，观测
+  钉定）；restore 新会话无历史事件（注册表随实例新生——恢复后
+  首个变更正常派发，钉定）。
+- 实施自纠两处：①open() 构造误用 UpdateCollector::default() 新
+  实例而非已 attach 的局部收集器（观察者写入被丢弃实例——11
+  测试全红定位后修复）；②调试示例踩 p18 变量遮蔽死锁（txn2 遮蔽
+  txn1 自锁——即删，与产品代码无关，纪律再验证）。
+- 测试 21 新增：collab events 11 + canvas events 10（含远端深观察
+  touched 提取/转发收敛/删除撤销同 ID 回归触及/分组=分组键）。
+- 门禁（亲跑）：G1 667→**688** 零失败 / clippy --workspace
+  --all-targets 恰 2 wasm_bindgen 基线 / fmt 0 / scan PASS /
+  wasm32 check --all-targets 0 错误 / Cargo.lock 零 diff。
+
+Stage Summary:
+- mdcore main d3bbb12→**02067ad**（integ-r2）已推送。
+- 集成项③ 收口：拉取式读模型 + 推式事件双面在位；前端集成的
+  通知面前置解除。剩余待集成 = ②workbench↔协同组合、④awareness、
+  ⑥服务端中继、⑤前端（用户裁决项）。

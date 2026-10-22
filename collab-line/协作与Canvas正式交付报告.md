@@ -89,7 +89,10 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
 > 身份映射三面定谳[family/foreign/孤儿]、plan→shadow 增量→collab
 > 命令核心执行序、真相源纪律[CollabSession 唯一、shadow 纯投影]、
 > dual_run 双跑锁翻译语义钉定、25 新测试；补丁 `d3bbb12` 清测试面
-> clippy 漂移）。**剩余待集成 = 项②③④⑤⑥ 五项。**
+> clippy 漂移）。**项③ 已落地**（mdcore `02067ad` integ-r2：双域
+> 事件层——一公共入口一事件/updates 逐事务可转发/失败不产事件/
+> canvas touched 对象 ID；21 新测试，G1 667→688）。
+> **剩余待集成 = 项②④⑤⑥ 四项。**
 
 1. ~~**mdcore（MD 引擎）↔ mdc-collab 的 op 层对接**~~ **已落地**
    （integ-r1 `1789493` + 卫生补丁 `d3bbb12`，2026-10-22 复验
@@ -101,8 +104,11 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
    直组侧车（evidence + canvas/collab 直接组合）；workbench 的
    XLSX/DOCX 摄取管线与协同态的组合（协同文档作为受证正文）留
    后续轮。mdbridge 落地后此组合的技术前置已齐备。
-3. **事件/订阅面**：前端宿主需要变更通知（推式）；当前为拉取式读
-   模型。yrs 观察者在位但未包装暴露。
+3. ~~**事件/订阅面**：前端宿主需要变更通知（推式）~~ **已落地**
+   （integ-r2 `02067ad`：mdc-collab/mdc-canvas events 模块——
+   延迟派发/一入口一事件/updates 逐事务可转发/失败不产事件；
+   canvas 域 touched 对象 ID 双路径提取；21 新测试）。拉取式读
+   模型与推式事件现已双面在位。
 4. **awareness（在线状态/光标）**：yrs sync feature 在位，未暴露
    API——协同编辑完整体验需要，属前端集成前置件。
 5. **前端**：未选型（指令⑤纪律——Headless 优先，未选定不得指定
