@@ -5469,3 +5469,70 @@ Stage Summary:
   接受/W7 单列目标）。
 - mdcore main = 82884cc + web 基准页（本提交）；cleanroom main =
   本提交。下一步 = 阶段 2 证据复验（七项清单）。
+
+---
+Task ID: p2-r1
+Agent: 主代理
+
+Task: 六阶段计划阶段 2——稳固证据与命令基础（计划 §五 七项验证：
+完整关联链/失效识别/不自动恢复/三态分离/导出独立/sidecar 异常处理/
+命令统一入口）。
+
+Work Log:
+- **七项覆盖面 gap 分析**：八步闭环（①-⑧ 全链）+ persistence_recovery
+  （六测）+ command_layer（五测）+ collab_composition（三测）对照计划
+  §五 逐项核对——六项既有直接测试证据；唯一实质缺口 = 末段「不同
+  业务场景可配置的审核门槛」（review() 无门槛面——任何操作者可翻
+  任何状态）。
+- **ReviewPolicy 落地**（mdc-workbench security.rs + pipeline.rs）：
+  三维 fail-closed 门禁——①操作者前缀允许列表（默认 `human:`——
+  AI 不可改审核态，架构原则「AI 只提关联与推导」的门面化）；
+  ② `allow_approval_of_broken_linkage`（默认 false——Stale/Missing/
+  Ambiguous 关联不得直接过审，过审前必须显式 reverify 恢复 Valid
+  ——计划 §五.3「不得自动恢复为已核验」的执行面）；③
+  `calc_required_at_or_above`（主张值达门槛的计算型证据须 calc
+  Passed——业务场景差异面）。会话级注入（set_review_policy）不入
+  sidecar——sidecar 只承载事实与审计，策略属调用方信任面。
+  Workbench::review 单点接门（拒绝 = 零状态变化 + sidecar 零落盘）；
+  命令层 map_error 映射 ReviewGate → Rejected（校验拒绝——与
+  路径/规模门同语义）。
+- **6 新测试**（crates/workbench/tests/review_gate.rs）：AI 操作者
+  双方向拒 + 零状态变化 / 失效过审拒（拒绝原因指向关联态）+ 拒绝
+  方向不受辖 / 值门槛（Passed 放行 → 来源修正后双门齐拒 Rejected
+  →Approved 翻案同样吃门）/ 宽松档显式放行（allow_broken_linkage）
+  / 自定义前缀（auditor:）/ 命令面同门（execute → Rejected + 不入
+  幂等表 + 重试独立校验）。
+- **测试适配 4 处**（门禁语义正确的既有测试翻新）：collab_composition
+  ×2 先审后验旧序 → 先验后审（人工重绑批次内次序本非测试语义本体
+  ——门禁守护的正是这次序）；command_layer full_loop 与
+  persistence_recovery idempotent 的 Review 命令操作者 ai:glm →
+  人工信封（统一 ai 操作者是便利性选择非语义）。
+- **实施自纠**：write 坐标 0 基（write(6,1)=B7——首版 write(7,2)=C8
+  即 CellNotFound）；tick 闭包可变借用冲突（快照时序前移）；Stale
+  级联诚实性（InputUnavailable 非 InputMismatch——复算不经失效关联，
+  测试期望对齐）。
+- **门禁漂移修复**：bench_canvas 缺 wasm32 占位 main（t21 收严
+  --all-targets 口径的漏网——bench_limits 同款既有模式[带文档注释]）
+  → 补齐后 wasm32 check --workspace --all-targets 0 错误复绿；
+  bench_long_doc 同型补齐。
+- **磁盘满事件第 2 次**（环境既定复发）：LO 解压残留 903M +
+  /tmp tool-results 1.2G + debug targets 5.7G（mdcore 4.0G +
+  proto-native 1.7G debug + 1.4G release）→ 按既定程序清理（含
+  proto-native 全 target——复跑原生基准需 rebuild）→ 7.1G 空闲。
+  本轮全量测试两轮异常失败（sidecar 三测/presence 一测）均为磁盘
+  满所致非代码缺陷——清理后 727/727 复绿验证。
+- 门禁（亲跑，磁盘恢复后）：G1 cargo test --workspace = **727/727
+  零失败**（721 既有 + 6 新门禁测试）/ clippy --workspace
+  --all-targets 恰 2 wasm_bindgen 基线 / fmt 0 / wasm32 check
+  --all-targets 0 错误 / Cargo.lock 零 diff。
+
+Stage Summary:
+- 阶段 2 验收达成：证据闭环可复现（727 全绿）/ UI 接入无需第二份
+  权威数据（web 桥 CM6 doc = 核投影 + collab 会话 = 唯一编辑面在
+  案）/ 失效与失败状态明确表达（三态正交 + 门禁拒绝零状态变化 +
+  Rejected 语义分类）。
+- mdcore main 2043bdb→**3d2e578**（p2-r1）已推送。七项中六项既有
+  证据复验 + 一项实质缺口（可配置审核门槛）落地。
+- 下一步 = 阶段 3 协作引擎完成实施核对（增量面：撤销粒度聚合[宿主
+  侧输入聚合待阶段 5——既有限制在档]/内存边界[软上限 clear_all
+  显式回执在档]/真实编辑器集成测试[collab_body_demo 既有]）。
