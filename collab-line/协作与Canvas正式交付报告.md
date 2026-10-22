@@ -91,8 +91,11 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
 > dual_run 双跑锁翻译语义钉定、25 新测试；补丁 `d3bbb12` 清测试面
 > clippy 漂移）。**项③ 已落地**（mdcore `02067ad` integ-r2：双域
 > 事件层——一公共入口一事件/updates 逐事务可转发/失败不产事件/
-> canvas touched 对象 ID；21 新测试，G1 667→688）。
-> **剩余待集成 = 项②④⑤⑥ 四项。**
+> canvas touched 对象 ID；21 新测试，G1 667→688）。**项④ 已落地**
+> （mdcore `e2dfc7c` integ-r3：presence 模块——在线状态/光标
+> JSON 在场层，独立 wire 通道；null 离线语义/陈旧 clock 取舍/
+> 限额+隔离/standalone 画布宿主路径；11 新测试，G1 688→699）。
+> **剩余待集成 = 项②⑤⑥ 三项。**
 
 1. ~~**mdcore（MD 引擎）↔ mdc-collab 的 op 层对接**~~ **已落地**
    （integ-r1 `1789493` + 卫生补丁 `d3bbb12`，2026-10-22 复验
@@ -109,8 +112,11 @@ static_method_of 基线 / fmt 0 / scan 0 hit-paths / wasm32 check
    延迟派发/一入口一事件/updates 逐事务可转发/失败不产事件；
    canvas 域 touched 对象 ID 双路径提取；21 新测试）。拉取式读
    模型与推式事件现已双面在位。
-4. **awareness（在线状态/光标）**：yrs sync feature 在位，未暴露
-   API——协同编辑完整体验需要，属前端集成前置件。
+4. ~~**awareness（在线状态/光标）**~~ **已落地**（integ-r3
+   `e2dfc7c`：mdc-collab presence 模块——基础设施单点归属[画布
+   宿主经 Presence::standalone 消费不镜像]；上游发现：yrs
+   update() 排除 null 条目 → 离线广播改走 update_with_clients
+   全键集；11 新测试）。
 5. **前端**：未选型（指令⑤纪律——Headless 优先，未选定不得指定
    框架；宿主经 wire 字节 + 命令接口接入）。
 6. **服务端中继**：当前为端到端直连同步（P2P 形状）；多端常驻

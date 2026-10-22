@@ -5132,3 +5132,52 @@ Stage Summary:
 - 集成项③ 收口：拉取式读模型 + 推式事件双面在位；前端集成的
   通知面前置解除。剩余待集成 = ②workbench↔协同组合、④awareness、
   ⑥服务端中继、⑤前端（用户裁决项）。
+
+---
+Task ID: integ-r3
+Agent: 主代理
+
+Task: 集成项④——awareness/在场层（交付报告 §3.4：在线状态/光标；
+yrs sync feature 在位未暴露 API——协同编辑完整体验需要，前端集成
+前置件）。
+
+Work Log:
+- mdc-collab presence 模块：Presence 类型（yrs Awareness 受控包装，
+  公开面零 yrs 类型）。归属定谳：在场层 = 会话层协同基础设施（非
+  领域逻辑）→ 单点落位 mdc-collab；画布宿主经 Presence::standalone
+  (client_id) 独立构造消费（私有载体 Doc 仅承载 client_id——
+  awareness 状态在 DashMap 不写 doc；宿主保证 doc 流与 presence 流
+  client_id 一致——身份关联纪律文档化）——领域独立纪律的反向应用
+  （基础设施单点，不镜像）。
+- 公开面：set_local_state（JSON fail-closed 校验）/local_state/
+  clear_local_state（null+clock+1 离线语义）/states（client_id
+  升序确定性读模型）/encode_update（v1 全量含 null 条目）/
+  encode_update_for（定向，未知客户端显式错）/apply_update（入向
+  限额默认 1MiB + panic 隔离，B1.6 同构）/subscribe（added/updated/
+  removed 三分类）。
+- **上游行为差异定谳（实施新发现）**：yrs Awareness::update() 刻意
+  排除已清除（null）条目（"doesn't include states that have been
+  removed"）→ 离线广播无法经 update() 传播；本 crate encode_update
+  改走 update_with_clients 全键集（null+clock 随全量走——晚到对端
+  退休旧态的唯一通道）。接收端三面钉定：json="null"+clock≥已知 →
+  退休+removed 事件；clock 陈旧零回退；远端不可删本地态（时钟反增
+  保护——yjs 安全语义）。
+- wasm32 兼容：Awareness::new（SystemClock）在 wasm32-unknown 被上
+  游 cfg 排除 → with_clock + SystemTime 回退 0 时钟（与撤销管理器
+  timestamp 同款模式——排序由 clock 字段保证）。
+- SessionOptions 增 presence_byte_limit（默认 1MiB——在场 JSON 小
+  载荷与文档 52MiB 族分立）；CollabSession::presence_mut()；
+  serde_json 显式声明（7 crate 既有直接依赖，零新三方）。
+- 测试 11 新增：本地生命周期三事件/非法 JSON 拒收/双端 wire 收敛/
+  null 离线传播/陈旧 clock 零回退/限额+垃圾隔离/standalone 域
+  （53 位恰过恰拒）/会话 client_id 对齐/三客户端全量互发收敛/
+  订阅生命周期/定向编码。
+- 门禁（亲跑）：G1 688→**699** 零失败 / clippy --workspace
+  --all-targets 恰 2 wasm_bindgen 基线 / fmt 0 / scan PASS /
+  wasm32 check --all-targets 0 错误 / Cargo.lock 纯成员行。
+
+Stage Summary:
+- mdcore main 02067ad→**e2dfc7c**（integ-r3）已推送。
+- 集成项④ 收口：在线状态/光标的完整 API 面暴露（含离线语义与
+  安全边界钉定）；前端集成第二前置件解除。剩余待集成 = ②workbench
+  ↔协同组合、⑥服务端中继、⑤前端（用户裁决项）。
