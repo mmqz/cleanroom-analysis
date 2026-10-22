@@ -5536,3 +5536,45 @@ Stage Summary:
 - 下一步 = 阶段 3 协作引擎完成实施核对（增量面：撤销粒度聚合[宿主
   侧输入聚合待阶段 5——既有限制在档]/内存边界[软上限 clear_all
   显式回执在档]/真实编辑器集成测试[collab_body_demo 既有]）。
+
+---
+Task ID: p34-verify
+Agent: 主代理
+
+Task: 六阶段计划阶段 3/4 核对——协作引擎与 Canvas 完成实施验收
+（大部已在前序集成冲刺落地，本轮 = 计划条目逐项对照 + 增量验证面）。
+
+Work Log:
+- **§六.1 撤销粒度实证**（唯一增量验证面）：新测试
+  typing_granularity_pinned_per_command——逐字符 5 命令 = 5 栈项
+  （undo_depth 钉定：捕获窗 0 = p20 缓解的既定代价）；逐项撤销
+  全链回退正确（语义完整性不因粒度细而破）；宿主聚合形态（单命令
+  多字符）恰 1 栈项——聚合责任在命令构造侧而非捕获窗（p20 窗>0 +
+  交错 origin = 缺陷路径，不可回退）。阶段 5 表面实施项（宿主侧
+  输入聚合）既有限制登记维持。
+- **§六.2 内存边界复验**：R3 定量（437.9 B/op · 6M≈2.4GiB）+ 软上限
+  clear_all 显式回执（B3.4 非静默）+ S0 一页清单在档——「不得伪造
+  上限/不得静默清空」两条纪律既有满足，零改动。
+- **§六.3 七项对照**：稳定逻辑 ID 与 CRDT ID 分离（mdbridge
+  family_id 重映射）/同命令契约（Actor×CollabCommand）/事件通知
+  （integ-r2 双域事件层）/并发冲突过期命令（matrix+hostile+并发
+  套件）/保存断连恢复删除复原（relay 检查点 + recovery 套件）/
+  会话本地撤销（origin 分栈）/真实编辑器组合测试（collab_body_demo
+  五幕 12 检查点）——全部既有产物，零增量。
+- **§七 Canvas**：headless 引擎（mdc-canvas 领域模型/命令接口/证据
+  关联）+ e2e_demo 全链复跑 PASS；「真实交互」= 阶段 5 表面项
+  （宿主定谳 A：web+wry——选型记录已列）。
+- **演示件适配**：collab_body_demo 幕五先审后验旧序 → 先重验恢复
+  Valid 再过审（阶段 2 门禁次序守护——与 collab_composition 测试
+  同型翻新，第 5 处适配点）。
+- 复验亲跑：collab 套件 **61/61**（60 既有 + 1 新粒度测试）+
+  collab_body_demo **五幕 12 检查点全过** + mdc-canvas e2e_demo
+  **全链 PASS**；G1 **728/728** 零失败 / fmt 0 / clippy 恰 2
+  wasm_bindgen 基线。
+
+Stage Summary:
+- 阶段 3/4 验收达成：撤销粒度实证钉定 + 内存边界纪律在档 + 全部
+  条目既有产物对照 + 三演示/套件亲跑复现。
+- mdcore main 3d2e578→**fc25f06**（p34-verify）已推送。
+- 下一步 = 阶段 5 渲染表面（宿主 A = web 面扩展；wry 壳真机编译 =
+  选型记录既列前置项）。
