@@ -1,2 +1,5 @@
 office-line/_upstream/
 collab-line/_upstream/
+# 阶段1宿主对照工件：可再生成（proto-native --gen）不入库；构建产物不入库
+workbench-line/proto-host/data/
+workbench-line/proto-native/target/

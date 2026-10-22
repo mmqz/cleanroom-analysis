@@ -1,0 +1,22 @@
+[package]
+name = "proto-native"
+version = "0.1.0"
+edition = "2021"
+description = "阶段1宿主选型原型B（原生 UI 候选：egui/eframe + winit/X11 + glow 软渲染）——评估工件，非产品代码。两模式：--gen 生成共享对照数据集；--bench 运行场景基准（Xvfb 下由 bench_native.py 驱动）。"
+
+[dependencies]
+# mdcore 核心复用（path 依赖——证明「核心不依赖 UI」架构纪律）
+mdcore = { path = "../../../mdcore/crates/mdcore" }
+
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+
+# 原生候选：eframe（winit + glow；x11 后端；default_fonts 内嵌拉丁字体，
+# CJK 字体运行时从系统装载——真实启动成本计入 startup 指标）
+eframe = { version = "0.37", default-features = false, features = ["default_fonts", "x11", "glow"] }
+
+# XTEST 合成输入（拖拽场景——纯 Rust X11 客户端，零系统依赖）
+x11rb = { version = "0.13", features = ["xtest"] }
+
+[profile.release]
+debug = true

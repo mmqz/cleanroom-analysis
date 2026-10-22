@@ -1,0 +1,126 @@
+{
+  "side": "web",
+  "env": {
+    "renderer": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/143.0.7499.4 Safari/537.36",
+    "engine": "Chromium headless（软渲染）"
+  },
+  "scenarios": [
+    {
+      "name": "startup",
+      "ms": 273.89999999990687,
+      "extra": {
+        "data_load_ms": 181.8000000002794,
+        "core_ingest_ms": 48.39999999990687
+      }
+    },
+    {
+      "name": "doc_open",
+      "ms": 22.200000000186265,
+      "extra": {
+        "lines": 10000
+      }
+    },
+    {
+      "name": "doc_edit",
+      "ms": 25.5,
+      "extra": {
+        "rev_before": 0,
+        "rev_after": 1,
+        "op_ok": true,
+        "text_has_edit": true
+      }
+    },
+    {
+      "name": "doc_jump_end",
+      "ms": 31.399999999906868,
+      "extra": {
+        "lines": 10000
+      }
+    },
+    {
+      "name": "evidence_render",
+      "ms": 30.799999999813735,
+      "extra": {
+        "claims": 100
+      }
+    },
+    {
+      "name": "evidence_jump",
+      "ms": 31.600000000093132,
+      "extra": {
+        "claim": "c-073",
+        "hl": true
+      }
+    },
+    {
+      "name": "table_open",
+      "ms": 33.40000000037253,
+      "extra": {
+        "rows": 5000,
+        "cols": 100
+      }
+    },
+    {
+      "name": "table_scroll",
+      "ms": 695.5,
+      "extra": {
+        "steps": 40,
+        "rows_moved": 2000,
+        "mean_frame_ms": 16.592500000004655,
+        "p95_frame_ms": 17
+      }
+    },
+    {
+      "name": "table_edit",
+      "ms": 30,
+      "extra": {
+        "cell": "r2005c7",
+        "val": "EDITED-✎"
+      }
+    },
+    {
+      "name": "canvas_render",
+      "ms": 43.200000000186265,
+      "extra": {
+        "nodes": 1000,
+        "edges": 1500
+      }
+    },
+    {
+      "name": "canvas_hit",
+      "ms": 3.6000000000931323,
+      "extra": {
+        "n": 100,
+        "mean_us": 36.00000000093132,
+        "hits": 23
+      }
+    },
+    {
+      "name": "fps_sustain",
+      "ms": 4991.200000000186,
+      "extra": {
+        "frames": 300,
+        "mean_frame_ms": 16.636666666666667,
+        "p95_frame_ms": 16.800000000279397,
+        "min_frame_ms": 7.900000000372529,
+        "max_frame_ms": 17.300000000279397
+      }
+    },
+    {
+      "name": "canvas_drag",
+      "ms": 2131.9000000003725,
+      "extra": {
+        "frames": 128,
+        "mean_frame_ms": 16.78661417323128,
+        "p95_frame_ms": 18.600000000093132,
+        "node500_dx": 37,
+        "node500_dy": 21
+      }
+    }
+  ],
+  "memory": {
+    "js_heap_used_mb": 61.03515625,
+    "js_heap_total_mb": 73.05145263671875,
+    "browser_tree_rss_kb": 673104
+  }
+}

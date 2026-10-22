@@ -5399,3 +5399,73 @@ Stage Summary:
   证据批量通道）。
 - 下一步：阶段 1 后半双宿主原型对照（A web+wry / B 原生）→ 选型
   记录 → 阶段 2 证据复验。
+
+---
+Task ID: p1-host
+Agent: 主代理
+
+Task: 六阶段计划阶段 1 后半——双宿主原型对照 → 选型记录 → 定主宿主
+（用户指令「继续持续的做不做完或者有重大阻塞不停息」；计划 §四.5
+裁决方式 = 基准 + 双原型对照后定谳，前端不再悬置）。
+
+Work Log:
+- **环境第 ~20 次重置恢复**：rustup 1.29.2 + Rust 1.99.0 钉住
+  （clippy/rustfmt/wasm32 经 rust-toolchain.toml 自动补装）+ cargo
+  fetch + pdfium chromium/8086 SHA256 验证重取（spike bin/lib 第 2
+  寻径序位）+ G1 cargo test --workspace = **721/721 零失败**（= 82884cc
+  推送态精确复现）+ wasm-bindgen-cli 0.2.129 按锁安装 + web npm
+  install/build-wasm/build + web_smoke **15/15**（W1-W11+perf 面）。
+  GH_TOKEN 环境变量重建（零落盘纪律维持）。
+- **可行性硬检查**：webkit2gtk-4.1/GTK3 MISSING（无 root 不可装）→
+  wry 桌面壳沙箱不可编译（如实登记为 A 侧未测量面）；Vulkan ICD 空
+  → wgpu/iced 排除；X11 全链在位（libX11/Xcursor/Xrandr/Xrender/
+  xkbcommon）→ winit 路可行；Xvfb + Playwright Chromium 缓存幸存。
+- **共享对照数据集**（单一真源，确定性 LCG）：10k 块中文正文 2952KB
+  + 100 证据主张 + 500k 格表格 5441KB + 1k 节点/1.5k 边画布 105KB
+  （proto-native --gen 生成，双侧字节同源）。
+- **原型 B（原生 egui 候选）**：`workbench-line/proto-native/` = egui
+  0.37 + glow + winit/X11（Xvfb 软渲染）+ mdcore path 依赖直连 +
+  x11rb XTEST 真实输入注入（X 服务器→winit→egui→GL 全链，与 CDP
+  对称）+ CJK 字体运行时装载（NotoSansSC 5.4MB 真实启动成本计入）。
+  沙箱缺件自愈：apt download 无 root 提取 libxkbcommon-x11+libxcb-xkb
+  → LD_LIBRARY_PATH（真实桌面标配，非产品约束）。
+- **原型 A 基准页**：`mdcore/web/bench.html + src/bench.ts`（零新
+  npm 依赖；CM6 = core.to_markdown() 投影镜像与产品面同纪律；虚拟
+  网格表格；SVG 画布 + 应用级 O(n) 命中 + 拖拽交互含连线跟随）+
+  build.mjs 双入口接线 + tsc 零错误。驱动器 bench_web.py（Playwright
+  CDP 真实鼠标）+ bench_native.py（Xvfb+XTEST）。
+- **13 场景双侧对称实测（双轮稳定）**：帧预算——web 四类负载全落
+  60Hz vsync（16.6ms）；原生软渲染表格滚动帧 31.6ms 超预算、画布
+  21.0ms、fps 20.6ms。内存 web 进程树 673MB vs 原生单进程 188MB。
+  启动 255-277ms vs 119-141ms。命中 0.74µs vs 32-53µs（43-70×）。
+  核 op 回写双侧验证过（rev 0→1 + 文本含编辑符）；命中点列 LCG
+  互证（23=23）；拖拽位移 (37,21) 双侧精确。
+- **实施发现三则**：①JS LCG 无 u64 回绕掩码 → 与 Rust 序列分叉
+  （hits=0 定位即此，BigInt & 0xFFFF...FFFF 修复后序列逐点对齐）；
+  ②String::insert 字节索引 vs 核 op 字符偏移——CJK 行直接 insert(5)
+  panic（'## ' 后首字符横跨字节 3-5），字符边界换算修复；③egui
+  scroll_to_rect 取屏幕坐标（= origin+内容坐标），初版误传内容坐标
+  致画布滚动过冲、XTEST 按压落屏外。
+- **IME 证据复跑**：web 面 ime_cdp.py = **28/28 全过**（CDP 真实
+  输入法通道：组合流逐预编辑落核 op/1s 合并窗单 undo 条/跨行兜底
+  同步/点击不清组合/提交后 undo 单条回退）——选型 IME 维度的
+  决定性证据（egui/winit IME 在位未验证，如实登记）。
+- **选型记录落档**：`workbench-line/宿主选型记录.md`——结论先行
+  （主宿主 = A：web 面 + wry/tao 壳，ADR-H1 方向确认；B 保留为降级
+  路径与参考实现）+ 方法/复现命令 + 双轮数据表 + 七维评估（A 四维
+  B 两维一维混合）+ 未测量面五条（wry 壳真机验证 = 阶段 5 前置）+
+  后续验证项清单。
+- 门禁（亲跑）：mdcore Rust 面零触碰（仅 web/ 三文件：bench.html/
+  bench.ts 新增 + build.mjs 接线）→ web 面 typecheck 0 错 +
+  web_smoke 15/15 + ime_cdp 28/28 + build 双入口绿；proto-native
+  cargo check/clippy 零警告；Cargo.lock（mdcore）零 diff。
+
+Stage Summary:
+- 阶段 1 全部收口：四类性能基线（前半，82884cc）+ 双宿主对照与
+  定谳（后半，本轮）——计划 §四.5 验收达成（可复现基线 + 候选
+  比较结果 + 明确宿主选型及理由）。
+- 主宿主定谳 = A（web+wry）；选型记录 + 双轮实测 + 七维评估 +
+  未测量面诚实边界全在档。B 降级触发条件明确（webview 矩阵不可
+  接受/W7 单列目标）。
+- mdcore main = 82884cc + web 基准页（本提交）；cleanroom main =
+  本提交。下一步 = 阶段 2 证据复验（七项清单）。

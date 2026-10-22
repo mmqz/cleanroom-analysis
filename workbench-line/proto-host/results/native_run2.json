@@ -1,0 +1,127 @@
+{
+  "env": {
+    "os": "linux",
+    "renderer": "egui 0.37 + glow + winit/X11（Xvfb 软渲染）"
+  },
+  "memory": {
+    "vm_hwm_kb": 195888,
+    "vm_rss_kb": 187628
+  },
+  "scenarios": [
+    {
+      "extra": {
+        "core_ingest_ms": 16.097762000000003,
+        "data_load_ms": 37.975258999999994,
+        "font_read_ms": 2.6099970000000003,
+        "font_set_ms": 1.45476
+      },
+      "ms": 118.87921899999999,
+      "name": "startup"
+    },
+    {
+      "extra": {
+        "lines": 10000
+      },
+      "ms": 40.580505,
+      "name": "doc_open"
+    },
+    {
+      "extra": {
+        "op_ok": true,
+        "rev_after": 1,
+        "rev_before": 0,
+        "text_has_edit": true
+      },
+      "ms": 14.963601,
+      "name": "doc_edit"
+    },
+    {
+      "extra": {
+        "lines": 10000
+      },
+      "ms": 12.6651,
+      "name": "doc_jump_end"
+    },
+    {
+      "extra": {
+        "claims": 100
+      },
+      "ms": 11.833741999999999,
+      "name": "evidence_render"
+    },
+    {
+      "extra": {
+        "claim": "c-073",
+        "hl_lines": 1
+      },
+      "ms": 12.089366,
+      "name": "evidence_jump"
+    },
+    {
+      "extra": {
+        "cols": 100,
+        "rows": 5000
+      },
+      "ms": 37.087723000000004,
+      "name": "table_open"
+    },
+    {
+      "extra": {
+        "mean_frame_ms": 31.980139848662585,
+        "p95_frame_ms": 39.171024322509766,
+        "rows_moved": 2000,
+        "steps": 40
+      },
+      "ms": 1277.344195,
+      "name": "table_scroll"
+    },
+    {
+      "extra": {
+        "cell": "r2005c7",
+        "val": "EDITED-✎"
+      },
+      "ms": 57.784711,
+      "name": "table_edit"
+    },
+    {
+      "extra": {
+        "edges": 1500,
+        "nodes": 1000
+      },
+      "ms": 40.621289,
+      "name": "canvas_render"
+    },
+    {
+      "extra": {
+        "mean_frame_ms": 20.597742898123606,
+        "node500_dx": 36.0,
+        "node500_dy": 20.0,
+        "p95_frame_ms": 33.865413665771484,
+        "xtest_error": null
+      },
+      "ms": 1280.871932,
+      "name": "canvas_drag"
+    },
+    {
+      "extra": {
+        "hits": 23,
+        "mean_us": 0.82968,
+        "n": 100
+      },
+      "ms": 0.082968,
+      "name": "canvas_hit"
+    },
+    {
+      "extra": {
+        "frames": 301,
+        "max_frame_ms": 40.27248764038086,
+        "mean_frame_ms": 21.651983641310785,
+        "min_frame_ms": 16.46331787109375,
+        "p95_frame_ms": 35.1280632019043
+      },
+      "ms": 6517.247076034547,
+      "name": "fps_sustain"
+    }
+  ],
+  "side": "native"
+}

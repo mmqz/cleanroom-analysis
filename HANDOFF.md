@@ -55,7 +55,30 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-22 harden-r1 + 新计划接管·最新）**：
+> **当前态速览（2026-10-22 p1-host 宿主定谳·最新）**：
+> 六阶段计划**阶段 1 后半收口——双宿主原型对照完成，主宿主定谳
+> = A（web 面 + wry/tao 壳）**，选型记录落档
+> `workbench-line/宿主选型记录.md`（实测数字/七维评估/未测量面/
+> 降级触发条件全在案）。本轮交付：①共享对照数据集单一真源
+> （proto-native --gen，10k 块中文正文/100 主张/500k 格表格/1k 节点
+> 画布，确定性 LCG）；②原型 B = egui 0.37+glow+winit/X11 原生候选
+> （`workbench-line/proto-native/`，mdcore path 依赖直连 + x11rb
+> XTEST 真实输入注入，Xvfb 实跑）；③原型 A 基准页 =
+> `mdcore/web/bench.html+bench.ts`（CM6/wasm 核/虚拟网格/SVG 画布，
+> 零新 npm 依赖，Playwright CDP 真实输入）；④13 场景双侧对称实测
+> 双轮稳定（帧预算：web 四类负载全落 60Hz vsync；原生软渲染表格
+> 31.6ms 超预算、画布 21ms；内存 673MB vs 188MB；IME 证据 = web 面
+> ime_cdp 28/28 复跑全过）。**未测量面诚实登记**：wry/webkit2gtk
+> 壳沙箱不可编译（无 root 装系统库）——A 侧测的是 Chromium 引擎，
+> 真机 wry 验证 = 阶段 5 前置项；原生 GPU 复测同列。环境恢复：
+> 第 ~20 次重置（工具链 1.99.0 重装 + pdfium SHA256 验证重取 +
+> G1 721/721 精确复现 + web 面 15/15）。mdcore main =
+> 82884cc+web 基准页提交；cleanroom main = 本提交。**下一步 =
+> 阶段 2 证据复验**（七项：XLSX/DOCX 定位关联、失效识别、指纹
+> 不匹配不自动恢复、三态分离、导出独立、sidecar 损坏处理、命令
+> 入口统一）。
+
+> **当前态速览（2026-10-22 harden-r1 + 新计划接管）**：
 > 用户下达《**文档工作台后续完整实施计划**》（六阶段 governing
 > 指令，原文落档 `workbench-line/文档工作台完整实施计划.md`）——
 > **前端⑤从「悬置裁决」升级为「阶段 1 基准 + 双原型对照后定谳」**。
