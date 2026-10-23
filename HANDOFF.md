@@ -55,7 +55,31 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-23 p5-t4 PDF 表面·最新）**：
+> **当前态速览（2026-10-23 p5-t5 Canvas 表面 + 阶段5 四表面收口·最新）**：
+用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
+§八.5 Canvas 表面落地，**四表面全部收口**（**mdcore main =
+2a67e77**）：**mdc-canvas 时钟注入面**（SessionOptions.clock_ms +
+HostClock 适配器——wasm32 SystemTime trap 解，native 零变化，
+canvas 23 测 + e2e_demo 零回归）+ **WasmCanvas wasm 出口**
+（八命令 flat JSON/回执/读模型/指纹/协同四方法/事件轮询 base64/
+静态 restore + CvError 全变体一码 + 测试 7）+ **web canvas_view.ts
+1585 行**（SVG 保留模式四层 + 双实例直连协同演示[事件 updates 转发
++ encode_diff 追赶 + 收敛断言 + 远端不入本地栈] + CDP 拖拽 LWW 提交
+粒度）+ e2e **15/15**（含 100 节点烟测 0.15s）。汇合修复：BigInt
+四处（u64 第三课）+ Option<String> null 契约 + NaN 断言分层。
+门禁（亲跑）：G1 **769/769** / fmt 0 / clippy 恰 4 同型 / scan
+PASS / web **十套全绿**（smoke 15 + grid 20 + evidence 16 + pdf
+15 + canvas 15 + contract 18 + 既有四套 42）。**阶段 5 四表面
+验收面成立**（正文/表格/证据/PDF/Canvas 全有可重复交互测试与性能
+数据；单一真相纪律全表面——wasm 会话唯一权威 + 宿主零第二数据源）。
+**下一步 = wry 壳真机集成**（宿主选型 A 的桌面壳实体——开发环境
+轮 R24-d 性质；选型记录既列前置项）或 **阶段 6 端到端质量验收**
+（§九 十项清单：长文档/表格/PDF/人机共作/并发/sidecar 异常/超大
+输入/退出恢复/打包实测/可选宿主适配）。环境注记：磁盘满第 5 次
+事件（大测试二进制清理模式已固化）；clippy 基线 3→4 同型
+（canvas restore 静态方法）。
+
+> **当前态速览（2026-10-23 p5-t4 PDF 表面·历史保留）**：
 用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
 §八.4 PDF 表面全链落地 + **渲染路径决策定谳**（**mdcore main =
 37399eb**）：**路线 B = pdf.js 渲染 + mdc-pdf lopdf wasm 写回**
