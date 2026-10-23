@@ -55,7 +55,31 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-23 p5-t2 表格 UI 产品化·最新）**：
+> **当前态速览（2026-10-23 p5-t3 证据界面 wasm 化·最新）**：
+用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
+§八.1 壳与证据界面两前置件 + web 侧栏全链落地（**mdcore main =
+3130b8a**）：**workbench 内存会话**（Io 双后端——Files/Memory 仅
+分派 IO 边界，验证/级联/审计核心单一；start_memory/open_memory/
+ingest_source_bytes/refresh_body_bytes/export_clean_bytes/
+sidecar_json/attach_source_bytes）+ **WasmWorkbench wasm 出口**
+（八步全方法 + 查询面 + 20 变体 wb_* 错误码一码一义 + 纯内核
+parse_*）+ **web 证据侧栏**（evidence_panel.ts 950 行：三态徽标
+卡片/审核操作/失效侧 reverify 分派/sidecar 导出恢复/干净正文导出/
+claim 跳转钩子；flex 双栏布局既有 DOM 零破坏；BigInt u64 边界）。
+**审查 3 MUST-FIX 全修**：M1 export_clean 次序漂移（拒绝路径幽灵
+审计——三段拆分恢复零状态变化纪律）/M2 reverify 按定位器类型分派
+（claim 侧失效绕过锚纪律静默恢复——改按失效侧分派 + e2e 锚重绑
+回归锁）/M3 target_scale 截断（try_from）；S1-S5/N1/N2 全修。
+门禁（亲跑）：G1 **751/751**（+8）/ fmt 0 / clippy 恰 3 同型基线 /
+scan PASS / lock +2 内部边 / wasm32 0 错 / web 八套全绿（evidence
+**16/16** + xlsx_grid 20 + 既有六套 75）+ pkg 重建复验。**下一步
+= §八.4 PDF 表面**（页面缓存/缩放滚动/文字选区/批注及证据区域
+叠加——复用 mdc-pdf pdfium 既有安全边界与 O(1) LRU）→ §八.5
+Canvas 表面 → wry 壳真机集成。环境注记：磁盘满第 3 次事件
+（target 增量 4.1G 清理恢复 51% 空闲）；clippy 基线 2→3 同因同型
+（wasm_bindgen static_method_of——restore 新方法）。
+
+> **当前态速览（2026-10-23 p5-t2 表格 UI 产品化·历史保留）**：
 用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
 §八.3 表格表面全链落地（**mdcore main = 823414a**）：
 **Rust 侧** = office-io 新模块 rebuild（C3 读-改-重建产品化：
