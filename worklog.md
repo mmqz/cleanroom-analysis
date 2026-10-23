@@ -5711,3 +5711,50 @@ Stage Summary:
 - 阶段 5 剩余（§八 依序）：§八.4 PDF 表面（页面缓存/缩放滚动/选区/
   批注叠加——复用 mdc-pdf 既有安全边界）→ §八.5 Canvas 表面 →
   wry 壳真机集成。
+
+---
+Task ID: p5-t4
+Agent: 主代理 + 调研子代理 + web 实施子代理 + 对抗审查子代理
+
+Task: 阶段 5 §八.4 PDF 表面——页面缓存/缩放滚动/文字选区/批注及
+证据区域叠加；渲染路径设计决策定谳。
+
+Work Log:
+- 调研子代理（含两项实测 + 三项网络一手核验）：路线定谳 B = pdf.js
+  渲染 + mdc-pdf lopdf wasm 写回（渲染分离、真相不分离）。A pdfium-
+  wasm 否决（bblanchon 堆不可增长 = 多页档 OOM + wasm 无线程 S4 塌缩
+  + 上游四轮断裂史）；C 壳侧渲染 = wry 落地后 native 升级位
+  （protocol.rs 信封使渲染器可替换）。
+- 子代理并行：web 实施子代理 pdf_view.ts 1991 行 + 夹具生成器 +
+  e2e 14 用例 + **契约 mock 干跑全过**（wasm 汇合前全路径验证）；
+  主代理 Rust 侧：mdc-pdf 便携化（PortableInstant——修 wasm trap
+  'time not implemented'）+ trait product_bytes 产物取回面 + 新
+  crate mdc-pdf-wasm（5 测试）。
+- 汇合修复：snake_case 调用面（pdfOpenScan→pdf_open_scan——p5-t2
+  同型教训）+ wasm trap panic hook 定位 + Instant 三调用点便携化 +
+  glue 名（--out-name pdf_wasm）。
+- 对抗审查：1 MUST-FIX（COMPLIANCE 事实错误——零传递依赖为假
+  [@napi-rs/canvas 13 包 optional 传递面] + 首个三方位 false）+
+  3 SHOULD-FIX（S-1 flush 文档被插页夺走/S-2 显示面 L2 像素钳制
+  缺失[400% 缩放 + 3x 屏单页 279MB canvas 分配]+evict 单条滞留/
+  S-3 双脏修订链无锁）全修 + NOTE 顺手（build 死分支 + hook 接线
+  ——时序 bug 自纠[初始化前调用致 13 SKIP，移到 default() 后恢复]）。
+- e2e 自纠：b64 前缀 != 字节前缀（3 字节块对齐——双修订链断言改
+  字节级解码比对）。
+- 磁盘满第 4 次事件（ld Bus error + tmp dir 拒绝——大测试二进制
+  清理 5.3G 恢复）。
+
+Stage Summary:
+- §八.4 四要件达成：页面缓存（64MB ImageBitmap LRU + L2 钳制镜像）/
+  缩放滚动（scale 控件 + IntersectionObserver 懒渲染 + 页码跟踪）/
+  文字选区（pdf.js textLayer——Firefox 级原生）+ 批注（四 kind 全链
+  + lopdf 增量写：前缀逐位/幂等/加密写拒语义锁 wasm 链路全数继承）
+  + 证据区域叠加钩子（evidence-jump 事件——真证据链接后续）。
+- 渲染路径决策落档：B 定谳（渲染分离、真相不分离——会话是单一
+  真相，pdf.js 纯显示面）；C = 壳实体后升级位。
+- 门禁（亲跑）：G1 767/767（+16）/ fmt 0 / clippy 恰 3 同型 +
+  wasm32 0 / scan PASS / e2e pdf_view 15/15（1 SKIP 登记）+ web
+  回归七套全绿 + typecheck 0。
+- mdcore main 3130b8a→37399eb（p5-t4）已推送。
+- 阶段 5 剩余：§八.5 Canvas 表面（实际节点编辑与协同操作——
+  mdc-canvas headless 已备，web 面消费）→ wry 壳真机集成。
