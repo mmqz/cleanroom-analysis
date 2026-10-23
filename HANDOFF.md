@@ -55,7 +55,27 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-23 p5-t5 Canvas 表面 + 阶段5 四表面收口·最新）**：
+> **当前态速览（2026-10-23 p6-t1 阶段6启动件·最新·本会话终态）**：
+用户「继续持续做不做完不停止用子代理加速和审核代码」——本会话
+连续五轮收口（p5-t2 表格 → p5-t3 证据 → p5-t4 PDF → p5-t5 Canvas
+→ p6-t1 集成旅程），**阶段 5 四表面全部落地 + 阶段 6 骨架启动**
+（**mdcore main = 6daeace**）：p6-t1 = 四表面集成旅程 e2e
+（integration_journey.py **7/7**——§九.1-4 实际使用路径：文档
+编辑往返/表格开滚编导/证据八步骨架/PDF 增量保存/Canvas 双实例
+收敛/跨表面共存零 pageerror；零产品代码增量）。p6-t2 wry 壳
+编译面：webkit2gtk/gtk3 沙箱缺席——**真机集成环境阻塞**（开发
+环境轮边界项，选型记录既列）。**本会话累计**：G1 730→**769**
+（+39 测试）/ web 测试 5→**10 套**（新增 grid 20 + evidence 16 +
+pdf 15 + canvas 15 + journey 7）/ 3 个 wasm 句柄（WasmBook 扩展
++ WasmWorkbench + WasmPdfSession + WasmCanvas）/ 2 新 crate 面
+（office-io rebuild + mdc-pdf-wasm）+ 4 个对抗审查轮（2+1+1+1
+MUST-FIX 全修）/ clippy 基线 2→4 同型登记 / NOTICES 增量登记
+（pdfjs-dist 13 包 Apache-2.0）。**剩余（阶段 6 完整清单）**：
+§九.5-8 web 面组合扩展 + §九.9 打包真机[环境阻塞] + §九.10 可选
+宿主适配 + wry 壳[环境阻塞]。环境注记：磁盘满 5 次事件（清理
+模式固化）；BigInt u64 教训三次入档。
+
+> **当前态速览（2026-10-23 p5-t5 Canvas 表面 + 阶段5 四表面收口·历史保留）**：
 用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
 §八.5 Canvas 表面落地，**四表面全部收口**（**mdcore main =
 2a67e77**）：**mdc-canvas 时钟注入面**（SessionOptions.clock_ms +
