@@ -5663,3 +5663,51 @@ Stage Summary:
 - 阶段 5 剩余（§八 依序）：§八.1 壳与证据界面 wasm 化（workbench
   字节入口 + 内存 sidecar 两前置件）→ §八.4 PDF 表面 → §八.5
   Canvas 表面 → wry 壳真机集成。
+
+---
+Task ID: p5-t3
+Agent: 主代理 + web 实施子代理 + 对抗审查子代理
+
+Task: 阶段 5 §八.1 壳与证据界面——workbench 字节入口 + 内存
+sidecar 两前置件 + web 证据侧栏全链。
+
+Work Log:
+- 子代理并行：web 实施子代理完成 evidence_panel.ts 950 行 +
+  index.html 双栏布局 + 夹具生成器 + e2e 16 用例初版（14 SKIP 等
+  wasm）；主代理并行实施 Rust 侧（Io 双后端内存会话 + WasmWorkbench
+  wasm 出口 + 测试 8 个）。
+- 汇合修正：BigInt 边界（wasm-bindgen u64 参数须 BigInt——面板
+  7 处 atMs 传参 + Ctor 签名）；restore 两步式对齐（restore +
+  attach_source——子代理初版是平行数组单调用）。
+- 对抗审查子代理：3 MUST-FIX——M1 export_clean 次序漂移（重构把
+  check_dest 挤到审计后——dest 拒绝/写失败路径留下幽灵 clean_export
+  审计 + sidecar 落盘，违反「拒绝=零状态变化」纪律）/M2 面板
+  reverify 按定位器类型分派（source_locator 恒 xlsx_cell → claim
+  侧失效恒走 source 通道静默恢复——绕过 claim 锚唯一恢复通道纪律，
+  e2e 把漏洞锁成预期）/M3 target_scale as u8 截断（256→0 静默改值）；
+  5 SHOULD-FIX（S1 claimed_value 静默吞跳过验证门/S2 Files 守卫
+  不对称/S3 policy 畸形 fail-open/S4 generation_batch 伪造默认/
+  S5 restore 后 sourceSeq 撞车）。
+- 全修复 + 回归锁：M1 三段拆分（verified 零副作用验证核 + 审计后置
+  + check_dest 前置）/M2 失效侧分派（claim 锚指纹对照 → 断则
+  reverify_claim 重绑；e2e 锚重绑断言 anchor_before != anchor_after）/
+  M3 try_from + S1-S5 + N1/N2；e2e 16/16 全 PASS 含新锁。
+- 磁盘满第 3 次事件：target/debug/incremental 4.1G 清理（9.3G/100%
+  → 4.7G/51% 空闲），collab_composition 3 测试 StorageFull 假失败
+  排除（清理后全绿）。
+
+Stage Summary:
+- §八.1 两前置件达成：workbench 字节入口（ingest_*_from_bytes/
+  start_memory/open_memory——验证核心单一，Io 仅分派 IO 边界）+
+  内存 sidecar（sidecar_json 单点投影与磁盘字节同构，持久化由宿主
+  决定——wasm 零 std::fs 纪律）。
+- web 证据侧栏全链：三态徽标卡片 + 审核操作（review gate human:
+  前缀）+ 失效侧 reverify + sidecar 导出/恢复 + 干净正文导出 +
+  claim 跳转钩子（evidence-jump 事件——正文视图滚动接入留后续）。
+- 门禁（亲跑）：G1 751/751（+8）/ fmt 0 / clippy 恰 3 同型基线 /
+  scan PASS / lock +2 内部边 / wasm32 0 错 / web 八套全绿（evidence
+  16 + xlsx_grid 20 + 既有六套）。
+- mdcore main 823414a→3130b8a（p5-t3）已推送。
+- 阶段 5 剩余（§八 依序）：§八.4 PDF 表面（页面缓存/缩放滚动/选区/
+  批注叠加——复用 mdc-pdf 既有安全边界）→ §八.5 Canvas 表面 →
+  wry 壳真机集成。
