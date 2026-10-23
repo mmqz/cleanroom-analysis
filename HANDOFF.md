@@ -55,7 +55,31 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-22 p5-t1 阶段5启动·最新）**：
+> **当前态速览（2026-10-23 p5-t2 表格 UI 产品化·最新）**：
+用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
+§八.3 表格表面全链落地（**mdcore main = 823414a**）：
+**Rust 侧** = office-io 新模块 rebuild（C3 读-改-重建产品化：
+replay_cell 单格联接 + 编辑账本[窗内覆盖/窗外扩展/Empty 清空/后写胜]
++ 表名防线[清洗+重截去重恒可终止] + 敌意跳过与扁平化全部 skipped
+登记 + FFFE/FFFF typed 拒）+ wasm export_with_edits/
+last_rebuild_stats_json/sheets ext 双暴露（非原点锚定表建域契约）。
+**web 侧** = xlsx_grid.ts 1162 行（三层虚拟化+冻结四层双轴钉扎+
+DOM 池化局部更新+完整键盘导航+命令账本编辑[撤销栈语义]+TSV 复制
+粘贴+证据高亮钩子+sheet 切换+导出 Blob/统计/警示）+ view tabs +
+夹具生成器 + e2e 20 用例。**子代理双轨**（用户指令）：web 实施
+子代理并行 + 对抗审查子代理——审查抓出 **2 MUST-FIX**（表名去重
+死循环[release 挂死]/截断缺重 trim[断整簿导出]）+ 6 SHOULD-FIX
+（extent 契约/文档错位/扁平化登记/写面域钳制/非有限数/测试盲区）
+**全部修复 + 3 回归锚测试**。门禁（亲跑）：G1 **743/743** /
+fmt 0 / clippy 双面恰 2 基线 / scan PASS / lock 零 diff / wasm32
+0 错 / web 全回归（smoke 15 + 四套 42 + contract 18）+ 新 e2e
+**20/20**。**下一步 = §八.1 壳与证据界面 wasm 化**（workbench
+字节入口 + 内存 sidecar 两前置件）→ §八.4 PDF 表面 → §八.5
+Canvas 表面 → wry 壳真机集成。环境第 19 次重置已恢复（rustup
+1.99.0+wasm32+clippy+rustfmt + wasm-bindgen CLI 0.2.129 + 双仓
+ff 拉齐）。
+
+> **当前态速览（2026-10-22 p5-t1 阶段5启动·历史保留）**：
 > 六阶段计划**阶段 5 启动**（mdcore `e8bbc7f` 已推送，G1 **730**）。
 > 第一个前置件落地：**表格表面数据面 wasm 出口**（xlsx_grid 模块）——
 > WasmBook 常驻句柄 + 可视窗切片（typed kind/原值/display 三件套，
