@@ -55,7 +55,33 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-23 p5-t3 证据界面 wasm 化·最新）**：
+> **当前态速览（2026-10-23 p5-t4 PDF 表面·最新）**：
+用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
+§八.4 PDF 表面全链落地 + **渲染路径决策定谳**（**mdcore main =
+37399eb**）：**路线 B = pdf.js 渲染 + mdc-pdf lopdf wasm 写回**
+（渲染分离、真相不分离——调研子代理实测背书：A pdfium-wasm 否决
+[bblanchon 堆不可增长多页 OOM + wasm 无线程 S4 塌缩]；C 壳侧渲染 =
+wry 落地后 native 升级位[protocol.rs 信封可替换]）。**Rust**：
+mdc-pdf 便携化（PortableInstant——修 wasm trap 'time not
+implemented'）+ AnnotationWriter trait product_bytes 产物取回面 +
+新 crate **mdc-pdf-wasm**（pdf_open_scan + WasmPdfSession[new/
+set_page_text/execute/attach_writer/flush_annotations/product_bytes]
++ 5 测试）。**web**：pdf_view.ts 1991 行（pdf.js legacy 显示面 +
+canvas/textLayer + 64MB ImageBitmap LRU + L2 像素钳制镜像 + 四 kind
+标注 + 增量保存链 + 搜索双面诚实[会话命中权威+pdf.js 几何] +
+evidence-jump 钩子）+ pdfjs-dist@6.4.299（Apache-2.0——COMPLIANCE
+登记 13 包 optional 传递面）+ 纯标准库 PDF 夹具生成器 + e2e
+**15/15**（1 SKIP=加密档登记；含双修订链字节级锁）。**审查**：
+1 MUST-FIX（COMPLIANCE 事实错误）+ 3 SHOULD-FIX（flush 文档归位/
+L2 钳制+evict/双修订链锁）全修。门禁（亲跑）：G1 **767/767** /
+fmt 0 / clippy 恰 3 同型 + wasm32 **0** 警告 / scan PASS / web
+回归七套全绿。**下一步 = §八.5 Canvas 表面**（实际节点编辑与协同
+操作——mdc-canvas headless 域模型/命令接口/证据关联已备，web 面消
+费）→ wry 壳真机集成（选型记录既列）。环境注记：磁盘满第 4 次
+事件（大测试二进制清理恢复）；wasm trap 定位面 = console_error_
+panic_hook 已接线（pdf_wasm_init）。
+
+> **当前态速览（2026-10-23 p5-t3 证据界面 wasm 化·历史保留）**：
 用户「继续持续做不做完不停止用子代理加速和审核代码」——阶段 5
 §八.1 壳与证据界面两前置件 + web 侧栏全链落地（**mdcore main =
 3130b8a**）：**workbench 内存会话**（Io 双后端——Files/Memory 仅
