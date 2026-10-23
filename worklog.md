@@ -5611,3 +5611,55 @@ Stage Summary:
 - 阶段 5 后续路线（§八 依序）：表格 UI 产品化 → 证据界面 wasm 化
   （workbench 字节入口 + 内存 sidecar 两前置件）→ PDF 表面渲染
   路径设计决策 → Canvas 表面 → wry 壳真机集成（选型记录既列）。
+
+---
+Task ID: p5-t2
+Agent: 主代理 + web 实施子代理 + 对抗审查子代理
+
+Task: 阶段 5 §八.3 表格 UI 产品化——切片/虚拟滚动/局部更新/冻结
+区域/单元格编辑/复制粘贴/键盘导航/计算结果/证据高亮全链 + 读-改
+重建导出闭环（§八.3 全条目）。
+
+Work Log:
+- 环境第 19 次重置恢复：rustup 重装 1.99.0+wasm32+clippy+rustfmt
+  （wasm-bindgen CLI 0.2.129 子代理侧补装）；双仓 ff 拉齐
+  （cleanroom 7d539ff / mdcore e8bbc7f——前会话阶段 0-4 全收口 +
+  p5-t1 表格数据面已在远端，本地仅旧克隆）。
+- 子代理并行实施（用户指令「用子代理加速」）：web 实施子代理完成
+  xlsx_grid.ts 1162 行 + index.html + main.ts 接线 + 夹具生成器 +
+  e2e 20 用例初版（19/19 过 + 1 SKIP 等待 wasm 扩展）；主代理并行
+  实施 Rust 侧（office-io rebuild.rs 重放器 + wasm export_with_edits
+  + 测试 13 个）。
+- 汇合修正：wasm 方法调用面统一 snake_case（全仓惯例——子代理用了
+  camelCase；exportWithEdits → export_with_edits）；SKIP 项转全断言。
+- 对抗审查子代理（用户指令「审核代码」）：2 MUST-FIX 实证复现——
+  M1 unique_sheet_name 死循环（基底≥30 chars 时后缀拼接恒超 31 →
+  release 下 wasm 调用挂死；良性输入可触发——两张表前 31 字符相同
+  即碰撞）+ M2 sanitize 截断后缺重 trim（第 31 位引号残留 →
+  add_sheet 拒绝 → 整簿导出失败）；6 SHOULD-FIX（S1 extent 契约/
+  S2 防线文档错位/S3 merge 非 Text 左上扁平化未登记/S4 前端写面域
+  零感知/S5 非有限数失真/S6 测试盲区六项）。
+- MUST-FIX + SHOULD-FIX 全修复：表名防线重写（基底重截恒可终止 +
+  重 trim）+ 3 审查回归锚测试（quote31 通过性/三表去重时限断言/
+  扁平化登记）+ sheets_core 双暴露 ext_rows/ext_cols + 前端写面域
+  钳制（MAX_GRID_ROW/COL 镜像）+ 账本 100k 上限 + parseCellInput
+  非有限回退 + copy 截断提示 + __gridSetSelection 探针 + undo 栈
+  语义用例（同格两版本逐次回退）。
+- e2e 调试自纠 3 处：测试序列错误（Enter 确认后下移——同格多编辑
+  须显式回格）/序贯状态契约破坏（清场位回 (2,1)）/repaintSelection
+  方法名（refreshSelectionClasses）。
+
+Stage Summary:
+- §八.3 全条目达成：切片（slice_json 窗口）/虚拟滚动（三层 + DOM
+  池化局部更新）/冻结区域（首行首列四层双轴钉扎）/单元格编辑（命令
+  账本 + 撤销栈语义）/复制粘贴（TSV 双向 + 截断提示）/键盘导航
+  （完整键位）/计算结果（display 面 + 公式缓存值）/证据高亮（钩子
+  面就绪——证据链阶段接入）+ 读-改重建导出闭环（C3 替代路径产品化
+  + 保真例外显式登记）。
+- 门禁（亲跑）：G1 743/743 零失败（+13）/ fmt 0 / clippy 双面恰 2
+  基线 / scan PASS / lock 零 diff / wasm32 check 0 错 / web 全回归
+  （smoke 15 + 既有四套 42 + contract 18）+ 新 e2e 20/20 全 PASS。
+- mdcore main e8bbc7f→823414a（p5-t2）已推送。
+- 阶段 5 剩余（§八 依序）：§八.1 壳与证据界面 wasm 化（workbench
+  字节入口 + 内存 sidecar 两前置件）→ §八.4 PDF 表面 → §八.5
+  Canvas 表面 → wry 壳真机集成。
