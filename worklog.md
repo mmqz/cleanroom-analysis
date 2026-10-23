@@ -5758,3 +5758,44 @@ Stage Summary:
 - mdcore main 3130b8a→37399eb（p5-t4）已推送。
 - 阶段 5 剩余：§八.5 Canvas 表面（实际节点编辑与协同操作——
   mdc-canvas headless 已备，web 面消费）→ wry 壳真机集成。
+
+---
+Task ID: p5-t5
+Agent: 主代理 + 调研子代理 + web 实施子代理
+
+Task: 阶段 5 §八.5 Canvas 表面——实际节点编辑与协同操作（四表面
+收口轮）。
+
+Work Log:
+- 调研子代理：mdc-canvas 全 API 面（八命令/双栈撤销/指纹/事件/
+  协同四方法）+ 唯一 wasm32 障碍定位（UndoManager SystemTime trap
+  ——SessionOptions 无时钟注入口）+ 序列化面空白（无 serde——
+  wasm 层新造 flat JSON）+ WasmCanvas 方法面定稿。
+- 子代理并行：web canvas_view.ts 1585 行（四层结构 + SVG 保留模式
+  + 双实例协同演示层）+ e2e 15 用例 + **契约 mock 干跑 15/15**
+  （含双实例收敛/远端不入栈/CDP 拖拽）；主代理 Rust 侧：mdc-canvas
+  时钟注入面（SessionOptions.clock_ms + HostClock 适配器——
+  canvas 23 测 + e2e_demo 零回归）+ WasmCanvas 模块 + 测试 7。
+- 汇合修复：BigInt 四处（client_id u64——p5-t3/t4 同型教训第三
+  次：u64 参数恒 BigInt）；object_json "null" 串 vs JS null
+  （Option<String> 契约直配）；NaN 断言分层（JSON 层 cv_bad_json
+  先拒——serde 对非法 JSON 字面量的第一道防线，cv_non_finite 是
+  Rust 直构 API 的第二道——诚实分层登记）；测试自纠 2 处（raw
+  string "#" 冲突 / 双向同步 SV 快照顺序 / base64 期望值手算错）。
+- 磁盘满第 5 次事件。
+
+Stage Summary:
+- §八.5 达成：实际节点编辑（八命令全链 + 拖拽 LWW 提交粒度 +
+  撤销重做双栈 + 分组 + 属性编辑）与协同操作（双实例直连：
+  事件 updates base64 转发 + encode_diff 追赶 + 收敛断言 + 远端
+  不入本地栈）。
+- 阶段 5 四表面全部落地（正文[CM6 既有]/表格/证据侧栏/PDF/
+  Canvas）——「四类表面均有可重复的交互测试及性能数据；不存在
+  UI 第二权威状态」验收面成立（wasm 会话为唯一权威 + 宿主零第
+  二数据源，全表面同纪律）。
+- 门禁（亲跑）：G1 769/769 / fmt 0 / clippy native+wasm32 恰 4
+  同型基线 / scan PASS / lock +1 内部边 / web 十套全绿（canvas
+  15/15 + 既有九套）。
+- mdcore main 37399eb→2a67e77（p5-t5）已推送。
+- 阶段 5 剩余：wry 壳真机集成（选型记录既列——开发环境轮 R24-d
+  性质，桌面壳实体）；随后阶段 6 端到端质量验收（§九 十项清单）。
