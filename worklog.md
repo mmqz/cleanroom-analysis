@@ -5827,3 +5827,137 @@ Stage Summary:
   sidecar 异常路径 web 面/超大输入组合] + §九.9 打包真机实测
   [环境阻塞——同 wry 壳] + §九.10 可选宿主适配[独立接口验证，
   无核心依赖]。
+
+---
+Task ID: p6-t2 + p6-t3..t6（欠账补记）
+Agent: 前会话实施 / 本会话补记（main，Super Z）
+
+Task: 补记 mdcore 06ba701 与 b4e6a12 两提交的工作记录（前会话已推送
+代码但文档未落档——本会话 Gate 0 拉齐时发现文档欠账）。
+
+Work Log:
+- 06ba701（p6-t2）：协同双端 web 化基础设施（§九.5/§九.8 前置件）——
+  mdc-collab SessionOptions.clock_ms 加性注入面（wasm32 无 std 时间）+
+  mdcore-wasm 第 15 模块 collab.rs（WasmCollabSession 全方法 + cl_*
+  12 错误码 + 纯内核 parse/receipt/event/block）+ 原生测试 8 件 +
+  web wasm_boot.ts 单飞 init 门（六调用点 WeakMap 序列化，双实例化
+  SEGV 根治）+ collab_channel.ts 464 行（BroadcastChannel 对等网格
+  七消息 + 13 探针 + 断连重连 catch-up）+ canvas_view ?cc 槽位化；
+  G1 774→782。
+- b4e6a12（p6-t3..t6）：§九.5-8 web 面组合套件四件——
+  concurrent_web.py（§九.5，16 检查：并发/过期命令/撤销重做/删除
+  复活/双页零 pageerror）+ sidecar_faults_web.py（§九.6，15 检查：
+  损坏六面/丢失/版本不匹配/异常退出恢复）+ oversized_web.py（§九.7，
+  18 检查：10MB 渐进/切片超限/敌意 22 连发 no-hang）+ lifecycle_web.py
+  （§九.8，15 检查：退出重启/房间状态存活/快照恢复/断连重连/晚加入
+  catch-up）+ mdc-canvas 撞号跳段修复（next_id 环内 O(1) 占位检查）
+  + collab 晚加入 catch-up 方向修复（joiner 显式 sync_req）+ 渲染层
+  自愈面；G1 782→783；web 15 套共 202 检查点亲跑全绿。
+
+Stage Summary:
+- 阶段 6 §九.1-8 全部落地（1-4 = p6-t1 旅程 7/7；5-8 = 本两条）。
+  §九 剩余：§九.9 打包真机[本会话 s5b 推进] + §九.10 可选宿主适配。
+- 文档欠账根因：前会话推送代码后未及落档即耗尽；补记内容以 git log
+  提交说明为单一事实源。
+
+---
+Task ID: s5a-env
+Agent: 子代理（general-purpose）执行 + 主代理复验
+
+Task: webkit2gtk-4.1/GTK3 dev 面无 root 自愈（wry/tao 壳前置——推翻
+「真机集成结构性受阻」登记）。
+
+Work Log:
+- 闭包解析 scripts/webkit_closure.py（libwebkit2gtk-4.1-dev 出发递归，
+  92 包清单）→ apt download 98 deb（66M pool）→ dpkg -x 提取树
+  optroot/root（209M）→ env.sh（PKG_CONFIG_PATH/LD_LIBRARY_PATH/
+  GI_TYPELIB_PATH/XDG_DATA_DIRS；.pc 重写 prefix；glib-compile-schemas）
+- rustup 1.99.0+wasm32+clippy+fmt 装于 optroot（沙箱 cargo 重建）
+- 三路验证史：bwrap（Permission denied）/proot（seccomp SIGSYS 31）
+  不通 → LD_PRELOAD PLT 层 exec 路径 shim（libexecpath_shim.c）：
+  WebKitNetworkProcess/WebKitWebProcess posix_spawn + injected-bundle
+  dlopen 三映射（原路径存在则零行为——实机部署天然退化）
+- mdshell-native 依赖实体化（wry 0.46/tao 0.30/gtk 0.18 循 ADR-H1
+  注释原值）+ native 模块（WryHost/ShellConfig/run_smoke）+
+  examples/xvfb_smoke
+- 主代理复验（不采信未亲跑结果）：pkg-config webkit2gtk-4.1=2.54.0/
+  gtk+-3.0=3.24.49/soup 3.6.5 三链通；cargo check 过；Xvfb 冒烟
+  EXIT=0（tao loop + webview responsive）
+
+Stage Summary:
+- 「webkit2gtk/gtk3 沙箱缺席=真机集成结构性受阻」（p6-t1 时点 HANDOFF
+  登记）被推翻：是可自愈缺件而非结构性阻塞。39bd74c 先例（apt
+  download 无 root 提取）放大到 webkit 全闭包成立。
+- 沙箱自愈工件存 /home/z/my-project/{optroot,scripts}/（仓外不入 git；
+  optroot/env.sh + scripts/xvfb_shell_run.sh 为入口）。
+
+---
+Task ID: s5b-wry-deb
+Agent: main (Super Z)
+
+Task: wry 壳实机深度验证（四表面探针）+ mdapp:// 产品级 bundle 加载
++ §九.9 deb 打包面 + SBOM 合规 + 全门禁复验 + 文档收口。
+
+Work Log:
+- 完整 web 工作台重建：build-wasm.sh（1m32s，wasm-bindgen 0.2.129
+  cargo install 精确锁版）+ build-pdf-wasm.sh + npm ci + build.mjs
+  → dist/（main.js 1.9M + 双 wasm pkg + pdf worker）
+- 实机三级递进（Xvfb 真进程，全部亲跑）：①about:blank 存活响应；
+  ②file:// 加载 dist——title 出现但探针全空轮询 12 次不初始化；
+  ③http:// 对照——全绿（blockCount:9/cmEditor/grid/ev/pdf/canvas/
+  collab）→ WebKit file:// wasm/ESM 限制实证（dist 自包含声明在
+  file:// 不成立——build.mjs 注释假设修正）
+- 【工程发现 1】wry 0.46.3 IPC 缺陷：with_ipc_handler 回调内
+  Request::builder().uri(webview.uri().unwrap().to_string())——
+  file:///（空 authority）在 http::Uri 下 Err(InvalidUri(InvalidFormat))
+  → 宿主 panic（隔离实验二分定位：about:blank 合法/file:// 必炸/
+  消息内容无关）；绕开=导航拦截通道（with_navigation_handler
+  Fn(String)->bool + location.assign("probe://r/"+encodeURIComponent)
+  + percent_decode 宿主侧解码；probe:// 截获返回 false 取消导航）；
+  缺陷注记在档未修上游
+- 【工程发现 2→产品修法】mdapp:// custom protocol（with_custom_
+  protocol）：serve_dist（穿越防护拒绝 .. 段含编码形/ / → index.html/
+  mime 表 wasm=application/wasm/404；无缓存每请求读盘）——桌面壳
+  加载本地 bundle 的产品级形态；探针轮询版 + flush 窗参数化
+  （ShellConfig.flush_millis，看门狗两段式：探针→700ms~8s 回传窗
+  →Exit）；mdapp:// 下四表面探针全绿 EXIT=0（wasm 核心+CM6+grid/
+  ev/pdf/canvas/collab 在 WebKit 壳内真实初始化）
+- shell-native 增强：probe_js/flush_millis/dist_root 三字段 +
+  --probe-js/--flush-ms/--dist 参数 + 新 bin mdcore（--version 单源
+  dist 解析序四层 --dist>MDCORE_DIST>/usr/share/mdcore/dist>./web/dist）
+  + 单元测试 2→4（percent_decode 四形/serve_dist 默认页+mime+穿越
+  四形+404）
+- 【真缺陷修复】mdc-pdf pdfb_skeleton Instant::now→portable_now ×2
+  （p5-t4 PortableInstant 化后 mdc-pdf 测试在 wasm32 --all-targets
+  下无法编译——口径统一为最强形态）；wasm32 门禁口径更新：
+  --workspace --all-targets --exclude mdshell-native（原生 GUI crate
+  不属 wasm 目标=平台事实注记）
+- 【§九.9 deb】build-deb.sh 两处修（# 注释行 grep -v 进 control
+  [dpkg-deb 严格解析]；mv 路径 dpkg-deb 输出=<STAGE>.deb[从未实跑的
+  假设]）+ dist 捆绑（usr/share/mdcore/dist 无 bundle 硬失败）→
+  mdcore_0.1.0_amd64.deb（2.4M/Installed-Size 17832）→ dpkg -x
+  提取形布局验证 + 包内二进制 Xvfb 首启冒烟全绿（mdapp:// 四表面
+  探针 + EXIT=0 + --version 一致）；边界诚实登记：dpkg -i 安装面
+  无 root 未做（提取形模拟）；AppImage 脚本在位未实跑（外部工具链
+  linuxdeploy/appimagetool 未引入）
+- 【合规】COMPLIANCE.md s5a-env 增量段 + SBOM 全量复跑 366 三方包
+  （scripts/sbom_check.py，cargo metadata --locked 逐包 license：
+  0 UNKNOWN/0 GPL/0 白名单外；r-efi LGPL 字样=MIT OR 组合可选路径；
+  webkit2gtk LGPL 系统库动态链接政策复引）；NOTICES 再生成边界登记
+  （compliance-baseline 分支不在 main）
+- 【门禁全亲跑】G1 786/0（783+2 新测+pdfb 36/36 语义不变）/fmt 0/
+  clippy mdshell-native 0（4 条修净：冗余 cast×3+any→contains）/
+  wasm32 --workspace --all-targets --exclude mdshell-native 0 错误/
+  scan PASS/lock +2813-308（wry/tao/gtk 闭包预期）/web 15 套全 PASS
+  /磁盘满 2 次事件清理恢复（9.3G→4.3G；pool/incremental/examples/
+  大测试二进制——清理模式沿用固化纪律）
+
+Stage Summary:
+- mdcore main c33bcab 已推送（b4e6a12→c33bcab，ls-remote 校验一致）。
+- wry 壳实机集成达成：宿主 A 定谳（Web 前端 + wry/tao 壳）的实机
+  兑现——四表面在真实 tao+wry+WebKit 进程内初始化并探针断言。
+- §九 进度：1-8 全绿（既有）+ 9 deb 面实体过（构建/布局/首启冒烟；
+  dpkg -i 与 AppImage 登记边界）；§九.10 可选宿主适配待评估。
+- 三项工程发现入档（wry IPC 缺陷/WebKit file:// 限制/mdapp:// 形态）。
+- 环境注记：磁盘满第 6/7 次事件（清理恢复在档）；~21 次重置恢复
+  沿用固化程序。

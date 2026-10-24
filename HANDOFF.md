@@ -55,7 +55,37 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-23 p6-t1 阶段6启动件·最新·本会话终态）**：
+> **当前态速览（2026-10-24 s5b-wry-deb 实机收口·最新·本会话终态）**：
+> 「继续做」+ token 续能——本会话从 Gate 0 重核基线出发，完成
+> **wry/tao 壳实机集成 + §九.9 deb 打包面**（mdcore main =
+> `c33bcab`，b4e6a12→c33bcab 已推送 ls-remote 校验）。**核心翻案**：
+> 上轮登记「webkit2gtk/gtk3 沙箱缺席=真机集成**结构性受阻**」被推翻
+> ——s5a-env 无 root 自愈（apt download 92 包闭包 + dpkg -x 1.1G
+> 提取树 + LD_PRELOAD exec 路径 shim；39bd74c 先例放大）成立，
+> wry/tao/gtk 依赖实体化（shell-native 蓝图→实体）。**实机三级递进
+> （Xvfb 真进程亲跑）**：mdapp:// custom protocol 下完整 web 工作台
+> 四表面探针全绿（blockCount:9/cmEditor/grid/ev/pdf/canvas/collab
+> + EXIT=0）——宿主 A 定谳的实机兑现。**三项工程发现**：①wry 0.46.3
+> IPC 缺陷（file:/// 空 authority 在 http::Uri InvalidFormat → 宿主
+> panic；绕开=导航拦截通道，未修上游注记在档）；②WebKit file://
+> wasm/ESM 限制（http 对照实证；build.mjs 的 file:// 假设修正）；
+> ③mdapp:// 为桌面壳加载本地 bundle 的产品级形态。**§九.9**：deb
+> 实体链全通（build-deb 两处修 + dist 捆绑 → mdcore_0.1.0_amd64.deb
+> → dpkg -x 布局验证 → 包内二进制 Xvfb 首启冒烟全绿）；边界诚实
+> 登记：dpkg -i 安装面无 root 未做（提取形模拟）、AppImage 未实跑
+> （外部工具链未引入）。**真缺陷修复**：mdc-pdf pdfb_skeleton
+> Instant::now→portable_now（wasm32 --all-targets 编译障）；wasm32
+> 口径更新 --exclude mdshell-native。**合规**：SBOM 全量复跑 366
+> 包 0 UNKNOWN/0 GPL/0 白名单外 + COMPLIANCE 增量段。**门禁全亲跑**：
+> G1 **786/0** / fmt 0 / clippy mdshell-native 0 / wasm32 0 错 /
+> scan PASS / web **15 套全 PASS** / lock +2813（wry/tao/gtk 闭包）。
+> 文档欠账补记：p6-t2（06ba701）+ p6-t3..t6（b4e6a12）两条入档。
+> **§九 剩余**：§九.9 残项（dpkg -i 安装面/AppImage/NSIS/.app——
+> 需真机或外部工具链）+ §九.10 可选宿主适配评估 + wry 壳完整功能
+> （对接点 1-5：文件对话框/渐进进度/Ctrl+S——R24-d 开发环境轮范围）。
+> 环境注记：磁盘满第 6/7 次事件清理恢复（9.3G→4.3G 固化模式）。
+
+> **当前态速览（2026-10-23 p6-t1 阶段6启动件·历史保留）**：
 用户「继续持续做不做完不停止用子代理加速和审核代码」——本会话
 连续五轮收口（p5-t2 表格 → p5-t3 证据 → p5-t4 PDF → p5-t5 Canvas
 → p6-t1 集成旅程），**阶段 5 四表面全部落地 + 阶段 6 骨架启动**
