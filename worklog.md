@@ -5961,3 +5961,26 @@ Stage Summary:
 - 三项工程发现入档（wry IPC 缺陷/WebKit file:// 限制/mdapp:// 形态）。
 - 环境注记：磁盘满第 6/7 次事件（清理恢复在档）；~21 次重置恢复
   沿用固化程序。
+
+---
+Task ID: s5c-host10
+Agent: main (Super Z)
+
+Task: §九.10 可选宿主适配评估（治理计划收官项——「Kokoa/Slint 的
+可选适配通过独立接口验证，不要求核心依赖该宿主」）。
+
+Work Log:
+- cargo metadata 依赖方向实证：mdcore（3 正常依赖）/mdshell（4 项）
+  零 GUI 框架引用；mdshell-native 单向依赖 mdcore/mdshell+wry/tao/
+  gtk（唯一 host 侧 crate，无反向）
+- 壳替换点 = mdshell::Host trait（crates/shell/src/lib.rs:38 契约层）
+  + 统一命令接口；本会话 WryHost（native 壳）与 web 壳（浏览器形态）
+  即同一契约的两个独立实现——「独立接口验证」成立
+- ADR-H1 维持：Slint GPL 排除不引入；「可选适配」的证明方式 =
+  可替换性已被双壳实证，无需为「验证」引入新宿主实体
+
+Stage Summary:
+- §九.10 判定：**成立（零核心依赖 + 独立接口验证）**，以依赖方向
+  与双壳同契约实证收口；无新实体引入。
+- 治理计划 §九 清单终态：1-8 全绿 / 9 deb 面实体过（残项边界登记：
+  dpkg -i、AppImage、NSIS、.app 需真机或外部工具链）/ 10 成立。
