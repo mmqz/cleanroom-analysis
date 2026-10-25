@@ -55,7 +55,39 @@ cleanroom-analysis/
 
 ## 6. 下一步任务（两条线并行，均已确认方向）
 
-> **当前态速览（2026-10-25 maint-r1 上游跟踪维护轮·最新）**：
+> **当前态速览（2026-10-25 maint-t3 十轮自主维护轮·最新）**：
+> 用户「继续至少10轮次」→ 第 19 次环境重置（cargo/.lo26/scripts
+> 大部再丢）自愈 + **并行线交付面全面独立复验**十轮：①环境自愈
+> （rustup 1.99.0 全组件 + wasm32）；②**mdcore c33bcab 门禁独立
+> 复验——抓到 fmt 破裂**（pdfb_skeleton use 排序，并行线自报
+> "全门禁复验"与实际不符）→ 修复提交 **`3e1f616`**；核心面
+> **782/782 零失败**（786 口径差 4 = mdshell-native GUI 壳，本
+> 环境 gtk dev 缺 + sudo 不可用受阻）+ clippy 核心 rc=0 +
+> wasm32 rc=0 + fmt 修复后 0；③+28 提交面审：三不变量全过
+> （yrs 0.28 钉版 / skip_gc B1.1 session.rs:193 / **mdcore 核心
+> crate 零触碰**）+ office-io rebuild 新模块纯增量；④yrs 上游
+> 三锚点零增量（PR #682 仍 OPEN / #676 仍 open / 0.28.0 仍最新）
+> ——升级窗口维持关闭；⑤R-O2 套件复跑 = **22=10+12+0 SUITE
+> PASS 基线完全同判零漂移**；⑥**TDF 版本线时效增量**（DECISION_
+> SHEET 批次 3 已登记）：25.8.x = 死路（自身 EOL 2026-06-12）；
+> **26.2 分支 EOL = 2026-11-30（仅剩 ~5 周）** vs 26.8 EOL
+> 2027-06-13——「零翻动 vs 5 周短窗」「一良性翻钉 vs 7.5 月长窗」
+> 权衡面完整呈递；⑦scripts /tmp 抢救 18 件（原版 webkit_closure/
+> xvfb_shell_run/sbom_check 全收回；仅 verify_authenticode/
+> nextbatch_search 2 件低优先级确认丢失）+ sbom_check_strict
+> 重建版；⑧**web 面 12 件套件 179 checks 亲验全绿**（构建链自愈：
+> wasm-bindgen 0.2.129 + npm + dist + pkg_pdf 补腿后
+> integration_journey 7/7）；⑨**SBOM 合规门禁 PASS**（Linux 面
+> 217 三方包 = 193 PASS + 24 WARN 系统库豁免 + **0 GPL 0
+> UNKNOWN**——wry/tao/gtk 新依赖面合规）；⑩磁盘治理（cargo
+> clean 6.4G + tmp 341M，100%→40%）。环境注记：/tmp/my-project/
+> optroot（2.3G）= s5a 工件副本在场，GUI 壳复验欠账降级为"待
+> 搬运"。
+> **剩余门控 = DECISION_SHEET.md 批次 1/3/4 不变**（批次 1 D1
+> 解锁包三件 = 最优先；批次 3 三选证据齐备 + 时效增量已呈递；
+> 批次 4 可整批按推荐默认）。
+>
+> **前一速览（2026-10-25 maint-r1 上游跟踪维护轮·历史保留）**：
 > 用户 token 续能「继续做」→ **第 18 次环境重置事故恢复 + 丢失轮
 > 重做 + 推送收口**。事故链：上轮（同日早间）完成的 r-o2-t6 /
 > maint-t1 / maint-t2 三提交（LO 26.8.1 复跑 + yrs 跟踪 + 26.2.6
@@ -74,9 +106,6 @@ cleanroom-analysis/
 > 破裂）。环境注记：cargo/.lo26/.lo262 随重置丢失，本轮重装 26.2.6
 > 前缀复跑；mdcore 零接触（ff 拉齐推送态，门禁以 s5b 速览口径
 > 为准）。
-> **剩余门控 = DECISION_SHEET.md 批次 1/3/4 不变**（批次 1 D1
-> 解锁包三件 = 最优先；批次 3 三选证据已齐备待批注；批次 4 可整批
-> 按推荐默认）。
 >
 > **前一速览（2026-10-24 s5b-wry-deb 实机收口·历史保留）**：
 > 「继续做」+ token 续能——本会话从 Gate 0 重核基线出发，完成

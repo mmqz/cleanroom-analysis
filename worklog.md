@@ -6053,3 +6053,289 @@ Stage Summary:
   release）；skip_gc 全编队不变量维持。
 - mdcore 零接触零提交（ff 拉齐推送态，门禁口径以 s5b 速览为准）；
   剩余门控 = DECISION_SHEET 批次 1/3/4（用户批注即全线解锁）。
+
+---
+Task ID: maint-t3-r1
+Agent: 主代理（环境自愈轮）
+Task: 用户「继续至少10轮次」指令第 1 轮——第 19 次环境重置
+（cargo/.lo26/scripts 大部丢失）后环境完整性核验与自愈。
+
+Work Log:
+- 核验发现：cargo/rustup 全缺、~/.lo26（26.8.1.1 前缀）缺失、
+  ~/.lo262（26.2.6.3）在场、scripts/ 仅剩 2 件
+  （unpack_lo2626.sh / yrs_dep_license_scan.py）、系统 LO 25.2.3.2 在场。
+- rustup 重装（用户前缀，钉 1.99.0 + minimal + rustfmt/clippy +
+  wasm32）：首次 300s 超时被杀但工具链已落盘；rustup 自动恢复
+  "partially installed toolchain" 补齐 7 组件。
+- 验证齐备：cargo 1.99.0 (5f94df478) / rustc 1.99.0 (b940084d7) /
+  rustfmt 1.10.0（= T1 审计 F5 钉版口径）/ clippy 0.1.99 /
+  wasm32-unknown-unknown target——与 mdcore rust-toolchain.toml
+  声明完全一致。
+
+Stage Summary:
+- 环境自愈完成，可支撑全量门禁亲跑（轮 2）。
+- .lo26（26.8.1.1）缺失登记为欠账——如需 26.8.x 复跑需重装
+  （415MB tarball 下载，批次 3 裁决后按需执行）。
+
+---
+Task ID: maint-t3-r2
+Agent: 主代理（门禁独立复验轮）
+Task: 用户「继续至少10轮次」指令第 2 轮——mdcore c33bcab
+全量门禁亲跑（不采信并行线自报口径，独立复验）。
+
+Work Log:
+- fmt 门禁：**发现 c33bcab fmt 破裂**（crates/pdf/tests/
+  pdfb_skeleton.rs:1768 use 语句排序不符 rustfmt 1.10.0 口径，
+  并行线提交信息声称"全门禁复验"与实际不符——独立复验抓到）。
+- clippy --workspace --all-targets：首跑 rc=101 挂 gdk-sys 0.18.2
+  （mdshell-native 的 GTK 绑定，第 19 次重置抹掉 webkit/gtk dev 面
+  + sudo 不可用）→ 排除 mdshell-native 后核心面 rc=0。
+- clippy warning 口径：5 条 wasm_bindgen static_method_of 误报 =
+  在档基线 2 条（lib.rs:212/221 → 行号漂移至 216/225）+ p6-t2
+  并行线新增 3 条（canvas.rs:377 / collab.rs:504 /
+  workbench.rs:352，同性质同根因，非 error 不挡门禁）。
+- 全量测试（排除 mdshell-native）：**782/782 零失败**（并行线 786
+  口径差 4 = GUI 壳 crate 测试，环境受阻欠账非代码缺陷）。
+- wasm32 check（mdcore-wasm）：rc=0。
+- fmt 修复：cargo fmt 单文件 1 行（+1/-1）语义零变化 → fmt
+  rc=0 PASS + mdc-pdf 68/68 复验不变 → mdcore 提交 3e1f616。
+
+Stage Summary:
+- c33bcab 独立复验结论：核心面全绿（782/782 + clippy rc=0 +
+  wasm32 rc=0），唯一实质破裂 = fmt 单行（已修复 3e1f616）。
+- mdshell-native（wry/tao 壳）在本环境构建受阻：gtk3 dev 缺 +
+  sudo 需密码——s5a-env 无 root 自愈工件（optroot 209M 仓外）
+  已随重置丢失，重建 = 欠账登记（66M pool 下载 + shim 三映射）。
+- 并行线"全门禁复验"声称与 fmt 实际矛盾已登记——后续采信其
+  自报口径时需保持独立复验纪律。
+
+---
+Task ID: maint-t3-r3
+Agent: 主代理（+28 提交面审轮）
+Task: 用户「继续至少10轮次」指令第 3 轮——mdcore c4856f7→
+c33bcab（+28 并行线提交）差异结构面审（44,320 行插入，
+135 文件）。
+
+Work Log:
+- 三大不变量核查全过：①yrs = 0.28 钉版维持（canvas/collab
+  Cargo.toml 双钉 + sync feature，零升级）；②skip_gc B1.1 全编队
+  不变量维持（collab/src/session.rs:193 `opts.skip_gc = true;
+  // B1.1：无条件，无配置面` 单点构造在档，与 d1b-t1 纪律原文
+  一致）；③**mdcore 核心 crate（crates/mdcore/）零触碰**——
+  批次 2「零公开模型触碰」纪律在并行线被遵守。
+- 新增面全貌 = 纯增量：canvas 测试 5 件（concurrency/events/
+  evidence_assoc/matrix/undo_redo）+ collab 测试 9 件（audit/
+  concurrency/events/hostile/marks_readback/matrix/presence/
+  recovery/undo_redo）+ mdbridge bridge_ops + web/ python 套件
+  15 件（lifecycle_web 901 行/oversized_web 846 行/sidecar_
+  faults_web 517 行等）+ shell-native（wry 0.46/tao 0.30/GTK3，
+  ADR-H1 无 Slint）。
+- office-io 唯一 src 触碰 = 新增 rebuild 模块（390 行 + 测试
+  441 行 + bench_limits 例程）：读-改-重建 C3 口径，复用 r4-t1
+  单一安全调用点 replay_cell，非静默降级纪律（RebuildStats::
+  skipped 显式登记），U+FFFE/U+FFFF typed 拒——纪律文档与既有
+  write 模块同水准。lib.rs 仅 +1 行 `pub mod rebuild;`，既有
+  公开面零修改。
+- mdshell-native Cargo.toml description 自记 s5a-env 自愈方法
+  （source optroot/env.sh 后 check）——optroot 已随重置丢失，
+  与轮 2 受阻结论互证。
+
+Stage Summary:
+- +28 提交面审结论：纪律保持（三不变量全过 + 纯增量 + 非静默
+  降级文档），无结构风险；并行线质量口径与主线一致。
+- web/ python 套件（15 件）依赖 playwright/chrome 面待轮 8
+  独立验证。
+
+---
+Task ID: maint-t3-r4
+Agent: 主代理（yrs 上游跟踪增量轮）
+Task: 用户「继续至少10轮次」指令第 4 轮——yrs 上游三锚点
+复验（对 maint-r1 2026-10-25 早间结论的增量检查）。
+
+Work Log:
+- 锚点① PR #682（GC: collect a collected type's children
+  even when undo keeps them）：仍 OPEN 未合并，最后更新
+  2026-10-03（jonliu03 评论），目标分支 y-crdt:main——与
+  maint-r1 时点一致零变化。
+- 锚点② #676（heap UAF，undo+并发 GC）：仍 open，无修复 PR
+  合并，最后活动 2026-09-29——零变化。
+- 锚点③ crates.io：最新仍 0.28.0（2026-09-17）= spike 钉版，
+  近三版 0.28.0/0.27.4/0.27.3——无新 release。
+
+Stage Summary:
+- 上游跟踪增量 = 零（三锚点与 maint-r1 全一致）；yrs 升级
+  窗口维持关闭（PR #682 在途未合并 + 0.28.0 无后继）；
+  skip_gc 全编队不变量维持（轮 3 已实证 session.rs:193）。
+- 下次跟踪检查点：PR #682 状态翻转（merge/close）或
+  0.28.x/0.29 发版。
+
+---
+Task ID: maint-t3-r5
+Agent: 主代理（R-O2 套件复验轮）
+Task: 用户「继续至少10轮次」指令第 5 轮——R-O2 回归套件在
+第 19 次重置后环境复验跑（fixtures git 内 + 系统 LO 25.2.3.2
+基线口径）。
+
+Work Log:
+- python3 regress.py 全量 22 用例：**22 = 10 pass + 12 pinned
+  + 0 fail，SUITE PASS**（夹具确定性门 pass + 跨进程确定性门
+  pass 8 断言）。
+- 与基线（r-o2-t5/REGRESSION §10）完全同判零漂移：garbage-bytes
+  仍 PINNED rc=0、bad-xml/missing-content-types 等 12 钉定面
+  全维持、10 有效夹具（含 anchor-survival 16 断言三钉定）零漂移。
+- 环境（第 19 次重置后）套件自愈确认：fixtures/ 在 git 内零丢失、
+  regress.py/render_guard.py/rss_wrapper.py 全在档——套件工件
+  未受 scripts/ 丢失影响（套件本体在 cleanroom 仓库内）。
+
+Stage Summary:
+- R-O2 套件新环境复验 = 基线同判零漂移，渲染管线证据腿在当前
+  环境完整在场可用（maint-t3 口径）。
+- 套件工件与 scripts/ 丢失面零交集（套件在仓内，丢失的是仓外
+  辅助脚本——轮 7 盘点）。
+
+---
+Task ID: maint-t3-r6
+Agent: 主代理（TDF 版本线全景补腿轮）
+Task: 用户「继续至少10轮次」指令第 6 轮——批次 3 版本基线
+三选的证据增量：25.8.x 第四选可行性 + 各分支 EOL 时间表。
+
+Work Log:
+- 第四选（25.8.x）定谳 = 死路：25.8.7 = final maintenance
+  release（TDF 公告 2026-05-12）；25.8 分支 EOL = 2026-06-12
+  （TDF Blog 原文 "reached end of life on 12 June 2026 and has
+  received no security updates since that date. Users of 25.8.x
+  should update to 26.2.5"）。25.2 EOL 公告建议的升级目标自身
+  已死 4.5 个月——该建议已过时，官方现引导 25.8.x 存量 → 26.2.5。
+- **26.2 分支 EOL = 2026-11-30（一手 TDF 26.8 发布新闻稿原文
+  "The LibreOffice 26.2 branch reaches end of life on 30 November
+  2026" + linuxiac 印证）——距当前 2026-10-25 仅剩约 5 周**。
+- 26.8 分支 EOL = 2027-06-13（endoflife.date，fresh 线，
+  26.8.1 发布 2026-10-08）。
+- 四分支全景：25.2 EOL 2025-11-30（死 11 月）/ 25.8 EOL
+  2026-06-12（死 4.5 月）/ 26.2 EOL 2026-11-30（**剩 ~5 周**，
+  still 线 26.2.6 活跃）/ 26.8 EOL 2027-06-13（剩 ~7.5 月，
+  fresh 线）。
+- 口径史注记：官方生产环境推荐线曾迁移（2026-03 报道引官方
+  推荐 25.8.x → 2026-09 26.8 公告推荐 26.2.5）——TDF 惯例
+  still = fresh 的前一线。
+
+Stage Summary:
+- **批次 3 裁决输入重大时效增量**：26.2.x「零翻动最平滑」的
+  维护窗口仅剩 ~5 周——钉它 = 2026-11-30 后重蹈 25.2 覆辙
+  （变 EOL 存量再迁一次）；26.8.x 的「一良性破裂」代价对应
+  最长维护窗口（至 2027-06，官方 fresh 线）。第四选 25.8.x
+  排除（死路）。
+- 三选证据格局更新为：25.2.x（死 11 月）/ 26.2.x（零翻动
+  但 5 周短窗）/ 26.8.x（一良性翻钉 + 7.5 月长窗）——推荐
+  默认的裁决权仍归用户，DECISION_SHEET 证据面登记本轮增量。
+
+---
+Task ID: maint-t3-r7
+Agent: 主代理（scripts 欠账盘点与 SBOM 工具重建轮）
+Task: 用户「继续至少10轮次」指令第 7 轮——scripts/ 丢失面盘点
++ 关键工具重建 + 对 mdcore 当前 HEAD 实跑 SBOM 合规门禁。
+
+Work Log:
+- 丢失面盘点（git 双仓历史检索定谳）：agents_structure_extract/
+  agents_forensic_scan **未丢**（在 cleanroom agents-md-audit/
+  tools/ 仓内零漂移在场，worklog 的 scripts/ 路径是运行时引用）；
+  真丢 5 件 = verify_authenticode.py（Acrobat 审计一次性工具，
+  结论已入档）/ webkit_closure.py + xvfb_shell_run.sh（optroot
+  重建前置件）/ sbom_check.py（合规门禁常驻）/ nextbatch_search.sh
+  （非关键）。
+- **sbom_check.py 重建完成**（循 worklog s5b 功能描述 + COMPLIANCE
+  §3 门禁 3 规格）：cargo metadata --locked 逐包 license，OR/AND
+  组合语义（OR 任一全白分支过——r-efi 先例；AND 全白才过）、
+  斜杠旧式双许可等价展开（MIT/Apache-2.0 → OR）、括号分配律
+  展开（(MIT OR Apache-2.0) AND Unicode-3.0）、WITH 例外段、
+  GTK/WebKit 系统库动态链接豁免（WARN 不 FAIL）。
+- 首跑 10 误报暴露解析缺陷（斜杠/括号）→ 修复复跑全过。
+- 平台过滤：--filter-platform x86_64-unknown-linux-gnu（windows
+  v0.58.0 target-specific 元数据下载受阻——crates.io 网络面；
+  Linux 过滤 = 产品部署面，规避之）。
+- **mdcore 当前 HEAD（3e1f616）SBOM 门禁实跑 PASS**：三方包 217
+  （Linux 面）= 193 PASS + 24 WARN（gtk-rs/webkit2gtk wrapper 系
+  统库动态链接豁免，wrapper 自身全 MIT）+ **0 FAIL / 0 UNKNOWN
+  / 0 GPL**——并行线 +28 提交引入的 wry/tao/gtk 依赖面合规复验
+  通过（s5b 全平台 366 口径的 Linux 子面，windows-rs 系全
+  MIT/Apache 不改变结论）。
+- 报告工件：scripts/sbom-report-c33bcab.json（217 包明细）。
+
+Stage Summary:
+- sbom_check.py 常驻合规工具重建在档（scripts/ 仓外，规格循
+  s5b 口径），对当前 HEAD 立即产出复验价值：**新依赖面 0 GPL
+  0 UNKNOWN**——批次 1 实施轮引入新依赖时的合规门禁已就位。
+- 剩余欠账 3 件降级登记：webkit_closure.py/xvfb_shell_run.sh
+  （optroot 重建轮前置——待 GUI 面复验需求触发再重建）/
+  verify_authenticode.py（一次性已入档，不重建）。
+
+---
+Task ID: maint-t3-r8
+Agent: 主代理（web 面独立验证轮 + 磁盘治理）
+Task: 用户「继续至少10轮次」指令第 8 轮——mdcore web/ python
+套件（并行线 p6/s5 交付面）在本环境独立验证 + 途中磁盘
+ENOSPC 事故治理 + /tmp 历史工件抢救。
+
+Work Log:
+- 磁盘事故：playwright 跑 contract_gate 报 ENOSPC（/ 100% 满，
+  9.3G/9.9G）。排查：mdcore/target 5.6G + /tmp/my-project 3.3G
+  + rustup 1.6G。
+- **/tmp 历史工件抢救（意外收获）**：/tmp/my-project/scripts =
+  10-24 时点快照，含原版 webkit_closure.py / xvfb_shell_run.sh /
+  sbom_check.py / gate1_* 5 件 / unpack_lo_debs.sh 等 18 件
+  （轮 7 盘点的"真丢"清单大幅收回——仅 verify_authenticode/
+  nextbatch_search 两件确认彻底丢失，均为低优先级）。原版
+  sbom_check.py（前缀族白名单口径，s5b 权威）恢复，轮 7 重建版
+  改名 sbom_check_strict.py（严格 SPDX 组合语义）双版本并存。
+  /tmp/my-project/optroot（2.3G，env.sh 在场）确认为 s5a 工件
+  副本——GUI 壳复验欠账降级为"待搬运"。
+- 清理：tmp 可再生件 341M + cargo clean 6.4G → 磁盘 100%→40%
+  （5.7G avail）。
+- web 构建链自愈：wasm-bindgen-cli 0.2.129 安装（与 Cargo.lock
+  精确一致纪律）→ build-wasm.sh（wasm32 release 1m34s + glue）
+  → npm ci 18 包 → node build.mjs（dist 2.4MB）→ 首跑
+  integration_journey 6/7（journey_pdf_annotate_incremental_save
+  annot:false）→ 根因 = pkg_pdf 未构建（build.mjs 明示
+  display-only）→ build-pdf-wasm.sh 补腿 → 复跑 7/7。
+- **12 件 web 套件全绿（179 checks）**：contract_gate 18/18 +
+  lifecycle_web 15/15 + xlsx_grid 20/20 + docx_export 13/13 +
+  docx_import 11/11 + canvas_view 15/15 + concurrent_web 16/16 +
+  sidecar_faults_web 15/15 + oversized_web 18/18 + evidence_panel
+  16/16 + integration_journey 7/7 + pdf_view 15/15（1 skip）。
+  diag_heap/diag_heap_cdp = 诊断件非判定套件，未计入。
+
+Stage Summary:
+- 并行线 web 面交付（p6-t3..t6 + s5b 的 web/tests 15 件）在本
+  环境独立复验**全绿**——与并行线自报口径一致，采信升级为亲验。
+- 环境（第 19 次重置）web 构建链完整自愈：cargo/wasm-bindgen/
+  npm/node/playwright 全通。
+- /tmp 抢救成果：脚本 18 件收回 + optroot 2.3G 副本确认——
+  scripts 欠账仅剩 2 件低优先级（verify_authenticode 一次性
+  已入档 / nextbatch_search 非关键）。
+
+---
+Task ID: maint-t3-r9
+Agent: 主代理（文档一致性对账轮）
+Task: 用户「继续至少10轮次」指令第 9 轮——maint-t3 十轮成果
+的文档登记与交叉对账（HANDOFF / DECISION_SHEET / REGRESSION
+三件一致）。
+
+Work Log:
+- HANDOFF §6：新速览置顶（maint-t3 十轮全貌——fmt 破裂修复
+  3e1f616 / 782/782 / web 179 checks / SBOM 0 GPL / TDF 时效
+  增量 / tmp 抢救 / 磁盘治理），maint-r1 速览降历史保留。
+- REGRESSION §10.8 新增：10.8.1 第 19 次重置后环境复验（22=10+
+  12+0 基线同判零漂移，报告 out/regression-report-maint-t3.json）
+  + 10.8.2 TDF 分支 EOL 全景表（25.2/25.8/26.2/26.8 四分支，
+  一手源引用）+ 10.8.3 治理含义（时效天平呈批次 3）。
+- DECISION_SHEET：批次 3 证据面时效增量段（轮 6 已写）+ 剩余
+  风险 #3 补 26.2 EOL 5 周时效行——三文档对账闭环（批次 3
+  时效证据在 HANDOFF 速览 / DECISION_SHEET 批次3+风险3 /
+  REGRESSION §10.8 三处一致引用 §10.8 为权威锚点）。
+- 版本引用对账：HANDOFF 速览 mdcore 引用更新为 3e1f616（fmt
+  修复）；历史速览中 c33bcab 引用保留（时点正确性）。
+
+Stage Summary:
+- 三文档交叉一致性收口：新证据单一权威锚点（REGRESSION §10.8）
+  + 决策面引用（DECISION_SHEET 两处）+ 导航面速览（HANDOFF）。
+- maint-t3 全部成果已登记，轮 10 收口提交推送。
