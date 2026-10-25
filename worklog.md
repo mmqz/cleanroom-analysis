@@ -6339,3 +6339,32 @@ Stage Summary:
 - 三文档交叉一致性收口：新证据单一权威锚点（REGRESSION §10.8）
   + 决策面引用（DECISION_SHEET 两处）+ 导航面速览（HANDOFF）。
 - maint-t3 全部成果已登记，轮 10 收口提交推送。
+
+---
+Task ID: maint-t3-r10
+Agent: 主代理（收口提交推送轮）
+Task: 用户「继续至少10轮次」指令第 10 轮——maint-t3 十轮
+成果双仓提交推送 + 决策门控呈递。
+
+Work Log:
+- cleanroom-analysis 提交 cfe0171（4 文件 +364/-5：worklog 十轮
+  + HANDOFF §6 速览置顶 + DECISION_SHEET 批次3时效增量/风险3
+  + REGRESSION §10.8）→ push 成功 46bb788..cfe0171，ls-remote
+  远端验证 cfe0171 在场。
+- mdcore 3e1f616（fmt 卫生修复，轮 2）推送：首两次失败 = shell
+  变量展开陷阱（前缀环境变量赋值不参与同命令行 ${} 展开，URL
+  中 token 展开为空——"Invalid username or token" 实为空密码）；
+  export 后推送成功 c33bcab..3e1f616。token 授权面 API 复核：
+  对 mmqz/mdcore push: True（fine-grained 或 classic，两仓均可）。
+- 双仓终态：cleanroom main = cfe0171 = origin/main；mdcore
+  main = 3e1f616 = origin/main；工作树全干净。
+
+Stage Summary:
+- maint-t3 十轮闭环：环境自愈 → 独立复验（抓 fmt 破裂并修复）→
+  面审 → 上游跟踪 → R-O2 复跑 → TDF 时效增量 → scripts 抢救
+  → web 面全绿 → SBOM 合规 → 文档对账 → 双仓推送。
+- 剩余门控不变：DECISION_SHEET 批次 1（D1 解锁包，最优先）/
+  批次 3（三选 + 时效天平）/ 批次 4（可整批按推荐默认）——
+  全部待用户批注，批注即解锁对应实施轮。
+- token 已在聊天中暴露多轮，建议用户用毕轮换（GitHub Settings
+  → Developer settings → Tokens 撤销重发）。
