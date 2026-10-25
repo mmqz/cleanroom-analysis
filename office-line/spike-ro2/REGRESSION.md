@@ -387,3 +387,67 @@ regress.py`（tarball 于 tool-results/lo26/，不入仓）。
 POLICY 限额表挂点）；RSS 口径与 rss_wrapper 峰值口径互补（看门狗
 = 在飞防护，wrapper = 事后计量）。
 
+
+## 10.7 LO 26.2.6 still 线复跑（maint-r1，2026-10-25）：批次 3 三选证据腿补齐
+
+> 触发链：TDF 版本线核对发现 **25.2 分支 EOL**（25.2.7 = final
+> maintenance release，官方公告 2025-10-30，明示建议 25.2.x 用户升
+> 25.8.x——TDF Community Blog 检索 datetime 直证）→ 批次 3 版本基线
+> 候选面扩为 25.2.x / 26.2.x / 26.8.x 三选，其中 26.2.x（still 活跃
+> 线）无实测 → 本轮补齐。性质 = §10.5 同构机械复跑：零代码改动、
+> 零钉定翻动、纯证据腿。
+
+### 10.7.1 环境
+
+- 来源：TDF 官方 `stable/26.2.6/deb/x86_64`
+  `LibreOffice_26.2.6_Linux_x86-64_deb.tar.gz`（217,285,735 B，gzip
+  完整性验证；解包内目录 `LibreOffice_26.2.6.3_...`——四段构建号）；
+- 安装形态：用户前缀解包 `/home/z/.lo262/opt/libreoffice26.2`（42
+  deb 全量 data.tar 解包，无 root 无 dpkg；脚本
+  `scripts/unpack_lo2626.sh`）+ PATH 垫片 `shim/soffice`；系统基线
+  25.2.3.2 零改动——多版本并行在场；
+- 版本串实测：`LibreOffice 26.2.6.3 8221e31b3ac356a1623c672912a3d2b492f7e3d1`；
+- 套件：regress.py 零改动，`--json-out out/regression-report-lo2626.json`
+  （首跑）+ `regression-report-lo2626-run2.json`（复跑），同工作区
+  先后完成。
+
+### 10.7.2 结果（三版本对照）
+
+| 面 | 25.2.3.2（基线） | 26.2.6.3（still） | 26.8.1.1（fresh，§10.5） |
+|---|---|---|---|
+| 总判 | 10 pass + 12 pinned + 0 fail | **10 pass + 12 pinned + 0 fail（零破裂）** | 10 pass + 11 pinned + 1 pin broken |
+| garbage-bytes | PINNED（rc=0 + 乱码产出） | **PINNED（rc=0 + 页 1 产出，冷 1.34s / RSS 274MB）** | 破裂（rc=1 + 零产出） |
+| 10 有效夹具 | 全 PASS | **全 PASS 零漂移**（含 anchor-survival 16 断言三钉定） | 全 PASS 零漂移 |
+| 12 畸形钉定 | 全 PINNED | **全 PINNED 恒** | 11 PINNED + 1 破裂 |
+| 确定性门 ×2 | pass | **pass（双次复跑稳定，逐用例同判）** | pass |
+
+### 10.7.3 版本差信号时间窗收窄
+
+garbage-bytes 的 rc=0 垃圾字节兜底面：**25.2.3.2 开放 → 26.2.6.3
+仍开放 → 26.8.1.1 收窄**——上游收窄变更发生在 **26.2.x → 26.8.x
+之间**（非 25.2→26.2）。锚点存活三钉定（GOTO 存活 / 目标页 =
+书签页 / 孤立书签零可观测）跨三版本全恒。
+
+### 10.7.4 治理含义（呈批次 3）
+
+1. **26.2.x = 零钉定翻动的最平滑升级路径**：行为面与 25.2.x 基线
+   完全一致（22/22 同判、零破裂）+ still 线活跃维护（26.2.6，
+   2026-09-04）——若裁决升 26.x，26.2.x 的回归面代价为零（对照
+   26.8.x 的一处良性破裂）；
+2. **25.2.x = EOL 存量**：TDF 官方维护已移出（25.2.7 final，
+   2025-10-30）——若维持钉 25.2.x，接受安全修复停止面（知情登记）；
+3. 26.8.x = fresh 更严行为（fail-closed 方向，§10.5 定性），若选
+   26.8.x 需翻钉 garbage-bytes 单用例（批次 3 后置项）；
+4. 版本差证据链三腿齐备（25.2.x 基线 / 26.2.x 零漂移 / 26.8.x 一
+   破裂）——批次 3 版本基线三选的裁决输入完备，不再缺实测腿。
+
+### 10.7.5 复现
+
+```bash
+PATH="/home/z/.lo262/shim:$PATH" \
+  python3 regress.py --json-out out/regression-report-lo2626.json
+```
+
+诚实边界：同 §10.5（用户前缀解包形态，stderr python 告警为该形态
+既有；RSS/墙钟为观察值：26.2.6 冷 0.36-1.34s / 暖 0.21-1.11s /
+97-274MB 与两版本同区间——无 dpkg 预链接，归因不确定）。

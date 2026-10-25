@@ -5984,3 +5984,72 @@ Stage Summary:
   与双壳同契约实证收口；无新实体引入。
 - 治理计划 §九 清单终态：1-8 全绿 / 9 deb 面实体过（残项边界登记：
   dpkg -i、AppImage、NSIS、.app 需真机或外部工具链）/ 10 成立。
+
+---
+Task ID: maint-r1
+Agent: 主代理（第 18 次重置事故恢复 + 丢失轮重做 + 推送收口）
+Task: 用户 token 续能「继续做」→ push 时发现远端领先 53 提交
+（Stage 5 workbench 会话线 10-19~10-24 推进），本地仓库回退到
+ae4aa4d——同日早间的 r-o2-t6/maint-t1/maint-t2 三提交在环境重置中
+本地全丢（reflog/fsck 零踪迹）。本轮：双仓 ff 拉齐（cleanroom
+f9efe19 / mdcore c33bcab，后者 +28 提交）→ 甄别覆盖面（26.8.1
+复跑证据已被并行线 REGRESSION §10.5 等价覆盖，无需重做）→ 重做
+三件独有面 → 提交推送。
+
+Work Log:
+- 事故定谳：push rejected → fetch 后 HEAD..origin/main = 53 提交
+  （p0-p6/s5b/s5c 系列，全部 workbench 线）且 origin/main..HEAD
+  = 0；本地 HEAD = ae4aa4d（10-18 r-o2-t5-doc）；丢失提交
+  ae6bec5/717628c/871a6fe 对象不存在（git cat-file 逐试探）+
+  reflog 只到 ae4aa4d + fsck 零 dangling——第 18 次重置把仓库
+  快照回退到 10-18 拍摄点（早间轮的三提交在快照之后产生，随重置
+  抹灭）。cargo/rustup、.lo26/.lo262 前缀、scripts/ 同批丢失。
+- 并行线甄别：远端 53 提交含 REGRESSION §10.5（LO 26.8.1 复跑
+  22 用例 + garbage-bytes 破裂 + anchor-survival 跨版本稳定——
+  结论与丢失的 r-o2-t6 完全一致）+ §10.6（render_guard 守护器
+  原型）——26.8.1 证据腿已被覆盖；mdcore 远端 c33bcab（+28：
+  p6-t3..t6 web 面组 + s5a/s5b wry/tao 壳实机集成 + deb 打包，
+  G1 786/web 15 套全绿，s5b 速览在档）。未覆盖面 = yrs 上游跟踪
+  / TDF 25.2 EOL / 26.2.6 复跑三件。
+- 双仓 ff 拉齐：cleanroom ae4aa4d→f9efe19、mdcore c4856f7→
+  c33bcab（token fetch，零冲突——本地无独有提交）。
+- 重做①yrs 上游跟踪（三锚点重验，结论与丢失轮一致）：旧路径
+  github.com/y-c-rs/yrs HTTP 404；crates.io repository 字段 =
+  github.com/y-crdt/y-crdt/（monorepo 转移）；#676 新家保号在场
+  仍 OPEN（页面嵌入 JSON state 三处一致）+ 标题即 UAF 主题；修复
+  PR #682 在途（OPEN 未合并，作者 jonliu03，「GC: collect a
+  collected type's children even when undo keeps them」——正中
+  d1b-t1 ASan 定位根因面）；crates.io 最新 0.28.0（2026-09-17，
+  = spike 钉版无新 release）。
+- 重做②TDF 25.2 EOL：25.2.7 = final maintenance release（TDF
+  Community Blog 检索 datetime 2025-10-30 直证，明示建议升
+  25.8.x）；当前 still = 26.2.6（公告 2026-09-04）/ fresh =
+  26.8.1。本机系统基线 25.2.3.2 所在分支上游停维一年。
+- 重做③26.2.6.3 still 线复跑：TDF 官方 tarball 217,285,735 B
+  （gzip -t 完整性验证，断点续传两段）用户前缀解包 42 deb
+  （scripts/unpack_lo2626.sh 重写——原文件随重置丢失）+ shim；
+  版本串 26.2.6.3 8221e31b 实测；R-O2 套件零改动双次复跑 = 22
+  = 10 pass + 12 pinned + 0 fail SUITE PASS 双次稳定逐用例同判
+  ——与基线完全同判零破裂（garbage-bytes 仍 PINNED：rc=0 + 页 1
+  产出冷 1.34s/RSS 274MB；10 有效夹具零漂移含 anchor-survival 16
+  断言三钉定；双确定性门双次 pass）。rc=0 兜底面收窄时间窗定谳：
+  25.2 开放 → 26.2 仍开放 → 26.8 收窄（收窄变更在 26.2→26.8
+  之间）。
+- 文档登记：REGRESSION §10.7（接并行线 §10.5/§10.6 编号）+
+  DECISIONS #19 跟踪增量 + DECISION_SHEET 批次 3 三选齐备/批次 4
+  #19 行/剩余风险 #1 #3 + DECISION_GROUPS G5 TDF 证据 + HANDOFF
+  新速览（并行线速览降为历史保留）。
+- 推送：cleanroom f9efe19→maint-r1 提交（token 单次环境变量，
+  push 脚本内存 Basic 头，.git/config 零 token）；mdcore 零新
+  提交（ff 拉齐态即推送态）。
+- 磁盘治理：.lo262dl 下载目录（415MB）用毕即删（.lo26dl 先例）。
+
+Stage Summary:
+- 第 18 次重置事故收口：早间三轮工作丢失面全部重做或确认被并行
+  线覆盖，零未恢复项；双仓与远端一致推送态。
+- 批次 3 版本基线三选证据腿齐备（25.2.x EOL 存量 / 26.2.x 零翻动
+  最平滑 / 26.8.x 一良性破裂需翻钉一项）——裁决输入完备。
+- yrs 升级窗口维持关闭（PR #682 在途未合并 + 0.28.0 无新
+  release）；skip_gc 全编队不变量维持。
+- mdcore 零接触零提交（ff 拉齐推送态，门禁口径以 s5b 速览为准）；
+  剩余门控 = DECISION_SHEET 批次 1/3/4（用户批注即全线解锁）。

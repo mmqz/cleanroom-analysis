@@ -33,7 +33,7 @@
 | 16 | R-6/R24-d 真机壳实体 | MD | **3** | 开发环境轮排期（本沙箱非目标环境） |
 | 17 | fuzz 战役排期 | PDF | **3** | SECURITY_POLICY S6 表战役启动时机 |
 | 18 | LO 26.8.1 上游复跑 | office | **3** | 上游版本环境就绪时复跑 r-o2-t3 套件（版本差核对前置——钉定破裂=版本差信号） |
-| 19 | 上游协同（yrs） | collab | **3** | #676 UAF 修复跟踪（open/0 修复维持——不升生产默认内核的约束维持）+ **新增两项 API 请求候选**（yrs-d §2.2：Update 内容类枚举 / ClientID release 校验） |
+| 19 | 上游协同（yrs） | collab | **3** | #676 UAF 修复跟踪（open/0 修复维持——不升生产默认内核的约束维持）+ **新增两项 API 请求候选**（yrs-d §2.2：Update 内容类枚举 / ClientID release 校验）。**跟踪增量（2026-10-25 maint-r1）**：上游仓库转移 y-c-rs/yrs → **y-crdt/y-crdt**（旧路径 HTTP 404 实测，crates.io repository 字段直证；#676 在新家保号在场仍 OPEN）；**修复 PR #682 在途**（OPEN 未合并，作者 jonliu03，「GC: collect a collected type's children even when undo keeps them」——正是 d1b-t1 ASan 定位根因面）；crates.io 最新仍 0.28.0（= spike 钉版，无新 release）——skip_gc 全编队不变量维持 |
 | 20 | STATUS §7-6 陈旧清单 | MD | **1** | **本轮已实施**（§1.1——e-review 勘误：初稿误引 §2） |
 
 ## 1. 类别 1 清单与实施结果（安全实现——零产品语义变化）
