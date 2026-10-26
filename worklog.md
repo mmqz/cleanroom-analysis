@@ -6622,3 +6622,60 @@ Stage Summary:
   探针——套件与探针是两套独立证据件，只更套件会留过时断言
   地雷（本次 5 天后首跑才暴露）。
 - mdcore 零接触；剩余门控=批次 1/3/4 不变。
+
+---
+Task ID: maint-r22（第 22 次重置恢复 + 十一面全绿复验 + 上游零增量）
+Agent: 主代理（自主维护轮 r22）
+Task: 用户「继续推进」——环境第 22 次重置甄别恢复 + 交付面全量
+复验 + 上游三锚点/TDF 时效跟踪 + 磁盘满治理（第 9 次事件）。
+
+Work Log:
+- **第 22 次重置甄别与恢复**：~/.cargo 与双仓快照再丢（同签名），
+  /tmp/my-project 全部幸存（scripts 21 件 + optroot 2.3G + lo26/
+  lo268）。本地双仓旧快照回退（mdcore c4856f7 / cleanroom
+  ae4aa4d）→ fetch 甄别双仓本地零独有 → ff 拉齐至最新推送态
+  （**mdcore 3e1f616 / cleanroom 0571a6c**，maint-r21-t5/t6 与
+  HANDOFF 速览增量全部纳入）。rustup 1.99.0 钉版重装
+  （rust-toolchain.toml 辖 + rustup default 补设——spike 工作区
+  无 toml 场景）。
+- **核心门禁四面亲跑全绿**：782/782 零失败（--workspace 排除
+  mdshell-native）+ fmt 0 diff + clippy 恰 5 wasm_bindgen
+  static_method_of 误报基线 + wasm32 check rc=0。
+- **GUI 壳 786 口径复验**：optroot 必需件搬运复刻（/tmp 幸存树
+  → /home/z/my-project/optroot 期望路径 586M——env.sh 的 .pc
+  prefix 硬编码绝对路径，sed env 变体法被链接失败证伪后回退
+  t5 搬运法）→ mdshell-native **4/4** = **786/786 全量** 与
+  maint-r21-t5 首达口径一致。
+- **适配层 57/57 零失败**（matrix24+hostile13+limit10+anchor6+
+  soak4）；**R-O2 复跑 22=10 pass+12 pinned+0 fail SUITE PASS**
+  同判零漂移（LO 26.2.6.3，r22.json 落档）。
+- **web 构建链重建 + 12 套件 179 checks 亲验全绿**：
+  wasm-bindgen-cli 0.2.129 锁版安装（前台 cargo install --locked，
+  无沙箱杀进程问题）+ build-wasm/build-pdf-wasm/npm build 三链
+  全过 + contract_gate 18/lifecycle 15/xlsx_grid 20/docx_export
+  13/docx_import 11/canvas_view 15/concurrent 16/sidecar_faults
+  15/oversized 18/evidence_panel 16/integration_journey 7/
+  pdf_view 15(1 skip)——与 maint-t3-r8/t2 逐件一致。
+- **SBOM 合规 PASS**（0 UNKNOWN/0 GPL/0 白名单外）。
+- **D1 就绪探针 p15/p16/p17 release ALL PASS**（批次 1 证据链
+  重置后独立成立——九 kind 形状+七 op 全环+per-origin 双栈）。
+- **磁盘满第 9 次事件治理**：SBOM 运行中 No space left on
+  device（rootfs 100%）——甄别 rootfs 为 overlay 形态（lower 层
+  删除不回收，/tmp 幸存件 rm 后 df 不降）→ cargo clean mdcore
+  target 回收 7.4GiB → 32%（6.4G 余）；/tmp 冗余工具链副本
+  （cargo-home 1016M+rustup 715M，t5 判定冗余）顺带清除。
+- **上游三锚点零增量**：yrs PR #682 open 未合并（updated
+  2026-10-03）/ #676 open（2026-09-29）/ crates.io 0.28.0 仍
+  最新（2026-09-17）——升级窗口维持关闭，skip_gc 全编队不变量。
+- **TDF 时效零增量**：26.2.7 终版仍定档 2026-10-29（Patch My PC
+  论坛再确认）未提前发布；26.8.1（10-08）= Latest Branch——
+  REGRESSION §10.9 落档维持有效，批次 3 终版倒计时 3 天。
+
+Stage Summary:
+- 第 22 次重置后 11 面复验全绿（核心 782/GUI 4=786/适配层 57/
+  R-O2 22/web 179/SBOM/D1 探针×3/fmt+clippy+wasm32/yrs 三锚点/
+  TDF 时效/磁盘治理）——全部交付面重置后独立成立，零漂移。
+- 治理登记：overlay rootfs 磁盘纪律更新——upper 层（本会话
+  编译产物）可回收，/tmp 幸存件删除不回收 lower 层空间。
+- mdcore 零接触；剩余门控=批次 1/3/4 不变（批次 1 证据链本轮
+  复验在案；批次 3 终版 10-29 倒计时 3 天最紧迫）。
