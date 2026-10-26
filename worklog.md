@@ -6513,3 +6513,28 @@ Stage Summary:
   26.8.1 现成——「赶终版定版 26.2.x」vs「直上 26.8.1」的
   窗口权衡面完整呈递。
 - 三文档一致；mdcore 零接触；剩余门控=批次 1/3/4 不变。
+
+---
+Task ID: maint-r21-t4（磁盘治理 + 会话收口）
+Agent: 主代理（治理收尾轮）
+Task: maint-r21 连续维护轮收口——磁盘预防性治理 + 双仓终态
+验证。
+
+Work Log:
+- 磁盘核查：门禁全链复验完成后 90%（1019M 余，历史第 8 次满盘
+  事件预防窗口）→ cargo clean 双 target（mdcore 6.2GiB + spike
+  528.5MiB）→ **26%（7.0G 余）**；~/.rustup 716M + ~/.cargo
+  799M + /tmp optroot 2.3G 保留（工具链与 GUI 复验待搬运件）。
+- 双仓终态验证：cleanroom main = 13b6396 = origin/main（ls-remote
+  40 字符 SHA 核对）；mdcore main = 3e1f616 = origin/main；
+  双仓工作树全干净。
+- ls-remote 多 SHA 虚惊登记：rg 七位切片把单个 40 字符 SHA 切成
+  五段显示——核对时须用完整 SHA 或 --format 钉住。
+
+Stage Summary:
+- maint-r21 连续维护轮四件收口：recover-21（双轮重置恢复+六面
+  复验）/ t2（D1 探针+web 179+SBOM 三连复验）/ t3（TDF 时效
+  增量二三文档一致）/ t4（磁盘治理+终态验证）——全部已推送。
+- 会话累计：第 20/21 次重置恢复 ×2 + 交付面独立复验八面全绿 +
+  批次 3 时效证据更新（终版倒计时 3 天）。
+- 剩余门控=批次 1/3/4 不变，批注即开对应实施轮。
