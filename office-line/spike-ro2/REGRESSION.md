@@ -487,3 +487,20 @@ should update to 26.2.5"）+ Release Plan 25.8 wiki。25.2 EOL
   §10.5 定性），换 7.5 个月维护窗口；
 - 时效证据不改变三选结构，但改变两选项的代价天平——DECISION_
   SHEET 批次 3 证据面已同步登记，裁决归用户。
+
+## 10.9 时效增量二（maint-r21，2026-10-26）——26.2 终版倒计时 3 天
+
+§10.8 全景后 24 小时内的一手源复查增量（对批次 3 裁决窗口有
+直接影响）：
+
+| 事件 | 日期 | 源 |
+|---|---|---|
+| **26.2.7（26.2 分支最终版）发布定档** | **2026-10-29（距今 3 天）** | Patch My PC 检测公告引 TDF 计划（"The next and final release of LibreOffice 26.2 will be 26.2.7 which is scheduled for release on 29-Oct 2026"） |
+| 26.8.1（fresh 线首个 bugfix）已发布 | 2026-10-02（官网 release notes 页标注 10-08） | libreoffice.org/release-notes + endoflife.date（26.8.1 = 02 Oct 2026） |
+| 26.2 EOL 2026-11-30 双源再确认 | — | TDF 新闻稿原文 + endoflife.date（"Ends in 1 month and 6 days (30 Nov 2026)"，2026-10-04 更新） |
+
+治理含义：26.2.7 落地（3 天后）即宣告 26.2 线进入「终版后仅余
+安全修复直至 11-30 EOL」的 4.5 周倒计时——若裁决走 26.2.x，
+建议赶在终版前或随终版一次性定版；若走 26.8.x，26.8.1（首个
+bugfix，已过早期采用期风险点）即现成目标版本。三选结构与推荐
+不变（§10.8.3），裁决归用户。
