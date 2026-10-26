@@ -6538,3 +6538,41 @@ Stage Summary:
 - 会话累计：第 20/21 次重置恢复 ×2 + 交付面独立复验八面全绿 +
   批次 3 时效证据更新（终版倒计时 3 天）。
 - 剩余门控=批次 1/3/4 不变，批注即开对应实施轮。
+
+---
+Task ID: maint-r21-t5（optroot 搬运 + GUI 壳 786 口径闭差）
+Agent: 主代理（验证欠账清偿轮）
+Task: maint-t3-r7 登记的「optroot 待搬运 + GUI 壳复验受阻」
+欠账清偿——mdshell-native 4 测试（782 vs 786 口径差）在
+本环境首次跑通。
+
+Work Log:
+- 搬运工程：/tmp/my-project/optroot（2.3G s5a 工件副本）→
+  /home/z/my-project/optroot（env.sh 硬编码期望路径）。三次
+  方案迭代：①mv 跨设备慢拷贝（~3.7M/s）120s 超时中断（拷出
+  448M 残片已清）；②符号链接被沙箱禁止；③**必需件洞察**：
+  env.sh 四面（pkg-config/LD_LIBRARY_PATH/GI/XDG）仅引用
+  root/ 提取树——cargo-home 1016M 与 rustup 715M 为 s5a 时代
+  工具链副本，本环境已有同功能件无需搬运。只拷必需件 586M
+  （root 561M + env.sh + shim + deb-verify）约 150s 完成。
+- **GUI 壳编译打通**：source optroot/env.sh 后 cargo check
+  -p mdshell-native 全链过（webkit2gtk 2.0.1 + tao 0.30.8 +
+  mdshell + mdshell-native，54.12s）——「gtk dev 缺 + sudo
+  不可用结构性受阻」（s5b 起 19 次重置维持的登记）经 optroot
+  前置后在本环境破局。
+- **786 口径闭差**：cargo test -p mdshell-native = **4/4 全绿**
+  （blueprint_constants_present / js_escape_roundtrip_samples
+  / percent_decode_samples / serve_dist_mapping_and_traversal）
+  + clippy GUI 壳 rc=0 + fmt 全仓 0——**782 + 4 = 786/786
+  全量亲验达成**，与 s5b 786/0 口径对齐。
+- 残留边界：doctest 1 ignored（BLUEPRINT_NOTE 文档例，既有
+  口径）；GUI 运行时面（Xvfb 实机）未跑——本轮仅编译面+单元
+  测试面闭差，实机冒烟维持 s5b 在档口径。
+
+Stage Summary:
+- 「待搬运」欠账（maint-t3-r7 降级登记）清偿 + GUI 壳验证
+  欠账（19 次重置维持受阻）翻案：本环境现可达 s5b 全量 786
+  口径，后续重置恢复复验不再需要排除 mdshell-native。
+- 搬运纪律沉淀：optroot 恢复 = 必需件 586M 而非全量 2.3G
+  （root 提取树唯一必需；工具链副本不搬）。
+- mdcore 零接触；剩余门控=批次 1/3/4 不变。
