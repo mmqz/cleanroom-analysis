@@ -6857,3 +6857,33 @@ Stage Summary:
   checks + R-O2 22 + SBOM PASS + 维护锚点三面零增量（yrs/TDF）。
 - mdcore main = 31aa316（本战役 8 提交）；cleanroom = 本档。
 - 剩余轮次 dev-r17-r30：敌意回归扩展 + UI 深化批 D + 终验收口。
+
+---
+Task ID: dev-r17..r22（30 轮战役·敌意回归 + UI 深化批 D + 终验）
+Agent: 主代理
+Task: 敌意回归扩展 + 批 D + 全量终验。
+
+Work Log:
+- **dev-r17-r18（敌意回归）** `2801a35`：hostile_ui 套件 7 checks
+  ——A 空文档全命令安全[wrapSelection 空选区创建内容块=合法行为
+  登记]+B 200KB 大文档工具栏 3s 内+C emoji 代理对包裹无撕裂[cpLen
+  换算实证]+跨代理对全替换+BIDI 希伯来文+D 面板叠加双 Esc 收敛+
+  E 连击 20 次 undo 链稳定+F localStorage 污染 clamp 防御；两测试
+  期望修正（空文档 blocks 语义+代理对选区实际覆盖形）。
+- **dev-r19-r20（批 D）** `51da472`：行号槽 lineNumbers（CM6 内置
+  零新增依赖）+ 自动保存提醒（dirty>5s → mdc-autosave-hint 事件；
+  不自动写核定谳——保存恒经宿主桥/用户）+ README §8 战役记录
+  （issues 闭环/工具条架构定谳/五面板/测试面）；hostile_ui 7→8。
+- **dev-r21（终验）**：核心 810/810 + GUI 壳 4/4（=814 口径，optroot
+  环境亲验）+ fmt 0。
+- **dev-r22（磁盘治理纪律执行）**：两次满盘预防（88%→28%→92%→
+  33%）——全量 test 编译 6.3G 膨胀模式确认，战役收尾即 clean。
+- 转义层级教训落档三条（Python heredoc \n 求值层级——文件字节级
+  修复法定型：rb 读写 + 精确 old_b/new_b 断言替换）。
+
+Stage Summary:
+- 30 轮进度 22/30；mdcore main = 51da472（本战役 11 提交）。
+- web 测试面 15→18 套件 239+1 checks 全绿（editor_toolbar 26 +
+  hostile_ui 8 + tr1_web_e2e 2 新增）。
+- 剩余 dev-r23-r30：收尾复验 + issues 面更新（#3 追加评论）+
+  HANDOFF 速览 + 终态推送。
