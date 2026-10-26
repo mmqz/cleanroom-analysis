@@ -6446,3 +6446,42 @@ Stage Summary:
   升高，恢复流程已固化（脚本链 recover_toolchain.sh 模式）。
 - 剩余门控不变：批次 1/3/4 待用户批注。后续自主轮计划：
   p15/p16/p17 D1 就绪探针复跑 → web 构建链 12 套件 → SBOM。
+
+---
+Task ID: maint-r21-t2（D1 就绪探针 + web 面 + SBOM 三连复验）
+Agent: 主代理（自主维护轮·恢复后交付面独立复验）
+Task: 用户「继续做持续做」——第 21 次重置后三面独立复验：
+D1 就绪探针 / web 构建链 12 套件 / SBOM 合规。
+
+Work Log:
+- **D1 就绪探针复跑（批次 1 证据面，release 口径）**：
+  p15_mapping_structure ALL PASS（九 kind 形状/属性开放面
+  透传/前插3前删2 锚点 ID 等值/交织容器序保持）+ p16_mapping_ops
+  ALL PASS（七 op 微缩全环/对端 wire apply 收敛/增量二轮再收敛
+  /重叠 marks 拆分读回语义相等/SetBlockType 三断言）+
+  p17_mapping_undo ALL PASS（per-origin 双栈互不干扰/双 redo
+  跨栈序全量复原/混合序列交叉）——三探针与 d1p-t2/t3/t4 落档
+  口径零漂移，批次 1 就绪证据在重置后环境再次独立成立。
+- **web 构建链重建 + 12 套件复跑**：wasm-bindgen-cli 0.2.129
+  重装（Cargo.lock 钉版纪律）→ build-wasm.sh（wasm32 release
+  1m35s + glue）→ build-pdf-wasm.sh → npm ci → node build.mjs
+  （dist 完整含 pkg/pkg_pdf）。12 件判定套件 = **179 checks
+  全绿**：contract_gate 18 + lifecycle_web 15 + xlsx_grid 20 +
+  docx_export 13 + docx_import 11 + canvas_view 15 +
+  concurrent_web 16 + sidecar_faults_web 15 + oversized_web 18
+  + evidence_panel 16 + integration_journey 7 + pdf_view 15
+  (1 skip)——与 maint-t3-r8 亲验口径逐件一致。
+- **SBOM 合规复验（3e1f616 全闭包）**：原版 sbom_check.py
+  （/tmp 幸存件）cargo metadata --locked 全量扫描——判定
+  **PASS：UNKNOWN/GPL/白名单外 = 0/0/0**；LGPL* 单列 1 项
+  （r-efi OR 表达式内可选支，MIT/Apache 支可得）维持系统库
+  政策口径。与 maint-t3-r7 结论一致（3e1f616 仅 fmt 卫生修复
+  零依赖变更）。
+
+Stage Summary:
+- 三面独立复验全绿：D1 证据（探针×3）/ web 交付面（179
+  checks）/ 合规门禁（SBOM PASS）——第 21 次重置后全部交付
+  面恢复到「亲验在案」状态。
+- 批次 1 实施轮的就绪证据链（yrs-e 映射矩阵 + p15/p16/p17 +
+  适配层 57/57）在当前环境完整复现——批注即开。
+- mdcore 零接触；剩余门控=批次 1/3/4 不变。
