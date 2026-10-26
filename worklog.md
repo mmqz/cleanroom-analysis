@@ -6410,3 +6410,39 @@ Stage Summary:
   （LO 版本三选 + 时效天平）/ 批次 4（可整批按推荐默认）——
   全部待用户批注，批注即解锁对应实施轮。
 - token 已在聊天中再次暴露，建议用户用毕轮换。
+
+---
+Task ID: recover-21
+Agent: 主代理（第 21 次重置恢复——会话中途二次重置）
+Task: 用户「继续做持续做」→ 会话进行中环境再次重置（recover-20
+推送后数分钟内：~/.cargo 与 ~/.rustup 丢失、双仓回退旧快照
+mdcore@c4856f7/analysis@ae4aa4d）恢复 + 拉齐 + 门禁复验。
+
+Work Log:
+- 重置甄别：适配层测试启动时 cargo not found → /home/z/.cargo
+  整体丢失 + 双仓回退（recover-20 提交 00a5f41 已在远端安全，
+  本地零独有）；/tmp/my-project 本轮**全部幸存**（scripts 21
+  件/lo26/lo268/optroot 2.3G 在场）。
+- 双仓 ff 拉齐：cleanroom ae4aa4d→00a5f41（公开仓匿名
+  fetch）；mdcore c4856f7→3e1f616（token 内存 Basic 头
+  fetch，remote URL 零 token 纪律维持）。
+- 工具链重装：rustup 1.29.2 + 1.99.0 钉版 + wasm32 +
+  clippy + rustfmt（rust-toolchain.toml 自动辖）。
+- 门禁复验（3e1f616 推送态，与 recover-20 同 SHA）：核心面
+  **782/782 零失败** + fmt 0 + clippy 恰 5 条 wasm_bindgen
+  误报基线 + wasm32 check rc=0。
+- **适配层复验（本轮原定任务，第 20 次重置后首次完成）**：
+  cargo test -p collab-adapter = **57/57 零失败**（matrix 24 +
+  hostile 13 + limit_boundaries 10 + anchor_undo_redo 6 +
+  soak 4[122s 长跑组]）——与 a5-r5 登记全套件口径一致。
+- R-O2 复跑（LO 25.2.3.2 基线）：**22 = 10 pass + 12 pinned
+  + 0 fail SUITE PASS** 同判零漂移；报告
+  out/regression-report-r21.json。
+
+Stage Summary:
+- 第 21 次重置恢复闭环：工具链 + 双仓拉齐 + 六面复验（核心
+  四面 + 适配层 + R-O2）全部零漂移。
+- 连续两次会话内重置（第 20/21 次）同签名——平台重置频率
+  升高，恢复流程已固化（脚本链 recover_toolchain.sh 模式）。
+- 剩余门控不变：批次 1/3/4 待用户批注。后续自主轮计划：
+  p15/p16/p17 D1 就绪探针复跑 → web 构建链 12 套件 → SBOM。
