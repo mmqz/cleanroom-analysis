@@ -6887,3 +6887,37 @@ Stage Summary:
   hostile_ui 8 + tr1_web_e2e 2 新增）。
 - 剩余 dev-r23-r30：收尾复验 + issues 面更新（#3 追加评论）+
   HANDOFF 速览 + 终态推送。
+
+---
+Task ID: dev-r23..r30（30 轮战役·收尾轮——issues 同步 + 终轮锁定 + 终档）
+Agent: 主代理
+Task: 战役收尾：issues 面同步 + 全量终验 + 终态推送。
+
+Work Log:
+- **dev-r23（issues 同步）**：issue #3 进度评论（UI 深化批次交付
+  同步——工具条/状态栏/四面板/细节面/验证面 239+ checks）。
+- **dev-r24-r25（HANDOFF + 终轮锁定）**：HANDOFF §6 速览 dev-r1..r22
+  置顶（`6482731`）；web **18 套件终轮全绿 240 checks**
+  （contract 18/lifecycle 15/toolbar 26/hostile 8/tr1 2/
+  docx_export 18/docx_import 11/xlsx_export 9/xlsx_import 9/
+  xlsx_grid 20/canvas 15/concurrent 16/sidecar 15/oversized 18/
+  evidence 16/IJ 7/pdf_view 15[1 skip 已知环境项]/web_smoke）。
+- **dev-r26-r28（终验汇总）**：核心 810/810 + GUI 4/4（814 口径）
+  + fmt 0 + R-O2 22 SUITE PASS + SBOM PASS + web 240——六面全绿
+  终态锁定；磁盘终态 33%（三拍治理 92%→33%）。
+- **dev-r29-r30（终档）**：本节 + 战役总结。
+
+Stage Summary:
+- **30 轮战役完整收口**：issues #9/#10 全链闭合（8→6 open）+ UI
+  三批深化（A 工具条/状态栏 + B TOC/查找替换 + C/D 字号/打印/
+  帮助/行号/自动保存）+ 敌意回归套件 + README §8 文档面。
+- mdcore `cdc6e1f→51da472` 十一提交（b317e95/7f47558/d991cde/
+  0070599/7bce0f9/f8324c0/604a081/31aa316/2801a35/51da472 +
+  cleanroom b980c8f/513676d/1f2ad80/bc4221e/6482731 六提交）——
+  **全程零积压推送**（用户点名纪律达成：每轮提交即推送）。
+- 测试面净增：核心 +12（798→810）+ web +61（179→240）=
+  **+73 checks**；产品缺陷修复 1 件（forceFullSync）+ 实施发现
+  登记 9 条。
+- 第 24 次重置恢复（dev-r3 中途被吞——远端推送纪律使其零损失）。
+- 剩余待用户：#3 后续迭代空间 + 产品决策三项（商品名/平台矩阵/
+  闭源）+ marks/双换行方言裁决。
