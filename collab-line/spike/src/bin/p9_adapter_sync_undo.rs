@@ -14,10 +14,12 @@
 //!      b1 栈本地性 + 效果全局：peer1 human 编辑同步 peer2 → peer1 undo
 //!         → 差量再同步 → 双端收敛于回退后状态（撤销产生的 op 随 update
 //!         同步，栈本身不出进程）；
-//!      b2 捕获窗合并/分离：窗内连续编辑 = 单栈项（一笔 undo 全回退）；
-//!         窗外（>1.1s 间隔）编辑 = 独立栈项（逐项 undo）；
-//!      b3 "一笔装载"语义（B2.2）：load_blocks 2k 块（Ai）= 捕获窗内
-//!         4 小批事务合并为 1 栈项；undo(Ai) 一次清空全部装载。
+//!      b2 逐事务粒度（窗 0，s0-t2 p20 缓解后语义，2026-10-21）：连续
+//!         编辑 = 每事务独立栈项，单次 undo 仅撤末笔（修复前窗 1000 会
+//!         合并非连续项触发 yrs 0.28 undo 下溢缺陷——c205fec 同款翻转）；
+//!      b3 装载撤销粒度（B2.2，窗 0 口径）：load_blocks 2k 块（Ai）=
+//!         512/批 × 4 批 = 4 独立栈项，单次 undo 撤末批（剩 1536）；
+//!         单事务面 load_bulk_text = 1 栈项单次清空（B2.2 真源保留）。
 //! P9c 同步深验（B1.6）
 //!      c1 截断面：合法 update 在 32 个随机偏移截断 → 全部 Err（Decode
 //!         或 Panic 隔离），进程存活，引擎每次仍可用（未毒化）；
@@ -30,9 +32,6 @@
 //!      逐出/容量 API；undo_stack()/redo_stack() 公开 getter 在（深度
 //!      监控可行）。结论：栈上限不可公开 API 实现——呈 B3.4/R-3 协同
 //!      裁决（选项：上游请求 / 粗粒度 clear_all / 无限维持）。
-
-use std::thread::sleep;
-use std::time::Duration;
 
 use collab_adapter::{
     BlockSpec, CollabAdapter, EditOrigin, SessionOptions, StreamEdit,
@@ -126,20 +125,19 @@ fn main() {
             .unwrap();
     }
     let merged = w.undo_depth(EditOrigin::Human);
-    assert_eq!(merged, 1, "b2 窗内三笔合并单栈项（捕获窗 1s = COALESCE_MS）");
+    assert_eq!(merged, 3, "b2 逐事务粒度：三笔 = 三栈项（窗 0，s0-t2 p20 缓解后语义）");
     assert!(w.undo(EditOrigin::Human));
-    assert_eq!(w.__probe_text(), "", "b2 单次 undo 全回退");
-    // 窗外独立栈项
+    assert_eq!(w.__probe_text(), "w1 w2 ", "b2 单次 undo 仅撤末笔");
+    // 逐项栈序（窗 0 下时间间隔不再影响栈结构——sleep 移除，c205fec 同款）
     w.edit_stream(EditOrigin::Human, StreamEdit::AppendText { text: "SLOW-1 ".into() })
         .unwrap();
-    sleep(Duration::from_millis(1_150));
     w.edit_stream(EditOrigin::Human, StreamEdit::AppendText { text: "SLOW-2".into() })
         .unwrap();
     let split = w.undo_depth(EditOrigin::Human);
-    assert_eq!(split, 2, "b2 窗外两笔独立栈项（逐项 undo）");
+    assert_eq!(split, 4, "b2 后续两笔亦独立栈项（剩余 2 + 新增 2）");
     assert!(w.undo(EditOrigin::Human));
-    assert_eq!(w.__probe_text(), "SLOW-1 ", "b2 逐项回退（仅最近项）");
-    println!("P9b2: 捕获窗合并（窗内单栈项）与分离（窗外逐项）双面实证");
+    assert_eq!(w.__probe_text(), "w1 w2 SLOW-1 ", "b2 LIFO 仅撤最近项");
+    println!("P9b2: 逐事务粒度（窗 0）——三笔三栈项 + LIFO 逐项回退实证");
 
     // b3 一笔装载语义（B2.2）
     let mut g = CollabAdapter::open(SessionOptions {
@@ -155,10 +153,21 @@ fn main() {
         .collect();
     g.load_blocks(EditOrigin::Ai, &gen_blocks).unwrap();
     let gen_depth = g.undo_depth(EditOrigin::Ai);
-    assert_eq!(gen_depth, 1, "b3 4 小批事务合并为单栈项（一笔装载）");
+    assert_eq!(gen_depth, 4, "b3 逐批粒度：512/批 × 4 批 = 四栈项（窗 0；修复前窗 1000 合一）");
     assert!(g.undo(EditOrigin::Ai));
-    assert_eq!(g.__probe_block_ids().len(), 0, "b3 单次 undo 清空全部装载");
-    println!("P9b3: 一笔装载 = 单 undo 栈项（B2.2 生成态语义，2048 块 4 批合并）");
+    assert_eq!(g.__probe_block_ids().len(), 1_536, "b3 单次 undo 仅撤末批（2048-512）");
+    // 单事务面（B2.2 真源）：load_bulk_text 单事务装载 = 1 栈项（matrix 同款锁）
+    let mut t = CollabAdapter::open(SessionOptions {
+        client_id: 8_000_007,
+        ..Default::default()
+    })
+    .unwrap();
+    t.load_bulk_text(EditOrigin::Ai, &"bulk 语义保留面 ".repeat(120))
+        .unwrap();
+    assert_eq!(t.undo_depth(EditOrigin::Ai), 1, "b3b 单事务装载 = 单栈项（B2.2 保留语义）");
+    assert!(t.undo(EditOrigin::Ai));
+    assert_eq!(t.__probe_text(), "", "b3b 单次 undo 清空全部装载");
+    println!("P9b3: 批次粒度（4 批 4 项 + 撤末批剩 1536）+ 单事务装载单栈项（B2.2）双面实证");
 
     // ── P9c 同步深验 ─────────────────────────────────────────────
     // c1 截断面
