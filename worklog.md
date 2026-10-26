@@ -6746,3 +6746,48 @@ Stage Summary:
   marks/双换行方言裁决——全部待用户，无工程侧欠账。
 - cleanroom 侧零接触（除本 worklog/HANDOFF）；mdcore 零 LO 面
   变更（R-O2 22 用例基线不受影响）。
+
+---
+Task ID: dev-r1..r4（30 轮战役·UI 开发会话——issues #9/#10 全链闭合）
+Agent: 主代理
+Task: 用户「持续推进30轮次包括ui的开发，记得及时提交代码」+
+「继续，运行时记得硬盘管理和代码云上传」——issues 驱动 + UI 开发。
+
+Work Log:
+- **第 24 次重置（会话中途，dev-r3 实施中被吞）**：签名 = mdcore
+  回退 c4856f7 旧 clone + office-io G2 API 消失 + 工具链丢 + 磁盘
+  9%；恢复 = 工作树碎片甄别丢弃 + token fetch 双仓 ff 拉齐
+  （mdcore b317e95 / cleanroom 4c67842——dev-r2 成果经远端零损失
+  找回）+ recover_toolchain.sh + optroot 586M 再搬运。dev-r3 全部
+  重做（内容从会话上下文完整重放）。
+- **dev-r2（issue #9 TR-1 CR 镜像）**：markdown_to_tree 入口
+  CRLF/孤立 CR 统一规范化 LF（模型=权威层；三解析入口漏斗单点
+  覆盖；快路径零分配）；tr1_line_endings.rs 六件锁；G1 804/804；
+  推送 b317e95 + 关单评论。
+- **dev-r3（issue #10 Rust 面）**：WasmCore::export_docx_styled
+  加性导出面（options JSON 镜像 office-io snake_case API；形状面
+  docx_options / 值域面 V9 save 漏斗 docx_invalid_input 分层校验；
+  既有 export_docx 字节级零变化）；TR-4 六件锁；G1 810/810；推送
+  7f47558。
+- **dev-r4（issue #10 web 消费 + #9 复验）**：⚙ 导出选项面板（4
+  预设 + 自定义三选）+ 鸭子探测 styled 面（旧 pkg 回退兼容）+
+  测试桥；docx_export 套件 13→18 checks 全绿（实施发现：zip DOS
+  时间戳 2 秒粒度漂移 → 部件级等价断言替代字节级）；tr1_web_e2e
+  新套件 2/2（#9 承诺复验收口：CRLF 注入 → __md() 零 CR + 视图
+  镜像）；wasm pkg 重建（styled 面在场）+ tsc 零错；推送 d991cde
+  + 双 issue 闭合评论。
+- **硬盘管理**（用户点名）：三次满盘预防（87%→66%→72% 区间内
+  cargo clean -p 精准回收 + 每 commit 前 df 检查）；optroot/工具链
+  重装均预算内完成。
+- **云上传纪律**（用户点名）：四提交四推送零积压（b317e95/
+  7f47558/d991cde + cleanroom 本档），token 全程瞬态 URL/内存头
+  零落盘（.git/config grep 验证）。
+
+Stage Summary:
+- mdcore open issues 8→6（#9/#10 闭合）；测试面 802→810（核心）
+  + web docx_export 13→18 + tr1_web_e2e 2 新。
+- 剩余 open：#3（UI 产品化——已两批交付，本战役 UI 批深化）、
+  #4/#5（已收口待关）、#6（已收口）、#7（交接单）、#8（测试单
+  已执行）。
+- 30 轮战役进度 4/30；下一步 dev-r5+ UI 开发批 A（编辑器工具栏/
+  状态栏/快捷键）。
