@@ -6791,3 +6791,38 @@ Stage Summary:
   已执行）。
 - 30 轮战役进度 4/30；下一步 dev-r5+ UI 开发批 A（编辑器工具栏/
   状态栏/快捷键）。
+
+---
+Task ID: dev-r5..r8（30 轮战役·UI 批 A + 批 B 前两件）
+Agent: 主代理
+Task: 用户「持续推进30轮次包括ui的开发，记得及时提交代码」——UI 开发批。
+
+Work Log:
+- **dev-r5（格式工具条）** `0070599`：sticky 11 键（B/I/code/del
+  包裹 + H1-H3/¶/quote/ul/ol toggle）——程序化文本编辑模式定谳
+  （零独立 op 面：dispatch 文本 changes 由既有双层管道承载；独立
+  op 轨否决因模型 marks 不写 MD 投影 = 视图零反馈）；CM6View 三新
+  方法 + 快捷键 8 键 + __format 统一入口；**产品缺陷修复
+  forceFullSync**（行首前缀变更被快路径吸收为字面文本 = 块类型漂移
+  实证；置位直接 fullResync 走核差分）；editor_toolbar 套件 9/9。
+- **dev-r6（状态栏+Ctrl+S）** `7bce0f9`：5 槽位（字符/词数混合计
+  数/块数/光标/rev + dirty 指示）+ Ctrl+S（mdc-save 事件 = 宿主
+  CONTRACT 桥路径）；500ms 轮询定谳（facet 扩展否决——零侵入）；
+  套件 12/12；**两条实施发现**：__inject = 核重建非编辑路径；
+  __ready = first-chunk 而 boot 收敛前 locked 窗吞编辑（800ms 稳定
+  窗规避——playwright 立即编辑竞态实证）。
+- **dev-r7（TOC 大纲）** `f8324c0`：fixed 右侧零布局侵入 + 层级
+  缩进 + 文本定位跳转（重名跳首个 v1 限制登记）；套件 16/16。
+- **dev-r8（查找替换）** `604a081`：Ctrl+F 面板（零新增依赖面——
+  @codemirror/search 不引入手写最小实现）+ replaceAll 单事务倒序
+  （undo 一次撤全）；套件 22/22。
+- 全程纪律：4 提交 4 推送零积压；每提交前 df 检查（72%/2.7G 稳定）；
+  token 瞬态 URL 零落盘 grep 验证。
+
+Stage Summary:
+- UI 批 A（工具栏/状态栏/快捷键）+ 批 B 两件（TOC/查找替换）完成；
+  editor_toolbar 套件 0→22 checks；mdcore main d991cde→604a081。
+- 实施发现登记四条（forceFullSync 快路径吸收缺陷/boot 竞态/__
+  inject 语义/Python-JS 转义层级）全部修复或规避。
+- 30 轮进度 8/30；下一步 dev-r9+ UI 批 C（主题持久化/打印样式/
+  字号调节/帮助面板）+ web 全量套件复验。
