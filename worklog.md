@@ -6679,3 +6679,70 @@ Stage Summary:
   编译产物）可回收，/tmp 幸存件删除不回收 lower 层空间。
 - mdcore 零接触；剩余门控=批次 1/3/4 不变（批次 1 证据链本轮
   复验在案；批次 3 终版 10-29 倒计时 3 天最紧迫）。
+
+---
+Task ID: issues-r1..r50（issues 驱动开发大会话——PR#1 + #3/#4/#5/#6/#7/#8 全处理）
+Agent: 主代理（issues 任务清单执行）
+Task: 用户「查看issues，进行至少50轮次的开发，注意硬盘管理」——
+mdcore 8 条 issues（用户本地审计会话布置）全清单执行。
+
+Work Log:
+- **第 23 次重置恢复**（会话首小时，签名同前）：双仓 fetch 拉齐
+  （cleanroom 39dfec3 / mdcore 3e1f616+fix/engine-closing 分支）+
+  rustup 1.99.0 重装（中途截断→工具链 manifest 破损→强制重装修复）+
+  wasm-bindgen 0.2.129 + optroot 586M 再搬运（/home/z 侧被重置清）。
+- **PR #1 审查验证合并**：diff review（相对判据 + booting 收口）→
+  r23_fingerprint 15/15（修复前 14+1）→ playwright debug line
+  'ready · blocks=9 · load=107ms' → ff 合入 483032f 推送（PR 自动
+  merged）→ clippy --all-targets 猎获 as u128 同型转换顺手修。
+- **G3 暗标清零（R-11 BLOCKER）** `956c41d`：探针定谳威胁面（引擎
+  新建面已匿名 unknown/epoch——真实 BLOCKER = export_clean 原字节
+  拷贝把用户既有文档暗标带出）→ office-io anonymize_docx_props
+  （五部件变换 + 正文 raw_copy 零触碰 + fail-closed）+ workbench
+  ExportAnonymous 命令（复用零标记全门 + 双验证 + 原子发布 + 审计）
+  + wasm 出口 + 12 测试全绿。
+- **G1 TOC 域** `603ec62`：可行性定谳（docx-rs InstrText::TOC build
+  完整——todo!() 仅 HYPERLINK 分支，#6 引用面勘误）→ FieldSpec 扩
+  展 + 五连发射（begin dirty + separate + 占位 + end）+ V8 域校验
+  + LO 跨层（域结构非破坏存活）。
+- **G2 格式面** `3f16779`：引擎三 API 已在场未接线定谳 →
+  PageGeometry/DefaultTypography/LineSpacingSpec 公开类型 + 两设置面
+  + V9 + LO 实测精确生效（边距 90.1pt=1800twips / 14pt=四号）。
+- **#5 PDF wasm** `7cfb3b3`：现状勘误（三件已预置）→ npm scripts
+  接线（build:wasm:pdf/build:full）+ absent 提示指引化 + README +
+  chmod 可执行位修复 → pdf_view 15/15 桥激活态。
+- **#4 平台面** `da3e85e`：wry/tao/gtk 平台门（Linux-only 实体化）
+  + windows-msvc 全 workspace 交叉 check 首次全绿（cfg 分支不再
+  「写到哪算哪」）+ shell-native README + COMPLIANCE §8 平台矩阵
+  真源（正式裁决注记挂起）。
+- **#3 UI 产品化** `44177a9`+`f5a618d`：CSS 变量化（22 变量 + dark
+  组 + 90+ 处迁移）+ 主题三态（消费 CONTRACT §4 appearance.theme
+  既有冻结键——零契约变更）+ 防闪白脚本 + 顶栏三分组 SVG 图标 +
+  设置面板全 9 键位（__setSetting 权威门 + 拒绝回滚）+ 证据面板
+  折叠（width-0 形态零测试面）+ grid 空态 + 9 截图交付。
+- **#8 敌意测试轮次** `cdc6e1f`：87 用例四组（A 幂等镜像 39 + B
+  Unicode 24 + C/D 召回+敌意 11 + E/F 互操作+撤销 5 + G-J 8），
+  外部独立工具三件（LO 26.2.6.3 夹具生成与导出开验/PyMuPDF/
+  playwright），**零 crash 零数据损坏零 P0**——幂等+镜像双不变量
+  63 用例全过、导入召回 100%×6、回环召回 100%、敌意 5 面全拒
+  （含 billion-laughs）、1MB 注入 220ms 量化；登记 7 项（TR-1 P2
+  CR 镜像 / TR-4 P2 web 导出链未消费 G2 / 方言 5 项）+ TEST-ROUND-
+  REPORT.md + 子 issue #9/#10 开单；已知 4 问题重核全部定谳。
+- **全量门禁终态**：核心 798/798 + GUI 4/4 = 802/802 零失败 +
+  fmt 0 + clippy 基线恒 + wasm32 双包 rc=0 + web 13 套件全绿。
+- **硬盘管理**（用户点名）：三次满盘治理（100%→32%→31%，cargo
+  clean 累计回收 22.8GiB；windows-msvc target 用后即删纪律）+ 每
+  批 df 检查；终态 31%（6.5G 余）。
+- **issues 回复五条**（#3/#4/#5/#6/#7/#8 全部带验证证据评论）+
+  子 issue 两张（#9/#10）。
+
+Stage Summary:
+- issues 任务清单 8 条全处理：1 PR 合并 + 5 工程单收口 + 1 交接单
+  回应 + 1 测试单执行完毕；mdcore main 483032f→cdc6e1f 八提交全
+  推送；测试面 782→802（+20）零回归。
+- 威胁面/可行性勘误三则（G3 读改写路径/G1 todo 位置/#5 预置面）
+  ——issues 描述与实态的漂移全部以实测锚定。
+- 剩余：#9/#10 两张子单 + 产品决策三项（商品名/平台矩阵/闭源）+
+  marks/双换行方言裁决——全部待用户，无工程侧欠账。
+- cleanroom 侧零接触（除本 worklog/HANDOFF）；mdcore 零 LO 面
+  变更（R-O2 22 用例基线不受影响）。
