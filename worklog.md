@@ -6368,3 +6368,45 @@ Stage Summary:
   全部待用户批注，批注即解锁对应实施轮。
 - token 已在聊天中暴露多轮，建议用户用毕轮换（GitHub Settings
   → Developer settings → Tokens 撤销重发）。
+
+---
+Task ID: recover-20
+Agent: 主代理（第 20 次重置恢复与停机复验）
+Task: 用户 token 续能「继续开发」→ 环境重置（mdcore 工作目录
+重新 clone 于 c4856f7、cargo/rustup 全丢）恢复 + 双仓拉齐 + 门禁
+复验 + 上游跟踪。
+
+Work Log:
+- 推送受阻甄别：本地 cleanroom-analysis 假领先 2 提交
+  （r-o2-t5/r-o2-t5-doc）push rejected → fetch 发现远端领先
+  53 提交（maint-r1/maint-t3 十轮/并行 Stage 5 线全部在远端），
+  本地零独有 → ff 拉齐 601f5d6；mdcore token 内存 Basic 头
+  fetch（remote URL 零 token 纪律维持）→ ff 拉齐 c4856f7→
+  3e1f616（29 提交：并行线 +28 + fmt 修复）。
+- 工具链重装：rustup 1.29.2 + 1.99.0 钉版（rust-toolchain.toml
+  自动辖）+ wasm32-unknown-unknown + clippy + rustfmt。
+- /tmp/my-project 工件幸存确认（lo26/lo268/scripts 18 件/
+  optroot 2.3G 在场——第 20 次重置未清 /tmp）。
+- 核心门禁四面复验（mdcore 3e1f616 推送态）：cargo test
+  --workspace --exclude mdshell-native = **782/782 零失败**；
+  fmt = 0；clippy 核心 rc=0（恰 5 条 wasm_bindgen
+  static_method_of 误报基线，与 maint-t3 登记一致）；wasm32
+  check rc=0。
+- R-O2 套件复跑（系统 LO 25.2.3.2 基线口径）：**22 = 10 pass
+  + 12 pinned + 0 fail SUITE PASS** 基线完全同判零漂移，双
+  确定性门恒过；报告 out/regression-report-r20.json。
+- 上游三锚点零增量：yrs PR #682 仍 open（GC 修复在途，最近
+  更新 2026-10-03）/ #676 仍 open（2026-09-29）/ crates.io
+  0.28.0 仍最新（2026-09-17）——升级窗口维持关闭，skip_gc
+  全编队不变量不变。
+- TDF 时效锚点维持 maint-t3-r6 全景（26.2 分支 EOL
+  2026-11-30 = 距今约 5 周；26.8 EOL 2027-06-13）——一日内
+  零增量，未重复核验。
+
+Stage Summary:
+- 第 20 次重置恢复闭环：双仓拉齐推送态 + 工具链 + 四面门禁 +
+  R-O2 复跑全部零漂移；上游零增量。
+- 剩余门控不变：批次 1（D1 解锁包三件，最优先）/ 批次 3
+  （LO 版本三选 + 时效天平）/ 批次 4（可整批按推荐默认）——
+  全部待用户批注，批注即解锁对应实施轮。
+- token 已在聊天中再次暴露，建议用户用毕轮换。
