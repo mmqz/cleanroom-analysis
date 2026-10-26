@@ -6826,3 +6826,34 @@ Stage Summary:
   inject 语义/Python-JS 转义层级）全部修复或规避。
 - 30 轮进度 8/30；下一步 dev-r9+ UI 批 C（主题持久化/打印样式/
   字号调节/帮助面板）+ web 全量套件复验。
+
+---
+Task ID: dev-r13..r16（30 轮战役·门禁复验 + 维护面 + 文档收口）
+Agent: 主代理
+Task: UI 批交付后全量门禁复验 + 维护锚点核实 + 收口。
+
+Work Log:
+- **dev-r13（Rust 门禁复验）**：cargo test --workspace --exclude
+  mdshell-native = **810/810 零失败** + fmt 0——UI 批零 Rust 回归确认
+  （UI 批全部在 web 面）。磁盘治理：全量编译后 88% 告警 → cargo
+  clean 回收 6.3GiB → 28%（6.8G 余）。
+- **dev-r14（维护面锚点）**：①yrs 三锚点零实质变化——PR #682 仍
+  open（updated 2026-10-03 未动）/ #676 **口径修正为 issue 非 PR**
+  （heap use-after-free 报告，仍 open 2026-09-29）/ crates.io
+  0.28.0 仍 max stable（2026-09-17）——升级窗口维持关闭；新观察：
+  上游 open PR 活跃（#731/#730/#729 十月中下旬 GC/sticky-index/
+  zero-length-GC/clear_undo 连续修复）= 下一版本积累期，跟踪面维持。
+  ②TDF 时效：26.2.7 终版**未提前发布**（官网下载页 26.2.6 仍为
+  previous line 最新）——定档 2026-10-29 倒计时 2 天。③SBOM 复验
+  PASS（0 UNKNOWN/0 GPL/0 白名单外）。
+- **dev-r15（R-O2 复验）**：22 用例 = 10 pass + 12 pinned + 0 fail
+  SUITE PASS（LO 26.2.6.3，devr15.json 落档）——export_docx_styled
+  加性导出面零 LO 行为漂移确认（issue #10 Rust 面的回归背书）。
+- **dev-r16（文档收口）**：本 worklog 节 + HANDOFF §6 速览更新 +
+  cleanroom 推送。
+
+Stage Summary:
+- 30 轮进度 16/30；全交付面绿：核心 810/810 + web 15 套件 229
+  checks + R-O2 22 + SBOM PASS + 维护锚点三面零增量（yrs/TDF）。
+- mdcore main = 31aa316（本战役 8 提交）；cleanroom = 本档。
+- 剩余轮次 dev-r17-r30：敌意回归扩展 + UI 深化批 D + 终验收口。
