@@ -7169,3 +7169,35 @@ Stage Summary:
   重建（防再发 #21 同类静默断裂）。
 - 剩余：DECISIONS 类别 3 用户裁决 19 项 + 产品决策三项——工程侧无欠
   账；web 19 套件复验待 npm 链重建（下轮候选）。
+
+---
+Task ID: m2（web 链重建 + 19 套件全量复验轮）
+Agent: main
+Task: web 测试面环境重建（npm/wasm-bindgen/pkg/pkg_pdf 四件全失）与全量复验。
+
+Work Log:
+- 幸存面：node v24.21.0/npm 11.19.0（系统装）+ playwright chromium
+  613M（~/.cache）+ python playwright 模块；node_modules/pkg/pkg_pdf/
+  wasm-bindgen CLI 全失。
+- 重建链：npm install（18 包 2s）→ wasm-bindgen-cli 0.2.129 --locked
+  精确对齐 Cargo.lock（前台直装——后台 nohup 会被会话收割，踩坑登记：
+  cargo install 后台化两连死）→ build-wasm.sh（wasm32 release 1m38s）→
+  build.mjs → build-pdf-wasm.sh（mdc-pdf-wasm 57s）→ dist 全量。
+- 19 套件全量复验：**279 checks 0 败**（web_smoke 15/docx_export 25/
+  docx_import 14/editor_toolbar 26/hostile 8/canvas 15/concurrent 16/
+  contract 19/empty_state 11/evidence 16/IJ 7/lifecycle 15/oversized 18/
+  sidecar 15/tr1 2/xlsx_export 9/xlsx_grid 20/xlsx_import 9/
+  pdf_view 15[1 skip=加密档已知环境项]）——较 dev-J 口径 +30 checks
+  （dev-H/I/J 新增面首次全量实跑）。
+- 战役面互证：TR-4 选项桥/TR-16 设置键消费 XML（docx_export 25 含
+  #16 面）/ 标题样式+域剥离+批注（docx_import 14 含 #13/#14/#19 面）/
+  pdf_view 模型面 pkg_pdf 激活 15/15（dev-I 面复现）。
+
+Stage Summary:
+- 六面复验完整收官：核心 818 + GUI 46 + 特性 109 + web 279 + fmt/clippy/
+  wasm32 基线 + 上游零增量——**当前 main（c57b6ce）全绿无死角**。
+- 磁盘终态 82%（1.8G 空）——wasm32/pdf 双 target 即用保留（后续轮
+  可增量复用），必要时 clean 回收 ~3.4G。
+- web 链恢复 SOP 固化：npm install → wasm-bindgen-cli 0.2.129 前台
+  装 → build-wasm → build.mjs → build-pdf-wasm → build.mjs（pkg_pdf
+  接入需二次 build）→ serve 8123 → python3 tests/*.py。
