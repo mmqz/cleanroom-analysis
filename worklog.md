@@ -6921,3 +6921,251 @@ Stage Summary:
 - 第 24 次重置恢复（dev-r3 中途被吞——远端推送纪律使其零损失）。
 - 剩余待用户：#3 后续迭代空间 + 产品决策三项（商品名/平台矩阵/
   闭源）+ marks/双换行方言裁决。
+---
+Task ID: dev-r0
+Agent: main
+Task: 第 25 次沙箱重置恢复 + 全 issue 侦查 + 新战役立计划（用户指令：查看 issue 持续推进，不完整高质量全部完成不允许停止）
+
+Work Log:
+- 重置盘点：工具链全失、/tmp/my-project/mdcore 空壳、optroot(578M) 幸存；磁盘 8.5G 空。
+- 双仓 fetch 甄别（token 内存 Basic 头 transient URL）：本地零独有提交 → ff-only 拉齐
+  mdcore → f8c860a（TR-2D 终批）、cleanroom → b3d5237（30 轮战役终档：web 18 套件 240 checks 六面全绿）。
+- 上会话 30 轮战役已完整打完：#9 修复(b317e95)+e2e、#10 实施(7f47558+d991cde)、UI 批 A/B/C/D、
+  TR-2D 真机深挖两批 15 项发现。
+- 工具链恢复：recover_toolchain.sh 中断后手动补齐（rustup 1.99.0 minimal + clippy/rustfmt +
+  wasm32-unknown-unknown + default 钉住）；cargo fetch 后台预取。
+- 全部开放 issue 侦查（mdcore 13 条 / cleanroom 0 条）+ 四大新 issue 根因解剖：
+  * #15 P0：markdown.rs 无行内 marks 解析（唯一 `***` 是 thematic break）——模型存原始
+    markdown 源文本（CM6 快路径 replace_text 直写原始行文本），MarkSpan 从未产出；导出面
+    runs_from(marks) 完好但无 marks 可消费 → 星号原样输出。修法定谳 Option B：导出映射层
+    解析行内语法（零模型/同步协议改动）；docx_import 已把 bold run 映射为 `**` → 修后
+    docx→md→docx 全环闭合。
+  * #13 A1：真 Word（中文）夹具 styleId="1"-"9"（name="heading 1-9"+outlineLvl 0-8），
+    heading_level() 只认 "Heading" 前缀 → headings:0。docx-rs 0.4.22 读模型有 styles: Styles
+    （find_style_by_id + create_heading_style_map）。修法：office-io StyleIndex + ParagraphData
+    加性字段（style_name/outline_lvl）+ 导入面扩展识别。
+  * #14 A2：根因证伪——不是编号叠加！标题段内嵌 PAGE 域（fldChar begin/instrText/separate/
+    缓存结果"1"/end），读面 extract_run 把域缓存结果 run 当普通文本 → "11.1 表格"。真 Word COM
+    显示 "1.1 表格"。修法：读面域状态机（表现型域 PAGE/NUMPAGES/DATE 剥结果、内容型域保留）；
+    编号模式回归钉定（导入从不加号——vacuous 满足 + 回归锁）。
+  * #16 A4：export_docx_styled(wasm)+⚙面板+按钮消费已在（7f47558/d991cde，TR-2D 探测的
+    __exportDocxStyled 桥不存在+默认态=引擎默认 10pt 属零破坏设计）。残差：设置面消费
+    （CONTRACT §4 扩展）+ __exportDocxStyled 测试桥 + XML 直读断言。
+- 旧 issue 现状：#9/#10 已修复待关；#3 六问题中五已解决（工具栏/主题/设置面板/折叠/启动反馈）
+  残余=空态引导卡片；#4 平台声明+CI 矩阵；#5 PDF 模型面接线（build-pdf-wasm.sh 已在）；
+  #6 G1 TOC 域仍真缺口（FieldSpec 仅 Page/NumPages）+G2 已落+行号漂移需重核；
+  #7 交接清单待更新；#8/#11 测试轮次收口（TR-2A/B/C 云端任务）。
+
+Stage Summary:
+- 恢复完成：双仓 @ f8c860a/b3d5237、rustc 1.99.0+wasm32+clippy+rustfmt 就位、磁盘 7.8G 空。
+- 新战役 11 轮计划已立（dev-A..dev-K），优先级：P0 #15 → #13 → #14 → #16 → 关单收尾 →
+  G1 TOC → PDF 接线 → 平台声明 → UI 空态 → 测试收口 → 终验。
+- 关键架构定谳：模型=markdown 源文本层（CM6 同步协议基石），行内 marks 走导出映射层解析，
+  不碰模型/投影/同步协议（802+ 测试基线零风险）。
+
+---
+Task ID: dev-F
+Agent: main
+Task: issue #18 文本框（w:txbxContent）块提取收口（dev-A..dev-E 断档后重建 + 本轮完整实施）
+
+Work Log:
+- 断档重建：worklog 在 dev-r0 后无记录，但 git/远端显示 dev-A..dev-E 已完成
+  （#15 fd3f884 / #13 a85decd / #14 338acdc / #16 1b8e1ab / #17 c60214f 均已推送关单）；
+  远端 main = 本地 = c60214f（status「ahead 56」为陈旧远程引用假象）。
+- 第 26 次环境重置应对：工具链幸存于 ~/.cargo/bin（仅 PATH 未挂）；GTK 系统库
+  用 /tmp/my-project/hostlibs（apt download + dpkg -x 树 + pkgconfig env）。
+- 接手 #18 WIP（上会话断在门禁前夜）：office-io 双形态实现已在案，tr18 两红。
+- 根因①（口径勘误）：issue「×2」溯源——夹具与 ai-bid-research 原件字节一致
+  （MD5 d24f1cf2），构造脚本单文本框、全包条款恰 1 处；bid-parse 基线「2 块命中」
+  实为其自身双重提取缺陷。测试修正为恰 1 命中 + 展平全流零重复回归锁。
+- 根因②（off-by-one）：scan_vml_textbox_regions 的 body_child_depth == Some(depth+1)
+  恒假（depth 在 match 后才自增）→ 顶层块计数永不增长 → 文本框全锚到块 0。
+  修正为 Some(depth) + 补 Event::Empty 自闭合 <w:p/> 计数（真 Word 形态防御）。
+- 根因③（双提取）：DrawingML 的 txbxContent 被 VML 第二趟重复抓取（扫描器
+  只认标签不认容器）→ 加 in_drawing 子树跳过（模型面领地），与 mc:Fallback
+  防御并列。
+- DrawingML 测试通道：docx-rs 写面 TextBox 为 todo!() → 依 corpus_harness 手构
+  zip 模式（STORED）；踩坑：docx-rs read_document_rels 硬性要求
+  word/_rels/document.xml.rels 存在（缺件 = "Failed to read from zip"）。
+- clippy 修净 3 条（needless_lifetimes/collapsible_match→match guard/single_match）。
+- 磁盘治理（用户专项叮嘱）：workspace 全测两次爆盘（target 7.3G）→ cargo clean
+  回收 8.0G → 分级门禁（核心 856 全测 + GUI 4 用 DEBUG=0 压缩构建）→ 2.6G 安全。
+
+Stage Summary:
+- 977f4c9 已推送，#18 关单（评论 6433697926）：Block::TextBox 加性承载、双形态、
+  双提取防御、wasm 扁平化+计数、tr18 4 测全绿。
+- 门禁：860 通过 0 败（核心 856 + GUI 4）；fmt clean；clippy 仅 wasm 基线 5。
+- 标书侧重要情报：bid-parse 文本框双重提取缺陷（同条款重复两块）——已在关单
+  评论建议排查。
+- 剩余开放：#19 批注/脚注（D2a 有 comments.xml 现成夹具）→ #11/#8 测试轮 →
+  #5 PDF 接线 → #4 平台声明 → #3 UI 空态。
+
+---
+Task ID: dev-G
+Agent: main
+Task: issue #19 批注/脚注/尾注读面完整实施（写读不对称收口）
+
+Work Log:
+- 侦查定谳：批注 = 模型面全承载（docx.comments 经 rels + ParagraphChild::
+  CommentStart 锚）；脚注/尾注 = 引擎零读取（reader/ 无 footnote 面）需第二趟。
+  TR2 真件脚注/尾注仅分隔符（-1/0）无实体——手构包覆盖脚注通道。
+- 实现：CommentData（锚关联最终块序——lockstep 重 walk 解析数组索引，
+  孤儿=None）+ FootnoteData（部件第二趟：quick-xml 区段扫描 + docx-rs
+  Paragraph/Table::read 复用；分隔符/ id<1 滤除）+ ParagraphData.footnote_refs
+  （scan_note_references 文档级引用位标注——文本框/Fallback 区跳过）+
+  wasm stats 三计数键。
+- 踩坑①（off-by-one）：scan_note_regions 条目 End 闭合条件直接比元素层
+  恒差一 → 条目永不闭合、后续永不捕获（症状 = footnotes 空集）。修：
+  Start 记 depth+1（条目内部层），End 比 depth。
+- 踩坑②：clippy type_complexity（extract_blocks 返回二元组）→ CommentAnchors
+  类型别名；mut 闭包告警一并修净。
+- 测试：tr19 3 测（D2a 批注 701 锚互证/TR2 真件批注/手构包脚注尾注+引用位）
+  + wasm 计数面 1 测；TR2 仅分隔符=空集断言（不伪装支持）。
+
+Stage Summary:
+- f7ddd39 已推送，#19 关单（评论 6433898644）。门禁：864 通过 0 败
+  （核心 860 + GUI 4）；fmt clean；clippy 仅 wasm 基线 5。
+- TR2 真件情报：word-complex.docx 无实体脚注（仅分隔符）——标书侧如需
+  脚注验证需补含实体脚注样本（引擎通道已由手构件覆盖）。
+- 剩余开放：#4 平台声明（低磁盘——CI/文档）/ #3 UI 空态 / #5 PDF 接线
+  （重磁盘——wasm 构建）/ #8 #11 测试轮。磁盘 89%（1.2G 空）——下轮
+  选 #4（纯配置/文档面，零构建压力）。
+
+---
+Task ID: dev-H
+Agent: main
+Task: issue #4 复验关单 + issue #3 残差（空态引导卡片）收口关单
+
+Work Log:
+- #4：da3e85e 已完整实施（前会话）——三验收面核验：README 排除指引 ✓ /
+  Windows 交叉 check 本会话复验 38.18s 全绿（产物即清）✓ / COMPLIANCE §8
+  矩阵 ✓。关单（评论 6433934488）。
+- #3 残差：empty_state.ts 新建（mount_surface_guide——pointer-events:none
+  零拦截 + 主题变量 + 内联 SVG + DOM 契约零触碰）；PDF/Grid/Canvas 三面
+  接线（syncGuide 单点：到达隐藏/归零回显）；canvas 无壳页防御门。
+- 主题 :root 自引用 bug（UI 批 B 预存）：--panel-hover/--border-strong/
+  --border-soft/--accent 在 :root var() 自引用 = IACVT——光模式 49 处
+  消费全废（暗模式正常故未察）。A4 几何检查（边框 0px）暴露，补光模式实值。
+- 测试踩坑三连：①漏 serve_forever 线程；②canvas 面板惰性创建（首点
+  tab 才挂）——boot 断言分阶段；③PDF 面异步自举竞态——__ready 后补等
+  __pdfReady。
+- 预存回归两起（非本轮改动）：1b8e1ab（#16）契约升 1.2 未同步六套件
+  （1.1→1.2 全量修）；integration_journey 缺 pkg_pdf SKIP 门（pdf_view.py
+  同款纪律补齐 + check() skip 形参）。
+- web 面全量回归 19 套件全绿（新增 empty_state 11 检查）。
+
+Stage Summary:
+- 78c83f3 已推送，#3 关单（评论 6434092587）——六问题全部收口。
+- 本会话累计关单：#18/#19/#4/#3 四单。剩余开放：#5 PDF 模型面接线
+  （pkg_pdf 构建 + pdf_view 模型面激活——重磁盘）、#8/#11 测试轮。
+- 磁盘 86%（1.4G 空）——#5 的 wasm32 构建估 300-600M，可行（构建后清
+  target/wasm32 保留 pkg_pdf）。
+
+---
+Task ID: dev-I
+Agent: main
+Task: issue #5 PDF 模型面接线收口关单（pkg_pdf 构建 + 模型面激活 + UI 级验收）
+
+Work Log:
+- 根因定谳：#5 非源码缺口——脚本/package.json（build:wasm:pdf +
+  build:full）/README 依赖文档/pdf_view.ts 模型面分支全部前会话已备；
+  真实缺口 = build-pdf-wasm.sh 从未在存活环境跑成（环境重置历史中断）。
+- build-pdf-wasm.sh 首次完整跑通：wasm32 release 1m01s → wasm-bindgen
+  → web/pkg_pdf/（101M target 产物，磁盘可控）→ npm run build 接入
+  （absent 提示消失）。
+- 探针面转正：pdf_view.py 15/15（此前 2-12 SKIP 的模型面检查全部实跑
+  ——text_selection/search/extract_text/annot_highlight/annot_list_filter/
+  flush/incremental_prefix/double_revision_chain/scan_warnings）；仅加密
+  档合法 SKIP。
+- UI 级验收（acceptance_pdf5_ui.py 入库）：打开前 save 禁用 → 打开后
+  启用（bridge 接线）→ 注释 460B 追加 → 按钮点击真实下载 1881B %PDF
+  （字节 = prefix + appended 逐位一致）。
+- 跨面回归：integration_journey 7/7（注释检查转正实跑）；empty_state
+  11/11 无回归。
+
+Stage Summary:
+- 0a622a9 已推送，#5 关单（评论 6434134375）。本会话累计五单：
+  #18/#19/#4/#3/#5。
+- 剩余开放：#8 敌意测试轮 / #11 TR-2 覆盖率补强——纯测试轮 issue。
+- pkg_pdf 为 gitignored 构建件——部署侧 npm run build:full 重建。
+
+---
+Task ID: dev-J（本轮终档）
+Agent: main
+Task: issue #8 K1-K6 重核闭环 + issue #11 TR-2A/B 收口——issue 面全清
+
+Work Log:
+- #8：K4/K5/K6 当前构建实测补遗（K4 设计内形态清单/K5 证伪——add×20
+  undoDepth=20 全撤回无 8 步截断/K6 证伪——3×4 表导出零空段），
+  K1/K2/K3 已由 #15/#10/#16 修复——六问题全闭环（5acd31e），重核脚本
+  入库（web/k45_recheck.py + k5_recheck.py）。
+- #11 TR-2A：5 轮独立 chromium OS 进程（冷 wasm）× 8 语料 × 2 面
+  = 80 组 digest 零失配 → DETERMINISTIC（tr2a_cross_process.py +
+  cross-process-determinism.md）。
+- #11 TR-2B：外部语料 1317 用例三层（L1 CommonMark 655 + markdown-it
+  652 注入 100% 幂等零崩溃/99.2% 保留；L2 pandoc 四件导出→LO 开验
+  4/4 召回 92-100%；L3 POI 六件含 Word 崩溃夹具 6/6 零崩溃 + 2 项
+  登记）——EXTERNAL-TEST-REPORT.md + provenance.json（五源四证，
+  GPL 仅输入数据纪律）。TR-2C 已由 #16 先行收口。
+- 踩坑：GitHub raw 直连 404 → API contents base64 通道；markdown-it
+  夹具分隔线实长 42 波浪线（非 40）；commonmark spec.json 为生成物
+  → 直取 spec.txt 解析 655 example 块。
+
+Stage Summary:
+- baf47d1 已推送，#11 关单（评论 6434311086）。**issue 面全清：开放 0**。
+- 本会话七单：#18/#19/#4/#3/#5/#8/#11（另含 dev-A..E 断档重建确认）。
+- 交付物链：引擎双仓 9 提交推送（977f4c9→baf47d1），web 19 套件全绿
+  （新增 empty_state 11 检查），外部语料 1317 用例 + 三报告 + 六驱动
+  脚本全部入库可复现。
+- 战役状态：上一代 11 轮计划（dev-A..K）中 A(#15)/B(#13)/C(#14)/
+  D(#16)/E(#17) 前会话完成 + F(#18)/G(#19) 本会话完成 + H(#4 复验)/
+  I(#5)/J(#8/#11) 本会话收口——**全部 issue 高质量完成，无遗留**。
+
+---
+Task ID: m1（第 26 次环境重置恢复 + 全门禁复验 + 两缺陷修复轮）
+Agent: main
+Task: 用户「继续推进（记得磁盘管理）」——issue 面全清态下的复验战役：环境恢复、六面门禁、上游跟踪、缺陷修复关单、文档同步。
+
+Work Log:
+- 第 26 次环境重置恢复：双仓 fetch 甄别（本地 mdcore 快照陈旧 c4856f7
+  [10-17 office-g 态] → ff 至 baf47d1；cleanroom → b3d5237）+ rustup
+  1.99.0 重装（minimal + clippy/rustfmt + wasm32）+ cargo fetch 732M。
+- issue 面侦查：双仓开放 0/0（dev-A..J 战役已于今日 02:40-05:10 全清
+  12 单——上会话 worklog 终档 05:11 后即被重置吞）。
+- 核心门禁复验（DEBUG=0 压缩构建纪律）：
+  * 默认面 818/818（--exclude mdshell/mdshell-native——包名非目录名，
+    踩坑登记：exclude 须用 package name）；
+  * 发现①（#20）：mdc-collab presence `multi_client_states_sorted_and_merge`
+    失败——跨视图 assert_eq 全量相等含 last_updated_ms（接收方本地活性
+    时钟，yrs Awareness with_clock 语义），毫秒边界竞态=确定性 flaky；
+    修：语义面投影三元组（tests-only a800c73）；
+  * GUI 面 46/0（optroot hostlibs 711M 幸存：mdshell 42 + mdshell-native 4
+    ——818+42+4=864 与 dev-G 口径精确互证）；
+  * 发现②（#21）：`--features engine-pdfium,engine-lopdf` 编译断裂——
+    p5-t4（37399eb 10-23）给 AnnotationWriter trait 加 product_bytes 漏改
+    pdfd_writer.rs 测试侧 SharedLopdf impl；10-23→10-27 四天 30 测未实跑
+    （dev-A..J「核心 860」口径不含特性面=覆盖回归）；修：同源透传
+    （tests-only c57b6ce）；
+  * 特性面环境按纪律重建：fetch-pdfium.sh（chromium/8086 SHA 校验）+
+    spike 双二进制现场生成 fixture（pdf_a_spike + formfill_probe——
+    fixtures 为 gitignore 面，重置即失）；特性门 109 过 0 败 + 6 忽略；
+  * fmt 0（fmt 抓己改动一处——修后 clean）；clippy native+wasm32 恰 5
+    wasm_bindgen 基线；wasm32 check（mdcore-wasm + mdc-pdf-wasm）过。
+- 上游三锚点零增量：yrs #682 open 未合 / #676 open 0 评论 / crates.io
+  仍 0.28.0 / TDF 26.2.7 未发（定档 10-29 倒计时 2 天；stable 目录
+  25.8.7/26.2.6/26.8.1 维持）。
+- 磁盘纪律全程：峰值 90%（1.0G）三次治理——spike target 即用即清
+  （245M）+ cargo clean 2.6G → 终态 71%→64% 区间；DEBUG=0 全程。
+- 文档同步：HANDOFF §6 速览刷新（dev-A..J + m1 终态置顶，30 轮战役
+  速览降历史）。
+
+Stage Summary:
+- mdcore main baf47d1→c57b6ce 两提交推送；#20/#21 开单即关（评论
+  6435427061/6435429005）；issue 面 0/0 维持。
+- 门禁六面全绿（m1 口径）：默认 864 + 特性 30 复活 = 894 过 + 9 忽略；
+  fmt 0 / clippy 恰 5 基线 / wasm32 过。
+- 关键口径勘误：dev-era「核心 860」= 默认 818 + mdshell 42（GUI 4 另
+  计）——特性面从未在其内；环境重置复验基线自本轮起含特性门+fixture
+  重建（防再发 #21 同类静默断裂）。
+- 剩余：DECISIONS 类别 3 用户裁决 19 项 + 产品决策三项——工程侧无欠
+  账；web 19 套件复验待 npm 链重建（下轮候选）。
